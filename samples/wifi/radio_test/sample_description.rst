@@ -128,7 +128,7 @@ Testing
          * To run a continuous Orthogonal frequency-division multiplexing (OFDM) TX traffic sequence with the following configuration:
 
            * Channel: 11
-           * Frame duration: 5484 us
+           * Frame duration: 2708 us
            * Inter-frame gap: 4200 us
 
            Execute the following sequence of commands:
@@ -136,7 +136,7 @@ Testing
            .. code-block:: console
 
               wifi_radio_test init 11
-              wifi_radio_test tx_pkt_len 4095
+              wifi_radio_test tx_pkt_len 4000
               wifi_radio_test tx_pkt_rate 12
               wifi_radio_test tx_power 4
               wifi_radio_test tx_pkt_gap 4200
@@ -177,7 +177,7 @@ Testing
               * D - Frame duration (us)
               * L - Frame length (bytes)
               * R - Data rate (Mbps)
-              * P - PHY overhead duration (us) (Values: 24 us - Legacy OFDM, 192 us - DSSS)
+              * P - PHY overhead duration (us) (Values: 20 us - Legacy OFDM, 192 us - DSSS)
 
          * To run a RX test with the following configuration:
 
