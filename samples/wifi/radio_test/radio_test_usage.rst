@@ -47,7 +47,7 @@ TX start must be given only after all parameters are configured.
    uart:~$ wifi_radio_test tx 1
 
 .. note::
-   
+
    While TX transmission is going on further changes in TX parameters are not permitted.
 
 Remaining sub-commands can be called after ``tx_pkt_tput_mode`` sub-command and before TX start.
