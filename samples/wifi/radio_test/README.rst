@@ -14,4 +14,5 @@ See the subpages for detailed documentation on the sample and its features.
 
    sample_description.rst
    radio_test_subcommands.rst
+   radio_test_usage.rst
    ficr.rst
