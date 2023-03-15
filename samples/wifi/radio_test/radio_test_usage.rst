@@ -7,13 +7,13 @@ Radio test usage
    :local:
    :depth: 2
 
-Using the Wi-Fi® radio test command ``wifi_radio_test`` and subcommands (See :ref:`wifi_radio_test_subcmds`). 
+Using the Wi-Fi® radio test command ``wifi_radio_test`` and subcommands (See :ref:`wifi_radio_test_subcmds`).
 
 .. _wifi_radio_test_subcmds:
 
 Wi-Fi radio test subcommands ordering
 *************************************
-Order of usage of W-Fi radio sub-commands is very important. The ``init`` sub-command must be called first. 
+Order of usage of W-Fi radio sub-commands is very important. The ``init`` sub-command must be called first.
 
 .. code-block:: console
 
@@ -23,7 +23,7 @@ Order of usage of W-Fi radio sub-commands is very important. The ``init`` sub-co
 
    The ``init`` sub-command disables any ongoing TX or RX testing and sets all configured parameters to default.
 
-The second sub-command to call is ``tx_pkt_tput_mode``.  
+The second sub-command to call is ``tx_pkt_tput_mode``.
 
 .. code-block:: console
 
@@ -33,7 +33,7 @@ The second sub-command to call is ``tx_pkt_tput_mode``.
 
    The ``tx_pkt_tput_mode`` sub-command is used to set frame format of the transmitted packet.
 
-For HETB packets (tx_pkt_tput_mode 5), ``ru_tone`` sub-command must be called before ``ru_index`` sub-command. 
+For HETB packets (tx_pkt_tput_mode 5), ``ru_tone`` sub-command must be called before ``ru_index`` sub-command.
 And ``ru_index`` sub-command must be called before ``tx_pkt_len`` sub-command.
 
 .. code-block:: console
@@ -55,3 +55,4 @@ Remaining sub-commands can be called after ``tx_pkt_tput_mode`` sub-command and 
 Wi-Fi radio test examples
 ***************************
 
+place holder
