@@ -62,42 +62,90 @@ PER test setup:
    The following connection is used for performing Wi-Fi association and ping tests with Wi-Fi capable access point.
 
 Wi-Fi System level test setup:
-   The following connection is used for performing Wi-Fi association and ping tests with Wi-Fi capable access point. 
+   The following connection is used for performing Wi-Fi association and ping tests with Wi-Fi capable access point.
 
    .. figure:: /images/wifi_coex_ble.png
         :width: 780px
         :align: center
         :alt: PER test setup
 
-Firmware for tests, description and list of files 
+Firmware for tests, description and list of files
 *************************************************
-nRF7002 firmware can be built as multiple samples – Radio Test and Wi-Fi Radio Test, Wi-Fi Station and Wi-Fi Shell.  
+nRF7002 firmware can be built as multiple samples – Radio Test and Wi-Fi Radio Test, Wi-Fi Station and Wi-Fi Shell.
+The nRF7002 comprises an nRF5340 SR device and an nRF7002 Wi-Fi device.
+The nRF5340 device contains two cores, an Application (APP) core and a Network (NET) core.
+Radio Test executes directly on the NET core, while Wi-Fi Radio Test,
+Station and Shell samples execute on the APP core and communicates with the nRF7002 slave device.
 
-The nRF7002 comprises an nRF5340 SR device and an nRF7002 Wi-Fi device. The nRF5340 device contains two cores, an Application (APP) core and a Network (NET) core.  Radio Test executes directly on the NET core, while Wi-Fi Radio Test, Station and Shell samples execute on the APP core and communicates with the nRF7002 slave device. 
+The combined build of Radio Test and Wi-Fi Radio Test firmware:
 
-The combined build of Radio Test and Wi-Fi Radio Test firmware: 
-
-   Short Range Radio test description - 
+Short Range Radio test description:
 
    * Wi-Fi Radio test description - :ref:`wifi_radio_sample_desc`
    * Radio Test controls the Short Range (SR) radio, while Wi-Fi Radio Test controls the Wi-Fi radio.
-   * Allows to put the DUT in all needed Transmission / Reception modes to perform RF emissions tests both in Wi-Fi and Short Range Radio. 
-   * Allows to do all Bluetooth/Thread tests as required for EMI/EMC testing 
-   * Allows to do all Wi-Fi tests as required for EMI/EMC testing 
+   * Allows to put the DUT in all needed Transmission / Reception modes to perform RF emissions tests both in Wi-Fi and Short Range Radio.
+   * Allows to do all Bluetooth/Thread tests as required for EMI/EMC testing.
+   * Allows to do all Wi-Fi tests as required for EMI/EMC testing.
 
-Wi-Fi Station sample: 
+Wi-Fi Station sample:
 
    * Detailed description - :ref:`wifi_radio_sample_desc`
    * Allows DUT to connect to a Wi-Fi Access Point device and gives visual indication of connected state (LED1 blinking) or not (LED1 off)
    * Allows an option to statically set a desired IP address to the DUT at build time via settings in prj.conf file.
-     This IP address will be used by the device up on connection to Access Point in case DHCP resolution fails for any reason. 
+     This IP address will be used by the device up on connection to Access Point in case DHCP resolution fails for any reason.
 
-Wi-Fi Shell sample: 
+Wi-Fi Shell sample:
 
    * Detailed description - :ref:`wifi_radio_sample_desc`
    * Allows DUT to connect to an Wi-Fi Access Point device and expose a shell interface via the UART console to run relevant Wi-Fi shell commands .
    * Allows an option to statically set a desired IP address to the DUT at build time via settings in prj.conf file.
    This IP address will be used by the device up on connection to Access Point in case DHCP resolution fails for any reason.
+
+Build instructions:
+
+* Standalone Wi-Fi Radio Test: <ncs_repo>/ncs/nrf/samples/wifi/radio_test
+
+  .. code-block:: console
+
+     $ west build -p -b nrf7002dk_nrf5340_cpuapp (DK Build)
+     $ west build -p -b nrf5340dk_nrf5340_cpuapp -- -DSHIELD=nrf7002_ek (EK build)
+
+  Hex file generated – build/zephyr/zephyr.hex 
+
+* Radio Test and Wi-Fi Radio Test combined build: <ncs_repo>/ncs/nrf/samples/wifi/radio_test
+
+  set CONFIG_BOARD_ENABLE_CPUNET=y in <ncs_repo>/nrf/samples/wifi/radio/test/prj.conf
+  set CONFIG_NCS_SAMPLE_REMOTE_SHELL_CHILD_IMAGE=n in <ncs_repo>/nrf/samples/peripheral/radio_test/prj_nrf5340dk_nrf5340_cpunet.conf
+
+  .. code-block:: console
+
+     $ west build -p -b nrf7002dk_nrf5340_cpuapp  (DK build)
+     $ west build -p -b nrf5340dk_nrf5340_cpuapp -- -DSHIELD=nrf7002_ek (EK build)
+
+  Hex files generated –  
+
+  * Combined hex file : build/zephyr/merged_domains.hex
+  * APP core hex file: build/zephyr/merged.hex
+  * NET core hex file: build/peripheral_radio_test/zephyr/merged_CPUNET.hex
+
+* Wi-Fi Station build : <ncs_repo>/ncs/nrf/samples/wifi/sta
+  Change the CONFIG parameters in Prj.conf as per Access Point requirements -
+  * Credentials - CONFIG_STA_KEY_MGMT_*, CONFIG_STA_SAMPLE_SSID, CONFIG_STA_SAMPLE_PASSWORD
+  * Static IP address - CONFIG_NET_CONFIG_MY_IPV4_ADDR, CONFIG_NET_CONFIG_MY_IPV4_NETMASK, CONFIG_NET_CONFIG_MY_IPV4_GW
+    (These are only used if IP address is not acquired due to DHCP failure)
+
+  .. code-block:: console
+
+     $ west build -p -b nrf7002dk_nrf5340_cpuapp  (DK build) 
+     $ west build -p -b nrf5340dk_nrf5340_cpuapp – -DSHIELD=nrf7002_ek (EK build) 
+
+  Hex file generated – build/zephyr/zephyr.hex
+* Wi-Fi Shell build : <ncs_repo>/ncs/nrf/samples/wifi/shell 
+
+  .. code-block:: console
+
+     $ west build -p -b nrf7002dk_nrf5340_cpuapp  (DK build)
+     $ west build -p -b nrf5340dk_nrf5340_cpuapp – -DSHIELD=nrf7002_ek (EK build)
 
 Wi-Fi radio test subcommands ordering
 *************************************
