@@ -199,40 +199,70 @@ Program Radio Test Firmware:
 How to use Radio Test
 *********************
 
-Radio Test is the sample (application) used to control the Short Range (SR) radio on the nRF5340 device. 
+Radio Test is the sample (application) used to control the Short Range (SR) radio on the nRF5340 device.
 
 How to use Radio Test firmware:
-   The Radio Test firmware supports configuration of the SR radio in specific modes and with various TX/RX parameters to test its performance. The following links give further details – 
-   General information about Radio Test software in online documentation - 
-   https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/samples/peripheral/radio_test/README.html 
-   Description of using Putty as the terminal application for controlling the DUT – 
-   https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/gs_testing.html#putty 
-   Description of the sub-commands that can be used to configure the radio - https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/samples/peripheral/radio_test/README.html#user-interface 
-   The example below details how to perform a continuous transmit on a fixed channel - 
+   The Radio Test firmware supports configuration of the SR radio in specific modes and with various TX/RX parameters to test its performance. The following links give further details –
+   General information about Radio Test software in online documentation -
+   https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/samples/peripheral/radio_test/README.html
+   Description of using Putty as the terminal application for controlling the DUT –
+   https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/gs_testing.html#putty
+   Description of the sub-commands that can be used to configure the radio - https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/samples/peripheral/radio_test/README.html#user-interface
+   The example below details how to perform a continuous transmit on a fixed channel -
    - Configure 1 Mbps date rate, random data and 90% duty cycle:
 
    .. code-block:: console
 
       uart:~$ data_rate ble_1Mbit
-      uart:~$ transmit_pattern pattern_random 
+      uart:~$ transmit_pattern pattern_random
 
-   - Select lowest channel (2400 MHz) 
-
-   .. code-block:: console
-
-      uart:~$ start_channel 0 
-
-   - Transmit packets continuously with high duty cycle 
+   - Select lowest channel (2400 MHz)
 
    .. code-block:: console
 
-      uart:~$ start_tx_modulated_carrier 
+      uart:~$ start_channel 0
 
-   - Terminate transmission 
+   - Transmit packets continuously with high duty cycle
 
    .. code-block:: console
 
-      uart:~$ cancel 
+      uart:~$ start_tx_modulated_carrier
+
+   - Terminate transmission
+
+   .. code-block:: console
+
+      uart:~$ cancel
+
+How to use Radio Test for PER measurements:
+A PER measurement can be performed using the Radio Test application running on two nRF7002 DK/EK, one as a transmitter, and the other as a receiver.
+The process is as follows –
+- Configure the first DK/EK to receive packets with a known Access Address at centre frequency of 2400 MHz –
+uart:~$ data_rate ble_1Mbit
+uart:~$ transmit_pattern pattern_11110000
+uart:~$ start_channel 0
+uart:~$ parameters_print
+uart:~$ start_rx
+- Configure the second DK/EK to transmit 10000 packets (TX transmit count) with the matching Access Address at centre frequency of 2400 MHz –
+
+.. code-block:: console
+
+   uart:~$ data_rate ble_1Mbit
+   uart:~$ transmit_pattern pattern_11110000
+   uart:~$ start_channel 0
+   uart:~$ parameters_print
+   uart:~$ start_tx_modulated_carrier 10000
+- Record number of successfully received packets on the first DK/EK (repeat as necessary until count stops incrementing). RX success count is the final item in the print display, ‘Number of packets’.
+
+.. code-block:: console
+
+   uart:~$ print_rx
+- Terminate receiving on the first DK/EK
+
+.. code-block:: console
+
+   uart:~$ cancel
+- Calculate the PER as 1 – (RX success count / TX transmit count).
 
 Wi-Fi radio test subcommands ordering
 *************************************
