@@ -7,8 +7,6 @@ Radio test usage
    :local:
    :depth: 2
 
-Using the Wi-Fi® radio test command ``wifi_radio_test`` and subcommands (See :ref:`wifi_radio_subcommands`).
-
 .. _wifi_radio_test_usage:
 
 Scope
@@ -27,17 +25,21 @@ There are two development kits for nRF7002 – nRF7002DK and nRF7002EK. nRF7002D
 
 DK Top view:
 
-.. figure:: /images/wifi_coex_ble.png
-     :width: 780px
-     :align: center
-     :alt: DK Top view
+  .. figure:: /images/wifi_coex_ble.png
+       :width: 780px
+       :align: center
+       :alt: DK Top view
+
+       DK Top view
 
 EK Top view:
 
-.. figure:: /images/wifi_coex_ble.png
-     :width: 780px
-     :align: center
-     :alt: EK Top view
+  .. figure:: /images/wifi_coex_ble.png
+       :width: 780px
+       :align: center
+       :alt: EK Top view
+
+       EK Top view
 
 Setup and Connections
 *********************
@@ -49,6 +51,8 @@ RF test setup:
         :align: center
         :alt: RF test setup
 
+        RF test setup
+
 PER test setup:
    The following connection is used for performing Wi-Fi and Short Range (SR) PER based tests.
 
@@ -56,6 +60,8 @@ PER test setup:
         :width: 780px
         :align: center
         :alt: PER test setup
+
+        PER test setup
 
    Alternatively, the “TX DUT” can be replaced with an appropriate Vector Signal Generator (VSG) if available, e.g. Rohde and Schwarz CMW-500 with appropriate personalities.  
    Wi-Fi System level test setup
@@ -67,7 +73,9 @@ Wi-Fi System level test setup:
    .. figure:: /images/wifi_coex_ble.png
         :width: 780px
         :align: center
-        :alt: PER test setup
+        :alt: Wi-Fi System level test setup
+
+        Wi-Fi System level test setup
 
 Firmware for tests, description and list of files
 *************************************************
@@ -79,27 +87,27 @@ Station and Shell samples execute on the APP core and communicates with the nRF7
 
 The combined build of Radio Test and Wi-Fi Radio Test firmware:
 
-Short Range Radio test description:
+  Short Range Radio test description:
+  
+     * Wi-Fi Radio test description - :ref:`wifi_radio_sample_desc`
+     * Radio Test controls the Short Range (SR) radio, while Wi-Fi Radio Test controls the Wi-Fi radio.
+     * Allows to put the DUT in all needed Transmission / Reception modes to perform RF emissions tests both in Wi-Fi and Short Range Radio.
+     * Allows to do all Bluetooth/Thread tests as required for EMI/EMC testing.
+     * Allows to do all Wi-Fi tests as required for EMI/EMC testing.
 
-   * Wi-Fi Radio test description - :ref:`wifi_radio_sample_desc`
-   * Radio Test controls the Short Range (SR) radio, while Wi-Fi Radio Test controls the Wi-Fi radio.
-   * Allows to put the DUT in all needed Transmission / Reception modes to perform RF emissions tests both in Wi-Fi and Short Range Radio.
-   * Allows to do all Bluetooth/Thread tests as required for EMI/EMC testing.
-   * Allows to do all Wi-Fi tests as required for EMI/EMC testing.
+  Wi-Fi Station sample:
 
-Wi-Fi Station sample:
+     * Detailed description - :ref:`wifi_radio_sample_desc`
+     * Allows DUT to connect to a Wi-Fi Access Point device and gives visual indication of connected state (LED1 blinking) or not (LED1 off)
+     * Allows an option to statically set a desired IP address to the DUT at build time via settings in prj.conf file.
+       This IP address will be used by the device up on connection to Access Point in case DHCP resolution fails for any reason.
 
-   * Detailed description - :ref:`wifi_radio_sample_desc`
-   * Allows DUT to connect to a Wi-Fi Access Point device and gives visual indication of connected state (LED1 blinking) or not (LED1 off)
-   * Allows an option to statically set a desired IP address to the DUT at build time via settings in prj.conf file.
+  Wi-Fi Shell sample:
+
+     * Detailed description - :ref:`wifi_radio_sample_desc`
+     * Allows DUT to connect to an Wi-Fi Access Point device and expose a shell interface via the UART console to run relevant Wi-Fi shell commands .
+     * Allows an option to statically set a desired IP address to the DUT at build time via settings in prj.conf file.
      This IP address will be used by the device up on connection to Access Point in case DHCP resolution fails for any reason.
-
-Wi-Fi Shell sample:
-
-   * Detailed description - :ref:`wifi_radio_sample_desc`
-   * Allows DUT to connect to an Wi-Fi Access Point device and expose a shell interface via the UART console to run relevant Wi-Fi shell commands .
-   * Allows an option to statically set a desired IP address to the DUT at build time via settings in prj.conf file.
-   This IP address will be used by the device up on connection to Access Point in case DHCP resolution fails for any reason.
 
 Build instructions:
 
@@ -110,7 +118,7 @@ Build instructions:
      $ west build -p -b nrf7002dk_nrf5340_cpuapp (DK Build)
      $ west build -p -b nrf5340dk_nrf5340_cpuapp -- -DSHIELD=nrf7002_ek (EK build)
 
-  Hex file generated – build/zephyr/zephyr.hex 
+  Hex file generated – build/zephyr/zephyr.hex
 
 * Radio Test and Wi-Fi Radio Test combined build: <ncs_repo>/ncs/nrf/samples/wifi/radio_test
 
@@ -122,7 +130,7 @@ Build instructions:
      $ west build -p -b nrf7002dk_nrf5340_cpuapp  (DK build)
      $ west build -p -b nrf5340dk_nrf5340_cpuapp -- -DSHIELD=nrf7002_ek (EK build)
 
-  Hex files generated –  
+  Hex files generated –
 
   * Combined hex file : build/zephyr/merged_domains.hex
   * APP core hex file: build/zephyr/merged.hex
@@ -136,16 +144,57 @@ Build instructions:
 
   .. code-block:: console
 
-     $ west build -p -b nrf7002dk_nrf5340_cpuapp  (DK build) 
-     $ west build -p -b nrf5340dk_nrf5340_cpuapp – -DSHIELD=nrf7002_ek (EK build) 
+     $ west build -p -b nrf7002dk_nrf5340_cpuapp  (DK build)
+     $ west build -p -b nrf5340dk_nrf5340_cpuapp -- -DSHIELD=nrf7002_ek (EK build)
 
   Hex file generated – build/zephyr/zephyr.hex
-* Wi-Fi Shell build : <ncs_repo>/ncs/nrf/samples/wifi/shell 
+* Wi-Fi Shell build : <ncs_repo>/ncs/nrf/samples/wifi/shell
 
   .. code-block:: console
 
      $ west build -p -b nrf7002dk_nrf5340_cpuapp  (DK build)
-     $ west build -p -b nrf5340dk_nrf5340_cpuapp – -DSHIELD=nrf7002_ek (EK build)
+     $ west build -p -b nrf5340dk_nrf5340_cpuapp -- -DSHIELD=nrf7002_ek (EK build)
+
+Firmware files:
+
+* Applications Core
+  nrf_cefcc_combo_rf_test_APP_<ncs_version>.nrf7002_dk_RevB.hex
+
+* Network Core
+  nrf_cefcc_combo_rf_test_NET_<ncs_version>.nrf7002_dk_RevB.hex
+
+How to program Firmware in nRF7002 Setup
+****************************************
+
+* Have nRFJPROG tool installed on PC. This program can be downloaded at
+
+https://www.nordicsemi.com/Products/Development-tools/nRF-Command-Line-Tools/Download?lang=en#infotabs
+
+* Connect PC to nRF7002 board with USB cable.
+* Switch nRF7002 board on.
+
+Program Radio Test Firmware:
+  * Program nrf_cefcc_combo_rf_test_APP_v3.nrf7002_dk_RevB.hex to application core on nRF7002- DK/EK
+
+  .. code-block:: console
+
+     $ nrfjprog --program nrf_cefcc_combo_rf_test_APP_v3.nrf7002_dk_RevB.hex -f NRF53 --coprocessor CP_APPLICATION --verify --chiperase --reset
+
+  * Program nrf_cefcc_combo_rf_test_NET_v3.nrf7002_dk_RevB.hex to network core on nRF7002- DK/EK
+
+  .. code-block:: console
+
+     $ nrfjprog --program nrf_cefcc_combo_rf_test_NET_v3.nrf7002_dk_RevB.hex -f NRF53 --coprocessor CP_NETWORK --verify --chiperase --reset
+
+  * Reset the nRF7002- DK/EK to start it running firmware
+
+    Press reset button, or
+    Invoke reset command in nRFJPROG, or
+    Power cycle the devkit
+
+  .. note::
+
+     Baud rate shall be set to 115200bps. Details about COM port setup at the end of this document.
 
 Wi-Fi radio test subcommands ordering
 *************************************
@@ -189,7 +238,7 @@ TX start must be given only after all parameters are configured.
 
    While TX transmission is going on further changes in TX parameters are not permitted.
 
-Remaining sub-commands can be called after ``tx_pkt_tput_mode`` sub-command and before TX start.
+Remaining sub-commands can be called in any order after ``tx_pkt_tput_mode`` sub-command and before TX start.
 
 Wi-Fi radio test examples
 ***************************
