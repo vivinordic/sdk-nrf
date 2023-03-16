@@ -535,7 +535,9 @@ How to use Wi-Fi Radio Test for transmit tests:
           Frame duration with above config = 332us, duty-cycle achieved = 62.4%
 
    At any point of time, we can use the following command to verify the configurations set (do this before setting tx or rx to 1):
+
    .. code-block:: console
+
       uart:~$ wifi_radio_test show_config
 
    Payload parameters for Maximum duty cycle
@@ -552,13 +554,16 @@ How to use Wi-Fi Radio Test for PER measurements:
 
    - Configure the first DK/EK to receive packets on the required channel number:
    Following set of commands configure DUT in channel 1, receive mode.
+
    .. code-block:: console
       uart:~$ wifi_radio_test init 1
       uart:~$ wifi_radio_test rx 1 #this will clear the earlier stats and wait for packets
 
    - Configure the second DK to transmit 10000 packets (TX transmit count) with the required modulation, TX power and channel (e.g. 11b, 1 Mbps, 10 dBm, channel 1):
    Change the Tx commands to below - (Note keep interpacket gap min 200us else it will take a lot of time)
+
    .. code-block:: console
+
       uart:~$ wifi_radio_test init 1
       uart:~$ wifi_radio_test tx_pkt_tput_mode 0
       uart:~$ wifi_radio_test tx_pkt_preamble 1
@@ -573,9 +578,12 @@ How to use Wi-Fi Radio Test for PER measurements:
    RX success count is displayed as ofdm_crc32_pass_cnt:
 
    .. code-block:: console
+
       uart:~$ wifi_radio_test get_stats
    - Terminate receiving on the first DK:
+
    .. code-block:: console
+
       uart:~$ wifi_radio_test rx 0
    - Calculate the PER as 1 – (RX success count / TX transmit count).
 
@@ -583,12 +591,14 @@ How to use Wi-Fi Radio Test for PER measurements:
       - Configure the first DK to receive packets on the required channel number:
 
       .. code-block:: console
+
          uart:~$ wifi_radio_test init 36
          uart:~$ wifi_radio_test rx 1     #this will clear the earlier stats and wait for packets
 
       - Configure the second DK to transmit 10000 packets (TX transmit count) with the required modulation, TX power and channel (e.g. 11g, 54 Mbps, 10 dBm, channel 36):
 
       .. code-block:: console
+
          uart:~$ wifi_radio_test init 36
          uart:~$ wifi_radio_test tx_pkt_tput_mode 0
          uart:~$ wifi_radio_test tx_pkt_rate 54
@@ -600,22 +610,30 @@ How to use Wi-Fi Radio Test for PER measurements:
 
       - Record number of successfully received packets on the first DK (repeat as necessary until count stops incrementing).
       RX success count is displayed as ofdm_crc32_pass_cnt:
+
       .. code-block:: console
+
          uart:~$ wifi_radio_test get_stats
       - Terminate receiving on the first DK:
+
       .. code-block:: console
+
          uart:~$ wifi_radio_test rx 0
       - Calculate the PER as 1 – (RX success count / TX transmit count).
 
    #. 802.11n PER measurements
       - Configure the first DK to receive packets on the required channel number:
+
       .. code-block:: console
+
          uart:~$ wifi_radio_test init 36
          uart:~$ wifi_radio_test rx 1 #this will clear the earlier stats and wait for packets
 
       - Configure the second DK to transmit 10000 packets (TX transmit count) with the required modulation,
       TX power and channel (e.g. 11n, MCS0, 10 dBm, channel 36):
+
       .. code-block:: console
+
          uart:~$ wifi_radio_test init 36
          uart:~$ wifi_radio_test tx_pkt_tput_mode 1
          uart:~$ wifi_radio_test tx_pkt_preamble 2
@@ -629,10 +647,14 @@ How to use Wi-Fi Radio Test for PER measurements:
 
       - Record number of successfully received packets on the first DK (repeat as necessary until count stops incrementing).
       RX success count is displayed as ofdm_crc32_pass_cnt:
+
       .. code-block:: console
+
          uart:~$ wifi_radio_test get_stats
       - Terminate receiving on the first DK:
+
       .. code-block:: console
+
          uart:~$ wifi_radio_test rx 0
       - Calculate the PER as 1 – (RX success count / TX transmit count).
 
@@ -640,13 +662,16 @@ How to use Wi-Fi Radio Test for PER measurements:
       - Configure the first DK to receive packets on the required channel number:
 
       .. code-block:: console
+
          uart:~$ wifi_radio_test init 40
          uart:~$ wifi_radio_test rx 1  #this will clear the earlier stats and wait for packets
 
       802.11ac, MCS7, 10 dBm, channel 40 - PER measurements
 
       - Configure the second DK to transmit 10000 packets (TX transmit count) with the required modulation, TX power and channel:
+
       .. code-block:: console
+
          uart:~$ wifi_radio_test init 40
          uart:~$ wifi_radio_test tx_pkt_tput_mode 2
          uart:~$ wifi_radio_test tx_pkt_mcs 7
@@ -658,11 +683,14 @@ How to use Wi-Fi Radio Test for PER measurements:
          uart:~$ wifi_radio_test tx 1
 
       - Record number of successfully received packets on the first DK (repeat as necessary until count stops incrementing). RX success count is displayed as ofdm_crc32_pass_cnt:
+
       .. code-block:: console
+
          uart:~$ wifi_radio_test get_stats
       - Terminate receiving on the first DK:
 
       .. code-block:: console
+
          uart:~$ wifi_radio_test rx 0
       - Calculate the PER as 1 – (RX success count / TX transmit count).
 
@@ -670,12 +698,14 @@ How to use Wi-Fi Radio Test for PER measurements:
       - Configure the first DK to receive packets on the required channel number:
 
       .. code-block:: console
+
          uart:~$ wifi_radio_test init 100
          uart:~$ wifi_radio_test rx 1  #this will clear the earlier stats and wait for packets.
 
       802.11ax, MCS0, 10 dBm, channel 100 - PER measurements
 
       .. code-block:: console
+
          uart:~$ wifi_radio_test init 100
          uart:~$ wifi_radio_test tx_pkt_tput_mode 3
          uart:~$ wifi_radio_test tx_pkt_mcs 0
@@ -691,10 +721,14 @@ How to use Wi-Fi Radio Test for PER measurements:
       RX success count is displayed as ofdm_crc32_pass_cnt:
 
       .. code-block:: console
+
          uart:~$ wifi_radio_test get_stats
       - Terminate receiving on the first DK:
+
       .. code-block:: console
+
          uart:~$ wifi_radio_test rx 0
+
       - Calculate the PER as 1 – (RX success count / TX transmit count).
 
 How to use Wi-Fi STA Sample 
@@ -717,21 +751,31 @@ How to use Wi-Fi Shell Sample
 https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/samples/wifi/shell/README.html
 This sample lets you scan, connect and ping to a desired network/Access Point via a Shell as described below –
 Scan all the access points in the vicinity
+
 .. code-block:: console
+
    uart:~$ wifi scan
 
 Connect to the desired access point (using SSID from the scan command)
+
 .. code-block:: console
+
    uart:~$ wifi connect <SSID> <Password>
 
 Query the status of the connection –
+
 .. code-block:: console
+
    uart:~$ wifi status
 
 Once the connection is established, you can run network tools like ping
+
 .. code-block:: console
+
    uart:~$ net ping 10 192.168.1.100
 
 To disconnect
+
 .. code-block:: console
+
    uart:~$ wifi disconnect
