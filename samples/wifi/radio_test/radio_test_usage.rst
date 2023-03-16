@@ -25,22 +25,41 @@ There are two development kits for nRF7002 – nRF7002DK and nRF7002EK. nRF7002D
 
    Buttons, battery are not used by the software outlined in the document.
 
-DK Top view
+DK Top view:
 
-EK Top view
-TBD 
+.. figure:: /images/wifi_coex_ble.png
+     :width: 780px
+     :align: center
+     :alt: DK Top view
+
+EK Top view:
+
+.. figure:: /images/wifi_coex_ble.png
+     :width: 780px
+     :align: center
+     :alt: EK Top view
 
 Setup and Connections
 *********************
-RF test setup
-The following connection is used for performing Wi-Fi and Short Range (SR) RF based tests.
+RF test setup:
+   The following connection is used for performing Wi-Fi and Short Range (SR) RF based tests.
 
-PER test setup
-The following connection is used for performing Wi-Fi and Short Range (SR) PER based tests.
+   .. figure:: /images/wifi_coex_ble.png
+        :width: 780px
+        :align: center
+        :alt: RF test setup
 
-Alternatively, the “TX DUT” can be replaced with an appropriate Vector Signal Generator (VSG) if available, e.g. Rohde and Schwarz CMW-500 with appropriate personalities.  
-Wi-Fi System level test setup
-The following connection is used for performing Wi-Fi association and ping tests with Wi-Fi capable access point.
+PER test setup:
+   The following connection is used for performing Wi-Fi and Short Range (SR) PER based tests.
+
+   .. figure:: /images/wifi_coex_ble.png
+        :width: 780px
+        :align: center
+        :alt: PER test setup
+
+   Alternatively, the “TX DUT” can be replaced with an appropriate Vector Signal Generator (VSG) if available, e.g. Rohde and Schwarz CMW-500 with appropriate personalities.  
+   Wi-Fi System level test setup
+   The following connection is used for performing Wi-Fi association and ping tests with Wi-Fi capable access point.
 
 
 Wi-Fi radio test subcommands ordering
