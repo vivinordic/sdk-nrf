@@ -83,3 +83,173 @@ Wi-Fi radio test examples
     .. note::
 
        Frame duration with above config = 8624 us, duty-cycle achieved = 50.07%
+#. To run a continuous (OFDM) TX traffic sequence in 11g mode:
+    - Channel: 11
+    - Payload length 4000 bytes
+    - Inter-frame gap: 200 us
+    - data rate : 6Mbps
+    - TX power : 0 dBm
+	
+    Execute the following sequence of commands:
+
+      .. code-block:: console
+
+         uart:~$ wifi_radio_test init 11
+         uart:~$ wifi_radio_test tx_pkt_tput_mode 0
+         uart:~$ wifi_radio_test tx_pkt_rate 6
+         uart:~$ wifi_radio_test tx_pkt_len 4000
+         uart:~$ wifi_radio_test tx_pkt_gap 200
+         uart:~$ wifi_radio_test tx_power 0
+         uart:~$ wifi_radio_test tx_pkt_num -1
+         uart:~$ wifi_radio_test tx 1
+   Note - Frame duration with above config = 5400 us, duty-cycle achieved = 96.4%
+
+#. To run a continuous (OFDM) TX traffic sequence in 11a mode:
+    - Channel: 40
+    - Payload length 4000 bytes
+    - Inter-frame gap: 200 us
+    - data rate : 54Mbps
+    - TX power : 10 dBm
+	
+    Execute the following sequence of commands:
+
+      .. code-block:: console
+
+         uart:~$ wifi_radio_test init 40
+         uart:~$ wifi_radio_test tx_pkt_tput_mode 0
+         uart:~$ wifi_radio_test tx_pkt_rate 54
+         uart:~$ wifi_radio_test tx_pkt_len 4000
+         uart:~$ wifi_radio_test tx_pkt_gap 200
+         uart:~$ wifi_radio_test tx_power 10
+         uart:~$ wifi_radio_test tx_pkt_num -1
+         uart:~$ wifi_radio_test tx 1
+   Note - Frame duration with above config = 620 us, duty-cycle achieved = 75.6%
+
+#. To run a continuous (OFDM) TX traffic sequence in HT (11n) mode:
+    - Channel: 11
+    - Frame format: HT (11n)
+    - Payload len: 4000 bytes
+    - Inter-frame gap: 200 us
+    - data rate : MCS7
+    - Long Guard
+          - TX power :  0 dBm
+
+    Execute the following sequence of commands:
+
+      .. code-block:: console
+
+         uart:~$ wifi_radio_test init 11
+         uart:~$ wifi_radio_test tx_pkt_tput_mode 1
+         uart:~$ wifi_radio_test tx_pkt_preamble 2
+         uart:~$ wifi_radio_test tx_pkt_mcs 7
+         uart:~$ wifi_radio_test tx_pkt_len 4000
+         uart:~$ wifi_radio_test tx_pkt_sgi 0
+         uart:~$ wifi_radio_test tx_pkt_gap 200
+         uart:~$ wifi_radio_test tx_power 0
+         uart:~$ wifi_radio_test tx_pkt_num -1
+         uart:~$ wifi_radio_test tx 1
+         Note - Frame duration with above config = 536 us, duty-cycle achieved = 72.8%
+
+#. To run a continuous (OFDM) TX traffic sequence in VHT (11ac) mode:
+    - Channel: 40
+    - Frame format: VHT (11ac)
+    - Payload len: 4000 bytes
+    - Inter-frame gap: 200 us
+    - data rate : MCS7
+    - Long Guard
+    - TX power :  0 dBm
+
+    Execute the following sequence of commands:
+	
+      .. code-block:: console
+
+         uart:~$ wifi_radio_test init 40
+         uart:~$ wifi_radio_test tx_pkt_tput_mode 2
+         uart:~$ wifi_radio_test tx_pkt_mcs 7
+         uart:~$ wifi_radio_test tx_pkt_len 4000
+         uart:~$ wifi_radio_test tx_pkt_sgi 0
+         uart:~$ wifi_radio_test tx_pkt_gap 200
+         uart:~$ wifi_radio_test tx_power 0
+         uart:~$ wifi_radio_test tx_pkt_num -1
+         uart:~$ wifi_radio_test tx 1
+         Note - Frame duration with above config = 540 us, duty-cycle achieved = 73%
+
+#. To run a continuous (OFDM) TX traffic sequence in HE-SU (11ax) mode:
+    - Channel: 116
+    - Frame format: HESU (11ax)
+    - Payload len: 4000
+    - Inter-frame gap: 200 us
+    - data rate : MCS7
+    - 3.2us GI
+    - 4x HELTF
+    - TX power :  0 dBm
+
+    Execute the following sequence of commands:
+
+      .. code-block:: console
+
+         uart:~$ wifi_radio_test init 116
+         uart:~$ wifi_radio_test tx_pkt_tput_mode 3
+         uart:~$ wifi_radio_test tx_pkt_mcs 7
+         uart:~$ wifi_radio_test tx_pkt_len 4000
+         uart:~$ wifi_radio_test he_ltf 2
+         uart:~$ wifi_radio_test he_gi 2
+         uart:~$ wifi_radio_test tx_pkt_gap 200
+         uart:~$ wifi_radio_test tx_power 0
+         uart:~$ wifi_radio_test tx_pkt_num -1
+         uart:~$ wifi_radio_test tx 1
+         Note - Frame duration with above config = 488 us, duty-cycle achieved = 70.9%
+
+#. To run a continuous (OFDM) TX traffic sequence in HE-ER-SU (11ax) mode:
+    - Channel: 100
+    - Frame format: HE-ERSU (11ax)
+    - Payload len: 1000
+    - Inter-frame gap: 200 us
+    - data rate : MCS0
+    - 3.2us GI
+    - 4x HELTF
+    - TX power: 10dBm
+    Execute the following sequence of commands:
+
+      .. code-block:: console
+
+         uart:~$ wifi_radio_test init 100
+         uart:~$ wifi_radio_test tx_pkt_tput_mode 4
+         uart:~$ wifi_radio_test tx_pkt_mcs 0
+         uart:~$ wifi_radio_test tx_pkt_len 1000
+         uart:~$ wifi_radio_test he_ltf 2
+         uart:~$ wifi_radio_test he_gi 2
+         uart:~$ wifi_radio_test tx_pkt_gap 200
+         uart:~$ wifi_radio_test tx_power 10
+         uart:~$ wifi_radio_test tx_pkt_num -1
+         uart:~$ wifi_radio_test tx 1
+         Note - Frame duration with above config = 1184 us, duty-cycle achieved = 85.5%
+
+#. To run a continuous (OFDM) TX traffic sequence in HE-TB-PPDU (11ax) mode:
+    - Channel: 100
+    - Frame format: HE-TB (11ax)
+    - Payload len: 1024
+    - Inter-frame gap: 200 us
+    - data rate : MCS7
+    - 3.2us GI
+    - 106 Tone
+    - 4x HELTF
+    - RU Index 2
+    - TX power: 10dBm
+    Execute the following sequence of commands:
+
+      .. code-block:: console
+
+         uart:~$ wifi_radio_test init 100
+         uart:~$ wifi_radio_test tx_pkt_tput_mode 5
+         uart:~$ wifi_radio_test ru_tone 106
+         uart:~$ wifi_radio_test ru_index 2
+         uart:~$ wifi_radio_test tx_pkt_len 1024
+         uart:~$ wifi_radio_test tx_pkt_mcs 7
+         uart:~$ wifi_radio_test he_ltf 2
+         uart:~$ wifi_radio_test he_gi 2
+         uart:~$ wifi_radio_test tx_pkt_gap 200
+         uart:~$ wifi_radio_test tx_power 10
+         uart:~$ wifi_radio_test tx_pkt_num -1
+         uart:~$ wifi_radio_test tx 1
+         Note - Frame duration with above config = 332us, duty-cycle achieved = 62.4%
