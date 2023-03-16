@@ -89,7 +89,7 @@ Wi-Fi radio test examples
     - Inter-frame gap: 200 us
     - data rate : 6Mbps
     - TX power : 0 dBm
-	
+
     Execute the following sequence of commands:
 
       .. code-block:: console
@@ -110,7 +110,7 @@ Wi-Fi radio test examples
     - Inter-frame gap: 200 us
     - data rate : 54Mbps
     - TX power : 10 dBm
-	
+
     Execute the following sequence of commands:
 
       .. code-block:: console
@@ -160,7 +160,7 @@ Wi-Fi radio test examples
     - TX power :  0 dBm
 
     Execute the following sequence of commands:
-	
+
       .. code-block:: console
 
          uart:~$ wifi_radio_test init 40
