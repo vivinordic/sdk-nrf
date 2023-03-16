@@ -67,16 +67,18 @@ Wi-Fi radio test examples
     - TX power: 20 dBm
 
     Execute the following sequence of commands:
-    .. code-block:: console
-       uart:~$ wifi_radio_test init 1
-       uart:~$ wifi_radio_test tx_pkt_tput_mode 0
-       uart:~$ wifi_radio_test tx_pkt_preamble 1
-       uart:~$ wifi_radio_test tx_pkt_rate 1
-       uart:~$ wifi_radio_test tx_pkt_len 1024
-       uart:~$ wifi_radio_test tx_pkt_gap 8600
-       uart:~$ wifi_radio_test tx_power 20
-       uart:~$ wifi_radio_test tx_pkt_num -1
-       uart:~$ wifi_radio_test tx 1
+
+      .. code-block:: console
+
+         uart:~$ wifi_radio_test init 1
+         uart:~$ wifi_radio_test tx_pkt_tput_mode 0
+         uart:~$ wifi_radio_test tx_pkt_preamble 1
+         uart:~$ wifi_radio_test tx_pkt_rate 1
+         uart:~$ wifi_radio_test tx_pkt_len 1024
+         uart:~$ wifi_radio_test tx_pkt_gap 8600
+         uart:~$ wifi_radio_test tx_power 20
+         uart:~$ wifi_radio_test tx_pkt_num -1
+         uart:~$ wifi_radio_test tx 1
 
     .. note::
 
