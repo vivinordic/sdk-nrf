@@ -58,4 +58,26 @@ Remaining sub-commands can be called after ``tx_pkt_tput_mode`` sub-command and 
 Wi-Fi radio test examples
 ***************************
 
-place holder
+#. To run a continuous (DSSS/CCK) TX sequence in 802.11b mode:
+    - Channel: 1
+    - Payload length: 1024 bytes
+    - Inter-frame gap: 8600 us
+    - datarate: 1Mbps
+    - Long Preamble: 1
+    - TX power: 20 dBm
+
+    Execute the following sequence of commands:
+    .. code-block:: console
+       uart:~$ wifi_radio_test init 1
+       uart:~$ wifi_radio_test tx_pkt_tput_mode 0
+       uart:~$ wifi_radio_test tx_pkt_preamble 1
+       uart:~$ wifi_radio_test tx_pkt_rate 1
+       uart:~$ wifi_radio_test tx_pkt_len 1024
+       uart:~$ wifi_radio_test tx_pkt_gap 8600
+       uart:~$ wifi_radio_test tx_power 20
+       uart:~$ wifi_radio_test tx_pkt_num -1
+       uart:~$ wifi_radio_test tx 1
+
+    .. note::
+
+       Frame duration with above config = 8624 us, duty-cycle achieved = 50.07%
