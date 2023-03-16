@@ -7,13 +7,13 @@ Radio test usage
    :local:
    :depth: 2
 
-Using the Wi-Fi® radio test command ``wifi_radio_test`` and subcommands (See :ref:`wifi_radio_test_subcmds`).
+Using the Wi-Fi® radio test command ``wifi_radio_test`` and subcommands (See :ref:`wifi_radio_subcommands`).
 
-.. _wifi_radio_test_subcmds:
+.. _wifi_radio_test_usage:
 
 Wi-Fi radio test subcommands ordering
 *************************************
-Order of usage of W-Fi radio sub-commands is very important. The ``init`` sub-command must be called first.
+Order of usage of Wi-Fi radio test sub-commands is very important. The ``init`` sub-command must be called first.
 
 .. code-block:: console
 
@@ -38,7 +38,10 @@ And ``ru_index`` sub-command must be called before ``tx_pkt_len`` sub-command.
 
 .. code-block:: console
 
-   uart:~$ wifi_radio_test tx_pkt_tput_mode <Throughput mode>
+   uart:~$ wifi_radio_test ru_tone 106
+   uart:~$ wifi_radio_test ru_index 2
+   uart:~$ wifi_radio_test tx_pkt_len 1024
+
 
 TX start must be given only after all parameters are configured.
 
