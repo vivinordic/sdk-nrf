@@ -88,7 +88,7 @@ Station and Shell samples execute on the APP core and communicates with the nRF7
 The combined build of Radio Test and Wi-Fi Radio Test firmware:
 
   Short Range Radio test description:
-  
+
      * Wi-Fi Radio test description - :ref:`wifi_radio_sample_desc`
      * Radio Test controls the Short Range (SR) radio, while Wi-Fi Radio Test controls the Wi-Fi radio.
      * Allows to put the DUT in all needed Transmission / Reception modes to perform RF emissions tests both in Wi-Fi and Short Range Radio.
@@ -97,33 +97,33 @@ The combined build of Radio Test and Wi-Fi Radio Test firmware:
 
   Wi-Fi Station sample:
 
-     * Detailed description - :ref:`wifi_radio_sample_desc`
+     * Detailed description - :ref:`wifi_station_sample`
      * Allows DUT to connect to a Wi-Fi Access Point device and gives visual indication of connected state (LED1 blinking) or not (LED1 off)
      * Allows an option to statically set a desired IP address to the DUT at build time via settings in prj.conf file.
        This IP address will be used by the device up on connection to Access Point in case DHCP resolution fails for any reason.
 
   Wi-Fi Shell sample:
 
-     * Detailed description - :ref:`wifi_radio_sample_desc`
+     * Detailed description - :ref:`wifi_shell_sample`
      * Allows DUT to connect to an Wi-Fi Access Point device and expose a shell interface via the UART console to run relevant Wi-Fi shell commands .
      * Allows an option to statically set a desired IP address to the DUT at build time via settings in prj.conf file.
      This IP address will be used by the device up on connection to Access Point in case DHCP resolution fails for any reason.
 
 Build instructions:
 
-* Standalone Wi-Fi Radio Test: <ncs_repo>/ncs/nrf/samples/wifi/radio_test
+* Standalone Wi-Fi Radio Test: ``<ncs_repo>/ncs/nrf/samples/wifi/radio_test``
 
   .. code-block:: console
 
      $ west build -p -b nrf7002dk_nrf5340_cpuapp (DK Build)
      $ west build -p -b nrf5340dk_nrf5340_cpuapp -- -DSHIELD=nrf7002_ek (EK build)
 
-  Hex file generated – build/zephyr/zephyr.hex
+  Hex file generated – ``build/zephyr/zephyr.hex``
 
-* Radio Test and Wi-Fi Radio Test combined build: <ncs_repo>/ncs/nrf/samples/wifi/radio_test
+* Radio Test and Wi-Fi Radio Test combined build: ``<ncs_repo>/ncs/nrf/samples/wifi/radio_test``
 
-  set CONFIG_BOARD_ENABLE_CPUNET=y in <ncs_repo>/nrf/samples/wifi/radio/test/prj.conf
-  set CONFIG_NCS_SAMPLE_REMOTE_SHELL_CHILD_IMAGE=n in <ncs_repo>/nrf/samples/peripheral/radio_test/prj_nrf5340dk_nrf5340_cpunet.conf
+  set CONFIG_BOARD_ENABLE_CPUNET=y in ``<ncs_repo>/nrf/samples/wifi/radio/test/prj.conf``
+  set CONFIG_NCS_SAMPLE_REMOTE_SHELL_CHILD_IMAGE=n in ``<ncs_repo>/nrf/samples/peripheral/radio_test/prj_nrf5340dk_nrf5340_cpunet.conf``
 
   .. code-block:: console
 
@@ -132,23 +132,23 @@ Build instructions:
 
   Hex files generated –
 
-  * Combined hex file : build/zephyr/merged_domains.hex
-  * APP core hex file: build/zephyr/merged.hex
-  * NET core hex file: build/peripheral_radio_test/zephyr/merged_CPUNET.hex
+  * Combined hex file : ``build/zephyr/merged_domains.hex``
+  * APP core hex file: ``build/zephyr/merged.hex``
+  * NET core hex file: ``build/peripheral_radio_test/zephyr/merged_CPUNET.hex``
 
-* Wi-Fi Station build : <ncs_repo>/ncs/nrf/samples/wifi/sta
+* Wi-Fi Station build : ``<ncs_repo>/ncs/nrf/samples/wifi/sta``
   Change the CONFIG parameters in Prj.conf as per Access Point requirements -
   * Credentials - CONFIG_STA_KEY_MGMT_*, CONFIG_STA_SAMPLE_SSID, CONFIG_STA_SAMPLE_PASSWORD
   * Static IP address - CONFIG_NET_CONFIG_MY_IPV4_ADDR, CONFIG_NET_CONFIG_MY_IPV4_NETMASK, CONFIG_NET_CONFIG_MY_IPV4_GW
-    (These are only used if IP address is not acquired due to DHCP failure)
+   (These are only used if IP address is not acquired due to DHCP failure)
 
   .. code-block:: console
 
      $ west build -p -b nrf7002dk_nrf5340_cpuapp  (DK build)
      $ west build -p -b nrf5340dk_nrf5340_cpuapp -- -DSHIELD=nrf7002_ek (EK build)
 
-  Hex file generated – build/zephyr/zephyr.hex
-* Wi-Fi Shell build : <ncs_repo>/ncs/nrf/samples/wifi/shell
+  Hex file generated – ``build/zephyr/zephyr.hex``
+* Wi-Fi Shell build : ``<ncs_repo>/ncs/nrf/samples/wifi/shell``
 
   .. code-block:: console
 
@@ -195,6 +195,44 @@ Program Radio Test Firmware:
   .. note::
 
      Baud rate shall be set to 115200bps. Details about COM port setup at the end of this document.
+
+How to use Radio Test
+*********************
+
+Radio Test is the sample (application) used to control the Short Range (SR) radio on the nRF5340 device. 
+
+How to use Radio Test firmware:
+   The Radio Test firmware supports configuration of the SR radio in specific modes and with various TX/RX parameters to test its performance. The following links give further details – 
+   General information about Radio Test software in online documentation - 
+   https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/samples/peripheral/radio_test/README.html 
+   Description of using Putty as the terminal application for controlling the DUT – 
+   https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/gs_testing.html#putty 
+   Description of the sub-commands that can be used to configure the radio - https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/samples/peripheral/radio_test/README.html#user-interface 
+   The example below details how to perform a continuous transmit on a fixed channel - 
+   - Configure 1 Mbps date rate, random data and 90% duty cycle:
+
+   .. code-block:: console
+
+      uart:~$ data_rate ble_1Mbit
+      uart:~$ transmit_pattern pattern_random 
+
+   - Select lowest channel (2400 MHz) 
+
+   .. code-block:: console
+
+      uart:~$ start_channel 0 
+
+   - Transmit packets continuously with high duty cycle 
+
+   .. code-block:: console
+
+      uart:~$ start_tx_modulated_carrier 
+
+   - Terminate transmission 
+
+   .. code-block:: console
+
+      uart:~$ cancel 
 
 Wi-Fi radio test subcommands ordering
 *************************************
