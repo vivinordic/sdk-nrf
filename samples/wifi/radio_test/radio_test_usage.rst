@@ -536,7 +536,7 @@ How to use Wi-Fi Radio Test for transmit tests:
 
    At any point of time, we can use the following command to verify the configurations set (do this before setting tx or rx to 1):
    .. code-block:: console
-      uart:~$ wifi_radio_test show_config 
+      uart:~$ wifi_radio_test show_config
 
    Payload parameters for Maximum duty cycle
    Assuming 200us interpacket gap, we need to set tx_pkt_len to the values as below
@@ -546,7 +546,7 @@ How to use Wi-Fi Radio Test for transmit tests:
 How to use Wi-Fi Radio Test for PER measurements:
 
    A PER measurement can be performed using the Wi-Fi Radio Test application running on two nRF7002-DK/EK’s,
-   one as a transmitter, and the other as a receiver. The process is as follows – 
+   one as a transmitter, and the other as a receiver. The process is as follows –
 
 802.11b PER measurements:
 
@@ -554,7 +554,7 @@ How to use Wi-Fi Radio Test for PER measurements:
    Following set of commands configure DUT in channel 1, receive mode.
    .. code-block:: console
       uart:~$ wifi_radio_test init 1
-      uart:~$ wifi_radio_test rx 1 #this will clear the earlier stats and wait for packets 
+      uart:~$ wifi_radio_test rx 1 #this will clear the earlier stats and wait for packets
 
    - Configure the second DK to transmit 10000 packets (TX transmit count) with the required modulation, TX power and channel (e.g. 11b, 1 Mbps, 10 dBm, channel 1):
    Change the Tx commands to below - (Note keep interpacket gap min 200us else it will take a lot of time)
@@ -584,7 +584,7 @@ How to use Wi-Fi Radio Test for PER measurements:
 
       .. code-block:: console
          uart:~$ wifi_radio_test init 36
-         uart:~$ wifi_radio_test rx 1     #this will clear the earlier stats and wait for packets 
+         uart:~$ wifi_radio_test rx 1     #this will clear the earlier stats and wait for packets
 
       - Configure the second DK to transmit 10000 packets (TX transmit count) with the required modulation, TX power and channel (e.g. 11g, 54 Mbps, 10 dBm, channel 36):
 
@@ -596,7 +596,7 @@ How to use Wi-Fi Radio Test for PER measurements:
          uart:~$ wifi_radio_test tx_pkt_gap 200
          uart:~$ wifi_radio_test tx_power 10
          uart:~$ wifi_radio_test tx_pkt_num 10000
-         uart:~$ wifi_radio_test tx 1 
+         uart:~$ wifi_radio_test tx 1
 
       - Record number of successfully received packets on the first DK (repeat as necessary until count stops incrementing).
       RX success count is displayed as ofdm_crc32_pass_cnt:
@@ -605,13 +605,13 @@ How to use Wi-Fi Radio Test for PER measurements:
       - Terminate receiving on the first DK:
       .. code-block:: console
          uart:~$ wifi_radio_test rx 0
-      - Calculate the PER as 1 – (RX success count / TX transmit count). 
+      - Calculate the PER as 1 – (RX success count / TX transmit count).
 
    #. 802.11n PER measurements
       - Configure the first DK to receive packets on the required channel number:
       .. code-block:: console
          uart:~$ wifi_radio_test init 36
-         uart:~$ wifi_radio_test rx 1  #this will clear the earlier stats and wait for packets 
+         uart:~$ wifi_radio_test rx 1 #this will clear the earlier stats and wait for packets
 
       - Configure the second DK to transmit 10000 packets (TX transmit count) with the required modulation,
       TX power and channel (e.g. 11n, MCS0, 10 dBm, channel 36):
@@ -696,3 +696,42 @@ How to use Wi-Fi Radio Test for PER measurements:
       .. code-block:: console
          uart:~$ wifi_radio_test rx 0
       - Calculate the PER as 1 – (RX success count / TX transmit count).
+
+How to use Wi-Fi STA Sample 
+***************************
+
+https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/samples/wifi/sta/README.html
+The Wi-Fi station sample is designed to be built with a SSID, password (set in the Prj.conf file) and once executing on the nRF7002 board,
+it automatically connects to the Wi-Fi Access Point and once connected, LED1 starts blinking indicating a successful connection.
+If the connection is lost, the LED1 stops blinking. The process repeats every time a board reset button is pressed.
+
+By default, an IP address is acquired by the nRF7002 board via the DHCP protocol exchanges with the Access Point.
+If for any reason, the DHCP exchange fails and hence IP address is not successfully acquired,
+one can set an expected static IP address in the Prj.conf file which will then become the default IP address.
+If the DHCP exchange is successful, the IP address acquired is used in the place of static IP address settings.
+.. note::
+   there is no UART shell support in this sample. The UART console will only display debug information from the sample.
+
+How to use Wi-Fi Shell Sample
+*****************************
+https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/samples/wifi/shell/README.html
+This sample lets you scan, connect and ping to a desired network/Access Point via a Shell as described below –
+Scan all the access points in the vicinity
+.. code-block:: console
+   uart:~$ wifi scan
+
+Connect to the desired access point (using SSID from the scan command)
+.. code-block:: console
+   uart:~$ wifi connect <SSID> <Password>
+
+Query the status of the connection –
+.. code-block:: console
+   uart:~$ wifi status
+
+Once the connection is established, you can run network tools like ping
+.. code-block:: console
+   uart:~$ net ping 10 192.168.1.100
+
+To disconnect
+.. code-block:: console
+   uart:~$ wifi disconnect
