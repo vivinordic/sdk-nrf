@@ -61,6 +61,43 @@ PER test setup:
    Wi-Fi System level test setup
    The following connection is used for performing Wi-Fi association and ping tests with Wi-Fi capable access point.
 
+Wi-Fi System level test setup:
+   The following connection is used for performing Wi-Fi association and ping tests with Wi-Fi capable access point. 
+
+   .. figure:: /images/wifi_coex_ble.png
+        :width: 780px
+        :align: center
+        :alt: PER test setup
+
+Firmware for tests, description and list of files 
+*************************************************
+nRF7002 firmware can be built as multiple samples – Radio Test and Wi-Fi Radio Test, Wi-Fi Station and Wi-Fi Shell.  
+
+The nRF7002 comprises an nRF5340 SR device and an nRF7002 Wi-Fi device. The nRF5340 device contains two cores, an Application (APP) core and a Network (NET) core.  Radio Test executes directly on the NET core, while Wi-Fi Radio Test, Station and Shell samples execute on the APP core and communicates with the nRF7002 slave device. 
+
+The combined build of Radio Test and Wi-Fi Radio Test firmware: 
+
+   Short Range Radio test description - 
+
+   * Wi-Fi Radio test description - :ref:`wifi_radio_sample_desc`
+   * Radio Test controls the Short Range (SR) radio, while Wi-Fi Radio Test controls the Wi-Fi radio.
+   * Allows to put the DUT in all needed Transmission / Reception modes to perform RF emissions tests both in Wi-Fi and Short Range Radio. 
+   * Allows to do all Bluetooth/Thread tests as required for EMI/EMC testing 
+   * Allows to do all Wi-Fi tests as required for EMI/EMC testing 
+
+Wi-Fi Station sample: 
+
+   * Detailed description - :ref:`wifi_radio_sample_desc`
+   * Allows DUT to connect to a Wi-Fi Access Point device and gives visual indication of connected state (LED1 blinking) or not (LED1 off)
+   * Allows an option to statically set a desired IP address to the DUT at build time via settings in prj.conf file.
+     This IP address will be used by the device up on connection to Access Point in case DHCP resolution fails for any reason. 
+
+Wi-Fi Shell sample: 
+
+   * Detailed description - :ref:`wifi_radio_sample_desc`
+   * Allows DUT to connect to an Wi-Fi Access Point device and expose a shell interface via the UART console to run relevant Wi-Fi shell commands .
+   * Allows an option to statically set a desired IP address to the DUT at build time via settings in prj.conf file.
+   This IP address will be used by the device up on connection to Access Point in case DHCP resolution fails for any reason.
 
 Wi-Fi radio test subcommands ordering
 *************************************
