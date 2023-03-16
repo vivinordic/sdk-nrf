@@ -235,15 +235,16 @@ How to use Radio Test firmware:
       uart:~$ cancel
 
 How to use Radio Test for PER measurements:
-A PER measurement can be performed using the Radio Test application running on two nRF7002 DK/EK, one as a transmitter, and the other as a receiver.
-The process is as follows –
-- Configure the first DK/EK to receive packets with a known Access Address at centre frequency of 2400 MHz –
-uart:~$ data_rate ble_1Mbit
-uart:~$ transmit_pattern pattern_11110000
-uart:~$ start_channel 0
-uart:~$ parameters_print
-uart:~$ start_rx
-- Configure the second DK/EK to transmit 10000 packets (TX transmit count) with the matching Access Address at centre frequency of 2400 MHz –
+  A PER measurement can be performed using the Radio Test application running on two nRF7002 DK/EK, one as a transmitter, and the other as a receiver.
+  The process is as follows –
+  - Configure the first DK/EK to receive packets with a known Access Address at centre frequency of 2400 MHz –
+  .. code-block:: console
+     uart:~$ data_rate ble_1Mbit
+     uart:~$ transmit_pattern pattern_11110000
+     uart:~$ start_channel 0
+     uart:~$ parameters_print
+     uart:~$ start_rx
+  - Configure the second DK/EK to transmit 10000 packets (TX transmit count) with the matching Access Address at centre frequency of 2400 MHz –
 
 .. code-block:: console
 
@@ -264,12 +265,13 @@ uart:~$ start_rx
    uart:~$ cancel
 - Calculate the PER as 1 – (RX success count / TX transmit count).
 
-How to use Wi-Fi Radio Test 
+How to use Wi-Fi Radio Test
 ***************************
 Wi-Fi Radio Test is the sample (application) used to control the Wi-Fi radio on the nRF7002 device.
 The Wi-Fi Radio Test firmware supports configuration of the W-Fi radio in specific modes and with various TX/RX parameters to test its performance. The following links give further details –
 Overall description of the Wi-Fi Radio Test mode - https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/samples/wifi/radio_test/sample_description.html
 Description of the sub-commands that can be used to configure the radio - https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/samples/wifi/radio_test/radio_test_subcommands.html
+
 Wi-Fi radio test subcommands ordering:
 
    Order of usage of Wi-Fi radio test sub-commands is very important. The ``init`` sub-command must be called first.
