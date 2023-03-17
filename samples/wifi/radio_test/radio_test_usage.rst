@@ -204,8 +204,7 @@ Radio Test is the sample (application) used to control the Short Range (SR) radi
 
 How to use Radio Test firmware:
    The Radio Test firmware supports configuration of the SR radio in specific modes and with various TX/RX parameters to test its performance. The following links give further details –
-   * General information about Radio Test software in online documentation -
-     :ref:`radio_test`
+   * General information about Radio Test software in online documentation - :ref:`radio_test`
    * Description of using Putty as the terminal application for controlling the DUT –
      https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/gs_testing.html#putty
    * Description of the sub-commands that can be used to configure the radio - :ref:`radio_test_ui`
@@ -275,8 +274,10 @@ How to use Wi-Fi Radio Test
 ***************************
 Wi-Fi Radio Test is the sample (application) used to control the Wi-Fi radio on the nRF7002 device.
 
-The Wi-Fi Radio Test firmware supports configuration of the W-Fi radio in specific modes and with various TX/RX parameters to test its performance. The following links give further details –
-* Overall description of the Wi-Fi Radio Test mode - :ref:`wifi_radio_sample_desc` 
+The Wi-Fi Radio Test firmware supports configuration of the W-Fi radio in specific modes and with various TX/RX parameters to test its performance.
+The following links give further details –
+
+* Overall description of the Wi-Fi Radio Test mode - :ref:`wifi_radio_sample_desc`
 * Description of the sub-commands that can be used to configure the radio - :ref:`wifi_radio_subcommands`
 
 Wi-Fi radio test subcommands ordering:
@@ -322,6 +323,7 @@ Wi-Fi radio test subcommands ordering:
    Remaining sub-commands can be called in any order after ``tx_pkt_tput_mode`` sub-command and before TX start.
 
 How to use Wi-Fi Radio Test for transmit tests:
+
 #. To run a continuous (DSSS/CCK) TX sequence in 802.11b mode:
     - Channel: 1
     - Payload length: 1024 bytes
@@ -556,8 +558,8 @@ How to use Wi-Fi Radio Test for PER measurements:
    one as a transmitter, and the other as a receiver. The process is as follows –
 
    802.11b PER measurements:
-     - Configure the first DK/EK to receive packets on the required channel number:
-       Following set of commands configure DUT in channel 1, receive mode.
+   - Configure the first DK/EK to receive packets on the required channel number:
+     Following set of commands configure DUT in channel 1, receive mode.
 
      .. code-block:: console
 
@@ -738,8 +740,7 @@ How to use Wi-Fi Radio Test for PER measurements:
 
 How to use Wi-Fi STA Sample
 ***************************
-
-https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/samples/wifi/sta/README.html
+:ref:`wifi_station_sample`
 The Wi-Fi station sample is designed to be built with a SSID, password (set in the Prj.conf file) and once executing on the nRF7002 board,
 it automatically connects to the Wi-Fi Access Point and once connected, LED1 starts blinking indicating a successful connection.
 If the connection is lost, the LED1 stops blinking. The process repeats every time a board reset button is pressed.
@@ -755,7 +756,7 @@ If the DHCP exchange is successful, the IP address acquired is used in the place
 
 How to use Wi-Fi Shell Sample
 *****************************
-https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/samples/wifi/shell/README.html
+:ref:`wifi_shell_sample`
 This sample lets you scan, connect and ping to a desired network/Access Point via a Shell as described below –
 Scan all the access points in the vicinity
 
@@ -811,44 +812,43 @@ The example below details how to perform a continuous transmit on a fixed channe
 
    uart:~$ cancel
 
-How to use Thread Radio Test for PER measurements
-*************************************************
+How to use Thread Radio Test for PER measurements:
+  A PER measurement can be performed using the Radio Test application running on two nRF7002- DK/EK’s, one as a transmitter, and the other as a receiver. The process is as follows –
+  - Configure the first DK/EK to receive packets with a known Access Address at center channel 18
 
-A PER measurement can be performed using the Radio Test application running on two nRF7002- DK/EK’s, one as a transmitter, and the other as a receiver. The process is as follows –
-- Configure the first DK/EK to receive packets with a known Access Address at center channel 18
+  .. code-block:: console
 
-.. code-block:: console
+     uart:~$ data_rate ieee802154_250Kbit
+     uart:~$ start_channel 18
+     uart:~$ parameters_print
+     uart:~$ start_rx
 
-   uart:~$ data_rate ieee802154_250Kbit
-   uart:~$ start_channel 18
-   uart:~$ parameters_print
-   uart:~$ start_rx
+  - Configure the second DK/EK to transmit 10000 packets (TX transmit count) with the matching Access Address at center channel 18
 
-- Configure the second DK/EK to transmit 10000 packets (TX transmit count) with the matching Access Address at center channel 18
+  .. code-block:: console
 
-.. code-block:: console
+     uart:~$ data_rate ieee802154_250Kbit
+     uart:~$ start_channel 18
+     uart:~$ parameters_print
+     uart:~$ start_tx_modulated_carrier 10000
 
-   uart:~$ data_rate ieee802154_250Kbit
-   uart:~$ start_channel 18
-   uart:~$ parameters_print
-   uart:~$ start_tx_modulated_carrier 10000
+  - Record number of successfully received packets on the first DK/EK (repeat as necessary until count stops incrementing). RX success count is the final item in the print display,
+    ‘Number of packets’.
 
-- Record number of successfully received packets on the first DK/EK (repeat as necessary until count stops incrementing). RX success count is the final item in the print display,
-‘Number of packets’.
+  .. code-block:: console
 
-.. code-block:: console
+     uart:~$ print_rx
+  - Terminate receiving on the first DK/EK
 
-   uart:~$ print_rx
-- Terminate receiving on the first DK/EK
+  .. code-block:: console
 
-.. code-block:: console
-
-   uart:~$ cancel
-- Calculate the PER as 1 – (RX success count / TX transmit count).
+     uart:~$ cancel
+  - Calculate the PER as 1 – (RX success count / TX transmit count).
 
 General note on VCOM setting
 ****************************
 * For choosing the correct COM port to interact with network core on nRF7002- DK/EK:
+
   * Attach the nRF7002- DK/EK on PC
   * Enter the following command in a command line interface
 
