@@ -170,8 +170,8 @@ How to program Firmware in nRF7002 Setup
 ****************************************
 
 * Have nRFJPROG tool installed on PC. This program can be downloaded
-  at `Development-tools <https://www.nordicsemi.com/Products/Development-tools/nRF-Command-Line-Tools/Download?lang=en#infotabs>`
-* Connect PC to nRF7002 board with USB cable.
+  at :ref:`Development-tools <https://www.nordicsemi.com/Products/Development-tools/nRF-Command-Line-Tools/Download?lang=en#infotabs>`
+* Connect PC to nRF7002 board with USB cable. :ref:`nRF Command Line Tools`
 * Switch nRF7002 board on.
 
 Program Radio Test Firmware:
