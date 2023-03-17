@@ -268,7 +268,11 @@ How to use Radio Test for PER measurements:
   .. code-block:: console
 
      uart:~$ cancel
-  - Calculate the PER as :math: `1 – (RX success count / TX transmit count)`.
+  - Calculate the PER as
+
+    .. math::
+
+       PER = 1 – (RX success count / TX transmit count)
 
 How to use Wi-Fi Radio Test
 ***************************
