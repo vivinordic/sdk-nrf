@@ -485,7 +485,7 @@ How to use Wi-Fi Radio Test for transmit tests:
     - Channel: 100
     - Frame format: HE-ERSU (11ax)
     - Payload len: 1000
-    - Inter-frame gap: 200 us
+    - Inter-frame gap: 200 us1
     - data rate : MCS0
     - 3.2us GI
     - 4x HELTF
@@ -557,7 +557,7 @@ How to use Wi-Fi Radio Test for PER measurements:
    A PER measurement can be performed using the Wi-Fi Radio Test application running on two nRF7002-DK/EK’s,
    one as a transmitter, and the other as a receiver. The process is as follows –
 
-   802.11b PER measurements:
+   #. 802.11b PER measurements:
    - Configure the first DK/EK to receive packets on the required channel number:
      Following set of commands configure DUT in channel 1, receive mode.
 
@@ -595,14 +595,15 @@ How to use Wi-Fi Radio Test for PER measurements:
    - Calculate the PER as 1 – (RX success count / TX transmit count).
 
    #. 802.11a PER measurements
-      - Configure the first DK to receive packets on the required channel number:
+
+   - Configure the first DK to receive packets on the required channel number:
 
       .. code-block:: console
 
          uart:~$ wifi_radio_test init 36
          uart:~$ wifi_radio_test rx 1     #this will clear the earlier stats and wait for packets
 
-      - Configure the second DK to transmit 10000 packets (TX transmit count) with the required modulation, TX power and channel (e.g. 11g, 54 Mbps, 10 dBm, channel 36):
+   - Configure the second DK to transmit 10000 packets (TX transmit count) with the required modulation, TX power and channel (e.g. 11g, 54 Mbps, 10 dBm, channel 36):
 
       .. code-block:: console
 
@@ -615,8 +616,9 @@ How to use Wi-Fi Radio Test for PER measurements:
          uart:~$ wifi_radio_test tx_pkt_num 10000
          uart:~$ wifi_radio_test tx 1
 
-      - Record number of successfully received packets on the first DK (repeat as necessary until count stops incrementing).
-      RX success count is displayed as ofdm_crc32_pass_cnt:
+   - Record number of successfully received packets on the first DK (repeat as necessary until count stops incrementing).
+
+   RX success count is displayed as ofdm_crc32_pass_cnt:
 
       .. code-block:: console
 
@@ -868,7 +870,7 @@ General note on VCOM setting
 
 .. note::
 
-   that the correct baud rate setting is 115200 bps.
+   The correct baud rate setting is 115200 bps.
 
 Appendix A
 **********
@@ -877,7 +879,7 @@ This section gives a general guidance/recommendation for mapping different Wi-Fi
 certification standards.
 
 
-.. list-table:: Wi-Fi radio test subcommands
+.. list-table:: CE certification standards
    :header-rows: 1
 
    * - Test Category
