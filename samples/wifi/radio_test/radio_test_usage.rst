@@ -169,10 +169,8 @@ Firmware files:
 How to program Firmware in nRF7002 Setup
 ****************************************
 
-* Have nRFJPROG tool installed on PC. This program can be downloaded at
-
-https://www.nordicsemi.com/Products/Development-tools/nRF-Command-Line-Tools/Download?lang=en#infotabs
-
+* Have nRFJPROG tool installed on PC. This program can be downloaded
+  at `Development-tools <https://www.nordicsemi.com/Products/Development-tools/nRF-Command-Line-Tools/Download?lang=en#infotabs>`
 * Connect PC to nRF7002 board with USB cable.
 * Switch nRF7002 board on.
 
@@ -746,8 +744,8 @@ How to use Wi-Fi Radio Test for PER measurements:
 
 How to use Wi-Fi STA Sample
 ***************************
-:ref:`wifi_station_sample`
-The Wi-Fi station sample is designed to be built with a SSID, password (set in the ``prj.conf`` file) and once executing on the nRF7002 board,
+
+The Wi-Fi station sample (see :ref:`wifi_station_sample`)is designed to be built with a SSID, password (set in the ``prj.conf`` file) and once executing on the nRF7002 board,
 it automatically connects to the Wi-Fi Access Point and once connected, LED1 starts blinking indicating a successful connection.
 If the connection is lost, the LED1 stops blinking. The process repeats every time a board reset button is pressed.
 
@@ -762,8 +760,8 @@ If the DHCP exchange is successful, the IP address acquired is used in the place
 
 How to use Wi-Fi Shell Sample
 *****************************
-:ref:`wifi_shell_sample`
-This sample lets you scan, connect and ping to a desired network/Access Point via a Shell as described below –
+
+Wi-Fi Shell sample (see :ref:`wifi_shell_sample`) lets you scan, connect and ping to a desired network/Access Point via a Shell as described below –
 Scan all the access points in the vicinity
 
 .. code-block:: console
