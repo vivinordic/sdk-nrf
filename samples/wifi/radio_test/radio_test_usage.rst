@@ -169,9 +169,8 @@ Firmware files:
 How to program Firmware in nRF7002 Setup
 ****************************************
 
-* Have nRFJPROG tool installed on PC. This program can be downloaded
-  at :ref:`Development-tools <https://www.nordicsemi.com/Products/Development-tools/nRF-Command-Line-Tools/Download?lang=en#infotabs>`
-* Connect PC to nRF7002 board with USB cable. :ref:`nRF Command Line Tools`
+* Have nRFJPROG tool installed on PC. This program is available at `Download nRF Command Line Tools`_
+* Connect PC to nRF7002 board with USB cable.
 * Switch nRF7002 board on.
 
 Program Radio Test Firmware:
@@ -207,8 +206,7 @@ How to use Radio Test firmware:
    The following links give further details –
 
    * General information about Radio Test software in online documentation - :ref:`radio_test`
-   * Description of using Putty as the terminal application for controlling the DUT –
-     https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/gs_testing.html#putty
+   * Description of using Putty as the terminal application for controlling the DUT – :ref:`gs_testing`
    * Description of the sub-commands that can be used to configure the radio - :ref:`radio_test_ui`
    The example below details how to perform a continuous transmit on a fixed channel -
 
