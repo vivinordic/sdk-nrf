@@ -138,10 +138,12 @@ Build instructions:
   * NET core hex file: ``build/peripheral_radio_test/zephyr/merged_CPUNET.hex``
 
 * Wi-Fi Station build : ``<ncs_repo>/ncs/nrf/samples/wifi/sta``
+  
   Change the CONFIG parameters in Prj.conf as per Access Point requirements -
+  
   * Credentials - CONFIG_STA_KEY_MGMT_*, CONFIG_STA_SAMPLE_SSID, CONFIG_STA_SAMPLE_PASSWORD
   * Static IP address - CONFIG_NET_CONFIG_MY_IPV4_ADDR, CONFIG_NET_CONFIG_MY_IPV4_NETMASK, CONFIG_NET_CONFIG_MY_IPV4_GW
-   (These are only used if IP address is not acquired due to DHCP failure)
+    (These are only used if IP address is not acquired due to DHCP failure)
 
   .. code-block:: console
 
@@ -203,7 +205,9 @@ How to use Radio Test
 Radio Test is the sample (application) used to control the Short Range (SR) radio on the nRF5340 device.
 
 How to use Radio Test firmware:
-   The Radio Test firmware supports configuration of the SR radio in specific modes and with various TX/RX parameters to test its performance. The following links give further details –
+   The Radio Test firmware supports configuration of the SR radio in specific modes and with various TX/RX parameters to test its performance.
+   The following links give further details –
+   
    * General information about Radio Test software in online documentation - :ref:`radio_test`
    * Description of using Putty as the terminal application for controlling the DUT –
      https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/gs_testing.html#putty
@@ -856,7 +860,7 @@ General note on VCOM setting
 
   .. code-block:: console
 
-     > nrfjprog –-com
+     > nrfjprog --com
 
   * Typically, VCOM0 is connected to the n RF5340 network core (running SR Radio Test) and VCOM1 is connected to the nRF5340 application core (running Wi-Fi Radio Test).
     Please verify the mapping of the COM ports based on the available commands for each port referring to the example figure shown.
@@ -864,7 +868,7 @@ General note on VCOM setting
 
   .. code-block:: console
 
-     > nrfjprog –-com
+     > nrfjprog --com
      960311844    COM47    VCOM0  //This is for Radio Test
      960311844    COM48    VCOM1  //This is for Wi-Fi Radio Test
 
@@ -877,22 +881,6 @@ Appendix A
 
 This section gives a general guidance/recommendation for mapping different Wi-Fi Test application samples to use for different category of tests defined in the CE
 certification standards.
-
-.. list-table:: test statistics
-   :header-rows: 1
-
-   * - Statistic
-     - Description
-   * - rssi_avg
-     - Average RSSI value in dBm.
-   * - ofdm_crc32_pass_cnt
-     - Number of OFDM frames whose CRC32 check passed.
-   * - ofdm_crc32_fail_cnt
-     - Number of OFDM frames whose CRC32 check failed.
-   * - dsss_crc32_pass_cnt
-     - Number of DSSS frames whose CRC32 check passed.
-   * - dsss_crc32_fail_cnt
-     - Number of DSSS frames whose CRC32 check failed.
 
 .. list-table:: CE certification standards
    :header-rows: 1
