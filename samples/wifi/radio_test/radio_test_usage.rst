@@ -99,14 +99,14 @@ The combined build of Radio Test and Wi-Fi Radio Test firmware:
 
      * Detailed description - :ref:`wifi_station_sample`
      * Allows DUT to connect to a Wi-Fi Access Point device and gives visual indication of connected state (LED1 blinking) or not (LED1 off)
-     * Allows an option to statically set a desired IP address to the DUT at build time via settings in prj.conf file.
+     * Allows an option to statically set a desired IP address to the DUT at build time via settings in ``prj.conf`` file.
        This IP address will be used by the device up on connection to Access Point in case DHCP resolution fails for any reason.
 
   Wi-Fi Shell sample:
 
      * Detailed description - :ref:`wifi_shell_sample`
      * Allows DUT to connect to an Wi-Fi Access Point device and expose a shell interface via the UART console to run relevant Wi-Fi shell commands .
-     * Allows an option to statically set a desired IP address to the DUT at build time via settings in prj.conf file.
+     * Allows an option to statically set a desired IP address to the DUT at build time via settings in ``prj.conf`` file.
        This IP address will be used by the device up on connection to Access Point in case DHCP resolution fails for any reason.
 
 Build instructions:
@@ -138,9 +138,9 @@ Build instructions:
   * NET core hex file: ``build/peripheral_radio_test/zephyr/merged_CPUNET.hex``
 
 * Wi-Fi Station build : ``<ncs_repo>/ncs/nrf/samples/wifi/sta``
-  
-  Change the CONFIG parameters in Prj.conf as per Access Point requirements -
-  
+
+  Change the CONFIG parameters in ``prj.conf`` as per Access Point requirements -
+
   * Credentials - CONFIG_STA_KEY_MGMT_*, CONFIG_STA_SAMPLE_SSID, CONFIG_STA_SAMPLE_PASSWORD
   * Static IP address - CONFIG_NET_CONFIG_MY_IPV4_ADDR, CONFIG_NET_CONFIG_MY_IPV4_NETMASK, CONFIG_NET_CONFIG_MY_IPV4_GW
     (These are only used if IP address is not acquired due to DHCP failure)
@@ -207,7 +207,7 @@ Radio Test is the sample (application) used to control the Short Range (SR) radi
 How to use Radio Test firmware:
    The Radio Test firmware supports configuration of the SR radio in specific modes and with various TX/RX parameters to test its performance.
    The following links give further details –
-   
+
    * General information about Radio Test software in online documentation - :ref:`radio_test`
    * Description of using Putty as the terminal application for controlling the DUT –
      https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/gs_testing.html#putty
@@ -561,7 +561,8 @@ How to use Wi-Fi Radio Test for PER measurements:
    A PER measurement can be performed using the Wi-Fi Radio Test application running on two nRF7002-DK/EK’s,
    one as a transmitter, and the other as a receiver. The process is as follows –
 
-   #. 802.11b PER measurements:
+#. 802.11b PER measurements:
+
    - Configure the first DK/EK to receive packets on the required channel number:
      Following set of commands configure DUT in channel 1, receive mode.
 
@@ -586,19 +587,19 @@ How to use Wi-Fi Radio Test for PER measurements:
         uart:~$ wifi_radio_test tx 1
 
    - Record number of successfully received packets on the first DK (repeat as necessary until count stops incrementing).
-   RX success count is displayed as ofdm_crc32_pass_cnt:
+     RX success count is displayed as ofdm_crc32_pass_cnt:
 
-   .. code-block:: console
+     .. code-block:: console
 
-      uart:~$ wifi_radio_test get_stats
+        uart:~$ wifi_radio_test get_stats
    - Terminate receiving on the first DK:
 
-   .. code-block:: console
+     .. code-block:: console
 
-      uart:~$ wifi_radio_test rx 0
+        uart:~$ wifi_radio_test rx 0
    - Calculate the PER as 1 – (RX success count / TX transmit count).
 
-   #. 802.11a PER measurements
+#. 802.11a PER measurements
 
    - Configure the first DK to receive packets on the required channel number:
 
@@ -621,8 +622,7 @@ How to use Wi-Fi Radio Test for PER measurements:
          uart:~$ wifi_radio_test tx 1
 
    - Record number of successfully received packets on the first DK (repeat as necessary until count stops incrementing).
-
-   RX success count is displayed as ofdm_crc32_pass_cnt:
+     RX success count is displayed as ofdm_crc32_pass_cnt:
 
       .. code-block:: console
 
@@ -634,16 +634,16 @@ How to use Wi-Fi Radio Test for PER measurements:
          uart:~$ wifi_radio_test rx 0
       - Calculate the PER as 1 – (RX success count / TX transmit count).
 
-   #. 802.11n PER measurements
-      - Configure the first DK to receive packets on the required channel number:
+#. 802.11n PER measurements
+   - Configure the first DK to receive packets on the required channel number:
 
       .. code-block:: console
 
          uart:~$ wifi_radio_test init 36
          uart:~$ wifi_radio_test rx 1 #this will clear the earlier stats and wait for packets
 
-      - Configure the second DK to transmit 10000 packets (TX transmit count) with the required modulation,
-      TX power and channel (e.g. 11n, MCS0, 10 dBm, channel 36):
+   - Configure the second DK to transmit 10000 packets (TX transmit count) with the required modulation,
+     TX power and channel (e.g. 11n, MCS0, 10 dBm, channel 36):
 
       .. code-block:: console
 
@@ -658,30 +658,30 @@ How to use Wi-Fi Radio Test for PER measurements:
          uart:~$ wifi_radio_test tx_pkt_num 10000
          uart:~$ wifi_radio_test tx 1
 
-      - Record number of successfully received packets on the first DK (repeat as necessary until count stops incrementing).
+   - Record number of successfully received packets on the first DK (repeat as necessary until count stops incrementing).
       RX success count is displayed as ofdm_crc32_pass_cnt:
 
       .. code-block:: console
 
          uart:~$ wifi_radio_test get_stats
-      - Terminate receiving on the first DK:
+   - Terminate receiving on the first DK:
 
       .. code-block:: console
 
          uart:~$ wifi_radio_test rx 0
-      - Calculate the PER as 1 – (RX success count / TX transmit count).
+   - Calculate the PER as 1 – (RX success count / TX transmit count).
 
-   #. 802. 11ac PER measurements
-      - Configure the first DK to receive packets on the required channel number:
+#. 802. 11ac PER measurements
+   - Configure the first DK to receive packets on the required channel number:
 
       .. code-block:: console
 
          uart:~$ wifi_radio_test init 40
          uart:~$ wifi_radio_test rx 1  #this will clear the earlier stats and wait for packets
 
-      802.11ac, MCS7, 10 dBm, channel 40 - PER measurements
+     802.11ac, MCS7, 10 dBm, channel 40 - PER measurements
 
-      - Configure the second DK to transmit 10000 packets (TX transmit count) with the required modulation, TX power and channel:
+   - Configure the second DK to transmit 10000 packets (TX transmit count) with the required modulation, TX power and channel:
 
       .. code-block:: console
 
@@ -695,27 +695,27 @@ How to use Wi-Fi Radio Test for PER measurements:
          uart:~$ wifi_radio_test tx_pkt_num 10000
          uart:~$ wifi_radio_test tx 1
 
-      - Record number of successfully received packets on the first DK (repeat as necessary until count stops incrementing). RX success count is displayed as ofdm_crc32_pass_cnt:
+   - Record number of successfully received packets on the first DK (repeat as necessary until count stops incrementing). RX success count is displayed as ofdm_crc32_pass_cnt:
 
       .. code-block:: console
 
          uart:~$ wifi_radio_test get_stats
-      - Terminate receiving on the first DK:
+   - Terminate receiving on the first DK:
 
       .. code-block:: console
 
          uart:~$ wifi_radio_test rx 0
-      - Calculate the PER as 1 – (RX success count / TX transmit count).
+   - Calculate the PER as 1 – (RX success count / TX transmit count).
 
-   #. 802.11ax PER measurements
-      - Configure the first DK to receive packets on the required channel number:
+#. 802.11ax PER measurements
+   - Configure the first DK to receive packets on the required channel number:
 
       .. code-block:: console
 
          uart:~$ wifi_radio_test init 100
          uart:~$ wifi_radio_test rx 1  #this will clear the earlier stats and wait for packets.
 
-      802.11ax, MCS0, 10 dBm, channel 100 - PER measurements
+     802.11ax, MCS0, 10 dBm, channel 100 - PER measurements
 
       .. code-block:: console
 
@@ -730,30 +730,30 @@ How to use Wi-Fi Radio Test for PER measurements:
          uart:~$ wifi_radio_test tx_pkt_num 10000
          uart:~$ wifi_radio_test tx 1
 
-      - Record number of successfully received packets on the first DK (repeat as necessary until count stops incrementing).
-      RX success count is displayed as ofdm_crc32_pass_cnt:
+   - Record number of successfully received packets on the first DK (repeat as necessary until count stops incrementing).
+     RX success count is displayed as ofdm_crc32_pass_cnt:
 
       .. code-block:: console
 
          uart:~$ wifi_radio_test get_stats
-      - Terminate receiving on the first DK:
+   - Terminate receiving on the first DK:
 
       .. code-block:: console
 
          uart:~$ wifi_radio_test rx 0
 
-      - Calculate the PER as 1 – (RX success count / TX transmit count).
+   - Calculate the PER as 1 – (RX success count / TX transmit count).
 
 How to use Wi-Fi STA Sample
 ***************************
 :ref:`wifi_station_sample`
-The Wi-Fi station sample is designed to be built with a SSID, password (set in the Prj.conf file) and once executing on the nRF7002 board,
+The Wi-Fi station sample is designed to be built with a SSID, password (set in the ``prj.conf`` file) and once executing on the nRF7002 board,
 it automatically connects to the Wi-Fi Access Point and once connected, LED1 starts blinking indicating a successful connection.
 If the connection is lost, the LED1 stops blinking. The process repeats every time a board reset button is pressed.
 
 By default, an IP address is acquired by the nRF7002 board via the DHCP protocol exchanges with the Access Point.
 If for any reason, the DHCP exchange fails and hence IP address is not successfully acquired,
-one can set an expected static IP address in the Prj.conf file which will then become the default IP address.
+one can set an expected static IP address in the ``prj.conf`` file which will then become the default IP address.
 If the DHCP exchange is successful, the IP address acquired is used in the place of static IP address settings.
 
 .. note::
