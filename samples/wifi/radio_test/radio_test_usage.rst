@@ -743,7 +743,9 @@ By default, an IP address is acquired by the nRF7002 board via the DHCP protocol
 If for any reason, the DHCP exchange fails and hence IP address is not successfully acquired,
 one can set an expected static IP address in the Prj.conf file which will then become the default IP address.
 If the DHCP exchange is successful, the IP address acquired is used in the place of static IP address settings.
+
 .. note::
+
    there is no UART shell support in this sample. The UART console will only display debug information from the sample.
 
 How to use Wi-Fi Shell Sample
@@ -779,3 +781,89 @@ To disconnect
 .. code-block:: console
 
    uart:~$ wifi disconnect
+
+How to use Thread Radio Testing
+*******************************
+
+The example below details how to perform a continuous transmit on a fixed channel -
+
+.. code-block:: console
+
+   uart:~$ data_rate ieee802154_250Kbit
+- Select lowest channel 11. Replace 11 with 18 for mid channel. Replace 11 with 26 for high channel.  
+
+.. code-block:: console
+
+   uart:~$ start_channel 11 
+- Transmit packets continuously with high duty cycle
+
+.. code-block:: console
+
+   uart:~$ start_tx_modulated_carrier
+- Terminate transmission
+
+.. code-block:: console
+
+   uart:~$ cancel
+
+How to use Thread Radio Test for PER measurements 
+A PER measurement can be performed using the Radio Test application running on two nRF7002- DK/EK’s, one as a transmitter, and the other as a receiver. The process is as follows –
+- Configure the first DK/EK to receive packets with a known Access Address at center channel 18
+
+.. code-block:: console
+
+   uart:~$ data_rate ieee802154_250Kbit
+   uart:~$ start_channel 18
+   uart:~$ parameters_print
+   uart:~$ start_rx
+
+- Configure the second DK/EK to transmit 10000 packets (TX transmit count) with the matching Access Address at center channel 18
+
+.. code-block:: console
+
+   uart:~$ data_rate ieee802154_250Kbit
+   uart:~$ start_channel 18
+   uart:~$ parameters_print
+   uart:~$ start_tx_modulated_carrier 10000
+
+- Record number of successfully received packets on the first DK/EK (repeat as necessary until count stops incrementing). RX success count is the final item in the print display,
+‘Number of packets’.
+
+.. code-block:: console
+
+   uart:~$ print_rx
+- Terminate receiving on the first DK/EK
+
+.. code-block:: console
+
+   uart:~$ cancel
+- Calculate the PER as 1 – (RX success count / TX transmit count).
+
+General note on VCOM setting
+****************************
+* For choosing the correct COM port to interact with network core on nRF7002- DK/EK:
+  ** Attach the nRF7002- DK/EK on PC
+  ** Enter the following command in a command line interface
+
+  .. code-block:: console
+
+     > nrfjprog –-com
+  ** Typically, VCOM0 is connected to the n RF5340 network core (running SR Radio Test) and VCOM1 is connected to the nRF5340 application core (running Wi-Fi Radio Test).
+     Please verify the mapping of the COM ports based on the available commands for each port referring to the example figure shown.
+  ** Example below
+
+  .. code-block:: console
+
+     > nrfjprog –-com
+     960311844    COM47    VCOM0  //This is for Radio Test
+     960311844    COM48    VCOM1  //This is for Wi-Fi Radio Test
+
+.. note::
+
+   that the correct baud rate setting is 115200 bps.
+
+Appendix A
+**********
+
+This section gives a general guidance/recommendation for mapping different Wi-Fi Test application samples to use for different category of tests defined in the CE
+certification standards.
