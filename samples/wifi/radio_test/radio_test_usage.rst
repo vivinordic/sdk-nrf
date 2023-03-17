@@ -878,7 +878,6 @@ Appendix A
 This section gives a general guidance/recommendation for mapping different Wi-Fi Test application samples to use for different category of tests defined in the CE
 certification standards.
 
-
 .. list-table:: test statistics
    :header-rows: 1
 
@@ -911,8 +910,7 @@ certification standards.
      - Radio Test
      - Section 7.A.1 to 7.A.8
    * - Adaptivity (Channel access mechanism)
-     - EN 300 328 v2.2.2,
-     - EN 301 893 V2.1.1
+     - EN 300 328 v2.2.2, EN 301 893 V2.1.1
      - Radio Test or Shell Sample
      - Section 7.A.1 to 7.A.8 or Section 8
    * - Occupied Channel Bandwidth
