@@ -731,7 +731,7 @@ How to use Wi-Fi Radio Test for PER measurements:
 
       - Calculate the PER as 1 – (RX success count / TX transmit count).
 
-How to use Wi-Fi STA Sample 
+How to use Wi-Fi STA Sample
 ***************************
 
 https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/samples/wifi/sta/README.html
@@ -790,11 +790,11 @@ The example below details how to perform a continuous transmit on a fixed channe
 .. code-block:: console
 
    uart:~$ data_rate ieee802154_250Kbit
-- Select lowest channel 11. Replace 11 with 18 for mid channel. Replace 11 with 26 for high channel.  
+- Select lowest channel 11. Replace 11 with 18 for mid channel. Replace 11 with 26 for high channel.
 
 .. code-block:: console
 
-   uart:~$ start_channel 11 
+   uart:~$ start_channel 11
 - Transmit packets continuously with high duty cycle
 
 .. code-block:: console
@@ -806,7 +806,9 @@ The example below details how to perform a continuous transmit on a fixed channe
 
    uart:~$ cancel
 
-How to use Thread Radio Test for PER measurements 
+How to use Thread Radio Test for PER measurements
+*************************************************
+
 A PER measurement can be performed using the Radio Test application running on two nRF7002- DK/EK’s, one as a transmitter, and the other as a receiver. The process is as follows –
 - Configure the first DK/EK to receive packets with a known Access Address at center channel 18
 
@@ -842,15 +844,16 @@ A PER measurement can be performed using the Radio Test application running on t
 General note on VCOM setting
 ****************************
 * For choosing the correct COM port to interact with network core on nRF7002- DK/EK:
-  ** Attach the nRF7002- DK/EK on PC
-  ** Enter the following command in a command line interface
+  * Attach the nRF7002- DK/EK on PC
+  * Enter the following command in a command line interface
 
   .. code-block:: console
 
      > nrfjprog –-com
-  ** Typically, VCOM0 is connected to the n RF5340 network core (running SR Radio Test) and VCOM1 is connected to the nRF5340 application core (running Wi-Fi Radio Test).
-     Please verify the mapping of the COM ports based on the available commands for each port referring to the example figure shown.
-  ** Example below
+
+  * Typically, VCOM0 is connected to the n RF5340 network core (running SR Radio Test) and VCOM1 is connected to the nRF5340 application core (running Wi-Fi Radio Test).
+    Please verify the mapping of the COM ports based on the available commands for each port referring to the example figure shown.
+  * Example below
 
   .. code-block:: console
 
@@ -867,3 +870,73 @@ Appendix A
 
 This section gives a general guidance/recommendation for mapping different Wi-Fi Test application samples to use for different category of tests defined in the CE
 certification standards.
+
+
+.. list-table:: Wi-Fi radio test subcommands
+   :header-rows: 1
+
+   * - Test Category
+     - Standard(s)
+     - Test Application
+     - Reference section in doc
+   * - Power Spectral Density
+     - EN 300 328 v2.2.2, EN 301 893 V2.1.1
+     - Radio Test
+     - Section 7.A.1 to 7.A.8
+   * - Duty Cycle, Tx-sequence, Tx-gap
+     - EN 300 328 v2.2.2
+     - Radio Test
+     - Section 7.A.1 to 7.A.8
+   * - Adaptivity (Channel access mechanism)
+     - EN 300 328 v2.2.2,
+     - EN 301 893 V2.1.1
+     - Radio Test or Shell Sample
+     - Section 7.A.1 to 7.A.8 or Section 8
+   * - Occupied Channel Bandwidth
+     - EN 300 328 v2.2.2, EN 301 893 V2.1.1
+     - Radio Test
+     - Section 7.A.1 to 7.A.8
+   * - Transmitter unwanted emissions in the out-of-band domain
+     - EN 300 328 v2.2.2
+     - Radio Test
+     - Section 7.A.1 to 7.A.8
+   * - Transmitter unwanted emissions in the spurious domain (radiated)
+     - EN 300 328 v2.2.2
+     - Radio Test
+     - Section 7.A.1 to 7.A.8
+   * - Receiver spurious emissions (radiated)
+     - EN 300 328 v2.2.2, EN 301 893 V2.1.1
+     - Radio Test
+     - Section 7.B.1 to 7.B.6
+   * - Receiver
+     - EN 300 328 v2.2.2
+     - Radio Test
+     - Section 7.B.1 to 7.B.6
+   * - Centre frequencies
+     - EN 301 893 V2.1.1
+     - Radio Test
+     - Section 7.A.3 to 7.A.8
+   * - RF Output Power
+     - EN 301 893 V2.1.1
+     - Radio Test
+     - Section 7.A.3 to 7.A.8
+   * - Transmitter unwanted emissions within the 5 GHz RLAN bands
+     - EN 301 893 V2.1.1
+     - Radio Test
+     - Section 7.A.3 to 7.A.8
+   * - Transmitter unwanted emissions outside the 5 GHz RLAN bands
+     - EN 301 893 V2.1.1
+     - Radio Test
+     - Section 7.A.3 to 7.A.8
+   * - Receiver Blocking
+     - EN 301 893 V2.1.1
+     - Radio Test
+     - Section 7.B.3 to 7.B.6
+   * - Electrostatic Discharge (ESD)
+     - EN 301 489-1 V2.2.3 and EN 301 489-17 V3.2.4
+     - STA sample
+     - Section 9
+   * - Radiated Emissions
+     - EN 301 489-1 V2.2.3 and EN 301 489-17 V3.2.4
+     - Radio Test  or Shell Sample?
+     - Section 7.A.1 to 7.A.8 or Section 8
