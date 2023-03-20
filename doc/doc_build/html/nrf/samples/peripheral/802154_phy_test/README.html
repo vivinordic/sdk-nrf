@@ -1,0 +1,1325 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IEEE 802.15.4 PHY test tool &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script src="../../../_static/tabs.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../../_static/js/ncs.js"
+></script>
+<script src="../../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Low Power UART" href="../lpuart/README.html" />
+    <link rel="prev" title="MPSL timeslot" href="../../mpsl/timeslot/README.html" />
+<link
+  href="../../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../applications.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../samples.html">Samples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../bl.html">Bluetooth samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../crypto.html">Cryptography samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../edge.html">Edge Impulse samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gazell.html">Gazell samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../matter.html">Matter samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nfc.html">NFC samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nrf5340.html">nRF5340 samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nrf9160.html">nRF9160 samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tfm.html">Trusted Firmware-M (TF-M) samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../thread.html">Thread samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../zigbee.html">Zigbee samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../wifi.html">Wi-Fi samples</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../other.html">Other samples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../app_event_manager/README.html">Application Event Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../app_event_manager_profiler_tracer/README.html">Application Event Manager profiling tracer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../bootloader/README.html">nRF Secure Immutable Bootloader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../caf/README.html">Common Application Framework preview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../caf_sensor_manager/README.html">CAF: Sensor manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../esb/README.html">Enhanced ShockBurst: Transmitter/Receiver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../event_manager_proxy/README.html">Event Manager Proxy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../hw_id/README.html">Hardware ID</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../nrf_profiler/README.html">Profiler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../debug/ppi_trace/README.html">PPI trace</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ipc/ipc_service/README.html">IPC service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../keys/hw_unique_key/README.html">Hardware unique key</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../keys/identity_key_generation/README.html">Identity key generation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../keys/identity_key_usage/README.html">Identity key usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../keys/random_hw_unique_key/README.html">Random hardware unique key</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../mpsl/timeslot/README.html">MPSL timeslot</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">IEEE 802.15.4 PHY test tool</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#requirements">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#serial-commands-list">Serial commands list</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuration">Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#building-and-running">Building and running</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../lpuart/README.html">Low Power UART</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../radio_test/README.html">Radio test (short-range)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../sensor/bh1749/README.html">BH1749: Ambient Light Sensor IC</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../drivers.html">Drivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../samples.html">Samples</a></li>
+          <li class="breadcrumb-item"><a href="../../other.html">Other samples</a></li>
+      <li class="breadcrumb-item active">IEEE 802.15.4 PHY test tool</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/samples/peripheral/802154_phy_test/README.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ieee-802-15-4-phy-test-tool">
+<span id="phy-test"></span><h1>IEEE 802.15.4 PHY test tool<a class="headerlink" href="#ieee-802-15-4-phy-test-tool" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#requirements" id="id6">Requirements</a></p></li>
+<li><p><a class="reference internal" href="#overview" id="id7">Overview</a></p></li>
+<li><p><a class="reference internal" href="#serial-commands-list" id="id8">Serial commands list</a></p>
+<ul>
+<li><p><a class="reference internal" href="#changemode-change-the-device-mode" id="id9">changemode - Change the device mode</a></p></li>
+<li><p><a class="reference internal" href="#lindication-led-indication" id="id10">lindication - LED indication</a></p></li>
+<li><p><a class="reference internal" href="#rping-ping-the-dut" id="id11">rping - Ping the DUT</a></p></li>
+<li><p><a class="reference internal" href="#lpingtimeout-set-the-ping-timeout" id="id12">lpingtimeout - Set the ping timeout</a></p></li>
+<li><p><a class="reference internal" href="#setchannel-set-the-common-radio-channel-for-the-dut-and-cmd" id="id13">setchannel - Set the common radio channel for the DUT and CMD</a></p></li>
+<li><p><a class="reference internal" href="#lsetchannel-set-the-cmd-radio-channel" id="id14">lsetchannel - Set the CMD radio channel</a></p></li>
+<li><p><a class="reference internal" href="#rsetchannel-set-the-dut-radio-channel" id="id15">rsetchannel - Set the DUT radio channel</a></p></li>
+<li><p><a class="reference internal" href="#lgetchannel-get-the-cmd-radio-channel" id="id16">lgetchannel - Get the CMD radio channel</a></p></li>
+<li><p><a class="reference internal" href="#lsetpower-set-the-cmd-radio-power" id="id17">lsetpower - Set the CMD radio power</a></p></li>
+<li><p><a class="reference internal" href="#lgetpower-get-the-cmd-radio-power" id="id18">lgetpower - Get the CMD radio power</a></p></li>
+<li><p><a class="reference internal" href="#rgetpower-get-the-dut-radio-power" id="id19">rgetpower - Get the DUT radio power</a></p></li>
+<li><p><a class="reference internal" href="#rstream-dut-modulated-waveform-transmission" id="id20">rstream - DUT modulated waveform transmission</a></p></li>
+<li><p><a class="reference internal" href="#rstart-start-the-rx-test" id="id21">rstart - Start the RX Test</a></p></li>
+<li><p><a class="reference internal" href="#rend-end-the-rx-test" id="id22">rend - End the RX Test</a></p></li>
+<li><p><a class="reference internal" href="#find-find-the-dut" id="id23">find - Find the DUT</a></p></li>
+<li><p><a class="reference internal" href="#lgetcca-clear-channel-assessment" id="id24">lgetcca - Clear Channel Assessment</a></p></li>
+<li><p><a class="reference internal" href="#lsetcca-clear-channel-assessment" id="id25">lsetcca - Clear Channel Assessment</a></p></li>
+<li><p><a class="reference internal" href="#lgeted-perform-energy-detection" id="id26">lgeted - Perform Energy Detection</a></p></li>
+<li><p><a class="reference internal" href="#lgetlqi-get-link-quality-indicator" id="id27">lgetlqi - Get Link Quality Indicator</a></p></li>
+<li><p><a class="reference internal" href="#lgetrssi-measure-rssi" id="id28">lgetrssi - Measure RSSI</a></p></li>
+<li><p><a class="reference internal" href="#lsetshort-set-short-address" id="id29">lsetshort - Set short address</a></p></li>
+<li><p><a class="reference internal" href="#lsetextended-set-extended-address" id="id30">lsetextended - Set extended address</a></p></li>
+<li><p><a class="reference internal" href="#lsetpanid-set-pan-id" id="id31">lsetpanid - Set PAN ID</a></p></li>
+<li><p><a class="reference internal" href="#lsetpayload-set-payload-for-burst-transmission" id="id32">lsetpayload - Set payload for burst transmission</a></p></li>
+<li><p><a class="reference internal" href="#ltx-burst-transmission-of-packets" id="id33">ltx - Burst transmission of packets</a></p></li>
+<li><p><a class="reference internal" href="#ltxend-stop-the-burst-transmission-of-packets" id="id34">ltxend - Stop the burst transmission of packets</a></p></li>
+<li><p><a class="reference internal" href="#lstart-start-the-continuous-receive-mode" id="id35">lstart - Start the continuous receive mode</a></p></li>
+<li><p><a class="reference internal" href="#lend-end-the-continuous-receive-mode" id="id36">lend - End the continuous receive mode</a></p></li>
+<li><p><a class="reference internal" href="#lsetantenna-set-cmd-antenna-id" id="id37">lsetantenna - Set CMD antenna ID</a></p></li>
+<li><p><a class="reference internal" href="#lsetrxantenna-set-cmd-antenna-id-for-rx" id="id38">lsetrxantenna - Set CMD antenna ID for RX</a></p></li>
+<li><p><a class="reference internal" href="#lsettxantenna-set-cmd-antenna-id-for-tx" id="id39">lsettxantenna - Set CMD antenna ID for TX</a></p></li>
+<li><p><a class="reference internal" href="#lgetrxantenna-get-cmd-rx-antenna-id" id="id40">lgetrxantenna - Get CMD RX antenna ID</a></p></li>
+<li><p><a class="reference internal" href="#lgettxantenna-get-cmd-tx-antenna-id" id="id41">lgettxantenna - Get CMD TX antenna ID</a></p></li>
+<li><p><a class="reference internal" href="#lgetbestrxantenna-get-last-best-cmd-rx-antenna-id-selected-by-antenna-diversity-algorithm" id="id42">lgetbestrxantenna - Get last best CMD RX antenna ID selected by antenna diversity algorithm</a></p></li>
+<li><p><a class="reference internal" href="#rsetantenna-set-dut-antenna-id" id="id43">rsetantenna - Set DUT antenna ID</a></p></li>
+<li><p><a class="reference internal" href="#rsettxantenna-set-dut-tx-antenna-id" id="id44">rsettxantenna - Set DUT TX antenna ID</a></p></li>
+<li><p><a class="reference internal" href="#rsetrxantenna-set-dut-rx-antenna-id" id="id45">rsetrxantenna - Set DUT RX antenna ID</a></p></li>
+<li><p><a class="reference internal" href="#rgetrxantenna-get-dut-tx-antenna-id" id="id46">rgetrxantenna - Get DUT TX antenna ID</a></p></li>
+<li><p><a class="reference internal" href="#rgettxantenna-get-dut-rx-antenna-id" id="id47">rgettxantenna - Get DUT RX antenna ID</a></p></li>
+<li><p><a class="reference internal" href="#rgetbestrxantenna-get-last-best-dut-rx-antenna-id-selected-by-antenna-diversity-algorithm" id="id48">rgetbestrxantenna - Get last best DUT RX antenna ID selected by antenna diversity algorithm</a></p></li>
+<li><p><a class="reference internal" href="#lcarrier-unmodulated-waveform-carrier-transmission" id="id49">lcarrier - Unmodulated waveform (carrier) transmission</a></p></li>
+<li><p><a class="reference internal" href="#lstream-modulated-waveform-transmission" id="id50">lstream - Modulated waveform transmission</a></p></li>
+<li><p><a class="reference internal" href="#rhardwareversion-get-the-dut-hardware-version" id="id51">rhardwareversion - Get the DUT hardware version</a></p></li>
+<li><p><a class="reference internal" href="#rsoftwareversion-get-the-dut-software-version" id="id52">rsoftwareversion - Get the DUT software version</a></p></li>
+<li><p><a class="reference internal" href="#lclk-high-frequency-clock-output-on-a-selected-pin" id="id53">lclk - High-frequency clock output on a selected pin</a></p></li>
+<li><p><a class="reference internal" href="#lsetgpio-set-gpio-pin-value" id="id54">lsetgpio - Set GPIO pin value</a></p></li>
+<li><p><a class="reference internal" href="#lgetgpio-get-gpio-pin-value" id="id55">lgetgpio - Get GPIO pin value</a></p></li>
+<li><p><a class="reference internal" href="#lsetdcdc-set-dc-dc-mode" id="id56">lsetdcdc - Set DC/DC mode</a></p></li>
+<li><p><a class="reference internal" href="#lgetdcdc-get-dc-dc-mode" id="id57">lgetdcdc - Get DC/DC mode</a></p></li>
+<li><p><a class="reference internal" href="#lseticache-set-icache-configuration" id="id58">lseticache - Set ICACHE configuration</a></p></li>
+<li><p><a class="reference internal" href="#lgettemp-read-soc-temperature" id="id59">lgettemp - Read SoC temperature</a></p></li>
+<li><p><a class="reference internal" href="#lsleep-transition-radio-to-sleep-mode" id="id60">lsleep - Transition radio to sleep mode</a></p></li>
+<li><p><a class="reference internal" href="#lreceive-transition-radio-to-receive-mode" id="id61">lreceive - Transition radio to receive mode</a></p></li>
+<li><p><a class="reference internal" href="#lreboot-reboots-the-device" id="id62">lreboot - Reboots the device</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#configuration" id="id63">Configuration</a></p>
+<ul>
+<li><p><a class="reference internal" href="#fem-support" id="id64">FEM support</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#building-and-running" id="id65">Building and running</a></p>
+<ul>
+<li><p><a class="reference internal" href="#testing-the-sample" id="id66">Testing the sample</a></p></li>
+<li><p><a class="reference internal" href="#performing-radio-tests-without-the-serial-interface" id="id67">Performing radio tests without the serial interface</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>The IEEE 802.15.4 PHY test tool performs 802.15.4 RF Performance and PHY Certification tests, and can also provide information for a general evaluation of the performance of the integrated 802.15.4 radio.</p>
+<section id="requirements">
+<h2><a class="toc-backref" href="#id6">Requirements</a><a class="headerlink" href="#requirements" title="Permalink to this heading"></a></h2>
+<p>The sample supports the following development kits:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 28%" />
+<col style="width: 7%" />
+<col style="width: 41%" />
+<col style="width: 24%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Hardware platforms</p></th>
+<th class="head"><p>PCA</p></th>
+<th class="head"><p>Board name</p></th>
+<th class="head"><p>Build target</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../working_with_nrf/nrf53/nrf5340.html#ug-nrf5340"><span class="std std-ref">nRF5340 DK</span></a></p></td>
+<td><p>PCA10095</p></td>
+<td><p><span class="xref std std-ref">nrf5340dk_nrf5340</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nrf5340dk_nrf5340_cpunet</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../working_with_nrf/nrf52/developing.html#ug-nrf52"><span class="std std-ref">nRF52840 DK</span></a></p></td>
+<td><p>PCA10056</p></td>
+<td><p><span class="xref std std-ref">nrf52840dk_nrf52840</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nrf52840dk_nrf52840</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../app_dev/working_with_fem/index.html#ug-radio-fem"><span class="std std-ref">nRF21540 DK</span></a></p></td>
+<td><p>PCA10112</p></td>
+<td><p><span class="xref std std-ref">nrf21540dk_nrf52840</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nrf21540dk_nrf52840</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>Conducting tests using the sample also requires a testing device, like another development kit running the same sample, set into DUT mode.
+For more information, see <a class="reference internal" href="#phy-test-testing"><span class="std std-ref">Testing the sample</span></a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can perform the testing using other equipment, like spectrum analyzers, oscilloscopes, or RF power meters, but these methods are not covered by this documentation.</p>
+</div>
+</section>
+<section id="overview">
+<h2><a class="toc-backref" href="#id7">Overview</a><a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+<p>To perform the tests, connect to the development kit through the serial port and send supported commands.</p>
+<p>See the <a class="reference internal" href="#phy-test-ui"><span class="std std-ref">Serial commands list</span></a> for the list of the available commands.</p>
+</section>
+<section id="serial-commands-list">
+<span id="phy-test-ui"></span><h2><a class="toc-backref" href="#id8">Serial commands list</a><a class="headerlink" href="#serial-commands-list" title="Permalink to this heading"></a></h2>
+<p>This section lists the serial commands that are supported by the sample.</p>
+<section id="changemode-change-the-device-mode">
+<h3><a class="toc-backref" href="#id9">changemode - Change the device mode</a><a class="headerlink" href="#changemode-change-the-device-mode" title="Permalink to this heading"></a></h3>
+<p>It changes the device mode if both modes are available.</p>
+<blockquote>
+<div><pre class="highlight literal-block">custom changemode <em>&lt;mode&gt;</em></pre>
+</div></blockquote>
+<p>The <code class="docutils literal notranslate"><span class="pre">&lt;mode&gt;</span></code> argument assumes one of the following values:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">0</span></code> - DUT</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">1</span></code> - CMD</p></li>
+</ul>
+<p>For example:</p>
+<blockquote>
+<div><pre class="highlight literal-block">custom changemode <em>1</em></pre>
+</div></blockquote>
+</section>
+<section id="lindication-led-indication">
+<h3><a class="toc-backref" href="#id10">lindication - LED indication</a><a class="headerlink" href="#lindication-led-indication" title="Permalink to this heading"></a></h3>
+<p>It makes the CMD device control the LED indicating packet reception.</p>
+<blockquote>
+<div><pre class="highlight literal-block">custom lindication <em>&lt;value&gt;</em></pre>
+</div></blockquote>
+<p>The <code class="docutils literal notranslate"><span class="pre">&lt;value&gt;</span></code> argument assumes one of the following values:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">0</span></code> - none</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">1</span></code> - LED packet reception indication</p></li>
+</ul>
+<p>For example:</p>
+<blockquote>
+<div><pre class="highlight literal-block">custom lindication <em>1</em></pre>
+</div></blockquote>
+</section>
+<section id="rping-ping-the-dut">
+<h3><a class="toc-backref" href="#id11">rping - Ping the DUT</a><a class="headerlink" href="#rping-ping-the-dut" title="Permalink to this heading"></a></h3>
+<p>It makes the CMD device send a PING to the DUT device and wait for the reply.</p>
+<blockquote>
+<div><div class="highlight highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">custom</span> <span class="n">rping</span>
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="lpingtimeout-set-the-ping-timeout">
+<h3><a class="toc-backref" href="#id12">lpingtimeout - Set the ping timeout</a><a class="headerlink" href="#lpingtimeout-set-the-ping-timeout" title="Permalink to this heading"></a></h3>
+<p>It makes the CMD device set the timeout in milliseconds for receiving the <em>pong</em> responses from the DUT device.</p>
+<blockquote>
+<div><pre class="highlight literal-block">custom lpingtimeout <em>&lt;timeout:1&gt;</em> <em>&lt;timeout:0&gt;</em></pre>
+</div></blockquote>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;timeout:1&gt;</span></code> value indicates the higher byte of the timeout.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;timeout:0&gt;</span></code> value indicates the lower byte of the timeout.</p></li>
+</ul>
+<p>For example:</p>
+<blockquote>
+<div><pre class="highlight literal-block">custom lpingtimeout <em>0</em> <em>255</em></pre>
+</div></blockquote>
+</section>
+<section id="setchannel-set-the-common-radio-channel-for-the-dut-and-cmd">
+<h3><a class="toc-backref" href="#id13">setchannel - Set the common radio channel for the DUT and CMD</a><a class="headerlink" href="#setchannel-set-the-common-radio-channel-for-the-dut-and-cmd" title="Permalink to this heading"></a></h3>
+<p>It sets a common radio channel for the DUT and CMD devices, sends a PING, and waits for the response.</p>
+<blockquote>
+<div><pre class="highlight literal-block">custom setchannel <em>&lt;channel:3&gt;</em> <em>&lt;channel:2&gt;</em> <em>&lt;channel:1&gt;</em> <em>&lt;channel:0&gt;</em>.</pre>
+</div></blockquote>
+<p>The four <code class="docutils literal notranslate"><span class="pre">&lt;channel:x&gt;</span></code> arguments are four octets defining the channel page and number.</p>
+<p>For example:</p>
+<blockquote>
+<div><pre class="highlight literal-block">custom setchannel <em>0</em> <em>0</em> <em>8</em> <em>0</em></pre>
+</div></blockquote>
+</section>
+<section id="lsetchannel-set-the-cmd-radio-channel">
+<h3><a class="toc-backref" href="#id14">lsetchannel - Set the CMD radio channel</a><a class="headerlink" href="#lsetchannel-set-the-cmd-radio-channel" title="Permalink to this heading"></a></h3>
+<p>It sets radio channel of the CMD device.</p>
+<blockquote>
+<div><pre class="highlight literal-block">custom lsetchannel <em>&lt;channel:3&gt;</em> <em>&lt;channel:2&gt;</em> <em>&lt;channel:1&gt;</em> <em>&lt;channel:0&gt;</em>.</pre>
+</div></blockquote>
+<p>The four <code class="docutils literal notranslate"><span class="pre">&lt;channel:x&gt;</span></code> arguments are four bytes defining the channel page and number.</p>
+<p>For example:</p>
+<blockquote>
+<div><pre class="highlight literal-block">custom lsetchannel <em>0</em> <em>0</em> <em>16</em> <em>0</em></pre>
+</div></blockquote>
+</section>
+<section id="rsetchannel-set-the-dut-radio-channel">
+<h3><a class="toc-backref" href="#id15">rsetchannel - Set the DUT radio channel</a><a class="headerlink" href="#rsetchannel-set-the-dut-radio-channel" title="Permalink to this heading"></a></h3>
+<p>It sets the radio channel of the DUT device.</p>
+<blockquote>
+<div><pre class="highlight literal-block">custom rsetchannel <em>&lt;channel&gt;</em></pre>
+</div></blockquote>
+<p>The <code class="docutils literal notranslate"><span class="pre">&lt;channel&gt;</span></code> argument indicates the selected channel’s number.</p>
+<p>For example:</p>
+<blockquote>
+<div><pre class="highlight literal-block">custom rsetchannel <em>13</em></pre>
+</div></blockquote>
+</section>
+<section id="lgetchannel-get-the-cmd-radio-channel">
+<h3><a class="toc-backref" href="#id16">lgetchannel - Get the CMD radio channel</a><a class="headerlink" href="#lgetchannel-get-the-cmd-radio-channel" title="Permalink to this heading"></a></h3>
+<p>It gets the current configured channel of the CMD device.</p>
+<blockquote>
+<div><div class="highlight highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">custom</span> <span class="n">lgetchannel</span>
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="lsetpower-set-the-cmd-radio-power">
+<h3><a class="toc-backref" href="#id17">lsetpower - Set the CMD radio power</a><a class="headerlink" href="#lsetpower-set-the-cmd-radio-power" title="Permalink to this heading"></a></h3>
+<p>It sets the CMD device’s TX power.</p>
+<blockquote>
+<div><pre class="highlight literal-block">custom lsetpower <em>&lt;mode:1&gt;</em> <em>&lt;mode:0&gt;</em> <em>&lt;power&gt;</em></pre>
+</div></blockquote>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;mode:1&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;mode:0&gt;</span></code> arguments are currently unsupported.
+Use <code class="docutils literal notranslate"><span class="pre">0</span></code> for both.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;power&gt;</span></code> argument indicates the TX power as a signed integer in dBm.</p></li>
+</ul>
+<p>For example:</p>
+<blockquote>
+<div><pre class="highlight literal-block">custom rsetpower <em>0</em> <em>0</em> <em>-17</em></pre>
+</div></blockquote>
+</section>
+<section id="lgetpower-get-the-cmd-radio-power">
+<h3><a class="toc-backref" href="#id18">lgetpower - Get the CMD radio power</a><a class="headerlink" href="#lgetpower-get-the-cmd-radio-power" title="Permalink to this heading"></a></h3>
+<p>It gets the current configured power of the CMD device.</p>
+<blockquote>
+<div><div class="highlight highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">custom</span> <span class="n">lgetpower</span>
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="rgetpower-get-the-dut-radio-power">
+<h3><a class="toc-backref" href="#id19">rgetpower - Get the DUT radio power</a><a class="headerlink" href="#rgetpower-get-the-dut-radio-power" title="Permalink to this heading"></a></h3>
+<p>It gets the current configured power of the DUT device.</p>
+<blockquote>
+<div><div class="highlight highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">custom</span> <span class="n">rgetpower</span>
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="rstream-dut-modulated-waveform-transmission">
+<h3><a class="toc-backref" href="#id20">rstream - DUT modulated waveform transmission</a><a class="headerlink" href="#rstream-dut-modulated-waveform-transmission" title="Permalink to this heading"></a></h3>
+<p>It commands the DUT device to start a modulated waveform transmission of a certain duration in milliseconds.</p>
+<blockquote>
+<div><pre class="highlight literal-block">custom rstream <em>&lt;duration:1&gt;</em> <em>&lt;duration:0&gt;</em></pre>
+</div></blockquote>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;duration:1&gt;</span></code> argument indicates the higher byte of the duration value.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;duration:0&gt;</span></code> argument indicates the lower byte of the duration value.</p></li>
+</ul>
+<p>For example:</p>
+<blockquote>
+<div><pre class="highlight literal-block">custom rstream <em>255</em> <em>255</em></pre>
+</div></blockquote>
+</section>
+<section id="rstart-start-the-rx-test">
+<h3><a class="toc-backref" href="#id21">rstart - Start the RX Test</a><a class="headerlink" href="#rstart-start-the-rx-test" title="Permalink to this heading"></a></h3>
+<p>It makes the DUT device start the RX test routine, clearing previous statistics.</p>
+<blockquote>
+<div><div class="highlight highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">custom</span> <span class="n">rstart</span>
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="rend-end-the-rx-test">
+<h3><a class="toc-backref" href="#id22">rend - End the RX Test</a><a class="headerlink" href="#rend-end-the-rx-test" title="Permalink to this heading"></a></h3>
+<p>It makes the DUT device terminate the RX test routine.
+The DUT device also sends the test results to the CMD device</p>
+<blockquote>
+<div><div class="highlight highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">custom</span> <span class="n">rend</span>
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="find-find-the-dut">
+<h3><a class="toc-backref" href="#id23">find - Find the DUT</a><a class="headerlink" href="#find-find-the-dut" title="Permalink to this heading"></a></h3>
+<p>It makes the CMD device cycle all the channels (11-26) trying to PING the DUT device.
+It stops upon receiving a reply.</p>
+<blockquote>
+<div><div class="highlight highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">custom</span> <span class="n">find</span>
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="lgetcca-clear-channel-assessment">
+<h3><a class="toc-backref" href="#id24">lgetcca - Clear Channel Assessment</a><a class="headerlink" href="#lgetcca-clear-channel-assessment" title="Permalink to this heading"></a></h3>
+<p>It makes the CMD device perform a Clear Channel Assessment (CCA) with the requested mode and print the result.</p>
+<blockquote>
+<div><pre class="highlight literal-block">custom lgetcca <em>&lt;mode&gt;</em></pre>
+</div></blockquote>
+<p>The <code class="docutils literal notranslate"><span class="pre">&lt;mode&gt;</span></code> argument indicates the IEEE 802.15.4 CCA mode (1-3).</p>
+<p>For example:</p>
+<blockquote>
+<div><pre class="highlight literal-block">custom lgetcca <em>1</em></pre>
+</div></blockquote>
+</section>
+<section id="lsetcca-clear-channel-assessment">
+<h3><a class="toc-backref" href="#id25">lsetcca - Clear Channel Assessment</a><a class="headerlink" href="#lsetcca-clear-channel-assessment" title="Permalink to this heading"></a></h3>
+<p>If enabled, it makes the CMD device perform a Clear Channel Assessment (CCA) before each transmission.</p>
+<blockquote>
+<div><pre class="highlight literal-block">custom lsetcca <em>&lt;toggle&gt;</em></pre>
+</div></blockquote>
+<p>The <code class="docutils literal notranslate"><span class="pre">&lt;toggle&gt;</span></code> argument enables or disables the execution of a CCA before each transmission.
+You can set it to the following values:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">1</span></code> - enable CCA</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">0</span></code> - disable CCA</p></li>
+</ul>
+<p>For example:</p>
+<blockquote>
+<div><pre class="highlight literal-block">custom lsetcca <em>1</em></pre>
+</div></blockquote>
+</section>
+<section id="lgeted-perform-energy-detection">
+<h3><a class="toc-backref" href="#id26">lgeted - Perform Energy Detection</a><a class="headerlink" href="#lgeted-perform-energy-detection" title="Permalink to this heading"></a></h3>
+<p>It starts the energy detection and reports the result as 2 hexadecimal bytes.</p>
+<blockquote>
+<div><div class="highlight highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">custom</span> <span class="n">lgeted</span>
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="lgetlqi-get-link-quality-indicator">
+<h3><a class="toc-backref" href="#id27">lgetlqi - Get Link Quality Indicator</a><a class="headerlink" href="#lgetlqi-get-link-quality-indicator" title="Permalink to this heading"></a></h3>
+<p>It puts the CMD device in receive mode and makes it wait for a packet.
+It then outputs the result as 2 hexadecimal bytes.</p>
+<blockquote>
+<div><div class="highlight highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">custom</span> <span class="n">lgetlqi</span>
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="lgetrssi-measure-rssi">
+<h3><a class="toc-backref" href="#id28">lgetrssi - Measure RSSI</a><a class="headerlink" href="#lgetrssi-measure-rssi" title="Permalink to this heading"></a></h3>
+<p>It gets the RSSI in dBm.</p>
+<blockquote>
+<div><div class="highlight highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">custom</span> <span class="n">lgetrssi</span>
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="lsetshort-set-short-address">
+<h3><a class="toc-backref" href="#id29">lsetshort - Set short address</a><a class="headerlink" href="#lsetshort-set-short-address" title="Permalink to this heading"></a></h3>
+<p>It sets the CMD device’s short address.
+It is used for frame filtering and acknowledgment transmission.</p>
+<blockquote>
+<div><pre class="highlight literal-block">custom lsetshort <em>0x&lt;short_address&gt;</em></pre>
+</div></blockquote>
+<p>The <code class="docutils literal notranslate"><span class="pre">&lt;short_address&gt;</span></code> argument indicates the IEEE 802.15.4 short, two-byte address.</p>
+<p>For example:</p>
+<blockquote>
+<div><pre class="highlight literal-block">custom lsetshort <em>0x00FF</em></pre>
+</div></blockquote>
+</section>
+<section id="lsetextended-set-extended-address">
+<h3><a class="toc-backref" href="#id30">lsetextended - Set extended address</a><a class="headerlink" href="#lsetextended-set-extended-address" title="Permalink to this heading"></a></h3>
+<p>It sets the CMD device’s extended address.
+It is used for frame filtering and acknowledgment transmission.</p>
+<blockquote>
+<div><pre class="highlight literal-block">custom lsetextended <em>0x&lt;extended_address&gt;</em></pre>
+</div></blockquote>
+<p>The <code class="docutils literal notranslate"><span class="pre">&lt;extended_address&gt;</span></code> argument indicates the IEEE 802.15.4 long, 8-byte address.</p>
+<p>For example:</p>
+<blockquote>
+<div><pre class="highlight literal-block">custom lsetextended <em>0x000000000000FFFF</em></pre>
+</div></blockquote>
+</section>
+<section id="lsetpanid-set-pan-id">
+<h3><a class="toc-backref" href="#id31">lsetpanid - Set PAN ID</a><a class="headerlink" href="#lsetpanid-set-pan-id" title="Permalink to this heading"></a></h3>
+<p>It sets the PAN ID.
+It is used for frame filtering and acknowledgment transmission.</p>
+<blockquote>
+<div><pre class="highlight literal-block">custom lsetpanid <em>0x&lt;panid&gt;</em></pre>
+</div></blockquote>
+<p>The <code class="docutils literal notranslate"><span class="pre">&lt;panid&gt;</span></code> argument indicates the two-bytes of the IEEE 802.15.4 PAN ID.</p>
+<p>For example:</p>
+<blockquote>
+<div><pre class="highlight literal-block">custom lsetpanid <em>0x000A</em></pre>
+</div></blockquote>
+</section>
+<section id="lsetpayload-set-payload-for-burst-transmission">
+<h3><a class="toc-backref" href="#id32">lsetpayload - Set payload for burst transmission</a><a class="headerlink" href="#lsetpayload-set-payload-for-burst-transmission" title="Permalink to this heading"></a></h3>
+<p>It sets an arbitrary payload of a raw IEEE 802.15.4 packet.</p>
+<blockquote>
+<div><pre class="highlight literal-block">custom lsetpayload <em>&lt;length&gt;</em> <em>&lt;payload&gt;</em></pre>
+</div></blockquote>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;length&gt;</span></code> argument indicates the length of the payload in bytes.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;payload&gt;</span></code> argument indicates the bytes of the packet payload.</p></li>
+</ul>
+<p>For example:</p>
+<blockquote>
+<div><pre class="highlight literal-block">custom lsetpayload <em>5</em> <em>FFFFFFFFFF</em></pre>
+</div></blockquote>
+</section>
+<section id="ltx-burst-transmission-of-packets">
+<h3><a class="toc-backref" href="#id33">ltx - Burst transmission of packets</a><a class="headerlink" href="#ltx-burst-transmission-of-packets" title="Permalink to this heading"></a></h3>
+<p>It starts the transmission of packets with a random (or previously defined) payload.</p>
+<blockquote>
+<div><pre class="highlight literal-block">custom ltx <em>&lt;number&gt;</em> <em>&lt;delay&gt;</em></pre>
+</div></blockquote>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;number&gt;</span></code> argument indicates the number of packets to be sent.
+Set to <code class="docutils literal notranslate"><span class="pre">0</span></code> for an infinite transmission.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;delay&gt;</span></code> argument indicates the delay in milliseconds between the transmissions.</p></li>
+</ul>
+<p>For example:</p>
+<blockquote>
+<div><pre class="highlight literal-block">custom ltx <em>10</em> <em>1000</em></pre>
+</div></blockquote>
+</section>
+<section id="ltxend-stop-the-burst-transmission-of-packets">
+<h3><a class="toc-backref" href="#id34">ltxend - Stop the burst transmission of packets</a><a class="headerlink" href="#ltxend-stop-the-burst-transmission-of-packets" title="Permalink to this heading"></a></h3>
+<p>It makes the CMD device stop current burst transmission.</p>
+<blockquote>
+<div><div class="highlight highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">custom</span> <span class="n">ltxend</span>
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="lstart-start-the-continuous-receive-mode">
+<h3><a class="toc-backref" href="#id35">lstart - Start the continuous receive mode</a><a class="headerlink" href="#lstart-start-the-continuous-receive-mode" title="Permalink to this heading"></a></h3>
+<p>It makes the sample enter the continuous receive mode and print the received packet information over a serial connection.
+The sample does not accept any other command until it receives <code class="docutils literal notranslate"><span class="pre">custom</span> <span class="pre">lend</span></code>.</p>
+<blockquote>
+<div><div class="highlight highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">custom</span> <span class="n">lstart</span>
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="lend-end-the-continuous-receive-mode">
+<h3><a class="toc-backref" href="#id36">lend - End the continuous receive mode</a><a class="headerlink" href="#lend-end-the-continuous-receive-mode" title="Permalink to this heading"></a></h3>
+<p>It makes the sample leave the continuous receive mode and print statistics</p>
+<blockquote>
+<div><div class="highlight highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">custom</span> <span class="n">lend</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>The statistics are shown in the following format:</p>
+<blockquote>
+<div><div class="highlight highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">total</span><span class="p">]</span><span class="mi">0</span><span class="n">x</span><span class="o">%</span><span class="n">x</span><span class="o">%</span><span class="n">x</span><span class="o">%</span><span class="n">x</span><span class="o">%</span><span class="n">x</span> <span class="p">[</span><span class="n">protocol</span><span class="p">]</span><span class="mi">0</span><span class="n">x</span><span class="o">%</span><span class="n">x</span><span class="o">%</span><span class="n">x</span><span class="o">%</span><span class="n">x</span><span class="o">%</span><span class="n">x</span> <span class="p">[</span><span class="n">totalLqi</span><span class="p">]</span><span class="mi">0</span><span class="n">x</span><span class="o">%</span><span class="n">x</span><span class="o">%</span><span class="n">x</span><span class="o">%</span><span class="n">x</span><span class="o">%</span><span class="n">x</span> <span class="p">[</span><span class="n">totalRssiMgnitude</span><span class="p">]</span><span class="mi">0</span><span class="n">x</span><span class="o">%</span><span class="n">x</span><span class="o">%</span><span class="n">x</span><span class="o">%</span><span class="n">x</span><span class="o">%</span><span class="n">x</span>
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="lsetantenna-set-cmd-antenna-id">
+<h3><a class="toc-backref" href="#id37">lsetantenna - Set CMD antenna ID</a><a class="headerlink" href="#lsetantenna-set-cmd-antenna-id" title="Permalink to this heading"></a></h3>
+<p>It sets the antenna used by the CMD device for both TX and RX operations.</p>
+<blockquote>
+<div><pre class="highlight literal-block">custom lsetantenna <em>&lt;antenna&gt;</em></pre>
+</div></blockquote>
+<p>The <code class="docutils literal notranslate"><span class="pre">&lt;antenna&gt;</span></code> argument indicates the antenna ID.
+It can either be <code class="docutils literal notranslate"><span class="pre">0</span></code> or <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
+<p>For example:</p>
+<blockquote>
+<div><pre class="highlight literal-block">custom lsetantenna <em>1</em></pre>
+</div></blockquote>
+</section>
+<section id="lsetrxantenna-set-cmd-antenna-id-for-rx">
+<h3><a class="toc-backref" href="#id38">lsetrxantenna - Set CMD antenna ID for RX</a><a class="headerlink" href="#lsetrxantenna-set-cmd-antenna-id-for-rx" title="Permalink to this heading"></a></h3>
+<p>It sets the antenna used by the CMD device for RX operations.</p>
+<blockquote>
+<div><pre class="highlight literal-block">custom lsetrxantenna <em>&lt;antenna&gt;</em></pre>
+</div></blockquote>
+<p>The <code class="docutils literal notranslate"><span class="pre">&lt;antenna&gt;</span></code> argument indicates the antenna ID.
+It can either be <code class="docutils literal notranslate"><span class="pre">0</span></code> or <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
+<p>For example:</p>
+<blockquote>
+<div><pre class="highlight literal-block">custom lsetrxantenna <em>1</em></pre>
+</div></blockquote>
+</section>
+<section id="lsettxantenna-set-cmd-antenna-id-for-tx">
+<h3><a class="toc-backref" href="#id39">lsettxantenna - Set CMD antenna ID for TX</a><a class="headerlink" href="#lsettxantenna-set-cmd-antenna-id-for-tx" title="Permalink to this heading"></a></h3>
+<p>It sets the antenna used by the CMD device for TX operations.</p>
+<blockquote>
+<div><pre class="highlight literal-block">custom lsettxantenna <em>&lt;antenna&gt;</em></pre>
+</div></blockquote>
+<p>The <code class="docutils literal notranslate"><span class="pre">&lt;antenna&gt;</span></code> argument indicates the antenna ID.
+It can either be <code class="docutils literal notranslate"><span class="pre">0</span></code> or <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
+<p>For example:</p>
+<blockquote>
+<div><pre class="highlight literal-block">custom lsettxantenna <em>1</em></pre>
+</div></blockquote>
+</section>
+<section id="lgetrxantenna-get-cmd-rx-antenna-id">
+<h3><a class="toc-backref" href="#id40">lgetrxantenna - Get CMD RX antenna ID</a><a class="headerlink" href="#lgetrxantenna-get-cmd-rx-antenna-id" title="Permalink to this heading"></a></h3>
+<p>It gets the antenna used by the CMD device for RX operations.</p>
+<blockquote>
+<div><div class="highlight highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">custom</span> <span class="n">lgetrxantenna</span>
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="lgettxantenna-get-cmd-tx-antenna-id">
+<h3><a class="toc-backref" href="#id41">lgettxantenna - Get CMD TX antenna ID</a><a class="headerlink" href="#lgettxantenna-get-cmd-tx-antenna-id" title="Permalink to this heading"></a></h3>
+<p>It gets the antenna used by the CMD device for TX operations.</p>
+<blockquote>
+<div><div class="highlight highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">custom</span> <span class="n">lgettxantenna</span>
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="lgetbestrxantenna-get-last-best-cmd-rx-antenna-id-selected-by-antenna-diversity-algorithm">
+<h3><a class="toc-backref" href="#id42">lgetbestrxantenna - Get last best CMD RX antenna ID selected by antenna diversity algorithm</a><a class="headerlink" href="#lgetbestrxantenna-get-last-best-cmd-rx-antenna-id-selected-by-antenna-diversity-algorithm" title="Permalink to this heading"></a></h3>
+<p>It gets the last best antenna selected for RX operations by the antenna diversity algorithm.</p>
+<blockquote>
+<div><div class="highlight highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">custom</span> <span class="n">lgetbestrxantenna</span>
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="rsetantenna-set-dut-antenna-id">
+<h3><a class="toc-backref" href="#id43">rsetantenna - Set DUT antenna ID</a><a class="headerlink" href="#rsetantenna-set-dut-antenna-id" title="Permalink to this heading"></a></h3>
+<p>It sets the antenna used by the DUT device for both TX and RX operations.</p>
+<blockquote>
+<div><pre class="highlight literal-block">custom rsetantenna <em>&lt;antenna&gt;</em></pre>
+</div></blockquote>
+<p>The <code class="docutils literal notranslate"><span class="pre">&lt;antenna&gt;</span></code> argument indicates the antenna ID.
+It can either be <code class="docutils literal notranslate"><span class="pre">0</span></code> or <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
+<p>For example:</p>
+<blockquote>
+<div><pre class="highlight literal-block">custom rsetantenna <em>1</em></pre>
+</div></blockquote>
+</section>
+<section id="rsettxantenna-set-dut-tx-antenna-id">
+<h3><a class="toc-backref" href="#id44">rsettxantenna - Set DUT TX antenna ID</a><a class="headerlink" href="#rsettxantenna-set-dut-tx-antenna-id" title="Permalink to this heading"></a></h3>
+<p>It sets the antenna used by the DUT device for TX operations.</p>
+<blockquote>
+<div><pre class="highlight literal-block">custom rsettxantenna <em>&lt;antenna&gt;</em></pre>
+</div></blockquote>
+<p>The <code class="docutils literal notranslate"><span class="pre">&lt;antenna&gt;</span></code> argument indicates the antenna ID.
+It can either be <code class="docutils literal notranslate"><span class="pre">0</span></code> or <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
+<p>For example:</p>
+<blockquote>
+<div><pre class="highlight literal-block">custom rsettxantenna <em>1</em></pre>
+</div></blockquote>
+</section>
+<section id="rsetrxantenna-set-dut-rx-antenna-id">
+<h3><a class="toc-backref" href="#id45">rsetrxantenna - Set DUT RX antenna ID</a><a class="headerlink" href="#rsetrxantenna-set-dut-rx-antenna-id" title="Permalink to this heading"></a></h3>
+<p>It sets the antenna used by the DUT device for RX operations.</p>
+<blockquote>
+<div><pre class="highlight literal-block">custom rsetrxantenna <em>&lt;antenna&gt;</em></pre>
+</div></blockquote>
+<p>The <code class="docutils literal notranslate"><span class="pre">&lt;antenna&gt;</span></code> argument indicates the antenna ID.
+It can either be <code class="docutils literal notranslate"><span class="pre">0</span></code> or <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
+<p>For example:</p>
+<blockquote>
+<div><pre class="highlight literal-block">custom rsetrxantenna <em>1</em></pre>
+</div></blockquote>
+</section>
+<section id="rgetrxantenna-get-dut-tx-antenna-id">
+<h3><a class="toc-backref" href="#id46">rgetrxantenna - Get DUT TX antenna ID</a><a class="headerlink" href="#rgetrxantenna-get-dut-tx-antenna-id" title="Permalink to this heading"></a></h3>
+<p>It gets the antenna used by the DUT device for TX operations.</p>
+<blockquote>
+<div><div class="highlight highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">custom</span> <span class="n">rgettxantenna</span>
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="rgettxantenna-get-dut-rx-antenna-id">
+<h3><a class="toc-backref" href="#id47">rgettxantenna - Get DUT RX antenna ID</a><a class="headerlink" href="#rgettxantenna-get-dut-rx-antenna-id" title="Permalink to this heading"></a></h3>
+<p>It gets the antenna used by the DUT device for RX operations.</p>
+<blockquote>
+<div><div class="highlight highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">custom</span> <span class="n">rgetrxantenna</span>
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="rgetbestrxantenna-get-last-best-dut-rx-antenna-id-selected-by-antenna-diversity-algorithm">
+<h3><a class="toc-backref" href="#id48">rgetbestrxantenna - Get last best DUT RX antenna ID selected by antenna diversity algorithm</a><a class="headerlink" href="#rgetbestrxantenna-get-last-best-dut-rx-antenna-id-selected-by-antenna-diversity-algorithm" title="Permalink to this heading"></a></h3>
+<p>It gets the last best antenna selected for RX operations by the antenna diversity algorithm.</p>
+<blockquote>
+<div><div class="highlight highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">custom</span> <span class="n">rgetbestrxantenna</span>
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="lcarrier-unmodulated-waveform-carrier-transmission">
+<h3><a class="toc-backref" href="#id49">lcarrier - Unmodulated waveform (carrier) transmission</a><a class="headerlink" href="#lcarrier-unmodulated-waveform-carrier-transmission" title="Permalink to this heading"></a></h3>
+<p>It starts the transmission of the unmodulated carrier.</p>
+<blockquote>
+<div><pre class="highlight literal-block">custom lcarrier <em>&lt;pulse_duration&gt;</em> <em>&lt;interval&gt;</em> <em>&lt;transmission_duration&gt;</em></pre>
+</div></blockquote>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;pulse_duration&gt;</span></code> argument indicates the duration of the continuous signal transmission.
+It ranges between <code class="docutils literal notranslate"><span class="pre">1</span></code> and <code class="docutils literal notranslate"><span class="pre">32767</span></code> milliseconds.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;interval&gt;</span></code> argument indicates the duration of the interval between the pulses.
+It ranges between <code class="docutils literal notranslate"><span class="pre">0</span></code> and <code class="docutils literal notranslate"><span class="pre">32767</span></code> milliseconds.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;transmission_duration&gt;</span></code> argument indicates the upper limit for the command’s execution.
+It ranges between <code class="docutils literal notranslate"><span class="pre">0</span></code> and <code class="docutils literal notranslate"><span class="pre">32767</span></code> milliseconds.
+Set to <code class="docutils literal notranslate"><span class="pre">0</span></code> for infinite transmission.</p></li>
+</ul>
+<p>For example:</p>
+<blockquote>
+<div><pre class="highlight literal-block">custom lcarrier <code class="docutils literal notranslate"><span class="pre">10</span></code> <code class="docutils literal notranslate"><span class="pre">200</span></code> <code class="docutils literal notranslate"><span class="pre">2000</span></code></pre>
+</div></blockquote>
+</section>
+<section id="lstream-modulated-waveform-transmission">
+<h3><a class="toc-backref" href="#id50">lstream - Modulated waveform transmission</a><a class="headerlink" href="#lstream-modulated-waveform-transmission" title="Permalink to this heading"></a></h3>
+<p>It starts a modulated waveform transmission.</p>
+<blockquote>
+<div><pre class="highlight literal-block">custom lstream <em>&lt;pulse_duration&gt;</em> <em>&lt;interval&gt;</em> <em>&lt;transmission_duration&gt;</em></pre>
+</div></blockquote>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;pulse_duration&gt;</span></code> argument indicates the duration of the continuous packet transmission.
+It ranges between <code class="docutils literal notranslate"><span class="pre">1</span></code> and <code class="docutils literal notranslate"><span class="pre">32767</span></code> milliseconds.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;interval&gt;</span></code> argument indicates the duration of the interval between the pulses.
+It ranges between <code class="docutils literal notranslate"><span class="pre">0</span></code> and <code class="docutils literal notranslate"><span class="pre">32767</span></code> milliseconds.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;transmission_duration&gt;</span></code> argument indicates the upper limit for the command’s execution.
+It ranges between <code class="docutils literal notranslate"><span class="pre">0</span></code> and <code class="docutils literal notranslate"><span class="pre">32767</span></code> milliseconds.
+Set to <code class="docutils literal notranslate"><span class="pre">0</span></code> for infinite transmission.</p></li>
+</ul>
+<p>For example:</p>
+<blockquote>
+<div><pre class="highlight literal-block">custom lstream <em>100</em> <em>200</em> <em>20000</em></pre>
+</div></blockquote>
+</section>
+<section id="rhardwareversion-get-the-dut-hardware-version">
+<h3><a class="toc-backref" href="#id51">rhardwareversion - Get the DUT hardware version</a><a class="headerlink" href="#rhardwareversion-get-the-dut-hardware-version" title="Permalink to this heading"></a></h3>
+<p>It gets the hardware version of the DUT device.</p>
+<blockquote>
+<div><div class="highlight highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">custom</span> <span class="n">rhardwareversion</span>
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="rsoftwareversion-get-the-dut-software-version">
+<h3><a class="toc-backref" href="#id52">rsoftwareversion - Get the DUT software version</a><a class="headerlink" href="#rsoftwareversion-get-the-dut-software-version" title="Permalink to this heading"></a></h3>
+<p>It gets the software version of the DUT device.</p>
+<blockquote>
+<div><div class="highlight highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">custom</span> <span class="n">rsoftwareversion</span>
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="lclk-high-frequency-clock-output-on-a-selected-pin">
+<h3><a class="toc-backref" href="#id53">lclk - High-frequency clock output on a selected pin</a><a class="headerlink" href="#lclk-high-frequency-clock-output-on-a-selected-pin" title="Permalink to this heading"></a></h3>
+<p>It makes the CMD device disable or enable the high-frequency clock output on a selected pin.
+The actual clock frequency depends on the SoC used.
+It is the highest possible considering the GPIO and CLOCK modules possibilities.</p>
+<blockquote>
+<div><pre class="highlight literal-block">custom lclk <em>&lt;pin&gt;</em> <em>&lt;value&gt;</em></pre>
+</div></blockquote>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;pin&gt;</span></code> argument indicates the GPIO pin number.
+It ranges between <code class="docutils literal notranslate"><span class="pre">0</span></code> and the number of GPIO pins supported by the SoC.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;value&gt;</span></code> argument can assume one of the following values:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">0</span></code> - disabled</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">1</span></code> - enabled</p></li>
+</ul>
+</li>
+</ul>
+<p>For example:</p>
+<blockquote>
+<div><pre class="highlight literal-block">custom lclk <em>10</em> <em>1</em></pre>
+</div></blockquote>
+</section>
+<section id="lsetgpio-set-gpio-pin-value">
+<h3><a class="toc-backref" href="#id54">lsetgpio - Set GPIO pin value</a><a class="headerlink" href="#lsetgpio-set-gpio-pin-value" title="Permalink to this heading"></a></h3>
+<p>It makes the CMD device set the value of the selected GPIO out pin.</p>
+<blockquote>
+<div><pre class="highlight literal-block">custom lsetgpio <em>&lt;pin&gt;</em> <em>&lt;value&gt;</em></pre>
+</div></blockquote>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;pin&gt;</span></code> argument indicates the GPIO pin number.
+It ranges between <code class="docutils literal notranslate"><span class="pre">0</span></code> and the number of GPIO pins supported by the SoC.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;value&gt;</span></code> argument can assume one of the following values:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">0</span></code> - low</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">1</span></code> - high</p></li>
+</ul>
+</li>
+</ul>
+<p>For example:</p>
+<blockquote>
+<div><pre class="highlight literal-block">custom lsetgpio <em>29</em> <em>0</em></pre>
+</div></blockquote>
+</section>
+<section id="lgetgpio-get-gpio-pin-value">
+<h3><a class="toc-backref" href="#id55">lgetgpio - Get GPIO pin value</a><a class="headerlink" href="#lgetgpio-get-gpio-pin-value" title="Permalink to this heading"></a></h3>
+<p>It makes CMD reconfigure the selected GPIO pin to INPUT mode and read its value.</p>
+<blockquote>
+<div><pre class="highlight literal-block">custom lgetgpio <em>&lt;pin&gt;</em></pre>
+</div></blockquote>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;pin&gt;</span></code> argument indicates the GPIO pin number.
+It ranges between <code class="docutils literal notranslate"><span class="pre">0</span></code> and the number of GPIO pins supported by the SoC.</p></li>
+</ul>
+<p>For example:</p>
+<blockquote>
+<div><pre class="highlight literal-block">custom lgetgpio <em>29</em></pre>
+</div></blockquote>
+</section>
+<section id="lsetdcdc-set-dc-dc-mode">
+<h3><a class="toc-backref" href="#id56">lsetdcdc - Set DC/DC mode</a><a class="headerlink" href="#lsetdcdc-set-dc-dc-mode" title="Permalink to this heading"></a></h3>
+<p>It makes the CMD device disable or enable the DC/DC mode.
+It has no effects on unsupported boards.</p>
+<blockquote>
+<div><pre class="highlight literal-block">custom lsetdcdc <em>&lt;value&gt;</em></pre>
+</div></blockquote>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;value&gt;</span></code> argument can assume one of the following values:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">0</span></code> - disabled</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">1</span></code> - enabled</p></li>
+</ul>
+</li>
+</ul>
+<p>For example:</p>
+<blockquote>
+<div><pre class="highlight literal-block">custom lsetdcdc <em>1</em></pre>
+</div></blockquote>
+</section>
+<section id="lgetdcdc-get-dc-dc-mode">
+<h3><a class="toc-backref" href="#id57">lgetdcdc - Get DC/DC mode</a><a class="headerlink" href="#lgetdcdc-get-dc-dc-mode" title="Permalink to this heading"></a></h3>
+<p>It gets the DC/DC mode of the CMD device.
+It is always <code class="docutils literal notranslate"><span class="pre">0</span></code> for unsupported boards.</p>
+<blockquote>
+<div><div class="highlight highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">custom</span> <span class="n">lgetdcdc</span>
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="lseticache-set-icache-configuration">
+<h3><a class="toc-backref" href="#id58">lseticache - Set ICACHE configuration</a><a class="headerlink" href="#lseticache-set-icache-configuration" title="Permalink to this heading"></a></h3>
+<p>It makes the CMD device disable or enable the ICACHE</p>
+<blockquote>
+<div><pre class="highlight literal-block">custom lseticache <em>&lt;value&gt;</em></pre>
+</div></blockquote>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;value&gt;</span></code> argument can assume one of the following values:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">0</span></code> - disabled</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">1</span></code> - enabled</p></li>
+</ul>
+</li>
+</ul>
+<p>For example:</p>
+<blockquote>
+<div><pre class="highlight literal-block">custom lseticache <em>1</em></pre>
+</div></blockquote>
+</section>
+<section id="lgettemp-read-soc-temperature">
+<h3><a class="toc-backref" href="#id59">lgettemp - Read SoC temperature</a><a class="headerlink" href="#lgettemp-read-soc-temperature" title="Permalink to this heading"></a></h3>
+<p>It makes the CMD device print the SoC temperature in the format <code class="docutils literal notranslate"><span class="pre">&lt;.%02&gt;</span></code>.</p>
+<blockquote>
+<div><div class="highlight highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">custom</span> <span class="n">lgettemp</span>
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="lsleep-transition-radio-to-sleep-mode">
+<h3><a class="toc-backref" href="#id60">lsleep - Transition radio to sleep mode</a><a class="headerlink" href="#lsleep-transition-radio-to-sleep-mode" title="Permalink to this heading"></a></h3>
+<p>It makes the CMD device put the radio in sleep mode.</p>
+<blockquote>
+<div><div class="highlight highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">custom</span> <span class="n">lsleep</span>
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="lreceive-transition-radio-to-receive-mode">
+<h3><a class="toc-backref" href="#id61">lreceive - Transition radio to receive mode</a><a class="headerlink" href="#lreceive-transition-radio-to-receive-mode" title="Permalink to this heading"></a></h3>
+<p>It makes the CMD device put the radio in receive mode.</p>
+<blockquote>
+<div><div class="highlight highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">custom</span> <span class="n">lreceive</span>
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="lreboot-reboots-the-device">
+<h3><a class="toc-backref" href="#id62">lreboot - Reboots the device</a><a class="headerlink" href="#lreboot-reboots-the-device" title="Permalink to this heading"></a></h3>
+<p>It reboots the device</p>
+<blockquote>
+<div><div class="highlight highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">custom</span> <span class="n">lreboot</span>
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+</section>
+<section id="configuration">
+<h2><a class="toc-backref" href="#id63">Configuration</a><a class="headerlink" href="#configuration" title="Permalink to this heading"></a></h2>
+<p>See <a class="reference internal" href="../../../getting_started/modifying.html#configure-application"><span class="std std-ref">Configuring your application</span></a> for information about how to permanently or temporarily change the configuration.</p>
+<section id="fem-support">
+<h3><a class="toc-backref" href="#id64">FEM support</a><a class="headerlink" href="#fem-support" title="Permalink to this heading"></a></h3>
+<p>You can add support for the nRF21540 front-end module to this sample by using one of the following options, depending on your hardware:</p>
+<ul>
+<li><p>Build the sample for one board that contains the nRF21540 FEM, such as <span class="xref std std-ref">nrf21540dk_nrf52840</span>.</p></li>
+<li><p>Manually create a devicetree overlay file that describes how FEM is connected to the nRF5 SoC in your device.
+See <span class="xref std std-ref">zephyr:set-devicetree-overlays</span> for different ways of adding the overlay file.</p></li>
+<li><p>Provide nRF21540 FEM capabilities by using a <span class="xref std std-ref">shield</span>, for example the <a class="reference internal" href="../../../app_dev/working_with_fem/index.html#ug-radio-fem-nrf21540-ek"><span class="std std-ref">nRF21540 EK</span></a> shield that is available in the nRF Connect SDK.
+In this case, build the project for a board connected to the shield you are using with an appropriate variable included in the build command, for example <code class="docutils literal notranslate"><span class="pre">SHIELD=nrf21540_ek</span></code>.
+This variable instructs the build system to append the appropriate devicetree overlay file.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-blJGIENvbm5lY3QgZm9yIFZTIENvZGU=" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-0-blJGIENvbm5lY3QgZm9yIFZTIENvZGU=" name="blJGIENvbm5lY3QgZm9yIFZTIENvZGU=" role="tab" tabindex="0">nRF Connect for VS Code</button><button aria-controls="panel-0-Q29tbWFuZCBsaW5l" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-0-Q29tbWFuZCBsaW5l" name="Q29tbWFuZCBsaW5l" role="tab" tabindex="-1">Command line</button></div><div aria-labelledby="tab-0-blJGIENvbm5lY3QgZm9yIFZTIENvZGU=" class="sphinx-tabs-panel group-tab" id="panel-0-blJGIENvbm5lY3QgZm9yIFZTIENvZGU=" name="blJGIENvbm5lY3QgZm9yIFZTIENvZGU=" role="tabpanel" tabindex="0"><p>To build the sample in the nRF Connect for VS Code IDE for an nRF52840 DK with the nRF21540 EK attached, add the shield variable in the build configuration’s <span class="guilabel">Extra CMake arguments</span> and rebuild the build configuration.
+For example: <code class="docutils literal notranslate"><span class="pre">-DSHIELD=nrf21540_ek</span></code>.</p>
+<p>See <a class="reference external" href="https://nrfconnect.github.io/vscode-nrf-connect/guides/build_config.html">nRF Connect for VS Code extension pack</a> documentation for more information.</p>
+</div><div aria-labelledby="tab-0-Q29tbWFuZCBsaW5l" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-0-Q29tbWFuZCBsaW5l" name="Q29tbWFuZCBsaW5l" role="tabpanel" tabindex="0"><p>To build the sample from the command line for an nRF52840 DK with the nRF21540 EK attached, use the following command within the sample directory:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">west build -b nrf52840dk_nrf52840 -- -DSHIELD=nrf21540_ek</span>
+</pre></div>
+</div>
+</div></div>
+<p>See <a class="reference internal" href="../../../app_dev/working_with_fem/index.html#ug-radio-fem-nrf21540-ek-programming"><span class="std std-ref">Programming nRF21540 EK</span></a> for information about how to program when you are using a board with a network core, for example nRF5340 DK.</p>
+</li>
+</ul>
+<p>Each of these options adds the description of the nRF21540 FEM to the devicetree.
+See <a class="reference internal" href="../../../app_dev/working_with_fem/index.html#ug-radio-fem"><span class="std std-ref">Working with RF front-end modules</span></a> for more information about FEM in the nRF Connect SDK.</p>
+<p>To add support for other front-end modules, add the respective devicetree file entries to the board devicetree file or the devicetree overlay file.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The sample provides support for the <em>antenna diversity</em> feature on the nRF52840.
+To enable the feature, set the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_PTT_ANTENNA_DIVERSITY</span></code> option as <code class="docutils literal notranslate"><span class="pre">enabled</span></code>.</p>
+</div>
+</section>
+</section>
+<section id="building-and-running">
+<h2><a class="toc-backref" href="#id65">Building and running</a><a class="headerlink" href="#building-and-running" title="Permalink to this heading"></a></h2>
+<p>This sample can be found under <code class="file docutils literal notranslate"><span class="pre">samples/peripheral/802154_phy_test</span></code> in the nRF Connect SDK folder structure.</p>
+<p>To build the sample with Visual Studio Code, follow the steps listed on the <a class="reference external" href="https://nrfconnect.github.io/vscode-nrf-connect/get_started/build_app_ncs.html">How to build an application</a> page in the nRF Connect for VS Code extension documentation.
+See <a class="reference internal" href="../../../getting_started/programming.html#gs-programming"><span class="std std-ref">Building and programming an application</span></a> for other building and programming scenarios and <a class="reference internal" href="../../../getting_started/testing.html#gs-testing"><span class="std std-ref">Testing and debugging an application</span></a> for general information about testing and debugging in the nRF Connect SDK.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>On the nRF5340 DK board (PCA10095), the IEEE 802.15.4 PHY Test Tool is a standalone network sample that does not require any counterpart application sample.
+However, you must still program the application core to boot up the network core, and forward the UART pins to the network core of the CMD device.
+The <a class="reference internal" href="../../nrf5340/empty_app_core/README.html#nrf5340-empty-app-core"><span class="std std-ref">nRF5340: Empty firmware for application core</span></a> sample, which does both, is built and programmed automatically by default.</p>
+</div>
+<section id="testing-the-sample">
+<span id="phy-test-testing"></span><h3><a class="toc-backref" href="#id66">Testing the sample</a><a class="headerlink" href="#testing-the-sample" title="Permalink to this heading"></a></h3>
+<p>After programming the sample to your development kit, complete the following steps to test it:</p>
+<ol class="arabic">
+<li><p>Connect the development kit to the computer using a USB cable.
+Use the development kit’s programmer USB port (J2).
+The kits are assigned a COM port (in Windows) or a ttyACM device (in Linux), visible in the Device Manager or in the <code class="file docutils literal notranslate"><span class="pre">/dev</span></code> directory.</p></li>
+<li><p>Connect to the kit with a terminal emulator (for example, PuTTY).
+See <a class="reference internal" href="../../../getting_started/testing.html#putty"><span class="std std-ref">How to connect with PuTTY</span></a> for the required settings.</p></li>
+<li><p>If the sample is configured to support both modes (the default setting), switch the development kit into CMD mode by sending the following command:</p>
+<pre class="highlight literal-block">custom changemode <em>1</em></pre>
+</li>
+<li><p>On the bottom side of your development kit, locate the table describing the GPIO pin assignment to the LEDs.</p></li>
+<li><p>Read the numbers of the GPIO pins assigned to LED 1, 2, 3 or 4.</p>
+<p>For example, on the nRF52840DK, the LEDs are controlled by the pins ranging between P0.13 and P0.16.
+The LEDs on nRF5340DK and nRF52840DK are in the <code class="docutils literal notranslate"><span class="pre">sink</span></code> configuration.</p>
+</li>
+<li><p>To turn the LEDs on, set the respective pin’s state to low to let the current flow through the LED, using the <code class="docutils literal notranslate"><span class="pre">custom</span> <span class="pre">lsetgpio</span> <span class="pre">&lt;pin&gt;</span> <span class="pre">0</span></code> command, where <code class="docutils literal notranslate"><span class="pre">&lt;pin&gt;</span></code> is the number of the pin assigned for selected LED.</p>
+<p>See the following example for how to light up LED 1 on the nRF5340DK:</p>
+<pre class="highlight literal-block">custom lsetgpio <em>28</em> 0</pre>
+</li>
+</ol>
+<p>If the selected LED lights up, the sample works as expected and is ready for use.</p>
+</section>
+<section id="performing-radio-tests-without-the-serial-interface">
+<span id="phy-test-testing-board"></span><h3><a class="toc-backref" href="#id67">Performing radio tests without the serial interface</a><a class="headerlink" href="#performing-radio-tests-without-the-serial-interface" title="Permalink to this heading"></a></h3>
+<ol class="arabic">
+<li><p>Make sure that at least one of the development kits can be set into CMD mode and the other one to the DUT mode.</p>
+<p>The DUT device does not initialize the serial interface.
+The easiest way to achieve this is to flash both devices with the sample configured to support both modes (default setting).</p>
+</li>
+<li><p>Connect both development kits to the computer using a USB cable.</p>
+<p>The kits are assigned a COM port (in Windows) or a ttyACM device (in Linux), visible in the Device Manager or the <code class="file docutils literal notranslate"><span class="pre">/dev</span></code> directory.</p>
+</li>
+<li><p>Connect to the kit with a terminal emulator (for example, PuTTY).
+See <a class="reference internal" href="../../../getting_started/testing.html#putty"><span class="std std-ref">How to connect with PuTTY</span></a> for the required settings.</p></li>
+<li><p>If the samples are configured to support both modes (the default setting), switch one of the development kits into CMD mode by sending the following command:</p>
+<pre class="highlight literal-block">custom changemode <em>1</em></pre>
+</li>
+<li><p>Run the following command on the development kit running in CMD mode:</p>
+<div class="highlight highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">custom</span> <span class="n">find</span>
+</pre></div>
+</div>
+</li>
+<li><p>The development kit running in CMD mode should respond with one of the following two responses:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">channel</span> <span class="pre">&lt;ch&gt;</span> <span class="pre">find</span> <span class="pre">&lt;ack&gt;</span></code> - if the CMD device successfully communicates with the DUT device.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DUT</span> <span class="pre">NOT</span> <span class="pre">FOUND</span></code> - if it could not exchange packets with the DUT device.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ol>
+<p>Refer to the <a class="reference internal" href="#phy-test-ui"><span class="std std-ref">Serial commands list</span></a> for the complete list of the available commands.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../lpuart/README.html" class="btn btn-neutral float-right" title="Low Power UART" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../../mpsl/timeslot/README.html" class="btn btn-neutral" title="MPSL timeslot" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

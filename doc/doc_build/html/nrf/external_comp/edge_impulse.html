@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Edge Impulse integration &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../_static/js/ncs.js"
+></script>
+<script src="../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Memfault integration" href="memfault.html" />
+    <link rel="prev" title="Using Google Fast Pair with the nRF Connect SDK" href="bt_fast_pair.html" />
+<link
+  href="../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../ecosystem_integration.html">Ecosystems integration</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="bt_coex.html">Bluetooth external radio coexistence integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bt_fast_pair.html">Using Google Fast Pair with the nRF Connect SDK</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Edge Impulse integration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#adding-edge-impulse-model-to-the-ncs">Adding Edge Impulse model to the nRF Connect SDK</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#preparing-the-machine-learning-model">Preparing the machine learning model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#building-the-machine-learning-model-in-ncs">Building the machine learning model in nRF Connect SDK</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="memfault.html">Memfault integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="avsystem.html">AVSystem integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nrf_cloud.html">Using nRF Cloud with the nRF Connect SDK</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../drivers.html">Drivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../ecosystem_integration.html">Ecosystems integration</a></li>
+      <li class="breadcrumb-item active">Edge Impulse integration</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/external_comp/edge_impulse.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="edge-impulse-integration">
+<span id="ug-edge-impulse"></span><h1>Edge Impulse integration<a class="headerlink" href="#edge-impulse-integration" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#overview" id="id8">Overview</a></p></li>
+<li><p><a class="reference internal" href="#adding-edge-impulse-model-to-the-ncs" id="id9">Adding Edge Impulse model to the nRF Connect SDK</a></p>
+<ul>
+<li><p><a class="reference internal" href="#preparing-the-machine-learning-model" id="id10">Preparing the machine learning model</a></p></li>
+<li><p><a class="reference internal" href="#building-the-machine-learning-model-in-ncs" id="id11">Building the machine learning model in nRF Connect SDK</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<p><a class="reference external" href="https://www.edgeimpulse.com/">Edge Impulse</a> is a development platform that can be used to enable <a class="reference external" href="https://docs.edgeimpulse.com/docs/what-is-embedded-machine-learning-anyway">embedded machine learning</a> on nRF Connect SDK devices.
+You can use this platform to collect data from sensors, train machine learning model, and then deploy it to your Nordic Semiconductor’s device.</p>
+<section id="overview">
+<h2><a class="toc-backref" href="#id8">Overview</a><a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+<p>Support for <a class="reference external" href="https://www.edgeimpulse.com/">Edge Impulse</a> in the nRF Connect SDK is centered around the <a class="reference internal" href="../libraries/others/ei_wrapper.html#ei-wrapper"><span class="std std-ref">Edge Impulse wrapper</span></a>, which is used for integrating the Edge Impulse machine learning model into an nRF Connect SDK application.
+The usage of the wrapper is demonstrated by the <a class="reference internal" href="../samples/edge_impulse/wrapper/README.html#ei-wrapper-sample"><span class="std std-ref">Edge Impulse: Wrapper</span></a> sample, while the <a class="reference internal" href="../applications/machine_learning/README.html#nrf-machine-learning-app"><span class="std std-ref">nRF Machine Learning</span></a> application demonstrates the complete out of the box reference design.</p>
+<p>Before integrating the Edge Impulse machine learning model to an nRF Connect SDK application, you must prepare and deploy the machine learning model for your embedded device.
+This model is prepared using the <a class="reference external" href="https://studio.edgeimpulse.com/login">Edge Impulse studio</a> external web tool.
+It relies on sensor data that can be provided by different sources, for example data forwarder.
+Check the <a class="reference internal" href="../samples/edge_impulse/data_forwarder/README.html#ei-data-forwarder-sample"><span class="std std-ref">Edge Impulse: Data forwarder</span></a> sample for a demonstration of how you can send sensor data to Edge Impulse studio using <a class="reference external" href="https://docs.edgeimpulse.com/docs/cli-data-forwarder">Edge Impulse’s data forwarder</a>.</p>
+</section>
+<section id="adding-edge-impulse-model-to-the-ncs">
+<span id="ug-edge-impulse-adding"></span><h2><a class="toc-backref" href="#id9">Adding Edge Impulse model to the nRF Connect SDK</a><a class="headerlink" href="#adding-edge-impulse-model-to-the-ncs" title="Permalink to this heading"></a></h2>
+<p>The machine learning model is distributed as a single <code class="file docutils literal notranslate"><span class="pre">zip</span></code> archive that includes C++ library sources.
+This file is used by the nRF Connect SDK build system to build the Edge Impulse library.
+See the following section for steps required to generate this archive and add it to the build system.</p>
+<section id="preparing-the-machine-learning-model">
+<span id="ug-edge-impulse-adding-preparing"></span><h3><a class="toc-backref" href="#id10">Preparing the machine learning model</a><a class="headerlink" href="#preparing-the-machine-learning-model" title="Permalink to this heading"></a></h3>
+<p>To prepare the machine learning model, use <a class="reference external" href="https://studio.edgeimpulse.com/login">Edge Impulse studio</a> and follow one of the tutorials described in <a class="reference external" href="https://docs.edgeimpulse.com/docs/getting-started">Edge Impulse getting started guide</a>.
+For example, you can try the <a class="reference external" href="https://docs.edgeimpulse.com/docs/continuous-motion-recognition">Continuous motion recognition tutorial</a>.
+This tutorial will guide you through the following steps:</p>
+<ol class="arabic">
+<li><p>Collecting data from sensors and uploading the data to Edge Impulse studio.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can use one of the development boards supported directly by Edge Impulse or your mobile phone to collect the data.
+You can also modify the <a class="reference internal" href="../samples/edge_impulse/data_forwarder/README.html#ei-data-forwarder-sample"><span class="std std-ref">Edge Impulse: Data forwarder</span></a> sample or <a class="reference internal" href="../applications/machine_learning/README.html#nrf-machine-learning-app"><span class="std std-ref">nRF Machine Learning</span></a> application and use it to forward data from a sensor that is connected to any board available in the nRF Connect SDK.</p>
+</div>
+</li>
+<li><p>Designing your machine learning model (an <em>impulse</em>).</p></li>
+<li><p>Deploying the machine learning model to use it on an embedded device.
+As part of this step, you must select the <span class="guilabel">C++ library</span> to generate the required <code class="file docutils literal notranslate"><span class="pre">zip</span></code> file that contains the source files for building the Edge Impulse library in nRF Connect SDK.</p></li>
+</ol>
+</section>
+<section id="building-the-machine-learning-model-in-ncs">
+<h3><a class="toc-backref" href="#id11">Building the machine learning model in nRF Connect SDK</a><a class="headerlink" href="#building-the-machine-learning-model-in-ncs" title="Permalink to this heading"></a></h3>
+<p>After preparing the <code class="file docutils literal notranslate"><span class="pre">zip</span></code> archive, you can use the nRF Connect SDK build system to build the C++ library with the machine learning model.
+Complete the following steps to configure the building process:</p>
+<ol class="arabic">
+<li><p>Make sure that the following Kconfig options are enabled:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_CPLUSPLUS</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_STD_CPP11</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LIB_CPLUSPLUS</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NEWLIB_LIBC</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NEWLIB_LIBC_FLOAT_PRINTF</span></code></p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_FPU</span></code> Kconfig option is implied by default if floating point unit (FPU) is supported by the hardware.
+Using FPU speeds up calculations.</p>
+</div>
+</li>
+<li><p>Make sure that the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_FP16</span></code> Kconfig option is disabled.
+The Edge Impulse library is not compatible with half-precision floating point support introduced in Zephyr.</p></li>
+<li><p>Enable building the downloaded library by setting the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_EDGE_IMPULSE</span></code> Kconfig option.
+Setting this option also enables the <a class="reference internal" href="../libraries/others/ei_wrapper.html#ei-wrapper"><span class="std std-ref">Edge Impulse wrapper</span></a>.</p></li>
+<li><p>Enable and specify the Uniform Resource Identifier (URI) in the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_EDGE_IMPULSE_URI</span></code> Kconfig option.
+You can set it to one of the following values:</p>
+<ul>
+<li><p>An absolute or relative path to a file in the local file system.
+For this variant, you must download the <code class="file docutils literal notranslate"><span class="pre">zip</span></code> file manually and place it under path defined by the Kconfig option.
+The relative path is tracked from the application source directory (<code class="docutils literal notranslate"><span class="pre">APPLICATION_SOURCE_DIR</span></code>).
+CMake variables that are part of the path are expanded.</p></li>
+<li><p>Any downloadable URI supported by CMake’s <code class="docutils literal notranslate"><span class="pre">file(DOWNLOAD)</span></code> command.
+For this variant, the nRF Connect SDK build system will download the <code class="file docutils literal notranslate"><span class="pre">zip</span></code> file automatically during build.
+The <code class="file docutils literal notranslate"><span class="pre">zip</span></code> file is downloaded into your application’s <code class="file docutils literal notranslate"><span class="pre">build</span></code> directory.</p>
+<p>If the URI requires providing an additional API key in the HTTP header, you can provide it using the <code class="xref c c-macro docutils literal notranslate"><span class="pre">EI_API_KEY_HEADER</span></code> CMake definition.
+The API key is provided using a format in which <em>key_name</em> is followed by <em>key_value</em>.
+For example, if the URI uses <code class="docutils literal notranslate"><span class="pre">x-api_key</span></code> for authentication, the <code class="xref c c-macro docutils literal notranslate"><span class="pre">EI_API_KEY_HEADER</span></code> can be defined as follows: <code class="docutils literal notranslate"><span class="pre">x-api-key:aaaabbbbccccdddd</span></code>.
+The <code class="docutils literal notranslate"><span class="pre">aaaabbbbccccdddd</span></code> is a sample <em>key_value</em>.
+See <a class="reference internal" href="../getting_started/modifying.html#cmake-options"><span class="std std-ref">Providing CMake options</span></a> for more information about defining CMake options for command line builds and the nRF Connect for VS Code extension.
+See <a class="reference internal" href="#downloading-model-directly-from-edge-impulse-studio">Downloading model directly from Edge Impulse studio</a> for details about downloading model directly from the Edge Impulse studio.</p>
+</li>
+</ul>
+</li>
+</ol>
+<section id="downloading-model-directly-from-edge-impulse-studio">
+<h4>Downloading model directly from Edge Impulse studio<a class="headerlink" href="#downloading-model-directly-from-edge-impulse-studio" title="Permalink to this heading"></a></h4>
+<p>As an example of downloadable URI, you can configure the nRF Connect SDK build system to download your model directly from the Edge Impulse studio.
+You can download a model from either a private or a public project.</p>
+<section id="downloading-from-a-private-project">
+<h5>Downloading from a private project<a class="headerlink" href="#downloading-from-a-private-project" title="Permalink to this heading"></a></h5>
+<p>Complete the following steps to download the model from a private Edge Impulse project:</p>
+<ol class="arabic">
+<li><p>Set <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_EDGE_IMPULSE_URI</span></code> to the URI from Edge Impulse studio:</p>
+<pre class="highlight literal-block">CONFIG_EDGE_IMPULSE_URI=&quot;https://studio.edgeimpulse.com/v1/api/<em>XYZ</em>/deployment/download?type=zip&quot;</pre>
+<p>Set <em>XYZ</em> to the project ID of your Edge Impulse project.
+You can check the project ID of your project in the <strong>Project info</strong> panel under <span class="guilabel">Dashboard</span>.</p>
+<figure class="align-default" id="id6">
+<a class="reference internal image-reference" href="../_images/ei_project_id.png"><img alt="Project ID in Edge Impulse studio dashboard" src="../_images/ei_project_id.png" style="width: 939.5px; height: 440.5px;" /></a>
+<figcaption>
+<p><span class="caption-text">Project ID in Edge Impulse studio dashboard</span><a class="headerlink" href="#id6" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</li>
+<li><p>Define the <code class="xref c c-macro docutils literal notranslate"><span class="pre">EI_API_KEY_HEADER</span></code> CMake option (see <a class="reference internal" href="../getting_started/modifying.html#cmake-options"><span class="std std-ref">Providing CMake options</span></a>) as <code class="docutils literal notranslate"><span class="pre">x-api-key:[ei</span> <span class="pre">api</span> <span class="pre">key]</span></code> to provide the x-api-key associated with your Edge Impulse project.
+To check what to provide as the <em>[ei api key]</em> value, check your API keys under the <span class="guilabel">Keys</span> tab in the Edge Impulse project dashboard.</p>
+<figure class="align-default" id="id7">
+<a class="reference internal image-reference" href="../_images/ei_api_key.png"><img alt="API key under the Keys tab in Edge Impulse studio" src="../_images/ei_api_key.png" style="width: 944.5px; height: 449.5px;" /></a>
+<figcaption>
+<p><span class="caption-text">API key under the Keys tab in Edge Impulse studio</span><a class="headerlink" href="#id7" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</li>
+</ol>
+</section>
+<section id="downloading-from-a-public-project">
+<h5>Downloading from a public project<a class="headerlink" href="#downloading-from-a-public-project" title="Permalink to this heading"></a></h5>
+<p>Complete the following steps to download the model from a public Edge Impulse project:</p>
+<ol class="arabic">
+<li><p>Check the ID of the public project:</p>
+<ol class="loweralpha">
+<li><p>Check the project ID of your project in the <strong>Project info</strong> panel under <span class="guilabel">Dashboard</span>.</p></li>
+<li><p>Provide this project ID in the <em>XYZ</em> field in the following URL:</p>
+<pre class="highlight literal-block">https://studio.edgeimpulse.com/v1/api/<em>XYZ</em>/versions/public</pre>
+</li>
+<li><p>Paste the URL into your browser.
+The ID of the public project is returned as the value of the <code class="docutils literal notranslate"><span class="pre">publicProjectId</span></code> field.
+For example:</p>
+<div class="highlight highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s2">&quot;success&quot;</span><span class="p">:</span><span class="n">true</span><span class="p">,</span><span class="s2">&quot;versions&quot;</span><span class="p">:[{</span><span class="s2">&quot;version&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="s2">&quot;publicProjectId&quot;</span><span class="p">:</span><span class="mi">66469</span><span class="p">,</span><span class="s2">&quot;publicProjectUrl&quot;</span><span class="p">:</span><span class="s2">&quot;https://studio.edgeimpulse.com/public/66468/latest&quot;</span><span class="p">}]}</span>
+</pre></div>
+</div>
+<p>In this example, the <em>XYZ</em> project ID is <code class="docutils literal notranslate"><span class="pre">66468</span></code>, while the <code class="docutils literal notranslate"><span class="pre">publicProjectId</span></code> equals <code class="docutils literal notranslate"><span class="pre">66469</span></code>.</p>
+</li>
+</ol>
+</li>
+<li><p>Set <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_EDGE_IMPULSE_URI</span></code> to the following URI from Edge Impulse studio:</p>
+<pre class="highlight literal-block">CONFIG_EDGE_IMPULSE_URI=&quot;https://studio.edgeimpulse.com/v1/api/<em>XYZ</em>/deployment/download?type=zip&amp;modelType=int8&quot;</pre>
+<p>Set the <em>XYZ</em> to the public project ID from previous step.
+Using the example above, this would be <code class="docutils literal notranslate"><span class="pre">66469</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This URI includes the <code class="docutils literal notranslate"><span class="pre">modelType=int8</span></code> parameter because from public Edge Impulse projects you can only download quantized models created with Edge Impulse’s EON Compiler.</p>
+</div>
+</li>
+</ol>
+</section>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="memfault.html" class="btn btn-neutral float-right" title="Memfault integration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="bt_fast_pair.html" class="btn btn-neutral" title="Using Google Fast Pair with the nRF Connect SDK" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

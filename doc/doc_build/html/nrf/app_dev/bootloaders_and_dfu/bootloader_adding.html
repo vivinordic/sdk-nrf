@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Adding a bootloader chain &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script src="../../_static/tabs.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../_static/js/ncs.js"
+></script>
+<script src="../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Testing the bootloader chain" href="bootloader_testing.html" />
+    <link rel="prev" title="Secure bootloader chain" href="bootloader.html" />
+<link
+  href="../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev_model.html">Development model</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../app_dev.html">Application development</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../board_support/index.html">Board support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pin_control/index.html">Pin control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../build_and_config_system/index.html">Build and configuration system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../optimizing/index.html">Optimizing application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ap_protect/index.html">Enabling access port protection mechanism</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Bootloaders and Device Firmware Updates</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="bootloader.html">Secure bootloader chain</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Adding a bootloader chain</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#adding-an-immutable-bootloader">Adding an immutable bootloader</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#adding-an-upgradable-bootloader">Adding an upgradable bootloader</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="bootloader_testing.html">Testing the bootloader chain</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bootloader_external_flash.html">Using external flash memory partitions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bootloader_config.html">Customizing the bootloader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fw_update.html">Firmware updates</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../logging/index.html">Logging in nRF Connect SDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multi_image/index.html">Multi-image builds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../testing_unity_cmock/index.html">Testing with Unity and CMock</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tfm/index.html">Running applications with Trusted Firmware-M</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_fem/index.html">Working with RF front-end modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../wifi_coex/index.html">Adding Wi-Fi Coexistence support to short-range radio applications</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drivers.html">Drivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../app_dev.html">Application development</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Bootloaders and Device Firmware Updates</a></li>
+      <li class="breadcrumb-item active">Adding a bootloader chain</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/app_dev/bootloaders_and_dfu/bootloader_adding.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="adding-a-bootloader-chain">
+<span id="ug-bootloader-adding"></span><h1>Adding a bootloader chain<a class="headerlink" href="#adding-a-bootloader-chain" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#adding-an-immutable-bootloader" id="id9">Adding an immutable bootloader</a></p>
+<ul>
+<li><p><a class="reference internal" href="#adding-nsib-as-an-immutable-bootloader" id="id10">Adding nRF Secure Immutable Bootloader as an immutable bootloader</a></p></li>
+<li><p><a class="reference internal" href="#adding-mcuboot-as-an-immutable-bootloader" id="id11">Adding MCUboot as an immutable bootloader</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#adding-an-upgradable-bootloader" id="id12">Adding an upgradable bootloader</a></p>
+<ul>
+<li><p><a class="reference internal" href="#adding-mcuboot-as-an-upgradable-bootloader" id="id13">Adding MCUboot as an upgradable bootloader</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>You can add bootloader chains to an application in the following ways:</p>
+<ul>
+<li><p>Permanently:</p>
+<ul class="simple">
+<li><p>Using Kconfig fragments.</p></li>
+<li><p>Using <code class="file docutils literal notranslate"><span class="pre">prj.conf</span></code> Kconfig project configuration files.</p></li>
+</ul>
+</li>
+<li><p>Temporarily (for a single build):</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Using <span class="xref std std-ref">one-time CMake arguments</span>.</p></li>
+<li><p>Using <span class="xref std std-ref">zephyr:menuconfig</span>.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<p>While you can use temporary configurations for quickly experimenting with different configurations from build to build, the recommended method is to implement your bootloader chain with permanent configurations.</p>
+<p>Both Kconfig fragments and Kconfig project configuration files use the same Kconfig syntax for configurations.
+You can add bootloader chains to nearly any sample in nRF Connect SDK or Zephyr for rapid testing and experimentation.</p>
+<p>Choose the bootloader type depending on your application needs.</p>
+<section id="adding-an-immutable-bootloader">
+<span id="ug-bootloader-adding-immutable"></span><h2><a class="toc-backref" href="#id9">Adding an immutable bootloader</a><a class="headerlink" href="#adding-an-immutable-bootloader" title="Permalink to this heading"></a></h2>
+<p>The following sections describe how to add either nRF Secure Immutable Bootloader or MCUboot as an immutable bootloader.</p>
+<section id="adding-nsib-as-an-immutable-bootloader">
+<span id="ug-bootloader-adding-immutable-b0"></span><h3><a class="toc-backref" href="#id10">Adding nRF Secure Immutable Bootloader as an immutable bootloader</a><a class="headerlink" href="#adding-nsib-as-an-immutable-bootloader" title="Permalink to this heading"></a></h3>
+<p>To build nRF Secure Immutable Bootloader with a Zephyr or nRF Connect SDK sample, enable the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_SECURE_BOOT</span></code> in the application’s <code class="file docutils literal notranslate"><span class="pre">prj.conf</span></code> file, in an associated Kconfig fragment, or using the command line:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">west build -b nrf52840dk_nrf52840 zephyr/samples/hello_world -- -DCONFIG_SECURE_BOOT=y</span>
+</pre></div>
+</div>
+<p>See <a class="reference internal" href="../../getting_started/modifying.html#configure-application"><span class="std std-ref">Configuring your application</span></a> for information on how to set the required configuration options temporarily or permanently.</p>
+<p>Like other child images, <a class="reference internal" href="../multi_image/index.html#ug-multi-image-variables"><span class="std std-ref">image-specific configurations</span></a> can be assigned at build time to further customize the bootloader’s functionality.</p>
+<p>To ensure that the immutable bootloader occupies as little flash memory as possible, you can also apply the <code class="file docutils literal notranslate"><span class="pre">prj_minimal.conf</span></code> configuration:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">west build -b nrf52840dk_nrf52840 zephyr/samples/hello_world -- \</span>
+<span class="go">-DCONFIG_SECURE_BOOT=y \</span>
+<span class="go">-Db0_CONF_FILE=prj_minimal.conf</span>
+</pre></div>
+</div>
+<p>See <a class="reference internal" href="bootloader_config.html#ug-bootloader-config"><span class="std std-ref">Customizing the bootloader</span></a> for more information about using Kconfig fragments.</p>
+<section id="adding-a-custom-signature-key-file">
+<span id="ug-bootloader-adding-immutable-keys"></span><h4>Adding a custom signature key file<a class="headerlink" href="#adding-a-custom-signature-key-file" title="Permalink to this heading"></a></h4>
+<p>To add a signature key file to this bootloader, set the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_SB_SIGNING_KEY_FILE</span></code> option in the application’s <code class="file docutils literal notranslate"><span class="pre">prj.conf</span></code> file, in an associated Kconfig fragment, or using the command line:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-S2NvbmZpZyAvIHByai5jb25m" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-0-S2NvbmZpZyAvIHByai5jb25m" name="S2NvbmZpZyAvIHByai5jb25m" role="tab" tabindex="0">Kconfig / prj.conf</button><button aria-controls="panel-0-Q29tbWFuZCBsaW5l" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-0-Q29tbWFuZCBsaW5l" name="Q29tbWFuZCBsaW5l" role="tab" tabindex="-1">Command line</button></div><div aria-labelledby="tab-0-S2NvbmZpZyAvIHByai5jb25m" class="sphinx-tabs-panel group-tab" id="panel-0-S2NvbmZpZyAvIHByai5jb25m" name="S2NvbmZpZyAvIHByai5jb25m" role="tabpanel" tabindex="0"><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">CONFIG_SB_SIGNING_KEY_FILE=&quot;priv.pem&quot;</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-Q29tbWFuZCBsaW5l" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-0-Q29tbWFuZCBsaW5l" name="Q29tbWFuZCBsaW5l" role="tabpanel" tabindex="0"><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">-DCONFIG_SB_SIGNING_KEY_FILE=\&quot;priv.pem\&quot;</span>
+</pre></div>
+</div>
+<p>Escaped quotations avoid malformed-string warnings from Kconfig.</p>
+</div></div>
+<p>This option only accepts the private key of an ECDSA key pair, as build system scripts automatically extract the public key at build time.</p>
+<p>The file argument must be a string and is specified in one of the following ways:</p>
+<ul class="simple">
+<li><p>The relative path to the file from the application directory.</p>
+<ul>
+<li><p>If the <code class="file docutils literal notranslate"><span class="pre">prj.conf</span></code> file is external to the directory, the key’s location is determined relative to the application directory, not to the configuration file.</p></li>
+</ul>
+</li>
+<li><p>The absolute path to the file.</p></li>
+</ul>
+<p>For example, if a directory named <code class="file docutils literal notranslate"><span class="pre">_keys</span></code> located in <code class="file docutils literal notranslate"><span class="pre">/home/user/ncs</span></code> contains signing keys, you can provide the path in the following ways:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-1-S2NvbmZpZyAvIHByai5jb25m" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-1-S2NvbmZpZyAvIHByai5jb25m" name="S2NvbmZpZyAvIHByai5jb25m" role="tab" tabindex="0">Kconfig / prj.conf</button><button aria-controls="panel-1-Q29tbWFuZCBsaW5l" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-1-Q29tbWFuZCBsaW5l" name="Q29tbWFuZCBsaW5l" role="tab" tabindex="-1">Command line</button></div><div aria-labelledby="tab-1-S2NvbmZpZyAvIHByai5jb25m" class="sphinx-tabs-panel group-tab" id="panel-1-S2NvbmZpZyAvIHByai5jb25m" name="S2NvbmZpZyAvIHByai5jb25m" role="tabpanel" tabindex="0"><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">CONFIG_SB_SIGNING_KEY_FILE=&quot;../../_keys/priv.pem&quot;</span>
+</pre></div>
+</div>
+<p>Or</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">CONFIG_SB_SIGNING_KEY_FILE=&quot;/home/user/ncs/_keys/priv.pem&quot;</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-1-Q29tbWFuZCBsaW5l" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-1-Q29tbWFuZCBsaW5l" name="Q29tbWFuZCBsaW5l" role="tabpanel" tabindex="0"><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">-DCONFIG_SB_SIGNING_KEY_FILE=\&quot;../../_keys/priv.pem\&quot;</span>
+</pre></div>
+</div>
+<p>Or</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">-DCONFIG_SB_SIGNING_KEY_FILE=\&quot;/home/user/ncs/_keys/priv.pem\&quot;</span>
+</pre></div>
+</div>
+<p>Or, if you set an environment variable named <span class="target" id="index-0"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">NCS</span></code> to <code class="file docutils literal notranslate"><span class="pre">/home/user/ncs</span></code>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">-DCONFIG_SB_SIGNING_KEY_FILE=\&quot;$NCS/_keys/priv.pem\&quot;</span>
+</pre></div>
+</div>
+</div></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The public key string must be an absolute path to the location of the public key file.
+Environment variables (like <span class="target" id="index-1"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">$HOME</span></code>, <span class="target" id="index-2"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">$PWD</span></code>, or <span class="target" id="index-3"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">$USER</span></code>) and the <code class="docutils literal notranslate"><span class="pre">~</span></code> character on Unix systems are not expanded when setting an absolute path from a <code class="file docutils literal notranslate"><span class="pre">prj.conf</span></code> file or Kconfig fragment, but are expanded correctly in key file paths from the command line that are not given as strings.</p>
+</div>
+<p>You can find specific configuration options for keys with this bootloader in <code class="file docutils literal notranslate"><span class="pre">nrf/subsys/bootloader/Kconfig</span></code>.</p>
+<p>See <a class="reference internal" href="fw_update.html#ug-fw-update-keys"><span class="std std-ref">Signature keys</span></a> for information on how to generate custom keys for a project.</p>
+<p>Additionally, the nRF Secure Immutable Bootloader supports the following methods for signing images with private keys:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="fw_update.html#ug-fw-update-keys-python"><span class="std std-ref">Using Python to generate keys</span></a> - The default method, using the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_SB_SIGNING_PYTHON</span></code>.</p></li>
+<li><p><a class="reference internal" href="fw_update.html#ug-fw-update-keys-openssl"><span class="std std-ref">Using OpenSSL to generate keys</span></a> - Uses the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_SB_SIGNING_OPENSSL</span></code>.</p></li>
+<li><p><a class="reference internal" href="#ug-bootloader-adding-immutable-b0-custom-signing"><span class="std std-ref">Using a custom command</span></a> - Uses the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_SB_SIGNING_CUSTOM</span></code>.</p></li>
+</ul>
+<p>Both Python and OpenSSL methods are handled internally by the build system, whereas using custom commands requires more configuration steps.</p>
+<section id="checking-the-public-key">
+<h5>Checking the public key<a class="headerlink" href="#checking-the-public-key" title="Permalink to this heading"></a></h5>
+<p>You can check that the bootloader image is correctly compiled with the custom signing key by comparing its auto-generated public key against a manual public key dump using OpenSSL.
+You can do this with <code class="docutils literal notranslate"><span class="pre">diff</span></code>, running the following command from a terminal:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">diff build/zephyr/nrf/subsys/bootloader/generated/public.pem &lt;(openssl ec -in priv.pem -pubout)</span>
+</pre></div>
+</div>
+<p>If there is no file diff output, then the private key has been successfully included in the bootloader image.</p>
+</section>
+</section>
+<section id="custom-signing-commands">
+<span id="ug-bootloader-adding-immutable-b0-custom-signing"></span><h4>Custom signing commands<a class="headerlink" href="#custom-signing-commands" title="Permalink to this heading"></a></h4>
+<p>If you want complete control over the key handling of a project, you can use a custom signing command with nRF Secure Immutable Bootloader.
+Using a custom signing command removes the need to use of a private key from the build system.
+This is useful when the private keys are stored, managed, or otherwise processed through a <em>hardware security module</em> (<a class="reference external" href="https://en.wikipedia.org/wiki/Hardware_security_module">HSM</a>) or an in-house tool.</p>
+<p>To use a custom signing command with this bootloader, set the following options in the application’s <code class="file docutils literal notranslate"><span class="pre">prj.conf</span></code> file, in an associated Kconfig fragment, or using the command line:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-2-S2NvbmZpZyAvIHByai5jb25m" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-2-S2NvbmZpZyAvIHByai5jb25m" name="S2NvbmZpZyAvIHByai5jb25m" role="tab" tabindex="0">Kconfig / prj.conf</button><button aria-controls="panel-2-Q29tbWFuZCBsaW5l" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-2-Q29tbWFuZCBsaW5l" name="Q29tbWFuZCBsaW5l" role="tab" tabindex="-1">Command line</button></div><div aria-labelledby="tab-2-S2NvbmZpZyAvIHByai5jb25m" class="sphinx-tabs-panel group-tab" id="panel-2-S2NvbmZpZyAvIHByai5jb25m" name="S2NvbmZpZyAvIHByai5jb25m" role="tabpanel" tabindex="0"><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">CONFIG_SECURE_BOOT=y</span>
+<span class="go">CONFIG_SB_SIGNING_CUSTOM=y</span>
+<span class="go">CONFIG_SB_SIGNING_PUBLIC_KEY=&quot;/path/to/pub.pem&quot;</span>
+<span class="go">CONFIG_SB_SIGNING_COMMAND=&quot;my_command&quot;</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-2-Q29tbWFuZCBsaW5l" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-2-Q29tbWFuZCBsaW5l" name="Q29tbWFuZCBsaW5l" role="tabpanel" tabindex="0"><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">west build -b nrf52840dk_nrf52840 zephyr/samples/hello_world -- \</span>
+<span class="go">-DCONFIG_SECURE_BOOT=y \</span>
+<span class="go">-DCONFIG_SB_SIGNING_CUSTOM=y \</span>
+<span class="go">-DCONFIG_SB_SIGNING_PUBLIC_KEY=\&quot;/path/to/pub.pem\&quot; \</span>
+<span class="go">-DCONFIG_SB_SIGNING_COMMAND=\&quot;my_command\&quot;</span>
+</pre></div>
+</div>
+<p>Escaped quotations avoid malformed-string warnings from Kconfig.</p>
+</div></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The public key string must be an absolute path to the location of the public key file, as mentioned previously in <a class="reference internal" href="#ug-bootloader-adding-immutable-keys"><span class="std std-ref">Adding a custom signature key file</span></a>.</p>
+</div>
+<p>See <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_SB_SIGNING_COMMAND</span></code> for specifics about what a usable signing command must do.
+The command string can include its own arguments like a typical terminal command, including arguments specific to the build system:</p>
+<pre class="highlight literal-block">my_command <em>[options]</em> <em>&lt;args ...&gt;</em> <em>&lt;build_system_args ..&gt;</em></pre>
+<p>See the description of <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_SB_SIGNING_COMMAND</span></code> for which arguments can be sent to the build system in this way.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Whitespace, hyphens, and other non-alphanumeric characters must be escaped appropriately when setting the string from the command line.
+If the custom signing command uses its own options or arguments, it is recommended to define the string in a <code class="file docutils literal notranslate"><span class="pre">prj.conf</span></code> file or Kconfig fragment to avoid tracking backslashes.
+Like public key paths, environment variables are not expanded when using them in a command string set from one of these files.</p>
+</div>
+</section>
+</section>
+<section id="adding-mcuboot-as-an-immutable-bootloader">
+<span id="ug-bootloader-adding-immutable-mcuboot"></span><h3><a class="toc-backref" href="#id11">Adding MCUboot as an immutable bootloader</a><a class="headerlink" href="#adding-mcuboot-as-an-immutable-bootloader" title="Permalink to this heading"></a></h3>
+<p>To build <span class="xref std std-doc">mcuboot:index-ncs</span> with a Zephyr or nRF Connect SDK sample, enable the <code class="docutils literal notranslate"><span class="pre">CONFIG_BOOTLOADER_MCUBOOT</span></code> in the application’s <code class="file docutils literal notranslate"><span class="pre">prj.conf</span></code> file, an associated Kconfig fragment, or using the command line:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">west build -b nrf52840dk_nrf52840 zephyr/samples/hello_world -- -DCONFIG_BOOTLOADER_MCUBOOT=y</span>
+</pre></div>
+</div>
+<p>See <a class="reference internal" href="../../getting_started/modifying.html#configure-application"><span class="std std-ref">Configuring your application</span></a> for information on how to set the required configuration options temporarily or permanently.
+Like other child images, you can assign <a class="reference internal" href="../multi_image/index.html#ug-multi-image-variables"><span class="std std-ref">image-specific configurations</span></a> at build time to further customize the bootloader’s functionality.</p>
+<section id="ug-bootloader-adding-immutable-mcuboot-keys">
+<span id="id1"></span><h4>Adding a custom signature key file<a class="headerlink" href="#ug-bootloader-adding-immutable-mcuboot-keys" title="Permalink to this heading"></a></h4>
+<p>To pass the signature key file into the MCUboot image, set its <code class="docutils literal notranslate"><span class="pre">CONFIG_BOOT_SIGNATURE_KEY_FILE</span></code> option to the selected private key file.
+You can set the option in <code class="file docutils literal notranslate"><span class="pre">bootloader/mcuboot/boot/zephyr/prj.conf</span></code>, an associated Kconfig fragment, or using the command line:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-3-S2NvbmZpZyAvIHByai5jb25m" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-3-S2NvbmZpZyAvIHByai5jb25m" name="S2NvbmZpZyAvIHByai5jb25m" role="tab" tabindex="0">Kconfig / prj.conf</button><button aria-controls="panel-3-Q29tbWFuZCBsaW5l" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-3-Q29tbWFuZCBsaW5l" name="Q29tbWFuZCBsaW5l" role="tab" tabindex="-1">Command line</button></div><div aria-labelledby="tab-3-S2NvbmZpZyAvIHByai5jb25m" class="sphinx-tabs-panel group-tab" id="panel-3-S2NvbmZpZyAvIHByai5jb25m" name="S2NvbmZpZyAvIHByai5jb25m" role="tabpanel" tabindex="0"><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">CONFIG_BOOT_SIGNATURE_KEY_FILE=&quot;priv.pem&quot;</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-3-Q29tbWFuZCBsaW5l" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-3-Q29tbWFuZCBsaW5l" name="Q29tbWFuZCBsaW5l" role="tabpanel" tabindex="0"><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">-Dmcuboot_CONFIG_BOOT_SIGNATURE_KEY_FILE=\&quot;priv.pem\&quot;</span>
+</pre></div>
+</div>
+<p>Escaped quotations avoid malformed-string warnings from Kconfig.</p>
+</div></div>
+<p>The path of the key works as <a class="reference internal" href="#ug-bootloader-adding-immutable-keys"><span class="std std-ref">described above</span></a> for nRF Secure Immutable Bootloader, except the application directory for relative pathing is considered to be <code class="file docutils literal notranslate"><span class="pre">bootloader/mcuboot</span></code>.</p>
+<p>See <a class="reference internal" href="fw_update.html#ug-fw-update-keys"><span class="std std-ref">Signature keys</span></a> for information on how to generate custom keys for a project.</p>
+<p>We recommend you also set the associated configuration for a key type to ensure MCUboot compiles the public key into its image correctly.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">west build -b nrf52840dk_nrf52840 zephyr/samples/hello_world -- \</span>
+<span class="go">-DCONFIG_BOOTLOADER_MCUBOOT=y \</span>
+<span class="go">-Dmcuboot_CONFIG_BOOT_SIGNATURE_KEY_FILE=\&quot;../../priv-ecdsa256.pem\&quot; \</span>
+<span class="go">-Dmcuboot_CONFIG_BOOT_SIGNATURE_TYPE_ECDSA_P256=y</span>
+</pre></div>
+</div>
+<p>You can find specific configuration options for keys with this bootloader in <code class="file docutils literal notranslate"><span class="pre">bootloader/mcuboot/boot/zephyr/Kconfig</span></code>.</p>
+<section id="id2">
+<h5>Checking the public key<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h5>
+<p>You can extract the public key locally and compare it against MCUboot’s auto-generated file to verify that it is using the custom key:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">diff build/mcuboot/zephyr/autogen-pubkey.c &lt;(python3 bootloader/mcuboot/scripts/imgtool.py getpub -k priv.pem)</span>
+</pre></div>
+</div>
+<p>If there is no file diff output, then the private key was successfully included with the bootloader image.</p>
+</section>
+</section>
+</section>
+</section>
+<section id="adding-an-upgradable-bootloader">
+<span id="ug-bootloader-adding-upgradable"></span><h2><a class="toc-backref" href="#id12">Adding an upgradable bootloader</a><a class="headerlink" href="#adding-an-upgradable-bootloader" title="Permalink to this heading"></a></h2>
+<p>MCUboot is the only upgradable bootloader currently available for the nRF Connect SDK.
+The following section describes how to add it to your secure bootloader chain.</p>
+<section id="adding-mcuboot-as-an-upgradable-bootloader">
+<span id="ug-bootloader-adding-upgradable-mcuboot"></span><h3><a class="toc-backref" href="#id13">Adding MCUboot as an upgradable bootloader</a><a class="headerlink" href="#adding-mcuboot-as-an-upgradable-bootloader" title="Permalink to this heading"></a></h3>
+<p>To use MCUboot as an upgradable bootloader, the application must already use the nRF Secure Immutable Bootloader as the immutable bootloader.
+MCUboot is added to its boot chain by including the <code class="docutils literal notranslate"><span class="pre">CONFIG_BOOTLOADER_MCUBOOT</span></code> option with either the build command or in the application’s <code class="file docutils literal notranslate"><span class="pre">prj.conf</span></code> file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">west</span> <span class="n">build</span> <span class="o">-</span><span class="n">b</span> <span class="n">nrf52840dk_nrf52840</span> <span class="n">zephyr</span><span class="o">/</span><span class="n">samples</span><span class="o">/</span><span class="n">hello_world</span> <span class="o">--</span> \
+<span class="o">-</span><span class="n">DCONFIG_SECURE_BOOT</span><span class="o">=</span><span class="n">y</span> \
+<span class="o">-</span><span class="n">DCONFIG_BOOTLOADER_MCUBOOT</span><span class="o">=</span><span class="n">y</span>
+</pre></div>
+</div>
+<p>See <a class="reference internal" href="../../getting_started/modifying.html#configure-application"><span class="std std-ref">Configuring your application</span></a> for information on how to set the required configuration options temporarily or permanently.</p>
+<p>MCUboot can use the cryptographic functionality exposed by the immutable bootloader, reducing the flash memory usage for MCUboot to less than 16 kB.
+To enable this configuration, apply both the <code class="file docutils literal notranslate"><span class="pre">prj_minimal.conf</span></code> Kconfig project file and the <code class="file docutils literal notranslate"><span class="pre">external_crypto.conf</span></code> Kconfig fragment for the MCUboot image:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">west</span> <span class="n">build</span> <span class="o">-</span><span class="n">b</span> <span class="n">nrf52840dk_nrf52840</span> <span class="n">zephyr</span><span class="o">/</span><span class="n">samples</span><span class="o">/</span><span class="n">hello_world</span> <span class="o">--</span> \
+<span class="o">-</span><span class="n">DCONFIG_BOOTLOADER_MCUBOOT</span><span class="o">=</span><span class="n">y</span> \
+<span class="o">-</span><span class="n">DCONFIG_SECURE_BOOT</span><span class="o">=</span><span class="n">y</span> \
+<span class="o">-</span><span class="n">Dmcuboot_CONF_FILE</span><span class="o">=</span><span class="n">prj_minimal</span><span class="o">.</span><span class="n">conf</span> \
+<span class="o">-</span><span class="n">Dmcuboot_OVERLAY_CONFIG</span><span class="o">=</span><span class="n">external_crypto</span><span class="o">.</span><span class="n">conf</span>
+</pre></div>
+</div>
+<p>See <a class="reference internal" href="bootloader_config.html#ug-bootloader-config"><span class="std std-ref">Customizing the bootloader</span></a> for more information about using Kconfig fragments with bootloaders.</p>
+<p>Adding an upgradable bootloader to an application changes its flash memory partition layout to accommodate first and second image slots for both immutable and upgradable bootloaders.
+See <a class="reference internal" href="bootloader.html#ug-bootloader-flash-mcuboot"><span class="std std-ref">MCUboot partitions</span></a> for more information about how this bootloader organizes its flash memory layout.</p>
+<section id="id3">
+<h4>Adding a custom signature key file<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h4>
+<p>The process to use specific signature keys with MCUboot used as the upgradable bootloader is the same as when it is used <a class="reference internal" href="#ug-bootloader-adding-immutable-mcuboot-keys"><span class="std std-ref">as the immutable one</span></a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Since each bootloader is built with its own signature key, using a different private key with an upgradable bootloader will not cause problems with the secure boot chain.
+You can also use the same private key for both the immutable and upgradable bootloaders, as long as the key type is supported by both of them.</p>
+</div>
+</section>
+<section id="generating-pre-signed-variants">
+<span id="ug-bootloader-adding-presigned-variants"></span><h4>Generating pre-signed variants<a class="headerlink" href="#generating-pre-signed-variants" title="Permalink to this heading"></a></h4>
+<p>Enable the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BUILD_S1_VARIANT</span></code> option when building the upgradable bootloader to automatically generate <a class="reference internal" href="bootloader.html#upgradable-bootloader-presigned-variants"><span class="std std-ref">pre-signed variants</span></a> of the image for both slots:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">west</span> <span class="n">build</span> <span class="o">-</span><span class="n">b</span> <span class="n">nrf52840dk_nrf52840</span> <span class="n">zephyr</span><span class="o">/</span><span class="n">samples</span><span class="o">/</span><span class="n">hello_world</span> <span class="o">--</span> \
+<span class="o">-</span><span class="n">DCONFIG_SECURE_BOOT</span><span class="o">=</span><span class="n">y</span> \
+<span class="o">-</span><span class="n">DCONFIG_BOOTLOADER_MCUBOOT</span><span class="o">=</span><span class="n">y</span> \
+<span class="o">-</span><span class="n">DCONFIG_BUILD_S1_VARIANT</span><span class="o">=</span><span class="n">y</span>
+</pre></div>
+</div>
+<p>This is a necessary step for creating application update images for use with <a class="reference internal" href="fw_update.html#ug-fw-update"><span class="std std-ref">Firmware updates</span></a>.</p>
+<p>The S1 variant is built as a separate child image called <code class="docutils literal notranslate"><span class="pre">s1_image</span></code>.
+For this reason, any modifications to the configuration of the S1 variant must be done to the <code class="docutils literal notranslate"><span class="pre">s1_image</span></code> child image.
+By default, this child image is an exact duplicate of the original image, with the exception of its placement in memory.
+The only configuration option that must be modified is the version set in <code class="docutils literal notranslate"><span class="pre">CONFIG_FW_INFO_FIRMWARE_VERSION</span></code>.
+To make <code class="docutils literal notranslate"><span class="pre">s1_image</span></code> bootable with nRF Secure Immutable Bootloader, the value of <code class="docutils literal notranslate"><span class="pre">CONFIG_FW_INFO_FIRMWARE_VERSION</span></code> for <code class="docutils literal notranslate"><span class="pre">s1_image</span></code> must be bigger than the one for original image.</p>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="bootloader_testing.html" class="btn btn-neutral float-right" title="Testing the bootloader chain" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="bootloader.html" class="btn btn-neutral" title="Secure bootloader chain" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Matter integration in the nRF Connect SDK &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../../_static/js/ncs.js"
+></script>
+<script src="../../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Getting started with Matter" href="../getting_started/index.html" />
+    <link rel="prev" title="Matter development model and compatible ecosystems" href="dev_model.html" />
+<link
+  href="../../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../protocols.html">Protocols</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../ble/index.html">Bluetooth LE Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../bt_mesh/index.html">Bluetooth mesh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../esb/index.html">Enhanced ShockBurst (ESB)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gazell/index.html">Gazell</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Matter</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Matter overview</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="architecture.html">Matter architecture</a></li>
+<li class="toctree-l4"><a class="reference internal" href="data_model.html">Matter Data Model and device types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="int_model.html">Matter Interaction Model and interaction types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="network_topologies.html">Matter network topology and concepts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="security.html">Matter network security</a></li>
+<li class="toctree-l4"><a class="reference internal" href="commissioning.html">Matter network commissioning</a></li>
+<li class="toctree-l4"><a class="reference internal" href="multi_fabrics.html">Matter multiple fabrics feature</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dfu.html">Matter OTA</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dev_model.html">Matter development model and compatible ecosystems</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Matter integration in the nRF Connect SDK</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../getting_started/index.html">Getting started with Matter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../end_product/index.html">How to create Matter end product</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../multiprotocol/index.html">Multiprotocol support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nfc/index.html">Near Field Communication (NFC)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../thread/index.html">Thread</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../wifi/index.html">Wi-Fi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../zigbee/index.html">Zigbee</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../drivers.html">Drivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../protocols.html">Protocols</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Matter</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Matter overview</a></li>
+      <li class="breadcrumb-item active">Matter integration in the nRF Connect SDK</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/protocols/matter/overview/integration.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="matter-integration-in-the-ncs">
+<span id="ug-matter-overview-architecture-integration"></span><h1>Matter integration in the nRF Connect SDK<a class="headerlink" href="#matter-integration-in-the-ncs" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#matter-stack-in-the-ncs" id="id12">Matter stack in the nRF Connect SDK</a></p></li>
+<li><p><a class="reference internal" href="#matter-platform-designs-system-on-chip-multiprotocol" id="id13">Matter platform designs (System-on-Chip, multiprotocol)</a></p>
+<ul>
+<li><p><a class="reference internal" href="#matter-over-thread" id="id14">Matter over Thread</a></p></li>
+<li><p><a class="reference internal" href="#matter-over-wi-fi" id="id15">Matter over Wi-Fi</a></p></li>
+<li><p><a class="reference internal" href="#switchable-matter-over-wi-fi-and-matter-over-thread" id="id16">Switchable Matter over Wi-Fi and Matter over Thread</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>Matter is included in the nRF Connect SDK as one of the submodule repositories managed with the <span class="xref std std-ref">zephyr:west</span> tool, using a <a class="reference external" href="https://github.com/nrfconnect/sdk-connectedhomeip">dedicated Matter fork</a>.
+That is, the code used for the nRF Connect SDK and Matter integration is stored in the Matter repository (nRF Connect platform) and is compiled when building one of the available <a class="reference internal" href="../../../samples/matter.html#matter-samples"><span class="std std-ref">Matter samples</span></a>.</p>
+<figure class="align-default" id="id6">
+<img alt="A graphical depiction of the |NCS| repository structure" src="../../../_images/matter_components_integration_ncs.svg" /><figcaption>
+<p><span class="caption-text">The nRF Connect SDK repository structure</span><a class="headerlink" href="#id6" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Both instances depend on each other, but their development is independent to ensure that they both support the latest stable version of one another.
+The fork is maintained and verified as a part of the nRF Connect SDK release process as an <a class="reference internal" href="../../../developing/code_base.html#dm-repo-types"><span class="std std-ref">OSS repository</span></a>.</p>
+<p>The Matter repository fetched into the fork also includes documentation files.
+A selection of these pages is included in the nRF Connect SDK documentation under the <span class="xref std std-ref">matter_index</span> tab.</p>
+<section id="matter-stack-in-the-ncs">
+<span id="ug-matter-overview-architecture-integration-stack"></span><h2><a class="toc-backref" href="#id12">Matter stack in the nRF Connect SDK</a><a class="headerlink" href="#matter-stack-in-the-ncs" title="Permalink to this heading"></a></h2>
+<p>Matter is located on the top application layer of the integration model, looking from the networking point of view.
+The nRF Connect SDK and Zephyr provide the Bluetooth® LE, Thread, and Wi-Fi stacks, which must be integrated with the Matter stack using a special intermediate layer.
+In case of Matter over Thread, the nRF Connect SDK’s Multiprotocol Service Layer (MPSL) driver allows running Bluetooth LE and Thread concurrently on the same radio chip.</p>
+<figure class="align-default" id="id7">
+<img alt="nRF Connect platform in Matter" src="../../../_images/matter_nrfconnect_overview_simplified_ncs.svg" /><figcaption>
+<p><span class="caption-text">nRF Connect platform in Matter</span><a class="headerlink" href="#id7" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>For detailed description, see the <span class="xref std std-doc">matter:nrfconnect_platform_overview</span> page in the Matter documentation.</p>
+</section>
+<section id="matter-platform-designs-system-on-chip-multiprotocol">
+<span id="ug-matter-overview-architecture-integration-designs"></span><h2><a class="toc-backref" href="#id13">Matter platform designs (System-on-Chip, multiprotocol)</a><a class="headerlink" href="#matter-platform-designs-system-on-chip-multiprotocol" title="Permalink to this heading"></a></h2>
+<p>Matter in the nRF Connect SDK supports the <em>System-on-Chip, multiprotocol</em> platform designs, available with the related network stack on Nordic Semiconductor devices in the nRF Connect SDK.
+For more information about the multiprotocol feature, see <a class="reference internal" href="../../multiprotocol/index.html#ug-multiprotocol-support"><span class="std std-ref">Multiprotocol support</span></a>.</p>
+<section id="matter-over-thread">
+<span id="ug-matter-overview-architecture-integration-designs-thread"></span><h3><a class="toc-backref" href="#id14">Matter over Thread</a><a class="headerlink" href="#matter-over-thread" title="Permalink to this heading"></a></h3>
+<p>In this design, the Matter stack, the OpenThread stack, and the Bluetooth LE stack run on a single SoC.</p>
+<p>This platform design is suitable for the following development kits:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 26%" />
+<col style="width: 7%" />
+<col style="width: 41%" />
+<col style="width: 26%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Hardware platforms</p></th>
+<th class="head"><p>PCA</p></th>
+<th class="head"><p>Board name</p></th>
+<th class="head"><p>Build target</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../working_with_nrf/nrf52/developing.html#ug-nrf52"><span class="std std-ref">nRF52840 DK</span></a></p></td>
+<td><p>PCA10056</p></td>
+<td><p><span class="xref std std-ref">nrf52840dk_nrf52840</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nrf52840dk_nrf52840</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../working_with_nrf/nrf53/nrf5340.html#ug-nrf5340"><span class="std std-ref">nRF5340 DK</span></a></p></td>
+<td><p>PCA10095</p></td>
+<td><p><span class="xref std std-ref">nrf5340dk_nrf5340</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nrf5340dk_nrf5340_cpuapp</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">nrf5340dk_nrf5340_cpuapp_ns</span></code></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>The design differences between the supported SoCs are the following:</p>
+<ul class="simple">
+<li><p>On the nRF5340 SoC, the network core runs both the Bluetooth LE Controller and the 802.15.4 IEEE Radio Driver.</p></li>
+<li><p>On the nRF52840 SoC, all components are located on the application core.</p></li>
+</ul>
+<figure class="align-default" id="id8">
+<img alt="Multiprotocol Thread and Bluetooth LE architecture (nRF52)" src="../../../_images/thread_platform_design_multi.svg" /><figcaption>
+<p><span class="caption-text">Multiprotocol Thread and Bluetooth LE architecture on nRF52 Series devices</span><a class="headerlink" href="#id8" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="id9">
+<img alt="Multiprotocol Thread and Bluetooth LE architecture (nRF53)" src="../../../_images/thread_platform_design_nRF53_multi.svg" /><figcaption>
+<p><span class="caption-text">Multiprotocol Thread and Bluetooth LE architecture on nRF53 Series devices</span><a class="headerlink" href="#id9" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="matter-over-wi-fi">
+<span id="ug-matter-overview-architecture-integration-designs-wifi"></span><h3><a class="toc-backref" href="#id15">Matter over Wi-Fi</a><a class="headerlink" href="#matter-over-wi-fi" title="Permalink to this heading"></a></h3>
+<p>In this design, the Matter stack, the Wi-Fi stack, and the Bluetooth LE stack run on a single SoC.</p>
+<p>This platform design is suitable for the following development kits:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 32%" />
+<col style="width: 7%" />
+<col style="width: 38%" />
+<col style="width: 24%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Hardware platforms</p></th>
+<th class="head"><p>PCA</p></th>
+<th class="head"><p>Board name</p></th>
+<th class="head"><p>Build target</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../working_with_nrf/nrf70/gs.html#nrf7002dk-nrf5340"><span class="std std-ref">nRF7002 DK</span></a></p></td>
+<td><p>PCA10143</p></td>
+<td><p><a class="reference internal" href="../../../working_with_nrf/nrf70/gs.html#nrf7002dk-nrf5340"><span class="std std-ref">nrf7002dk_nrf5340</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nrf7002dk_nrf5340_cpuapp</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../working_with_nrf/nrf53/nrf5340.html#ug-nrf5340"><span class="std std-ref">nRF5340 DK</span></a></p></td>
+<td><p>PCA10095</p></td>
+<td><p><span class="xref std std-ref">nrf5340dk_nrf5340</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nrf5340dk_nrf5340_cpuapp</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>For this design, the Wi-Fi driver on the application core communicates with the external nRF7002 Wi-Fi 6 Companion IC over QSPI or SPI:</p>
+<ul class="simple">
+<li><p>For the <code class="docutils literal notranslate"><span class="pre">nrf5340dk_nrf5340_cpuapp</span></code>, nRF7002 support is added using <code class="docutils literal notranslate"><span class="pre">nrf7002_ek</span></code> shield connected through SPI.</p></li>
+<li><p>For the <code class="docutils literal notranslate"><span class="pre">nrf7002dk_nrf5340_cpuapp</span></code>, nRF7002 is connected with the nRF5340 SoC through QSPI.</p></li>
+</ul>
+<figure class="align-default" id="id10">
+<img alt="Multiprotocol Wi-Fi and Bluetooth LE architecture (nRF53 with the nRF7002 Wi-Fi 6 Companion IC)" src="../../../_images/matter_platform_design_nRF53_wifi.svg" /><figcaption>
+<p><span class="caption-text">Multiprotocol Wi-Fi and Bluetooth LE architecture (nRF53 with the nRF7002 Wi-Fi 6 Companion IC)</span><a class="headerlink" href="#id10" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="switchable-matter-over-wi-fi-and-matter-over-thread">
+<span id="ug-matter-overview-architecture-integration-designs-switchable"></span><h3><a class="toc-backref" href="#id16">Switchable Matter over Wi-Fi and Matter over Thread</a><a class="headerlink" href="#switchable-matter-over-wi-fi-and-matter-over-thread" title="Permalink to this heading"></a></h3>
+<p>In this design, the Matter stack, the OpenThread stack, Wi-Fi stack, and the Bluetooth LE stack run on a single SoC.</p>
+<p>The application is built in two variants: the first one is the application working with Matter over Thread and the second one is the application working with Matter over Wi-Fi.
+You can configure which transport is selected on the device boot as the default one.
+Both application variants are programmed into separate partitions of the external flash.
+The application runs from the internal flash memory, using one of the variants from the external flash.
+You can trigger the switch from one variant to another using the <strong>Button 3</strong> on the nRF5340 DK.
+The device is rebooted into the MCUboot bootloader, which replaces the current variant by swapping the application variant in the internal flash.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Because the external flash is used for both the DFU and the switching feature, this implementation has higher memory size requirements and you need an external flash with at least 6 MB of memory.</p>
+</div>
+<p>For an example of how this design works, see the <a class="reference internal" href="../../../samples/matter/lock/README.html#matter-lock-sample-wifi-thread-switching"><span class="std std-ref">Thread and Wi-Fi switching</span></a> feature in the Matter door lock sample.</p>
+<p>This platform design is suitable for the following development kits:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 27%" />
+<col style="width: 7%" />
+<col style="width: 40%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Hardware platforms</p></th>
+<th class="head"><p>PCA</p></th>
+<th class="head"><p>Board name</p></th>
+<th class="head"><p>Build target</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../working_with_nrf/nrf53/nrf5340.html#ug-nrf5340"><span class="std std-ref">nRF5340 DK</span></a></p></td>
+<td><p>PCA10095</p></td>
+<td><p><span class="xref std std-ref">nrf5340dk_nrf5340</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nrf5340dk_nrf5340_cpuapp</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>This design is only available for the <code class="docutils literal notranslate"><span class="pre">nrf5340dk_nrf5340_cpuapp</span></code> with the <code class="docutils literal notranslate"><span class="pre">nrf7002_ek</span></code> shield.
+The Wi-Fi driver on the application core communicates through SPI with the external nRF7002 EK shield, which works as the Wi-Fi 6 Companion IC.</p>
+<figure class="align-default" id="id11">
+<img alt="Multiprotocol Wi-Fi/Thread and Bluetooth LE architecture (nRF53 with the nRF7002 EK shield as the Wi-Fi 6 Companion IC)" src="../../../_images/matter_platform_design_nRF53_wifi_switching.svg" /><figcaption>
+<p><span class="caption-text">Multiprotocol Wi-Fi/Thread and Bluetooth LE architecture (nRF53 with the nRF7002 EK shield as the Wi-Fi 6 Companion IC)</span><a class="headerlink" href="#id11" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../getting_started/index.html" class="btn btn-neutral float-right" title="Getting started with Matter" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="dev_model.html" class="btn btn-neutral" title="Matter development model and compatible ecosystems" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

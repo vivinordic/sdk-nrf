@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Matter Data Model and device types &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../../_static/js/ncs.js"
+></script>
+<script src="../../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Matter Interaction Model and interaction types" href="int_model.html" />
+    <link rel="prev" title="Matter architecture" href="architecture.html" />
+<link
+  href="../../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../protocols.html">Protocols</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../ble/index.html">Bluetooth LE Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../bt_mesh/index.html">Bluetooth mesh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../esb/index.html">Enhanced ShockBurst (ESB)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gazell/index.html">Gazell</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Matter</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Matter overview</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="architecture.html">Matter architecture</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Matter Data Model and device types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="int_model.html">Matter Interaction Model and interaction types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="network_topologies.html">Matter network topology and concepts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="security.html">Matter network security</a></li>
+<li class="toctree-l4"><a class="reference internal" href="commissioning.html">Matter network commissioning</a></li>
+<li class="toctree-l4"><a class="reference internal" href="multi_fabrics.html">Matter multiple fabrics feature</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dfu.html">Matter OTA</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dev_model.html">Matter development model and compatible ecosystems</a></li>
+<li class="toctree-l4"><a class="reference internal" href="integration.html">Matter integration in the nRF Connect SDK</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../getting_started/index.html">Getting started with Matter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../end_product/index.html">How to create Matter end product</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../multiprotocol/index.html">Multiprotocol support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nfc/index.html">Near Field Communication (NFC)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../thread/index.html">Thread</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../wifi/index.html">Wi-Fi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../zigbee/index.html">Zigbee</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../drivers.html">Drivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../protocols.html">Protocols</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Matter</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Matter overview</a></li>
+      <li class="breadcrumb-item active">Matter Data Model and device types</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/protocols/matter/overview/data_model.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="matter-data-model-and-device-types">
+<span id="ug-matter-overview-data-model"></span><h1>Matter Data Model and device types<a class="headerlink" href="#matter-data-model-and-device-types" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#data-model-example-door-lock" id="id8">Data Model example: Door Lock</a></p>
+<ul>
+<li><p><a class="reference internal" href="#identify-cluster" id="id9">Identify cluster</a></p></li>
+<li><p><a class="reference internal" href="#doorlock-cluster" id="id10">DoorLock cluster</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#matter-device-types" id="id11">Matter device types</a></p></li>
+<li><p><a class="reference internal" href="#device-type-overview" id="id12">Device type overview</a></p>
+<ul>
+<li><p><a class="reference internal" href="#lighting-device-types" id="id13">Lighting device types</a></p></li>
+<li><p><a class="reference internal" href="#smart-plugs-outlets-device-types" id="id14">Smart Plugs/Outlets device types</a></p></li>
+<li><p><a class="reference internal" href="#switches-and-controls-device-types" id="id15">Switches and Controls device types</a></p></li>
+<li><p><a class="reference internal" href="#sensor-device-types" id="id16">Sensor device types</a></p></li>
+<li><p><a class="reference internal" href="#closure-device-types" id="id17">Closure device types</a></p></li>
+<li><p><a class="reference internal" href="#hvac-device-types" id="id18">HVAC device types</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>The Data Model layer describes the supported remote operations of a Matter node using the concepts of attributes, commands and events, grouped into logical blocks called clusters.
+The clusters included in the <a class="reference external" href="https://csa-iot.org/developer-resource/specifications-download-request/">Matter Application Cluster Specification</a> have well-defined scope and behavior to assure interoperability between Matter nodes developed by different vendors.
+A cluster can be abstract, meaning that it can underlie several device types to reduce the time and cost of introducing new product categories to Matter.</p>
+<figure class="align-default" id="id6">
+<img alt="Data Model layer overview" src="../../../_images/matter_components_DM1.svg" /><figcaption>
+<p><span class="caption-text">Data Model layer overview</span><a class="headerlink" href="#id6" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<dl>
+<dt>Nodes</dt><dd><p>Each device is composed of one or more nodes, which are complete implementations of a Matter application functionality on a single stack.
+Nodes are identifiable with a unique network address on a single network.
+They can communicate directly with other nodes in the network.</p>
+</dd>
+<dt>Endpoints</dt><dd><p>Each node is composed of one or more endpoints, which contain feature sets of single device functionalities.
+For example, in a voice-controlled door lock device, one endpoint could include the feature set for operating the bolt, while the other endpoint could include the feature set for handling a temperature sensor.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Endpoint 0 is always reserved for Matter’s Utility Clusters.
+This is the only mandatory endpoint for each Matter device.</p>
+</div>
+</dd>
+<dt>Clusters</dt><dd><p>Endpoints are composed of one or more clusters, which group attributes, commands and events that together make up each single feature in a set.
+For example, in an endpoint for operating a door bolt, one cluster could group attributes for moving the bolt to open or closed position, while other could group attributes for controlling alarms in case the door is opened in unauthorized way.</p>
+<p>Clusters can be of the following types:</p>
+<ul class="simple">
+<li><p>Server – responsible for holding values for Attributes, Commands, and Events.</p></li>
+<li><p>Client – responsible for performing interactions with other Server Clusters.</p></li>
+</ul>
+<p>The supported Matter application clusters are described in the Application Cluster Specification, available from the <a class="reference external" href="https://csa-iot.org/developer-resource/specifications-download-request/">CSA Specifications Download Request</a> page.
+Sets of clusters on one or more endpoint can form a <a class="reference internal" href="#ug-matter-device-types"><span class="std std-ref">device type</span></a>, that is an officially defined collection of requirements that is conformant with the Device Library Specification.</p>
+</dd>
+<dt>Attributes</dt><dd><p>Attributes are data entities that represent a physical quantity or state.
+They are stored in the Matter device’s memory, but can also be calculated dynamically on demand.</p>
+</dd>
+<dt>Commands</dt><dd><p>Commands are actions that can be used to trigger some behavior on other devices.
+For example, in a door lock device the lock door command can be used to trigger such action on a physical device.</p>
+</dd>
+<dt>Events</dt><dd><p>Events are a type of attributes that communicate device state changes.
+They can also be treated as historical data records of something that happened on the device in the past.</p>
+</dd>
+</dl>
+<section id="data-model-example-door-lock">
+<h2><a class="toc-backref" href="#id8">Data Model example: Door Lock</a><a class="headerlink" href="#data-model-example-door-lock" title="Permalink to this heading"></a></h2>
+<p>The following figure illustrates the Data Model structure of a common door lock device.</p>
+<figure class="align-default" id="id7">
+<img alt="Data Model Door Lock example" src="../../../_images/matter_components_DM_doorlock.svg" /><figcaption>
+<p><span class="caption-text">Data Model Door Lock example</span><a class="headerlink" href="#id7" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Each Matter node must ensure that its Endpoint 0 satisfies the requirements of the Root Node device type.
+This device type enforces the availability of clusters used in the process of <a class="reference internal" href="commissioning.html#ug-matter-overview-commissioning"><span class="std std-ref">Matter commissioning</span></a> and further administering of a Matter node.</p>
+<p>Besides the Root Node endpoint, the door lock device provides Endpoint 1, which implements the Door Lock Device Type functionality as defined in the Matter Device Library Specification.
+This device type enforces the availability of the <code class="docutils literal notranslate"><span class="pre">Identify</span></code> and <code class="docutils literal notranslate"><span class="pre">DoorLock</span></code> clusters.</p>
+<section id="identify-cluster">
+<h3><a class="toc-backref" href="#id9">Identify cluster</a><a class="headerlink" href="#identify-cluster" title="Permalink to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">Identify</span></code> cluster is a cluster shared across many device types.
+It provides commands that allow a user to trigger a special effect, such as blinking an LED, that helps find the physical location of the device.</p>
+</section>
+<section id="doorlock-cluster">
+<h3><a class="toc-backref" href="#id10">DoorLock cluster</a><a class="headerlink" href="#doorlock-cluster" title="Permalink to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">DoorLock</span></code> cluster is a large cluster that contains many attributes, commands, and events for managing and operating a smart lock.</p>
+<p>Examples of the attributes are the following:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">LockType</span></code> - A constant that assigns the device to one of the known lock categories.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LockState</span></code> - An attribute that renders the current state of the lock: locked, unlocked, or moving from one position to another.</p></li>
+</ul>
+</div></blockquote>
+<p>Examples of the commands are the following:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">LockDoor</span></code> and <code class="docutils literal notranslate"><span class="pre">UnlockDoor</span></code> - For remotely operating the lock.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SetCredential</span></code> - For configuring the lock to require a specified credential, such as PIN code, to unlock the door.</p></li>
+</ul>
+</div></blockquote>
+<p>An example of the event is <code class="docutils literal notranslate"><span class="pre">DoorLockAlarm</span></code>, which records occurrences of critical states of the lock.
+Examples of the critical states are jamming the lock or exceeding the limit of wrong PIN code entries.</p>
+</section>
+</section>
+<section id="matter-device-types">
+<span id="ug-matter-device-types"></span><h2><a class="toc-backref" href="#id11">Matter device types</a><a class="headerlink" href="#matter-device-types" title="Permalink to this heading"></a></h2>
+<p>A Matter device type is an officially defined collection of requirements for one or more endpoints.
+Device types are intended to ensure interoperability of different device brands on the market.</p>
+<p>All device types are defined in the Device Library Specification, which is available from the <a class="reference external" href="https://csa-iot.org/developer-resource/specifications-download-request/">CSA Specifications Download Request</a> page.
+Each device type definition is composed of the following elements:</p>
+<ul class="simple">
+<li><p>Device type ID</p></li>
+<li><p>Device type revision</p></li>
+<li><p>One or more mandatory clusters, including each cluster’s minimum revision</p></li>
+</ul>
+<p>The device type definition in the Device Library specification can change over time.
+The changes are tracked using the Device Type Revision value, which is initially set to <code class="docutils literal notranslate"><span class="pre">1</span></code>.
+Changes do not modify how the device works, but only improve its functionality.</p>
+<p>A device type can require other device types for its composition, making it a <em>composed device type</em>.</p>
+</section>
+<section id="device-type-overview">
+<h2><a class="toc-backref" href="#id12">Device type overview</a><a class="headerlink" href="#device-type-overview" title="Permalink to this heading"></a></h2>
+<p>The following tables list the <em>application device types</em> that are supported in Matter.</p>
+<ul class="simple">
+<li><p>The description for each device type is taken from the Device Library Specification.</p></li>
+<li><p>The state of the device specifies whether a device type can be subject to certification.
+The <cite>Provisional</cite> state indicates that the device type implementation is not yet fully tested and certified, even though the implementation may be ready and you can use it on your own risk.</p></li>
+<li><p>The dedicated sample column provides the link to the sample in the nRF Connect SDK that implements the given device type, if available.</p></li>
+</ul>
+<p>You can add support for device types without a dedicated sample in the nRF Connect SDK by using the <a class="reference internal" href="../../../samples/matter/template/README.html#matter-template-sample"><span class="std std-ref">Matter: Template</span></a> and following the <a class="reference internal" href="../getting_started/adding_clusters.html#ug-matter-creating-accessory"><span class="std std-ref">Adding clusters to Matter application</span></a> user guide, which describes how to edit clusters of a Matter application.</p>
+<section id="lighting-device-types">
+<span id="ug-matter-device-types-lighting"></span><h3><a class="toc-backref" href="#id13">Lighting device types</a><a class="headerlink" href="#lighting-device-types" title="Permalink to this heading"></a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 50%" />
+<col style="width: 13%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Device type</p></th>
+<th class="head"><p>Description (from Device Library Specification)</p></th>
+<th class="head"><p>State of the device</p></th>
+<th class="head"><p>Dedicated sample in the nRF Connect SDK</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>On/Off Light</p></td>
+<td><p>The On/Off Light is a lighting device that is capable of being switched on
+or off by means of a bound controller device such as an on/off light switch
+or a non-color controller. In addition, an on/off light is also capable
+of being switched by means of a bound occupancy sensor.</p></td>
+<td><p>Certifiable</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Dimmable Light</p></td>
+<td><p>A Dimmable Light is a lighting device that is capable of being switched on
+or off and the intensity of its light adjusted by means of a bound
+controller device such as a dimmer switch or a non-color controller.
+In addition, a Dimmable Light device is also capable of being switched
+by means of a bound occupancy sensor.</p></td>
+<td><p>Certifiable</p></td>
+<td><p><a class="reference internal" href="../../../samples/matter/light_bulb/README.html#matter-light-bulb-sample"><span class="std std-ref">Matter: Light bulb</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Color Temperature
+Light</p></td>
+<td><p>A Color Temperature Light is a lighting device that is capable of being
+switched on or off, the intensity of its light adjusted, and its color
+adjusted by means of a bound controller device such as a color controller.
+The color temperature light supports adjustment of color by means of color
+temperature.</p></td>
+<td><p>Certifiable</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Extended Color
+Light</p></td>
+<td><p>An Extended Color Light is a lighting device that is capable of being
+switched on or off, the intensity of its light adjusted, and its color
+adjusted by means of a bound controller device such as a color controller.
+The device supports adjustment of color by means of hue/saturation,
+enhanced hue, color looping, XY coordinates, and color temperature.
+In addition, the extended color light is also capable of being switched
+by means of a bound occupancy sensor.</p></td>
+<td><p>Certifiable</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="smart-plugs-outlets-device-types">
+<span id="ug-matter-device-types-plugs-outlets"></span><h3><a class="toc-backref" href="#id14">Smart Plugs/Outlets device types</a><a class="headerlink" href="#smart-plugs-outlets-device-types" title="Permalink to this heading"></a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 50%" />
+<col style="width: 13%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Device type</p></th>
+<th class="head"><p>Description (from Device Library Specification)</p></th>
+<th class="head"><p>State of the device</p></th>
+<th class="head"><p>Dedicated sample in the nRF Connect SDK</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>On/Off Plug-in
+Unit</p></td>
+<td><p>An On/Off Plug-in Unit is a device that is capable of being switched on
+or off by means of a bound controller device such as an on/off light switch
+or a non-color controller. The On/Off Plug-in Unit is then capable of having
+a non-communicating light attached to it.</p></td>
+<td><p>Certifiable</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Dimmable Plug-In
+Unit</p></td>
+<td><p>A Dimmable Plug-In Unit is a device that is capable of being switched on
+or off and have its level adjusted by means of a bound controller device
+such as a dimmer switch or a non-color controller. The device is then
+capable of having a non-communicating light attached to it.</p></td>
+<td><p>Certifiable</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>Pump</p></td>
+<td><p>A Pump device is a pump that may have variable speed. It may have optional
+built-in sensors and a regulation mechanism. It is typically used
+for pumping fluids like water.</p></td>
+<td><p>Certifiable</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="switches-and-controls-device-types">
+<span id="ug-matter-device-types-switches-controls"></span><h3><a class="toc-backref" href="#id15">Switches and Controls device types</a><a class="headerlink" href="#switches-and-controls-device-types" title="Permalink to this heading"></a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 50%" />
+<col style="width: 13%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Device type</p></th>
+<th class="head"><p>Description (from Device Library Specification)</p></th>
+<th class="head"><p>State of the device</p></th>
+<th class="head"><p>Dedicated sample in the nRF Connect SDK</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>On/Off Light
+Switch</p></td>
+<td><p>An On/Off Light Switch is a controller device that,
+when bound to a lighting device such as an on/off light, is capable of
+being used to switch the device on or off. The on/off light switch is also
+capable of being configured when bound to a suitable configuration device.</p></td>
+<td><p>Certifiable</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Dimmer Switch</p></td>
+<td><p>A Dimmer Switch is a controller device that, when bound to a lighting device
+such as a dimmable light, is capable of being used to switch the device on
+or off and adjust the intensity of the light being emitted. A Dimmer Switch
+device is also capable of being configured when bound to a suitable
+configuration device.</p></td>
+<td><p>Certifiable</p></td>
+<td><p><a class="reference internal" href="../../../samples/matter/light_switch/README.html#matter-light-switch-sample"><span class="std std-ref">Matter: Light switch</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Color Dimmer
+Switch</p></td>
+<td><p>A Color Dimmer Switch is a controller device that, when bound to a lighting
+device such as a color light, is capable of being used to adjust the color
+of the light being emitted. A Color Dimmer Switch device is also capable
+of being configured when bound to a suitable configuration device.</p></td>
+<td><p>Certifiable</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Control Bridge</p></td>
+<td><p>A Control Bridge is a controller device that, when bound to a lighting
+device such as a color light, is capable of being used to switch the device
+on or off, adjust the intensity of the light being emitted and adjust
+the color of the light being emitted. In addition, a Control Bridge device
+is capable of being used for setting scenes.</p></td>
+<td><p>Certifiable</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>Pump Controller</p></td>
+<td><p>A Pump Controller device is capable of configuring and controlling
+a Pump device.</p></td>
+<td><p>Certifiable</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Generic Switch</p></td>
+<td><p>General-purpose switch that can have more than two positions.
+A controller can use a generic switch to control any other device
+by subscribing to or polling changes of the current switch position.</p></td>
+<td><p>Certifiable</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="sensor-device-types">
+<span id="ug-matter-device-types-sensors"></span><h3><a class="toc-backref" href="#id16">Sensor device types</a><a class="headerlink" href="#sensor-device-types" title="Permalink to this heading"></a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 50%" />
+<col style="width: 13%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Device type</p></th>
+<th class="head"><p>Description (from Device Library Specification)</p></th>
+<th class="head"><p>State of the device</p></th>
+<th class="head"><p>Dedicated sample in the nRF Connect SDK</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Contact Sensor</p></td>
+<td><p>A Contact Sensor device reports boolean state (open/close
+or contact/no-contact).</p></td>
+<td><p>Certifiable</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Light Sensor</p></td>
+<td><p>A Light Sensor device is a measurement and sensing device that is capable
+of measuring and reporting the intensity of light being emitted
+by a light source.</p></td>
+<td><p>Certifiable</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>Occupancy Sensor</p></td>
+<td><p>An Occupancy Sensor is a measurement and sensing device that is capable
+of measuring and reporting the occupancy state in a designated area.</p></td>
+<td><p>Certifiable</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Temperature
+Sensor</p></td>
+<td><p>A Temperature Sensor device reports measurements of temperature.</p></td>
+<td><p>Certifiable</p></td>
+<td><p><a class="reference internal" href="../../../applications/matter_weather_station/README.html#matter-weather-station-app"><span class="std std-ref">Thingy:53: Matter weather station</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Pressure Sensor</p></td>
+<td><p>A Pressure Sensor device measures and periodically reports the pressure
+of a fluid.</p></td>
+<td><p>Certifiable</p></td>
+<td><p><a class="reference internal" href="../../../applications/matter_weather_station/README.html#matter-weather-station-app"><span class="std std-ref">Thingy:53: Matter weather station</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Flow Sensor</p></td>
+<td><p>A Flow Sensor device measures and periodically reports the flow rate
+of a fluid.</p></td>
+<td><p>Certifiable</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>Humidity Sensor</p></td>
+<td><p>A Humidity Sensor (in most cases a Relative Humidity Sensor) reports
+humidity measurements.</p></td>
+<td><p>Certifiable</p></td>
+<td><p><a class="reference internal" href="../../../applications/matter_weather_station/README.html#matter-weather-station-app"><span class="std std-ref">Thingy:53: Matter weather station</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p>On/Off Sensor</p></td>
+<td><p>An On/Off Sensor is a measurement and sensing device that, when bound
+to a lighting device such as a color light, is capable of being used
+to switch the device on or off.</p></td>
+<td><p>Certifiable</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="closure-device-types">
+<span id="ug-matter-device-types-closures"></span><h3><a class="toc-backref" href="#id17">Closure device types</a><a class="headerlink" href="#closure-device-types" title="Permalink to this heading"></a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 50%" />
+<col style="width: 13%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Device type</p></th>
+<th class="head"><p>Description (from Device Library Specification)</p></th>
+<th class="head"><p>State of the device</p></th>
+<th class="head"><p>Dedicated sample in the nRF Connect SDK</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Door Lock</p></td>
+<td><p>A Door Lock is a device used to secure a door. It is possible to actuate
+a door lock either by means of a manual or a remote method.</p></td>
+<td><p>Certifiable</p></td>
+<td><p><a class="reference internal" href="../../../samples/matter/lock/README.html#matter-lock-sample"><span class="std std-ref">Matter: Door lock</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Door Lock
+Controller</p></td>
+<td><p>A Door Lock Controller is a device capable of controlling a door lock.</p></td>
+<td><p>Certifiable</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>Window Covering</p></td>
+<td><p>A Window Covering is a device used to control absolute position of window
+cover.</p></td>
+<td><p>Certifiable</p></td>
+<td><p><a class="reference internal" href="../../../samples/matter/window_covering/README.html#matter-window-covering-sample"><span class="std std-ref">Matter: Window covering</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Window Covering
+Controller</p></td>
+<td><p>A Window Covering Controller is a device that controls an automatic window
+covering.</p></td>
+<td><p>Certifiable</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="hvac-device-types">
+<span id="ug-matter-device-types-hvac"></span><h3><a class="toc-backref" href="#id18">HVAC device types</a><a class="headerlink" href="#hvac-device-types" title="Permalink to this heading"></a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 50%" />
+<col style="width: 13%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Device type</p></th>
+<th class="head"><p>Description (from Device Library Specification)</p></th>
+<th class="head"><p>State of the device</p></th>
+<th class="head"><p>Dedicated sample in the nRF Connect SDK</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Heating/Cooling
+Unit</p></td>
+<td><p>A Heating/Cooling Unit is a device capable of heating or cooling a space
+in a house. It is not mandatory to provide both functionalities
+(for example, the device may just heat but not cool). It may be an indoor
+air handler.</p></td>
+<td><p>Provisional</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Thermostat</p></td>
+<td><p>A Thermostat device is capable of having either built-in or separate sensors
+for temperature, humidity or occupancy. It allows the desired temperature to
+be set either remotely or locally. The thermostat is capable of sending
+heating and/or cooling requirement notifications to a heating/cooling unit
+(for example, an indoor air handler) or is capable of including a mechanism
+to control a heating or cooling unit directly.</p></td>
+<td><p>Certifiable</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>Fan</p></td>
+<td><p>A Fan device capable of controlling a fan in a heating or cooling system.</p></td>
+<td><p>Provisional</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="int_model.html" class="btn btn-neutral float-right" title="Matter Interaction Model and interaction types" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="architecture.html" class="btn btn-neutral" title="Matter architecture" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

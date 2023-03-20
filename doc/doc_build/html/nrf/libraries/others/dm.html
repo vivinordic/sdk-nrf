@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Distance Measurement &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../_static/js/ncs.js"
+></script>
+<script src="../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Edge Impulse wrapper" href="ei_wrapper.html" />
+    <link rel="prev" title="DK Buttons and LEDs" href="dk_buttons_and_leds.html" />
+<link
+  href="../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drivers.html">Drivers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Libraries</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../bin/index.html">Binary libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bluetooth_services/index.html">Bluetooth libraries and services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bootloader/index.html">Bootloader libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../caf/index.html">Common Application Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../debug/index.html">Debug libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dfu/index.html">DFU libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gazell/index.html">Gazell libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modem/index.html">Modem libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mpsl/index.html">Multiprotocol Service Layer libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../networking/index.html">Libraries for networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nfc/index.html">Libraries for NFC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nrf_rpc/index.html">nRF RPC libraries</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Other libraries</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="adp536x.html">adp536x</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_event_manager.html">Application Event Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_event_manager_profiler_tracer.html">Application Event Manager profiler tracer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contin_array.html">Continuous array</a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_fifo.html">Data FIFO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="date_time.html">Date-Time</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dk_buttons_and_leds.html">DK Buttons and LEDs</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Distance Measurement</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuration">Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#api-documentation">API documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ei_wrapper.html">Edge Impulse wrapper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="emds.html">Emergency data storage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="esb.html">Enhanced ShockBurst</a></li>
+<li class="toctree-l3"><a class="reference internal" href="event_manager_proxy.html">Event Manager Proxy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fatal_error.html">Fatal error handler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="flash_map_pm.html">Partition Manager flash map</a></li>
+<li class="toctree-l3"><a class="reference internal" href="flash_patch.html">Flash patch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fprotect.html">Hardware flash write protection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fw_info.html">Firmware information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hw_id.html">Hardware ID</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hw_unique_key.html">Hardware unique key</a></li>
+<li class="toctree-l3"><a class="reference internal" href="identity_key.html">Identity key</a></li>
+<li class="toctree-l3"><a class="reference internal" href="memfault_ncs.html">Memfault</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nrf_profiler.html">nRF Profiler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pcm_mix.html">Pulse Code Modulation audio mixer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pcm_stream_channel_modifier.html">PCM Stream Channel Modifier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qos.html">Quality of Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ram_pwrdn.html">RAM power-down</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sfloat.html">Short float (SFLOAT)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="st25r3911b_nfc.html">NFC Reader ST25R3911B</a></li>
+<li class="toctree-l3"><a class="reference internal" href="supl_os_client.html">SUPL client and SUPL client OS integration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tone.html">Tone generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wave_gen.html">Wave generator</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../shell/index.html">Shell libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tfm/index.html">TF-M libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../zigbee/index.html">Libraries for Zigbee</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Libraries</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Other libraries</a></li>
+      <li class="breadcrumb-item active">Distance Measurement</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/libraries/others/dm.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="distance-measurement">
+<span id="mod-dm"></span><h1>Distance Measurement<a class="headerlink" href="#distance-measurement" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#overview" id="id7">Overview</a></p>
+<ul>
+<li><p><a class="reference internal" href="#ranging" id="id8">Ranging</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#configuration" id="id9">Configuration</a></p>
+<ul>
+<li><p><a class="reference internal" href="#configuring-synchronization" id="id10">Configuring synchronization</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#api-documentation" id="id11">API documentation</a></p></li>
+</ul>
+</div>
+<p>The Distance Measurement module provides an integration of <span class="xref std std-ref">nrfxlib:nrf_dm</span> into nRF Connect SDK.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The current implementation is <a class="reference internal" href="../../software_maturity.html#software-maturity"><span class="std std-ref">experimental</span></a>.</p>
+</div>
+<section id="overview">
+<h2><a class="toc-backref" href="#id7">Overview</a><a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+<p>The Distance Measurement module is independent of the communication protocol used.
+The <span class="xref std std-ref">nrfxlib:mpsl</span> library is used to access the radio module.
+The distance is measured during the allocated timeslot.</p>
+<section id="ranging">
+<h3><a class="toc-backref" href="#id8">Ranging</a><a class="headerlink" href="#ranging" title="Permalink to this heading"></a></h3>
+<p>When a new ranging request arrives, the module checks if a timeslot for the ranging can be scheduled.
+It also checks if the request fits in the schedule of rangings.
+Rangings are not executed immediately, but are scheduled for future execution, which gives additional flexibility.
+New ranging requests may arrive at any point in time.</p>
+<p>If the request can be scheduled, the module performs the ranging after the time set in the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_DM_RANGING_OFFSET_US</span></code> option has passed.
+The ranging is executed within a timeslot.
+After ranging, a callback is called to store or process the measurement data.</p>
+</section>
+</section>
+<section id="configuration">
+<h2><a class="toc-backref" href="#id9">Configuration</a><a class="headerlink" href="#configuration" title="Permalink to this heading"></a></h2>
+<p>To use the Distance Measurement module, complete the following steps:</p>
+<ol class="arabic simple">
+<li><p>Enable the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF_DM</span></code> Kconfig option.</p></li>
+<li><p>Include <code class="file docutils literal notranslate"><span class="pre">dm.h</span></code> in your <code class="file docutils literal notranslate"><span class="pre">main.c</span></code> file.</p></li>
+<li><p>Call <a class="reference internal" href="#c.dm_init" title="dm_init"><code class="xref c c-func docutils literal notranslate"><span class="pre">dm_init()</span></code></a> to initialize the module.</p></li>
+<li><p>Call <a class="reference internal" href="#c.dm_request_add" title="dm_request_add"><code class="xref c c-func docutils literal notranslate"><span class="pre">dm_request_add()</span></code></a> to perform the measurement.</p></li>
+</ol>
+<p>After synchronizing, the nodes that perform the measurement with each other will issue the measurement request.
+The callback function <code class="xref c c-func docutils literal notranslate"><span class="pre">data_ready()</span></code> is called when the measurement data is available.</p>
+<section id="configuring-synchronization">
+<h3><a class="toc-backref" href="#id10">Configuring synchronization</a><a class="headerlink" href="#configuring-synchronization" title="Permalink to this heading"></a></h3>
+<p>To adjust the synchronization of the nodes, change the values of the following options:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_DM_INITIATOR_DELAY_US</span></code> - Extra delay of the start of the initiator role for the distance measurement.
+Reducing this value decreases the power consumption, but leads to less successful rangings.</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_DM_MIN_TIME_BETWEEN_TIMESLOTS_US</span></code> - Minimum time between two timeslots.
+This option should account for processing of the ranging data after the timeslot.</p></li>
+</ul>
+<section id="enabling-output-pin-state-change">
+<h4>Enabling output pin state change<a class="headerlink" href="#enabling-output-pin-state-change" title="Permalink to this heading"></a></h4>
+<p>It is possible to enable an output pin state change when an event related to this module occurs.
+You can use this functionality to determine the synchronization accuracy.
+A logic analyzer or oscilloscope are helpful for this purpose.</p>
+<p>Enabling the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_DM_GPIO_DEBUG</span></code> option changes the state of the pins when a new measurement request is added and the timeslot is assigned.
+To assign the pin numbers, create the appropriate nodes in the devicetree as follows:</p>
+<div class="highlight-dts notranslate"><div class="highlight"><pre><span></span><span class="nf">/</span><span class="cm"> </span><span class="p">{</span>
+<span class="w">   </span><span class="nf">dm_gpio</span><span class="cm"> </span><span class="p">{</span>
+<span class="w">      </span><span class="kr">compatible</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;gpio-leds&quot;</span><span class="p">;</span>
+<span class="w">      </span><span class="nl">dm_ranging</span><span class="p">:</span><span class="w"> </span><span class="nf">dm-ranging</span><span class="cm"> </span><span class="p">{</span>
+<span class="w">         </span><span class="n">gpios</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;&amp;</span><span class="na">gpio0</span><span class="w"> </span><span class="mi">27</span><span class="w"> </span><span class="na">GPIO_ACTIVE_LOW</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">         </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;DM Ranging Pin&quot;</span><span class="p">;</span>
+<span class="w">      </span><span class="p">};</span>
+<span class="w">      </span><span class="nl">dm_add_request</span><span class="p">:</span><span class="w"> </span><span class="nf">dm-add-request</span><span class="cm"> </span><span class="p">{</span>
+<span class="w">         </span><span class="n">gpios</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;&amp;</span><span class="na">gpio0</span><span class="w"> </span><span class="mi">26</span><span class="w"> </span><span class="na">GPIO_ACTIVE_LOW</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">         </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;DM Add request Pin&quot;</span><span class="p">;</span>
+<span class="w">      </span><span class="p">};</span>
+<span class="w">   </span><span class="p">};</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</section>
+<section id="configuring-timeslot-queue">
+<h4>Configuring timeslot queue<a class="headerlink" href="#configuring-timeslot-queue" title="Permalink to this heading"></a></h4>
+<p>Use the following options to configure the timeslot queue:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_DM_TIMESLOT_QUEUE_LENGTH</span></code> - Maximum number of scheduled timeslots.</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_DM_TIMESLOT_QUEUE_COUNT_SAME_PEER</span></code> - Maximum number of timeslots with rangings to the same peer.</p></li>
+</ul>
+<p>For optimal performance and scalability, both peers should come to the same decision to range each other.
+Otherwise, one of the peers tries to range the other peer that is not listening and therefore wastes power and time during this operation.</p>
+<p>If you enable the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_DM_TIMESLOT_RESCHEDULE</span></code> option, the device will try to range the same peer again if the previous ranging was successful.</p>
+</section>
+<section id="defining-ranging-offset">
+<h4>Defining ranging offset<a class="headerlink" href="#defining-ranging-offset" title="Permalink to this heading"></a></h4>
+<p>The option <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_DM_RANGING_OFFSET_US</span></code> defines the time between the synchronization (adding a request) and ranging.
+Increasing this value allows for more rangings to different nodes, but also increases latency.</p>
+</section>
+</section>
+</section>
+<section id="api-documentation">
+<h2><a class="toc-backref" href="#id11">API documentation</a><a class="headerlink" href="#api-documentation" title="Permalink to this heading"></a></h2>
+<div class="line-block">
+<div class="line">Header file: <code class="file docutils literal notranslate"><span class="pre">include/dm.h</span></code></div>
+<div class="line">Source files: <code class="file docutils literal notranslate"><span class="pre">subsys/dm/</span></code></div>
+</div>
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="group__dm"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">dm</span></span></dt>
+<dd><p>API for the Distance Measurement (DM). </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-enums">Enums</p>
+<dl class="c enum">
+<dt class="sig sig-object c" id="c.dm_dev_role">
+<span class="target" id="group__dm_1ga53fe55ea69c78be94926b296d61ac4dd"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dm_dev_role</span></span></span><a class="headerlink" href="#c.dm_dev_role" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Role definition. </p>
+<p><em>Values:</em></p>
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.dm_dev_role.DM_ROLE_NONE">
+<span class="target" id="group__dm_1gga53fe55ea69c78be94926b296d61ac4dda3c7b1632726b202cc7b9fe2db7d44625"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">DM_ROLE_NONE</span></span></span><a class="headerlink" href="#c.dm_dev_role.DM_ROLE_NONE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Undefined role. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.dm_dev_role.DM_ROLE_INITIATOR">
+<span class="target" id="group__dm_1gga53fe55ea69c78be94926b296d61ac4dda89737dd9cefff5f31fa2a1d52622191d"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">DM_ROLE_INITIATOR</span></span></span><a class="headerlink" href="#c.dm_dev_role.DM_ROLE_INITIATOR" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Act as an initiator. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.dm_dev_role.DM_ROLE_REFLECTOR">
+<span class="target" id="group__dm_1gga53fe55ea69c78be94926b296d61ac4dda1137dc324ff4bfbd70d779d980109946"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">DM_ROLE_REFLECTOR</span></span></span><a class="headerlink" href="#c.dm_dev_role.DM_ROLE_REFLECTOR" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Act as a reflector. </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="c enum">
+<dt class="sig sig-object c" id="c.dm_ranging_mode">
+<span class="target" id="group__dm_1gad4595ef25325138aec36349965660b04"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dm_ranging_mode</span></span></span><a class="headerlink" href="#c.dm_ranging_mode" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Ranging mode definition. </p>
+<p><em>Values:</em></p>
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.dm_ranging_mode.DM_RANGING_MODE_RTT">
+<span class="target" id="group__dm_1ggad4595ef25325138aec36349965660b04a9895d8c216a743b03f4c0492495ebd14"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">DM_RANGING_MODE_RTT</span></span></span><a class="headerlink" href="#c.dm_ranging_mode.DM_RANGING_MODE_RTT" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Round trip timing. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.dm_ranging_mode.DM_RANGING_MODE_MCPD">
+<span class="target" id="group__dm_1ggad4595ef25325138aec36349965660b04a71e7e09cf2db7bf281cce169af75b954"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">DM_RANGING_MODE_MCPD</span></span></span><a class="headerlink" href="#c.dm_ranging_mode.DM_RANGING_MODE_MCPD" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Multi-carrier phase difference. </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="c enum">
+<dt class="sig sig-object c" id="c.dm_quality">
+<span class="target" id="group__dm_1gacf78623977f379ee6e4ecea7c5cfd2bf"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dm_quality</span></span></span><a class="headerlink" href="#c.dm_quality" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Measurement quality definition. </p>
+<p><em>Values:</em></p>
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.dm_quality.DM_QUALITY_OK">
+<span class="target" id="group__dm_1ggacf78623977f379ee6e4ecea7c5cfd2bfa07c2bd7222190d61edab58242a5423dc"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">DM_QUALITY_OK</span></span></span><a class="headerlink" href="#c.dm_quality.DM_QUALITY_OK" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Good measurement quality. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.dm_quality.DM_QUALITY_POOR">
+<span class="target" id="group__dm_1ggacf78623977f379ee6e4ecea7c5cfd2bfa608639b9c6b8550fce63a4b7d09dbb8c"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">DM_QUALITY_POOR</span></span></span><a class="headerlink" href="#c.dm_quality.DM_QUALITY_POOR" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Poor measurement quality. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.dm_quality.DM_QUALITY_DO_NOT_USE">
+<span class="target" id="group__dm_1ggacf78623977f379ee6e4ecea7c5cfd2bfa8e059651ef0e410886326d99231789b6"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">DM_QUALITY_DO_NOT_USE</span></span></span><a class="headerlink" href="#c.dm_quality.DM_QUALITY_DO_NOT_USE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Measurements not usable. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.dm_quality.DM_QUALITY_CRC_FAIL">
+<span class="target" id="group__dm_1ggacf78623977f379ee6e4ecea7c5cfd2bfadfd23a1203a4b64bf44b19459eff7c73"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">DM_QUALITY_CRC_FAIL</span></span></span><a class="headerlink" href="#c.dm_quality.DM_QUALITY_CRC_FAIL" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Incorrect measurement CRC. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.dm_quality.DM_QUALITY_NONE">
+<span class="target" id="group__dm_1ggacf78623977f379ee6e4ecea7c5cfd2bfa6897dacfff67c9fcd60fc15ada3909f5"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">DM_QUALITY_NONE</span></span></span><a class="headerlink" href="#c.dm_quality.DM_QUALITY_NONE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Measurement quality not specified. </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.dm_init">
+<span class="target" id="group__dm_1gabc27f2ef0d0500d37599eb6350acb61b"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dm_init</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.dm_init_param" title="dm_init_param"><span class="n"><span class="pre">dm_init_param</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">init_param</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.dm_init" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Initialize the DM. </p>
+<p>Initialize the DM by specifying a list of supported operations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>init_param</strong> – <strong>[in]</strong> Initialization parameters.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><p><strong>0</strong> – if the operation was successful. Otherwise, a (negative) error code is returned. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.dm_request_add">
+<span class="target" id="group__dm_1ga856e1cbe98454448649ffeffd14a1c12"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dm_request_add</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.dm_request" title="dm_request"><span class="n"><span class="pre">dm_request</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">req</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.dm_request_add" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Add measurement request. </p>
+<p>Adding a measurement request. This is related to timeslot allocation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>req</strong> – <strong>[in]</strong> Address of the structure with request parameters.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><p><strong>0</strong> – if the operation was successful. Otherwise, a (negative) error code is returned. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.dm_result">
+<span class="target" id="structdm__result"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dm_result</span></span></span><a class="headerlink" href="#c.dm_result" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;dm.h&gt;</em></div>
+<p>Distance Measurement result structure. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.dm_result.status">
+<span class="target" id="structdm__result_1ad27ccb4963bb7848affeced8c6dc39f4"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">status</span></span></span><a class="headerlink" href="#c.dm_result.status" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Status of the procedure. <em>True</em> if measurement was done correctly, <em>False</em> otherwise. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.dm_result.quality">
+<span class="target" id="structdm__result_1a29c74e6ca93ce4afe3f5910491dd6f20"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#c.dm_quality" title="dm_quality"><span class="n"><span class="pre">dm_quality</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">quality</span></span></span><a class="headerlink" href="#c.dm_result.quality" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Quality indicator </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.dm_result.bt_addr">
+<span class="target" id="structdm__result_1ad270035f56ab5bd71560936c7c4267ad"></span><span class="n"><span class="pre">bt_addr_le_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_addr</span></span></span><a class="headerlink" href="#c.dm_result.bt_addr" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Bluetooth LE device address. The address is used to distinguish peers. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.dm_result.ranging_mode">
+<span class="target" id="structdm__result_1ab62645df37a7fb6187349ef3d2a3a18a"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#c.dm_ranging_mode" title="dm_ranging_mode"><span class="n"><span class="pre">dm_ranging_mode</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ranging_mode</span></span></span><a class="headerlink" href="#c.dm_result.ranging_mode" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Mode used for ranging. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.dm_result.ifft">
+<span class="target" id="structdm__result_1a0c5070345dfa346db6ed71da20d5c997"></span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ifft</span></span></span><a class="headerlink" href="#c.dm_result.ifft" title="Permalink to this definition"></a><br /></dt>
+<dd><p>MCPD: Distance estimate based on IFFT of spectrum. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.dm_result.phase_slope">
+<span class="target" id="structdm__result_1ac81a504d79de9d36a32450f1db459188"></span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">phase_slope</span></span></span><a class="headerlink" href="#c.dm_result.phase_slope" title="Permalink to this definition"></a><br /></dt>
+<dd><p>MCPD: Distance estimate based on average phase slope estimation. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.dm_result.rssi_openspace">
+<span class="target" id="structdm__result_1ae41846e286f51633f35eab81114b9e40"></span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">rssi_openspace</span></span></span><a class="headerlink" href="#c.dm_result.rssi_openspace" title="Permalink to this definition"></a><br /></dt>
+<dd><p>RSSI: Distance estimate based on Friis path loss formula. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.dm_result.best">
+<span class="target" id="structdm__result_1a22c3e9d34175d904166418cedbdfb120"></span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">best</span></span></span><a class="headerlink" href="#c.dm_result.best" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Best effort distance estimate. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.dm_result.rtt">
+<span class="target" id="structdm__result_1ad9fc1e2992e389a4e5200cc804818b6d"></span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">rtt</span></span></span><a class="headerlink" href="#c.dm_result.rtt" title="Permalink to this definition"></a><br /></dt>
+<dd><p>RTT: Distance estimate based on RTT measurement. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.dm_result.dist_estimates">
+<span class="target" id="structdm__result_1af36e123b7af60f49710665f1ae416507"></span><span class="k"><span class="pre">union</span></span><span class="w"> </span><a class="reference internal" href="#c.dm_result" title="dm_result"><span class="n"><span class="pre">dm_result</span></span></a><span class="p"><span class="pre">.</span></span><span class="n"><span class="pre">[anonymous]</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dist_estimates</span></span></span><a class="headerlink" href="#c.dm_result.dist_estimates" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Container of distance estimate results for a number of different methods, in meters. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.dm_cb">
+<span class="target" id="structdm__cb"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dm_cb</span></span></span><a class="headerlink" href="#c.dm_cb" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;dm.h&gt;</em></div>
+<p>Event callback structure. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.dm_cb.data_ready">
+<span class="target" id="structdm__cb_1a772d6d0d5092fa91afa87d0423ac1347"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">data_ready</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.dm_result" title="dm_result"><span class="n"><span class="pre">dm_result</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#c.dm_cb.data_ready" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Data ready. </p>
+<p>Callback that is executed when the result of the Distance Measurement is available for reading.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Param result</dt>
+<dd class="field-odd"><p><strong>[out]</strong> Pointer to the variable that is used to store the Distance Measurement result. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.dm_init_param">
+<span class="target" id="structdm__init__param"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dm_init_param</span></span></span><a class="headerlink" href="#c.dm_init_param" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;dm.h&gt;</em></div>
+<p>DM initialization parameters. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.dm_init_param.cb">
+<span class="target" id="structdm__init__param_1a3c6527b9a603be5482f7efcd9491f6eb"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.dm_cb" title="dm_cb"><span class="n"><span class="pre">dm_cb</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">cb</span></span></span><a class="headerlink" href="#c.dm_init_param.cb" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Event callback structure. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.dm_request">
+<span class="target" id="structdm__request"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dm_request</span></span></span><a class="headerlink" href="#c.dm_request" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;dm.h&gt;</em></div>
+<p>DM request structure. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.dm_request.role">
+<span class="target" id="structdm__request_1afd9e9f1b58690d97d25951e08d4373cb"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#c.dm_dev_role" title="dm_dev_role"><span class="n"><span class="pre">dm_dev_role</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">role</span></span></span><a class="headerlink" href="#c.dm_request.role" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Role of the device. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.dm_request.bt_addr">
+<span class="target" id="structdm__request_1a87d1eb917238cb773cf424165a31c6b1"></span><span class="n"><span class="pre">bt_addr_le_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_addr</span></span></span><a class="headerlink" href="#c.dm_request.bt_addr" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Bluetooth LE device address. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.dm_request.rng_seed">
+<span class="target" id="structdm__request_1acbf794ccf907fa009c8ed8b89237cf8c"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">rng_seed</span></span></span><a class="headerlink" href="#c.dm_request.rng_seed" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Seed used in pseudo random number generation. Needs to be the same for an initiator and a reflector that will range with each other. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.dm_request.ranging_mode">
+<span class="target" id="structdm__request_1aa703f9a72e1e67338bea2e7a15c07b11"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#c.dm_ranging_mode" title="dm_ranging_mode"><span class="n"><span class="pre">dm_ranging_mode</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ranging_mode</span></span></span><a class="headerlink" href="#c.dm_request.ranging_mode" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Ranging mode to use in the procedure. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.dm_request.start_delay_us">
+<span class="target" id="structdm__request_1a5a90e7cf7d10e0289cfb80084576aef7"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">start_delay_us</span></span></span><a class="headerlink" href="#c.dm_request.start_delay_us" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Start delay. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.dm_request.extra_window_time_us">
+<span class="target" id="structdm__request_1af79176dee2613fc4514b8c3646333588"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">extra_window_time_us</span></span></span><a class="headerlink" href="#c.dm_request.extra_window_time_us" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Extra time to extend the ranging window. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="ei_wrapper.html" class="btn btn-neutral float-right" title="Edge Impulse wrapper" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="dk_buttons_and_leds.html" class="btn btn-neutral" title="DK Buttons and LEDs" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

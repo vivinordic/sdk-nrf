@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Board support &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../_static/js/ncs.js"
+></script>
+<script src="../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Pin control" href="../pin_control/index.html" />
+    <link rel="prev" title="Application development" href="../../app_dev.html" />
+<link
+  href="../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev_model.html">Development model</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../app_dev.html">Application development</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Board support</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#board-names">Board names</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#boards-included-in-sdk-zephyr">Boards included in sdk-zephyr</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#boards-included-in-sdk-nrf">Boards included in sdk-nrf</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#custom-boards">Custom boards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#processing-environments">Processing environments</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#building-for-cpuapp-cmse-disabled">Building for <code class="docutils literal notranslate"><span class="pre">cpuapp</span></code> (CMSE disabled)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#building-for-ns-cmse-enabled">Building for <code class="docutils literal notranslate"><span class="pre">*_ns</span></code> (CMSE enabled)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../pin_control/index.html">Pin control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../build_and_config_system/index.html">Build and configuration system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../optimizing/index.html">Optimizing application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ap_protect/index.html">Enabling access port protection mechanism</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bootloaders_and_dfu/index.html">Bootloaders and Device Firmware Updates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../logging/index.html">Logging in nRF Connect SDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multi_image/index.html">Multi-image builds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../testing_unity_cmock/index.html">Testing with Unity and CMock</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tfm/index.html">Running applications with Trusted Firmware-M</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_fem/index.html">Working with RF front-end modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../wifi_coex/index.html">Adding Wi-Fi Coexistence support to short-range radio applications</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drivers.html">Drivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../app_dev.html">Application development</a></li>
+      <li class="breadcrumb-item active">Board support</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/app_dev/board_support/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="board-support">
+<span id="app-boards"></span><h1>Board support<a class="headerlink" href="#board-support" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#board-names" id="id7">Board names</a></p>
+<ul>
+<li><p><a class="reference internal" href="#boards-included-in-sdk-zephyr" id="id8">Boards included in sdk-zephyr</a></p></li>
+<li><p><a class="reference internal" href="#boards-included-in-sdk-nrf" id="id9">Boards included in sdk-nrf</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#custom-boards" id="id10">Custom boards</a></p></li>
+<li><p><a class="reference internal" href="#processing-environments" id="id11">Processing environments</a></p>
+<ul>
+<li><p><a class="reference internal" href="#building-for-cpuapp-cmse-disabled" id="id12">Building for <code class="docutils literal notranslate"><span class="pre">cpuapp</span></code> (CMSE disabled)</a></p></li>
+<li><p><a class="reference internal" href="#building-for-ns-cmse-enabled" id="id13">Building for <code class="docutils literal notranslate"><span class="pre">*_ns</span></code> (CMSE enabled)</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>The nRF Connect SDK provides board definitions for all Nordic Semiconductor devices.
+In addition, you can define custom boards.</p>
+<section id="board-names">
+<span id="gs-programming-board-names"></span><span id="app-boards-names"></span><h2><a class="toc-backref" href="#id7">Board names</a><a class="headerlink" href="#board-names" title="Permalink to this heading"></a></h2>
+<p>The following tables list all boards and build targets for Nordic Semiconductor’s hardware platforms.</p>
+<p>The build target column uses several entries for multi-core hardware platforms:</p>
+<ul class="simple">
+<li><p>For core type:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">cpuapp</span></code> - When you choose this target, you build the application core firmware.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cpunet</span></code> - When you choose this target, you build the network core firmware.</p></li>
+</ul>
+</li>
+<li><p>For usage of Cortex-M Security Extensions (CMSE):</p>
+<ul>
+<li><p>Entries without <code class="docutils literal notranslate"><span class="pre">*_ns</span></code> (<code class="docutils literal notranslate"><span class="pre">cpuapp</span></code>) - When you choose this target, you build the application core firmware as a single execution environment that does not use CMSE (<a class="reference internal" href="../tfm/index.html#ug-tfm"><span class="std std-ref">Trusted Firmware-M (TF-M)</span></a>).</p></li>
+<li><p>Entries with <code class="docutils literal notranslate"><span class="pre">*_ns</span></code> (for example, <code class="docutils literal notranslate"><span class="pre">cpuapp_ns</span></code>) - When you choose this target, you build the application with CMSE.
+The application core firmware is placed in Non-Secure Processing Environment (NSPE) and uses Secure Processing Environment (SPE) for security features.
+By default, the build system automatically includes <a class="reference internal" href="../tfm/index.html#ug-tfm"><span class="std std-ref">Trusted Firmware-M (TF-M)</span></a> in SPE and merges it with NSPE.</p></li>
+</ul>
+</li>
+</ul>
+<p>Read more about separation of processing environments in the <a class="reference internal" href="#app-boards-spe-nspe"><span class="std std-ref">Processing environments</span></a> section.</p>
+<section id="boards-included-in-sdk-zephyr">
+<span id="app-boards-names-zephyr"></span><h3><a class="toc-backref" href="#id8">Boards included in sdk-zephyr</a><a class="headerlink" href="#boards-included-in-sdk-zephyr" title="Permalink to this heading"></a></h3>
+<p>The following boards are defined in the <code class="file docutils literal notranslate"><span class="pre">zephyr/boards/arm/</span></code> folder.
+Also see the <span class="xref std std-ref">zephyr:boards</span> section in the Zephyr documentation.</p>
+<table class="docutils align-default" id="table">
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 9%" />
+<col style="width: 48%" />
+<col style="width: 29%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Hardware platform</p></th>
+<th class="head"><p>PCA number</p></th>
+<th class="head"><p>Board name</p></th>
+<th class="head"><p>Build target</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td rowspan="3"><p>nRF52 DK
+(nRF52832)</p></td>
+<td rowspan="3"><p>PCA10040</p></td>
+<td><p><span class="xref std std-ref">nrf52dk_nrf52832</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nrf52dk_nrf52832</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="xref std std-ref">nrf52dk_nrf52810</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nrf52dk_nrf52810</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="xref std std-ref">nrf52dk_nrf52805</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nrf52dk_nrf52805</span></code></p></td>
+</tr>
+<tr class="row-odd"><td rowspan="2"><p>nRF52833 DK</p></td>
+<td rowspan="2"><p>PCA10100</p></td>
+<td><p><span class="xref std std-ref">nrf52833dk_nrf52833</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nrf52833dk_nrf52833</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="xref std std-ref">nrf52833dk_nrf52820</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nrf52833dk_nrf52820</span></code></p></td>
+</tr>
+<tr class="row-odd"><td rowspan="2"><p>nRF52840 DK</p></td>
+<td rowspan="2"><p>PCA10056</p></td>
+<td><p><span class="xref std std-ref">nrf52840dk_nrf52840</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nrf52840dk_nrf52840</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="xref std std-ref">nrf52840dk_nrf52811</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nrf52840dk_nrf52811</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>nRF52840 Dongle</p></td>
+<td><p>PCA10059</p></td>
+<td><p><span class="xref std std-ref">nrf52840dongle_nrf52840</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nrf52840dongle_nrf52840</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Thingy:52</p></td>
+<td><p>PCA20020</p></td>
+<td><p><span class="xref std std-ref">thingy52_nrf52832</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">thingy52_nrf52832</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>nRF21540 DK</p></td>
+<td><p>PCA10112</p></td>
+<td><p><span class="xref std std-ref">nrf21540dk_nrf52840</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nrf21540dk_nrf52840</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>nRF5340 DK</p></td>
+<td><p>PCA10095</p></td>
+<td><p><span class="xref std std-ref">nrf5340dk_nrf5340</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nrf5340dk_nrf5340_cpunet</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">nrf5340dk_nrf5340_cpuapp</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">nrf5340dk_nrf5340_cpuapp_ns</span></code></p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>Thingy:53</p></td>
+<td><p>PCA20053</p></td>
+<td><p><span class="xref std std-ref">thingy53_nrf5340</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">thingy53_nrf5340_cpunet</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">thingy53_nrf5340_cpuapp</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">thingy53_nrf5340_cpuapp_ns</span></code></p>
+</td>
+</tr>
+<tr class="row-even"><td rowspan="2"><p>nRF9160 DK</p></td>
+<td rowspan="2"><p>PCA10090</p></td>
+<td><p><span class="xref std std-ref">nrf9160dk_nrf9160</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nrf9160dk_nrf9160</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">nrf9160dk_nrf9160_ns</span></code></p>
+</td>
+</tr>
+<tr class="row-odd"><td><p><span class="xref std std-ref">nrf9160dk_nrf52840</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nrf9160dk_nrf52840</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In nRF Connect SDK releases before v1.6.1:</p>
+<ul class="simple">
+<li><p>The build target <code class="docutils literal notranslate"><span class="pre">nrf9160dk_nrf9160_ns</span></code> was named <code class="docutils literal notranslate"><span class="pre">nrf9160dk_nrf9160ns</span></code>.</p></li>
+<li><p>The build target <code class="docutils literal notranslate"><span class="pre">nrf5340dk_nrf5340_cpuapp_ns</span></code> was named <code class="docutils literal notranslate"><span class="pre">nrf5340dk_nrf5340_cpuappns</span></code>.</p></li>
+</ul>
+</div>
+</section>
+<section id="boards-included-in-sdk-nrf">
+<span id="app-boards-names-nrf"></span><h3><a class="toc-backref" href="#id9">Boards included in sdk-nrf</a><a class="headerlink" href="#boards-included-in-sdk-nrf" title="Permalink to this heading"></a></h3>
+<p>The following boards are defined in the <code class="file docutils literal notranslate"><span class="pre">nrf/boards/arm/</span></code> folder.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 9%" />
+<col style="width: 45%" />
+<col style="width: 30%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Hardware platform</p></th>
+<th class="head"><p>PCA number</p></th>
+<th class="head"><p>Board name</p></th>
+<th class="head"><p>Build target</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>nRF5340 Audio</p></td>
+<td><p>PCA10121</p></td>
+<td><p><a class="reference internal" href="../../applications/nrf5340_audio/README.html#nrf53-audio-app"><span class="std std-ref">nrf5340_audio_dk_nrf5340</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nrf5340_audio_dk_nrf5340_cpuapp</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>nRF Desktop
+Gaming Mouse</p></td>
+<td><p>PCA20041</p></td>
+<td><p><a class="reference internal" href="../../applications/nrf_desktop/README.html#nrf-desktop"><span class="std std-ref">nrf52840gmouse_nrf52840</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nrf52840gmouse_nrf52840</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>nRF Desktop
+Mouse</p></td>
+<td><p>PCA20044</p></td>
+<td><p><a class="reference internal" href="../../applications/nrf_desktop/README.html#nrf-desktop"><span class="std std-ref">nrf52dmouse_nrf52832</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nrf52dmouse_nrf52832</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>nRF Desktop
+Mouse</p></td>
+<td><p>PCA20045</p></td>
+<td><p><a class="reference internal" href="../../applications/nrf_desktop/README.html#nrf-desktop"><span class="std std-ref">nrf52810dmouse_nrf52810</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nrf52810dmouse_nrf52810</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>nRF Desktop
+Keyboard</p></td>
+<td><p>PCA20037</p></td>
+<td><p><a class="reference internal" href="../../applications/nrf_desktop/README.html#nrf-desktop"><span class="std std-ref">nrf52kbd_nrf52832</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nrf52kbd_nrf52832</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>nRF Desktop
+Dongle</p></td>
+<td><p>PCA10111</p></td>
+<td><p><a class="reference internal" href="../../applications/nrf_desktop/README.html#nrf-desktop"><span class="std std-ref">nrf52833dongle_nrf52833</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nrf52833dongle_nrf52833</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>nRF Desktop
+Dongle</p></td>
+<td><p>PCA10114</p></td>
+<td><p><a class="reference internal" href="../../applications/nrf_desktop/README.html#nrf-desktop"><span class="std std-ref">nrf52820dongle_nrf52820</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nrf52820dongle_nrf52820</span></code></p></td>
+</tr>
+<tr class="row-odd"><td rowspan="2"><p>Thingy:91</p></td>
+<td rowspan="2"><p>PCA20035</p></td>
+<td><p><a class="reference internal" href="../../working_with_nrf/nrf91/thingy91.html#ug-thingy91"><span class="std std-ref">thingy91_nrf9160</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">thingy91_nrf9160</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">thingy91_nrf9160_ns</span></code></p>
+</td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../working_with_nrf/nrf91/thingy91.html#ug-thingy91"><span class="std std-ref">thingy91_nrf52840</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">thingy91_nrf52840</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>nRF7002 DK</p></td>
+<td><p>PCA10143</p></td>
+<td><p><a class="reference internal" href="../../working_with_nrf/nrf70/gs.html#nrf7002dk-nrf5340"><span class="std std-ref">nrf7002dk_nrf5340</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nrf7002dk_nrf5340_cpunet</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">nrf7002dk_nrf5340_cpuapp</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">nrf7002dk_nrf5340_cpuapp_ns</span></code></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>The <a class="reference internal" href="../working_with_fem/index.html#ug-radio-fem-nrf21540-ek"><span class="std std-ref">nRF21540 EK shield</span></a> is defined in the <code class="file docutils literal notranslate"><span class="pre">nrf/boards/shields</span></code> folder.</p>
+</section>
+</section>
+<section id="custom-boards">
+<h2><a class="toc-backref" href="#id10">Custom boards</a><a class="headerlink" href="#custom-boards" title="Permalink to this heading"></a></h2>
+<p>Defining your own board is a very common step in application development, because applications are typically designed to run on boards that are not directly supported by the nRF Connect SDK, and are often custom designs not available publicly.
+To define your own board, you can use the following Zephyr guides as reference, since boards are defined in the nRF Connect SDK just as they are in Zephyr:</p>
+<ul class="simple">
+<li><p><span class="xref std std-ref">custom_board_definition</span> is a guide to adding your own custom board to the Zephyr build system.</p></li>
+<li><p><span class="xref std std-ref">board_porting_guide</span> is a complete guide to porting Zephyr to your own board.</p></li>
+</ul>
+<p>One of the nRF Connect SDK applications that lets you add custom boards is <a class="reference internal" href="../../applications/nrf_desktop/README.html#nrf-desktop"><span class="std std-ref">nRF Desktop</span></a>.
+See <a class="reference internal" href="../../applications/nrf_desktop/README.html#nrf-desktop-porting-guide"><span class="std std-ref">Integrating your own hardware</span></a> in the application documentation for details.</p>
+</section>
+<section id="processing-environments">
+<span id="app-boards-spe-nspe"></span><h2><a class="toc-backref" href="#id11">Processing environments</a><a class="headerlink" href="#processing-environments" title="Permalink to this heading"></a></h2>
+<p>The build target column in the tables above separates entries according to the CPU to target (for multi-core SoCs) and whether Cortex-M Security Extensions (CMSE) are used or not (addition of <code class="docutils literal notranslate"><span class="pre">_ns</span></code> if they are used).</p>
+<p>When CMSE is used, the firmware is split in accordance with the security by separation architecture principle to better protect sensitive assets and code.
+With CMSE, the firmware is stored in one of two security environments (flash partitions), either Secure Processing Environment (SPE) or Non-Secure Processing Environment (NSPE).
+This isolation of firmware is only possible if the underlying hardware supports <a class="reference external" href="https://developer.arm.com/documentation/100690/0200/ARM-TrustZone-technology?lang=en">ARM TrustZone</a>.</p>
+<figure class="align-default" id="id6">
+<img alt="Processing environments in the |NCS|" src="../../_images/spe_nspe.svg" /><figcaption>
+<p><span class="caption-text">Processing environments in the nRF Connect SDK</span><a class="headerlink" href="#id6" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>In Zephyr and the nRF Connect SDK, SPE and NSPE are used exclusively in the context of the application core of a multi-core SoC.
+Building follows the security by separation principle and depends on the build target.</p>
+<section id="building-for-cpuapp-cmse-disabled">
+<span id="app-boards-spe-nspe-cpuapp"></span><h3><a class="toc-backref" href="#id12">Building for <code class="docutils literal notranslate"><span class="pre">cpuapp</span></code> (CMSE disabled)</a><a class="headerlink" href="#building-for-cpuapp-cmse-disabled" title="Permalink to this heading"></a></h3>
+<p>When you build for <code class="docutils literal notranslate"><span class="pre">cpuapp</span></code>, you build the firmware for the application core without CMSE.
+Because CMSE is disabled, TF-M is not used and there is no separation of firmware.</p>
+</section>
+<section id="building-for-ns-cmse-enabled">
+<span id="app-boards-spe-nspe-cpuapp-ns"></span><h3><a class="toc-backref" href="#id13">Building for <code class="docutils literal notranslate"><span class="pre">*_ns</span></code> (CMSE enabled)</a><a class="headerlink" href="#building-for-ns-cmse-enabled" title="Permalink to this heading"></a></h3>
+<p>When you build for <code class="docutils literal notranslate"><span class="pre">*_ns</span></code>, you build firmware with CMSE.
+Firmware is separated in the following way:</p>
+<ul class="simple">
+<li><p>SPE implements security-critical functionality and data (including bootloaders) and isolates them from the application software in NSPE.
+It also contains secure firmware running in the secure state.</p></li>
+<li><p>NSPE typically implements the user application and communication firmware, among other major components.</p></li>
+</ul>
+<p>The application is built as a non-secure image and <a class="reference internal" href="../tfm/index.html#ug-tfm"><span class="std std-ref">Trusted Firmware-M (TF-M)</span></a> is built as the secure image.
+The build system merges both images to form a combined image that will be used for programming or updating the device.</p>
+<p>TF-M enables hardware-supported separation of firmware.
+It also implements <a class="reference external" href="https://www.psacertified.org/what-is-psa-certified/">Platform Security Architecture (PSA)</a> API, which provides security features for the system, including roots of trust for protecting secrets, platform state, and cryptographic keys.
+The API coordinates the communication with the components in NSPE.</p>
+<section id="more-information-about-spe-and-nspe">
+<h4>More information about SPE and NSPE<a class="headerlink" href="#more-information-about-spe-and-nspe" title="Permalink to this heading"></a></h4>
+<p>Read the following pages for a better understanding of security by separation in the nRF Connect SDK:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../tfm/index.html#ug-tfm"><span class="std std-ref">Running applications with Trusted Firmware-M</span></a></p></li>
+<li><p><a class="reference internal" href="../../getting_started/testing.html#gs-debugging-spe-nspe"><span class="std std-ref">Debugging secure and non-secure firmware</span></a></p></li>
+<li><p><a class="reference external" href="https://devzone.nordicsemi.com/nordic/nordic-blog/b/blog/posts/an-introduction-to-trusted-firmware-m-t-m#mcetoc_1gc9ihpcd0">An Introduction to Trusted Firmware-M (TF-M)</a> on DevZone</p></li>
+<li><p><a class="reference external" href="https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/tfm/index.html">TF-M documentation</a></p></li>
+</ul>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../pin_control/index.html" class="btn btn-neutral float-right" title="Pin control" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../../app_dev.html" class="btn btn-neutral" title="Application development" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

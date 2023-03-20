@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Connection Handover messages and records &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../../_static/js/ncs.js"
+></script>
+<script src="../../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Parser for Connection Handover records" href="ch_rec_parser.html" />
+    <link rel="prev" title="NFC Data Exchange Format (NDEF)" href="index.html" />
+<link
+  href="../../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../drivers.html">Drivers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Libraries</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../bin/index.html">Binary libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../bluetooth_services/index.html">Bluetooth libraries and services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../bootloader/index.html">Bootloader libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../caf/index.html">Common Application Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../debug/index.html">Debug libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../dfu/index.html">DFU libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gazell/index.html">Gazell libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../modem/index.html">Modem libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mpsl/index.html">Multiprotocol Service Layer libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../networking/index.html">Libraries for networking</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Libraries for NFC</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">NFC Data Exchange Format (NDEF)</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Connection Handover messages and records</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ch_rec_parser.html">Parser for Connection Handover records</a></li>
+<li class="toctree-l4"><a class="reference internal" href="launchapp.html">Launch App message and records</a></li>
+<li class="toctree-l4"><a class="reference internal" href="le_oob_rec.html">Bluetooth LE OOB records</a></li>
+<li class="toctree-l4"><a class="reference internal" href="le_oob_rec_parser.html">Parser for Bluetooth LE OOB records</a></li>
+<li class="toctree-l4"><a class="reference internal" href="msg.html">Messages and records</a></li>
+<li class="toctree-l4"><a class="reference internal" href="msg_parser.html">Parser for messages and records</a></li>
+<li class="toctree-l4"><a class="reference internal" href="text_rec.html">Text records</a></li>
+<li class="toctree-l4"><a class="reference internal" href="uri_msg.html">URI messages and records</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../t2t/index.html">Type 2 Tag</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../t4t/index.html">Type 4 Tag</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tnep/index.html">Tag NDEF Exchange Protocol (TNEP)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../nrf_rpc/index.html">nRF RPC libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../others/index.html">Other libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../shell/index.html">Shell libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tfm/index.html">TF-M libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../zigbee/index.html">Libraries for Zigbee</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Libraries</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Libraries for NFC</a></li>
+          <li class="breadcrumb-item"><a href="index.html">NFC Data Exchange Format (NDEF)</a></li>
+      <li class="breadcrumb-item active">Connection Handover messages and records</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/libraries/nfc/ndef/ch_msg.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="connection-handover-messages-and-records">
+<span id="nfc-ch"></span><h1>Connection Handover messages and records<a class="headerlink" href="#connection-handover-messages-and-records" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#connection-handover-records" id="id9">Connection Handover records</a></p></li>
+<li><p><a class="reference internal" href="#connection-handover-messages" id="id10">Connection Handover messages</a></p></li>
+<li><p><a class="reference internal" href="#api-documentation" id="id11">API documentation</a></p>
+<ul>
+<li><p><a class="reference internal" href="#nfc-ndef-ch" id="id12">Connection Handover records</a></p></li>
+<li><p><a class="reference internal" href="#nfc-pair-msg" id="id13">Connection Handover messages</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>Connection Handover records and the corresponding messages are used to negotiate and activate an alternative communication carrier.
+The negotiated communication carrier can then be used to perform certain activities between the two devices, such as Bluetooth® pairing.</p>
+<section id="connection-handover-records">
+<h2><a class="toc-backref" href="#id9">Connection Handover records</a><a class="headerlink" href="#connection-handover-records" title="Permalink to this heading"></a></h2>
+<p>The Connection Handover library provides functions for creating and encoding the following Connection Handover records:</p>
+<ul class="simple">
+<li><p>Handover Request record</p></li>
+<li><p>Handover Select record</p></li>
+<li><p>Handover Mediation record</p></li>
+<li><p>Handover Initiate record</p></li>
+<li><p>Handover Carrier record</p></li>
+<li><p>Local records:</p>
+<ul>
+<li><p>Alternative Carrier record</p></li>
+<li><p>Collision Resolution record</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="connection-handover-messages">
+<h2><a class="toc-backref" href="#id10">Connection Handover messages</a><a class="headerlink" href="#connection-handover-messages" title="Permalink to this heading"></a></h2>
+<p>The Connection Handover message library provides functions for encoding the following messages:</p>
+<ul class="simple">
+<li><p>Bluetooth LE OOB message</p></li>
+<li><p>Handover Select message</p></li>
+<li><p>Handover Request message</p></li>
+<li><p>Handover Mediation message</p></li>
+<li><p>Handover Initiate message</p></li>
+</ul>
+<p>This library is used in the <a class="reference internal" href="../../../samples/bluetooth/peripheral_nfc_pairing/README.html#peripheral-nfc-pairing"><span class="std std-ref">Bluetooth: NFC pairing</span></a> sample.</p>
+<p>The following code sample demonstrates how to create a Handover Select message with one Alternative Carrier record that has a reference to the <a class="reference internal" href="le_oob_rec.html#nfc-ndef-le-oob"><span class="std std-ref">Bluetooth LE OOB record</span></a>:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">tnep_initial_msg_encode</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">nfc_ndef_msg_desc</span><span class="w"> </span><span class="o">*</span><span class="n">msg</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">	</span><span class="kt">int</span><span class="w"> </span><span class="n">err</span><span class="p">;</span>
+<span class="w">	</span><span class="k">struct</span><span class="w"> </span><span class="nc">nfc_ndef_ch_msg_records</span><span class="w"> </span><span class="n">ch_records</span><span class="p">;</span>
+<span class="w">	</span><span class="k">static</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">nfc_ndef_le_oob_rec_payload_desc</span><span class="w"> </span><span class="n">rec_payload</span><span class="p">;</span>
+
+<span class="w">	</span><span class="n">NFC_NDEF_LE_OOB_RECORD_DESC_DEF</span><span class="p">(</span><span class="n">oob_rec</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;0&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rec_payload</span><span class="p">);</span>
+<span class="w">	</span><span class="n">NFC_NDEF_CH_AC_RECORD_DESC_DEF</span><span class="p">(</span><span class="n">oob_ac</span><span class="p">,</span><span class="w"> </span><span class="n">NFC_AC_CPS_ACTIVE</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;0&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">	</span><span class="n">NFC_NDEF_CH_HS_RECORD_DESC_DEF</span><span class="p">(</span><span class="n">hs_rec</span><span class="p">,</span><span class="w"> </span><span class="n">NFC_NDEF_CH_MSG_MAJOR_VER</span><span class="p">,</span>
+<span class="w">				       </span><span class="n">NFC_NDEF_CH_MSG_MINOR_VER</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+
+<span class="w">	</span><span class="n">memset</span><span class="p">(</span><span class="o">&amp;</span><span class="n">rec_payload</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">rec_payload</span><span class="p">));</span>
+
+<span class="w">	</span><span class="n">rec_payload</span><span class="p">.</span><span class="n">addr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">oob_local</span><span class="p">.</span><span class="n">addr</span><span class="p">;</span>
+<span class="w">	</span><span class="n">rec_payload</span><span class="p">.</span><span class="n">le_sc_data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">oob_local</span><span class="p">.</span><span class="n">le_sc_data</span><span class="p">;</span>
+<span class="w">	</span><span class="n">rec_payload</span><span class="p">.</span><span class="n">tk_value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tk_value</span><span class="p">;</span>
+<span class="w">	</span><span class="n">rec_payload</span><span class="p">.</span><span class="n">local_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bt_get_name</span><span class="p">();</span>
+<span class="w">	</span><span class="n">rec_payload</span><span class="p">.</span><span class="n">le_role</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NFC_NDEF_LE_OOB_REC_LE_ROLE</span><span class="p">(</span>
+<span class="w">		</span><span class="n">NFC_NDEF_LE_OOB_REC_LE_ROLE_PERIPH_ONLY</span><span class="p">);</span>
+<span class="w">	</span><span class="n">rec_payload</span><span class="p">.</span><span class="n">appearance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NFC_NDEF_LE_OOB_REC_APPEARANCE</span><span class="p">(</span>
+<span class="w">		</span><span class="n">CONFIG_BT_DEVICE_APPEARANCE</span><span class="p">);</span>
+<span class="w">	</span><span class="n">rec_payload</span><span class="p">.</span><span class="n">flags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NFC_NDEF_LE_OOB_REC_FLAGS</span><span class="p">(</span><span class="n">BT_LE_AD_NO_BREDR</span><span class="p">);</span>
+
+<span class="w">	</span><span class="n">ch_records</span><span class="p">.</span><span class="n">ac</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">NFC_NDEF_CH_AC_RECORD_DESC</span><span class="p">(</span><span class="n">oob_ac</span><span class="p">);</span>
+<span class="w">	</span><span class="n">ch_records</span><span class="p">.</span><span class="n">carrier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">NFC_NDEF_LE_OOB_RECORD_DESC</span><span class="p">(</span><span class="n">oob_rec</span><span class="p">);</span>
+<span class="w">	</span><span class="n">ch_records</span><span class="p">.</span><span class="n">cnt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+
+<span class="w">	</span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="n">nfc_ndef_ch_msg_hs_create</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span>
+<span class="w">					 </span><span class="o">&amp;</span><span class="n">NFC_NDEF_CH_RECORD_DESC</span><span class="p">(</span><span class="n">hs_rec</span><span class="p">),</span>
+<span class="w">					 </span><span class="o">&amp;</span><span class="n">ch_records</span><span class="p">);</span>
+<span class="w">	</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="n">err</span><span class="p">;</span>
+<span class="w">	</span><span class="p">}</span>
+
+<span class="w">	</span><span class="k">return</span><span class="w"> </span><span class="n">nfc_tnep_initial_msg_encode</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="api-documentation">
+<h2><a class="toc-backref" href="#id11">API documentation</a><a class="headerlink" href="#api-documentation" title="Permalink to this heading"></a></h2>
+<section id="nfc-ndef-ch">
+<span id="id1"></span><h3><a class="toc-backref" href="#id12">Connection Handover records</a><a class="headerlink" href="#nfc-ndef-ch" title="Permalink to this heading"></a></h3>
+<div class="line-block">
+<div class="line">Header file: <code class="file docutils literal notranslate"><span class="pre">include/nfc/ndef/ch.h</span></code></div>
+<div class="line">Source file: <code class="file docutils literal notranslate"><span class="pre">subsys/nfc/ndef/ch.c</span></code></div>
+</div>
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="group__nfc__ndef__ch"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">nfc_ndef_ch</span></span></dt>
+<dd><p>Generation of NFC NDEF Connection Handover records for NDEF messages. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-defines">Defines</p>
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.NFC_NDEF_CH_REC_TYPE_LENGTH">
+<span class="target" id="group__nfc__ndef__ch_1gad14a10543ef41e9ceee3081b77355766"></span><span class="sig-name descname"><span class="n"><span class="pre">NFC_NDEF_CH_REC_TYPE_LENGTH</span></span></span><a class="headerlink" href="#c.NFC_NDEF_CH_REC_TYPE_LENGTH" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Size of the type field of the Connection Handover records. Record types are defined in the file <code class="docutils literal notranslate"><span class="pre">ch_rec.c</span></code>. </p>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.NFC_NDEF_CH_AC_CPS_MASK">
+<span class="target" id="group__nfc__ndef__ch_1gaa4e4689c2d769b075e82f7fa04ef35db"></span><span class="sig-name descname"><span class="n"><span class="pre">NFC_NDEF_CH_AC_CPS_MASK</span></span></span><a class="headerlink" href="#c.NFC_NDEF_CH_AC_CPS_MASK" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Mask of Carrier Power State bits in a first ac record byte. </p>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.NFC_NDEF_CH_RECORD_DESC_DEF">
+<span class="target" id="group__nfc__ndef__ch_1gad82842440a55f57d8a31f83c99a98ad4"></span><span class="sig-name descname"><span class="n"><span class="pre">NFC_NDEF_CH_RECORD_DESC_DEF</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">_name</span></span>, <span class="n"><span class="pre">_rec_type_field</span></span>, <span class="n"><span class="pre">_major_version</span></span>, <span class="n"><span class="pre">_minor_version</span></span>, <span class="n"><span class="pre">_max_records</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.NFC_NDEF_CH_RECORD_DESC_DEF" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Macro for creating and initializing an NFC NDEF record descriptor for the Connection Handover. </p>
+<p>This macro creates and initializes an instance of type <a class="reference internal" href="msg.html#structnfc__ndef__record__desc"><span class="std std-ref">nfc_ndef_record_desc</span></a> and an instance of type <a class="reference internal" href="#structnfc__ndef__ch__rec"><span class="std std-ref">nfc_ndef_ch_rec</span></a>, which together constitute an instance of a Connection Handover record.</p>
+<p>Use the macro <a class="reference internal" href="#group__nfc__ndef__ch_1ga3d102a1b79ed6039152a5c80d523d787"><span class="std std-ref">NFC_NDEF_CH_RECORD_DESC</span></a> to access the NDEF Connection Handover record descriptor instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>_name</strong> – <strong>[in]</strong> Name of the created record descriptor instance. </p></li>
+<li><p><strong>_rec_type_field</strong> – <strong>[in]</strong> The NFC Forum Well Known Type Connection Handover record type. </p></li>
+<li><p><strong>_major_version</strong> – <strong>[in]</strong> Major version number of the supported Connection Handover specification. </p></li>
+<li><p><strong>_minor_version</strong> – <strong>[in]</strong> Minor version number of the supported Connection Handover specification. </p></li>
+<li><p><strong>_max_records</strong> – <strong>[in]</strong> Maximum number of local records. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.NFC_NDEF_CH_HS_RECORD_DESC_DEF">
+<span class="target" id="group__nfc__ndef__ch_1ga03b13b805dba16630f375bbb63b5c201"></span><span class="sig-name descname"><span class="n"><span class="pre">NFC_NDEF_CH_HS_RECORD_DESC_DEF</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">_name</span></span>, <span class="n"><span class="pre">_major_version</span></span>, <span class="n"><span class="pre">_minor_version</span></span>, <span class="n"><span class="pre">_max_records</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.NFC_NDEF_CH_HS_RECORD_DESC_DEF" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Macro for creating and initializing an NFC NDEF record descriptor for a Handover Select record. </p>
+<p>This macro creates and initializes an instance of type <a class="reference internal" href="msg.html#structnfc__ndef__record__desc"><span class="std std-ref">nfc_ndef_record_desc</span></a> and an instance of type <a class="reference internal" href="#structnfc__ndef__ch__rec"><span class="std std-ref">nfc_ndef_ch_rec</span></a>, which together constitute an instance of a Handover Select record.</p>
+<p>Use the macro <a class="reference internal" href="#group__nfc__ndef__ch_1ga3d102a1b79ed6039152a5c80d523d787"><span class="std std-ref">NFC_NDEF_CH_RECORD_DESC</span></a> to access the NDEF Handover Select record descriptor instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>_name</strong> – <strong>[in]</strong> Name of the created record descriptor instance. </p></li>
+<li><p><strong>_major_version</strong> – <strong>[in]</strong> Major version number of the supported Connection Handover specification. </p></li>
+<li><p><strong>_minor_version</strong> – <strong>[in]</strong> Minor version number of the supported Connection Handover specification. </p></li>
+<li><p><strong>_max_records</strong> – <strong>[in]</strong> Maximum number of local records struct (ac records plus optional err record). </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.NFC_NDEF_CH_HR_RECORD_DESC_DEF">
+<span class="target" id="group__nfc__ndef__ch_1gab962c075c60a8b687af7a848cd16444a"></span><span class="sig-name descname"><span class="n"><span class="pre">NFC_NDEF_CH_HR_RECORD_DESC_DEF</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">_name</span></span>, <span class="n"><span class="pre">_major_version</span></span>, <span class="n"><span class="pre">_minor_version</span></span>, <span class="n"><span class="pre">_max_records</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.NFC_NDEF_CH_HR_RECORD_DESC_DEF" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Macro for creating and initializing an NFC NDEF record descriptor for a Handover Request record. </p>
+<p>This macro creates and initializes an instance of type <a class="reference internal" href="msg.html#structnfc__ndef__record__desc"><span class="std std-ref">nfc_ndef_record_desc</span></a> and an instance of type <a class="reference internal" href="#structnfc__ndef__ch__rec"><span class="std std-ref">nfc_ndef_ch_rec</span></a>, which together constitute an instance of a Handover Request record.</p>
+<p>Use the macro <a class="reference internal" href="#group__nfc__ndef__ch_1ga3d102a1b79ed6039152a5c80d523d787"><span class="std std-ref">NFC_NDEF_CH_RECORD_DESC</span></a> to access the NDEF Handover Request record descriptor instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>_name</strong> – <strong>[in]</strong> Name of the created record descriptor instance. </p></li>
+<li><p><strong>_major_version</strong> – <strong>[in]</strong> Major version number of the supported Connection Handover specification. </p></li>
+<li><p><strong>_minor_version</strong> – <strong>[in]</strong> Minor version number of the supported Connection Handover specification. </p></li>
+<li><p><strong>_max_records</strong> – <strong>[in]</strong> Maximum number of local records (cr record plus ac records). </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.NFC_NDEF_CH_HM_RECORD_DESC_DEF">
+<span class="target" id="group__nfc__ndef__ch_1gae0afd9bc9af8a9c14f9a3273a99acad9"></span><span class="sig-name descname"><span class="n"><span class="pre">NFC_NDEF_CH_HM_RECORD_DESC_DEF</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">_name</span></span>, <span class="n"><span class="pre">_major_version</span></span>, <span class="n"><span class="pre">_minor_version</span></span>, <span class="n"><span class="pre">_max_records</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.NFC_NDEF_CH_HM_RECORD_DESC_DEF" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Macro for creating and initializing an NFC NDEF record descriptor for a Handover Mediation record. </p>
+<p>This macro creates and initializes an instance of type <a class="reference internal" href="msg.html#structnfc__ndef__record__desc"><span class="std std-ref">nfc_ndef_record_desc</span></a> and an instance of type <a class="reference internal" href="#structnfc__ndef__ch__rec"><span class="std std-ref">nfc_ndef_ch_rec</span></a>, which together constitute an instance of a Handover Mediation record.</p>
+<p>Use the macro <a class="reference internal" href="#group__nfc__ndef__ch_1ga3d102a1b79ed6039152a5c80d523d787"><span class="std std-ref">NFC_NDEF_CH_RECORD_DESC</span></a> to access the NDEF Handover Mediation record descriptor instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>_name</strong> – <strong>[in]</strong> Name of the created record descriptor instance. </p></li>
+<li><p><strong>_major_version</strong> – <strong>[in]</strong> Major version number of the supported Connection Handover specification. </p></li>
+<li><p><strong>_minor_version</strong> – <strong>[in]</strong> Minor version number of the supported Connection Handover specification. </p></li>
+<li><p><strong>_max_records</strong> – <strong>[in]</strong> Maximum number of local records (ac records). </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.NFC_NDEF_CH_HI_RECORD_DESC_DEF">
+<span class="target" id="group__nfc__ndef__ch_1gafe7a97ca33a8e1a6db2f9d8823874390"></span><span class="sig-name descname"><span class="n"><span class="pre">NFC_NDEF_CH_HI_RECORD_DESC_DEF</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">_name</span></span>, <span class="n"><span class="pre">_major_version</span></span>, <span class="n"><span class="pre">_minor_version</span></span>, <span class="n"><span class="pre">_max_records</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.NFC_NDEF_CH_HI_RECORD_DESC_DEF" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Macro for creating and initializing an NFC NDEF record descriptor for a Handover Initiate record. </p>
+<p>This macro creates and initializes an instance of type <a class="reference internal" href="msg.html#structnfc__ndef__record__desc"><span class="std std-ref">nfc_ndef_record_desc</span></a>.</p>
+<p>Use the macro <a class="reference internal" href="#group__nfc__ndef__ch_1ga3d102a1b79ed6039152a5c80d523d787"><span class="std std-ref">NFC_NDEF_CH_RECORD_DESC</span></a> to access the NDEF Handover Initiate record descriptor instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>_name</strong> – <strong>[in]</strong> Name of the created record descriptor instance. </p></li>
+<li><p><strong>_major_version</strong> – <strong>[in]</strong> Major version number of the supported Connection Handover specification. </p></li>
+<li><p><strong>_minor_version</strong> – <strong>[in]</strong> Minor version number of the supported Connection Handover specification. </p></li>
+<li><p><strong>_max_records</strong> – <strong>[in]</strong> Maximum number of local records (ac records). </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.NFC_NDEF_CH_RECORD_DESC">
+<span class="target" id="group__nfc__ndef__ch_1ga3d102a1b79ed6039152a5c80d523d787"></span><span class="sig-name descname"><span class="n"><span class="pre">NFC_NDEF_CH_RECORD_DESC</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">_name</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.NFC_NDEF_CH_RECORD_DESC" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Macro for accessing the NFC NDEF Handover Select record descriptor instance that was created with <a class="reference internal" href="#group__nfc__ndef__ch_1ga03b13b805dba16630f375bbb63b5c201"><span class="std std-ref">NFC_NDEF_CH_HS_RECORD_DESC_DEF</span></a>. </p>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.NFC_NDEF_CH_HC_RECORD_DESC_DEF">
+<span class="target" id="group__nfc__ndef__ch_1gab23245f4d9649852b9fe9eadd3268d95"></span><span class="sig-name descname"><span class="n"><span class="pre">NFC_NDEF_CH_HC_RECORD_DESC_DEF</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">_name</span></span>, <span class="n"><span class="pre">_payload_id</span></span>, <span class="n"><span class="pre">_payload_id_length</span></span>, <span class="n"><span class="pre">_payload_desc</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.NFC_NDEF_CH_HC_RECORD_DESC_DEF" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Macro for creating and initializing an NFC NDEF record descriptor for the Handover Carrier record. </p>
+<p>This macro creates and initializes an instance of type <a class="reference internal" href="msg.html#structnfc__ndef__record__desc"><span class="std std-ref">nfc_ndef_record_desc</span></a> and an instance of type <a class="reference internal" href="#structnfc__ndef__ch__rec"><span class="std std-ref">nfc_ndef_ch_rec</span></a>, which together constitute an instance of a Connection Handover record.</p>
+<p>Use the macro <a class="reference internal" href="#group__nfc__ndef__ch_1ga5206c02d95b4891a26f8c912e36f879b"><span class="std std-ref">NFC_NDEF_CH_HC_RECORD_DESC</span></a> to access the NDEF Connection Handover record descriptor instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>_name</strong> – <strong>[in]</strong> Name of the created record descriptor instance. </p></li>
+<li><p><strong>_payload_id</strong> – <strong>[in]</strong> ID of the payload. </p></li>
+<li><p><strong>_payload_id_length</strong> – <strong>[in]</strong> Length of the payload. </p></li>
+<li><p><strong>_payload_desc</strong> – <strong>[in]</strong> Description of the payload. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.NFC_NDEF_CH_HC_RECORD_DESC">
+<span class="target" id="group__nfc__ndef__ch_1ga5206c02d95b4891a26f8c912e36f879b"></span><span class="sig-name descname"><span class="n"><span class="pre">NFC_NDEF_CH_HC_RECORD_DESC</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">_name</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.NFC_NDEF_CH_HC_RECORD_DESC" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Macro for accessing the NFC NDEF Handover Carrier record descriptor instance that was created with <em>NFC_NDEF_CH_HC_GENERIC_RECORD_DESC_DEF</em>. </p>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.NFC_NDEF_CH_AC_RECORD_DESC_DEF">
+<span class="target" id="group__nfc__ndef__ch_1gac11cbe7e33ebd9e2f349e47c04b33bf9"></span><span class="sig-name descname"><span class="n"><span class="pre">NFC_NDEF_CH_AC_RECORD_DESC_DEF</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">_name</span></span>, <span class="n"><span class="pre">_cps</span></span>, <span class="n"><span class="pre">_carr_data_ref_len</span></span>, <span class="n"><span class="pre">_carr_data_ref</span></span>, <span class="n"><span class="pre">_max_aux_data_ref_cnt</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.NFC_NDEF_CH_AC_RECORD_DESC_DEF" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Macro for creating and initializing an NFC NDEF record descriptor for an Alternative Carrier record. </p>
+<p>This macro creates and initializes an instance of type <a class="reference internal" href="msg.html#structnfc__ndef__record__desc"><span class="std std-ref">nfc_ndef_record_desc</span></a> and an instance of type <a class="reference internal" href="#structnfc__ndef__ch__ac__rec"><span class="std std-ref">nfc_ndef_ch_ac_rec</span></a>, which together constitute an instance of an Alternative Carrier record.</p>
+<p>Use the macro <a class="reference internal" href="#group__nfc__ndef__ch_1gaec1e80a045a06c8bbd6608dd128ee37d"><span class="std std-ref">NFC_NDEF_CH_AC_RECORD_DESC</span></a> to access the NDEF Alternative Carrier record descriptor instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>_name</strong> – <strong>[in]</strong> Name of the created record descriptor instance. </p></li>
+<li><p><strong>_cps</strong> – <strong>[in]</strong> Carrier Power State value. </p></li>
+<li><p><strong>_carr_data_ref_len</strong> – <strong>[in]</strong> Length of the Carrier Data Reference field. </p></li>
+<li><p><strong>_carr_data_ref</strong> – <strong>[in]</strong> Pointer to the Carrier Data Reference field. </p></li>
+<li><p><strong>_max_aux_data_ref_cnt</strong> – <strong>[in]</strong> Maximum number of Auxiliary Data Reference fields. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.NFC_NDEF_CH_AC_RECORD_DESC">
+<span class="target" id="group__nfc__ndef__ch_1gaec1e80a045a06c8bbd6608dd128ee37d"></span><span class="sig-name descname"><span class="n"><span class="pre">NFC_NDEF_CH_AC_RECORD_DESC</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">_name</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.NFC_NDEF_CH_AC_RECORD_DESC" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Macro for accessing the NFC NDEF Alternative Carrier record descriptor instance that was created with <em>NFC_NDEF_AC_RECORD_DESC_DEF</em>. </p>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.NFC_NDEF_CH_CR_RECORD_DESC_DEF">
+<span class="target" id="group__nfc__ndef__ch_1ga709736e27277ffe50080ab5108db708c"></span><span class="sig-name descname"><span class="n"><span class="pre">NFC_NDEF_CH_CR_RECORD_DESC_DEF</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">_name</span></span>, <span class="n"><span class="pre">_random_number</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.NFC_NDEF_CH_CR_RECORD_DESC_DEF" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Macro for creating and initializing an NFC NDEF record descriptor for an Collision Resolution record. </p>
+<p>This macro creates and initializes an instance of type <a class="reference internal" href="msg.html#structnfc__ndef__record__desc"><span class="std std-ref">nfc_ndef_record_desc</span></a> and an instance of type <a class="reference internal" href="#structnfc__ndef__ch__cr__rec"><span class="std std-ref">nfc_ndef_ch_cr_rec</span></a>, which together constitute an instance of an Collision Resolution record.</p>
+<p>Use the macro <a class="reference internal" href="#group__nfc__ndef__ch_1gadb2dec03ca88d176062cffad8c2b19b7"><span class="std std-ref">NFC_NDEF_CR_RECORD_DESC</span></a> to access the NDEF Collision Resolution record descriptor instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>_name</strong> – <strong>[in]</strong> Name of the created record descriptor instance. </p></li>
+<li><p><strong>_random_number</strong> – <strong>[in]</strong> Generated random number required to resolve a collision. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.NFC_NDEF_CR_RECORD_DESC">
+<span class="target" id="group__nfc__ndef__ch_1gadb2dec03ca88d176062cffad8c2b19b7"></span><span class="sig-name descname"><span class="n"><span class="pre">NFC_NDEF_CR_RECORD_DESC</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">_name</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.NFC_NDEF_CR_RECORD_DESC" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Macro for accessing the NFC NDEF Alternative Carrier record descriptor instance that was created with <a class="reference internal" href="#group__nfc__ndef__ch_1ga709736e27277ffe50080ab5108db708c"><span class="std std-ref">NFC_NDEF_CH_CR_RECORD_DESC_DEF</span></a>. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-enums">Enums</p>
+<dl class="c enum">
+<dt class="sig sig-object c" id="c.nfc_ndef_ch_ac_rec_cps">
+<span class="target" id="group__nfc__ndef__ch_1ga8d51ab4bb22b9ba9e2f6c6137ee9eb99"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nfc_ndef_ch_ac_rec_cps</span></span></span><a class="headerlink" href="#c.nfc_ndef_ch_ac_rec_cps" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Carrier Power State. </p>
+<p>Possible Carrier Power State field values in an Alternative Carrier record. </p>
+<p><em>Values:</em></p>
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.nfc_ndef_ch_ac_rec_cps.NFC_AC_CPS_INACTIVE">
+<span class="target" id="group__nfc__ndef__ch_1gga8d51ab4bb22b9ba9e2f6c6137ee9eb99afebd846f2151ff49132bdf9efbcb3d9f"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">NFC_AC_CPS_INACTIVE</span></span></span><a class="headerlink" href="#c.nfc_ndef_ch_ac_rec_cps.NFC_AC_CPS_INACTIVE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Alternative Carrier inactive. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.nfc_ndef_ch_ac_rec_cps.NFC_AC_CPS_ACTIVE">
+<span class="target" id="group__nfc__ndef__ch_1gga8d51ab4bb22b9ba9e2f6c6137ee9eb99a2130fb2b06b49f2fa148cd8ef56ca06b"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">NFC_AC_CPS_ACTIVE</span></span></span><a class="headerlink" href="#c.nfc_ndef_ch_ac_rec_cps.NFC_AC_CPS_ACTIVE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Alternative Carrier active. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.nfc_ndef_ch_ac_rec_cps.NFC_AC_CPS_ACTIVATING">
+<span class="target" id="group__nfc__ndef__ch_1gga8d51ab4bb22b9ba9e2f6c6137ee9eb99a7a798eb20042cea05bb91d2aabf2270b"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">NFC_AC_CPS_ACTIVATING</span></span></span><a class="headerlink" href="#c.nfc_ndef_ch_ac_rec_cps.NFC_AC_CPS_ACTIVATING" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Alternative Carrier activating. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.nfc_ndef_ch_ac_rec_cps.NFC_AC_CPS_UNKNOWN">
+<span class="target" id="group__nfc__ndef__ch_1gga8d51ab4bb22b9ba9e2f6c6137ee9eb99ab9e9c167328ec384d0d7d1738f04d994"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">NFC_AC_CPS_UNKNOWN</span></span></span><a class="headerlink" href="#c.nfc_ndef_ch_ac_rec_cps.NFC_AC_CPS_UNKNOWN" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Alternative Carrier power status unknown. </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.nfc_ndef_ch_rec_payload_encode">
+<span class="target" id="group__nfc__ndef__ch_1ga65947bf6856848202b31d66c33f61772"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nfc_ndef_ch_rec_payload_encode</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.nfc_ndef_ch_rec" title="nfc_ndef_ch_rec"><span class="n"><span class="pre">nfc_ndef_ch_rec</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ch_rec</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">buf</span></span>, <span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">len</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.nfc_ndef_ch_rec_payload_encode" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Constructor for an NFC Connection Handover generic record payload. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ch_rec</strong> – <strong>[in]</strong> Pointer to the Connection Handover record description. </p></li>
+<li><p><strong>buf</strong> – <strong>[out]</strong> Pointer to the payload destination. If NULL, function will calculate the expected size of the Handover Connection record payload. </p></li>
+<li><p><strong>len</strong> – <strong>[inout]</strong> Size of the available memory to write as input. Size of the generated record payload as output.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><p><strong>0</strong> – If the operation was successful. Otherwise, a (negative) error code is returned. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.nfc_ndef_ch_rec_local_record_clear">
+<span class="target" id="group__nfc__ndef__ch_1gaac202d07c7353eae7258c92d99f997ae"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nfc_ndef_ch_rec_local_record_clear</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="msg.html#c.nfc_ndef_record_desc" title="nfc_ndef_record_desc"><span class="n"><span class="pre">nfc_ndef_record_desc</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ch_rec</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.nfc_ndef_ch_rec_local_record_clear" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Function for clearing local records in the NFC NDEF Connection Handover records. </p>
+<p>This function clears local records of the Connection Handover records.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ch_rec</strong> – <strong>[inout]</strong> Pointer to the Connection Handover record descriptor.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><p><strong>0</strong> – If the operation was successful. Otherwise, a (negative) error code is returned. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.nfc_ndef_ch_rec_local_record_add">
+<span class="target" id="group__nfc__ndef__ch_1gadb2af9d1c574a089dc81b2e2f619a84f"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nfc_ndef_ch_rec_local_record_add</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="msg.html#c.nfc_ndef_record_desc" title="nfc_ndef_record_desc"><span class="n"><span class="pre">nfc_ndef_record_desc</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ch_rec</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="msg.html#c.nfc_ndef_record_desc" title="nfc_ndef_record_desc"><span class="n"><span class="pre">nfc_ndef_record_desc</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">local_rec</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.nfc_ndef_ch_rec_local_record_add" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Function for adding a local record to an NFC NDEF Handover Select record. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ch_rec</strong> – <strong>[inout]</strong> Pointer to a Connection Handover record. </p></li>
+<li><p><strong>local_rec</strong> – <strong>[in]</strong> Pointer to a local record to add.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><p><strong>0</strong> – If the operation was successful. Otherwise, a (negative) error code is returned. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.nfc_ndef_ch_hc_rec_payload_encode">
+<span class="target" id="group__nfc__ndef__ch_1ga804cc7434a4b88825696faf61ddc41d1"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nfc_ndef_ch_hc_rec_payload_encode</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.nfc_ndef_ch_hc_rec" title="nfc_ndef_ch_hc_rec"><span class="n"><span class="pre">nfc_ndef_ch_hc_rec</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">hc_rec</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">buf</span></span>, <span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">len</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.nfc_ndef_ch_hc_rec_payload_encode" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Constructor for an NFC Connection Handover Carrier Record payload. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hc_rec</strong> – <strong>[in]</strong> Pointer to the Connection Handover Carrier record description. </p></li>
+<li><p><strong>buf</strong> – <strong>[out]</strong> Pointer to the payload destination. If NULL, function will calculate the expected size of the Handover Connection Carrier Record payload. </p></li>
+<li><p><strong>len</strong> – <strong>[inout]</strong> Size of the available memory to write as input. Size of the generated record payload as output.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><p><strong>0</strong> – If the operation was successful. Otherwise, a (negative) error code is returned. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.nfc_ndef_ch_ac_rec_payload_encode">
+<span class="target" id="group__nfc__ndef__ch_1ga848813f7ddaf11532fb920b08275146c"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nfc_ndef_ch_ac_rec_payload_encode</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.nfc_ndef_ch_ac_rec" title="nfc_ndef_ch_ac_rec"><span class="n"><span class="pre">nfc_ndef_ch_ac_rec</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">nfc_rec_ac</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">buf</span></span>, <span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">len</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.nfc_ndef_ch_ac_rec_payload_encode" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Constructor for an NFC NDEF Alternative Carrier record payload. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nfc_rec_ac</strong> – <strong>[in]</strong> Pointer to the Alternative Carrier record description. </p></li>
+<li><p><strong>buf</strong> – <strong>[in]</strong> Pointer to the payload destination. If NULL, function will calculate the expected size of the Alternative Carrier record payload. </p></li>
+<li><p><strong>len</strong> – <strong>[inout]</strong> Size of the available memory to write as input. Size of the generated record payload as output.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><p><strong>0</strong> – If the operation was successful. Otherwise, a (negative) error code is returned. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.nfc_ndef_ch_ac_rec_auxiliary_data_ref_clear">
+<span class="target" id="group__nfc__ndef__ch_1ga1e653485bf56d183eb49a34bc8163054"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nfc_ndef_ch_ac_rec_auxiliary_data_ref_clear</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="msg.html#c.nfc_ndef_record_desc" title="nfc_ndef_record_desc"><span class="n"><span class="pre">nfc_ndef_record_desc</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ac_rec</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.nfc_ndef_ch_ac_rec_auxiliary_data_ref_clear" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Function for clearing an Auxiliary Data Reference in an NFC NDEF Alternative Carrier record. </p>
+<p>This function clears the Auxiliary Data References from the Alternative Carrier record.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ac_rec</strong> – <strong>[inout]</strong> Pointer to the Alternative Carrier record descriptor. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.nfc_ndef_ch_ac_rec_auxiliary_data_ref_add">
+<span class="target" id="group__nfc__ndef__ch_1ga4af3f1301839eaefde9f348cb8e1c588"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nfc_ndef_ch_ac_rec_auxiliary_data_ref_add</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="msg.html#c.nfc_ndef_record_desc" title="nfc_ndef_record_desc"><span class="n"><span class="pre">nfc_ndef_record_desc</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ac_rec</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">aux_data</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">aux_length</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.nfc_ndef_ch_ac_rec_auxiliary_data_ref_add" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Function for adding an Auxiliary Data Reference to an NFC NDEF Alternative Carrier record. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ac_rec</strong> – <strong>[inout]</strong> Pointer to an ac record. </p></li>
+<li><p><strong>aux_data</strong> – <strong>[in]</strong> Pointer to the Auxiliary Data Reference data buffer. </p></li>
+<li><p><strong>aux_length</strong> – <strong>[in]</strong> Length of the Auxiliary Data Reference data.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><p><strong>0</strong> – If the operation was successful. Otherwise, a (negative) error code is returned. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.nfc_ndef_ch_cr_rec_payload_encode">
+<span class="target" id="group__nfc__ndef__ch_1gad15bcf7040ca8634d4c4572680e10c88"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nfc_ndef_ch_cr_rec_payload_encode</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.nfc_ndef_ch_cr_rec" title="nfc_ndef_ch_cr_rec"><span class="n"><span class="pre">nfc_ndef_ch_cr_rec</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">nfc_rec_cr</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">buf</span></span>, <span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">len</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.nfc_ndef_ch_cr_rec_payload_encode" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Constructor for an NFC NDEF Collision Resolution record payload. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nfc_rec_cr</strong> – <strong>[in]</strong> Pointer to the Collision Resolution record description. </p></li>
+<li><p><strong>buf</strong> – <strong>[out]</strong> Pointer to the payload destination. If NULL, function will calculate the expected size of the Collision Resolution record payload. </p></li>
+<li><p><strong>len</strong> – <strong>[inout]</strong> Size of the available memory to write as input. Size of the generated record payload as output.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><p><strong>0</strong> – If the operation was successful. Otherwise, a (negative) error code is returned. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.nfc_ndef_ch_hc_rec">
+<span class="target" id="structnfc__ndef__ch__hc__rec"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nfc_ndef_ch_hc_rec</span></span></span><a class="headerlink" href="#c.nfc_ndef_ch_hc_rec" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;ch.h&gt;</em></div>
+<p>Handover Carrier record payload descriptor. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.nfc_ndef_ch_hc_rec.ctf">
+<span class="target" id="structnfc__ndef__ch__hc__rec_1a0fee9b1e992168e71c163d9dcbaa3bce"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="msg.html#c.nfc_ndef_record_tnf" title="nfc_ndef_record_tnf"><span class="n"><span class="pre">nfc_ndef_record_tnf</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ctf</span></span></span><a class="headerlink" href="#c.nfc_ndef_ch_hc_rec.ctf" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Carrier Type Format, it has the same semantics like TNF. Supported TNF:<ul class="simple">
+<li><p>NFC Forum Well Known Type</p></li>
+<li><p>Media Type</p></li>
+<li><p>Absolute URI</p></li>
+<li><p>NFC Forum external type </p></li>
+</ul>
+</p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.nfc_ndef_ch_hc_rec.type_len">
+<span class="target" id="structnfc__ndef__ch__hc__rec_1a7c36ed7cbcec745e2a29bd894a7a49f1"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">type_len</span></span></span><a class="headerlink" href="#c.nfc_ndef_ch_hc_rec.type_len" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Carrier type field length. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.nfc_ndef_ch_hc_rec.type">
+<span class="target" id="structnfc__ndef__ch__hc__rec_1af70023fcbd574d1e304fd3e0de3907bb"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">type</span></span></span><a class="headerlink" href="#c.nfc_ndef_ch_hc_rec.type" title="Permalink to this definition"></a><br /></dt>
+<dd><p>A unique identification of the alternative carrier. It shall follow the structure, encoding, and format implied by the value of the CTF field. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.nfc_ndef_ch_hc_rec.data_len">
+<span class="target" id="structnfc__ndef__ch__hc__rec_1a89b4a5f51c8e03481c6922fb0abde83c"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">data_len</span></span></span><a class="headerlink" href="#c.nfc_ndef_ch_hc_rec.data_len" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Optional data length. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.nfc_ndef_ch_hc_rec.data">
+<span class="target" id="structnfc__ndef__ch__hc__rec_1a5397c4b46867cc34fcd55759b5deadb9"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">data</span></span></span><a class="headerlink" href="#c.nfc_ndef_ch_hc_rec.data" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Optional information about alternative carrier. It length can be calculated using following formula: (NDEF Record Payload length - carrier type length) - 2 </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.nfc_ndef_ch_hc_rec.carrier">
+<span class="target" id="structnfc__ndef__ch__hc__rec_1a432d060090be704fc4b8ae7785b3c0dd"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.nfc_ndef_ch_hc_rec" title="nfc_ndef_ch_hc_rec"><span class="n"><span class="pre">nfc_ndef_ch_hc_rec</span></span></a><span class="p"><span class="pre">.</span></span><span class="n"><span class="pre">[anonymous]</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">carrier</span></span></span><a class="headerlink" href="#c.nfc_ndef_ch_hc_rec.carrier" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Carrier description. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.nfc_ndef_ch_ac_rec_ref">
+<span class="target" id="structnfc__ndef__ch__ac__rec__ref"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nfc_ndef_ch_ac_rec_ref</span></span></span><a class="headerlink" href="#c.nfc_ndef_ch_ac_rec_ref" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;ch.h&gt;</em></div>
+<p>Carrier Data Reference and Auxiliary Data Reference descriptor. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.nfc_ndef_ch_ac_rec_ref.length">
+<span class="target" id="structnfc__ndef__ch__ac__rec__ref_1a23c705a89b303d7530d61c1d06121341"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">length</span></span></span><a class="headerlink" href="#c.nfc_ndef_ch_ac_rec_ref.length" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Length of the data field. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.nfc_ndef_ch_ac_rec_ref.data">
+<span class="target" id="structnfc__ndef__ch__ac__rec__ref_1a529f66b618955dfaa2318c1e36c71e3b"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">data</span></span></span><a class="headerlink" href="#c.nfc_ndef_ch_ac_rec_ref.data" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Pointer to the Data Reference characters. Not relevant if length is 0. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.nfc_ndef_ch_ac_rec">
+<span class="target" id="structnfc__ndef__ch__ac__rec"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nfc_ndef_ch_ac_rec</span></span></span><a class="headerlink" href="#c.nfc_ndef_ch_ac_rec" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;ch.h&gt;</em></div>
+<p>Alternative Carrier record payload descriptor. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.nfc_ndef_ch_ac_rec.cps">
+<span class="target" id="structnfc__ndef__ch__ac__rec_1a8ee539a3cfae007e333d12b118a9220a"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#c.nfc_ndef_ch_ac_rec_cps" title="nfc_ndef_ch_ac_rec_cps"><span class="n"><span class="pre">nfc_ndef_ch_ac_rec_cps</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cps</span></span></span><a class="headerlink" href="#c.nfc_ndef_ch_ac_rec.cps" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Carrier Power State value. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.nfc_ndef_ch_ac_rec.carrier_data_ref">
+<span class="target" id="structnfc__ndef__ch__ac__rec_1aa7172fd7c07b1764133edb2fa2e9a0b3"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.nfc_ndef_ch_ac_rec_ref" title="nfc_ndef_ch_ac_rec_ref"><span class="n"><span class="pre">nfc_ndef_ch_ac_rec_ref</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">carrier_data_ref</span></span></span><a class="headerlink" href="#c.nfc_ndef_ch_ac_rec.carrier_data_ref" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Carrier Data Reference. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.nfc_ndef_ch_ac_rec.max_aux_data_ref_cnt">
+<span class="target" id="structnfc__ndef__ch__ac__rec_1ac89d791b9fd3cd8884ed435b40fb3312"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">max_aux_data_ref_cnt</span></span></span><a class="headerlink" href="#c.nfc_ndef_ch_ac_rec.max_aux_data_ref_cnt" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Maximum number of Auxiliary Data Reference fields. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.nfc_ndef_ch_ac_rec.aux_data_ref_cnt">
+<span class="target" id="structnfc__ndef__ch__ac__rec_1a360906dd189be2563c4ad1fc6d8317e2"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">aux_data_ref_cnt</span></span></span><a class="headerlink" href="#c.nfc_ndef_ch_ac_rec.aux_data_ref_cnt" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Number of Auxiliary Data Reference fields. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.nfc_ndef_ch_ac_rec.aux_data_ref">
+<span class="target" id="structnfc__ndef__ch__ac__rec_1a20aefa7fec68c9efd4173a0e50009991"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.nfc_ndef_ch_ac_rec_ref" title="nfc_ndef_ch_ac_rec_ref"><span class="n"><span class="pre">nfc_ndef_ch_ac_rec_ref</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">aux_data_ref</span></span></span><a class="headerlink" href="#c.nfc_ndef_ch_ac_rec.aux_data_ref" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Pointer to the Auxiliary Data Reference fields. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.nfc_ndef_ch_cr_rec">
+<span class="target" id="structnfc__ndef__ch__cr__rec"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nfc_ndef_ch_cr_rec</span></span></span><a class="headerlink" href="#c.nfc_ndef_ch_cr_rec" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;ch.h&gt;</em></div>
+<p>Collision Resolution record payload descriptor. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.nfc_ndef_ch_cr_rec.random">
+<span class="target" id="structnfc__ndef__ch__cr__rec_1a6fcc1263b89683bad1994a397df88972"></span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">random</span></span></span><a class="headerlink" href="#c.nfc_ndef_ch_cr_rec.random" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Randomly generated number. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.nfc_ndef_ch_rec">
+<span class="target" id="structnfc__ndef__ch__rec"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nfc_ndef_ch_rec</span></span></span><a class="headerlink" href="#c.nfc_ndef_ch_rec" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;ch.h&gt;</em></div>
+<p>Handover Select record payload descriptor. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.nfc_ndef_ch_rec.major_version">
+<span class="target" id="structnfc__ndef__ch__rec_1a8c21a98978da6786dd1d18823ecd8a33"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">major_version</span></span></span><a class="headerlink" href="#c.nfc_ndef_ch_rec.major_version" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Major version number of the supported Connection Handover specification. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.nfc_ndef_ch_rec.minor_version">
+<span class="target" id="structnfc__ndef__ch__rec_1ad3d6f9e66adc098f8b56bab03b540b8e"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">minor_version</span></span></span><a class="headerlink" href="#c.nfc_ndef_ch_rec.minor_version" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Minor version number of the supported Connection Handover specification. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.nfc_ndef_ch_rec.local_records">
+<span class="target" id="structnfc__ndef__ch__rec_1a72e2347939630eb3469a1e215466f2d6"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="msg.html#c.nfc_ndef_msg_desc" title="nfc_ndef_msg_desc"><span class="n"><span class="pre">nfc_ndef_msg_desc</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">local_records</span></span></span><a class="headerlink" href="#c.nfc_ndef_ch_rec.local_records" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Pointer to a message encapsulating local records. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="nfc-pair-msg">
+<span id="id2"></span><h3><a class="toc-backref" href="#id13">Connection Handover messages</a><a class="headerlink" href="#nfc-pair-msg" title="Permalink to this heading"></a></h3>
+<div class="line-block">
+<div class="line">Header file: <code class="file docutils literal notranslate"><span class="pre">include/nfc/ndef/ch_msg.h</span></code></div>
+<div class="line">Source file: <code class="file docutils literal notranslate"><span class="pre">subsys/nfc/ndef/ch_msg.c</span></code></div>
+</div>
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="group__nfc__ndef__ch__msg"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">nfc_ndef_ch_msg</span></span></dt>
+<dd><p>Generation of The Connection Handover NDEF messages. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-defines">Defines</p>
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.NFC_NDEF_CH_MSG_MAJOR_VER">
+<span class="target" id="group__nfc__ndef__ch__msg_1gafb5c0d9a5e876fab9098771f109cd202"></span><span class="sig-name descname"><span class="n"><span class="pre">NFC_NDEF_CH_MSG_MAJOR_VER</span></span></span><a class="headerlink" href="#c.NFC_NDEF_CH_MSG_MAJOR_VER" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.NFC_NDEF_CH_MSG_MINOR_VER">
+<span class="target" id="group__nfc__ndef__ch__msg_1ga7bf35c812a36ad804bc6db740330bda0"></span><span class="sig-name descname"><span class="n"><span class="pre">NFC_NDEF_CH_MSG_MINOR_VER</span></span></span><a class="headerlink" href="#c.NFC_NDEF_CH_MSG_MINOR_VER" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.nfc_ndef_ch_msg_le_oob_encode">
+<span class="target" id="group__nfc__ndef__ch__msg_1ga3177df93eb0294ef581d40bee47702ca"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nfc_ndef_ch_msg_le_oob_encode</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="le_oob_rec.html#c.nfc_ndef_le_oob_rec_payload_desc" title="nfc_ndef_le_oob_rec_payload_desc"><span class="n"><span class="pre">nfc_ndef_le_oob_rec_payload_desc</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">oob</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">buf</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">len</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.nfc_ndef_ch_msg_le_oob_encode" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Encode an NFC NDEF LE OOB message. </p>
+<p>This function encodes an NFC NDEF message into a buffer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>oob</strong> – <strong>[in]</strong> Pointer to the LE OOB Record payload descriptor. </p></li>
+<li><p><strong>buf</strong> – <strong>[out]</strong> Pointer to the buffer for the message. </p></li>
+<li><p><strong>len</strong> – <strong>[inout]</strong> Size of the available memory for the message as input. Size of the generated message as output.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><p><strong>0</strong> – If the operation was successful. Otherwise, a (negative) error code is returned. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.nfc_ndef_ch_msg_hs_create">
+<span class="target" id="group__nfc__ndef__ch__msg_1ga0f5bc870aab55885540cf4de2e744806"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nfc_ndef_ch_msg_hs_create</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="msg.html#c.nfc_ndef_msg_desc" title="nfc_ndef_msg_desc"><span class="n"><span class="pre">nfc_ndef_msg_desc</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">msg</span></span>, <span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="msg.html#c.nfc_ndef_record_desc" title="nfc_ndef_record_desc"><span class="n"><span class="pre">nfc_ndef_record_desc</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">hs_rec</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.nfc_ndef_ch_msg_records" title="nfc_ndef_ch_msg_records"><span class="n"><span class="pre">nfc_ndef_ch_msg_records</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">records</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.nfc_ndef_ch_msg_hs_create" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Create an NFC NDEF Handover Select message. </p>
+<p>This function create an NFC NDEF message. It create a nested NDEF message with the Alternative Carrier Records. Next the Records with the Carrier data are added into the main Connection Hanover Select message. Number of the Alternative Carrier Records must be equal to the number of the Carrier Records.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>msg</strong> – <strong>[inout]</strong> Pointer to NDEF message. This message is initialized with Connection Handover Record. The message must be able to keep at least count of the Alternative Carrier Records + 1 records. </p></li>
+<li><p><strong>hs_rec</strong> – <strong>[out]</strong> Pointer to the Handover Select Record. </p></li>
+<li><p><strong>records</strong> – <strong>[in]</strong> Pointer to structure which contains the Alternative Carrier Records and the Carrier Records</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><p><strong>0</strong> – If the operation was successful. Otherwise, a (negative) error code is returned. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.nfc_ndef_ch_msg_hr_create">
+<span class="target" id="group__nfc__ndef__ch__msg_1ga414c6150e5843da0f8bdaca8f93f3ba0"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nfc_ndef_ch_msg_hr_create</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="msg.html#c.nfc_ndef_msg_desc" title="nfc_ndef_msg_desc"><span class="n"><span class="pre">nfc_ndef_msg_desc</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">msg</span></span>, <span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="msg.html#c.nfc_ndef_record_desc" title="nfc_ndef_record_desc"><span class="n"><span class="pre">nfc_ndef_record_desc</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">hr_rec</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="msg.html#c.nfc_ndef_record_desc" title="nfc_ndef_record_desc"><span class="n"><span class="pre">nfc_ndef_record_desc</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">cr_rec</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.nfc_ndef_ch_msg_records" title="nfc_ndef_ch_msg_records"><span class="n"><span class="pre">nfc_ndef_ch_msg_records</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">records</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.nfc_ndef_ch_msg_hr_create" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Encode an NFC NDEF Handover Request message. </p>
+<p>This function create an NFC NDEF message. It create a nested NDEF message with the Alternative Carrier Records. Next the Records with the Carrier data are added into the main Connection Hanover Request message. Number of the Alternative Carrier Records must be equal to the number of the Carrier Records.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>msg</strong> – <strong>[inout]</strong> Pointer to NDEF message. This message is initialized with Connection Handover Record. The message must be able to keep at least count of the Alternative Carrier Records + 1 records. </p></li>
+<li><p><strong>hr_rec</strong> – <strong>[out]</strong> Pointer to the Handover Request Record. </p></li>
+<li><p><strong>cr_rec</strong> – <strong>[in]</strong> Pointer to the Collision Resolution Record. </p></li>
+<li><p><strong>records</strong> – <strong>[in]</strong> Pointer to structure which contains the Alternative Carrier Records and the Carrier Records</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><p><strong>0</strong> – If the operation was successful. Otherwise, a (negative) error code is returned. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.nfc_ndef_ch_msg_hm_create">
+<span class="target" id="group__nfc__ndef__ch__msg_1gaa09d0edf5da83025bd5840ea86022f81"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nfc_ndef_ch_msg_hm_create</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="msg.html#c.nfc_ndef_msg_desc" title="nfc_ndef_msg_desc"><span class="n"><span class="pre">nfc_ndef_msg_desc</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">msg</span></span>, <span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="msg.html#c.nfc_ndef_record_desc" title="nfc_ndef_record_desc"><span class="n"><span class="pre">nfc_ndef_record_desc</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">hm_rec</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.nfc_ndef_ch_msg_records" title="nfc_ndef_ch_msg_records"><span class="n"><span class="pre">nfc_ndef_ch_msg_records</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">records</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.nfc_ndef_ch_msg_hm_create" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Create an NFC NDEF Handover Mediation message. </p>
+<p>This function creates an NFC NDEF message. It create a nested NDEF message with the Alternative Carrier Records. Next the Records with the Carrier data are added into the main Connection Hanover Mediation message. Number of the Alternative Carrier Records must be equal to the number of the Carrier Records.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>msg</strong> – <strong>[inout]</strong> Pointer to NDEF message. This message is initialized with Connection Handover Record. The message must be able to keep at least count of the Alternative Carrier Records + 1 records. </p></li>
+<li><p><strong>hm_rec</strong> – <strong>[out]</strong> Pointer to the Handover Mediation Record. </p></li>
+<li><p><strong>records</strong> – <strong>[in]</strong> Pointer to structure which contains the Alternative Carrier Records and the Carrier Records</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><p><strong>0</strong> – If the operation was successful. Otherwise, a (negative) error code is returned. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.nfc_ndef_ch_msg_hi_create">
+<span class="target" id="group__nfc__ndef__ch__msg_1gaa33649cb5b349af31d808e8ca93080af"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nfc_ndef_ch_msg_hi_create</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="msg.html#c.nfc_ndef_msg_desc" title="nfc_ndef_msg_desc"><span class="n"><span class="pre">nfc_ndef_msg_desc</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">msg</span></span>, <span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="msg.html#c.nfc_ndef_record_desc" title="nfc_ndef_record_desc"><span class="n"><span class="pre">nfc_ndef_record_desc</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">hi_rec</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.nfc_ndef_ch_msg_records" title="nfc_ndef_ch_msg_records"><span class="n"><span class="pre">nfc_ndef_ch_msg_records</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">records</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.nfc_ndef_ch_msg_hi_create" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Create an NFC NDEF Handover Initiate message. </p>
+<p>This function creates an NFC NDEF message. It create a nested NDEF message with the Alternative Carrier Records. Next the Records with the Carrier data are added into the main Connection Hanover Initiate message. Number of the Alternative Carrier Records must be equal to the number of the Carrier Records.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>msg</strong> – <strong>[inout]</strong> Pointer to NDEF message. This message is initialized with Connection Handover Record. The message must be able to keep at least count of the Alternative Carrier Records + 1 records. </p></li>
+<li><p><strong>hi_rec</strong> – <strong>[out]</strong> Pointer to the Handover Initiate Record. </p></li>
+<li><p><strong>records</strong> – <strong>[in]</strong> Pointer to structure which contains the Alternative Carrier Records and the Carrier Records</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><p><strong>0</strong> – If the operation was successful. Otherwise, a (negative) error code is returned. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.nfc_ndef_ch_msg_records">
+<span class="target" id="structnfc__ndef__ch__msg__records"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nfc_ndef_ch_msg_records</span></span></span><a class="headerlink" href="#c.nfc_ndef_ch_msg_records" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;ch_msg.h&gt;</em></div>
+<p>NFC NDEF Connection Handover message structure. This structure contains all needed records needed to create the Connection Handover message. It can contains one or more the Alternative Carrier Records and the Carrier Records. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.nfc_ndef_ch_msg_records.ac">
+<span class="target" id="structnfc__ndef__ch__msg__records_1ae71de861f614cac7defdda0a48a14af8"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="msg.html#c.nfc_ndef_record_desc" title="nfc_ndef_record_desc"><span class="n"><span class="pre">nfc_ndef_record_desc</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">ac</span></span></span><a class="headerlink" href="#c.nfc_ndef_ch_msg_records.ac" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Array of the Alternative Carrier Records. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.nfc_ndef_ch_msg_records.carrier">
+<span class="target" id="structnfc__ndef__ch__msg__records_1af07b491320ea80bb20b0f660cebd3752"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="msg.html#c.nfc_ndef_record_desc" title="nfc_ndef_record_desc"><span class="n"><span class="pre">nfc_ndef_record_desc</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">carrier</span></span></span><a class="headerlink" href="#c.nfc_ndef_ch_msg_records.carrier" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Array of the Carrier Records. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.nfc_ndef_ch_msg_records.cnt">
+<span class="target" id="structnfc__ndef__ch__msg__records_1a74c0497a038ac2a99b306d3f69c8edcc"></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cnt</span></span></span><a class="headerlink" href="#c.nfc_ndef_ch_msg_records.cnt" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Count of the Alternative Carrier Records and the Carrier Records. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="ch_rec_parser.html" class="btn btn-neutral float-right" title="Parser for Connection Handover records" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="NFC Data Exchange Format (NDEF)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

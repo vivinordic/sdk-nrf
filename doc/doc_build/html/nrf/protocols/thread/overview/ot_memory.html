@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OpenThread memory requirements &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../../_static/js/ncs.js"
+></script>
+<script src="../../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="OpenThread power consumption" href="power_consumption.html" />
+    <link rel="prev" title="OpenThread integration" href="ot_integration.html" />
+<link
+  href="../../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../protocols.html">Protocols</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../ble/index.html">Bluetooth LE Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../bt_mesh/index.html">Bluetooth mesh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../esb/index.html">Enhanced ShockBurst (ESB)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gazell/index.html">Gazell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../matter/index.html">Matter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../multiprotocol/index.html">Multiprotocol support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nfc/index.html">Near Field Communication (NFC)</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Thread</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">OpenThread overview</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="supported_features.html">Supported Thread features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="architectures.html">OpenThread architectures</a></li>
+<li class="toctree-l4"><a class="reference internal" href="communication.html">OpenThread co-processor communication</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ot_integration.html">OpenThread integration</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">OpenThread memory requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="power_consumption.html">OpenThread power consumption</a></li>
+<li class="toctree-l4"><a class="reference internal" href="commissioning.html">OpenThread commissioning</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../configuring.html">Configuring Thread in the nRF Connect SDK</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prebuilt_libs.html">Pre-built libraries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tools.html">Thread tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../certification.html">Thread certification</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../wifi/index.html">Wi-Fi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../zigbee/index.html">Zigbee</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../drivers.html">Drivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../protocols.html">Protocols</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Thread</a></li>
+          <li class="breadcrumb-item"><a href="index.html">OpenThread overview</a></li>
+      <li class="breadcrumb-item active">OpenThread memory requirements</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/protocols/thread/overview/ot_memory.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="openthread-memory-requirements">
+<span id="thread-ot-memory"></span><h1>OpenThread memory requirements<a class="headerlink" href="#openthread-memory-requirements" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#how-to-read-the-tables" id="id10">How to read the tables</a></p></li>
+<li><p><a class="reference internal" href="#nrf5340-dk-ram-and-flash-memory-requirements" id="id11">nRF5340 DK RAM and flash memory requirements</a></p></li>
+<li><p><a class="reference internal" href="#nrf52840-dk-ram-and-flash-memory-requirements" id="id12">nRF52840 DK RAM and flash memory requirements</a></p></li>
+</ul>
+</div>
+<p>This page provides information about the layout and the amount of flash memory and RAM that is required by samples that use the OpenThread stack.
+Use these values to see whether your application has enough space for running on particular platforms for different application configurations.</p>
+<section id="how-to-read-the-tables">
+<span id="thread-ot-memory-introduction"></span><h2><a class="toc-backref" href="#id10">How to read the tables</a><a class="headerlink" href="#how-to-read-the-tables" title="Permalink to this heading"></a></h2>
+<p>The memory requirement tables list flash memory and RAM requirements for the <a class="reference internal" href="../../../samples/openthread/cli/README.html#ot-cli-sample"><span class="std std-ref">Thread CLI sample</span></a> that was built with OpenThread pre-built libraries.</p>
+<p>The values change depending on device type and hardware platform.
+Moreover, take into account the following considerations:</p>
+<ul class="simple">
+<li><p>The sample was compiled using:</p>
+<ul>
+<li><p>The default <code class="file docutils literal notranslate"><span class="pre">prj.conf</span></code> and the corresponding <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">OPENTHREAD_NORDIC_LIBRARY</span></code>, <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">OPENTHREAD_THREAD_VERSION</span></code> choices.</p></li>
+<li><p>The <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ASSERT</span></code> Kconfig option set to <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p></li>
+</ul>
+</li>
+<li><p>Values for the <a class="reference internal" href="../../../samples/openthread/cli/README.html#ot-cli-sample"><span class="std std-ref">Thread CLI sample</span></a>, which works with all OpenThread calls, are the highest possible for the OpenThread stack using the master image library configuration.</p></li>
+</ul>
+<p>The tables provide memory requirements for the following device type variants:</p>
+<ul class="simple">
+<li><p><em>FTD</em> - Full Thread Device.</p></li>
+<li><p><em>MTD</em> - Minimal Thread Device.</p></li>
+</ul>
+<p>Some tables also list a <em>master</em> variant, which is an FTD with additional features, such as being able to have the <em>commissioner</em> or <em>border router</em> commissioning roles.
+See <a class="reference internal" href="../prebuilt_libs.html#thread-ug-feature-sets"><span class="std std-ref">Feature sets</span></a> for more information.</p>
+</section>
+<section id="nrf5340-dk-ram-and-flash-memory-requirements">
+<span id="thread-ot-memory-5340"></span><h2><a class="toc-backref" href="#id11">nRF5340 DK RAM and flash memory requirements</a><a class="headerlink" href="#nrf5340-dk-ram-and-flash-memory-requirements" title="Permalink to this heading"></a></h2>
+<p>The following tables present memory requirements for samples running on the <a class="reference internal" href="../../../app_dev/board_support/index.html#gs-programming-board-names"><span class="std std-ref">nRF5340 DK</span></a> (<span class="xref std std-ref">nrf5340dk_nrf5340</span>) with the software cryptography support provided by the <span class="xref std std-ref">nrfxlib:nrf_oberon_readme</span> module.</p>
+<table class="docutils align-default" id="id6">
+<caption><span class="caption-text">nRF5340 single protocol Thread 1.3 memory requirements</span><a class="headerlink" href="#id6" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 67%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"></th>
+<th class="head"><p>FTD</p></th>
+<th class="head"><p>MTD</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ROM OT stack + App [kB]</p></td>
+<td><p>383</p></td>
+<td><p>332</p></td>
+</tr>
+<tr class="row-odd"><td><p>ROM Bluetooth LE stack [kB]</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>Persistent storage [kB]</p></td>
+<td><p>24</p></td>
+<td><p>24</p></td>
+</tr>
+<tr class="row-odd"><td><p>Free ROM [kB]</p></td>
+<td><p>617</p></td>
+<td><p>668</p></td>
+</tr>
+<tr class="row-even"><td><p>RAM OT stack + App [kB]</p></td>
+<td><p>100</p></td>
+<td><p>90</p></td>
+</tr>
+<tr class="row-odd"><td><p>RAM Bluetooth LE stack [kB]</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>Free RAM [kB]</p></td>
+<td><p>412</p></td>
+<td><p>422</p></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-default" id="id7">
+<caption><span class="caption-text">nRF5340 multiprotocol Thread 1.3 memory requirements</span><a class="headerlink" href="#id7" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 67%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"></th>
+<th class="head"><p>FTD</p></th>
+<th class="head"><p>MTD</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ROM OT stack + App [kB]</p></td>
+<td><p>383</p></td>
+<td><p>332</p></td>
+</tr>
+<tr class="row-odd"><td><p>ROM Bluetooth LE stack [kB]</p></td>
+<td><p>29</p></td>
+<td><p>29</p></td>
+</tr>
+<tr class="row-even"><td><p>Persistent storage [kB]</p></td>
+<td><p>24</p></td>
+<td><p>24</p></td>
+</tr>
+<tr class="row-odd"><td><p>Free ROM [kB]</p></td>
+<td><p>588</p></td>
+<td><p>639</p></td>
+</tr>
+<tr class="row-even"><td><p>RAM OT stack + App [kB]</p></td>
+<td><p>100</p></td>
+<td><p>90</p></td>
+</tr>
+<tr class="row-odd"><td><p>RAM Bluetooth LE stack [kB]</p></td>
+<td><p>11</p></td>
+<td><p>11</p></td>
+</tr>
+<tr class="row-even"><td><p>Free RAM [kB]</p></td>
+<td><p>401</p></td>
+<td><p>411</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="nrf52840-dk-ram-and-flash-memory-requirements">
+<span id="thread-ot-memory-52840"></span><h2><a class="toc-backref" href="#id12">nRF52840 DK RAM and flash memory requirements</a><a class="headerlink" href="#nrf52840-dk-ram-and-flash-memory-requirements" title="Permalink to this heading"></a></h2>
+<p>The following tables present memory requirements for samples running on the <a class="reference internal" href="../../../app_dev/board_support/index.html#gs-programming-board-names"><span class="std std-ref">nRF52840 DK</span></a> (<span class="xref std std-ref">nrf52840dk_nrf52840</span>) with the software cryptography support provided by the <span class="xref std std-ref">nrfxlib:nrf_oberon_readme</span> module.</p>
+<table class="docutils align-default" id="id8">
+<caption><span class="caption-text">nRF52840 single protocol Thread 1.3 memory requirements</span><a class="headerlink" href="#id8" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 55%" />
+<col style="width: 19%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"></th>
+<th class="head"><p>master</p></th>
+<th class="head"><p>FTD</p></th>
+<th class="head"><p>MTD</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ROM OT stack + App [kB]</p></td>
+<td><p>452</p></td>
+<td><p>426</p></td>
+<td><p>375</p></td>
+</tr>
+<tr class="row-odd"><td><p>ROM Bluetooth LE stack [kB]</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>Persistent storage [kB]</p></td>
+<td><p>32</p></td>
+<td><p>32</p></td>
+<td><p>32</p></td>
+</tr>
+<tr class="row-odd"><td><p>Free ROM [kB]</p></td>
+<td><p>540</p></td>
+<td><p>566</p></td>
+<td><p>617</p></td>
+</tr>
+<tr class="row-even"><td><p>RAM OT stack + App [kB]</p></td>
+<td><p>99</p></td>
+<td><p>96</p></td>
+<td><p>86</p></td>
+</tr>
+<tr class="row-odd"><td><p>RAM Bluetooth LE stack [kB]</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>Free RAM [kB]</p></td>
+<td><p>157</p></td>
+<td><p>160</p></td>
+<td><p>170</p></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-default" id="id9">
+<caption><span class="caption-text">nRF52840 multiprotocol Thread 1.3 memory requirements</span><a class="headerlink" href="#id9" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 55%" />
+<col style="width: 19%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"></th>
+<th class="head"><p>master</p></th>
+<th class="head"><p>FTD</p></th>
+<th class="head"><p>MTD</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ROM OT stack + App [kB]</p></td>
+<td><p>452</p></td>
+<td><p>426</p></td>
+<td><p>375</p></td>
+</tr>
+<tr class="row-odd"><td><p>ROM Bluetooth LE stack [kB]</p></td>
+<td><p>84</p></td>
+<td><p>84</p></td>
+<td><p>84</p></td>
+</tr>
+<tr class="row-even"><td><p>Persistent storage [kB]</p></td>
+<td><p>32</p></td>
+<td><p>32</p></td>
+<td><p>32</p></td>
+</tr>
+<tr class="row-odd"><td><p>Free ROM [kB]</p></td>
+<td><p>456</p></td>
+<td><p>482</p></td>
+<td><p>533</p></td>
+</tr>
+<tr class="row-even"><td><p>RAM OT stack + App [kB]</p></td>
+<td><p>99</p></td>
+<td><p>96</p></td>
+<td><p>86</p></td>
+</tr>
+<tr class="row-odd"><td><p>RAM Bluetooth LE stack [kB]</p></td>
+<td><p>17</p></td>
+<td><p>16</p></td>
+<td><p>16</p></td>
+</tr>
+<tr class="row-even"><td><p>Free RAM [kB]</p></td>
+<td><p>140</p></td>
+<td><p>144</p></td>
+<td><p>154</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="power_consumption.html" class="btn btn-neutral float-right" title="OpenThread power consumption" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="ot_integration.html" class="btn btn-neutral" title="OpenThread integration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

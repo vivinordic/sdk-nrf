@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OpenThread co-processor communication &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../../_static/js/ncs.js"
+></script>
+<script src="../../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="OpenThread integration" href="ot_integration.html" />
+    <link rel="prev" title="OpenThread architectures" href="architectures.html" />
+<link
+  href="../../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../protocols.html">Protocols</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../ble/index.html">Bluetooth LE Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../bt_mesh/index.html">Bluetooth mesh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../esb/index.html">Enhanced ShockBurst (ESB)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gazell/index.html">Gazell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../matter/index.html">Matter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../multiprotocol/index.html">Multiprotocol support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nfc/index.html">Near Field Communication (NFC)</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Thread</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">OpenThread overview</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="supported_features.html">Supported Thread features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="architectures.html">OpenThread architectures</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">OpenThread co-processor communication</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ot_integration.html">OpenThread integration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ot_memory.html">OpenThread memory requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="power_consumption.html">OpenThread power consumption</a></li>
+<li class="toctree-l4"><a class="reference internal" href="commissioning.html">OpenThread commissioning</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../configuring.html">Configuring Thread in the nRF Connect SDK</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prebuilt_libs.html">Pre-built libraries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tools.html">Thread tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../certification.html">Thread certification</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../wifi/index.html">Wi-Fi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../zigbee/index.html">Zigbee</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../drivers.html">Drivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../protocols.html">Protocols</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Thread</a></li>
+          <li class="breadcrumb-item"><a href="index.html">OpenThread overview</a></li>
+      <li class="breadcrumb-item active">OpenThread co-processor communication</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/protocols/thread/overview/communication.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="openthread-co-processor-communication">
+<span id="ug-thread-communication"></span><h1>OpenThread co-processor communication<a class="headerlink" href="#openthread-co-processor-communication" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#ncp-rcp-prioritization" id="id10">NCP/RCP prioritization</a></p></li>
+<li><p><a class="reference internal" href="#receiving-and-transmitting-data" id="id11">Receiving and transmitting data</a></p>
+<ul>
+<li><p><a class="reference internal" href="#receiving-data-and-rx-data-flows" id="id12">Receiving data and RX data flows</a></p></li>
+<li><p><a class="reference internal" href="#transmitting-data" id="id13">Transmitting data</a></p></li>
+<li><p><a class="reference internal" href="#unsolicited-update-commands" id="id14">Unsolicited update commands</a></p></li>
+<li><p><a class="reference internal" href="#writing-to-the-buffer" id="id15">Writing to the buffer</a></p></li>
+<li><p><a class="reference internal" href="#tx-data-flows" id="id16">TX data flows</a></p></li>
+<li><p><a class="reference internal" href="#log-messages-and-raw-data-through-spinel" id="id17">Log messages and raw data through Spinel</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>The network co-processor (NCP) and radio co-processor (RCP) transport architectures include a transmit (TX) buffer that stores all the data that are to be received by the host using the <a class="reference external" href="https://github.com/openthread/spinel-spec">Spinel protocol</a>.</p>
+<p>See <a class="reference internal" href="architectures.html#thread-architectures-designs-cp"><span class="std std-ref">Co-processor designs</span></a> for more information on the architectures.
+The NCP platform design is currently discontinued by nRF Connect SDK.</p>
+<section id="ncp-rcp-prioritization">
+<span id="ug-thread-communication-priorities"></span><h2><a class="toc-backref" href="#id10">NCP/RCP prioritization</a><a class="headerlink" href="#ncp-rcp-prioritization" title="Permalink to this heading"></a></h2>
+<p>The Spinel protocol does not enforce any prioritization for writing data.
+Therefore, the OpenThread NCP and RCP architectures introduce a data prioritization of their own:</p>
+<ul class="simple">
+<li><p>High priority – for data in the TX buffer that must be written, including data that must be written as fast as possible.</p></li>
+<li><p>Low priority – for data in the TX buffer that can be delayed or can be dropped if a high priority message is awaiting to be written.</p></li>
+</ul>
+<p>When the buffer is full, some of the low priority frames are dropped or delayed for later transmission.
+This happens for example with the <a class="reference internal" href="#ug-thread-update-commands"><span class="std std-ref">Unsolicited update commands</span></a>, where the low priority frames are:</p>
+<ol class="arabic simple">
+<li><p>Frames that can be delayed (“delayable frames”) are delayed for later transmission.</p></li>
+<li><p>Frames that cannot be delayed (“droppable frames”) are dropped.</p></li>
+</ol>
+</section>
+<section id="receiving-and-transmitting-data">
+<span id="ug-thread-communication-rxtx"></span><h2><a class="toc-backref" href="#id11">Receiving and transmitting data</a><a class="headerlink" href="#receiving-and-transmitting-data" title="Permalink to this heading"></a></h2>
+<p>The Spinel communication is based on commands and responses.
+The host sends commands to NCP/RCP, and expects a response to each of them.</p>
+<p>The commands and responses are tied together with the Transaction Identifier value (TID value) in the Spinel frame header.
+Responses have a non-zero TID value, and OpenThread NCP/RCP always gives them high priority.</p>
+<p>The pending responses that do not fit into the TX buffer are queued for later execution.
+The queue is a separate buffer located above the TX buffer.
+If it is full or contains any pending responses, sending of the delayable frames is postponed and all other low priority data is dropped.</p>
+<p>Moreover, the Spinel allows sending unsolicited update commands from NCP to the host, as well as <a class="reference internal" href="#ug-thread-communication-logs"><span class="std std-ref">sending logs</span></a>.
+See <a class="reference internal" href="#ug-thread-communication-rxtx-tx"><span class="std std-ref">Transmitting data</span></a> for details.</p>
+<section id="receiving-data-and-rx-data-flows">
+<span id="ug-thread-communication-rxtx-rx"></span><h3><a class="toc-backref" href="#id12">Receiving data and RX data flows</a><a class="headerlink" href="#receiving-data-and-rx-data-flows" title="Permalink to this heading"></a></h3>
+<p>This section illustrates the RX data flows for UART and SPI for when the commands are received by NCP/RCP:</p>
+<ul>
+<li><p>Data RX flow for UART</p>
+<figure class="align-default" id="id6">
+<img alt="Data RX flow for UART" src="../../../_images/thread_data_flow_rx_uart.svg" /><figcaption>
+<p><span class="caption-text">Data RX flow for UART</span><a class="headerlink" href="#id6" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>In this flow:</p>
+<ol class="arabic simple">
+<li><p>UART interface stores up to six bytes in the hardware FIFO.</p></li>
+<li><p>HDLC-encoded data is stored in the Driver receive buffer.</p></li>
+<li><p>HDLC data is decoded and stored in the NCP UART Driver receive buffer.</p></li>
+<li><p>Spinel commands are dispatched and handled by proper routines.</p>
+<ul class="simple">
+<li><p>If a command requires a response, it will be added to the NCP response queue for later execution.</p></li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>Data RX flow for SPI</p>
+<figure class="align-default" id="id7">
+<img alt="Data RX flow for SPI" src="../../../_images/thread_data_flow_rx_spi.svg" /><figcaption>
+<p><span class="caption-text">Data RX flow for SPI</span><a class="headerlink" href="#id7" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>In this flow:</p>
+<ol class="arabic">
+<li><p>SPI interface saves data into the NCP SPI RX buffer.</p></li>
+<li><p>NCP obtains pointer to the Spinel frame in the buffer and handles it.</p>
+<p>If a command requires a response, it will be added to the NCP response queue for later execution.</p>
+</li>
+</ol>
+</li>
+</ul>
+</section>
+<section id="transmitting-data">
+<span id="ug-thread-communication-rxtx-tx"></span><h3><a class="toc-backref" href="#id13">Transmitting data</a><a class="headerlink" href="#transmitting-data" title="Permalink to this heading"></a></h3>
+<p>NCP/RCP has the following process for sending responses:</p>
+<ol class="arabic">
+<li><p>After a command is received, the response is placed in the NCP/RCP Response Queue.</p></li>
+<li><p>In the NCP/RCP Response Queue, the command is checked for the data required by the host.</p></li>
+<li><p>NCP/RCP gathers the data and writes the response to the TX buffer by emptying the NCP/RCP Response Queue.</p>
+<p>The process of writing the frames to the buffer is described in the <a class="reference internal" href="#ug-thread-writing-buffer"><span class="std std-ref">Writing to the buffer</span></a> paragraph.</p>
+</li>
+<li><p>NCP/RCP sends the response from the TX buffer to the host.</p></li>
+</ol>
+</section>
+<section id="unsolicited-update-commands">
+<span id="ug-thread-update-commands"></span><h3><a class="toc-backref" href="#id14">Unsolicited update commands</a><a class="headerlink" href="#unsolicited-update-commands" title="Permalink to this heading"></a></h3>
+<p>The Spinel protocol also allows sending unsolicited update commands from NCP to the host in addition to responses.
+These are used for example when NCP or a node receives a IPv6 packet that must be forwarded to the host.</p>
+<p>The unsolicited update commands have the following characteristics:</p>
+<ul class="simple">
+<li><p>They are written to the TX buffer.</p></li>
+<li><p>They are asynchronous.</p></li>
+<li><p>All have the TID value equal to zero.</p></li>
+<li><p>They have low priority.</p></li>
+</ul>
+<p>The unsolicited update commands include both delayable and droppable frames (see <a class="reference internal" href="#ug-thread-communication-priorities"><span class="std std-ref">NCP/RCP prioritization</span></a>), prioritized in the following order:</p>
+<ol class="arabic">
+<li><p>Delayable frames:</p>
+<ol class="arabic simple">
+<li><p>MAC, IPv6 and UDP forwarding stream properties.</p></li>
+<li><p>Property value notification commands, including last status update.</p></li>
+</ol>
+</li>
+<li><p>Droppable frames:</p>
+<ol class="arabic">
+<li><p>Debug stream for application.</p>
+<p>This is a separate log for application that has a property ID field that allows the application to distinguish different debug streams.</p>
+</li>
+<li><p>Log.</p>
+<p>This is a log that can be used to report errors and debug information in the OpenThread stack and in Zephyr to the host <a class="reference internal" href="#ug-thread-communication-logs"><span class="std std-ref">using Spinel</span></a>.</p>
+</li>
+</ol>
+</li>
+</ol>
+</section>
+<section id="writing-to-the-buffer">
+<span id="ug-thread-writing-buffer"></span><h3><a class="toc-backref" href="#id15">Writing to the buffer</a><a class="headerlink" href="#writing-to-the-buffer" title="Permalink to this heading"></a></h3>
+<p>The responses and unsolicited update commands are written to the buffer according to the following process:</p>
+<ol class="arabic simple">
+<li><p>NCP/RCP attempts to empty the NCP/RCP Response Queue.
+If any response remains in the queue, it prevents the lower priority messages from being written to the buffer.</p>
+<ul class="simple">
+<li><p>Network frames from the Thread stack are added to the queue and a reattempt is made later.</p></li>
+<li><p>Property value notification commands are not sent and a reattempt is made later.</p></li>
+<li><p>Log and debug stream frames are dropped.</p></li>
+</ul>
+</li>
+<li><p>NCP/RCP attempts to empty the OT Message Queue for pending MAC, IPv6, and UDP messages.
+The data from these pending messages is not directly copied into the NCP TX Buffer, but instead it is stored in the OT stack and associated with the Spinel frame.
+The data is copied just before transmission over UART/USB/SPI.
+This helps save the TX buffer space.</p></li>
+<li><p>NCP/RCP attempts to send all pending property value notification commands.</p></li>
+<li><p>If the buffer space is available and no responses are pending in the NCP/RCP Response Queue, NCP/RCP allows the logs and debug stream to be written to the TX buffer.</p></li>
+</ol>
+</section>
+<section id="tx-data-flows">
+<span id="ug-thread-communication-rxtx-tx-flows"></span><h3><a class="toc-backref" href="#id16">TX data flows</a><a class="headerlink" href="#tx-data-flows" title="Permalink to this heading"></a></h3>
+<p>This section illustrates TX data flows for UART and SPI when sending responses and writing them to the TX buffer:</p>
+<ul>
+<li><p>Data TX flow for UART</p>
+<figure class="align-default" id="id8">
+<img alt="Data TX flow for UART" src="../../../_images/thread_data_flow_tx_uart.svg" /><figcaption>
+<p><span class="caption-text">Data TX flow for UART</span><a class="headerlink" href="#id8" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</li>
+<li><p>Data TX flow for SPI</p>
+<figure class="align-default" id="id9">
+<img alt="Data TX flow for SPI" src="../../../_images/thread_data_flow_tx_spi.svg" /><figcaption>
+<p><span class="caption-text">Data TX flow for SPI</span><a class="headerlink" href="#id9" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</li>
+</ul>
+</section>
+<section id="log-messages-and-raw-data-through-spinel">
+<span id="ug-thread-communication-logs"></span><h3><a class="toc-backref" href="#id17">Log messages and raw data through Spinel</a><a class="headerlink" href="#log-messages-and-raw-data-through-spinel" title="Permalink to this heading"></a></h3>
+<p>Spinel communication is based on commands and responses.
+However, logs from OpenThread and from Zephyr system can also be encoded and transmitted using Spinel.
+This allows for using only one interface for frame and log transmission.</p>
+<p>When using NCP with Zephyr, there is still a possibility that NCP transmits raw data, without encoding it into Spinel frames.
+This happens when some critical errors occur in Zephyr and the system wants to provide as much information about the failure as possible without using interrupts.
+This exception applies mainly to log messages and is done by turning off UART interrupts and flushing everything from the TX buffer without encoding it.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="ot_integration.html" class="btn btn-neutral float-right" title="OpenThread integration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="architectures.html" class="btn btn-neutral" title="OpenThread architectures" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

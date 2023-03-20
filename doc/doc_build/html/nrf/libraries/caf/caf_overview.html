@@ -1,0 +1,1966 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Common Application Framework overview &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../_static/js/ncs.js"
+></script>
+<script src="../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="CAF: Bluetooth LE advertising module" href="ble_adv.html" />
+    <link rel="prev" title="Common Application Framework" href="index.html" />
+<link
+  href="../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drivers.html">Drivers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Libraries</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../bin/index.html">Binary libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bluetooth_services/index.html">Bluetooth libraries and services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bootloader/index.html">Bootloader libraries</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Common Application Framework</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Common Application Framework overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#architecture">Architecture</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enabling-caf">Enabling CAF</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#caf-modules">CAF modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#caf-events">CAF events</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ble_adv.html">CAF: Bluetooth LE advertising module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ble_bond.html">CAF: Bluetooth LE bond module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ble_smp.html">CAF: Simple Management Protocol module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ble_state.html">CAF: Bluetooth LE state module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ble_state_pm.html">CAF: Bluetooth state power manager module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="buttons.html">CAF: Buttons module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="buttons_pm_keep_alive.html">CAF: Power manager keep alive module for buttons</a></li>
+<li class="toctree-l3"><a class="reference internal" href="click_detector.html">CAF: Click detector module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="leds.html">CAF: LEDs module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="net_state.html">CAF: Network state module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="power_manager.html">CAF: Power manager module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sensor_data_aggregator.html">CAF: Sensor data aggregator module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sensor_manager.html">CAF: Sensor manager module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="settings_loader.html">CAF: Settings loader module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../debug/index.html">Debug libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dfu/index.html">DFU libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gazell/index.html">Gazell libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modem/index.html">Modem libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mpsl/index.html">Multiprotocol Service Layer libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../networking/index.html">Libraries for networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nfc/index.html">Libraries for NFC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nrf_rpc/index.html">nRF RPC libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../others/index.html">Other libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../shell/index.html">Shell libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tfm/index.html">TF-M libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../zigbee/index.html">Libraries for Zigbee</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Libraries</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Common Application Framework</a></li>
+      <li class="breadcrumb-item active">Common Application Framework overview</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/libraries/caf/caf_overview.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="common-application-framework-overview">
+<span id="caf-overview"></span><h1>Common Application Framework overview<a class="headerlink" href="#common-application-framework-overview" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#architecture" id="id7">Architecture</a></p></li>
+<li><p><a class="reference internal" href="#enabling-caf" id="id8">Enabling CAF</a></p></li>
+<li><p><a class="reference internal" href="#caf-modules" id="id9">CAF modules</a></p>
+<ul>
+<li><p><a class="reference internal" href="#configuration-of-caf-modules" id="id10">Configuration of CAF modules</a></p></li>
+<li><p><a class="reference internal" href="#adding-custom-modules" id="id11">Adding custom modules</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#caf-events" id="id12">CAF events</a></p>
+<ul>
+<li><p><a class="reference internal" href="#caf-bluetooth-le-common-events" id="id13">CAF Bluetooth LE common events</a></p></li>
+<li><p><a class="reference internal" href="#caf-button-events" id="id14">CAF button events</a></p></li>
+<li><p><a class="reference internal" href="#caf-click-events" id="id15">CAF click events</a></p></li>
+<li><p><a class="reference internal" href="#caf-force-power-down-events" id="id16">CAF force power down events</a></p></li>
+<li><p><a class="reference internal" href="#caf-keep-alive-events" id="id17">CAF keep alive events</a></p></li>
+<li><p><a class="reference internal" href="#caf-led-events" id="id18">CAF LED events</a></p></li>
+<li><p><a class="reference internal" href="#caf-module-state-events" id="id19">CAF module state events</a></p></li>
+<li><p><a class="reference internal" href="#caf-power-events" id="id20">CAF power events</a></p></li>
+<li><p><a class="reference internal" href="#caf-power-manager-events" id="id21">CAF power manager events</a></p></li>
+<li><p><a class="reference internal" href="#caf-sensor-events" id="id22">CAF sensor events</a></p></li>
+<li><p><a class="reference internal" href="#caf-sensor-common" id="id23">CAF sensor common</a></p></li>
+<li><p><a class="reference internal" href="#caf-sensor-data-aggregator-events" id="id24">CAF sensor data aggregator events</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>Common Application Framework (CAF) is a set of ready-for-use modules and events built on top of <a class="reference internal" href="../others/app_event_manager.html#app-event-manager"><span class="std std-ref">Application Event Manager</span></a>.
+Using CAF allows you to have a consistent event-based architecture in your application.</p>
+<p>You can check the <a class="reference internal" href="../../samples/caf/README.html#caf-preview-sample"><span class="std std-ref">Common Application Framework preview</span></a> for a demonstration of how to add ready-for-use and custom CAF modules into an application.</p>
+<section id="architecture">
+<span id="caf-overview-architecture"></span><h2><a class="toc-backref" href="#id7">Architecture</a><a class="headerlink" href="#architecture" title="Permalink to this heading"></a></h2>
+<p>In an event-based application, parts of the application functionality are separated into isolated modules that communicate with each other using Application Event Manager’s events.
+These events are defined either by CAF or by the application.
+They are submitted by modules and other modules can subscribe and react to them.</p>
+<figure class="align-default" id="id6">
+<img alt="Common Application Framework architecture example" src="../../_images/caf_overview.svg" /><figcaption>
+<p><span class="caption-text">Common Application Framework architecture example</span><a class="headerlink" href="#id6" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Every CAF module can use additional libraries or drivers.
+The drivers can be used to communicate with hardware.
+The module can then broadcast information from the driver using events (for example, the <a class="reference internal" href="buttons.html#caf-buttons"><span class="std std-ref">buttons module</span></a> can submit a <a class="reference internal" href="#c.button_event" title="button_event"><code class="xref c c-struct docutils literal notranslate"><span class="pre">button_event</span></code></a> on a button press).
+It can also forward information from application to the driver (for example, the <a class="reference internal" href="leds.html#caf-leds"><span class="std std-ref">LEDs module</span></a> can display a given LED effect upon receiving <a class="reference internal" href="#c.led_event" title="led_event"><code class="xref c c-struct docutils literal notranslate"><span class="pre">led_event</span></code></a>).</p>
+<p>In your application, you can use any number of CAF modules together with your own custom modules.
+Custom modules can use both CAF and custom events.
+The figure shows an example application that uses one CAF module and one custom module, which has one custom event.</p>
+</section>
+<section id="enabling-caf">
+<span id="caf-overview-enabling"></span><h2><a class="toc-backref" href="#id8">Enabling CAF</a><a class="headerlink" href="#enabling-caf" title="Permalink to this heading"></a></h2>
+<p>To enable CAF, you need to enable the required Kconfig option and enable and initialize Application Event Manager.
+You then must submit the first <code class="docutils literal notranslate"><span class="pre">module_state_event</span></code>, because CAF modules are initialized when they receive a <a class="reference internal" href="#c.module_state_event" title="module_state_event"><code class="xref c c-struct docutils literal notranslate"><span class="pre">module_state_event</span></code></a> that reports <code class="docutils literal notranslate"><span class="pre">MODULE_STATE_READY</span></code> of the module <code class="docutils literal notranslate"><span class="pre">main</span></code>.</p>
+<p>complete the following steps:</p>
+<ol class="arabic">
+<li><p>Enable <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_CAF</span></code> Kconfig option in your project configuration file.</p></li>
+<li><p>Enable and initialize Application Event Manager.
+See <a class="reference internal" href="../others/app_event_manager.html#app-event-manager-configuration"><span class="std std-ref">Configuration</span></a> for more details.</p></li>
+<li><p>Submit the first <a class="reference internal" href="#c.module_state_event" title="module_state_event"><code class="xref c c-struct docutils literal notranslate"><span class="pre">module_state_event</span></code></a>:</p>
+<ol class="loweralpha">
+<li><p>Add the following in your <code class="file docutils literal notranslate"><span class="pre">main.c</span></code> file:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#define MODULE main</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;caf/events/module_state_event.h&gt;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Call the following function after Application Event Manager is initialized:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">module_set_state</span><span class="p">(</span><span class="n">MODULE_STATE_READY</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>This function call submits the required <a class="reference internal" href="#c.module_state_event" title="module_state_event"><code class="xref c c-struct docutils literal notranslate"><span class="pre">module_state_event</span></code></a>.</p>
+</li>
+</ol>
+<p>For an example implementation, see <code class="file docutils literal notranslate"><span class="pre">applications/nrf_desktop/src/main.c</span></code>.</p>
+</li>
+</ol>
+</section>
+<section id="caf-modules">
+<span id="caf-overview-modules"></span><h2><a class="toc-backref" href="#id9">CAF modules</a><a class="headerlink" href="#caf-modules" title="Permalink to this heading"></a></h2>
+<p>CAF supports a set of <a class="reference internal" href="index.html#lib-caf"><span class="std std-ref">predefined modules</span></a>.
+Each of these modules is available for use out of the box and needs to be enabled and configured separately.</p>
+<p>There is no limit to the number of modules and events that can be used.
+However, Application Event Manager sets the limit of event types in an application to 32, and CAF inherits this limitation.</p>
+<section id="configuration-of-caf-modules">
+<span id="caf-overview-modules-configuration"></span><h3><a class="toc-backref" href="#id10">Configuration of CAF modules</a><a class="headerlink" href="#configuration-of-caf-modules" title="Permalink to this heading"></a></h3>
+<p>Each module must be configured separately.
+When configuring CAF modules, you will be asked to use the following configuration methods:</p>
+<ul class="simple">
+<li><p>Edit Devicetree Specification (DTS) files - These files reflect the hardware configuration.
+See <span class="xref std std-ref">zephyr:dt-guide</span> for more information about the DTS data structure.</p></li>
+<li><p>Edit <code class="file docutils literal notranslate"><span class="pre">_def</span></code> files - These files contain configuration arrays for the application modules and are specific to CAF.</p></li>
+<li><p>Select Kconfig options or modify Kconfig files, or both - These reflect the software configuration.
+See <span class="xref std std-ref">kconfig_tips_and_tricks</span> for information about how to configure them.</p></li>
+</ul>
+<p>CAF modules can use all or some of these methods.
+For example, enabling the <a class="reference internal" href="ble_adv.html#caf-ble-adv"><span class="std std-ref">CAF: Bluetooth LE advertising module</span></a> requires enabling Kconfig options and creating a configuration file, while <a class="reference internal" href="ble_state.html#caf-ble-state"><span class="std std-ref">CAF: Bluetooth LE state module</span></a> can be configured using only Kconfig options.</p>
+</section>
+<section id="adding-custom-modules">
+<span id="caf-overview-modules-custom"></span><h3><a class="toc-backref" href="#id11">Adding custom modules</a><a class="headerlink" href="#adding-custom-modules" title="Permalink to this heading"></a></h3>
+<p>As part of your application, you can add your own custom modules.
+These modules can communicate using Application Event Manager’s events.
+However, if you want to add custom modules that communicate with CAF modules using CAF events, you must make sure that they meet the following requirements:</p>
+<ul class="simple">
+<li><p>A custom module must register as Application Event Manager’s listener and subscribe for CAF events that should be handled by that custom module.
+You can subscribe for a CAF event in the same way as you subscribe for any other Application Event Manager event.
+See the <a class="reference internal" href="../others/app_event_manager.html#app-event-manager-register-module-as-listener"><span class="std std-ref">Registering a module as listener</span></a> documentation for instructions about how to configure this.</p></li>
+<li><p>The module must work with <a class="reference internal" href="#c.module_state_event" title="module_state_event"><code class="xref c c-struct docutils literal notranslate"><span class="pre">module_state_event</span></code></a>.
+It must submit it and react to it.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you want a module to react to a CAF event, check the event’s documentation for information about the event.</p>
+</div>
+</section>
+</section>
+<section id="caf-events">
+<span id="caf-overview-events"></span><h2><a class="toc-backref" href="#id12">CAF events</a><a class="headerlink" href="#caf-events" title="Permalink to this heading"></a></h2>
+<p>Listed below are all available CAF events grouped by module, including details about events and how to handle them.</p>
+<section id="caf-bluetooth-le-common-events">
+<h3><a class="toc-backref" href="#id13">CAF Bluetooth LE common events</a><a class="headerlink" href="#caf-bluetooth-le-common-events" title="Permalink to this heading"></a></h3>
+<div class="line-block">
+<div class="line">Header file: <code class="file docutils literal notranslate"><span class="pre">include/caf/events/ble_common_event.h</span></code></div>
+<div class="line">Source file: <code class="file docutils literal notranslate"><span class="pre">subsys/caf/events/ble_common_event.c</span></code></div>
+</div>
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="group__caf__ble__common__event"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">caf_ble_common_event</span></span></dt>
+<dd><p>CAF Bluetooth LE Common Event. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-enums">Enums</p>
+<dl class="c enum">
+<dt class="sig sig-object c" id="c.peer_state">
+<span class="target" id="group__caf__ble__common__event_1gaf960a6979cd9769891c731a932718427"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">peer_state</span></span></span><a class="headerlink" href="#c.peer_state" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Peer states. </p>
+<p>State of the Bluetooth connected peer. </p>
+<p><em>Values:</em></p>
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.peer_state.PEER_STATE_DISCONNECTED">
+<span class="target" id="group__caf__ble__common__event_1ggaf960a6979cd9769891c731a932718427af77a841c1c7c80bda9c81dc293a213c2"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PEER_STATE_DISCONNECTED</span></span></span><a class="headerlink" href="#c.peer_state.PEER_STATE_DISCONNECTED" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Bluetooth stack disconnected from the remote peer. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.peer_state.PEER_STATE_DISCONNECTING">
+<span class="target" id="group__caf__ble__common__event_1ggaf960a6979cd9769891c731a932718427a7e0c9738ecfb141513df0a75037ac99f"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PEER_STATE_DISCONNECTING</span></span></span><a class="headerlink" href="#c.peer_state.PEER_STATE_DISCONNECTING" title="Permalink to this definition"></a><br /></dt>
+<dd><p>An application module called bt_conn_disconnect() to disconnect the remote peer. This state can be reported by the module that requests peer disconnection to let other application modules prepare for the planned disconnection. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.peer_state.PEER_STATE_CONNECTED">
+<span class="target" id="group__caf__ble__common__event_1ggaf960a6979cd9769891c731a932718427ac89a6ebf34e029db43c011d000d166f6"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PEER_STATE_CONNECTED</span></span></span><a class="headerlink" href="#c.peer_state.PEER_STATE_CONNECTED" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Bluetooth stack successfully connected to the remote peer. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.peer_state.PEER_STATE_SECURED">
+<span class="target" id="group__caf__ble__common__event_1ggaf960a6979cd9769891c731a932718427a8ad73139c4e620adcb1726505aa2df4d"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PEER_STATE_SECURED</span></span></span><a class="headerlink" href="#c.peer_state.PEER_STATE_SECURED" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Bluetooth stack set the connection security to at least level 2 (that is, encryption and no authentication). </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.peer_state.PEER_STATE_CONN_FAILED">
+<span class="target" id="group__caf__ble__common__event_1ggaf960a6979cd9769891c731a932718427a924e6ac8a75aadb3e22ce5748d10076f"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PEER_STATE_CONN_FAILED</span></span></span><a class="headerlink" href="#c.peer_state.PEER_STATE_CONN_FAILED" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Bluetooth stack failed to connect the remote peer. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.peer_state.PEER_STATE_COUNT">
+<span class="target" id="group__caf__ble__common__event_1ggaf960a6979cd9769891c731a932718427a369bec064041670d8dc873fecac9269d"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PEER_STATE_COUNT</span></span></span><a class="headerlink" href="#c.peer_state.PEER_STATE_COUNT" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Number of peer states. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.peer_state.APP_EM_ENFORCE_ENUM_SIZE">
+<span class="target" id="group__caf__ble__common__event_gaf960a6979cd9769891c731a932718427_1ggaa5f5d51c4d32cd760f1aebe47777d126a91f735aa06454e8506dba14837427ec4"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">APP_EM_ENFORCE_ENUM_SIZE</span></span></span><a class="headerlink" href="#c.peer_state.APP_EM_ENFORCE_ENUM_SIZE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Unused in code, required for inter-core compatibility. </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="c enum">
+<dt class="sig sig-object c" id="c.peer_operation">
+<span class="target" id="group__caf__ble__common__event_1gaa5f5d51c4d32cd760f1aebe47777d126"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">peer_operation</span></span></span><a class="headerlink" href="#c.peer_operation" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Peer operations. </p>
+<p><em>Values:</em></p>
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.peer_operation.PEER_OPERATION_SELECT">
+<span class="target" id="group__caf__ble__common__event_1ggaa5f5d51c4d32cd760f1aebe47777d126a3320917435db50ef4dbcec4db2964921"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PEER_OPERATION_SELECT</span></span></span><a class="headerlink" href="#c.peer_operation.PEER_OPERATION_SELECT" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The peer change is triggered and waiting for confirmation. The operation is not performed by the Bluetooth stack before the selection is confirmed. PEER_OPERATION_SELECTED should be used for confirmed operation. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.peer_operation.PEER_OPERATION_SELECTED">
+<span class="target" id="group__caf__ble__common__event_1ggaa5f5d51c4d32cd760f1aebe47777d126a945aa596e6a20b742ae75d17ca44ba57"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PEER_OPERATION_SELECTED</span></span></span><a class="headerlink" href="#c.peer_operation.PEER_OPERATION_SELECTED" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The peer change is confirmed. That results in swapping used local identity. The peers that are connected to previously used Bluetooth local identity should be disconnected. The application can start peer search for peers related to a new local identity. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.peer_operation.PEER_OPERATION_SCAN_REQUEST">
+<span class="target" id="group__caf__ble__common__event_1ggaa5f5d51c4d32cd760f1aebe47777d126a9f8454f3b23d9efa6a003af97d8ef81b"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PEER_OPERATION_SCAN_REQUEST</span></span></span><a class="headerlink" href="#c.peer_operation.PEER_OPERATION_SCAN_REQUEST" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Bluetooth scanning is requested. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.peer_operation.PEER_OPERATION_ERASE">
+<span class="target" id="group__caf__ble__common__event_1ggaa5f5d51c4d32cd760f1aebe47777d126a16dbe0aacb881dbe03ad4ccbef5c2641"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PEER_OPERATION_ERASE</span></span></span><a class="headerlink" href="#c.peer_operation.PEER_OPERATION_ERASE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The bond erase is triggered and waiting for confirmation. The operation is not performed by the Bluetooth stack before the erase is confirmed. PEER_OPERATION_ERASED should be used for a confirmed operation. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.peer_operation.PEER_OPERATION_ERASE_ADV">
+<span class="target" id="group__caf__ble__common__event_1ggaa5f5d51c4d32cd760f1aebe47777d126a072b9e04b4bb94402721e3fd43eca0d7"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PEER_OPERATION_ERASE_ADV</span></span></span><a class="headerlink" href="#c.peer_operation.PEER_OPERATION_ERASE_ADV" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Trigger erase advertising for selected local identity. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.peer_operation.PEER_OPERATION_ERASE_ADV_CANCEL">
+<span class="target" id="group__caf__ble__common__event_1ggaa5f5d51c4d32cd760f1aebe47777d126ad6df8c00f608e5e4137e61db3dcc1a54"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PEER_OPERATION_ERASE_ADV_CANCEL</span></span></span><a class="headerlink" href="#c.peer_operation.PEER_OPERATION_ERASE_ADV_CANCEL" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Cancel ongoing erase advertising. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.peer_operation.PEER_OPERATION_ERASED">
+<span class="target" id="group__caf__ble__common__event_1ggaa5f5d51c4d32cd760f1aebe47777d126abc289d73593ad6ac11edfb50cfb75c7b"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PEER_OPERATION_ERASED</span></span></span><a class="headerlink" href="#c.peer_operation.PEER_OPERATION_ERASED" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The bond erase is confirmed. That results in removing all of the Bluetooth bonds of related local identity. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.peer_operation.PEER_OPERATION_CANCEL">
+<span class="target" id="group__caf__ble__common__event_1ggaa5f5d51c4d32cd760f1aebe47777d126a819eed2058257d927dc2dbc27563369e"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PEER_OPERATION_CANCEL</span></span></span><a class="headerlink" href="#c.peer_operation.PEER_OPERATION_CANCEL" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Cancel ongoing peer operation. If PEER_OPERATION_ERASE_ADV is cancelled, PEER_OPERATION_ERASE_ADV_CANCEL must be used instead. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.peer_operation.PEER_OPERATION_COUNT">
+<span class="target" id="group__caf__ble__common__event_1ggaa5f5d51c4d32cd760f1aebe47777d126acb52562461d959e336a4eaa1faad1b94"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PEER_OPERATION_COUNT</span></span></span><a class="headerlink" href="#c.peer_operation.PEER_OPERATION_COUNT" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Number of peer operations. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.peer_operation.APP_EM_ENFORCE_ENUM_SIZE">
+<span class="target" id="group__caf__ble__common__event_1ggaa5f5d51c4d32cd760f1aebe47777d126a91f735aa06454e8506dba14837427ec4"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">APP_EM_ENFORCE_ENUM_SIZE</span></span></span><a class="headerlink" href="#c.peer_operation.APP_EM_ENFORCE_ENUM_SIZE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Unused in code, required for inter-core compatibility. </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.ble_peer_event">
+<span class="target" id="structble__peer__event"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ble_peer_event</span></span></span><a class="headerlink" href="#c.ble_peer_event" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;ble_common_event.h&gt;</em></div>
+<p>Bluetooth LE peer event. </p>
+<p>The Bluetooth LE peer event is submitted to inform about state change of a Bluetooth connected peer. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.ble_peer_event.header">
+<span class="target" id="structble__peer__event_1aa72ae7dc1c75650f645c167be2d11a1e"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">app_event_header</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">header</span></span></span><a class="headerlink" href="#c.ble_peer_event.header" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Event header. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.ble_peer_event.state">
+<span class="target" id="structble__peer__event_1a9e9bd6711867cd2d1ababfbe700c30d8"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#c.peer_state" title="peer_state"><span class="n"><span class="pre">peer_state</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">state</span></span></span><a class="headerlink" href="#c.ble_peer_event.state" title="Permalink to this definition"></a><br /></dt>
+<dd><p>State of the Bluetooth LE peer. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.ble_peer_event.id">
+<span class="target" id="structble__peer__event_1a655687e23fbc039b5bcbf446ce8860e1"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">id</span></span></span><a class="headerlink" href="#c.ble_peer_event.id" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ID used to identify Bluetooth connection - pointer to the bt_conn. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.ble_peer_operation_event">
+<span class="target" id="structble__peer__operation__event"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ble_peer_operation_event</span></span></span><a class="headerlink" href="#c.ble_peer_operation_event" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;ble_common_event.h&gt;</em></div>
+<p>Bluetooth LE peer operation event. </p>
+<p>The Bluetooth LE peer operation event informs about operation that is performed on Bluetooth peers related to a given Bluetooth local identity (and application local identity).</p>
+<p>For detailed information related to local identities, peer and bond management, see documentation of the Bluetooth LE bond module in nRF Desktop. The Bluetooth LE bond module is an example of application-specific module that implements Bluetooth peer and bond management. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.ble_peer_operation_event.header">
+<span class="target" id="structble__peer__operation__event_1a3b5517bc91d66794b4bf1e7be8903197"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">app_event_header</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">header</span></span></span><a class="headerlink" href="#c.ble_peer_operation_event.header" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Event header. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.ble_peer_operation_event.op">
+<span class="target" id="structble__peer__operation__event_1a30b3f42de3ba2dc7d5394c0540d8d0d3"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#c.peer_operation" title="peer_operation"><span class="n"><span class="pre">peer_operation</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">op</span></span></span><a class="headerlink" href="#c.ble_peer_operation_event.op" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Bluetooth LE peer operation. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.ble_peer_operation_event.bt_app_id">
+<span class="target" id="structble__peer__operation__event_1a9d8bc53bd291f3a926ae640f2cfbbafd"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_app_id</span></span></span><a class="headerlink" href="#c.ble_peer_operation_event.bt_app_id" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Local identity related to the peer operation (used by the application). </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.ble_peer_operation_event.bt_stack_id">
+<span class="target" id="structble__peer__operation__event_1a0e9dbf51c41b5116ebb564a9fe79f04b"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_stack_id</span></span></span><a class="headerlink" href="#c.ble_peer_operation_event.bt_stack_id" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Bluetooth local identity related to the peer operation (used by the Bluetooth stack). </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.ble_peer_conn_params_event">
+<span class="target" id="structble__peer__conn__params__event"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ble_peer_conn_params_event</span></span></span><a class="headerlink" href="#c.ble_peer_conn_params_event" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;ble_common_event.h&gt;</em></div>
+<p>Bluetooth LE connection parameters event. </p>
+<p>The Bluetooth LE connection parameters event is submitted to inform either about received Bluetooth connection parameter update request or fact that connection parameters were already updated.</p>
+<p>If the event is related to fact that the connection parameters were already updated, values of interval_min and interval_max are the same. They are equal to the connection interval that is in use. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.ble_peer_conn_params_event.header">
+<span class="target" id="structble__peer__conn__params__event_1aec4791481d0ef2e0a9a29b541697d460"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">app_event_header</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">header</span></span></span><a class="headerlink" href="#c.ble_peer_conn_params_event.header" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Event header. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.ble_peer_conn_params_event.id">
+<span class="target" id="structble__peer__conn__params__event_1aa608611409b722ca7708c61ca15a004e"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">id</span></span></span><a class="headerlink" href="#c.ble_peer_conn_params_event.id" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ID used to identify Bluetooth connection - pointer to the bt_conn. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.ble_peer_conn_params_event.interval_min">
+<span class="target" id="structble__peer__conn__params__event_1a8b907252982923f47265c0dc41b6a26c"></span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">interval_min</span></span></span><a class="headerlink" href="#c.ble_peer_conn_params_event.interval_min" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Minimum Connection Interval (N * 1.25 ms). </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.ble_peer_conn_params_event.interval_max">
+<span class="target" id="structble__peer__conn__params__event_1a71aafc4e5705464008c2468fadc910f0"></span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">interval_max</span></span></span><a class="headerlink" href="#c.ble_peer_conn_params_event.interval_max" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Maximum Connection Interval (N * 1.25 ms). </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.ble_peer_conn_params_event.latency">
+<span class="target" id="structble__peer__conn__params__event_1ab28e3433ea4719247895244986d6292f"></span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">latency</span></span></span><a class="headerlink" href="#c.ble_peer_conn_params_event.latency" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Connection Latency. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.ble_peer_conn_params_event.timeout">
+<span class="target" id="structble__peer__conn__params__event_1ac6d31363a3cbabf8390e99dea8722439"></span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">timeout</span></span></span><a class="headerlink" href="#c.ble_peer_conn_params_event.timeout" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Supervision Timeout (N * 10 ms). </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.ble_peer_conn_params_event.updated">
+<span class="target" id="structble__peer__conn__params__event_1a7fa65cc787cd5996c0ca9002689c8b67"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">updated</span></span></span><a class="headerlink" href="#c.ble_peer_conn_params_event.updated" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Information if the event is related to the fact that connection parameters were already updated or connection parameter update request was received. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.ble_peer_search_event">
+<span class="target" id="structble__peer__search__event"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ble_peer_search_event</span></span></span><a class="headerlink" href="#c.ble_peer_search_event" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;ble_common_event.h&gt;</em></div>
+<p>Bluetooth LE peer search event. </p>
+<p>The Bluetooth LE peer search event is submitted to inform if application is currently looking for a Bluetooth peer. The event can be related either to Bluetooth scanning or advertising. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.ble_peer_search_event.header">
+<span class="target" id="structble__peer__search__event_1a5f4949b4b77e95f4921facce864b6611"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">app_event_header</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">header</span></span></span><a class="headerlink" href="#c.ble_peer_search_event.header" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Event header. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.ble_peer_search_event.active">
+<span class="target" id="structble__peer__search__event_1a7e97f0c25d89f703d574c0ee9f8949cc"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">active</span></span></span><a class="headerlink" href="#c.ble_peer_search_event.active" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Information if application is currently looking for a Bluetooth peer. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.ble_adv_data_update_event">
+<span class="target" id="structble__adv__data__update__event"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ble_adv_data_update_event</span></span></span><a class="headerlink" href="#c.ble_adv_data_update_event" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;ble_common_event.h&gt;</em></div>
+<p>Bluetooth LE advertising data update event. </p>
+<p>The Bluetooth LE advertising data update event is submitted to trigger update of advertising data and scan response data. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.ble_adv_data_update_event.header">
+<span class="target" id="structble__adv__data__update__event_1ad408bac558dfa10bcb5cca7a42df1f14"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">app_event_header</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">header</span></span></span><a class="headerlink" href="#c.ble_adv_data_update_event.header" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Event header. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="caf-button-events">
+<h3><a class="toc-backref" href="#id14">CAF button events</a><a class="headerlink" href="#caf-button-events" title="Permalink to this heading"></a></h3>
+<div class="line-block">
+<div class="line">Header file: <code class="file docutils literal notranslate"><span class="pre">include/caf/events/button_event.h</span></code></div>
+<div class="line">Source file: <code class="file docutils literal notranslate"><span class="pre">subsys/caf/events/button_event.c</span></code></div>
+</div>
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="group__caf__button__event"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">caf_button_event</span></span></dt>
+<dd><p>CAF Button Event. </p>
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.button_event">
+<span class="target" id="structbutton__event"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">button_event</span></span></span><a class="headerlink" href="#c.button_event" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;button_event.h&gt;</em></div>
+<p>Button event. </p>
+<p>The button event is submitted when a button is pressed or released. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.button_event.header">
+<span class="target" id="structbutton__event_1aaf73ea40028f80535f2f45774eaab898"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">app_event_header</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">header</span></span></span><a class="headerlink" href="#c.button_event.header" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Event header. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.button_event.key_id">
+<span class="target" id="structbutton__event_1aee0006e7d691cfdce5cd81681f1a3960"></span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">key_id</span></span></span><a class="headerlink" href="#c.button_event.key_id" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ID of the button. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.button_event.pressed">
+<span class="target" id="structbutton__event_1a9cbac4a74f9c158330a79d991ed25608"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pressed</span></span></span><a class="headerlink" href="#c.button_event.pressed" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Information if the button was pressed or released. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="caf-click-events">
+<h3><a class="toc-backref" href="#id15">CAF click events</a><a class="headerlink" href="#caf-click-events" title="Permalink to this heading"></a></h3>
+<div class="line-block">
+<div class="line">Header file: <code class="file docutils literal notranslate"><span class="pre">include/caf/events/click_event.h</span></code></div>
+<div class="line">Source file: <code class="file docutils literal notranslate"><span class="pre">subsys/caf/events/click_event.c</span></code></div>
+</div>
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="group__caf__click__event"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">caf_click_event</span></span></dt>
+<dd><p>CAF Click Event. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-enums">Enums</p>
+<dl class="c enum">
+<dt class="sig sig-object c" id="c.click">
+<span class="target" id="group__caf__click__event_1gaa4ab9acde58c39ed8f273e894f51fa69"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">click</span></span></span><a class="headerlink" href="#c.click" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Click types. </p>
+<p>The click type refers to the way a button can be pressed. </p>
+<p><em>Values:</em></p>
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.click.CLICK_NONE">
+<span class="target" id="group__caf__click__event_1ggaa4ab9acde58c39ed8f273e894f51fa69a172bbcfbcfb06569269d34823b08cc71"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">CLICK_NONE</span></span></span><a class="headerlink" href="#c.click.CLICK_NONE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Button pressed and held for a period of time that is too long for CLICK_SHORT, but too short for CLICK_LONG. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.click.CLICK_SHORT">
+<span class="target" id="group__caf__click__event_1ggaa4ab9acde58c39ed8f273e894f51fa69a2363d3cf0ada4db1ee267ee337d67d3f"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">CLICK_SHORT</span></span></span><a class="headerlink" href="#c.click.CLICK_SHORT" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Button pressed and released after a short time. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.click.CLICK_LONG">
+<span class="target" id="group__caf__click__event_1ggaa4ab9acde58c39ed8f273e894f51fa69adfcb136d5d952a22b314f033e7317322"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">CLICK_LONG</span></span></span><a class="headerlink" href="#c.click.CLICK_LONG" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Button pressed and held for a long period of time. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.click.CLICK_DOUBLE">
+<span class="target" id="group__caf__click__event_1ggaa4ab9acde58c39ed8f273e894f51fa69a6a6b9152bd1cc0b637573c34e69c1e73"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">CLICK_DOUBLE</span></span></span><a class="headerlink" href="#c.click.CLICK_DOUBLE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Two sequences of the button press and release in a short time interval. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.click.CLICK_COUNT">
+<span class="target" id="group__caf__click__event_1ggaa4ab9acde58c39ed8f273e894f51fa69ae88fb2356d399f1866fd553515274906"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">CLICK_COUNT</span></span></span><a class="headerlink" href="#c.click.CLICK_COUNT" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Number of click types. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.click.APP_EM_ENFORCE_ENUM_SIZE">
+<span class="target" id="group__caf__click__event_1ggaa4ab9acde58c39ed8f273e894f51fa69ad1e849407aac602fc1ba57df6c3d8bf0"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">APP_EM_ENFORCE_ENUM_SIZE</span></span></span><a class="headerlink" href="#c.click.APP_EM_ENFORCE_ENUM_SIZE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Unused in code, required for inter-core compatibility. </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.click_event">
+<span class="target" id="structclick__event"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">click_event</span></span></span><a class="headerlink" href="#c.click_event" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;click_event.h&gt;</em></div>
+<p>Click event. </p>
+<p>The click event is submitted when a click type is recorded for one of the monitored buttons. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.click_event.header">
+<span class="target" id="structclick__event_1ad9e2094bb7f99fa8790937fa4cd3c49f"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">app_event_header</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">header</span></span></span><a class="headerlink" href="#c.click_event.header" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Event header. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.click_event.key_id">
+<span class="target" id="structclick__event_1ac05203e0857756a573cb90bb657a9838"></span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">key_id</span></span></span><a class="headerlink" href="#c.click_event.key_id" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ID of the button - matching the key_id used by the <a class="reference internal" href="#structbutton__event"><span class="std std-ref">button_event</span></a>. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.click_event.click">
+<span class="target" id="structclick__event_1acc5d646650f95408852b542218b7d271"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#c.click_event.click" title="click"><span class="n"><span class="pre">click</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">click</span></span></span><a class="headerlink" href="#c.click_event.click" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Detected click type. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="caf-force-power-down-events">
+<h3><a class="toc-backref" href="#id16">CAF force power down events</a><a class="headerlink" href="#caf-force-power-down-events" title="Permalink to this heading"></a></h3>
+<div class="line-block">
+<div class="line">Header file: <code class="file docutils literal notranslate"><span class="pre">include/caf/events/force_power_down_event.h</span></code></div>
+<div class="line">Source file: <code class="file docutils literal notranslate"><span class="pre">subsys/caf/events/force_power_down_event.c</span></code></div>
+</div>
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="group__caf__force__power__down__event"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">caf_force_power_down_event</span></span></dt>
+<dd><p>CAF Force Power Down Event. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.force_power_down">
+<span class="target" id="group__caf__force__power__down__event_1ga557e42a03e85820c23f8435feb3d4f06"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">force_power_down</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.force_power_down" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Force power down now. </p>
+</dd></dl>
+
+</div>
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.force_power_down_event">
+<span class="target" id="structforce__power__down__event"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">force_power_down_event</span></span></span><a class="headerlink" href="#c.force_power_down_event" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;force_power_down_event.h&gt;</em></div>
+<p>Simple event to force a quick power down. </p>
+<p>The event is called when the device has to power down quickly, without waiting. The device would power down if no wakeup event is generated in short period of time. The keep_alive event would be ignored. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.force_power_down_event.header">
+<span class="target" id="structforce__power__down__event_1a0a9de65a90cf87c2ff293540a79c2324"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">app_event_header</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">header</span></span></span><a class="headerlink" href="#c.force_power_down_event.header" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Event header. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="caf-keep-alive-events">
+<h3><a class="toc-backref" href="#id17">CAF keep alive events</a><a class="headerlink" href="#caf-keep-alive-events" title="Permalink to this heading"></a></h3>
+<div class="line-block">
+<div class="line">Header file: <code class="file docutils literal notranslate"><span class="pre">include/caf/events/keep_alive_event.h</span></code></div>
+<div class="line">Source file: <code class="file docutils literal notranslate"><span class="pre">subsys/caf/events/keep_alive_event.c</span></code></div>
+</div>
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="group__caf__keep__alive__event"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">caf_keep_alive_event</span></span></dt>
+<dd><p>CAF Keep Alive Event. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.keep_alive">
+<span class="target" id="group__caf__keep__alive__event_1ga61088a42184f79c3d78191210e25588a"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">keep_alive</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.keep_alive" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Keep the device alive. </p>
+<p>The function generates the power manager event that would reset the power down counter when processed. </p>
+</dd></dl>
+
+</div>
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.keep_alive_event">
+<span class="target" id="structkeep__alive__event"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">keep_alive_event</span></span></span><a class="headerlink" href="#c.keep_alive_event" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;keep_alive_event.h&gt;</em></div>
+<p>Simple event to keep the power manager alive. </p>
+<p>The event called would keep power manager from power downing for configured period of time. The event does not take any argument. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.keep_alive_event.header">
+<span class="target" id="structkeep__alive__event_1ad3e61f1bc9375a07ec4313f9407642fb"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">app_event_header</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">header</span></span></span><a class="headerlink" href="#c.keep_alive_event.header" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Event header. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="caf-led-events">
+<h3><a class="toc-backref" href="#id18">CAF LED events</a><a class="headerlink" href="#caf-led-events" title="Permalink to this heading"></a></h3>
+<div class="line-block">
+<div class="line">Header file: <code class="file docutils literal notranslate"><span class="pre">include/caf/events/led_event.h</span></code></div>
+<div class="line">Source file: <code class="file docutils literal notranslate"><span class="pre">subsys/caf/events/led_event.c</span></code></div>
+</div>
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="group__caf__led__event"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">caf_led_event</span></span></dt>
+<dd><p>CAF LED Event. </p>
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.led_event">
+<span class="target" id="structled__event"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">led_event</span></span></span><a class="headerlink" href="#c.led_event" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;led_event.h&gt;</em></div>
+<p>LED event. </p>
+<p>The LED event is submitted to change effect displayed by the selected LED. The LED effect affects operating mode and color of the LED. The LED effect displayed by the given LED is overridden if LED receives a new LED event. For more information about LED effects see <a class="reference internal" href="../../applications/nrf_desktop/doc/led_state.html#group__led__effect__CAF"><span class="std std-ref">LED Effect</span></a>. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.led_event.header">
+<span class="target" id="structled__event_1a95ad8f2cb0d94474de291f083668c958"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">app_event_header</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">header</span></span></span><a class="headerlink" href="#c.led_event.header" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Event header. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.led_event.led_id">
+<span class="target" id="structled__event_1aa44bb4bf60f980d3b1a0a34645437a74"></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">led_id</span></span></span><a class="headerlink" href="#c.led_event.led_id" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ID of the LED. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.led_event.led_effect">
+<span class="target" id="structled__event_1aedcee8ea76f55c8f9102ec03757ef4d4"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.led_event.led_effect" title="led_effect"><span class="n"><span class="pre">led_effect</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">led_effect</span></span></span><a class="headerlink" href="#c.led_event.led_effect" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Pointer to LED effect to be displayed. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.led_ready_event">
+<span class="target" id="structled__ready__event"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">led_ready_event</span></span></span><a class="headerlink" href="#c.led_ready_event" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;led_event.h&gt;</em></div>
+<p>LED ready event. </p>
+<p>The LED ready event is submitted to inform that a LED has finished displaying a LED effect. The event is used to notify that the LED is ready to display next effect.</p>
+<p>If the displayed LED effect has loop_forever set to true, the effect never ends and the LED ready event should not be submitted. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.led_ready_event.header">
+<span class="target" id="structled__ready__event_1aded3044194d4b4b711dc33b5d678518a"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">app_event_header</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">header</span></span></span><a class="headerlink" href="#c.led_ready_event.header" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Event header. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.led_ready_event.led_id">
+<span class="target" id="structled__ready__event_1a4339803f807d8186da4efd1014ef1d8a"></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">led_id</span></span></span><a class="headerlink" href="#c.led_ready_event.led_id" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ID of the LED. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.led_ready_event.led_effect">
+<span class="target" id="structled__ready__event_1a60e68524bc41dc9923cc5dbfb56caf0b"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.led_ready_event.led_effect" title="led_effect"><span class="n"><span class="pre">led_effect</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">led_effect</span></span></span><a class="headerlink" href="#c.led_ready_event.led_effect" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Pointer to the LED effect that was displayed. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="caf-module-state-events">
+<h3><a class="toc-backref" href="#id19">CAF module state events</a><a class="headerlink" href="#caf-module-state-events" title="Permalink to this heading"></a></h3>
+<div class="line-block">
+<div class="line">Header file: <code class="file docutils literal notranslate"><span class="pre">include/caf/events/module_state_event.h</span></code></div>
+<div class="line">Source file: <code class="file docutils literal notranslate"><span class="pre">subsys/caf/events/module_state_event.c</span></code></div>
+</div>
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="group__caf__module__state__event"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">caf_module_state_event</span></span></dt>
+<dd><p>CAF Module State Event. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-defines">Defines</p>
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.MODULE_ID_LIST_SECTION_PREFIX">
+<span class="target" id="group__caf__module__state__event_1gab67bf9372a6820c068c16b731c4b0b5f"></span><span class="sig-name descname"><span class="n"><span class="pre">MODULE_ID_LIST_SECTION_PREFIX</span></span></span><a class="headerlink" href="#c.MODULE_ID_LIST_SECTION_PREFIX" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.MODULE_ID_PTR_VAR">
+<span class="target" id="group__caf__module__state__event_1ga10fd3e6504aeeb04f0f206450a5e0291"></span><span class="sig-name descname"><span class="n"><span class="pre">MODULE_ID_PTR_VAR</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">mname</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.MODULE_ID_PTR_VAR" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.MODULE_ID_LIST_SECTION_NAME">
+<span class="target" id="group__caf__module__state__event_1gaf5bf39cdacd24165674f6b3261c86184"></span><span class="sig-name descname"><span class="n"><span class="pre">MODULE_ID_LIST_SECTION_NAME</span></span></span><a class="headerlink" href="#c.MODULE_ID_LIST_SECTION_NAME" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.MODULE_ID_PTR_VAR_EXTERN_DEC">
+<span class="target" id="group__caf__module__state__event_1ga53842783c01a9929f72555ed1035f337"></span><span class="sig-name descname"><span class="n"><span class="pre">MODULE_ID_PTR_VAR_EXTERN_DEC</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">mname</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.MODULE_ID_PTR_VAR_EXTERN_DEC" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.MODULE_IDX">
+<span class="target" id="group__caf__module__state__event_1ga245e68ba25ad6f4e675ebc59226c2ed5"></span><span class="sig-name descname"><span class="n"><span class="pre">MODULE_IDX</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">mname</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.MODULE_IDX" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get index of module. </p>
+<p>For example, the <a class="reference internal" href="#group__caf__module__state__event_1ga245e68ba25ad6f4e675ebc59226c2ed5"><span class="std std-ref">MODULE_IDX(buttons)</span></a> can be used to get module index of module named buttons.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mname</strong> – <strong>[in]</strong> Name of the module.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Index of the module. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.MODULE_ID">
+<span class="target" id="group__caf__module__state__event_1ga41dcbdc9825119792bee0adb1604ed19"></span><span class="sig-name descname"><span class="n"><span class="pre">MODULE_ID</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">mname</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.MODULE_ID" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get module ID. </p>
+<p>For example, the <a class="reference internal" href="#group__caf__module__state__event_1ga41dcbdc9825119792bee0adb1604ed19"><span class="std std-ref">MODULE_ID(buttons)</span></a> can be used to get module ID of module named buttons.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mname</strong> – <strong>[in]</strong> Name of the module.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>ID of the module. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.MODULE_NAME">
+<span class="target" id="group__caf__module__state__event_1ga14ded244c47bbba850a8a4be6d16c7e3"></span><span class="sig-name descname"><span class="n"><span class="pre">MODULE_NAME</span></span></span><a class="headerlink" href="#c.MODULE_NAME" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-enums">Enums</p>
+<dl class="c enum">
+<dt class="sig sig-object c" id="c.module_state">
+<span class="target" id="group__caf__module__state__event_1ga17d626d50e9a9d43cc372a32d2bd8f90"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">module_state</span></span></span><a class="headerlink" href="#c.module_state" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Module states. </p>
+<p><em>Values:</em></p>
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.module_state.MODULE_STATE_READY">
+<span class="target" id="group__caf__module__state__event_1gga17d626d50e9a9d43cc372a32d2bd8f90add04efffd8c5ccc4239fe56063edb068"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">MODULE_STATE_READY</span></span></span><a class="headerlink" href="#c.module_state.MODULE_STATE_READY" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Module is active. This state is reported when the module is initialized or woken up after suspending. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.module_state.MODULE_STATE_OFF">
+<span class="target" id="group__caf__module__state__event_1gga17d626d50e9a9d43cc372a32d2bd8f90a78bb39cfd1f00e49daf67deac08b5249"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">MODULE_STATE_OFF</span></span></span><a class="headerlink" href="#c.module_state.MODULE_STATE_OFF" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Module is suspended in reaction to <a class="reference internal" href="#structpower__down__event"><span class="std std-ref">power_down_event</span></a>. The module cannot submit <a class="reference internal" href="#structwake__up__event"><span class="std std-ref">wake_up_event</span></a>. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.module_state.MODULE_STATE_STANDBY">
+<span class="target" id="group__caf__module__state__event_1gga17d626d50e9a9d43cc372a32d2bd8f90ab2a33747987d341a01bc84d4b24ce51b"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">MODULE_STATE_STANDBY</span></span></span><a class="headerlink" href="#c.module_state.MODULE_STATE_STANDBY" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Module is suspended in reaction to <a class="reference internal" href="#structpower__down__event"><span class="std std-ref">power_down_event</span></a>. The module can submit <a class="reference internal" href="#structwake__up__event"><span class="std std-ref">wake_up_event</span></a>. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.module_state.MODULE_STATE_ERROR">
+<span class="target" id="group__caf__module__state__event_1gga17d626d50e9a9d43cc372a32d2bd8f90af21c1f9f54d1a8d4a17fd2ebb49b6183"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">MODULE_STATE_ERROR</span></span></span><a class="headerlink" href="#c.module_state.MODULE_STATE_ERROR" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Module reported fatal error. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.module_state.MODULE_STATE_COUNT">
+<span class="target" id="group__caf__module__state__event_1gga17d626d50e9a9d43cc372a32d2bd8f90ab81ba308aa290191a055111e009382f1"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">MODULE_STATE_COUNT</span></span></span><a class="headerlink" href="#c.module_state.MODULE_STATE_COUNT" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Number of module states. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.module_state.APP_EM_ENFORCE_ENUM_SIZE">
+<span class="target" id="group__caf__module__state__event_1gga17d626d50e9a9d43cc372a32d2bd8f90ad1e849407aac602fc1ba57df6c3d8bf0"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">APP_EM_ENFORCE_ENUM_SIZE</span></span></span><a class="headerlink" href="#c.module_state.APP_EM_ENFORCE_ENUM_SIZE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Unused in code, required for inter-core compatibility. </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.module_count">
+<span class="target" id="group__caf__module__state__event_1ga32b8e30b4c975b605d211d8ce890f654"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">module_count</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.module_count" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get number of modules. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Number of modules. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.module_id_get">
+<span class="target" id="group__caf__module__state__event_1ga91f1f306826487e697ca0b5cfe015fda"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">module_id_get</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n"><span class="pre">idx</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.module_id_get" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get ID of module with given index. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>idx</strong> – <strong>[in]</strong> Index of the module.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Module ID. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.module_idx_get">
+<span class="target" id="group__caf__module__state__event_1ga29bc8ec3de9d081249cd13b0c7188411"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">module_idx_get</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">module_id</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.module_idx_get" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get IDX of module with given id. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>module_id</strong> – <strong>[in]</strong> ID of the module.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Module IDX. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.module_name_get">
+<span class="target" id="group__caf__module__state__event_1ga4d3575a607b601feaab3f1acf4a34831"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">module_name_get</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">id</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.module_name_get" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get name of the module with given id. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> – <strong>[in]</strong> Id of the module.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Module name. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.module_check_id_valid">
+<span class="target" id="group__caf__module__state__event_1ga7f6c12c14b206ba3a64c8b55df4c8039"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">module_check_id_valid</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n"><span class="pre">module_idx</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.module_check_id_valid" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Check if given module index is valid. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>module_idx</strong> – <strong>[in]</strong> The index to check.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>true</strong> – Index is valid. </p></li>
+<li><p><strong>false</strong> – Index is out of valid range. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.module_flags_check_zero">
+<span class="target" id="group__caf__module__state__event_1ga3f7672e0b5d6085118c98803b52997fb"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">module_flags_check_zero</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.module_flags" title="module_flags"><span class="n"><span class="pre">module_flags</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">mf</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.module_flags_check_zero" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Check if there is 0 in all the flags. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mf</strong> – <strong>[in]</strong> Pointer to module flags variable.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>true</strong> – All the flags have value of 0. </p></li>
+<li><p><strong>false</strong> – Any of the flags is not 0. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.module_flags_test_bit">
+<span class="target" id="group__caf__module__state__event_1gae974e4875d9ae03e6bae14f4e586236c"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">module_flags_test_bit</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.module_flags" title="module_flags"><span class="n"><span class="pre">module_flags</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">mf</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n"><span class="pre">module_idx</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.module_flags_test_bit" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Test single module bit. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mf</strong> – <strong>[in]</strong> Pointer to module flags variable. </p></li>
+<li><p><strong>module_idx</strong> – <strong>[in]</strong> The index of the selected module.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>true</strong> – The module bit in flags is set. </p></li>
+<li><p><strong>false</strong> – The module bit in flags is cleared. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.module_flags_clear_bit">
+<span class="target" id="group__caf__module__state__event_1gaa992d6526211f173595825ee8ce4f246"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">module_flags_clear_bit</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.module_flags" title="module_flags"><span class="n"><span class="pre">module_flags</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">mf</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n"><span class="pre">module_idx</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.module_flags_clear_bit" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Clear single module bit. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mf</strong> – <strong>[inout]</strong> Pointer to module flags variable. </p></li>
+<li><p><strong>module_idx</strong> – <strong>[in]</strong> The index of the selected module. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.module_flags_set_bit">
+<span class="target" id="group__caf__module__state__event_1ga5d301ee178db9869f013e31136d46910"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">module_flags_set_bit</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.module_flags" title="module_flags"><span class="n"><span class="pre">module_flags</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">mf</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n"><span class="pre">module_idx</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.module_flags_set_bit" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Set single module bit. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mf</strong> – <strong>[inout]</strong> Pointer to module flags variable. </p></li>
+<li><p><strong>module_idx</strong> – <strong>[in]</strong> The index of the selected module. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.module_flags_set_bit_to">
+<span class="target" id="group__caf__module__state__event_1ga171adf2bdcb325175aff6e87bdb99b86"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">module_flags_set_bit_to</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.module_flags" title="module_flags"><span class="n"><span class="pre">module_flags</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">mf</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n"><span class="pre">module_idx</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n"><span class="pre">val</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.module_flags_set_bit_to" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Set single module bit to specified value. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mf</strong> – <strong>[inout]</strong> Pointer to module flags variable. </p></li>
+<li><p><strong>module_idx</strong> – <strong>[in]</strong> The index of the selected module. </p></li>
+<li><p><strong>val</strong> – <strong>[in]</strong> The value to be set in a specified module’s bit. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.check_state">
+<span class="target" id="group__caf__module__state__event_1gad1a80ac5733dc3538a4e4511b1081803"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">check_state</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.module_state_event" title="module_state_event"><span class="n"><span class="pre">module_state_event</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">event</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">module_id</span></span>, <span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#c.module_state" title="module_state"><span class="n"><span class="pre">module_state</span></span></a><span class="w"> </span><span class="n"><span class="pre">state</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.check_state" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Check if the selected module reported the selected state. </p>
+<p>The function can be used in event handler to verify if received module state event informs that selected module reported selected state. The <a class="reference internal" href="#group__caf__module__state__event_1ga41dcbdc9825119792bee0adb1604ed19"><span class="std std-ref">MODULE_ID</span></a> can be used to get module ID of module with selected name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>event</strong> – <strong>[in]</strong> Pointer to handled module state event. </p></li>
+<li><p><strong>module_id</strong> – <strong>[in]</strong> ID of the selected module. </p></li>
+<li><p><strong>state</strong> – <strong>[in]</strong> Selected module state.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><p><strong>true</strong> – The module state event informs that selected module reported selected state. Otherwise, false is returned. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.module_set_state">
+<span class="target" id="group__caf__module__state__event_1gadfd325057870175b5df3bd26759175e4"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">module_set_state</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#c.module_state" title="module_state"><span class="n"><span class="pre">module_state</span></span></a><span class="w"> </span><span class="n"><span class="pre">state</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.module_set_state" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Submit module state event to inform that state of the module changed. </p>
+<p>ID of the module is automatically assigned based on name that is defined as MODULE.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>state</strong> – <strong>[in]</strong> New state of the module. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.module_flags">
+<span class="target" id="structmodule__flags"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">module_flags</span></span></span><a class="headerlink" href="#c.module_flags" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;module_state_event.h&gt;</em></div>
+<p>Structure that provides a flag for every module available in application. </p>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.module_state_event">
+<span class="target" id="structmodule__state__event"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">module_state_event</span></span></span><a class="headerlink" href="#c.module_state_event" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;module_state_event.h&gt;</em></div>
+<p>Module state event. </p>
+<p>The module state event is submitted by a module to inform that state of the module changed. The <a class="reference internal" href="#group__caf__module__state__event_1gadfd325057870175b5df3bd26759175e4"><span class="std std-ref">module_set_state</span></a> can be used to submit the module state event for a module. The <a class="reference internal" href="#group__caf__module__state__event_1gad1a80ac5733dc3538a4e4511b1081803"><span class="std std-ref">check_state</span></a> can be used in event_handler to check if the event carries information that selected module reported selected state. See <a class="reference internal" href="#group__caf__module__state__event_1ga17d626d50e9a9d43cc372a32d2bd8f90"><span class="std std-ref">module_state</span></a> for details about available module states.</p>
+<p>Name of the module must be defined as MODULE before including the module_state_event.h header. For example, “#define MODULE buttons” defines name of the module as buttons. The module name is used to identify a module.</p>
+<p>Every application module must register for module state event and submit this event when state of the module changes. An application module can initialize itself when all the required application modules are initialized (report MODULE_STATE_READY). This ensures proper initialization order of the application modules. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.module_state_event.header">
+<span class="target" id="structmodule__state__event_1a314bcae8e5a24736244aa7b13606aaa0"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">app_event_header</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">header</span></span></span><a class="headerlink" href="#c.module_state_event.header" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Event header. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.module_state_event.module_id">
+<span class="target" id="structmodule__state__event_1a9f9b001f57e28f02ce119cecb3cd1d8d"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">module_id</span></span></span><a class="headerlink" href="#c.module_state_event.module_id" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ID of the module. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.module_state_event.state">
+<span class="target" id="structmodule__state__event_1ad160c7caa7b02392522786204faa70bd"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#c.module_state" title="module_state"><span class="n"><span class="pre">module_state</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">state</span></span></span><a class="headerlink" href="#c.module_state_event.state" title="Permalink to this definition"></a><br /></dt>
+<dd><p>New state of the module. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="caf-power-events">
+<h3><a class="toc-backref" href="#id20">CAF power events</a><a class="headerlink" href="#caf-power-events" title="Permalink to this heading"></a></h3>
+<div class="line-block">
+<div class="line">Header file: <code class="file docutils literal notranslate"><span class="pre">include/caf/events/power_event.h</span></code></div>
+<div class="line">Source file: <code class="file docutils literal notranslate"><span class="pre">subsys/caf/events/power_event.c</span></code></div>
+</div>
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="group__caf__power__event"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">caf_power_event</span></span></dt>
+<dd><p>CAF Power Event. </p>
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.power_down_event">
+<span class="target" id="structpower__down__event"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">power_down_event</span></span></span><a class="headerlink" href="#c.power_down_event" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;power_event.h&gt;</em></div>
+<p>Power down event. </p>
+<p>The power down event is submitted to inform the application modules that they should be suspended to reduce the power consumption. The power down event can also be submitted to suspend the modules after an application module reports fatal error submitting <a class="reference internal" href="#structmodule__state__event"><span class="std std-ref">module_state_event</span></a> with state set to MODULE_STATE_ERROR.</p>
+<p>An application module that handles the power down event should submit <a class="reference internal" href="#structmodule__state__event"><span class="std std-ref">module_state_event</span></a> with state set to MODULE_STATE_OFF or MODULE_STATE_STANDBY. The MODULE_STATE_STANDBY should be submitted by a module that is capable of submitting <a class="reference internal" href="#structwake__up__event"><span class="std std-ref">wake_up_event</span></a> to wake up the system on external event. Otherwise MODULE_STATE_OFF should be reported. If the module is unable to suspend at the moment, it should consume the received power down events until it’s ready to suspend itself. The module should also delay submitting the <a class="reference internal" href="#structmodule__state__event"><span class="std std-ref">module_state_event</span></a> until it’s ready to suspend itself.</p>
+<p>The module may handle the power down event differently if it’s related to fatal error. In general, an application module should suspend itself, but some of the modules may still need to be active after the fatal error. For example, module that controls hardware LEDs may be used to display LED effect related to the fatal error.</p>
+<p>Only the module that controls the power management in the application can submit the power down event. It is also the final subscriber for the power down event. When it receives the power down event, it’s ensured that all other application modules that handle power down event are already suspended. Then it can continue the power down procedure.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>An application module that handles power down event must also handle <a class="reference internal" href="#structwake__up__event"><span class="std std-ref">wake_up_event</span></a>. Otherwise the module will never be woken up after suspending. </p>
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.power_down_event.header">
+<span class="target" id="structpower__down__event_1a542f4691458892bc2875ea27ae19241f"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">app_event_header</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">header</span></span></span><a class="headerlink" href="#c.power_down_event.header" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Event header. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.power_down_event.error">
+<span class="target" id="structpower__down__event_1ada8b42bf8a4b461c0ca8e5fc1c890a37"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">error</span></span></span><a class="headerlink" href="#c.power_down_event.error" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Information if the power down was triggered by a fatal error. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.wake_up_event">
+<span class="target" id="structwake__up__event"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">wake_up_event</span></span></span><a class="headerlink" href="#c.wake_up_event" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;power_event.h&gt;</em></div>
+<p>Wake up event. </p>
+<p>The wake up event is submitted to trigger exiting the suspended state.</p>
+<p>The wake up event can be submitted by any application module after the application is suspended. The event can be submitted for example on button press or sensor trigger.</p>
+<p>Every application module that handles wake up event should exit suspended state, turn on functionalities disabled on <a class="reference internal" href="#structpower__down__event"><span class="std std-ref">power_down_event</span></a> and submit <a class="reference internal" href="#structmodule__state__event"><span class="std std-ref">module_state_event</span></a> with state set to MODULE_STATE_READY. If the module is already woken up, it should ignore the event. The module must not consume the wake up event to ensure that other listeners will be informed.</p>
+<p>The module that controls power management of the application should be an only early subscriber for the wake up event. This module can consume the wake up events to prevent waking up the application modules after fatal error.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For more information about suspending modules see <a class="reference internal" href="#structpower__down__event"><span class="std std-ref">power_down_event</span></a>. </p>
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.wake_up_event.header">
+<span class="target" id="structwake__up__event_1aa872cc3200ec318ff38f1c94b5bca480"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">app_event_header</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">header</span></span></span><a class="headerlink" href="#c.wake_up_event.header" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Event header. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="caf-power-manager-events">
+<h3><a class="toc-backref" href="#id21">CAF power manager events</a><a class="headerlink" href="#caf-power-manager-events" title="Permalink to this heading"></a></h3>
+<div class="line-block">
+<div class="line">Header file: <code class="file docutils literal notranslate"><span class="pre">include/caf/events/power_manager_event.h</span></code></div>
+<div class="line">Source file: <code class="file docutils literal notranslate"><span class="pre">subsys/caf/events/power_manager_event.c</span></code></div>
+</div>
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="group__caf__power__manager__event"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">caf_power_manager_event</span></span></dt>
+<dd><p>CAF Power Manager Event. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-enums">Enums</p>
+<dl class="c enum">
+<dt class="sig sig-object c" id="c.power_manager_level">
+<span class="target" id="group__caf__power__manager__event_1gacc919dc5eaa5c53a0daf966249c8ac96"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">power_manager_level</span></span></span><a class="headerlink" href="#c.power_manager_level" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Available power levels. </p>
+<p>The power levels provided by the power manager. </p>
+<p><em>Values:</em></p>
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.power_manager_level.POWER_MANAGER_LEVEL_ALIVE">
+<span class="target" id="group__caf__power__manager__event_1ggacc919dc5eaa5c53a0daf966249c8ac96a6cf4e645873823cd0d1c46325addb7a0"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">POWER_MANAGER_LEVEL_ALIVE</span></span></span><a class="headerlink" href="#c.power_manager_level.POWER_MANAGER_LEVEL_ALIVE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Stay alive. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.power_manager_level.POWER_MANAGER_LEVEL_SUSPENDED">
+<span class="target" id="group__caf__power__manager__event_1ggacc919dc5eaa5c53a0daf966249c8ac96ad07a0cf46024c9bf253c393ecbd7a619"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">POWER_MANAGER_LEVEL_SUSPENDED</span></span></span><a class="headerlink" href="#c.power_manager_level.POWER_MANAGER_LEVEL_SUSPENDED" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Suspend but do not go to power off. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.power_manager_level.POWER_MANAGER_LEVEL_OFF">
+<span class="target" id="group__caf__power__manager__event_1ggacc919dc5eaa5c53a0daf966249c8ac96a304b28ebb6e4caf42a1764f9357cc84e"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">POWER_MANAGER_LEVEL_OFF</span></span></span><a class="headerlink" href="#c.power_manager_level.POWER_MANAGER_LEVEL_OFF" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Go to full power off. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.power_manager_level.POWER_MANAGER_LEVEL_MAX">
+<span class="target" id="group__caf__power__manager__event_1ggacc919dc5eaa5c53a0daf966249c8ac96a5a782d247c32ffee8415ea8344f9e607"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">POWER_MANAGER_LEVEL_MAX</span></span></span><a class="headerlink" href="#c.power_manager_level.POWER_MANAGER_LEVEL_MAX" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Number of supported levels. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.power_manager_level.APP_EM_ENFORCE_ENUM_SIZE">
+<span class="target" id="group__caf__power__manager__event_1ggacc919dc5eaa5c53a0daf966249c8ac96ad1e849407aac602fc1ba57df6c3d8bf0"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">APP_EM_ENFORCE_ENUM_SIZE</span></span></span><a class="headerlink" href="#c.power_manager_level.APP_EM_ENFORCE_ENUM_SIZE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Unused in code, required for inter-core compatibility. </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.power_manager_restrict">
+<span class="target" id="group__caf__power__manager__event_1ga4967f0a8ae0ffcba9fac9c8dc8400eaa"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">power_manager_restrict</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n"><span class="pre">module_idx</span></span>, <span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#c.power_manager_level" title="power_manager_level"><span class="n"><span class="pre">power_manager_level</span></span></a><span class="w"> </span><span class="n"><span class="pre">lvl</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.power_manager_restrict" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Set the deepest power sleep mode allowed. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>module_idx</strong> – The index of the module </p></li>
+<li><p><strong>lvl</strong> – Maximal allowed mode </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.power_manager_restrict_event">
+<span class="target" id="structpower__manager__restrict__event"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">power_manager_restrict_event</span></span></span><a class="headerlink" href="#c.power_manager_restrict_event" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;power_manager_event.h&gt;</em></div>
+<p>An event to specify which power state is allowed by module. </p>
+<p>Any module can set maximum allowed power state that can be configured by power manager. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.power_manager_restrict_event.header">
+<span class="target" id="structpower__manager__restrict__event_1a3566087224587f4713ff6988338318f7"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">app_event_header</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">header</span></span></span><a class="headerlink" href="#c.power_manager_restrict_event.header" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Event header. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.power_manager_restrict_event.module_idx">
+<span class="target" id="structpower__manager__restrict__event_1a165a999ce05d8719dd407756198db093"></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">module_idx</span></span></span><a class="headerlink" href="#c.power_manager_restrict_event.module_idx" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The module index. </p>
+<p>The index of the module that wish to block possibility to set power mode below specified level. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.power_manager_restrict_event.level">
+<span class="target" id="structpower__manager__restrict__event_1a648a06cba524f34aaa1e8727cd659e8c"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#c.power_manager_level" title="power_manager_level"><span class="n"><span class="pre">power_manager_level</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">level</span></span></span><a class="headerlink" href="#c.power_manager_restrict_event.level" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The deepest sleep mode allowed. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="caf-sensor-events">
+<h3><a class="toc-backref" href="#id22">CAF sensor events</a><a class="headerlink" href="#caf-sensor-events" title="Permalink to this heading"></a></h3>
+<div class="line-block">
+<div class="line">Header file: <code class="file docutils literal notranslate"><span class="pre">include/caf/events/sensor_event.h</span></code></div>
+<div class="line">Source file: <code class="file docutils literal notranslate"><span class="pre">subsys/caf/events/sensor_event.c</span></code></div>
+</div>
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="group__caf__sensor__event"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">caf_sensor_event</span></span></dt>
+<dd><p>CAF Sensor Event. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-enums">Enums</p>
+<dl class="c enum">
+<dt class="sig sig-object c" id="c.sensor_state">
+<span class="target" id="group__caf__sensor__event_1ga3d6bbbd93d481807bf4beff831216749"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">sensor_state</span></span></span><a class="headerlink" href="#c.sensor_state" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Sensor states. </p>
+<p><em>Values:</em></p>
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.sensor_state.SENSOR_STATE_DISABLED">
+<span class="target" id="group__caf__sensor__event_1gga3d6bbbd93d481807bf4beff831216749a3cff3d7d8a46a3d790e7c4b1dcd21d54"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SENSOR_STATE_DISABLED</span></span></span><a class="headerlink" href="#c.sensor_state.SENSOR_STATE_DISABLED" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Initial state of the sensor. The state is used only before sensor is initialized and it should not be broadcasted using <a class="reference internal" href="#structsensor__state__event"><span class="std std-ref">sensor_state_event</span></a>. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.sensor_state.SENSOR_STATE_SLEEP">
+<span class="target" id="group__caf__sensor__event_1gga3d6bbbd93d481807bf4beff831216749ab4553ab3a3a4d00c3abf3c53016ac51d"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SENSOR_STATE_SLEEP</span></span></span><a class="headerlink" href="#c.sensor_state.SENSOR_STATE_SLEEP" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Sensor is sleeping and no sampling is performed. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.sensor_state.SENSOR_STATE_ACTIVE">
+<span class="target" id="group__caf__sensor__event_1gga3d6bbbd93d481807bf4beff831216749a84f8aec695718fe8a5e3f65e231ae022"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SENSOR_STATE_ACTIVE</span></span></span><a class="headerlink" href="#c.sensor_state.SENSOR_STATE_ACTIVE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Sensor is sampled periodically. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.sensor_state.SENSOR_STATE_ERROR">
+<span class="target" id="group__caf__sensor__event_1gga3d6bbbd93d481807bf4beff831216749a926a047d10a2309d2e7ea68e318a2d9a"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SENSOR_STATE_ERROR</span></span></span><a class="headerlink" href="#c.sensor_state.SENSOR_STATE_ERROR" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Sensor error occurred. The sensor is no longer sampled. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.sensor_state.SENSOR_STATE_COUNT">
+<span class="target" id="group__caf__sensor__event_1gga3d6bbbd93d481807bf4beff831216749aac79648a569c05c45ab9139f356b14cb"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SENSOR_STATE_COUNT</span></span></span><a class="headerlink" href="#c.sensor_state.SENSOR_STATE_COUNT" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Number of sensor states. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.sensor_state.APP_EM_ENFORCE_ENUM_SIZE">
+<span class="target" id="group__caf__sensor__event_1gga3d6bbbd93d481807bf4beff831216749ad1e849407aac602fc1ba57df6c3d8bf0"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">APP_EM_ENFORCE_ENUM_SIZE</span></span></span><a class="headerlink" href="#c.sensor_state.APP_EM_ENFORCE_ENUM_SIZE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Unused in code, required for inter-core compatibility. </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.sensor_event_get_data_cnt">
+<span class="target" id="group__caf__sensor__event_1gaf92d41c8319140c932cf0781a819407f"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">sensor_event_get_data_cnt</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.sensor_event" title="sensor_event"><span class="n"><span class="pre">sensor_event</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">event</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.sensor_event_get_data_cnt" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get size of sensor data. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>event</strong> – <strong>[in]</strong> Pointer to the <a class="reference internal" href="#structsensor__event"><span class="std std-ref">sensor_event</span></a>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Size of the sensor data, expressed as a number of struct sensor_value. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.sensor_event_get_data_ptr">
+<span class="target" id="group__caf__sensor__event_1ga6b57322b06d43aa963f76742e0a66657"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">sensor_value</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">sensor_event_get_data_ptr</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.sensor_event" title="sensor_event"><span class="n"><span class="pre">sensor_event</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">event</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.sensor_event_get_data_ptr" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get pointer to the sensor data. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>event</strong> – <strong>[in]</strong> Pointer to the <a class="reference internal" href="#structsensor__event"><span class="std std-ref">sensor_event</span></a>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Pointer to the sensor data. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.sensor_state_event">
+<span class="target" id="structsensor__state__event"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">sensor_state_event</span></span></span><a class="headerlink" href="#c.sensor_state_event" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;sensor_event.h&gt;</em></div>
+<p>Sensor state event. </p>
+<p>The sensor state event is submitted when state of a sensor changes.</p>
+<p>The description field is a pointer to a string that is used to identify the sensor by the application. The Common Application Framework does not impose any standard way of describing sensors. Format and content of the sensor description is defined by the application.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The sensor state event related to the given sensor must use the same description as <a class="reference internal" href="#structsensor__event"><span class="std std-ref">sensor_event</span></a> related to the sensor. </p>
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.sensor_state_event.header">
+<span class="target" id="structsensor__state__event_1af9c2166295dbf0ccd4b527506b96ecd9"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">app_event_header</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">header</span></span></span><a class="headerlink" href="#c.sensor_state_event.header" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Event header. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.sensor_state_event.descr">
+<span class="target" id="structsensor__state__event_1a84374a4cd4a0e7b40c646fa047414a13"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">descr</span></span></span><a class="headerlink" href="#c.sensor_state_event.descr" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Description of the sensor. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.sensor_state_event.state">
+<span class="target" id="structsensor__state__event_1a05206095618aa974b391ade5d02349f4"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#c.sensor_state" title="sensor_state"><span class="n"><span class="pre">sensor_state</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">state</span></span></span><a class="headerlink" href="#c.sensor_state_event.state" title="Permalink to this definition"></a><br /></dt>
+<dd><p>New state of the sensor. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.sensor_event">
+<span class="target" id="structsensor__event"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">sensor_event</span></span></span><a class="headerlink" href="#c.sensor_event" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;sensor_event.h&gt;</em></div>
+<p>Sensor event. </p>
+<p>The sensor event is submitted when a sensor is sampled.</p>
+<p>The description field is a pointer to a string that is used to identify the sensor by the application. The Common Application Framework does not impose any standard way of describing sensors. Format and content of the sensor description is defined by the application.</p>
+<p>The dyndata contains sensor readouts represented as array of fixed-point values. Content of the array depends only on selected sensor. For example an accelerometer may report acceleration in X, Y and Z axis as three fixed-point values. <a class="reference internal" href="#group__caf__sensor__event_1gaf92d41c8319140c932cf0781a819407f"><span class="std std-ref">sensor_event_get_data_cnt</span></a> and <a class="reference internal" href="#group__caf__sensor__event_1ga6b57322b06d43aa963f76742e0a66657"><span class="std std-ref">sensor_event_get_data_ptr</span></a> can be used to access the sensor data provided by a given sensor event.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The sensor event related to the given sensor must use the same description as <a class="reference internal" href="#structsensor__state__event"><span class="std std-ref">sensor_state_event</span></a> related to the sensor. </p>
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.sensor_event.header">
+<span class="target" id="structsensor__event_1a271cc58e848c14322577bfca0107dc43"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">app_event_header</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">header</span></span></span><a class="headerlink" href="#c.sensor_event.header" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Event header. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.sensor_event.descr">
+<span class="target" id="structsensor__event_1a937521ac26922ff0e6c2b82193b93804"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">descr</span></span></span><a class="headerlink" href="#c.sensor_event.descr" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Description of the sensor. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.sensor_event.dyndata">
+<span class="target" id="structsensor__event_1ade63153fb96ccf8b3a4fed52b96cea92"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">event_dyndata</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dyndata</span></span></span><a class="headerlink" href="#c.sensor_event.dyndata" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Sensor data. Provided as fixed-point values. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.set_sensor_period_event">
+<span class="target" id="structset__sensor__period__event"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_sensor_period_event</span></span></span><a class="headerlink" href="#c.set_sensor_period_event" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;sensor_event.h&gt;</em></div>
+<p>Set sensor period event. </p>
+<p>The set sensor period event can be submitted by user to change sensor sampling period.</p>
+<p>The description field is a pointer to a string that is used to identify the sensor by the application. The Common Application Framework does not impose any standard way of describing sensors. Format and content of the sensor description are defined by the application.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The set sensor period event related to the given sensor must use the same description as <a class="reference internal" href="#structsensor__event"><span class="std std-ref">sensor_event</span></a> related to the sensor. </p>
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.set_sensor_period_event.header">
+<span class="target" id="structset__sensor__period__event_1a2f5bb501cd236da25db61bb124eb676c"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">app_event_header</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">header</span></span></span><a class="headerlink" href="#c.set_sensor_period_event.header" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Event header. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.set_sensor_period_event.descr">
+<span class="target" id="structset__sensor__period__event_1ae2461a0a50b0ca19c10b0784296d4fd5"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">descr</span></span></span><a class="headerlink" href="#c.set_sensor_period_event.descr" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Description of the sensor. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.set_sensor_period_event.sampling_period">
+<span class="target" id="structset__sensor__period__event_1abb0e4688d1d32c2854a0d7fde1924c6c"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">sampling_period</span></span></span><a class="headerlink" href="#c.set_sensor_period_event.sampling_period" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Sensors new sampling period in ms. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="caf-sensor-common">
+<h3><a class="toc-backref" href="#id23">CAF sensor common</a><a class="headerlink" href="#caf-sensor-common" title="Permalink to this heading"></a></h3>
+<div class="line-block">
+<div class="line">Header file: <code class="file docutils literal notranslate"><span class="pre">include/caf/caf_sensor_common.h</span></code></div>
+</div>
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="group__caf__sensor__common"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">caf_sensor_common</span></span></dt>
+<dd><p>CAF Sensor Common. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-defines">Defines</p>
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.FLOAT_TO_SENSOR_VAL_CONST">
+<span class="target" id="group__caf__sensor__common_1ga5a0474022234b3446d04ba660c0a920a"></span><span class="sig-name descname"><span class="n"><span class="pre">FLOAT_TO_SENSOR_VAL_CONST</span></span></span><a class="headerlink" href="#c.FLOAT_TO_SENSOR_VAL_CONST" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.FLOAT_TO_SENSOR_VALUE">
+<span class="target" id="group__caf__sensor__common_1ga08b38a9cb4f90df0bbb1ac66b33c43f3"></span><span class="sig-name descname"><span class="n"><span class="pre">FLOAT_TO_SENSOR_VALUE</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">float_val</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.FLOAT_TO_SENSOR_VALUE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.sensor_value_greater_then">
+<span class="target" id="group__caf__sensor__common_1ga44ecccf37618584aed8fe6070a343470"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">sensor_value_greater_then</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">sensor_value</span></span><span class="w"> </span><span class="n"><span class="pre">sensor_val1</span></span>, <span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">sensor_value</span></span><span class="w"> </span><span class="n"><span class="pre">sensor_val2</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.sensor_value_greater_then" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Helper function for checking if one sensor_value is greater than the other. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sensor_val1</strong> – First compered sensor value. </p></li>
+<li><p><strong>sensor_val2</strong> – Second compered sensor value. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if sensor_val1 is greater than sensor_val2, false otherwise. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.sensor_value_abs_difference">
+<span class="target" id="group__caf__sensor__common_1ga02c84e6bd0fb041fc2af8af43a5e953e"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">sensor_value</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">sensor_value_abs_difference</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">sensor_value</span></span><span class="w"> </span><span class="n"><span class="pre">sensor_val1</span></span>, <span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">sensor_value</span></span><span class="w"> </span><span class="n"><span class="pre">sensor_val2</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.sensor_value_abs_difference" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Helper function for calculating absolute value of difference of two sensor_values. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sensor_val1</strong> – First sensor value. </p></li>
+<li><p><strong>sensor_val2</strong> – Second sensor value. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Absolute value of difference between sensor_val1 and sensor_val2. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.caf_sampled_channel">
+<span class="target" id="structcaf__sampled__channel"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">caf_sampled_channel</span></span></span><a class="headerlink" href="#c.caf_sampled_channel" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;caf_sensor_common.h&gt;</em></div>
+<p>Description of single channel. </p>
+<p>The description of the channel to do the measurement on. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.caf_sampled_channel.chan">
+<span class="target" id="structcaf__sampled__channel_1af5c6b8ed10283c2dfb9abc450bfbd577"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="n"><span class="pre">sensor_channel</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">chan</span></span></span><a class="headerlink" href="#c.caf_sampled_channel.chan" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Channel identifier. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.caf_sampled_channel.data_cnt">
+<span class="target" id="structcaf__sampled__channel_1afbc4cb4ee1c086a33ceffd164e34a018"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">data_cnt</span></span></span><a class="headerlink" href="#c.caf_sampled_channel.data_cnt" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Number of data samples in selected channel. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="caf-sensor-data-aggregator-events">
+<h3><a class="toc-backref" href="#id24">CAF sensor data aggregator events</a><a class="headerlink" href="#caf-sensor-data-aggregator-events" title="Permalink to this heading"></a></h3>
+<div class="line-block">
+<div class="line">Header file: <code class="file docutils literal notranslate"><span class="pre">include/caf/events/sensor_data_aggregator_event.h</span></code></div>
+<div class="line">Source file: <code class="file docutils literal notranslate"><span class="pre">subsys/caf/events/sensor_data_aggregator_event.c</span></code></div>
+</div>
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="group__caf__sensor__data__aggregator__event"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">caf_sensor_data_aggregator_event</span></span></dt>
+<dd><p>CAF Sensor Data Aggregator Event. </p>
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.sensor_data_aggregator_event">
+<span class="target" id="structsensor__data__aggregator__event"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">sensor_data_aggregator_event</span></span></span><a class="headerlink" href="#c.sensor_data_aggregator_event" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;sensor_data_aggregator_event.h&gt;</em></div>
+<p>Sensor data aggregator event. </p>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.sensor_data_aggregator_release_buffer_event">
+<span class="target" id="structsensor__data__aggregator__release__buffer__event"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">sensor_data_aggregator_release_buffer_event</span></span></span><a class="headerlink" href="#c.sensor_data_aggregator_release_buffer_event" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;sensor_data_aggregator_event.h&gt;</em></div>
+<p>Sensor data aggregator release buffer event. </p>
+<p>It is expected that exactly one release event is sent for each buffer. </p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="ble_adv.html" class="btn btn-neutral float-right" title="CAF: Bluetooth LE advertising module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Common Application Framework" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

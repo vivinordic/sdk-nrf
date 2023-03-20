@@ -1,0 +1,268 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="group__dfu__multi__image" kind="group">
+    <compoundname>dfu_multi_image</compoundname>
+    <title>DFU Multi Image</title>
+    <innerclass refid="structdfu__image__writer" prot="public">dfu_image_writer</innerclass>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="group__dfu__multi__image_1ga5aaca0b29b1c71b2d38a176d84fefacb" prot="public" static="no">
+        <type>int(*</type>
+        <definition>typedef int(* dfu_image_open_t) (int image_id, size_t image_size)</definition>
+        <argsstring>)(int image_id, size_t image_size)</argsstring>
+        <name>dfu_image_open_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/dfu/dfu_multi_image.h" line="51" column="9" bodyfile="include/dfu/dfu_multi_image.h" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="group__dfu__multi__image_1ga18db3f4f710893c1e24106afdb0a7d79" prot="public" static="no">
+        <type>int(*</type>
+        <definition>typedef int(* dfu_image_write_t) (const uint8_t *chunk, size_t chunk_size)</definition>
+        <argsstring>)(const uint8_t *chunk, size_t chunk_size)</argsstring>
+        <name>dfu_image_write_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/dfu/dfu_multi_image.h" line="52" column="9" bodyfile="include/dfu/dfu_multi_image.h" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="group__dfu__multi__image_1ga0c381503a72f4792f60ecf1057292c04" prot="public" static="no">
+        <type>int(*</type>
+        <definition>typedef int(* dfu_image_close_t) (bool success)</definition>
+        <argsstring>)(bool success)</argsstring>
+        <name>dfu_image_close_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/dfu/dfu_multi_image.h" line="53" column="9" bodyfile="include/dfu/dfu_multi_image.h" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__dfu__multi__image_1gab7362d30c405c8245089db54fa0c7c8e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int dfu_multi_image_init</definition>
+        <argsstring>(uint8_t *buffer, size_t buffer_size)</argsstring>
+        <name>dfu_multi_image_init</name>
+        <param>
+          <type>uint8_t *</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>buffer_size</declname>
+        </param>
+        <briefdescription>
+<para>Initialize DFU Multi Image library context. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Resets the internal state of the DFU Multi Image library and initializes necessary resources. In particular, the function removes all writers previously registered with the <computeroutput>dfu_multi_image_register_writer</computeroutput> function.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Buffer to store DFU Multi Image header in case it spans multiple chunks of the package. The buffer is only needed until the header is parsed, so the same buffer can be provided to the <computeroutput>dfu_target_mcuboot_set_buf</computeroutput> function. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">buffer_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Size of the buffer to store DFU Multi Image header.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>-EINVAL If the provided buffer is too small. </para>
+</simplesect>
+<simplesect kind="return"><para>0 On success. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/dfu/dfu_multi_image.h" line="114" column="5" declfile="include/dfu/dfu_multi_image.h" declline="114" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="group__dfu__multi__image_1ga7b5f690240dca272cf0a4dd1c15465c1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int dfu_multi_image_register_writer</definition>
+        <argsstring>(const struct dfu_image_writer *writer)</argsstring>
+        <name>dfu_multi_image_register_writer</name>
+        <param>
+          <type>const struct <ref refid="structdfu__image__writer" kindref="compound">dfu_image_writer</ref> *</type>
+          <declname>writer</declname>
+        </param>
+        <briefdescription>
+<para>Register DFU image writer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Registers functions for opening, writing and closing a single image included in the downloaded DFU Multi Image package.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">writer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Structure that contains the applicable image identifier and functions to be registered.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>-ENOMEM If the image writer could not be registered due to lack of empty slots. </para>
+</simplesect>
+<simplesect kind="return"><para>0 On success. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/dfu/dfu_multi_image.h" line="128" column="5" declfile="include/dfu/dfu_multi_image.h" declline="128" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="group__dfu__multi__image_1ga9995857413921880c401e29d901bf2db" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int dfu_multi_image_write</definition>
+        <argsstring>(size_t offset, const uint8_t *chunk, size_t chunk_size)</argsstring>
+        <name>dfu_multi_image_write</name>
+        <param>
+          <type>size_t</type>
+          <declname>offset</declname>
+        </param>
+        <param>
+          <type>const uint8_t *</type>
+          <declname>chunk</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>chunk_size</declname>
+        </param>
+        <briefdescription>
+<para>Write subsequent DFU Multi Image package chunk. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Called to consume a subsequent chunk of the DFU Multi Image package. The initial bytes of the package contain a header that allows the library to learn offsets of particular images within the entire package. After the header is parsed, the registered image writers are used to store the image data.</para>
+<para>The package chunks must be provided in order.</para>
+<para>When an image for which no writer has been registered is found in the package, the library may decide to skip ahead the image. For that reason, a user of the function must provide the <computeroutput>offset</computeroutput> argument to validate the chunk&apos;s position against the current write position and potentially drop the bytes that are not needed anymore.</para>
+<para>A user shall NOT write any more chunks after any write results in a failure.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">offset</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Offset of the chunk within the entire package. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">chunk</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the chunk&apos;s data. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">chunk_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Size of the chunk.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>-ESPIPE</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If <computeroutput>offset</computeroutput> is bigger than expected which may indicate a data gap or writing more data than declared in the package header. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>negative On other failure. </para>
+</simplesect>
+<simplesect kind="return"><para>0 On success. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/dfu/dfu_multi_image.h" line="156" column="5" declfile="include/dfu/dfu_multi_image.h" declline="156" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="group__dfu__multi__image_1gabe243243a6348245e2aa2ffd1cf685bc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t dfu_multi_image_offset</definition>
+        <argsstring>(void)</argsstring>
+        <name>dfu_multi_image_offset</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Returns DFU Multi Image package write position. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Offset of the next needed package chunk in bytes. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/dfu/dfu_multi_image.h" line="163" column="8" declfile="include/dfu/dfu_multi_image.h" declline="163" declcolumn="8"/>
+      </memberdef>
+      <memberdef kind="function" id="group__dfu__multi__image_1ga0a5bab6dbeb1ab1c4b409f2f5dc76782" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int dfu_multi_image_done</definition>
+        <argsstring>(bool success)</argsstring>
+        <name>dfu_multi_image_done</name>
+        <param>
+          <type>bool</type>
+          <declname>success</declname>
+        </param>
+        <briefdescription>
+<para>Complete DFU Multi Image package write. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Close an open image writer if such exists. Additionally, if <computeroutput>success</computeroutput> argument is true, the function validates that all images listed in the package header have been fully written.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">success</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Indicates that a user expects all the package contents to have been written successfully.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>-ESPIPE If <computeroutput>success</computeroutput> and not all package contents have been written yet. </para>
+</simplesect>
+<simplesect kind="return"><para>negative On other failure. </para>
+</simplesect>
+<simplesect kind="return"><para>0 On success. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/dfu/dfu_multi_image.h" line="179" column="5" declfile="include/dfu/dfu_multi_image.h" declline="179" declcolumn="5"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Provides an API for writing DFU Multi Image package. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>DFU Multi Image package is a general-purpose update file consisting of a CBOR-based header that describes contents of the package, followed by a number of update components, such as firmware images for different MCU cores. More specifically, the header contains signed numeric identifiers and sizes of included images. The meaning of the identifiers is application-specific, that is, a user is allowed to assign arbitrary identifiers to their images.</para>
+<para>A DFU Multi Image package can be built manually using either the Python script located at &apos;scripts/bootloader/dfu_multi_image_tool.py&apos; or the CMake wrapper defined in &apos;cmake/dfu_multi_image.cmake&apos;. Additionally, <computeroutput>DFU_MULTI_IMAGE_PACKAGE_BUILD</computeroutput> and related Kconfig options are available to enable building of a package that includes common update images.</para>
+<para>The DFU Multi Image library can be used to process a DFU Multi Image package downloaded onto a device during the DFU process. Its proper usage consists of the following steps:</para>
+<para><orderedlist>
+<listitem><para>Call <computeroutput>dfu_multi_image_init</computeroutput> function to initialize the library&apos;s context.</para>
+</listitem><listitem><para>Call <computeroutput>dfu_multi_image_register_writer</computeroutput> for each image identifier you would like to extract from the package. Images included in the package for which no corresponding writers have been registered will be ignored.</para>
+</listitem><listitem><para>Pass subsequent downloaded chunks of the package to <computeroutput>dfu_multi_image_write</computeroutput> function. The chunks must be provided in order. Note that if the function returns an error, no more chunks shall be provided.</para>
+</listitem><listitem><para>Call <computeroutput>dfu_multi_image_done</computeroutput> function to release open resources and verify that all data declared in the header have been written properly. </para>
+</listitem></orderedlist>
+</para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

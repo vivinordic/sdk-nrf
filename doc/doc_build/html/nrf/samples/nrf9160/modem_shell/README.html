@@ -1,0 +1,1729 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>nRF9160: Modem Shell &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../../_static/js/ncs.js"
+></script>
+<script src="../../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="nRF9160: Modem trace backend" href="../modem_trace_backend/README.html" />
+    <link rel="prev" title="nRF9160: Modem callbacks" href="../modem_callbacks/README.html" />
+<link
+  href="../../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../applications.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../samples.html">Samples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../bl.html">Bluetooth samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../crypto.html">Cryptography samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../edge.html">Edge Impulse samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gazell.html">Gazell samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../matter.html">Matter samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nfc.html">NFC samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nrf5340.html">nRF5340 samples</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../nrf9160.html">nRF9160 samples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../at_client/README.html">nRF9160: AT Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../at_monitor/README.html">nRF9160: AT monitor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../aws_iot/README.html">nRF9160: AWS IoT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../azure_fota/README.html">nRF9160: Azure FOTA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../azure_iot_hub/README.html">nRF9160: Azure IoT Hub</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ciphersuites/README.html">nRF9160: TLS cipher suites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../coap_client/README.html">nRF9160: nRF CoAP Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../download/README.html">nRF9160: Download client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fmfu_smp_svr/README.html">nRF9160: Full modem firmware update using SMP Server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gnss/README.html">nRF9160: GNSS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../https_client/README.html">nRF9160: HTTPS Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../location/README.html">nRF9160: Location</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../lte_ble_gateway/README.html">nRF9160: LTE Sensor Gateway</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../lwm2m_carrier/README.html">nRF9160: LwM2M carrier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../lwm2m_client/README.html">nRF9160: LwM2M Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../memfault/README.html">nRF9160: Memfault</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modem_callbacks/README.html">nRF9160: Modem callbacks</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">nRF9160: Modem Shell</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#requirements">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuration">Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#building-and-running">Building and running</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#references">References</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dependencies">Dependencies</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../modem_trace_backend/README.html">nRF9160: Modem trace backend</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modem_trace_flash/README.html">nRF9160: Modem trace external flash backend</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../nidd/README.html">nRF9160: NIDD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../nrf_cloud_mqtt_multi_service/README.html">nRF9160: nRF Cloud MQTT multi-service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../nrf_cloud_rest_cell_location/README.html">nRF9160: nRF Cloud REST cellular location</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../nrf_cloud_rest_device_message/README.html">nRF9160: nRF Cloud REST Device Message</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../nrf_cloud_rest_fota/README.html">nRF9160: nRF Cloud REST FOTA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pdn/README.html">nRF9160: PDN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../slm_shell/README.html">nRF9160: SLM Shell</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../sms/README.html">nRF9160: SMS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../udp/README.html">nRF9160: UDP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../net/mqtt/README.html">MQTT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../http_update/application_update/README.html">nRF9160: HTTP application update</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../http_update/full_modem_update/README.html">nRF9160: HTTP full modem update</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../http_update/modem_delta_update/README.html">nRF9160: HTTP modem delta update</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../tfm.html">Trusted Firmware-M (TF-M) samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../thread.html">Thread samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../zigbee.html">Zigbee samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../wifi.html">Wi-Fi samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../other.html">Other samples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../drivers.html">Drivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../samples.html">Samples</a></li>
+          <li class="breadcrumb-item"><a href="../../nrf9160.html">nRF9160 samples</a></li>
+      <li class="breadcrumb-item active">nRF9160: Modem Shell</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/samples/nrf9160/modem_shell/README.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="nrf9160-modem-shell">
+<span id="modem-shell-application"></span><h1>nRF9160: Modem Shell<a class="headerlink" href="#nrf9160-modem-shell" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#requirements" id="id25">Requirements</a></p></li>
+<li><p><a class="reference internal" href="#overview" id="id26">Overview</a></p>
+<ul>
+<li><p><a class="reference internal" href="#lte-link-control" id="id27">LTE link control</a></p></li>
+<li><p><a class="reference internal" href="#at-commands" id="id28">AT commands</a></p></li>
+<li><p><a class="reference internal" href="#ping" id="id29">Ping</a></p></li>
+<li><p><a class="reference internal" href="#iperf3" id="id30">Iperf3</a></p></li>
+<li><p><a class="reference internal" href="#curl" id="id31">Curl</a></p></li>
+<li><p><a class="reference internal" href="#socket-tool" id="id32">Socket tool</a></p></li>
+<li><p><a class="reference internal" href="#sms-tool" id="id33">SMS tool</a></p></li>
+<li><p><a class="reference internal" href="#location-tool" id="id34">Location tool</a></p></li>
+<li><p><a class="reference internal" href="#modem-traces" id="id35">Modem traces</a></p></li>
+<li><p><a class="reference internal" href="#gnss" id="id36">GNSS</a></p></li>
+<li><p><a class="reference internal" href="#fota" id="id37">FOTA</a></p></li>
+<li><p><a class="reference internal" href="#ppp" id="id38">PPP</a></p></li>
+<li><p><a class="reference internal" href="#rest-client" id="id39">REST client</a></p></li>
+<li><p><a class="reference internal" href="#running-stored-commands-after-startup" id="id40">Running stored commands after startup</a></p></li>
+<li><p><a class="reference internal" href="#running-commands-in-different-threads-and-pipelining-commands" id="id41">Running commands in different threads and pipelining commands</a></p></li>
+<li><p><a class="reference internal" href="#sleep" id="id42">Sleep</a></p></li>
+<li><p><a class="reference internal" href="#cloud" id="id43">Cloud</a></p></li>
+<li><p><a class="reference internal" href="#remote-control-using-nrf-cloud" id="id44">Remote control using nRF Cloud</a></p></li>
+<li><p><a class="reference internal" href="#uart" id="id45">UART</a></p></li>
+<li><p><a class="reference internal" href="#heap-usage-statistics" id="id46">Heap usage statistics</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#configuration" id="id47">Configuration</a></p>
+<ul>
+<li><p><a class="reference internal" href="#configuration-options" id="id48">Configuration options</a></p></li>
+<li><p><a class="reference internal" href="#additional-configuration" id="id49">Additional configuration</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#building-and-running" id="id50">Building and running</a></p>
+<ul>
+<li><p><a class="reference internal" href="#dk-buttons" id="id51">DK buttons</a></p></li>
+<li><p><a class="reference internal" href="#led-indications" id="id52">LED indications</a></p></li>
+<li><p><a class="reference internal" href="#power-measurements" id="id53">Power measurements</a></p></li>
+<li><p><a class="reference internal" href="#testing" id="id54">Testing</a></p></li>
+<li><p><a class="reference internal" href="#getting-nrf9160-dk-out-of-the-box-and-to-nrf-cloud" id="id55">Getting nRF9160 DK out-of-the-box and to nRF Cloud</a></p></li>
+<li><p><a class="reference internal" href="#nrf9160-dk-with-nrf7002-ek-wi-fi-support" id="id56">nRF9160 DK with nRF7002 EK Wi-Fi support</a></p></li>
+<li><p><a class="reference internal" href="#esp8266-wi-fi-support" id="id57">ESP8266 Wi-Fi support</a></p></li>
+<li><p><a class="reference internal" href="#ppp-support" id="id58">PPP support</a></p></li>
+<li><p><a class="reference internal" href="#application-fota-support" id="id59">Application FOTA support</a></p></li>
+<li><p><a class="reference internal" href="#lwm2m-carrier-library-support" id="id60">LwM2M carrier library support</a></p></li>
+<li><p><a class="reference internal" href="#p-gps-support" id="id61">P-GPS support</a></p></li>
+<li><p><a class="reference internal" href="#cloud-over-mqtt" id="id62">Cloud over MQTT</a></p></li>
+<li><p><a class="reference internal" href="#location-service-handled-in-application" id="id63">Location service handled in application</a></p></li>
+<li><p><a class="reference internal" href="#remote-control-using-nrf-cloud-over-mqtt" id="id64">Remote control using nRF Cloud over MQTT</a></p></li>
+<li><p><a class="reference internal" href="#zephyr-native-tcp-ip-stack-usage-over-nrf9160-lte-connection" id="id65">Zephyr native TCP/IP stack usage over nRF9160 LTE connection</a></p></li>
+<li><p><a class="reference internal" href="#bt-shell-support" id="id66">BT shell support</a></p></li>
+<li><p><a class="reference internal" href="#segger-rtt-support" id="id67">SEGGER RTT support</a></p></li>
+<li><p><a class="reference internal" href="#lwm2m-support" id="id68">LwM2M support</a></p></li>
+<li><p><a class="reference internal" href="#nrf9160-dk-and-modem-trace-support" id="id69">nRF9160 DK and modem trace support</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#references" id="id70">References</a></p></li>
+<li><p><a class="reference internal" href="#dependencies" id="id71">Dependencies</a></p></li>
+</ul>
+</div>
+<p>The Modem Shell (MoSh) sample application enables you to test various device connectivity features, including data throughput.</p>
+<section id="requirements">
+<h2><a class="toc-backref" href="#id25">Requirements</a><a class="headerlink" href="#requirements" title="Permalink to this heading"></a></h2>
+<p>The sample supports the following development kits:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 28%" />
+<col style="width: 8%" />
+<col style="width: 42%" />
+<col style="width: 23%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Hardware platforms</p></th>
+<th class="head"><p>PCA</p></th>
+<th class="head"><p>Board name</p></th>
+<th class="head"><p>Build target</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../working_with_nrf/nrf91/thingy91.html#ug-thingy91"><span class="std std-ref">Thingy:91</span></a></p></td>
+<td><p>PCA20035</p></td>
+<td><p>thingy91_nrf9160</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">thingy91_nrf9160_ns</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../working_with_nrf/nrf91/nrf9160.html#ug-nrf9160"><span class="std std-ref">nRF9160 DK</span></a></p></td>
+<td><p>PCA10090</p></td>
+<td><p><span class="xref std std-ref">nrf9160dk_nrf9160</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nrf9160dk_nrf9160_ns</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>When built for an <code class="docutils literal notranslate"><span class="pre">_ns</span></code> build target, the sample is configured to compile and run as a non-secure application with <a class="reference internal" href="../../../app_dev/board_support/index.html#app-boards-spe-nspe-cpuapp-ns"><span class="std std-ref">Cortex-M Security Extensions enabled</span></a>.
+Therefore, it automatically includes <a class="reference internal" href="../../../app_dev/tfm/index.html#ug-tfm"><span class="std std-ref">Trusted Firmware-M</span></a> that prepares the required peripherals and secure services to be available for the application.</p>
+</section>
+<section id="overview">
+<h2><a class="toc-backref" href="#id26">Overview</a><a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+<p>MoSh enables testing of different connectivity features such as LTE link handling, TCP/IP connections, data throughput (iperf3 and curl), SMS, GNSS, FOTA updates and PPP.
+Hence, this sample is not only code sample, which it also is in many aspects, but also a test application for aforementioned features.
+MoSh uses the LTE link control driver to establish an LTE connection and initializes the Zephyr shell to provide a shell command-line interface for users.</p>
+<p>The subsections list the MoSh features and show shell command examples for their usage.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To learn more about using a MoSh command, run the command without any parameters.</p>
+</div>
+<section id="lte-link-control">
+<h3><a class="toc-backref" href="#id27">LTE link control</a><a class="headerlink" href="#lte-link-control" title="Permalink to this heading"></a></h3>
+<p>MoSh command: <code class="docutils literal notranslate"><span class="pre">link</span></code></p>
+<p>LTE link control changes and queries the state of the LTE connection.
+Many of the changes are applied when going to online mode for the next time.
+You can store some link subcommand parameters into settings, which are persistent between sessions.</p>
+<p>3GPP Release 14 features are enabled by default, which means they are set when going into normal mode and when booting up.
+For the list of supported features, refer to <a class="reference external" href="https://infocenter.nordicsemi.com/index.jsp?topic=%2Fref_at_commands%2FREF%2Fat_commands%2Fnw_service%2Frel14feat_read.html&amp;cp=2_1_7_16_1">3GPP Release 14 features AT command</a>.
+To disable these features in normal mode,  use the <code class="docutils literal notranslate"><span class="pre">link</span> <span class="pre">funmode</span> <span class="pre">--normal_no_rel14</span></code> command.
+During autoconnect in bootup, use the <code class="docutils literal notranslate"><span class="pre">link</span> <span class="pre">nmodeauto</span> <span class="pre">--enable_no_rel14</span></code> command.</p>
+<section id="examples">
+<h4>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h4>
+<ul>
+<li><p>Change the system mode to NB-IoT and query the connection status:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">link funmode -4</span>
+<span class="go">link sysmode -n</span>
+<span class="go">link funmode -1</span>
+<span class="go">link status</span>
+</pre></div>
+</div>
+</li>
+<li><p>Open another PDP context and close it:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">link connect -a internet.operator.com</span>
+<span class="go">link status</span>
+<span class="go">link disconnect -I 1</span>
+</pre></div>
+</div>
+</li>
+<li><p>Enable and configure eDRX:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">link edrx -e -m --edrx_value 0010 --ptw 0010</span>
+</pre></div>
+</div>
+</li>
+<li><p>Subscribe for modem TAU and sleep notifications, enable and configure PSM:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">link tau --subscribe</span>
+<span class="go">link msleep --subscribe</span>
+<span class="go">link psm -e --rptau 01100100 --rat 00100010</span>
+</pre></div>
+</div>
+</li>
+<li><p>Disable autoconnect when the DK starts (modem will remain in pwroff functional mode and the link is not connected):</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">link nmodeauto --disable</span>
+</pre></div>
+</div>
+</li>
+<li><p>Set the custom AT commands that are run when switching to normal mode (locking device to band #3):</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">link funmode --poweroff</span>
+<span class="go">link nmodeat --mem1 &quot;at%xbandlock=2,\&quot;100\&quot;&quot;</span>
+<span class="go">link funmode --normal</span>
+</pre></div>
+</div>
+</li>
+<li><p>Write periodic search parameters with two patterns, read the parameters and start modem network search operation:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">link search --write --search_cfg=&quot;0,1,1&quot; --search_pattern_table=&quot;10,10,30&quot; --search_pattern_range=&quot;50,300,10,20&quot;</span>
+<span class="go">link search --read</span>
+<span class="go">link search --start</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="at-commands">
+<h3><a class="toc-backref" href="#id28">AT commands</a><a class="headerlink" href="#at-commands" title="Permalink to this heading"></a></h3>
+<p>MoSh command: <code class="docutils literal notranslate"><span class="pre">at</span></code></p>
+<p>You can use the AT command module to send AT commands to the modem, individually or
+in a separate plain AT command mode where also pipelining of AT commands is supported.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Using AT commands that read information from the modem is safe together with MoSh commands.
+However, it is not recommended to write any values with AT commands and use MoSh commands among them.
+If you mix AT commands and MoSh commands, the internal state of MoSh might get out of synchronization and result in unexpected behavior.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When using <code class="docutils literal notranslate"><span class="pre">at</span></code> command, any quotation marks (“), apostrophes (’) and backslashes () within the AT command syntax must be escaped with a backslash ().
+The percentage sign (%) is often needed and can be written as is.</p>
+</div>
+<section id="id1">
+<h4>Examples<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h4>
+<ul>
+<li><p>Send AT command to query network status:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">at at+cereg?</span>
+</pre></div>
+</div>
+</li>
+<li><p>Send AT command to query neighbor cells:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">at at%NBRGRSRP</span>
+</pre></div>
+</div>
+</li>
+<li><p>Escape quotation marks in a command targeting the network search to a specific operator:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">at AT+COPS=1,2,\&quot;24407\&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Enable AT command events:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">at events_enable</span>
+</pre></div>
+</div>
+</li>
+<li><p>Disable AT command events:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">at events_disable</span>
+</pre></div>
+</div>
+</li>
+<li><p>Enable autostarting of AT command mode in next bootup:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">at at_cmd_mode enable_autostart</span>
+</pre></div>
+</div>
+</li>
+<li><p>Start AT command mode:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">at at_cmd_mode start</span>
+<span class="go">MoSh AT command mode started, press ctrl-x ctrl-q to escape</span>
+<span class="go">MoSh specific AT commands:</span>
+<span class="go">  ICMP Ping: AT+NPING=&lt;addr&gt;[,&lt;payload_length&gt;,&lt;timeout_msecs&gt;,&lt;count&gt;[,&lt;interval_msecs&gt;[,&lt;cid&gt;]]]</span>
+<span class="go">Other custom functionalities:</span>
+<span class="go">  AT command pipelining, for example:</span>
+<span class="go">    at+cgmr|at+cfun?|at+nping=&quot;example.com&quot;</span>
+<span class="go">===========================================================</span>
+<span class="go">at</span>
+<span class="go">OK</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="ping">
+<h3><a class="toc-backref" href="#id29">Ping</a><a class="headerlink" href="#ping" title="Permalink to this heading"></a></h3>
+<p>MoSh command: <code class="docutils literal notranslate"><span class="pre">ping</span></code></p>
+<p>Ping is a tool for testing the reachability of a host on an IP network.</p>
+<section id="id2">
+<h4>Examples<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h4>
+<ul>
+<li><p>Ping a URL:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">ping -d ping.server.url</span>
+</pre></div>
+</div>
+</li>
+<li><p>Ping an IPv6 address with length of 500 bytes and 1 s intervals (the used PDN needs to support IPv6):</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">ping -d 1a2b:1a2b:1a2b:1a2b::1 -6 -l 500 -i 1000</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="iperf3">
+<h3><a class="toc-backref" href="#id30">Iperf3</a><a class="headerlink" href="#iperf3" title="Permalink to this heading"></a></h3>
+<p>MoSh command: <code class="docutils literal notranslate"><span class="pre">iperf</span></code></p>
+<p>Iperf3 is a tool for measuring data transfer performance both in uplink and downlink direction.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Some features, for example file operations and TCP option tuning, are not supported.</p>
+</div>
+<section id="id3">
+<h4>Examples<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h4>
+<ul>
+<li><p>Download data over TCP for 30 seconds with a buffer size of 3540 bytes and use detailed output:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">iperf3 --client 111.222.111.222 --port 10000 -l 3540 --time 30 -V -R</span>
+</pre></div>
+</div>
+</li>
+<li><p>Upload data over TCP for 30 seconds with the payload size of 708 bytes using a PDN with ID #2 (use the <code class="docutils literal notranslate"><span class="pre">link</span> <span class="pre">status</span></code> command to see the active PDNs and their IDs):</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">iperf3 -c 111.222.111.222 -p 10000 -l 708 -t 30 --pdn_id 2</span>
+</pre></div>
+</div>
+</li>
+<li><p>Upload data over UDP for 60 seconds with the payload size of 1240 bytes and use the detailed output as well as debug output:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">iperf3 --client 111.222.111.222 --port 10000 -l 1240 --time 60 -u -V -d</span>
+</pre></div>
+</div>
+</li>
+<li><p>Download data over TCP/IPv6 for 10 seconds (the used PDN needs to support IPv6, use the <code class="docutils literal notranslate"><span class="pre">link</span> <span class="pre">status</span></code> command to see PDP type support for active contexts):</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">iperf3 --client 1a2b:1a2b:1a2b:1a2b::1 --port 20000 --time 10 -R -6</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="curl">
+<h3><a class="toc-backref" href="#id31">Curl</a><a class="headerlink" href="#curl" title="Permalink to this heading"></a></h3>
+<p>MoSh command: <code class="docutils literal notranslate"><span class="pre">curl</span></code></p>
+<p>Curl is a command-line tool for transferring data specified with URL syntax.
+It is a part of MoSh and enables you to test the data download with a “standard” tool.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>File operations are not supported.</p>
+</div>
+<section id="id4">
+<h4>Examples<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h4>
+<ul>
+<li><p>HTTP download:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">curl http://curl.server.url/small.txt</span>
+<span class="go">curl http://curl.server.url/bigger_file.zip --output /dev/null</span>
+</pre></div>
+</div>
+</li>
+<li><p>HTTP upload for given data:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">curl http://curl.server.url/data -d &quot;foo=bar&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>HTTP upload for given number of bytes sent in a POST body:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">curl http://curl.server.url/data -d #500000</span>
+</pre></div>
+</div>
+</li>
+<li><p>HTTP upload for given number of bytes sent in a POST body using a PDN with ID #1 (use the <code class="docutils literal notranslate"><span class="pre">link</span> <span class="pre">status</span></code> command to see active PDNs and their IDs):</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">curl http://curl.server.url/data -d #500000 --pdn_id 1</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="socket-tool">
+<h3><a class="toc-backref" href="#id32">Socket tool</a><a class="headerlink" href="#socket-tool" title="Permalink to this heading"></a></h3>
+<p>MoSh command: <code class="docutils literal notranslate"><span class="pre">sock</span></code></p>
+<p>You can use the socket tool to:</p>
+<ul class="simple">
+<li><p>Create and manage socket connections.</p></li>
+<li><p>Send and receive data.</p></li>
+</ul>
+<section id="id5">
+<h4>Examples<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h4>
+<ul>
+<li><p>Open and connect to an IP address and port (IPv4 TCP socket):</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sock connect -a 111.222.111.222 -p 20000</span>
+</pre></div>
+</div>
+</li>
+<li><p>Open and connect to hostname and port (IPv4 TCP socket):</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sock connect -a google.com -p 20000</span>
+</pre></div>
+</div>
+</li>
+<li><p>Open and connect an IPv6 TCP socket and bind to a port:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sock connect -a 1a2b:1a2b:1a2b:1a2b::1 -p 20000 -f inet6 -t stream -b 40000</span>
+</pre></div>
+</div>
+</li>
+<li><p>Open an IPv6 UDP socket:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sock connect -a 1a2b:1a2b:1a2b:1a2b::1 -p 20000 -f inet6 -t dgram</span>
+</pre></div>
+</div>
+</li>
+<li><p>Open a raw socket:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sock connect -f packet -t raw</span>
+</pre></div>
+</div>
+</li>
+<li><p>Open a socket to a non-default PDP context:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">link connect -a nondefault.context.com</span>
+<span class="go">sock connect -f packet -t raw -I 1</span>
+</pre></div>
+</div>
+</li>
+<li><p>Send a string through the socket:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sock send -i 0 -d testing</span>
+</pre></div>
+</div>
+</li>
+<li><p>Send 100 kB of data and show throughput statistics:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sock send -i 0 -l 100000</span>
+</pre></div>
+</div>
+</li>
+<li><p>Send data periodically with 10 s interval:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sock send -i 0 -e 10 -d test_periodic</span>
+</pre></div>
+</div>
+</li>
+<li><p>Calculate the receive throughput:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&lt;do whatever is needed to make device receive data after some time&gt;</span>
+<span class="go">sock recv -i 0 -r -l 1000000</span>
+<span class="go">sock recv -i 0</span>
+<span class="go">sock recv -i 0</span>
+</pre></div>
+</div>
+</li>
+<li><p>Close a socket:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sock close -i 0</span>
+</pre></div>
+</div>
+</li>
+<li><p>Use RAI settings:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">link funmode -4</span>
+<span class="go">link rai -e</span>
+<span class="go">link funmode -1</span>
+<span class="go">sock connect -a 111.222.111.222 -p 20000</span>
+<span class="go">sock rai -i 0 --rai_last</span>
+<span class="go">sock send -i 0 -d testing</span>
+</pre></div>
+</div>
+<p>When both 3GPP Release 13 Control Plane (CP) Release Assistance Indication (RAI) and 3GPP Release 14 Access Stratum (AS) RAI are enabled,
+which can be the case for NB-IoT, both are signalled.
+Which RAI takes effect depends on the network configuration and prioritization.</p>
+</li>
+<li><p>List open sockets:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sock list</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="sms-tool">
+<h3><a class="toc-backref" href="#id33">SMS tool</a><a class="headerlink" href="#sms-tool" title="Permalink to this heading"></a></h3>
+<p>MoSh command: <code class="docutils literal notranslate"><span class="pre">sms</span></code></p>
+<p>You can use the SMS tool for sending and receiving SMS messages.</p>
+<section id="id6">
+<h4>Examples<a class="headerlink" href="#id6" title="Permalink to this heading"></a></h4>
+<ul>
+<li><p>Register the SMS service so that messages can be received if SIM subscription supports it:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sms reg</span>
+</pre></div>
+</div>
+</li>
+<li><p>Send an SMS message (registration is done automatically if not already done):</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sms send -n +987654321 -m testing</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="location-tool">
+<h3><a class="toc-backref" href="#id34">Location tool</a><a class="headerlink" href="#location-tool" title="Permalink to this heading"></a></h3>
+<p>MoSh command: <code class="docutils literal notranslate"><span class="pre">location</span></code></p>
+<p>You can use the Location tool for retrieving device’s location with different methods.
+See <a class="reference internal" href="../../../libraries/modem/location.html#lib-location"><span class="std std-ref">Location</span></a> library for information on the configuration of different location methods and services.
+Some default configurations are available to facilitate trials.</p>
+<p>This sample is using cloud service for positioning through the <a class="reference internal" href="../../../libraries/modem/location.html#lib-location"><span class="std std-ref">Location</span></a> library by default.
+However, an application can also handle the cloud communication for the location services by itself.
+To enable cloud communication, use the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LOCATION_SERVICE_EXTERNAL</span></code> Kconfig option and
+a separate configuration (<code class="file docutils literal notranslate"><span class="pre">overlay-cloud_mqtt.conf</span></code>) to enable nRF Cloud service over MQTT for retrieving location data.
+Use the <code class="docutils literal notranslate"><span class="pre">cloud</span></code> command to establish the MQTT connection before <code class="docutils literal notranslate"><span class="pre">location</span></code> commands.</p>
+<section id="id7">
+<h4>Examples<a class="headerlink" href="#id7" title="Permalink to this heading"></a></h4>
+<ul>
+<li><p>Retrieve location with default configuration:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">location get</span>
+</pre></div>
+</div>
+</li>
+<li><p>Retrieve location with Wi-Fi positioning.
+You need to have a Wi-Fi-enabled device and build the sample with Wi-Fi support.
+If the location is not found, use cellular positioning:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">location get --method wifi --wifi_timeout 60000 --method cellular --cellular_service nrf</span>
+</pre></div>
+</div>
+</li>
+<li><p>Retrieve location periodically every hour with GNSS and if not found, use cellular positioning:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">location get --interval 3600 --method gnss --gnss_timeout 300000 --method cellular</span>
+</pre></div>
+</div>
+</li>
+<li><p>Cancel ongoing location request or periodic location request:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">location cancel</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="modem-traces">
+<h3><a class="toc-backref" href="#id35">Modem traces</a><a class="headerlink" href="#modem-traces" title="Permalink to this heading"></a></h3>
+<p>MoSh command: <code class="docutils literal notranslate"><span class="pre">modem_trace</span></code></p>
+<p>You can use the modem trace commands to control the trace functionality in the modem.
+See <a class="reference internal" href="../../../libraries/modem/nrf_modem_lib.html#modem-trace-module"><span class="std std-ref">Modem trace module</span></a> for more information on how to configure modem tracing and the built-in trace backends available.</p>
+<p>You need a trace backend that can store modem traces if you want to upload modem traces to the cloud.
+The flash backend can store modem traces to the external flash on the nRF9160 DK and can be retrieved for uploading.</p>
+<p>To enable modem traces with a flash backend, use the <code class="file docutils literal notranslate"><span class="pre">overlay-modem-trace.conf</span></code> configuration file.
+This also requires a device tree overlay for the external flash (<code class="file docutils literal notranslate"><span class="pre">nrf9160dk_ext_flash.overlay</span></code>).</p>
+<section id="send-to-memfault">
+<h4>Send to Memfault<a class="headerlink" href="#send-to-memfault" title="Permalink to this heading"></a></h4>
+<p>To register an account and obtain the project key, refer to the <a class="reference internal" href="../../../external_comp/memfault.html#using-memfault"><span class="std std-ref">Integration overview</span></a> section of the <a class="reference internal" href="../../../external_comp/memfault.html#ug-memfault"><span class="std std-ref">Memfault integration</span></a> guide.
+The Memfault overlay config (<code class="file docutils literal notranslate"><span class="pre">overlay-memfault.conf</span></code>) includes the most common configuration options for using the Memfault with modem traces.</p>
+<p>After a modem trace session, prepare sending the trace data to Memfault using <code class="docutils literal notranslate"><span class="pre">modem_trace</span> <span class="pre">send</span> <span class="pre">memfault</span></code>.
+This informs the <a class="reference external" href="https://github.com/memfault/memfault-firmware-sdk">Memfault-SDK</a> about a Custom Data Recording (CDR) that will be sent as part of the next data transfer to Memfault.
+To trigger sending immediately, it’s possible to use the Memfault shell command <code class="docutils literal notranslate"><span class="pre">mflt</span> <span class="pre">post_chunks</span></code>.</p>
+<p>Follow these steps to download the modem trace data:</p>
+<blockquote>
+<div><ol class="loweralpha simple">
+<li><p>In a web browser, navigate to <a class="reference external" href="https://memfault.com/">Memfault</a>.</p></li>
+<li><p>Log in to your account and select the project you created earlier.</p></li>
+<li><p>Navigate to <span class="guilabel">Fleet</span> &gt; <span class="guilabel">Devices</span> in the left side menu.</p></li>
+<li><p>Select the <strong>device</strong> that sent a modem trace.</p></li>
+<li><p>Navigate to the <span class="guilabel">Timeline</span> tab.</p></li>
+<li><p>Find the CDR in the timeline and click on it.</p></li>
+<li><p>Select <span class="guilabel">Download</span> from the pop-up window.</p></li>
+</ol>
+</div></blockquote>
+<p>See the following figure, which shows how to download the modem trace data in the <a class="reference external" href="https://memfault.com/">Memfault</a>:</p>
+<figure class="align-default" id="id24">
+<img alt="Modem trace download" src="../../../_images/modem_shell_trace_download.png" />
+<figcaption>
+<p><span class="caption-text">Modem trace download</span><a class="headerlink" href="#id24" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The conversion of modem trace file to a Wireshark-compatible format will be available in one of the future releases of the Trace Collector tool.</p>
+</div>
+<p>To build the MoSh sample with the nRF9160 DK and modem traces with a flash backend, see <a class="reference internal" href="#modem-shell-trace-support"><span class="std std-ref">nRF9160 DK and modem trace support</span></a>.</p>
+</section>
+<section id="id8">
+<h4>Examples<a class="headerlink" href="#id8" title="Permalink to this heading"></a></h4>
+<ul>
+<li><p>Modem trace everything (LTE, IP and GNSS):</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">modem_trace start full</span>
+<span class="go">&lt;test using gnss-, lte-, or ip-commands&gt;</span>
+<span class="go">modem_trace stop</span>
+</pre></div>
+</div>
+</li>
+<li><p>Read out the size of stored modem traces:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">modem_trace size</span>
+</pre></div>
+</div>
+</li>
+<li><p>Delete all stored modem traces:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">modem_trace clear</span>
+</pre></div>
+</div>
+</li>
+<li><p>Send modem traces to Memfault:
+(This will free up the stored traces as they are sent)</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">modem_trace send memfault</span>
+<span class="go">mflt post_chunks</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="gnss">
+<h3><a class="toc-backref" href="#id36">GNSS</a><a class="headerlink" href="#gnss" title="Permalink to this heading"></a></h3>
+<p>MoSh command: <code class="docutils literal notranslate"><span class="pre">gnss</span></code></p>
+<p>GNSS provides commands for searching the location of the device.</p>
+<section id="id9">
+<h4>Examples<a class="headerlink" href="#id9" title="Permalink to this heading"></a></h4>
+<ul>
+<li><p>Start GNSS tracking and stop it:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">gnss start</span>
+<span class="go">gnss stop</span>
+</pre></div>
+</div>
+</li>
+<li><p>Disable LTE, enable all GNSS output and start continuous tracking with power saving enabled:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">link funmode --lteoff</span>
+<span class="go">gnss output 2 1 1</span>
+<span class="go">gnss mode cont</span>
+<span class="go">gnss config powersave perf</span>
+<span class="go">gnss start</span>
+</pre></div>
+</div>
+</li>
+<li><p>Enable LTE PSM, only NMEA output, automatic A-GPS data fetching and start periodic fixes with 5 minute interval and 120 second timeout:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">link psm -e</span>
+<span class="go">gnss output 0 1 0</span>
+<span class="go">gnss agps automatic enable</span>
+<span class="go">gnss mode periodic 300 120</span>
+<span class="go">gnss start</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="fota">
+<h3><a class="toc-backref" href="#id37">FOTA</a><a class="headerlink" href="#fota" title="Permalink to this heading"></a></h3>
+<p>MoSh command: <code class="docutils literal notranslate"><span class="pre">fota</span></code></p>
+<p>You can use FOTA to perform software updates over-the-air for both modem and application side.
+However, to use this feature, you need to know which updates are available in the servers.
+This feature is intended to be used only by selected users and customers to whom available image names are communicated separately.</p>
+<section id="id10">
+<h4>Examples<a class="headerlink" href="#id10" title="Permalink to this heading"></a></h4>
+<ul>
+<li><p>Perform a FOTA update:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">fota download eu fw_update_package_filename.hex</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="ppp">
+<h3><a class="toc-backref" href="#id38">PPP</a><a class="headerlink" href="#ppp" title="Permalink to this heading"></a></h3>
+<p>MoSh command: <code class="docutils literal notranslate"><span class="pre">ppp</span></code></p>
+<p>You can use the PPP (Point-to-Point Protocol) to enable dial-up access to the Internet.
+The MoSh command is simple but you need to have a normal dial-up setup in your PC to be able to use the development kit’s PPP interface.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>On Windows, dial-up connection is not functional when using SEGGER virtual UART ports.
+PPP has been used successfully with FTDI UART port though.
+Refer to <a class="reference external" href="https://infocenter.nordicsemi.com/topic/nwp_034/WP/nwp_034/nwp_034_uart_if.html">nRF9160 Hardware Verification Guidelines - UART interface</a>.</p>
+<p>PPP has been successfully used running Ubuntu Linux in a virtualization environment hosted by Windows.
+In the hosted virtual Linux environment, using PPP is possible also with plain SEGGER UART ports.</p>
+</div>
+<section id="id11">
+<h4>Examples<a class="headerlink" href="#id11" title="Permalink to this heading"></a></h4>
+<ul>
+<li><p>PPP network interface is brought up/down automatically when LTE connection is up/down. Set the PPP network interface up manually:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">ppp up</span>
+</pre></div>
+</div>
+</li>
+<li><p>Set the PPP network interface down manually:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">ppp down</span>
+</pre></div>
+</div>
+</li>
+<li><p>Set the custom baudrate configuration for PPP UART (default: 115200):</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">ppp uartconf --baudrate 921600</span>
+</pre></div>
+</div>
+</li>
+<li><p>Set the <code class="docutils literal notranslate"><span class="pre">rts_cts</span></code> hardware flow control configuration for PPP UART (default: none):</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">ppp uartconf --flowctrl rts_cts</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="rest-client">
+<h3><a class="toc-backref" href="#id39">REST client</a><a class="headerlink" href="#rest-client" title="Permalink to this heading"></a></h3>
+<p>MoSh command: <code class="docutils literal notranslate"><span class="pre">rest</span></code></p>
+<p>You can use the REST client for sending simple REST requests and receiving responses to them.</p>
+<section id="id12">
+<h4>Examples<a class="headerlink" href="#id12" title="Permalink to this heading"></a></h4>
+<ul>
+<li><p>Sending a HEAD request with custom dummy headers:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">rest -d example.com -l 1024 -m head -H &quot;X-foo1: bar1\x0D\x0A&quot; -H &quot;X-foo2: bar2\x0D\x0A&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="running-stored-commands-after-startup">
+<h3><a class="toc-backref" href="#id40">Running stored commands after startup</a><a class="headerlink" href="#running-stored-commands-after-startup" title="Permalink to this heading"></a></h3>
+<p>MoSh command: <code class="docutils literal notranslate"><span class="pre">startup_cmd</span></code></p>
+<p>You can store up to three MoSh commands to run on start/bootup.
+By default, commands are run after the default PDN context is activated,
+but can be set to run N seconds after bootup.</p>
+<section id="id13">
+<h4>Examples<a class="headerlink" href="#id13" title="Permalink to this heading"></a></h4>
+<ul>
+<li><p>Starting periodic location acquiring after LTE has been connected with both cellular and GNSS, including sending the location to nRF Cloud:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">startup_cmd --mem1 &quot;location get --mode all --method cellular --method gnss --gnss_cloud_pvt --interval 15&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<hr class="docutils" />
+</section>
+</section>
+<section id="running-commands-in-different-threads-and-pipelining-commands">
+<span id="pipelining-commands"></span><h3><a class="toc-backref" href="#id41">Running commands in different threads and pipelining commands</a><a class="headerlink" href="#running-commands-in-different-threads-and-pipelining-commands" title="Permalink to this heading"></a></h3>
+<p>MoSh command: <code class="docutils literal notranslate"><span class="pre">th</span></code></p>
+<p>You can run <code class="docutils literal notranslate"><span class="pre">iperf3</span></code> and <code class="docutils literal notranslate"><span class="pre">ping</span></code> in separate threads either in the background or in the foreground.
+Subcommand <code class="docutils literal notranslate"><span class="pre">pipeline</span></code> allows running any commands sequentially in the foreground.</p>
+<section id="id14">
+<h4>Examples<a class="headerlink" href="#id14" title="Permalink to this heading"></a></h4>
+<ul>
+<li><p>Start iperf test in the background.
+Meanwhile, start ping in the foreground.
+Print the output buffer of iperf thread once done:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">th startbg iperf3 --client 111.222.111.222 --port 10000 -l 3540 --time 30 -V -R</span>
+<span class="go">th startfg ping -d 8.8.8.8</span>
+<span class="go">th results 1</span>
+</pre></div>
+</div>
+</li>
+<li><p>Establish MQTT connection to nRF Cloud, wait 10 seconds for the connection establishment, and request current location:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">th pipeline &quot;cloud connect&quot; &quot;sleep 10&quot; &quot;location get&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="sleep">
+<h3><a class="toc-backref" href="#id42">Sleep</a><a class="headerlink" href="#sleep" title="Permalink to this heading"></a></h3>
+<p>When pipelining commands using <code class="docutils literal notranslate"><span class="pre">th</span> <span class="pre">pipeline</span></code>, you can use the <code class="docutils literal notranslate"><span class="pre">sleep</span></code> command to pause the execution for a given period to allow previous command to return before executing next one.
+See <a class="reference internal" href="#pipelining-commands"><span class="std std-ref">Running commands in different threads and pipelining commands</span></a> for usage.</p>
+</section>
+<section id="cloud">
+<h3><a class="toc-backref" href="#id43">Cloud</a><a class="headerlink" href="#cloud" title="Permalink to this heading"></a></h3>
+<p>MoSh command: <code class="docutils literal notranslate"><span class="pre">cloud</span></code></p>
+<p>nRF Cloud is a platform for providing, among other things, various location services.
+Modem Shell enables you to establish an MQTT connection to nRF Cloud using the <a class="reference internal" href="../../../libraries/networking/nrf_cloud.html#lib-nrf-cloud"><span class="std std-ref">nRF Cloud</span></a> library.
+Currently, the <code class="docutils literal notranslate"><span class="pre">cloud</span></code> command is useful mostly when using the location services and MQTT is the desired transport protocol.
+However, you can use any nRF Cloud services once the MQTT connection is established.</p>
+<section id="id15">
+<h4>Examples<a class="headerlink" href="#id15" title="Permalink to this heading"></a></h4>
+<ul>
+<li><p>Establish the connection to nRF Cloud, request the cell-based location of the device, and disconnect when ready:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">cloud connect</span>
+<span class="go">location get --method cellular</span>
+<span class="go">cloud disconnect</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="remote-control-using-nrf-cloud">
+<h3><a class="toc-backref" href="#id44">Remote control using nRF Cloud</a><a class="headerlink" href="#remote-control-using-nrf-cloud" title="Permalink to this heading"></a></h3>
+<p>Once you have established an MQTT connection to nRF Cloud using the <code class="docutils literal notranslate"><span class="pre">cloud</span></code> command, you can use the <strong>Terminal</strong> window in the nRF Cloud portal to execute MoSh commands to the device.
+This feature enables full remote control of the MoSh application running on a device that is connected to cloud.
+MoSh output, such as responses to commands and other notifications can be echoed to the <code class="docutils literal notranslate"><span class="pre">messages</span></code> endpoint and the <strong>Terminal</strong> window of the nRF Cloud portal.
+Use the <code class="docutils literal notranslate"><span class="pre">print</span> <span class="pre">cloud</span></code> command to enable this behavior.
+The data format of the input data in the <strong>Terminal</strong> window must be JSON.</p>
+<section id="id16">
+<h4>Examples<a class="headerlink" href="#id16" title="Permalink to this heading"></a></h4>
+<ul>
+<li><p>Establish the connection to nRF Cloud:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">cloud connect</span>
+</pre></div>
+</div>
+</li>
+<li><p>To request the device location, enter the following command in the <strong>Terminal</strong> window of the nRF Cloud portal:</p>
+<blockquote>
+<div><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">{&quot;appId&quot;:&quot;MODEM_SHELL&quot;, &quot;data&quot;:&quot;location get --method cellular&quot;}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>The device location appears in the <strong>Location</strong> window.</p>
+</li>
+<li><p>An AT command is sent to the modem:</p>
+<blockquote>
+<div><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">{&quot;appId&quot;:&quot;MODEM_SHELL&quot;, &quot;data&quot;:&quot;at AT+COPS=1,2,\\\&quot;24412\\\&quot;&quot;}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Note the syntax for escaping the quotation marks.</p>
+</li>
+</ul>
+<hr class="docutils" />
+</section>
+</section>
+<section id="uart">
+<span id="uart-command"></span><h3><a class="toc-backref" href="#id45">UART</a><a class="headerlink" href="#uart" title="Permalink to this heading"></a></h3>
+<p>Disable UARTs for power measurement purposes.</p>
+<ul>
+<li><p>Disable UARTs for 30 seconds:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">uart disable 30</span>
+</pre></div>
+</div>
+</li>
+<li><p>Disable UARTs whenever modem is in sleep state:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">uart during_sleep disable</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="heap-usage-statistics">
+<h3><a class="toc-backref" href="#id46">Heap usage statistics</a><a class="headerlink" href="#heap-usage-statistics" title="Permalink to this heading"></a></h3>
+<p>You can use the <code class="docutils literal notranslate"><span class="pre">heap</span></code> command to print kernel and system heap usage statistics.</p>
+<blockquote>
+<div><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">mosh:~$ </span>heap
+<span class="go">kernel heap statistics:</span>
+<span class="go">free:             7804</span>
+<span class="go">allocated:         272</span>
+<span class="go">max. allocated:   1056</span>
+
+<span class="go">system heap statistics:</span>
+<span class="go">max. size:       81400</span>
+<span class="go">size:              248</span>
+<span class="go">free:              160</span>
+<span class="go">allocated:          88</span>
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+</section>
+<section id="configuration">
+<h2><a class="toc-backref" href="#id47">Configuration</a><a class="headerlink" href="#configuration" title="Permalink to this heading"></a></h2>
+<p>See <a class="reference internal" href="../../../getting_started/modifying.html#configure-application"><span class="std std-ref">Configuring your application</span></a> for information about how to permanently or temporarily change the configuration.</p>
+<section id="configuration-options">
+<h3><a class="toc-backref" href="#id48">Configuration options</a><a class="headerlink" href="#configuration-options" title="Permalink to this heading"></a></h3>
+<p>Check and configure the following configuration options for the sample:</p>
+<dl class="simple" id="config-mosh-link">
+<dt>CONFIG_MOSH_LINK</dt><dd><p>Enable LTE link control feature in modem shell.</p>
+</dd>
+</dl>
+<dl class="simple" id="config-mosh-ping">
+<dt>CONFIG_MOSH_PING</dt><dd><p>Enable ping feature in modem shell.</p>
+</dd>
+</dl>
+<dl class="simple" id="config-mosh-iperf3">
+<dt>CONFIG_MOSH_IPERF3</dt><dd><p>Enable iperf3 feature in modem shell.</p>
+</dd>
+</dl>
+<dl class="simple" id="config-mosh-curl">
+<dt>CONFIG_MOSH_CURL</dt><dd><p>Enable curl feature in modem shell.</p>
+</dd>
+</dl>
+<dl class="simple" id="config-mosh-sock">
+<dt>CONFIG_MOSH_SOCK</dt><dd><p>Enable socket tool feature in modem shell.</p>
+</dd>
+</dl>
+<dl class="simple" id="config-mosh-sms">
+<dt>CONFIG_MOSH_SMS</dt><dd><p>Enable SMS feature in modem shell</p>
+</dd>
+</dl>
+<dl class="simple" id="config-mosh-location">
+<dt>CONFIG_MOSH_LOCATION</dt><dd><p>Enable Location tool in modem shell.</p>
+</dd>
+</dl>
+<dl class="simple" id="config-mosh-gnss">
+<dt>CONFIG_MOSH_GNSS</dt><dd><p>Enable GNSS feature in modem shell</p>
+</dd>
+</dl>
+<dl class="simple" id="config-mosh-fota">
+<dt>CONFIG_MOSH_FOTA</dt><dd><p>Enable FOTA feature in modem shell</p>
+</dd>
+</dl>
+<dl class="simple" id="config-mosh-ppp">
+<dt>CONFIG_MOSH_PPP</dt><dd><p>Enable PPP feature in modem shell</p>
+</dd>
+</dl>
+<dl class="simple" id="config-mosh-rest">
+<dt>CONFIG_MOSH_REST</dt><dd><p>Enable REST client feature in modem shell.</p>
+</dd>
+</dl>
+<dl class="simple" id="config-mosh-cloud-rest">
+<dt>CONFIG_MOSH_CLOUD_REST</dt><dd><p>Enable nRF Cloud REST feature in modem shell.</p>
+</dd>
+</dl>
+<dl class="simple" id="config-mosh-cloud-mqtt">
+<dt>CONFIG_MOSH_CLOUD_MQTT</dt><dd><p>Enable nRF Cloud MQTT connection feature in modem shell.</p>
+</dd>
+</dl>
+<dl class="simple" id="config-mosh-at-cmd-mode">
+<dt>CONFIG_MOSH_AT_CMD_MODE</dt><dd><p>Enable AT command mode feature in modem shell.</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You may not be able to use all features at the same time due to memory restrictions.
+To see which features are enabled simultaneously, check the configuration files and overlays.</p>
+</div>
+</section>
+<section id="additional-configuration">
+<h3><a class="toc-backref" href="#id49">Additional configuration</a><a class="headerlink" href="#additional-configuration" title="Permalink to this heading"></a></h3>
+<p>Check and configure the following library option that is used by the sample:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MODEM_ANTENNA_GNSS_EXTERNAL</span></code> - Selects an external GNSS antenna.</p></li>
+</ul>
+</section>
+</section>
+<section id="building-and-running">
+<h2><a class="toc-backref" href="#id50">Building and running</a><a class="headerlink" href="#building-and-running" title="Permalink to this heading"></a></h2>
+<p>This sample can be found under <code class="file docutils literal notranslate"><span class="pre">samples/nrf9160/modem_shell</span></code> in the nRF Connect SDK folder structure.</p>
+<p>When built as firmware image for the <code class="docutils literal notranslate"><span class="pre">_ns</span></code> build target, the sample has Cortex-M Security Extensions (CMSE) enabled and separates the firmware between Non-Secure Processing Environment (NSPE) and Secure Processing Environment (SPE).
+Because of this, it automatically includes the <a class="reference internal" href="../../../app_dev/tfm/index.html#ug-tfm"><span class="std std-ref">Trusted Firmware-M (TF-M)</span></a>.
+To read more about CMSE, see <a class="reference internal" href="../../../app_dev/board_support/index.html#app-boards-spe-nspe"><span class="std std-ref">Processing environments</span></a>.</p>
+<p>To build the sample with Visual Studio Code, follow the steps listed on the <a class="reference external" href="https://nrfconnect.github.io/vscode-nrf-connect/get_started/build_app_ncs.html">How to build an application</a> page in the nRF Connect for VS Code extension documentation.
+See <a class="reference internal" href="../../../getting_started/programming.html#gs-programming"><span class="std std-ref">Building and programming an application</span></a> for other building and programming scenarios and <a class="reference internal" href="../../../getting_started/testing.html#gs-testing"><span class="std std-ref">Testing and debugging an application</span></a> for general information about testing and debugging in the nRF Connect SDK.</p>
+<p>See <a class="reference internal" href="../../../getting_started/modifying.html#cmake-options"><span class="std std-ref">Providing CMake options</span></a> for instructions on how to provide CMake options, for example to use a configuration overlay.</p>
+<section id="dk-buttons">
+<span id="id17"></span><h3><a class="toc-backref" href="#id51">DK buttons</a><a class="headerlink" href="#dk-buttons" title="Permalink to this heading"></a></h3>
+<p>The buttons have the following functions:</p>
+<dl class="simple">
+<dt>Button 1:</dt><dd><p>Raises a kill or abort signal. A long press of the button will kill or abort all supported running commands. You can abort commands <code class="docutils literal notranslate"><span class="pre">iperf3</span></code> (also with <code class="docutils literal notranslate"><span class="pre">th</span></code>), <code class="docutils literal notranslate"><span class="pre">curl</span></code>, <code class="docutils literal notranslate"><span class="pre">ping</span></code> and <code class="docutils literal notranslate"><span class="pre">sock</span> <span class="pre">send</span></code>.</p>
+</dd>
+<dt>Button 2:</dt><dd><p>Enables or disables the UARTs for power consumption measurements. Toggles between UARTs enabled and disabled.</p>
+</dd>
+</dl>
+</section>
+<section id="led-indications">
+<h3><a class="toc-backref" href="#id52">LED indications</a><a class="headerlink" href="#led-indications" title="Permalink to this heading"></a></h3>
+<p>The LEDs have the following functions:</p>
+<dl class="simple">
+<dt>LED 1 (nRF9160 DK)/Purple LED (Thingy:91):</dt><dd><p>Lit for five seconds when the current location has been successfully retrieved by using the <code class="docutils literal notranslate"><span class="pre">location</span> <span class="pre">get</span></code> command.</p>
+</dd>
+<dt>LED 3 (nRF9160 DK)/Blue LED (Thingy:91):</dt><dd><p>Indicates the LTE registration status.</p>
+</dd>
+</dl>
+</section>
+<section id="power-measurements">
+<h3><a class="toc-backref" href="#id53">Power measurements</a><a class="headerlink" href="#power-measurements" title="Permalink to this heading"></a></h3>
+<p>You can perform power measurements using the <a class="reference external" href="https://infocenter.nordicsemi.com/topic/ug_ppk2/UG/ppk/PPK_user_guide_Intro.html">Power Profiler Kit II (PPK2)</a>.
+See the documentation for instructions on how to setup the DK for power measurements.
+The documentation shows, for example, how to connect the wires for both source meter and ampere meter modes.
+The same instructions are valid also when using a different meter.</p>
+<p>To achieve satisfactory power measurement results, it is often desirable to disable UART interfaces unless their contribution to overall power consumption is of interest.
+In MoSh, perform one of the following actions:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Use MoSh command <code class="docutils literal notranslate"><span class="pre">uart</span></code> to disable UARTs as in <a class="reference internal" href="#uart-command"><span class="std std-ref">UART</span></a></p></li>
+<li><p>Press <strong>Button 2</strong> in DK to enable or disable UARTs as instructed in <a class="reference internal" href="#dk-buttons"><span class="std std-ref">DK buttons</span></a></p></li>
+</ul>
+</div></blockquote>
+<p>For more information about application power optimizations, refer to <a class="reference internal" href="../../../app_dev/optimizing/power.html#app-power-opt"><span class="std std-ref">Power optimization</span></a>.</p>
+</section>
+<section id="testing">
+<h3><a class="toc-backref" href="#id54">Testing</a><a class="headerlink" href="#testing" title="Permalink to this heading"></a></h3>
+<p>After programming the application and all prerequisites to your development kit, test it by performing the following steps:</p>
+<ol class="arabic">
+<li><p>Connect the development kit to the computer using a USB cable.
+The development kit is assigned a COM port (Windows) or ttyACM device (Linux), which is visible in the Device Manager.</p></li>
+<li><p>Create a serial connection to the development kit (J-Link COM port) with a terminal that supports VT100/ANSI escape characters using the following settings:</p>
+<ul class="simple">
+<li><p>Hardware flow control: disabled</p></li>
+<li><p>Baud rate: 115200</p></li>
+<li><p>Parity bit: no</p></li>
+</ul>
+</li>
+<li><p>Reset the development kit.</p></li>
+<li><p>Observe in the terminal window that the application starts.
+This is indicated by output similar to the following (there is also a lot of additional information about the LTE connection):</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">*** Booting Zephyr OS build v2.4.99-ncs1-3525-g4d068de3f50f  ***</span>
+
+<span class="go">MOSH version:       v1.5.0-649-g7e657c2fab02</span>
+<span class="go">MOSH build id:      152</span>
+<span class="go">MOSH build variant: normal</span>
+
+<span class="go">Initializing modemlib...</span>
+
+<span class="go">Initialized modemlib</span>
+<span class="go">Network registration status: searching</span>
+<span class="go">Network registration status: Connected - home network</span>
+<span class="gp">mosh:~$</span>
+</pre></div>
+</div>
+</li>
+<li><p>Type any of the commands listed in the Overview section to the terminal. When you type only the command, the terminal shows the usage, for example <code class="docutils literal notranslate"><span class="pre">sock</span></code>.</p></li>
+</ol>
+</section>
+<section id="getting-nrf9160-dk-out-of-the-box-and-to-nrf-cloud">
+<h3><a class="toc-backref" href="#id55">Getting nRF9160 DK out-of-the-box and to nRF Cloud</a><a class="headerlink" href="#getting-nrf9160-dk-out-of-the-box-and-to-nrf-cloud" title="Permalink to this heading"></a></h3>
+<p>To program the certificates and connect to nRF Cloud, complete the following steps:</p>
+<ol class="arabic">
+<li><p><a class="reference external" href="https://www.nordicsemi.com/Software-and-Tools/Development-Tools/nRF-Connect-for-desktop/Download#infotabs">Download nRF Connect for Desktop</a>.</p></li>
+<li><p>Update the modem firmware on the on-board modem of the nRF9160 DK to the latest version as instructed in <a class="reference internal" href="../../../working_with_nrf/nrf91/nrf9160_gs.html#nrf9160-gs-updating-fw-modem"><span class="std std-ref">Updating the modem firmware</span></a>.</p></li>
+<li><p>Build and program the MoSh to the nRF9160 DK using the default MoSh configuration (with REST as the transport):</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>west<span class="w"> </span>build<span class="w"> </span>-p<span class="w"> </span>-b<span class="w"> </span>nrf9160dk_nrf9160_ns<span class="w"> </span>-d<span class="w"> </span>build
+<span class="gp">$ </span>west<span class="w"> </span>flash<span class="w"> </span>-d<span class="w"> </span>build
+</pre></div>
+</div>
+</li>
+<li><p>Get certificates from nRF Cloud as explained in <a class="reference internal" href="../../../working_with_nrf/nrf91/nrf9160.html#downloading-cloud-certificate"><span class="std std-ref">Downloading the nRF Cloud certificate</span></a>.</p></li>
+<li><p>In the MoSH terminal, power off the modem and start the AT command mode:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">mosh:~$ </span>link<span class="w"> </span>funmode<span class="w"> </span>-0
+<span class="gp">mosh:~$ </span>at<span class="w"> </span>at_cmd_mode<span class="w"> </span>start
+</pre></div>
+</div>
+</li>
+<li><p>Disconnect the MoSh terminal.</p></li>
+<li><p>Connect and use <a class="reference external" href="https://infocenter.nordicsemi.com/topic/ug_link_monitor/UG/link_monitor/lm_intro.html">LTE Link Monitor</a> to store the certificates to the modem (default nRF Cloud security tag).</p>
+<p>See <a class="reference external" href="https://infocenter.nordicsemi.com/topic/ug_link_monitor/UG/link_monitor/lm_certificate_manager.html">Managing credentials</a> in the LTE Link Monitor user guide for instructions.</p>
+</li>
+<li><p>Reconnect the MoSh terminal and press <code class="docutils literal notranslate"><span class="pre">ctrl-x</span></code> and <code class="docutils literal notranslate"><span class="pre">ctrl-q</span></code> to exit the AT command mode.</p></li>
+<li><p>Set the modem to normal mode to activate LTE:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">mosh:~$ </span>link<span class="w"> </span>funmode<span class="w"> </span>-1
+</pre></div>
+</div>
+<p>Observe that LTE is getting connected.</p>
+</li>
+<li><p>Perform just-in-time provisioning (JITP) with nRF Cloud through REST:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">mosh:~$ </span>cloud_rest<span class="w"> </span>jitp
+</pre></div>
+</div>
+<p>You only need to do this once for each device.</p>
+</li>
+<li><p>Follow the instructions for JITP printed in the MoSh terminal.</p></li>
+<li><p>Complete the user association:</p>
+<ol class="arabic simple">
+<li><p>Open the <a class="reference external" href="https://nrfcloud.com/">nRF Cloud</a> portal.</p></li>
+<li><p>Click the large plus sign in the upper left corner.</p></li>
+<li><p>Enter the device ID from MoSh in the <strong>Device ID</strong> field.</p></li>
+</ol>
+<p>When the device has been added, the message <strong>Device added to account. Waiting for it to connect…</strong> appears.
+When the message disappears, click <span class="guilabel">Devices</span> on the left side menu.
+Your MoSh device is now visible in the list.</p>
+</li>
+<li><p>Send MoSh device information to nRF Cloud:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">mosh:~$ </span>cloud_rest<span class="w"> </span>shadow_update
+</pre></div>
+</div>
+<p>It might take a while for the data to appear in the nRF Cloud UI.</p>
+</li>
+<li><p>Use the <code class="docutils literal notranslate"><span class="pre">location</span></code> command to verify that the REST transport to nRF Cloud is working.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">mosh:~$ </span>location<span class="w"> </span>get<span class="w"> </span>--method<span class="w"> </span>cellular
+</pre></div>
+</div>
+</li>
+<li><p>As a success response, the location is printed in the MoSh terminal.</p></li>
+<li><p>Open the entry for your device in the <strong>Devices</strong> view.</p></li>
+<li><p>Observe that location and device information are shown in the device page.</p></li>
+</ol>
+</section>
+<section id="nrf9160-dk-with-nrf7002-ek-wi-fi-support">
+<h3><a class="toc-backref" href="#id56">nRF9160 DK with nRF7002 EK Wi-Fi support</a><a class="headerlink" href="#nrf9160-dk-with-nrf7002-ek-wi-fi-support" title="Permalink to this heading"></a></h3>
+<p>To build the MoSh sample with nRF9160 DK and nRF7002 EK Wi-Fi support, use the <code class="docutils literal notranslate"><span class="pre">-DSHIELD=nrf7002_ek</span></code>, <code class="docutils literal notranslate"><span class="pre">-DDTC_OVERLAY_FILE=nrf9160dk_with_nrf7002ek.overlay</span></code> and  <code class="docutils literal notranslate"><span class="pre">-DOVERLAY_CONFIG=overlay-nrf7002ek-wifi-scan-only.conf</span></code> options.</p>
+<p>For example:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">west build -p -b nrf9160dk_nrf9160_ns -- -DSHIELD=nrf7002_ek -DDTC_OVERLAY_FILE=nrf9160dk_with_nrf7002ek.overlay -DOVERLAY_CONFIG=overlay-nrf7002ek-wifi-scan-only.conf</span>
+</pre></div>
+</div>
+<p>See <a class="reference internal" href="../../../getting_started/modifying.html#cmake-options"><span class="std std-ref">Providing CMake options</span></a> for more instructions on how to add these options.</p>
+</section>
+<section id="esp8266-wi-fi-support">
+<h3><a class="toc-backref" href="#id57">ESP8266 Wi-Fi support</a><a class="headerlink" href="#esp8266-wi-fi-support" title="Permalink to this heading"></a></h3>
+<p>To build the MoSh sample with ESP8266 Wi-Fi chip support, use the <code class="docutils literal notranslate"><span class="pre">-DDTC_OVERLAY_FILE=esp_8266_nrf9160ns.overlay</span></code> and  <code class="docutils literal notranslate"><span class="pre">-DOVERLAY_CONFIG=overlay-esp-wifi.conf</span></code> options.</p>
+<p>For example:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">west build -p -b nrf9160dk_nrf9160_ns -d build -- -DDTC_OVERLAY_FILE=esp_8266_nrf9160ns.overlay -DOVERLAY_CONFIG=overlay-esp-wifi.conf</span>
+</pre></div>
+</div>
+<p>See <a class="reference internal" href="../../../getting_started/modifying.html#cmake-options"><span class="std std-ref">Providing CMake options</span></a> for more instructions on how to add these options.</p>
+</section>
+<section id="ppp-support">
+<h3><a class="toc-backref" href="#id58">PPP support</a><a class="headerlink" href="#ppp-support" title="Permalink to this heading"></a></h3>
+<p>To build the MoSh sample with PPP/dial up support, use the <code class="docutils literal notranslate"><span class="pre">-DDTC_OVERLAY_FILE=ppp.overlay</span></code> and <code class="docutils literal notranslate"><span class="pre">-DOVERLAY_CONFIG=overlay-ppp.conf</span></code> options.
+For example:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">west build -p -b nrf9160dk_nrf9160_ns -- -DDTC_OVERLAY_FILE=ppp.overlay -DOVERLAY_CONFIG=overlay-ppp.conf</span>
+</pre></div>
+</div>
+<p>After programming the development kit, test it in the Linux environment by performing the following steps:</p>
+<ol class="arabic">
+<li><p>Connect the development kit to the computer using a USB cable.
+The development kit is assigned a ttyACM device (Linux).</p></li>
+<li><p>Open a serial connection to the development kit (/dev/ttyACM2) with a terminal that supports VT100/ANSI escape characters (for example PuTTY).</p></li>
+<li><p>Reset the development kit.</p></li>
+<li><p>Observe in the terminal window that the MoSh starts with the PPP support.
+This is indicated by output similar to the following (there is also a lot of additional information about the LTE connection):</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">Network registration status: searching</span>
+<span class="go">Network registration status: Connected - home network</span>
+<span class="go">Default PDN is active: starting PPP automatically</span>
+<span class="go">PPP: started</span>
+<span class="gp">mosh:~$</span>
+</pre></div>
+</div>
+<p>Higher baudrates than the default 115200 result in better performance with the usual use cases for PPP/dial up.
+Set the nRF9160 DK side UART for PPP with a MoSh command, for example <code class="docutils literal notranslate"><span class="pre">ppp</span> <span class="pre">uartconf</span> <span class="pre">-b</span> <span class="pre">921600</span></code>.
+You also need to set the corresponding UART accordingly from PC side (in this example, within the <code class="docutils literal notranslate"><span class="pre">pppd</span></code> command).</p>
+</li>
+<li><p>Enter command <code class="docutils literal notranslate"><span class="pre">ppp</span> <span class="pre">uartconf</span></code> that results in the following UART configuration:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">mosh:~$ </span>ppp<span class="w"> </span>uartconf<span class="w"> </span>-r
+<span class="go">PPP uart configuration:</span>
+<span class="go">  baudrate:     921600</span>
+<span class="go">  flow control: RTS_CTS</span>
+<span class="go">  parity:       none</span>
+<span class="go">  data bits:    bits8</span>
+<span class="go">  stop bits:    bits1</span>
+<span class="gp">mosh:~$</span>
+</pre></div>
+</div>
+</li>
+<li><p>In a Linux terminal, enter the following command to start the PPP connection:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>pppd<span class="w"> </span>-detach<span class="w"> </span>/dev/ttyACM0<span class="w"> </span><span class="m">921600</span><span class="w"> </span>noauth<span class="w"> </span>crtscts<span class="w"> </span>noccp<span class="w"> </span>novj<span class="w"> </span>nodeflate<span class="w"> </span>nobsdcomp<span class="w"> </span><span class="nb">local</span><span class="w"> </span>debug<span class="w"> </span>+ipv6<span class="w"> </span>ipv6cp-use-ipaddr<span class="w"> </span>usepeerdns<span class="w"> </span>noipdefault<span class="w"> </span>defaultroute<span class="w"> </span>ipv6cp-restart<span class="w"> </span><span class="m">5</span><span class="w"> </span>ipcp-restart<span class="w"> </span><span class="m">5</span><span class="w"> </span>lcp-echo-interval<span class="w"> </span><span class="m">0</span>
+</pre></div>
+</div>
+</li>
+<li><p>In a MoSh terminal, observe that the PPP connection is created:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">Dial up (IPv6) connection up</span>
+<span class="go">Dial up (IPv4) connection up</span>
+<span class="gp">mosh:~$</span>
+</pre></div>
+</div>
+</li>
+<li><p>Now, you are ready to browse Internet in Linux by using the MoSh PPP dial-up over LTE connection.</p></li>
+</ol>
+</section>
+<section id="application-fota-support">
+<h3><a class="toc-backref" href="#id59">Application FOTA support</a><a class="headerlink" href="#application-fota-support" title="Permalink to this heading"></a></h3>
+<p>To build the MoSh sample with application FOTA support, use the <code class="docutils literal notranslate"><span class="pre">-DOVERLAY_CONFIG=overlay-app_fota.conf</span></code> option.
+For example:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">west build -p -b nrf9160dk_nrf9160_ns -d build -- -DOVERLAY_CONFIG=overlay-app_fota.conf</span>
+</pre></div>
+</div>
+</section>
+<section id="lwm2m-carrier-library-support">
+<h3><a class="toc-backref" href="#id60">LwM2M carrier library support</a><a class="headerlink" href="#lwm2m-carrier-library-support" title="Permalink to this heading"></a></h3>
+<p>To build the MoSh sample with LwM2M carrier library support, use the <code class="docutils literal notranslate"><span class="pre">-DOVERLAY_CONFIG=overlay-lwm2m_carrier.conf</span></code> option.
+For example:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">west build -p -b nrf9160dk_nrf9160_ns -d build -- -DOVERLAY_CONFIG=overlay-lwm2m_carrier.conf</span>
+</pre></div>
+</div>
+</section>
+<section id="p-gps-support">
+<h3><a class="toc-backref" href="#id61">P-GPS support</a><a class="headerlink" href="#p-gps-support" title="Permalink to this heading"></a></h3>
+<p>To build the MoSh sample with P-GPS support, use the <code class="docutils literal notranslate"><span class="pre">-DOVERLAY_CONFIG=overlay-pgps.conf</span></code> option.
+For example:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">west build -p -b nrf9160dk_nrf9160_ns -d build -- -DOVERLAY_CONFIG=overlay-pgps.conf</span>
+</pre></div>
+</div>
+</section>
+<section id="cloud-over-mqtt">
+<span id="cloud-build"></span><h3><a class="toc-backref" href="#id62">Cloud over MQTT</a><a class="headerlink" href="#cloud-over-mqtt" title="Permalink to this heading"></a></h3>
+<p>To build the MoSh sample with cloud connectivity, use the <code class="docutils literal notranslate"><span class="pre">-DOVERLAY_CONFIG=overlay-cloud_mqtt.conf</span></code> option.
+For example:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">west build -p -b nrf9160dk_nrf9160_ns -d build -- -DOVERLAY_CONFIG=overlay-cloud_mqtt.conf</span>
+</pre></div>
+</div>
+</section>
+<section id="location-service-handled-in-application">
+<h3><a class="toc-backref" href="#id63">Location service handled in application</a><a class="headerlink" href="#location-service-handled-in-application" title="Permalink to this heading"></a></h3>
+<p>This sample is using cloud service for positioning through the <a class="reference internal" href="../../../libraries/modem/location.html#lib-location"><span class="std std-ref">Location</span></a> library by default.
+To build the sample with location cloud services handled in the MoSh,
+use the <code class="docutils literal notranslate"><span class="pre">-DOVERLAY_CONFIG=&quot;overlay-cloud_mqtt.conf&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">-DCONFIG_LOCATION_SERVICE_EXTERNAL=y</span></code> options.
+For example:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">west build -p -b nrf9160dk_nrf9160_ns -d build -- -DOVERLAY_CONFIG=&quot;overlay-cloud_mqtt.conf&quot; -DCONFIG_LOCATION_SERVICE_EXTERNAL=y</span>
+</pre></div>
+</div>
+<p>To add P-GPS on top of that, use the <code class="docutils literal notranslate"><span class="pre">-DOVERLAY_CONFIG=&quot;overlay-cloud_mqtt.conf;overlay-pgps.conf&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">-DCONFIG_LOCATION_SERVICE_EXTERNAL=y</span></code> and <code class="docutils literal notranslate"><span class="pre">-DCONFIG_NRF_CLOUD_PGPS_TRANSPORT_NONE=y</span></code> options.
+For example:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">west build -p -b nrf9160dk_nrf9160_ns -d build -- -DOVERLAY_CONFIG=&quot;overlay-cloud_mqtt.conf;overlay-pgps.conf&quot; -DCONFIG_LOCATION_SERVICE_EXTERNAL=y -DCONFIG_NRF_CLOUD_PGPS_TRANSPORT_NONE=y</span>
+</pre></div>
+</div>
+</section>
+<section id="remote-control-using-nrf-cloud-over-mqtt">
+<h3><a class="toc-backref" href="#id64">Remote control using nRF Cloud over MQTT</a><a class="headerlink" href="#remote-control-using-nrf-cloud-over-mqtt" title="Permalink to this heading"></a></h3>
+<p>To enable the remote control feature, you need to build the sample with cloud connectivity, see <a class="reference internal" href="#cloud-build"><span class="std std-ref">Cloud over MQTT</span></a>.</p>
+</section>
+<section id="zephyr-native-tcp-ip-stack-usage-over-nrf9160-lte-connection">
+<h3><a class="toc-backref" href="#id65">Zephyr native TCP/IP stack usage over nRF9160 LTE connection</a><a class="headerlink" href="#zephyr-native-tcp-ip-stack-usage-over-nrf9160-lte-connection" title="Permalink to this heading"></a></h3>
+<p>To build the MoSh sample with the nRF91 device driver that is not offloading the TCP/IP stack to modem, use the <code class="docutils literal notranslate"><span class="pre">-DOVERLAY_CONFIG=overlay-non-offloading.conf</span></code> option.
+When running this configuration, the configured MoSh commands, for example iperf3, are using Zephyr native TCP/IP stack over nRF9160 LTE connection in default PDN context.</p>
+<p>For example:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">west build -p -b nrf9160dk_nrf9160_ns -- -DOVERLAY_CONFIG=overlay-non-offloading.conf</span>
+</pre></div>
+</div>
+</section>
+<section id="bt-shell-support">
+<h3><a class="toc-backref" href="#id66">BT shell support</a><a class="headerlink" href="#bt-shell-support" title="Permalink to this heading"></a></h3>
+<p>To build the MoSh sample with Zephyr BT shell command support, use the <code class="file docutils literal notranslate"><span class="pre">-DDTC_OVERLAY_FILE=bt.overlay</span></code> and <code class="file docutils literal notranslate"><span class="pre">-DOVERLAY_CONFIG=overlay-bt.conf</span></code> options.
+When running this configuration, you can perform BT scanning and advertising using the <code class="docutils literal notranslate"><span class="pre">bt</span></code> command.</p>
+<p>Compile as follows:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">west build -p -b nrf9160dk_nrf9160_ns -- -DDTC_OVERLAY_FILE=&quot;bt.overlay&quot; -DOVERLAY_CONFIG=&quot;overlay-bt.conf&quot;</span>
+</pre></div>
+</div>
+<p>Additionally, you need to program the nRF52840 side of the nRF9160 DK as instructed in <a class="reference internal" href="../lte_ble_gateway/README.html#lte-sensor-gateway"><span class="std std-ref">nRF9160: LTE Sensor Gateway</span></a>.</p>
+<p>Compile the <a class="reference internal" href="../../bluetooth/hci_lpuart/README.html#bluetooth-hci-lpuart-sample"><span class="std std-ref">Bluetooth: HCI low power UART</span></a> sample as follows:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">west build -p -b nrf9160dk_nrf52840</span>
+</pre></div>
+</div>
+<p>The following example demonstrates how to use MoSh with two development kits, where one acts as a broadcaster and the other one as an observer.</p>
+<p>DK #1, where MoSh is used in broadcaster (advertising) role:</p>
+<blockquote>
+<div><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">mosh:~$ </span>bt<span class="w"> </span>init
+<span class="go">Bluetooth initialized</span>
+<span class="go">Settings Loaded</span>
+<span class="gp">mosh:~$ </span>bt<span class="w"> </span>name<span class="w"> </span>mosh-adv
+<span class="gp">mosh:~$ </span>bt<span class="w"> </span>name
+<span class="go">Bluetooth Local Name: mosh-adv</span>
+<span class="gp">mosh:~$ </span>bt<span class="w"> </span>advertise<span class="w"> </span>scan
+<span class="go">Advertising started</span>
+
+<span class="go">/* And when done: */</span>
+<span class="gp">mosh:~$ </span>bt<span class="w"> </span>advertise<span class="w"> </span>off
+<span class="go">Advertising stopped</span>
+<span class="gp">mosh:~$</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>DK #2, where MoSh is used in observer (scanning) role:</p>
+<blockquote>
+<div><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">mosh:~$ </span>bt<span class="w"> </span>init
+<span class="go">Bluetooth initialized</span>
+<span class="go">Settings Loaded</span>
+<span class="gp">mosh:~$ </span>bt<span class="w"> </span>name<span class="w"> </span>mosh-scanner
+<span class="gp">mosh:~$ </span>bt<span class="w"> </span>name
+<span class="go">Bluetooth Local Name: mosh-scanner</span>
+<span class="gp">mosh:~$ </span>bt<span class="w"> </span>scan-filter-set<span class="w"> </span>name<span class="w"> </span>mosh-adv
+<span class="gp">mosh:~$ </span>bt<span class="w"> </span>scan<span class="w"> </span>on
+<span class="go">Bluetooth active scan enabled</span>
+<span class="go">[DEVICE]: 11:22:33:44:55:66(random), AD evt type 4, RSSI -42 mosh-adv C:0 S:1 D:0 SR:1 E:0 Prim: LE 1M, Secn: No packets, Interval: 0x0000 (0 ms), SID: 0xff</span>
+<span class="go">...</span>
+
+<span class="go">/* And when done: */</span>
+<span class="gp">mosh:~$ </span>bt<span class="w"> </span>scan<span class="w"> </span>off
+<span class="go">Scan successfully stopped</span>
+<span class="gp">mosh:~$</span>
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="segger-rtt-support">
+<h3><a class="toc-backref" href="#id67">SEGGER RTT support</a><a class="headerlink" href="#segger-rtt-support" title="Permalink to this heading"></a></h3>
+<p>To build the MoSh sample with SEGGER’s Real Time Transfer (RTT) support, use the <code class="docutils literal notranslate"><span class="pre">-DOVERLAY_CONFIG=overlay-rtt.conf</span></code> option.
+When running this configuration, RTT is used as the shell backend instead of UART.</p>
+<p>For example:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">west build -p -b nrf9160dk_nrf9160_ns -- -DOVERLAY_CONFIG=overlay-rtt.conf</span>
+</pre></div>
+</div>
+</section>
+<section id="lwm2m-support">
+<h3><a class="toc-backref" href="#id68">LwM2M support</a><a class="headerlink" href="#lwm2m-support" title="Permalink to this heading"></a></h3>
+<p>Before building and running the sample, select the LwM2M server for testing.
+Follow the instructions in <a class="reference internal" href="../lwm2m_client/sample_description.html#server-setup-lwm2m-client"><span class="std std-ref">Server setup</span></a> to set up the server and register your device to the server.
+With the default LwM2M configuration, the device connects directly to the device management server without bootstrap support.
+You can change the LwM2M server address by setting the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LWM2M_CLIENT_UTILS_SERVER</span></code> Kconfig option.</p>
+<p>Location assistance uses a proprietary mechanism to fetch location assistance data from nRF Cloud by proxying it through the LwM2M server.
+As of now, you can only use AVSystem’s Coiote LwM2M server for the location assistance data from nRF Cloud.
+To know more about the AVSystem integration with nRF Connect SDK, see <a class="reference internal" href="../../../external_comp/avsystem.html#ug-avsystem"><span class="std std-ref">AVSystem integration</span></a>.</p>
+<p>You can build the MoSh sample with different LwM2M configurations:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>To build the MoSh sample with the default LwM2M configuration, use the <code class="docutils literal notranslate"><span class="pre">-DOVERLAY_CONFIG=overlay-lwm2m.conf</span></code> option and set the used Pre-Shared-Key (PSK) using <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MOSH_LWM2M_PSK</span></code> Kconfig option.</p></li>
+<li><p>To enable bootstrapping, use the optional overlay file <code class="file docutils literal notranslate"><span class="pre">overlay-lwm2m_bootstrap.conf</span></code>.</p></li>
+<li><p>To enable P-GPS support, use the optional overlay files <code class="file docutils literal notranslate"><span class="pre">overlay-lwm2m_pgps.conf</span></code> and <code class="file docutils literal notranslate"><span class="pre">overlay-pgps.conf</span></code>.</p></li>
+</ul>
+</div></blockquote>
+<p>To build the sample with LwM2M support, use the following command:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">west build -p -b nrf9160dk_nrf9160_ns -- -DOVERLAY_CONFIG=overlay-lwm2m.conf -DCONFIG_MOSH_LWM2M_PSK=\&quot;000102030405060708090a0b0c0d0e0f\&quot;</span>
+</pre></div>
+</div>
+<p>To also enable P-GPS, use the following command:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">west build -p -b nrf9160dk_nrf9160_ns -- -DOVERLAY_CONFIG=&quot;overlay-lwm2m.conf;overlay-lwm2m_pgps.conf;overlay-pgps.conf&quot; -DCONFIG_MOSH_LWM2M_PSK=\&quot;000102030405060708090a0b0c0d0e0f\&quot;</span>
+</pre></div>
+</div>
+<p>Use the following command to establish connection to the LwM2M server:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">mosh:~$ </span>cloud_lwm2m<span class="w"> </span>connect
+<span class="go">LwM2M: Starting LwM2M client</span>
+<span class="go">LwM2M: Registration complete</span>
+</pre></div>
+</div>
+<p>Use the following command to disconnect from the LwM2M server:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">mosh:~$ </span>cloud_lwm2m<span class="w"> </span>disconnect
+<span class="go">LwM2M: Stopping LwM2M client</span>
+<span class="go">LwM2M: Disconnected</span>
+</pre></div>
+</div>
+<p>When connected, the <code class="docutils literal notranslate"><span class="pre">location</span></code> and <code class="docutils literal notranslate"><span class="pre">gnss</span></code> commands use the LwM2M cloud connection for fetching GNSS assistance data and for cellular positioning.</p>
+</section>
+<section id="nrf9160-dk-and-modem-trace-support">
+<span id="modem-shell-trace-support"></span><h3><a class="toc-backref" href="#id69">nRF9160 DK and modem trace support</a><a class="headerlink" href="#nrf9160-dk-and-modem-trace-support" title="Permalink to this heading"></a></h3>
+<p>To build the MoSh sample with nRF9160 DK and modem traces with flash backend, use the <code class="docutils literal notranslate"><span class="pre">-DDTC_OVERLAY_FILE=nrf9160dk_ext_flash.overlay</span></code> and  <code class="docutils literal notranslate"><span class="pre">-DOVERLAY_CONFIG=&quot;overlay-modem-trace.conf;overlay-memfault.conf&quot;</span></code> options.</p>
+<p>For example:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">west build -p -b nrf9160dk_nrf9160_ns -- -DOVERLAY_CONFIG=&quot;overlay-modem-trace.conf;overlay-memfault.conf&quot; -DDTC_OVERLAY_FILE=nrf9160dk_ext_flash.overlay</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="references">
+<h2><a class="toc-backref" href="#id70">References</a><a class="headerlink" href="#references" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://infocenter.nordicsemi.com/topic/nwp_034/WP/nwp_034/nwp_034_uart_if.html">nRF9160 Hardware Verification Guidelines - UART interface</a></p></li>
+</ul>
+</section>
+<section id="dependencies">
+<h2><a class="toc-backref" href="#id71">Dependencies</a><a class="headerlink" href="#dependencies" title="Permalink to this heading"></a></h2>
+<p>This sample uses the following nRF Connect SDK libraries:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../../libraries/modem/at_cmd_parser.html#at-cmd-parser-readme"><span class="std std-ref">AT command parser</span></a></p></li>
+<li><p><a class="reference internal" href="../../../libraries/others/date_time.html#lib-date-time"><span class="std std-ref">Date-Time</span></a></p></li>
+<li><p><a class="reference internal" href="../../../libraries/modem/location.html#lib-location"><span class="std std-ref">Location</span></a></p></li>
+<li><p><a class="reference internal" href="../../../libraries/modem/lte_lc.html#lte-lc-readme"><span class="std std-ref">LTE link controller</span></a></p></li>
+<li><p><a class="reference internal" href="../../../libraries/networking/lwm2m_client_utils.html#lib-lwm2m-client-utils"><span class="std std-ref">LwM2M client utils</span></a></p></li>
+<li><p><a class="reference internal" href="../../../libraries/networking/lwm2m_location_assistance.html#lib-lwm2m-location-assistance"><span class="std std-ref">LwM2M location assistance</span></a></p></li>
+<li><p><a class="reference internal" href="../../../libraries/modem/modem_info.html#modem-info-readme"><span class="std std-ref">Modem information</span></a></p></li>
+<li><p><a class="reference internal" href="../../../libraries/modem/modem_jwt.html#lib-modem-jwt"><span class="std std-ref">Modem JWT</span></a></p></li>
+<li><p><a class="reference internal" href="../../../libraries/networking/nrf_cloud.html#lib-nrf-cloud"><span class="std std-ref">nRF Cloud</span></a></p></li>
+<li><p><a class="reference internal" href="../../../libraries/networking/rest_client.html#lib-rest-client"><span class="std std-ref">REST client</span></a></p></li>
+<li><p><a class="reference internal" href="../../../libraries/modem/sms.html#sms-readme"><span class="std std-ref">SMS subscriber</span></a></p></li>
+</ul>
+<p>This sample uses the following <a class="reference external" href="https://github.com/nrfconnect/sdk-nrfxlib">sdk-nrfxlib</a> libraries:</p>
+<ul class="simple">
+<li><p><span class="xref std std-ref">nrfxlib:nrf_modem</span></p></li>
+</ul>
+<p>In addition, it uses the following secure firmware component:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../../app_dev/tfm/index.html#ug-tfm"><span class="std std-ref">Trusted Firmware-M</span></a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../modem_trace_backend/README.html" class="btn btn-neutral float-right" title="nRF9160: Modem trace backend" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../modem_callbacks/README.html" class="btn btn-neutral" title="nRF9160: Modem callbacks" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

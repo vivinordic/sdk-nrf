@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zigbee: NCP &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script src="../../../_static/tabs.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../../_static/js/ncs.js"
+></script>
+<script src="../../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Zigbee: Network coordinator" href="../network_coordinator/README.html" />
+    <link rel="prev" title="Zigbee: Light switch" href="../light_switch/README.html" />
+<link
+  href="../../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../applications.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../samples.html">Samples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../bl.html">Bluetooth samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../crypto.html">Cryptography samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../edge.html">Edge Impulse samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gazell.html">Gazell samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../matter.html">Matter samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nfc.html">NFC samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nrf5340.html">nRF5340 samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nrf9160.html">nRF9160 samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tfm.html">Trusted Firmware-M (TF-M) samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../thread.html">Thread samples</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../zigbee.html">Zigbee samples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../light_bulb/README.html">Zigbee: Light bulb</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../light_switch/README.html">Zigbee: Light switch</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Zigbee: NCP</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#requirements">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuration">Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#user-interface">User interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#building-and-running">Building and running</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dependencies">Dependencies</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../network_coordinator/README.html">Zigbee: Network coordinator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../shell/README.html">Zigbee: Shell</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../template/README.html">Zigbee: Template</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../wifi.html">Wi-Fi samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../other.html">Other samples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../drivers.html">Drivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../samples.html">Samples</a></li>
+          <li class="breadcrumb-item"><a href="../../zigbee.html">Zigbee samples</a></li>
+      <li class="breadcrumb-item active">Zigbee: NCP</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/samples/zigbee/ncp/README.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="zigbee-ncp">
+<span id="zigbee-ncp-sample"></span><h1>Zigbee: NCP<a class="headerlink" href="#zigbee-ncp" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#requirements" id="id9">Requirements</a></p>
+<ul>
+<li><p><a class="reference internal" href="#requirements-for-dfu-through-mcuboot" id="id10">Requirements for DFU through MCUboot</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#overview" id="id11">Overview</a></p></li>
+<li><p><a class="reference internal" href="#configuration" id="id12">Configuration</a></p>
+<ul>
+<li><p><a class="reference internal" href="#serial-communication-setup" id="id13">Serial communication setup</a></p></li>
+<li><p><a class="reference internal" href="#bootloader-support" id="id14">Bootloader support</a></p></li>
+<li><p><a class="reference internal" href="#fem-support" id="id15">FEM support</a></p></li>
+<li><p><a class="reference internal" href="#vendor-specific-commands" id="id16">Vendor-specific commands</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#user-interface" id="id17">User interface</a></p></li>
+<li><p><a class="reference internal" href="#building-and-running" id="id18">Building and running</a></p>
+<ul>
+<li><p><a class="reference internal" href="#testing" id="id19">Testing</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#dependencies" id="id20">Dependencies</a></p></li>
+</ul>
+</div>
+<p>The <a class="reference internal" href="../../../protocols/zigbee/index.html#ug-zigbee"><span class="std std-ref">Zigbee</span></a> NCP sample demonstrates the usage of Zigbee’s <a class="reference internal" href="../../../protocols/zigbee/architectures.html#ug-zigbee-platform-design-ncp-details"><span class="std std-ref">Network Co-Processor (NCP)</span></a> architecture.</p>
+<p>Together with the source code from <a class="reference internal" href="../../../protocols/zigbee/tools.html#ug-zigbee-tools-ncp-host"><span class="std std-ref">ZBOSS NCP Host</span></a>, you can use this sample to create a complete and functional Zigbee device.
+For example, as shown in the <a class="reference internal" href="#testing">Testing</a> scenario, you can program a development kit with the NCP sample and bundle it with the simple gateway application on the NCP host processor.</p>
+<p>You can then use this sample together with the <a class="reference internal" href="../light_bulb/README.html#zigbee-light-bulb-sample"><span class="std std-ref">Zigbee Light bulb</span></a> to set up a basic Zigbee network.</p>
+<section id="requirements">
+<h2><a class="toc-backref" href="#id9">Requirements</a><a class="headerlink" href="#requirements" title="Permalink to this heading"></a></h2>
+<p>The sample supports the following development kits:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 26%" />
+<col style="width: 6%" />
+<col style="width: 45%" />
+<col style="width: 22%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Hardware platforms</p></th>
+<th class="head"><p>PCA</p></th>
+<th class="head"><p>Board name</p></th>
+<th class="head"><p>Build target</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../working_with_nrf/nrf53/nrf5340.html#ug-nrf5340"><span class="std std-ref">nRF5340 DK</span></a></p></td>
+<td><p>PCA10095</p></td>
+<td><p><span class="xref std std-ref">nrf5340dk_nrf5340</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nrf5340dk_nrf5340_cpuapp</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../working_with_nrf/nrf52/developing.html#ug-nrf52"><span class="std std-ref">nRF52840 Dongle</span></a></p></td>
+<td><p>PCA10059</p></td>
+<td><p><span class="xref std std-ref">nrf52840dongle_nrf52840</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nrf52840dongle_nrf52840</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../working_with_nrf/nrf52/developing.html#ug-nrf52"><span class="std std-ref">nRF52840 DK</span></a></p></td>
+<td><p>PCA10056</p></td>
+<td><p><span class="xref std std-ref">nrf52840dk_nrf52840</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nrf52840dk_nrf52840</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../working_with_nrf/nrf52/developing.html#ug-nrf52"><span class="std std-ref">nRF52833 DK</span></a></p></td>
+<td><p>PCA10100</p></td>
+<td><p><span class="xref std std-ref">nrf52833dk_nrf52833</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nrf52833dk_nrf52833</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../app_dev/working_with_fem/index.html#ug-radio-fem"><span class="std std-ref">nRF21540 DK</span></a></p></td>
+<td><p>PCA10112</p></td>
+<td><p><span class="xref std std-ref">nrf21540dk_nrf52840</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nrf21540dk_nrf52840</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>The nRF5340 DK (<code class="docutils literal notranslate"><span class="pre">nrf5340dk_nrf5340_cpuapp</span></code>) is supported only for development.</p>
+<p>You can use any of the development kits listed above.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The nRF52840 Dongle uses a <a class="reference internal" href="#zigbee-ncp-bootloader"><span class="std std-ref">different bootloader</span></a> than other development kits.</p>
+</div>
+<p>To test this sample, you also need the following:</p>
+<ul>
+<li><p><a class="reference internal" href="../../../protocols/zigbee/tools.html#ug-zigbee-tools-ncp-host"><span class="std std-ref">ZBOSS NCP Host</span></a> tool, which is based on the ZBOSS stack and requires a PC with an operating system compatible with the 64-bit Ubuntu 18.04 Linux.
+The tool is available for download as a standalone <code class="file docutils literal notranslate"><span class="pre">zip</span></code> package using the following link:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://developer.nordicsemi.com/Zigbee/ncp_sdk_for_host/ncp_host_v2.2.1.zip">ZBOSS NCP Host</a> (2.2.1)</p></li>
+</ul>
+<p>For more information, see also the <a class="reference external" href="https://developer.nordicsemi.com/nRF_Connect_SDK/doc/zboss/3.11.2.1/zboss_ncp_host_intro.html">NCP Host documentation</a>.</p>
+</li>
+<li><p>The <a class="reference internal" href="../light_bulb/README.html#zigbee-light-bulb-sample"><span class="std std-ref">Zigbee: Light bulb</span></a> sample programmed on one separate device.</p></li>
+</ul>
+<p>This means that you need at least two development kits for testing this sample.</p>
+<figure class="align-default" id="id8">
+<img alt="Zigbee NCP sample setup overview" src="../../../_images/zigbee_ncp_sample_overview.svg" /><figcaption>
+<p><span class="caption-text">Zigbee NCP sample setup overview</span><a class="headerlink" href="#id8" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<section id="requirements-for-dfu-through-mcuboot">
+<h3><a class="toc-backref" href="#id10">Requirements for DFU through MCUboot</a><a class="headerlink" href="#requirements-for-dfu-through-mcuboot" title="Permalink to this heading"></a></h3>
+<p>If you opt for <a class="reference external" href="https://www.mcuboot.com">MCUboot</a> when selecting the <a class="reference internal" href="#bootloader-support">Bootloader support</a>, you need the <a class="reference external" href="http://dfu-util.sourceforge.net/">dfu-util tool</a> to upload the new firmware image.</p>
+</section>
+</section>
+<section id="overview">
+<h2><a class="toc-backref" href="#id11">Overview</a><a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+<p>The sample demonstrates using a Nordic Semiconductor’s Development Kit as a Zigbee Network Co-Processor.</p>
+<p>The sample uses the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZIGBEE_LIBRARY_NCP_DEV</span></code> Kconfig option, which is available as part of the <span class="xref std std-ref">nrfxlib:zboss_configuration</span>.
+The NCP Kconfig option extends the compilation process with an implementation of the ZBOSS API serialization through NCP commands.
+It also implements the ZBOSS default signal handler function that controls the ZBOSS and commissioning logic.</p>
+<p>The sample is built to work with bootloader.
+See <a class="reference internal" href="#zigbee-ncp-bootloader"><span class="std std-ref">Bootloader support</span></a> for more information.</p>
+<p>The NCP application creates and starts a ZBOSS thread as well as the communication channel for NCP commands that are exchanged between the connectivity device and the host processor.</p>
+</section>
+<section id="configuration">
+<h2><a class="toc-backref" href="#id12">Configuration</a><a class="headerlink" href="#configuration" title="Permalink to this heading"></a></h2>
+<p>See <a class="reference internal" href="../../../getting_started/modifying.html#configure-application"><span class="std std-ref">Configuring your application</span></a> for information about how to permanently or temporarily change the configuration.</p>
+<p>See <a class="reference internal" href="../../../protocols/zigbee/configuring.html#ug-zigbee-configuring-eui64"><span class="std std-ref">IEEE 802.15.4 EUI-64 configuration</span></a> for information about how to configure the IEEE address for this sample.</p>
+<section id="serial-communication-setup">
+<h3><a class="toc-backref" href="#id13">Serial communication setup</a><a class="headerlink" href="#serial-communication-setup" title="Permalink to this heading"></a></h3>
+<p>The communication channel uses Zephyr’s <span class="xref std std-ref">zephyr:uart_api</span> API. The serial device is selected in Devicetree like this:</p>
+<div class="highlight-devicetree notranslate"><div class="highlight"><pre><span></span><span class="nf">chosen</span><span class="cm"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">ncs</span><span class="p">,</span><span class="n">zigbee-uart</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">uart0</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>By default, Zephyr’s logger uses <code class="docutils literal notranslate"><span class="pre">uart0</span></code> and the NCP sample communicates through the UART serialization using <code class="docutils literal notranslate"><span class="pre">uart1</span></code>.
+The DTS overlay file configures <code class="docutils literal notranslate"><span class="pre">uart1</span></code> to be connected to the on-board J-Link instead of <code class="docutils literal notranslate"><span class="pre">uart0</span></code>.
+As the result, Zephyr’s logger <code class="docutils literal notranslate"><span class="pre">uart0</span></code> is available only through GPIO pins (<strong>P1.00</strong> and <strong>P1.01</strong>).</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">uart0</span></code> pins are configured by Devicetree overlay files for each supported development kit in the <code class="file docutils literal notranslate"><span class="pre">boards</span></code> directory.</p>
+<section id="communication-through-usb">
+<h4>Communication through USB<a class="headerlink" href="#communication-through-usb" title="Permalink to this heading"></a></h4>
+<p>To change the communication channel from the default UART to nRF USB CDC ACM <code class="docutils literal notranslate"><span class="pre">cdc_acm_uart0</span></code>, use the <code class="file docutils literal notranslate"><span class="pre">prj_usb.conf</span></code> configuration file and add the <code class="docutils literal notranslate"><span class="pre">-DCONF_FILE='prj_usb.conf'</span></code> flag to the build command.
+See <a class="reference internal" href="../../../getting_started/modifying.html#cmake-options"><span class="std std-ref">Providing CMake options</span></a> for instructions on how to add this flag to your build.
+For example, when building from the command line, use the following command:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">west build samples/zigbee/ncp -b nrf52840dk_nrf52840 -- -DCONF_FILE=&#39;prj_usb.conf&#39;</span>
+</pre></div>
+</div>
+<p>The USB device VID and PID are configured by the sample’s Kconfig file.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>USB is used as the default NCP communication channel when using the nRF52840 Dongle.</p>
+</div>
+<p>When you change the communication channel to nRF USB with <code class="file docutils literal notranslate"><span class="pre">prj_usb.conf</span></code> and select any of the <code class="file docutils literal notranslate"><span class="pre">&lt;board&gt;_usb.overlay</span></code> files, <a class="reference internal" href="../../../protocols/zigbee/configuring.html#zigbee-ug-logging-stack-logs"><span class="std std-ref">Zigbee stack logs</span></a> are printed by default using <code class="docutils literal notranslate"><span class="pre">uart1</span></code>.
+This is configured in the <code class="file docutils literal notranslate"><span class="pre">prj_usb.conf</span></code> file with the following settings:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZBOSS_TRACE_BINARY_LOGGING</span></code> - To enable binary format.</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZBOSS_TRACE_UART_LOGGING</span></code> - To select the UART serial over the nRF USB serial.
+This option is set by default when the binary format is enabled.</p></li>
+</ul>
+<p>And, in the overlay file like this:</p>
+<div class="highlight-devicetree notranslate"><div class="highlight"><pre><span></span><span class="nf">chosen</span><span class="cm"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">ncs</span><span class="p">,</span><span class="n">zboss-trace-uart</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">uart1</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>Alternatively, you can configure <a class="reference internal" href="../../../protocols/zigbee/configuring.html#zigbee-ug-logging-stack-logs"><span class="std std-ref">Zigbee stack logs</span></a> to be printed in binary format using an independent CDC ACM device of the same nRF USB.
+Complete the following steps:</p>
+<ol class="arabic">
+<li><p>Set the following Kconfig options:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZBOSS_TRACE_BINARY_LOGGING</span></code> - This option enables the binary format.</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZBOSS_TRACE_USB_CDC_LOGGING</span></code> - This option selects nRF USB serial over UART serial.</p></li>
+</ul>
+</li>
+<li><p>Create two instances of USB CDC ACM for the application:</p>
+<ol class="loweralpha">
+<li><p>Create two entries in the DTS overlay file <code class="file docutils literal notranslate"><span class="pre">&lt;board&gt;_usb.overlay</span></code> for the selected board, one for each USB CDC ACM instance.
+See <span class="xref std std-ref">zephyr:usb_device_cdc_acm</span> for more information.</p></li>
+<li><p>Extend the <code class="docutils literal notranslate"><span class="pre">zephyr_udc0</span></code> node in the DTS overlay file to also configure the second USB CDC ACM instance <code class="docutils literal notranslate"><span class="pre">&quot;cdc_acm_uart1&quot;</span></code>:</p>
+<div class="highlight-devicetree notranslate"><div class="highlight"><pre><span></span><span class="o">&amp;</span><span class="na">zephyr_udc0</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="nl">cdc_acm_uart0</span><span class="p">:</span><span class="w"> </span><span class="nf">cdc_acm_uart0</span><span class="cm"> </span><span class="p">{</span>
+<span class="w">      </span><span class="kr">compatible</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;zephyr,cdc-acm-uart&quot;</span><span class="p">;</span>
+<span class="w">   </span><span class="p">};</span>
+
+<span class="w">   </span><span class="nl">cdc_acm_uart1</span><span class="p">:</span><span class="w"> </span><span class="nf">cdc_acm_uart1</span><span class="cm"> </span><span class="p">{</span>
+<span class="w">      </span><span class="kr">compatible</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;zephyr,cdc-acm-uart&quot;</span><span class="p">;</span>
+<span class="w">   </span><span class="p">};</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</li>
+<li><p>Configure the chosen tracing UART device like this:</p>
+<div class="highlight-devicetree notranslate"><div class="highlight"><pre><span></span><span class="nf">chosen</span><span class="cm"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">ncs</span><span class="p">,</span><span class="n">zboss-trace-uart</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">cdc_acm_uart1</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</li>
+<li><p>Enable the composite USB device driver using the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_USB_COMPOSITE_DEVICE</span></code> Kconfig option.</p></li>
+</ol>
+<p>With this configuration, you have two serial ports created by the NCP sample.
+Use the first one for NCP communication.
+Use the second serial port for collecting Zigbee stack logs.</p>
+<p>You can also check the <code class="file docutils literal notranslate"><span class="pre">prj_usb.conf</span></code> file that contains the complete Kconfig configuration of Zigbee stack logs over nRF USB serial commented out.
+For more configuration options, see <a class="reference internal" href="../../../protocols/zigbee/configuring.html#zigbee-ug-logging-stack-logs"><span class="std std-ref">Zigbee stack logs</span></a>.</p>
+</section>
+</section>
+<section id="bootloader-support">
+<span id="zigbee-ncp-bootloader"></span><h3><a class="toc-backref" href="#id14">Bootloader support</a><a class="headerlink" href="#bootloader-support" title="Permalink to this heading"></a></h3>
+<p>The bootloader support in the NCP sample depends on the development kit, its respective build target, and <a class="reference internal" href="#serial-communication-setup">Serial communication setup</a>:</p>
+<ul class="simple">
+<li><p>For the <code class="docutils literal notranslate"><span class="pre">nrf52840dongle_nrf52840</span></code> build target, the <a class="reference external" href="https://infocenter.nordicsemi.com/topic/sdk_nrf5_v17.0.2/lib_bootloader.html">nRF5 SDK Bootloader</a> is used by default because the dongle comes with this bootloader preinstalled.</p></li>
+<li><p>For the <code class="docutils literal notranslate"><span class="pre">nrf52840dk_nrf52840</span></code>, <code class="docutils literal notranslate"><span class="pre">nrf52833dk_nrf52833</span></code>, and <code class="docutils literal notranslate"><span class="pre">nrf21540dk_nrf52840</span></code> build targets, the following scenarios are possible when building for them:</p>
+<ul>
+<li><p>If you select <a class="reference internal" href="#communication-through-usb">Communication through USB</a>, <a class="reference external" href="https://www.mcuboot.com">MCUboot</a> is enabled by default.</p></li>
+<li><p>If you use the default UART serial communication channel, the bootloader support is not enabled, but you can enable MCUboot.</p></li>
+</ul>
+</li>
+</ul>
+<section id="mcuboot">
+<h4>MCUboot<a class="headerlink" href="#mcuboot" title="Permalink to this heading"></a></h4>
+<p>When you select <a class="reference internal" href="#communication-through-usb">Communication through USB</a>, MCUboot is built with support for a single application slot, and it uses the USB DFU class driver to allow uploading of the image over USB.</p>
+<p>If you want to use the default UART serial communication channel, set the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BOOTLOADER_MCUBOOT</span></code> Kconfig option to enable MCUboot.
+To use the same MCUboot configuration as in <a class="reference internal" href="#communication-through-usb">Communication through USB</a>, you need to provide MCUboot with the Kconfig options included in the <code class="file docutils literal notranslate"><span class="pre">child_image/mcuboot_usb.conf</span></code> file.
+See <a class="reference internal" href="../../../app_dev/multi_image/index.html#ug-multi-image-variables"><span class="std std-ref">Image-specific variables</span></a> to learn how to set the required options.</p>
+<p>MCUboot with the USB DFU requires a larger partition.
+To increase the partition, define the <code class="docutils literal notranslate"><span class="pre">PM_STATIC_YML_FILE</span></code> variable that provides the path to the <code class="file docutils literal notranslate"><span class="pre">pm_static.yml</span></code> static configuration file in the <code class="file docutils literal notranslate"><span class="pre">configuration</span></code> directory for the build target of your choice.</p>
+<p>For instructions on how to set these additional options and configuration at build time, see <a class="reference internal" href="../../../getting_started/modifying.html#cmake-options"><span class="std std-ref">Providing CMake options</span></a> and <a class="reference internal" href="../../../getting_started/modifying.html#configure-application"><span class="std std-ref">Configuring your application</span></a>.</p>
+<p>See the following command-line instruction for an example:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">west build samples/zigbee/ncp -b nrf52840dk_nrf52840 -- -DCONFIG_BOOTLOADER_MCUBOOT=y  -Dmcuboot_CONFIG_MULTITHREADING=y -Dmcuboot_CONFIG_BOOT_USB_DFU_WAIT=y -Dmcuboot_CONFIG_SINGLE_APPLICATION_SLOT=y -DPM_STATIC_YML_FILE=samples/zigbee/ncp/configuration/nrf52840dk_nrf52840/pm_static.yml</span>
+</pre></div>
+</div>
+<p>When building the sample, the build system also generates the signed <code class="file docutils literal notranslate"><span class="pre">app_update.bin</span></code> image file in the <code class="file docutils literal notranslate"><span class="pre">build</span></code> directory.
+You can use this file to upgrade a device.
+See <span class="xref std std-ref">mcuboot_ncs</span> for more information about this and other automatically generated files.</p>
+<p>After every reset, the sample first boots to MCUboot and then, after a couple of seconds, the NCP sample is booted.
+When booted to MCUboot, you can upload the new image with the <a class="reference external" href="http://dfu-util.sourceforge.net/">dfu-util tool</a>.
+See the Testing section of the <span class="xref std std-ref">USB DFU sample documentation</span> for the list of required dfu-util commands.</p>
+<p>To learn more about configuring bootloader for an application in nRF Connect SDK, see the <a class="reference internal" href="../../../app_dev/bootloaders_and_dfu/bootloader.html#ug-bootloader"><span class="std std-ref">Secure bootloader chain</span></a> page.</p>
+</section>
+<section id="nrf5-sdk-bootloader">
+<h4>nRF5 SDK Bootloader<a class="headerlink" href="#nrf5-sdk-bootloader" title="Permalink to this heading"></a></h4>
+<p>When the sample is built for <code class="docutils literal notranslate"><span class="pre">nrf52840dongle_nrf52840</span></code>, the build system does not produce an upgrade image.
+To upgrade the dongle, you can use one of the following options:</p>
+<ul>
+<li><p>nRF Connect Programmer application (part of <a class="reference external" href="https://www.nordicsemi.com/Software-and-Tools/Development-Tools/nRF-Connect-for-desktop">nRF Connect for Desktop</a>).</p>
+<p>For more details, see <a class="reference external" href="https://infocenter.nordicsemi.com/topic/ug_nc_programmer/UG/nrf_connect_programmer/ncp_programming_dongle.html">Programming the nRF52840 Dongle</a> in the nRF Connect Programmer user guide.</p>
+</li>
+<li><p><a class="reference external" href="https://infocenter.nordicsemi.com/topic/ug_nrfutils/UG/nrfutils/nrfutil_intro.html">nRF Util</a> tool, if you do not want to use the nRF Connect Programmer application.</p>
+<p>To generate a DFU package, see <a class="reference external" href="https://infocenter.nordicsemi.com/topic/ug_nrfutil/UG/nrfutil/nrfutil_pkg.html">Generating DFU packages</a> in the nRF Util user guide.
+Upgrading the dongle using this method requires putting the dongle into the DFU mode.
+When in the DFU mode, you can use <a class="reference external" href="https://infocenter.nordicsemi.com/topic/ug_nrfutils/UG/nrfutils/nrfutil_intro.html">nRF Util</a> for sending the upgrade image.
+See <a class="reference external" href="https://infocenter.nordicsemi.com/topic/ug_nrfutil/UG/nrfutil/nrfutil_dfu_serial_usb.html">DFU over a serial USB connection</a> in the nRF Util user guide.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>By default, you can enter the DFU mode on the dongle using the pin reset.
+Alternatively, you can call <code class="xref c c-func docutils literal notranslate"><span class="pre">ncp_host_ota_run_bootloader()</span></code> to trigger the bootloader on the dongle from the NCP Host application.</p>
+</div>
+</li>
+</ul>
+</section>
+</section>
+<section id="fem-support">
+<h3><a class="toc-backref" href="#id15">FEM support</a><a class="headerlink" href="#fem-support" title="Permalink to this heading"></a></h3>
+<p>You can add support for the nRF21540 front-end module to this sample by using one of the following options, depending on your hardware:</p>
+<ul>
+<li><p>Build the sample for one board that contains the nRF21540 FEM, such as <span class="xref std std-ref">nrf21540dk_nrf52840</span>.</p></li>
+<li><p>Manually create a devicetree overlay file that describes how FEM is connected to the nRF5 SoC in your device.
+See <span class="xref std std-ref">zephyr:set-devicetree-overlays</span> for different ways of adding the overlay file.</p></li>
+<li><p>Provide nRF21540 FEM capabilities by using a <span class="xref std std-ref">shield</span>, for example the <a class="reference internal" href="../../../app_dev/working_with_fem/index.html#ug-radio-fem-nrf21540-ek"><span class="std std-ref">nRF21540 EK</span></a> shield that is available in the nRF Connect SDK.
+In this case, build the project for a board connected to the shield you are using with an appropriate variable included in the build command, for example <code class="docutils literal notranslate"><span class="pre">SHIELD=nrf21540_ek</span></code>.
+This variable instructs the build system to append the appropriate devicetree overlay file.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-blJGIENvbm5lY3QgZm9yIFZTIENvZGU=" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-0-blJGIENvbm5lY3QgZm9yIFZTIENvZGU=" name="blJGIENvbm5lY3QgZm9yIFZTIENvZGU=" role="tab" tabindex="0">nRF Connect for VS Code</button><button aria-controls="panel-0-Q29tbWFuZCBsaW5l" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-0-Q29tbWFuZCBsaW5l" name="Q29tbWFuZCBsaW5l" role="tab" tabindex="-1">Command line</button></div><div aria-labelledby="tab-0-blJGIENvbm5lY3QgZm9yIFZTIENvZGU=" class="sphinx-tabs-panel group-tab" id="panel-0-blJGIENvbm5lY3QgZm9yIFZTIENvZGU=" name="blJGIENvbm5lY3QgZm9yIFZTIENvZGU=" role="tabpanel" tabindex="0"><p>To build the sample in the nRF Connect for VS Code IDE for an nRF52840 DK with the nRF21540 EK attached, add the shield variable in the build configuration’s <span class="guilabel">Extra CMake arguments</span> and rebuild the build configuration.
+For example: <code class="docutils literal notranslate"><span class="pre">-DSHIELD=nrf21540_ek</span></code>.</p>
+<p>See <a class="reference external" href="https://nrfconnect.github.io/vscode-nrf-connect/guides/build_config.html">nRF Connect for VS Code extension pack</a> documentation for more information.</p>
+</div><div aria-labelledby="tab-0-Q29tbWFuZCBsaW5l" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-0-Q29tbWFuZCBsaW5l" name="Q29tbWFuZCBsaW5l" role="tabpanel" tabindex="0"><p>To build the sample from the command line for an nRF52840 DK with the nRF21540 EK attached, use the following command within the sample directory:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">west build -b nrf52840dk_nrf52840 -- -DSHIELD=nrf21540_ek</span>
+</pre></div>
+</div>
+</div></div>
+<p>See <a class="reference internal" href="../../../app_dev/working_with_fem/index.html#ug-radio-fem-nrf21540-ek-programming"><span class="std std-ref">Programming nRF21540 EK</span></a> for information about how to program when you are using a board with a network core, for example nRF5340 DK.</p>
+</li>
+</ul>
+<p>Each of these options adds the description of the nRF21540 FEM to the devicetree.
+See <a class="reference internal" href="../../../app_dev/working_with_fem/index.html#ug-radio-fem"><span class="std std-ref">Working with RF front-end modules</span></a> for more information about FEM in the nRF Connect SDK.</p>
+<p>To add support for other front-end modules, add the respective devicetree file entries to the board devicetree file or the devicetree overlay file.</p>
+</section>
+<section id="vendor-specific-commands">
+<span id="zigbee-ncp-vendor-specific-commands"></span><h3><a class="toc-backref" href="#id16">Vendor-specific commands</a><a class="headerlink" href="#vendor-specific-commands" title="Permalink to this heading"></a></h3>
+<p>You can extend the NCP sample with support for vendor-specific commands to implement new features, such as controlling LEDs.
+These commands let you request custom actions over the ZBOSS NCP protocol.</p>
+<p>Vendor-specific commands are sent over the NCP protocol using the following types of packets:</p>
+<ul>
+<li><p>Request</p>
+<p>These can be sent only by the host.
+The nRF SoC must respond to all of them.</p>
+</li>
+<li><p>Response</p>
+<p>These can be sent only by the nRF SoC.
+The nRF SoC can send them only when requested by the host.
+This limitation can be bypassed by indications.</p>
+</li>
+<li><p>Indication</p>
+<p>These can be sent only by the nRF SoC.
+The indications are sent on demand from the nRF SoC to the host, for example to inform the host about polling avoidance or sudden or rare events, such as pressing the button.
+Indications are neither responded to nor acknowledged.</p>
+</li>
+</ul>
+<p>By default, the NCP sample already supports the vendor-specific commands for controlling a LED.</p>
+<section id="implementing-vendor-specific-commands">
+<h4>Implementing vendor-specific commands<a class="headerlink" href="#implementing-vendor-specific-commands" title="Permalink to this heading"></a></h4>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The steps in this section describe the process of implementing the vendor-specific commands in the NCP sample.
+Documentation for the implementation steps for the host side is not yet available.</p>
+</div>
+<p>To implement custom vendor-specific commands, you need to modify the NCP sample as follows:</p>
+<ol class="arabic">
+<li><p>Implement a callback for handling custom commands requests.</p>
+<p>The function must follow the <code class="xref c c-func docutils literal notranslate"><span class="pre">zb_ncp_custom_request_cb_t()</span></code> declaration.
+For an example, see <code class="xref c c-func docutils literal notranslate"><span class="pre">ncp_vendor_specific_req_handler()</span></code> in the sample.
+This function parses the command payload, validates it, performs required action on <strong>LED 2</strong>, and sends a response.</p>
+</li>
+<li><p>Register the handler function using <code class="xref c c-func docutils literal notranslate"><span class="pre">zb_ncp_custom_register_request_cb()</span></code>, as implemented in the sample.</p>
+<p>Once the callback is registered, it is called for every custom command request received from the host.</p>
+</li>
+<li><p>At the end of the custom request callback, implement the response to the request using one of the following options:</p>
+<ul class="simple">
+<li><p>Implement an immediate response that is sent just after the request is received and parsed.
+For this option, make sure that the length of the response is returned from the custom command callback (implemented in step 1) and <code class="xref c c-func docutils literal notranslate"><span class="pre">zb_ncp_custom_response()</span></code> is called with a buffer that contains both the response payload and the parameters encapsulated in <code class="xref c c-struct docutils literal notranslate"><span class="pre">ncp_hl_custom_resp_t</span></code>.</p></li>
+<li><p>Implement a delayed response that can be useful for example to implement commands that require more time to complete.
+For this option, make sure that <code class="xref c c-macro docutils literal notranslate"><span class="pre">NCP_RET_LATER</span></code> is returned from the custom command callback (implemented in step 1) and <code class="xref c c-func docutils literal notranslate"><span class="pre">zb_ncp_custom_response()</span></code> is called after this callback.</p></li>
+</ul>
+<p>If the function fails, it must return an error code, while a response is automatically generated by the stack.
+See <code class="xref c c-func docutils literal notranslate"><span class="pre">ncp_vendor_specific_req_handler()</span></code> for an example of the immediate response.</p>
+</li>
+<li><p>Implement custom indications by using <code class="xref c c-func docutils literal notranslate"><span class="pre">zb_ncp_custom_indication()</span></code> to send an indication to the host.</p>
+<p>The NCP sample demonstrates the indication usage to inform the host about the index of the LED that is controlled by custom requests.
+The indication is sent three seconds after start-up.
+See <code class="xref c c-func docutils literal notranslate"><span class="pre">custom_indication()</span></code> in the sample to see how to pass the data to the indication’s payload.</p>
+</li>
+</ol>
+<p>Once you complete these steps and configure the vendor-specific commands on the host, you can call these commands from the host to use the extended functionalities in the NCP sample.</p>
+</section>
+</section>
+</section>
+<section id="user-interface">
+<span id="zigbee-ncp-user-interface"></span><h2><a class="toc-backref" href="#id17">User interface</a><a class="headerlink" href="#user-interface" title="Permalink to this heading"></a></h2>
+<p>All the NCP sample’s interactions with the application are automatically handled using serial or USB communication.</p>
+</section>
+<section id="building-and-running">
+<h2><a class="toc-backref" href="#id18">Building and running</a><a class="headerlink" href="#building-and-running" title="Permalink to this heading"></a></h2>
+<p>Make sure to configure the Zigbee stack before building and testing this sample.
+See <a class="reference internal" href="../../../protocols/zigbee/configuring.html#ug-zigbee-configuring"><span class="std std-ref">Configuring Zigbee in nRF Connect SDK</span></a> for more information.</p>
+<p>This sample can be found under <code class="file docutils literal notranslate"><span class="pre">samples/zigbee/ncp</span></code> in the nRF Connect SDK folder structure.</p>
+<p>To build the sample with Visual Studio Code, follow the steps listed on the <a class="reference external" href="https://nrfconnect.github.io/vscode-nrf-connect/get_started/build_app_ncs.html">How to build an application</a> page in the nRF Connect for VS Code extension documentation.
+See <a class="reference internal" href="../../../getting_started/programming.html#gs-programming"><span class="std std-ref">Building and programming an application</span></a> for other building and programming scenarios and <a class="reference internal" href="../../../getting_started/testing.html#gs-testing"><span class="std std-ref">Testing and debugging an application</span></a> for general information about testing and debugging in the nRF Connect SDK.</p>
+<section id="testing">
+<span id="zigbee-ncp-testing"></span><h3><a class="toc-backref" href="#id19">Testing</a><a class="headerlink" href="#testing" title="Permalink to this heading"></a></h3>
+<p>After building the sample and programming it to your development kit, complete the following steps to test it:</p>
+<ol class="arabic">
+<li><p>Download and extract the <a class="reference external" href="https://developer.nordicsemi.com/Zigbee/ncp_sdk_for_host/ncp_host_v2.2.1.zip">ZBOSS NCP Host</a> package.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you are using a Linux distribution different than the 64-bit Ubuntu 18.04, make sure to rebuild the package libraries and applications.
+Follow the instructions in the <a class="reference external" href="https://developer.nordicsemi.com/nRF_Connect_SDK/doc/zboss/3.11.2.1/zboss_ncp_host.html#rebuilding_libs">Rebuilding the ZBOSS libraries for host</a> section in the <a class="reference external" href="https://developer.nordicsemi.com/nRF_Connect_SDK/doc/zboss/3.11.2.1/zboss_ncp_host_intro.html">NCP Host documentation</a>.</p>
+</div>
+</li>
+<li><p>If you are using <a class="reference internal" href="#communication-through-usb">Communication through USB</a>, connect the nRF USB port of the NCP sample’s development kit to the PC USB port with a USB cable.</p></li>
+<li><p>Get the kit’s serial port name (for example, <code class="docutils literal notranslate"><span class="pre">/dev/ttyACM0</span></code>).</p>
+<p>If you are communicating through the nRF USB, get the nRF USB serial port name.</p>
+</li>
+<li><p>Turn on the development kit that runs the Light bulb sample.</p></li>
+<li><p>To start the simple gateway application, run the following command with <em>serial_port_name</em> replaced with the serial port name used for communication with the NCP sample:</p>
+<div class="highlight highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">NCP_SLAVE_PTY</span><span class="o">=*</span><span class="n">serial_port_name</span><span class="o">*</span> <span class="o">./</span><span class="n">application</span><span class="o">/</span><span class="n">simple_gw</span><span class="o">/</span><span class="n">simple_gw</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<p>The simple gateway device forms the Zigbee network and opens the network for 180 seconds for new devices to join.
+When the light bulb joins the network, the <strong>LED 3</strong> on the light bulb device turns on to indicate that it is connected to the simple gateway.
+The gateway then starts discovering the On/Off cluster.
+When it is found, the simple gateway configures bindings and reporting for the device.
+It then starts sending On/Off toggle commands with a 15-second interval that toggle the <strong>LED 4</strong> on the light bulb on and off.</p>
+</section>
+</section>
+<section id="dependencies">
+<h2><a class="toc-backref" href="#id20">Dependencies</a><a class="headerlink" href="#dependencies" title="Permalink to this heading"></a></h2>
+<p>This sample uses the following nRF Connect SDK libraries:</p>
+<ul class="simple">
+<li><p>Zigbee subsystem:</p>
+<ul>
+<li><p><code class="file docutils literal notranslate"><span class="pre">zb_nrf_platform.h</span></code></p></li>
+</ul>
+</li>
+</ul>
+<p>It uses the following <a class="reference external" href="https://github.com/nrfconnect/sdk-nrfxlib">sdk-nrfxlib</a> libraries:</p>
+<ul class="simple">
+<li><p><span class="xref std std-ref">nrfxlib:zboss</span> 3.11.2.1 (<a class="reference external" href="https://developer.nordicsemi.com/nRF_Connect_SDK/doc/zboss/3.11.2.1/zigbee_devguide.html">API documentation</a>)</p></li>
+</ul>
+<p>In addition, it uses the following Zephyr libraries:</p>
+<ul class="simple">
+<li><p><code class="file docutils literal notranslate"><span class="pre">include/device.h</span></code></p></li>
+<li><p><span class="xref std std-ref">zephyr:usb_api</span></p></li>
+<li><p><span class="xref std std-ref">zephyr:logging_api</span></p></li>
+<li><p><span class="xref std std-ref">zephyr:uart_api</span></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../network_coordinator/README.html" class="btn btn-neutral float-right" title="Zigbee: Network coordinator" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../light_switch/README.html" class="btn btn-neutral" title="Zigbee: Light switch" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

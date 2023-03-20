@@ -1,0 +1,400 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="fw__info_8h" kind="file" language="C++">
+    <compoundname>fw_info.h</compoundname>
+    <includes local="no">zephyr/types.h</includes>
+    <includes local="no">stddef.h</includes>
+    <includes local="no">zephyr/toolchain.h</includes>
+    <includes local="no">zephyr/sys/util.h</includes>
+    <includes local="no">zephyr/sys/__assert.h</includes>
+    <includes local="no">zephyr/linker/sections.h</includes>
+    <includes local="no">string.h</includes>
+    <includes refid="fw__info__bare_8h" local="no">fw_info_bare.h</includes>
+    <includedby refid="bl__crypto_8h" local="no">include/bl_crypto.h</includedby>
+    <includedby refid="bl__validation_8h" local="no">include/bl_validation.h</includedby>
+    <incdepgraph>
+      <node id="7">
+        <label>zephyr/linker/sections.h</label>
+      </node>
+      <node id="5">
+        <label>zephyr/sys/util.h</label>
+      </node>
+      <node id="10">
+        <label>stdint.h</label>
+      </node>
+      <node id="6">
+        <label>zephyr/sys/__assert.h</label>
+      </node>
+      <node id="3">
+        <label>stddef.h</label>
+      </node>
+      <node id="8">
+        <label>string.h</label>
+      </node>
+      <node id="9">
+        <label>fw_info_bare.h</label>
+        <link refid="fw__info__bare_8h"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>zephyr/toolchain.h</label>
+      </node>
+      <node id="1">
+        <label>include/fw_info.h</label>
+        <link refid="fw__info_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>zephyr/types.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="3">
+        <label>include/bl_validation.h</label>
+        <link refid="bl__validation_8h"/>
+      </node>
+      <node id="2">
+        <label>include/bl_crypto.h</label>
+        <link refid="bl__crypto_8h"/>
+      </node>
+      <node id="1">
+        <label>include/fw_info.h</label>
+        <link refid="fw__info_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="group__fw__info_ga0149018d3260448bc647c9a3fe55bb84_1ga0149018d3260448bc647c9a3fe55bb84" prot="public" static="no">
+        <name>EXT_API</name>
+        <param><defname>ext_api_name</defname></param>
+        <param><defname>type</defname></param>
+        <param><defname>name</defname></param>
+        <initializer>	Z_GENERIC_SECTION(.ext_apis) \
+	const uint8_t _CONCAT(name, _ext_api_counter) = 0xFF; \
+	BUILD_ASSERT((sizeof(type) % 4) == 0, \
+			&quot;Size of EXT_API &quot; #type &quot; is not word-aligned&quot;); \
+	struct __packed _CONCAT(name, _t) \
+	{ \
+		struct <ref refid="structfw__info__ext__api" kindref="compound">fw_info_ext_api</ref> header; \
+		type ext_api; \
+	}; \
+	Z_GENERIC_SECTION(.firmware_info.1) __attribute__((used)) \
+	const struct _CONCAT(name, _t) name = { \
+	.header = {\
+		.magic = {EXT_API_MAGIC}, \
+		.ext_api_id = CONFIG_ ## ext_api_name ## _EXT_API_ID, \
+		.ext_api_flags = CONFIG_ ## ext_api_name ## _EXT_API_FLAGS, \
+		.ext_api_version = CONFIG_ ## ext_api_name ## _EXT_API_VER, \
+		.ext_api_len = sizeof(struct __packed _CONCAT(name, _t)), \
+	}, \
+	.ext_api</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/fw_info.h" line="50" column="9" bodyfile="include/fw_info.h" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__fw__info_gae8a7197716c16b537d6fb822649a4da8_1gae8a7197716c16b537d6fb822649a4da8" prot="public" static="no">
+        <name>EXT_API_REQ</name>
+        <param><defname>name</defname></param>
+        <param><defname>req</defname></param>
+        <param><defname>type</defname></param>
+        <param><defname>var_name</defname></param>
+        <initializer>	Z_GENERIC_SECTION(.ext_apis_req) \
+	const uint8_t _CONCAT(var_name, _ext_api_req_counter) = 0xFF; \
+	__noinit const struct __packed \
+	{ \
+		struct <ref refid="structfw__info__ext__api" kindref="compound">fw_info_ext_api</ref> header; \
+		type ext_api; \
+	} *var_name; \
+	Z_GENERIC_SECTION(.firmware_info.2) \
+	__attribute__((used)) \
+	const struct <ref refid="structfw__info__ext__api__request" kindref="compound">fw_info_ext_api_request</ref> _CONCAT(var_name, _req) = \
+	{ \
+		.request = {\
+			.magic = {EXT_API_MAGIC}, \
+			.ext_api_id = CONFIG_ ## name ## _EXT_API_ID, \
+			.ext_api_flags = CONFIG_ ## name ## _EXT_API_FLAGS, \
+			.ext_api_version = CONFIG_ ## name ## _EXT_API_VER, \
+			.ext_api_len = sizeof(struct <ref refid="structfw__info__ext__api__request" kindref="compound">fw_info_ext_api_request</ref>), \
+		}, \
+		.ext_api_max_version = CONFIG_ ## name ## _EXT_API_MAX_VER, \
+		.required = req, \
+		.ext_api = (void *) &amp;var_name, \
+	}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/fw_info.h" line="88" column="9" bodyfile="include/fw_info.h" bodystart="88" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__fw__info_ga560b86f362bb7de199d1b64ec0740b8c_1ga560b86f362bb7de199d1b64ec0740b8c" prot="public" static="no">
+        <name>FW_INFO_VECTOR_OFFSET</name>
+        <initializer>0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/fw_info.h" line="146" column="11" bodyfile="include/fw_info.h" bodystart="146" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__fw__info_ga21f6b55232bf46b901a0f7c99035ccd4_1ga21f6b55232bf46b901a0f7c99035ccd4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fw_info_ext_api_provide</definition>
+        <argsstring>(const struct fw_info *fwinfo, bool provide)</argsstring>
+        <name>fw_info_ext_api_provide</name>
+        <param>
+          <type>const struct <ref refid="structfw__info" kindref="compound">fw_info</ref> *</type>
+          <declname>fwinfo</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>provide</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Expose EXT_APIs to another firmware</para>
+<para>Populate the other firmware&apos;s <computeroutput>ext_api_in</computeroutput> with EXT_APIs from other images.</para>
+<para><simplesect kind="note"><para>This should be called immediately before booting the other firmware since it will likely corrupt the memory of the running firmware.</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">fwinfo</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the other firmware&apos;s information structure. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">provide</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If true, populate ext_api_in. If false, only check whether requirements can be satisfied.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Whether requirements could be satisfied. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/fw_info.h" line="183" column="6" declfile="include/fw_info.h" declline="183" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="group__fw__info_ga8e6f107ad53cf5b9aefb60e66edfab3b_1ga8e6f107ad53cf5b9aefb60e66edfab3b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fw_info_invalidate</definition>
+        <argsstring>(const struct fw_info *fw_info)</argsstring>
+        <name>fw_info_invalidate</name>
+        <param>
+          <type>const struct <ref refid="structfw__info" kindref="compound">fw_info</ref> *</type>
+          <declname>fw_info</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Invalidate an image by manipulating its <ref refid="structfw__info" kindref="compound">fw_info</ref>.</para>
+<para>Invalidation happens by setting the <computeroutput>valid</computeroutput> value to INVALID_VAL.</para>
+<para><simplesect kind="note"><para>This function needs to have<verbatim>embed:rst:inline :kconfig:option:`CONFIG_NRFX_NVMC` </verbatim> enabled.</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in"><ref refid="structfw__info" kindref="compound">fw_info</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The info structure to invalidate. This memory will be modified directly in flash. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/fw_info.h" line="194" column="6" declfile="include/fw_info.h" declline="194" declcolumn="6"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="2"><highlight class="comment"><sp/>*<sp/>Copyright<sp/>(c)<sp/>2018<sp/>Nordic<sp/>Semiconductor<sp/>ASA</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/>*<sp/>SPDX-License-Identifier:<sp/>LicenseRef-Nordic-5-Clause</highlight></codeline>
+<codeline lineno="5"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>FW_INFO_H__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>FW_INFO_H__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;C&quot;</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;zephyr/types.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stddef.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;zephyr/toolchain.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;zephyr/sys/util.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;zephyr/sys/__assert.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;zephyr/linker/sections.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;string.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>USE_PARTITION_MANAGER</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;pm_config.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="fw__info__bare_8h" kindref="compound">fw_info_bare.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>OFFSET_CHECK(type,<sp/>member,<sp/>value)<sp/>\</highlight></codeline>
+<codeline lineno="34"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>BUILD_ASSERT(offsetof(type,<sp/>member)<sp/>==<sp/>value,<sp/>\</highlight></codeline>
+<codeline lineno="35"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#member<sp/>&quot;<sp/>has<sp/>wrong<sp/>offset&quot;</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Static<sp/>asserts<sp/>to<sp/>ensure<sp/>compatibility<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal">OFFSET_CHECK(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structfw__info__ext__api" kindref="compound">fw_info_ext_api</ref>,<sp/>ext_api_len,<sp/>12);</highlight></codeline>
+<codeline lineno="39"><highlight class="normal">OFFSET_CHECK(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structfw__info__ext__api" kindref="compound">fw_info_ext_api</ref>,<sp/>ext_api_id,<sp/>16);</highlight></codeline>
+<codeline lineno="40"><highlight class="normal">OFFSET_CHECK(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structfw__info__ext__api" kindref="compound">fw_info_ext_api</ref>,<sp/>ext_api_flags,<sp/>20);</highlight></codeline>
+<codeline lineno="41"><highlight class="normal">OFFSET_CHECK(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structfw__info__ext__api" kindref="compound">fw_info_ext_api</ref>,<sp/>ext_api_version,<sp/>24);</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Macro<sp/>for<sp/>initializing<sp/>struct<sp/>fw_info_ext_api<sp/>instances<sp/>in<sp/>the<sp/>correct</highlight></codeline>
+<codeline lineno="47"><highlight class="comment"><sp/>*<sp/>linker<sp/>section.<sp/>Also<sp/>creates<sp/>a<sp/>uint8_t<sp/>in<sp/>another<sp/>section<sp/>to<sp/>provide<sp/>a<sp/>count<sp/>of</highlight></codeline>
+<codeline lineno="48"><highlight class="comment"><sp/>*<sp/>the<sp/>number<sp/>of<sp/>struct<sp/>fw_info_ext_api<sp/>instances.</highlight></codeline>
+<codeline lineno="49"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="50" refid="group__fw__info_ga0149018d3260448bc647c9a3fe55bb84_1ga0149018d3260448bc647c9a3fe55bb84" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>EXT_API(ext_api_name,<sp/>type,<sp/>name)<sp/>\</highlight></codeline>
+<codeline lineno="51"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Z_GENERIC_SECTION(.ext_apis)<sp/>\</highlight></codeline>
+<codeline lineno="52"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>const<sp/>uint8_t<sp/>_CONCAT(name,<sp/>_ext_api_counter)<sp/>=<sp/>0xFF;<sp/>\</highlight></codeline>
+<codeline lineno="53"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>BUILD_ASSERT((sizeof(type)<sp/>%<sp/>4)<sp/>==<sp/>0,<sp/>\</highlight></codeline>
+<codeline lineno="54"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&quot;Size<sp/>of<sp/>EXT_API<sp/>&quot;</highlight><highlight class="normal"><sp/>#type<sp/>&quot;<sp/>is<sp/>not<sp/>word-aligned&quot;);<sp/>\</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>struct<sp/>__packed<sp/>_CONCAT(name,<sp/>_t)<sp/>\</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>\</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>struct<sp/>fw_info_ext_api<sp/>header;<sp/>\</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>type<sp/>ext_api;<sp/>\</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};<sp/>\</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Z_GENERIC_SECTION(.firmware_info.1)<sp/>__attribute__((used))<sp/>\</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>const<sp/>struct<sp/>_CONCAT(name,<sp/>_t)<sp/>name<sp/>=<sp/>{<sp/>\</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.header<sp/>=<sp/>{\</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.magic<sp/>=<sp/>{EXT_API_MAGIC},<sp/>\</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.ext_api_id<sp/>=<sp/>CONFIG_<sp/>##<sp/>ext_api_name<sp/>##<sp/>_EXT_API_ID,<sp/>\</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.ext_api_flags<sp/>=<sp/>CONFIG_<sp/>##<sp/>ext_api_name<sp/>##<sp/>_EXT_API_FLAGS,<sp/>\</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.ext_api_version<sp/>=<sp/>CONFIG_<sp/>##<sp/>ext_api_name<sp/>##<sp/>_EXT_API_VER,<sp/>\</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.ext_api_len<sp/>=<sp/>sizeof(struct<sp/>__packed<sp/>_CONCAT(name,<sp/>_t)),<sp/>\</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>},<sp/>\</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.ext_api</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Static<sp/>asserts<sp/>to<sp/>ensure<sp/>compatibility<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal">OFFSET_CHECK(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structfw__info__ext__api__request" kindref="compound">fw_info_ext_api_request</ref>,<sp/>request,<sp/>0);</highlight></codeline>
+<codeline lineno="78"><highlight class="normal">OFFSET_CHECK(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structfw__info__ext__api__request" kindref="compound">fw_info_ext_api_request</ref>,<sp/>ext_api_max_version,<sp/>28);</highlight></codeline>
+<codeline lineno="79"><highlight class="normal">OFFSET_CHECK(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structfw__info__ext__api__request" kindref="compound">fw_info_ext_api_request</ref>,<sp/>required,<sp/>32);</highlight></codeline>
+<codeline lineno="80"><highlight class="normal">OFFSET_CHECK(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structfw__info__ext__api__request" kindref="compound">fw_info_ext_api_request</ref>,<sp/>ext_api,<sp/>36);</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Decorator<sp/>for<sp/>struct<sp/>fw_info_ext_api_request<sp/>instances<sp/>to<sp/>place<sp/>them<sp/>in<sp/>the</highlight></codeline>
+<codeline lineno="85"><highlight class="comment"><sp/>*<sp/>correct<sp/>linker<sp/>section.<sp/>Also<sp/>creates<sp/>a<sp/>uint8_t<sp/>in<sp/>another<sp/>section<sp/>to<sp/>provide<sp/>a</highlight></codeline>
+<codeline lineno="86"><highlight class="comment"><sp/>*<sp/>count<sp/>of<sp/>the<sp/>number<sp/>of<sp/>struct<sp/>fw_info_ext_api<sp/>instances.</highlight></codeline>
+<codeline lineno="87"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="88" refid="group__fw__info_gae8a7197716c16b537d6fb822649a4da8_1gae8a7197716c16b537d6fb822649a4da8" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>EXT_API_REQ(name,<sp/>req,<sp/>type,<sp/>var_name)<sp/>\</highlight></codeline>
+<codeline lineno="89"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Z_GENERIC_SECTION(.ext_apis_req)<sp/>\</highlight></codeline>
+<codeline lineno="90"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>const<sp/>uint8_t<sp/>_CONCAT(var_name,<sp/>_ext_api_req_counter)<sp/>=<sp/>0xFF;<sp/>\</highlight></codeline>
+<codeline lineno="91"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>__noinit<sp/>const<sp/>struct<sp/>__packed<sp/>\</highlight></codeline>
+<codeline lineno="92"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>\</highlight></codeline>
+<codeline lineno="93"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>struct<sp/>fw_info_ext_api<sp/>header;<sp/>\</highlight></codeline>
+<codeline lineno="94"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>type<sp/>ext_api;<sp/>\</highlight></codeline>
+<codeline lineno="95"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/>*var_name;<sp/>\</highlight></codeline>
+<codeline lineno="96"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Z_GENERIC_SECTION(.firmware_info.2)<sp/>\</highlight></codeline>
+<codeline lineno="97"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>__attribute__((used))<sp/>\</highlight></codeline>
+<codeline lineno="98"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>const<sp/>struct<sp/>fw_info_ext_api_request<sp/>_CONCAT(var_name,<sp/>_req)<sp/>=<sp/>\</highlight></codeline>
+<codeline lineno="99"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>\</highlight></codeline>
+<codeline lineno="100"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.request<sp/>=<sp/>{\</highlight></codeline>
+<codeline lineno="101"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.magic<sp/>=<sp/>{EXT_API_MAGIC},<sp/>\</highlight></codeline>
+<codeline lineno="102"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.ext_api_id<sp/>=<sp/>CONFIG_<sp/>##<sp/>name<sp/>##<sp/>_EXT_API_ID,<sp/>\</highlight></codeline>
+<codeline lineno="103"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.ext_api_flags<sp/>=<sp/>CONFIG_<sp/>##<sp/>name<sp/>##<sp/>_EXT_API_FLAGS,<sp/>\</highlight></codeline>
+<codeline lineno="104"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.ext_api_version<sp/>=<sp/>CONFIG_<sp/>##<sp/>name<sp/>##<sp/>_EXT_API_VER,<sp/>\</highlight></codeline>
+<codeline lineno="105"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.ext_api_len<sp/>=<sp/>sizeof(struct<sp/>fw_info_ext_api_request),<sp/>\</highlight></codeline>
+<codeline lineno="106"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>},<sp/>\</highlight></codeline>
+<codeline lineno="107"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.ext_api_max_version<sp/>=<sp/>CONFIG_<sp/>##<sp/>name<sp/>##<sp/>_EXT_API_MAX_VER,<sp/>\</highlight></codeline>
+<codeline lineno="108"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.required<sp/>=<sp/>req,<sp/>\</highlight></codeline>
+<codeline lineno="109"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.ext_api<sp/>=<sp/>(void<sp/>*)<sp/>&amp;var_name,<sp/>\</highlight></codeline>
+<codeline lineno="110"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="111"><highlight class="normal"></highlight></codeline>
+<codeline lineno="112"><highlight class="normal"></highlight></codeline>
+<codeline lineno="116"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Static<sp/>asserts<sp/>to<sp/>ensure<sp/>compatibility<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="117"><highlight class="normal">OFFSET_CHECK(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structfw__info" kindref="compound">fw_info</ref>,<sp/>magic,<sp/>0);</highlight></codeline>
+<codeline lineno="118"><highlight class="normal">OFFSET_CHECK(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structfw__info" kindref="compound">fw_info</ref>,<sp/>total_size,<sp/>12);</highlight></codeline>
+<codeline lineno="119"><highlight class="normal">OFFSET_CHECK(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structfw__info" kindref="compound">fw_info</ref>,<sp/>size,<sp/>16);</highlight></codeline>
+<codeline lineno="120"><highlight class="normal">OFFSET_CHECK(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structfw__info" kindref="compound">fw_info</ref>,<sp/>version,<sp/>20);</highlight></codeline>
+<codeline lineno="121"><highlight class="normal">OFFSET_CHECK(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structfw__info" kindref="compound">fw_info</ref>,<sp/>address,<sp/>24);</highlight></codeline>
+<codeline lineno="122"><highlight class="normal">OFFSET_CHECK(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structfw__info" kindref="compound">fw_info</ref>,<sp/>boot_address,<sp/>28);</highlight></codeline>
+<codeline lineno="123"><highlight class="normal">OFFSET_CHECK(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structfw__info" kindref="compound">fw_info</ref>,<sp/>valid,<sp/>32);</highlight></codeline>
+<codeline lineno="124"><highlight class="normal">OFFSET_CHECK(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structfw__info" kindref="compound">fw_info</ref>,<sp/>reserved,<sp/>36);</highlight></codeline>
+<codeline lineno="125"><highlight class="normal">OFFSET_CHECK(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structfw__info" kindref="compound">fw_info</ref>,<sp/>ext_api_num,<sp/>52);</highlight></codeline>
+<codeline lineno="126"><highlight class="normal">OFFSET_CHECK(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structfw__info" kindref="compound">fw_info</ref>,<sp/>ext_api_request_num,<sp/>56);</highlight></codeline>
+<codeline lineno="127"><highlight class="normal">OFFSET_CHECK(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structfw__info" kindref="compound">fw_info</ref>,<sp/>ext_apis,<sp/>60);</highlight></codeline>
+<codeline lineno="128"><highlight class="normal">BUILD_ASSERT(</highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structfw__info" kindref="compound">fw_info</ref>)<sp/>==<sp/>offsetof(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structfw__info" kindref="compound">fw_info</ref>,<sp/>ext_apis),</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;Size<sp/>of<sp/>fw_info<sp/>must<sp/>assume<sp/>ext_apis<sp/>is<sp/>empty.&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Find<sp/>the<sp/>difference<sp/>between<sp/>the<sp/>start<sp/>of<sp/>the<sp/>current<sp/>image<sp/>and<sp/>the<sp/>address</highlight></codeline>
+<codeline lineno="136"><highlight class="comment"><sp/>*<sp/>from<sp/>which<sp/>the<sp/>firmware<sp/>info<sp/>offset<sp/>is<sp/>calculated.</highlight></codeline>
+<codeline lineno="137"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="138"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>defined(PM_S0_PAD_SIZE)<sp/>&amp;&amp;<sp/>(PM_ADDRESS<sp/>==<sp/>PM_S0_IMAGE_ADDRESS)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="139"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#define<sp/>FW_INFO_VECTOR_OFFSET<sp/>PM_S0_PAD_SIZE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="140"><highlight class="normal"></highlight><highlight class="preprocessor">#elif<sp/>defined(PM_S1_PAD_SIZE)<sp/>&amp;&amp;<sp/>(PM_ADDRESS<sp/>==<sp/>PM_S1_IMAGE_ADDRESS)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="141"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#define<sp/>FW_INFO_VECTOR_OFFSET<sp/>PM_S1_PAD_SIZE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="142"><highlight class="normal"></highlight><highlight class="preprocessor">#elif<sp/>defined(PM_MCUBOOT_PAD_SIZE)<sp/>&amp;&amp;<sp/>\</highlight></codeline>
+<codeline lineno="143"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(PM_ADDRESS<sp/>==<sp/>PM_MCUBOOT_PRIMARY_APP_ADDRESS)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="144"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#define<sp/>FW_INFO_VECTOR_OFFSET<sp/>PM_MCUBOOT_PAD_SIZE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="145"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="146" refid="group__fw__info_ga560b86f362bb7de199d1b64ec0740b8c_1ga560b86f362bb7de199d1b64ec0740b8c" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#define<sp/>FW_INFO_VECTOR_OFFSET<sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="147"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="148"><highlight class="normal"></highlight></codeline>
+<codeline lineno="149"><highlight class="normal"></highlight></codeline>
+<codeline lineno="153"><highlight class="normal">BUILD_ASSERT(ARRAY_SIZE(<ref refid="group__fw__info__bare_ga0f1288a42c7aab29f7c9b878b9f853d0_1ga0f1288a42c7aab29f7c9b878b9f853d0" kindref="member">fw_info_allowed_offsets</ref>)<sp/>==<sp/><ref refid="group__fw__info__bare_gada889dc8a81a2da32c7622751bbdbcbe_1gada889dc8a81a2da32c7622751bbdbcbe" kindref="member">FW_INFO_OFFSET_COUNT</ref>,</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;Mismatch<sp/>in<sp/>the<sp/>number<sp/>of<sp/>allowed<sp/>offsets.&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Build<sp/>time<sp/>check<sp/>of<sp/>CONFIG_FW_INFO_OFFSET.<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="159"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>(FW_INFO_OFFSET_COUNT<sp/>!=<sp/>5)<sp/>\</highlight></codeline>
+<codeline lineno="160"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>||<sp/>((FW_INFO_CURRENT_OFFSET)<sp/>!=<sp/>(FW_INFO_OFFSET0)<sp/>&amp;&amp;<sp/>\</highlight></codeline>
+<codeline lineno="161"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(FW_INFO_CURRENT_OFFSET)<sp/>!=<sp/>(FW_INFO_OFFSET1)<sp/>&amp;&amp;<sp/>\</highlight></codeline>
+<codeline lineno="162"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(FW_INFO_CURRENT_OFFSET)<sp/>!=<sp/>(FW_INFO_OFFSET2)<sp/>&amp;&amp;<sp/>\</highlight></codeline>
+<codeline lineno="163"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(FW_INFO_CURRENT_OFFSET)<sp/>!=<sp/>(FW_INFO_OFFSET3)<sp/>&amp;&amp;<sp/>\</highlight></codeline>
+<codeline lineno="164"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(FW_INFO_CURRENT_OFFSET)<sp/>!=<sp/>(FW_INFO_OFFSET4))</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="165"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#error<sp/>FW_INFO_OFFSET<sp/>not<sp/>set<sp/>to<sp/>one<sp/>of<sp/>the<sp/>allowed<sp/>values.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="166"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="167"><highlight class="normal"></highlight></codeline>
+<codeline lineno="168"><highlight class="normal"></highlight></codeline>
+<codeline lineno="183" refid="group__fw__info_ga21f6b55232bf46b901a0f7c99035ccd4_1ga21f6b55232bf46b901a0f7c99035ccd4" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="group__fw__info_ga21f6b55232bf46b901a0f7c99035ccd4_1ga21f6b55232bf46b901a0f7c99035ccd4" kindref="member">fw_info_ext_api_provide</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structfw__info" kindref="compound">fw_info</ref><sp/>*fwinfo,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>provide);</highlight></codeline>
+<codeline lineno="184"><highlight class="normal"></highlight></codeline>
+<codeline lineno="194" refid="group__fw__info_ga8e6f107ad53cf5b9aefb60e66edfab3b_1ga8e6f107ad53cf5b9aefb60e66edfab3b" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="group__fw__info_ga8e6f107ad53cf5b9aefb60e66edfab3b_1ga8e6f107ad53cf5b9aefb60e66edfab3b" kindref="member">fw_info_invalidate</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structfw__info" kindref="compound">fw_info</ref><sp/>*<ref refid="structfw__info" kindref="compound">fw_info</ref>);</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"></highlight></codeline>
+<codeline lineno="198"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="199"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="200"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="201"><highlight class="normal"></highlight></codeline>
+<codeline lineno="202"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="include/fw_info.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>nRF Connect SDK code base &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../_static/js/ncs.js"
+></script>
+<script src="../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Managing the code base" href="managing_code.html" />
+    <link rel="prev" title="Development model" href="../dev_model.html" />
+<link
+  href="../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../dev_model.html">Development model</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">nRF Connect SDK code base</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#repository-types">Repository types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#repository-structure">Repository structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#revisions">Revisions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#oss-repositories-downstream-project-history">OSS repositories downstream project history</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#userdata-associated-with-oss-repositories">Userdata associated with OSS repositories</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="managing_code.html">Managing the code base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adding_code.html">Adding your own code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ncs_distro.html">Redistributing the nRF Connect SDK</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../drivers.html">Drivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../dev_model.html">Development model</a></li>
+      <li class="breadcrumb-item active">nRF Connect SDK code base</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/developing/code_base.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="nrf-connect-sdk-code-base">
+<span id="dm-code-base"></span><h1>nRF Connect SDK code base<a class="headerlink" href="#nrf-connect-sdk-code-base" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#repository-types" id="id7">Repository types</a></p></li>
+<li><p><a class="reference internal" href="#repository-structure" id="id8">Repository structure</a></p></li>
+<li><p><a class="reference internal" href="#revisions" id="id9">Revisions</a></p></li>
+<li><p><a class="reference internal" href="#oss-repositories-downstream-project-history" id="id10">OSS repositories downstream project history</a></p></li>
+<li><p><a class="reference internal" href="#userdata-associated-with-oss-repositories" id="id11">Userdata associated with OSS repositories</a></p></li>
+</ul>
+</div>
+<p>The source code, libraries, and tools that compose the nRF Connect SDK are entirely hosted in a set of <a class="reference external" href="https://git-scm.com/">Git</a> repositories.
+Basic familiarity with Git is required to understand the architecture of the repository set and to work with the nRF Connect SDK.</p>
+<p>All nRF Connect SDK repositories are publicly hosted on the <a class="reference external" href="https://github.com/nrfconnect">nrfconnect GitHub organization</a>, and accessible to both individual users and companies.</p>
+<section id="repository-types">
+<span id="dm-repo-types"></span><h2><a class="toc-backref" href="#id7">Repository types</a><a class="headerlink" href="#repository-types" title="Permalink to this heading"></a></h2>
+<p>There are two main types of Git repositories in the nRF Connect SDK repository set:</p>
+<ul class="simple">
+<li><p>nRF repositories</p>
+<ul>
+<li><p>Created, developed, and maintained by Nordic.</p></li>
+<li><p>Usually licensed for use on Nordic products only.</p></li>
+</ul>
+</li>
+<li><p>OSS repositories</p>
+<ul>
+<li><p>Created and maintained by Nordic.</p></li>
+<li><p>Soft forks of open-source projects.</p></li>
+<li><p>Typically contain a small set of changes that are specific to nRF Connect SDK.</p></li>
+<li><p>Updated (“upmerged”) regularly with the latest changes from the open source project.</p></li>
+</ul>
+</li>
+</ul>
+<p>nRF repositories are stand-alone and have no upstreams, since they are unique to the nRF Connect SDK.
+Some examples of repositories of this type are:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/nrfconnect/sdk-nrf">sdk-nrf</a>: The main repository for Nordic-developed software.</p></li>
+<li><p><a class="reference external" href="https://github.com/nrfconnect/sdk-nrfxlib">sdk-nrfxlib</a>: A repository containing linkable libraries developed by Nordic.</p></li>
+</ul>
+<p>OSS repositories, on the other hand, are typically soft forks of an upstream open source project, which Nordic maintains in order to keep a small set of changes that do not belong, or have not been merged, to the upstream official open-source repository.
+For example:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/nrfconnect/sdk-zephyr">sdk-zephyr</a> is a soft fork (and therefore a downstream) of the upstream official <a class="reference external" href="https://github.com/zephyrproject-rtos/zephyr">Zephyr repository</a>.</p></li>
+<li><p><a class="reference external" href="https://github.com/nrfconnect/sdk-mcuboot">sdk-mcuboot</a> is a soft fork (and therefore a downstream) of the upstream official <a class="reference external" href="https://github.com/mcu-tools/mcuboot">MCUboot repository</a>.</p></li>
+</ul>
+</section>
+<section id="repository-structure">
+<h2><a class="toc-backref" href="#id8">Repository structure</a><a class="headerlink" href="#repository-structure" title="Permalink to this heading"></a></h2>
+<p>The nRF Connect SDK uses <span class="xref std std-ref">west</span> to manage the combination of repositories and versions.</p>
+<p>A <span class="xref std std-ref">manifest repository</span>, <a class="reference external" href="https://github.com/nrfconnect/sdk-nrf">sdk-nrf</a>, contains a file in its root folder, <code class="file docutils literal notranslate"><span class="pre">west.yml</span></code>, which lists all other repositories (west projects) included in the nRF Connect SDK.
+The nRF Connect SDK repository structure has a star topology, with the <a class="reference external" href="https://github.com/nrfconnect/sdk-nrf">sdk-nrf</a> repository being the center of the star and all other repositories being west projects that are managed by <code class="file docutils literal notranslate"><span class="pre">west.yml</span></code>.
+This is equivalent to topology T2 in the <span class="xref std std-ref">west documentation</span>.</p>
+<figure class="align-default" id="id6">
+<img alt="A graphical depiction of the |NCS| repository structure" src="../_images/ncs-west-repos.svg" /><figcaption>
+<p><span class="caption-text">The nRF Connect SDK repository structure</span><a class="headerlink" href="#id6" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>The figure above depicts the nRF Connect SDK repository structure.
+A central concept with this repository structure is that each revision (in Git terms) of the <a class="reference external" href="https://github.com/nrfconnect/sdk-nrf">sdk-nrf</a> repository completely determines the revisions of all other
+repositories (that is, the west projects).
+This means that the linear Git history of this manifest repository also determines the history of the repository set in its entirety, thanks to the <code class="file docutils literal notranslate"><span class="pre">west.yml</span></code> <a class="reference external" href="https://github.com/nrfconnect/sdk-nrf/blob/main/west.yml">west manifest file</a> being part of the manifest repository.
+West reads the contents of the manifest file to find out which revisions of the project repositories are to be checked out every time <code class="docutils literal notranslate"><span class="pre">west</span> <span class="pre">update</span></code> is run.
+In this way, you can decide to work with a specific nRF Connect SDK release either by initializing a new west installation at a particular tag or by checking out the corresponding tag for a release in an existing installation and then updating your project repositories to the corresponding state with <code class="docutils literal notranslate"><span class="pre">west</span> <span class="pre">update</span></code>.
+Alternatively, you can work with the latest state of development by using the main branch of the <a class="reference external" href="https://github.com/nrfconnect/sdk-nrf">sdk-nrf</a> repository, updating it with Git regularly and using <code class="docutils literal notranslate"><span class="pre">west</span> <span class="pre">update</span></code> to update the project repositories every time the manifest repository changes.
+More information about manifests can be found in the <span class="xref std std-ref">west manifest section</span> of the Zephyr documentation.</p>
+</section>
+<section id="revisions">
+<span id="dm-revisions"></span><h2><a class="toc-backref" href="#id9">Revisions</a><a class="headerlink" href="#revisions" title="Permalink to this heading"></a></h2>
+<p>There are two fundamental revisions that are relevant to most nRF Connect SDK users:</p>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">main</span></code> branch of the <a class="reference external" href="https://github.com/nrfconnect/sdk-nrf">sdk-nrf</a> repository</p></li>
+<li><p>Any Git tag (that is, release, release candidate or development tag) of the <a class="reference external" href="https://github.com/nrfconnect/sdk-nrf">sdk-nrf</a> repository</p></li>
+</ul>
+<p>As discussed above, the revision of the manifest repository, <a class="reference external" href="https://github.com/nrfconnect/sdk-nrf">sdk-nrf</a>, uniquely determines the revisions of all other repositories, so a discussion about nRF Connect SDK revisions can be essentially limited to the manifest repository revision.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">main</span></code> branch of the <a class="reference external" href="https://github.com/nrfconnect/sdk-nrf">sdk-nrf</a> repository always contains the latest development state of the nRF Connect SDK.
+Since all development is done openly, you can use it if you are not particularly concerned about stability and want to track the latest changes that are being merged continuously into the different repositories.</p>
+<p>The Git tags correspond to official releases tested and signed by the Nordic engineers.
+The format for nRF repositories is as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">vX</span><span class="o">.</span><span class="n">Y</span><span class="o">.</span><span class="n">Z</span><span class="p">(</span><span class="o">-</span><span class="n">rcN</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Where X, Y, and Z are the major, minor, and patch version respectively and, optionally, a release candidate postfix <code class="docutils literal notranslate"><span class="pre">-rcN</span></code> is attached if the tag identifies a candidate instead of the actual release.</p>
+<p>The Git tags are composed as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">vX</span><span class="o">.</span><span class="n">Y</span><span class="o">.</span><span class="n">Z</span><span class="p">(</span><span class="o">-</span><span class="n">rcN</span><span class="o">|-</span><span class="n">devN</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>X, Y, and Z are the major, minor, and patch version, respectively.</p>
+<p>A special value of <code class="docutils literal notranslate"><span class="pre">99</span></code> for the patch version number is reserved for any revision in between releases.
+Tags without a suffix correspond to official releases tested and signed by Nordic Semiconductor engineers.
+A release candidate suffix <code class="docutils literal notranslate"><span class="pre">-rcN</span></code> is attached if the tag identifies a candidate instead of the actual release.</p>
+<p>In between releases, there might be development tags.
+These are identified by a <code class="docutils literal notranslate"><span class="pre">-devN</span></code> suffix included after the nRF Connect SDK version, for example <code class="docutils literal notranslate"><span class="pre">v1.9.99-dev1</span></code> for the main branch or <code class="docutils literal notranslate"><span class="pre">v1.9.2-dev1</span></code> for the release branch.
+Such versions indicate a snapshot of the development state that is created to highlight the introduction of a new piece of functionality.
+Unlike an nRF Connect SDK release, a <code class="docutils literal notranslate"><span class="pre">-devN</span></code> version may or may not have received the same amount of testing.</p>
+<p>In the case of OSS repositories, the git tag format reuses the upstream project’s version along with some nRF Connect SDK specific postfixes:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">vX</span><span class="o">.</span><span class="n">Y</span><span class="o">.</span><span class="n">Z</span><span class="o">-</span><span class="n">ncsN</span><span class="p">(</span><span class="o">-</span><span class="n">rcM</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In this format, X, Y and Z are the major, minor and patch versions of the upstream project, and <code class="docutils literal notranslate"><span class="pre">-ncsN</span></code> is used to identify the number of nRF Connect SDK releases based on that particular version.</p>
+</section>
+<section id="oss-repositories-downstream-project-history">
+<span id="dm-oss-downstreams"></span><h2><a class="toc-backref" href="#id10">OSS repositories downstream project history</a><a class="headerlink" href="#oss-repositories-downstream-project-history" title="Permalink to this heading"></a></h2>
+<p>As described in <a class="reference internal" href="#dm-repo-types"><span class="std std-ref">Repository types</span></a>, the nRF Connect SDK contains OSS repositories, which are based on third-party, open-source Git repositories and may contain additional patches not present upstream.
+Examples include <a class="reference external" href="https://github.com/nrfconnect/sdk-zephyr">sdk-zephyr</a> and <a class="reference external" href="https://github.com/nrfconnect/sdk-mcuboot">sdk-mcuboot</a>, which have upstream open-source projects used as a basis for downstream repositories distributed with the nRF Connect SDK.
+This section describes how the history of these OSS repositories is maintained, and how they are synchronized with their upstreams.</p>
+<p>The short logs for these downstream patches contain <code class="docutils literal notranslate"><span class="pre">[nrf</span> <span class="pre">xyz]</span></code> at the beginning, for different <code class="docutils literal notranslate"><span class="pre">xyz</span></code> strings.
+This makes their different purposes downstream clearer, and makes them easier to search for and see in <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code>.
+The current values of <code class="docutils literal notranslate"><span class="pre">[nrf</span> <span class="pre">xyz]</span></code> are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">[nrf</span> <span class="pre">mergeup]</span></code>: periodic merges of the upstream tree</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[nrf</span> <span class="pre">fromlist]</span></code>: patches which have upstream pull requests, including any later revisions</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[nrf</span> <span class="pre">noup]</span></code>: patches which are specific to the nRF Connect SDK</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[nrf</span> <span class="pre">fromtree]</span></code>: patches which have been cherry-picked from an upstream tree</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The downstream project history is periodically rewritten.
+This is important to prevent the number of downstream patches included in a specific nRF Connect SDK release from increasing forever.
+A repository’s history is typically only rewritten once for every nRF Connect SDK release.</p>
+</div>
+<p>To make incorporating new history into your own forks easier, a new point in the downstream nRF Connect SDK history is always created which has an empty <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span></code> with the previous version.
+The empty diff means you can always use:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">merge</span></code> to get the rewritten history merged into your own fork without errors</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rebase</span> <span class="pre">--onto</span></code> or <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">cherry-pick</span></code> to reapply any of your own patches cleanly before and after the history rewrite</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">cherry</span></code> to list any additional patches you may have applied to these projects to rewrite history as needed</p></li>
+</ul>
+<p>Additionally, both the old and new histories are committed sequentially into the <code class="docutils literal notranslate"><span class="pre">revision</span></code> fields for these projects in the <code class="file docutils literal notranslate"><span class="pre">nrf/west.yml</span></code> west
+manifest file.
+This means you can always combine <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">bisect</span></code> in the <code class="docutils literal notranslate"><span class="pre">nrf</span></code> repository with <code class="docutils literal notranslate"><span class="pre">west</span> <span class="pre">update</span></code> at each bisection point to diagnose regressions and the rest.</p>
+</section>
+<section id="userdata-associated-with-oss-repositories">
+<span id="dm-oss-userdata"></span><h2><a class="toc-backref" href="#id11">Userdata associated with OSS repositories</a><a class="headerlink" href="#userdata-associated-with-oss-repositories" title="Permalink to this heading"></a></h2>
+<p>The west manifest file <code class="file docutils literal notranslate"><span class="pre">nrf/west.yml</span></code> contains <code class="docutils literal notranslate"><span class="pre">userdata</span></code> values for
+some OSS repository projects.</p>
+<p>This section documents these values and their purpose. However, they are mainly
+meant for internal use and are safe to ignore.</p>
+<p>See <span class="xref std std-ref">zephyr:west-project-userdata</span> for general information about the west
+<code class="docutils literal notranslate"><span class="pre">userdata</span></code> feature.</p>
+<p>In the nRF Connect SDK, each <code class="docutils literal notranslate"><span class="pre">userdata</span></code> value has this format:</p>
+<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span><span class="nt">ncs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">upstream-url</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://...</span>
+<span class="w">  </span><span class="nt">upstream-sha</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">GIT_SHA</span>
+<span class="w">  </span><span class="nt">compare-by-default</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;true|false&gt;</span>
+</pre></div>
+</div>
+<p>These fields are used to track some extra OSS repository metadata. The metadata
+is present for projects which are not included in the nRF Connect SDK directly from the
+Zephyr project’s manifest in <code class="file docutils literal notranslate"><span class="pre">zephyr/west.yml</span></code>. Repository maintainers
+use this metadata while synchronizing the nRF Connect SDK fork of each repository with
+its upstream repository.</p>
+<p>The meaning of each <code class="docutils literal notranslate"><span class="pre">userdata</span></code> field is:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">upstream-url</span></code>: Git URL that the project is synchronized against</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">upstream-sha</span></code>: most recent Git SHA in the <code class="docutils literal notranslate"><span class="pre">upstream-url</span></code>
+repository which is included in the nRF Connect SDK fork of the repository</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">compare-by-default</span></code>: if <code class="docutils literal notranslate"><span class="pre">true</span></code>, internal nRF Connect SDK synchronization tooling
+will include information related to this repository by default</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="managing_code.html" class="btn btn-neutral float-right" title="Managing the code base" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../dev_model.html" class="btn btn-neutral" title="Development model" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,170 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="group__fw__info" kind="group">
+    <compoundname>fw_info</compoundname>
+    <title>Firmware information linker helpers and build asserts.</title>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__fw__info_1ga21f6b55232bf46b901a0f7c99035ccd4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fw_info_ext_api_provide</definition>
+        <argsstring>(const struct fw_info *fwinfo, bool provide)</argsstring>
+        <name>fw_info_ext_api_provide</name>
+        <param>
+          <type>const struct <ref refid="structfw__info" kindref="compound">fw_info</ref> *</type>
+          <declname>fwinfo</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>provide</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Expose EXT_APIs to another firmware</para>
+<para>Populate the other firmware&apos;s <computeroutput>ext_api_in</computeroutput> with EXT_APIs from other images.</para>
+<para><simplesect kind="note"><para>This should be called immediately before booting the other firmware since it will likely corrupt the memory of the running firmware.</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">fwinfo</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the other firmware&apos;s information structure. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">provide</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If true, populate ext_api_in. If false, only check whether requirements can be satisfied.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Whether requirements could be satisfied. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/fw_info.h" line="183" column="6" declfile="include/fw_info.h" declline="183" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="group__fw__info_1ga8e6f107ad53cf5b9aefb60e66edfab3b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fw_info_invalidate</definition>
+        <argsstring>(const struct fw_info *fw_info)</argsstring>
+        <name>fw_info_invalidate</name>
+        <param>
+          <type>const struct <ref refid="structfw__info" kindref="compound">fw_info</ref> *</type>
+          <declname>fw_info</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Invalidate an image by manipulating its <ref refid="structfw__info" kindref="compound">fw_info</ref>.</para>
+<para>Invalidation happens by setting the <computeroutput>valid</computeroutput> value to INVALID_VAL.</para>
+<para><simplesect kind="note"><para>This function needs to have<verbatim>embed:rst:inline :kconfig:option:`CONFIG_NRFX_NVMC` </verbatim> enabled.</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in"><ref refid="structfw__info" kindref="compound">fw_info</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The info structure to invalidate. This memory will be modified directly in flash. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/fw_info.h" line="194" column="6" declfile="include/fw_info.h" declline="194" declcolumn="6"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="group__fw__info_1ga0149018d3260448bc647c9a3fe55bb84" prot="public" static="no">
+        <name>EXT_API</name>
+        <param><defname>ext_api_name</defname></param>
+        <param><defname>type</defname></param>
+        <param><defname>name</defname></param>
+        <initializer>	Z_GENERIC_SECTION(.ext_apis) \
+	const uint8_t _CONCAT(name, _ext_api_counter) = 0xFF; \
+	BUILD_ASSERT((sizeof(type) % 4) == 0, \
+			&quot;Size of EXT_API &quot; #type &quot; is not word-aligned&quot;); \
+	struct __packed _CONCAT(name, _t) \
+	{ \
+		struct <ref refid="structfw__info__ext__api" kindref="compound">fw_info_ext_api</ref> header; \
+		type ext_api; \
+	}; \
+	Z_GENERIC_SECTION(.firmware_info.1) __attribute__((used)) \
+	const struct _CONCAT(name, _t) name = { \
+	.header = {\
+		.magic = {EXT_API_MAGIC}, \
+		.ext_api_id = CONFIG_ ## ext_api_name ## _EXT_API_ID, \
+		.ext_api_flags = CONFIG_ ## ext_api_name ## _EXT_API_FLAGS, \
+		.ext_api_version = CONFIG_ ## ext_api_name ## _EXT_API_VER, \
+		.ext_api_len = sizeof(struct __packed _CONCAT(name, _t)), \
+	}, \
+	.ext_api</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/fw_info.h" line="50" column="9" bodyfile="include/fw_info.h" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__fw__info_1gae8a7197716c16b537d6fb822649a4da8" prot="public" static="no">
+        <name>EXT_API_REQ</name>
+        <param><defname>name</defname></param>
+        <param><defname>req</defname></param>
+        <param><defname>type</defname></param>
+        <param><defname>var_name</defname></param>
+        <initializer>	Z_GENERIC_SECTION(.ext_apis_req) \
+	const uint8_t _CONCAT(var_name, _ext_api_req_counter) = 0xFF; \
+	__noinit const struct __packed \
+	{ \
+		struct <ref refid="structfw__info__ext__api" kindref="compound">fw_info_ext_api</ref> header; \
+		type ext_api; \
+	} *var_name; \
+	Z_GENERIC_SECTION(.firmware_info.2) \
+	__attribute__((used)) \
+	const struct <ref refid="structfw__info__ext__api__request" kindref="compound">fw_info_ext_api_request</ref> _CONCAT(var_name, _req) = \
+	{ \
+		.request = {\
+			.magic = {EXT_API_MAGIC}, \
+			.ext_api_id = CONFIG_ ## name ## _EXT_API_ID, \
+			.ext_api_flags = CONFIG_ ## name ## _EXT_API_FLAGS, \
+			.ext_api_version = CONFIG_ ## name ## _EXT_API_VER, \
+			.ext_api_len = sizeof(struct <ref refid="structfw__info__ext__api__request" kindref="compound">fw_info_ext_api_request</ref>), \
+		}, \
+		.ext_api_max_version = CONFIG_ ## name ## _EXT_API_MAX_VER, \
+		.required = req, \
+		.ext_api = (void *) &amp;var_name, \
+	}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/fw_info.h" line="88" column="9" bodyfile="include/fw_info.h" bodystart="88" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__fw__info_1ga560b86f362bb7de199d1b64ec0740b8c" prot="public" static="no">
+        <name>FW_INFO_VECTOR_OFFSET</name>
+        <initializer>0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/fw_info.h" line="146" column="11" bodyfile="include/fw_info.h" bodystart="146" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

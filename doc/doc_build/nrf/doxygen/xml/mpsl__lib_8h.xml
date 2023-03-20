@@ -1,0 +1,140 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="mpsl__lib_8h" kind="file" language="C++">
+    <compoundname>mpsl_lib.h</compoundname>
+    <includes local="no">stdint.h</includes>
+    <incdepgraph>
+      <node id="1">
+        <label>include/mpsl/mpsl_lib.h</label>
+        <link refid="mpsl__lib_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>stdint.h</label>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__mpsl__lib_ga9c300759e3df0b84bdc1b175060b1193_1ga9c300759e3df0b84bdc1b175060b1193" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int32_t</type>
+        <definition>int32_t mpsl_lib_init</definition>
+        <argsstring>(void)</argsstring>
+        <name>mpsl_lib_init</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Initialize MPSL and attach interrupt handlers. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This routine initializes MPSL (via <computeroutput>mpsl_init</computeroutput>) after it has been uninitialized via <ref refid="group__mpsl__lib_ga023b749e3fa9231996922c15201cc120_1ga023b749e3fa9231996922c15201cc120" kindref="member">mpsl_lib_uninit</ref>, and attaches all required interrupt handlers.</para>
+<para><simplesect kind="pre"><para>This method requires CONFIG_MPSL_DYNAMIC_INTERRUPTS to be enabled and MPSL to have been previously uninitialized via <ref refid="group__mpsl__lib_ga023b749e3fa9231996922c15201cc120_1ga023b749e3fa9231996922c15201cc120" kindref="member">mpsl_lib_uninit</ref>.</para>
+</simplesect>
+<simplesect kind="note"><para>After successful execution of this method, any existing interrupt handlers will be detached from RADIO_IRQn, RTC0_IRQn, and TIMER0_IRQn.</para>
+</simplesect>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>0</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>MPSL enabled successfully. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>-NRF_EPERM</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Operation is not supported or MPSL is already initialized. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>-NRF_EINVAL</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Invalid parameters supplied to MPSL. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/mpsl/mpsl_lib.h" line="43" column="9" declfile="include/mpsl/mpsl_lib.h" declline="43" declcolumn="9"/>
+      </memberdef>
+      <memberdef kind="function" id="group__mpsl__lib_ga023b749e3fa9231996922c15201cc120_1ga023b749e3fa9231996922c15201cc120" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int32_t</type>
+        <definition>int32_t mpsl_lib_uninit</definition>
+        <argsstring>(void)</argsstring>
+        <name>mpsl_lib_uninit</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Uninitialize MPSL and disable interrupt handlers. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This routine uninitializes MPSL (via <computeroutput>mpsl_uninit</computeroutput>) and disables MPSL interrupts. Uninitializing MPSL stops clocks and scheduler. This will release all peripherals and reduce power usage, allowing the user to override any interrupt handlers used by MPSL.</para>
+<para><simplesect kind="pre"><para>This method requires CONFIG_MPSL_DYNAMIC_INTERRUPTS to be enabled.</para>
+</simplesect>
+<simplesect kind="note"><para>After successful execution of this method, user-supplied interrupt handlers can be attached to RADIO_IRQn, RTC0_IRQn, and TIMER0_IRQn using <computeroutput>irq_connect_dynamic</computeroutput>. Care must be taken when developing these handlers, as they will be executed as direct dynamic interrupts. See <computeroutput>ARM_IRQ_DIRECT_DYNAMIC_CONNECT</computeroutput> for additional documentation. These interrupts will trigger thread re-scheduling upon return.</para>
+</simplesect>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>0</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>MPSL disabled successfully. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>-NRF_EPERM</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Operation is not supported. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/mpsl/mpsl_lib.h" line="66" column="9" declfile="include/mpsl/mpsl_lib.h" declline="66" declcolumn="9"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="2"><highlight class="comment"><sp/>*<sp/>Copyright<sp/>(c)<sp/>2022<sp/>Nordic<sp/>Semiconductor<sp/>ASA</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/>*<sp/>SPDX-License-Identifier:<sp/>LicenseRef-Nordic-5-Clause</highlight></codeline>
+<codeline lineno="5"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>MPSL_LIB__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>MPSL_LIB__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;C&quot;</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdint.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight></codeline>
+<codeline lineno="43" refid="group__mpsl__lib_ga9c300759e3df0b84bdc1b175060b1193_1ga9c300759e3df0b84bdc1b175060b1193" refkind="member"><highlight class="normal">int32_t<sp/><ref refid="group__mpsl__lib_ga9c300759e3df0b84bdc1b175060b1193_1ga9c300759e3df0b84bdc1b175060b1193" kindref="member">mpsl_lib_init</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight></codeline>
+<codeline lineno="66" refid="group__mpsl__lib_ga023b749e3fa9231996922c15201cc120_1ga023b749e3fa9231996922c15201cc120" refkind="member"><highlight class="normal">int32_t<sp/><ref refid="group__mpsl__lib_ga023b749e3fa9231996922c15201cc120_1ga023b749e3fa9231996922c15201cc120" kindref="member">mpsl_lib_uninit</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="69"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>MPSL_LIB__<sp/>*/</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="include/mpsl/mpsl_lib.h"/>
+  </compounddef>
+</doxygen>

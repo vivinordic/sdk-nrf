@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TCP and UDP AT commands &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../../_static/js/ncs.js"
+></script>
+<script src="../../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="ICMP AT commands" href="ICMP_AT_commands.html" />
+    <link rel="prev" title="Socket AT commands" href="SOCKET_AT_commands.html" />
+<link
+  href="../../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../protocols.html">Protocols</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../applications.html">Applications</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../connectivity_bridge/README.html">Connectivity bridge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../asset_tracker_v2/README.html">nRF9160: Asset Tracker v2</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../README.html">nRF9160: Serial LTE modem</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="slm_description.html">Application description</a></li>
+<li class="toctree-l3"><a class="reference internal" href="slm_testing.html">Testing scenarios</a></li>
+<li class="toctree-l3"><a class="reference internal" href="slm_extending.html">Extending the application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="slm_data_mode.html">Running in data mode</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="AT_commands_intro.html">SLM-specific AT commands</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="Generic_AT_commands.html">Generic AT commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SOCKET_AT_commands.html">Socket AT commands</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">TCP and UDP AT commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ICMP_AT_commands.html">ICMP AT commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="FOTA_AT_commands.html">FOTA AT commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DFU_AT_commands.html">DFU AT commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SMS_AT_commands.html">SMS AT commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="FTP_AT_commands.html">FTP AT commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="GNSS_AT_commands.html">GNSS AT commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="MQTT_AT_commands.html">MQTT client AT commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="HTTPC_AT_commands.html">HTTP client AT commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="TWI_AT_commands.html">TWI AT commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="GPIO_AT_commands.html">GPIO AT commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="CARRIER_AT_commands.html">LwM2M carrier library AT commands</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../nrf_desktop/README.html">nRF Desktop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nrf5340_audio/README.html">nRF5340 Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../machine_learning/README.html">nRF Machine Learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../matter_weather_station/README.html">Thingy:53: Matter weather station</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../zigbee_weather_station/README.html">Thingy:53: Zigbee weather station</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../drivers.html">Drivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../applications.html">Applications</a></li>
+          <li class="breadcrumb-item"><a href="../README.html">nRF9160: Serial LTE modem</a></li>
+          <li class="breadcrumb-item"><a href="AT_commands_intro.html">SLM-specific AT commands</a></li>
+      <li class="breadcrumb-item active">TCP and UDP AT commands</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/applications/serial_lte_modem/doc/TCPIP_AT_commands.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="tcp-and-udp-at-commands">
+<span id="slm-at-tcp-udp"></span><h1>TCP and UDP AT commands<a class="headerlink" href="#tcp-and-udp-at-commands" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#tcp-server-xtcpsvr" id="id65">TCP server #XTCPSVR</a></p>
+<ul>
+<li><p><a class="reference internal" href="#set-command" id="id66">Set command</a></p></li>
+<li><p><a class="reference internal" href="#read-command" id="id67">Read command</a></p></li>
+<li><p><a class="reference internal" href="#test-command" id="id68">Test command</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#tcp-tls-client-xtcpcli" id="id69">TCP/TLS client #XTCPCLI</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id7" id="id70">Set command</a></p></li>
+<li><p><a class="reference internal" href="#id11" id="id71">Read command</a></p></li>
+<li><p><a class="reference internal" href="#id14" id="id72">Test command</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#tcp-send-data-xtcpsend" id="id73">TCP send data #XTCPSEND</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id18" id="id74">Set command</a></p></li>
+<li><p><a class="reference internal" href="#id22" id="id75">Read command</a></p></li>
+<li><p><a class="reference internal" href="#id23" id="id76">Test command</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#tcp-hang-up-xtcphangup" id="id77">TCP hang up #XTCPHANGUP</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id24" id="id78">Set command</a></p></li>
+<li><p><a class="reference internal" href="#id28" id="id79">Read command</a></p></li>
+<li><p><a class="reference internal" href="#id29" id="id80">Test command</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#tcp-receive-data" id="id81">TCP receive data</a></p></li>
+<li><p><a class="reference internal" href="#udp-server-xudpsvr" id="id82">UDP server #XUDPSVR</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id33" id="id83">Set command</a></p></li>
+<li><p><a class="reference internal" href="#id37" id="id84">Read command</a></p></li>
+<li><p><a class="reference internal" href="#id40" id="id85">Test command</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#udp-dtls-client-xudpcli" id="id86">UDP/DTLS client #XUDPCLI</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id44" id="id87">Set command</a></p></li>
+<li><p><a class="reference internal" href="#id48" id="id88">Read command</a></p></li>
+<li><p><a class="reference internal" href="#id51" id="id89">Test command</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#udp-send-data-xudpsend" id="id90">UDP send data #XUDPSEND</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id54" id="id91">Set command</a></p></li>
+<li><p><a class="reference internal" href="#id58" id="id92">Read command</a></p></li>
+<li><p><a class="reference internal" href="#id59" id="id93">Test command</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#udp-receive-data" id="id94">UDP receive data</a></p></li>
+</ul>
+</div>
+<p>The following commands list contains TCP-related and UDP-related AT commands.
+When native TLS is used, you must store the credentials using the <code class="docutils literal notranslate"><span class="pre">AT#XCMNG</span></code> AT command.</p>
+<p>For more information on the networking services, visit the <a class="reference external" href="https://pubs.opengroup.org/onlinepubs/007908799/xnsix.html">BSD Networking Services Spec Reference</a>.</p>
+<section id="tcp-server-xtcpsvr">
+<h2><a class="toc-backref" href="#id65">TCP server #XTCPSVR</a><a class="headerlink" href="#tcp-server-xtcpsvr" title="Permalink to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">#XTCPSVR</span></code> command allows you to start and stop the TCP/TLS server.</p>
+<section id="set-command">
+<h3><a class="toc-backref" href="#id66">Set command</a><a class="headerlink" href="#set-command" title="Permalink to this heading"></a></h3>
+<p>The set command allows you to start and stop the TCP/TLS server.</p>
+<section id="syntax">
+<h4>Syntax<a class="headerlink" href="#syntax" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#XTCPSVR=&lt;op&gt;[&lt;port&gt;[,&lt;sec_tag&gt;]]</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;op&gt;</span></code> parameter can accept one of the following values:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">0</span></code> - Stop the server.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">1</span></code> - Start the server using IP protocol family version 4.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">2</span></code> - Start the server using IP protocol family version 6.</p></li>
+</ul>
+</li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;port&gt;</span></code> parameter is an unsigned 16-bit integer (0 - 65535).
+It represents the TCP service port.
+It is mandatory to set it when starting the server.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;sec_tag&gt;</span></code> parameter is an integer.
+If it is given, a TLS server will be started.
+It indicates to the modem the credential of the security tag used for establishing a secure connection.</p></li>
+</ul>
+</section>
+<section id="response-syntax">
+<h4>Response syntax<a class="headerlink" href="#response-syntax" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#XTCPSVR: &lt;handle&gt;,&quot;started&quot;</span>
+
+<span class="c1">#XTCPSVR: &lt;error&gt;,&quot;not started&quot;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;handle&gt;</span></code> value is an integer.
+When positive, it indicates the handle of the successfully opened listening socket.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;error&gt;</span></code> value is an integer.
+It represents the error value according to the standard POSIX <em>errno</em>.</p></li>
+</ul>
+</section>
+<section id="examples">
+<h4>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AT</span><span class="c1">#XTCPSVR=1,3442,600</span>
+<span class="c1">#XTCPSVR: 2,&quot;started&quot;</span>
+<span class="n">OK</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="read-command">
+<h3><a class="toc-backref" href="#id67">Read command</a><a class="headerlink" href="#read-command" title="Permalink to this heading"></a></h3>
+<p>The read command allows you to check the TCP server settings.</p>
+<section id="id1">
+<h4>Syntax<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#XTCPSVR?</span>
+</pre></div>
+</div>
+</section>
+<section id="id2">
+<h4>Response syntax<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#XTCPSVR: &lt;listen_socket_handle&gt;,&lt;income_socket_handle&gt;,&lt;family&gt;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;xxx_socket_handle&gt;</span></code> value is an integer.
+When positive, it indicates that the socket opened successfully.
+When negative, it indicates that the socket failed to open or that there is no incoming connection.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;family&gt;</span></code> value is an integer.</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">1</span></code> - IP protocol family version 4.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">2</span></code> - IP protocol family version 6.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="id3">
+<h4>Examples<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AT</span><span class="c1">#XTCPSVR?</span>
+<span class="c1">#XTCPSVR: 1,2,1</span>
+<span class="n">OK</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="test-command">
+<h3><a class="toc-backref" href="#id68">Test command</a><a class="headerlink" href="#test-command" title="Permalink to this heading"></a></h3>
+<p>The test command tests the existence of the command and provides information about the type of its subparameters.</p>
+<section id="id4">
+<h4>Syntax<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#XTCPSVR=?</span>
+</pre></div>
+</div>
+</section>
+<section id="id5">
+<h4>Response syntax<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#XTCPSVR: (list of op value),&lt;port&gt;,&lt;sec_tag&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="id6">
+<h4>Examples<a class="headerlink" href="#id6" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AT</span><span class="c1">#XTCPSVR=?</span>
+<span class="c1">#XTCPSVR: (0,1,2),&lt;port&gt;,&lt;sec_tag&gt;</span>
+<span class="n">OK</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="tcp-tls-client-xtcpcli">
+<h2><a class="toc-backref" href="#id69">TCP/TLS client #XTCPCLI</a><a class="headerlink" href="#tcp-tls-client-xtcpcli" title="Permalink to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">#XTCPCLI</span></code> command allows you to create a TCP/TLS client and to connect to a server.</p>
+<section id="id7">
+<h3><a class="toc-backref" href="#id70">Set command</a><a class="headerlink" href="#id7" title="Permalink to this heading"></a></h3>
+<p>The set command allows you to create a TCP/TLS client and to connect to a server.</p>
+<section id="id8">
+<h4>Syntax<a class="headerlink" href="#id8" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#XTCPCLI=&lt;op&gt;[,&lt;url&gt;,&lt;port&gt;[,[sec_tag]]</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;op&gt;</span></code> parameter can accept one of the following values:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">0</span></code> - Disconnect.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">1</span></code> - Connect to the server for IP protocol family version 4.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">2</span></code> - Connect to the server for IP protocol family version 6.</p></li>
+</ul>
+</li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;url&gt;</span></code> parameter is a string.
+It indicates the hostname or the IP address to connect to.
+Its maximum size is 128 bytes.
+When the parameter is an IP address, it supports both IPv4 and IPv6.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;port&gt;</span></code> parameter is an unsigned 16-bit integer (0 - 65535).
+It represents the TCP/TLS service port on the remote server.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;sec_tag&gt;</span></code> parameter is an integer.
+If it is given, a TLS client will be started.
+It indicates to the modem the credential of the security tag used for establishing a secure connection.</p></li>
+</ul>
+</section>
+<section id="id9">
+<h4>Response syntax<a class="headerlink" href="#id9" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#XTCPCLI: &lt;handle&gt;, &quot;connected&quot;</span>
+
+<span class="c1">#XTCPCLI: &lt;error&gt;, &quot;not connected&quot;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;handle&gt;</span></code> value is an integer.
+When positive, it indicates the handle of the successfully opened socket.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;error&gt;</span></code> value is an integer.
+It represents the error value according to the standard POSIX <em>errno</em>.</p></li>
+</ul>
+</section>
+<section id="id10">
+<h4>Examples<a class="headerlink" href="#id10" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AT</span><span class="c1">#XTCPCLI=1,&quot;remote.ip&quot;,1234</span>
+<span class="c1">#XTCPCLI: 2,&quot;connected&quot;</span>
+<span class="n">OK</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id11">
+<h3><a class="toc-backref" href="#id71">Read command</a><a class="headerlink" href="#id11" title="Permalink to this heading"></a></h3>
+<p>The read command allows you to verify the status of the connection.</p>
+<section id="id12">
+<h4>Syntax<a class="headerlink" href="#id12" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#XTCPCLI?</span>
+</pre></div>
+</div>
+</section>
+<section id="id13">
+<h4>Response syntax<a class="headerlink" href="#id13" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#XTCPCLI: &lt;handle&gt;,&lt;family&gt;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;handle&gt;</span></code> value is an integer.
+When positive, it indicates the handle of the successfully opened socket.
+When negative, it indicates that the client socket failed to open.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;family&gt;</span></code> value is an integer.</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">1</span></code> - IP protocol family version 4.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">2</span></code> - IP protocol family version 6.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="id14">
+<h3><a class="toc-backref" href="#id72">Test command</a><a class="headerlink" href="#id14" title="Permalink to this heading"></a></h3>
+<p>The test command tests the existence of the command and provides information about the type of its subparameters.</p>
+<section id="id15">
+<h4>Syntax<a class="headerlink" href="#id15" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#XTCPCLI=?</span>
+</pre></div>
+</div>
+</section>
+<section id="id16">
+<h4>Response syntax<a class="headerlink" href="#id16" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#XTCPCLI: (op list),&lt;url&gt;,&lt;port&gt;,&lt;sec_tag&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="id17">
+<h4>Examples<a class="headerlink" href="#id17" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AT</span><span class="c1">#XTCPCLI=?</span>
+<span class="c1">#XTCPCLI: (0,1,2),&lt;url&gt;,&lt;port&gt;,&lt;sec_tag&gt;</span>
+<span class="n">OK</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="tcp-send-data-xtcpsend">
+<h2><a class="toc-backref" href="#id73">TCP send data #XTCPSEND</a><a class="headerlink" href="#tcp-send-data-xtcpsend" title="Permalink to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">#XTCPSEND</span></code> command allows you to send the data over the connection.</p>
+<section id="id18">
+<h3><a class="toc-backref" href="#id74">Set command</a><a class="headerlink" href="#id18" title="Permalink to this heading"></a></h3>
+<p>The set command allows you to send the data over the connection.
+When used from a TCP/TLS client, it sends the data to the remote TCP server
+When used from a TCP server, it sends data to the remote TCP client</p>
+<section id="id19">
+<h4>Syntax<a class="headerlink" href="#id19" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#XTCPSEND=&lt;data&gt;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;data&gt;</span></code> parameter is a string that contains the data to be sent.
+The maximum size of the data is 1024 bytes.
+When the parameter is not specified, SLM enters <code class="docutils literal notranslate"><span class="pre">slm_data_mode</span></code>.</p></li>
+</ul>
+</section>
+<section id="id20">
+<h4>Response syntax<a class="headerlink" href="#id20" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#XTCPSEND: &lt;size&gt;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;size&gt;</span></code> value is an integer.
+It represents the actual number of the bytes sent.</p></li>
+</ul>
+</section>
+<section id="id21">
+<h4>Examples<a class="headerlink" href="#id21" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AT</span><span class="c1">#XTCPSEND=&quot;Test TLS client&quot;</span>
+<span class="c1">#XTCPSEND: 15</span>
+<span class="n">OK</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id22">
+<h3><a class="toc-backref" href="#id75">Read command</a><a class="headerlink" href="#id22" title="Permalink to this heading"></a></h3>
+<p>The read command is not supported.</p>
+</section>
+<section id="id23">
+<h3><a class="toc-backref" href="#id76">Test command</a><a class="headerlink" href="#id23" title="Permalink to this heading"></a></h3>
+<p>The test command is not supported.</p>
+</section>
+</section>
+<section id="tcp-hang-up-xtcphangup">
+<h2><a class="toc-backref" href="#id77">TCP hang up #XTCPHANGUP</a><a class="headerlink" href="#tcp-hang-up-xtcphangup" title="Permalink to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">#XTCPHANGUP</span></code> command allows you to disconnect an incoming connection.</p>
+<section id="id24">
+<h3><a class="toc-backref" href="#id78">Set command</a><a class="headerlink" href="#id24" title="Permalink to this heading"></a></h3>
+<p>The set command allows you to disconnect an incoming connection.
+This function is reserved to TCP server role by its nature.</p>
+<section id="id25">
+<h4>Syntax<a class="headerlink" href="#id25" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#XTCPHANGUP=&lt;handle&gt;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;handle&gt;</span></code> parameter is an integer.
+Refer to <code class="docutils literal notranslate"><span class="pre">#XTCPSVR?</span></code> command for the <code class="docutils literal notranslate"><span class="pre">&lt;income_socket_handle&gt;</span></code>.</p></li>
+</ul>
+</section>
+<section id="id26">
+<h4>Response syntax<a class="headerlink" href="#id26" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#XTCPSVR: &lt;cause&gt;,&quot;disconnected&quot;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;cause&gt;</span></code> value is an integer of -111 or ECONNREFUSED.</p></li>
+</ul>
+</section>
+<section id="id27">
+<h4>Examples<a class="headerlink" href="#id27" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AT</span><span class="c1">#XTCPSVR?</span>
+<span class="c1">#XTCPSVR: 1,2,1</span>
+<span class="n">OK</span>
+<span class="n">AT</span><span class="c1">#XTCPHANGUP=2</span>
+<span class="c1">#XTCPSVR: -111,&quot;disconnected&quot;</span>
+<span class="n">OK</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id28">
+<h3><a class="toc-backref" href="#id79">Read command</a><a class="headerlink" href="#id28" title="Permalink to this heading"></a></h3>
+<p>The read command is not supported.</p>
+</section>
+<section id="id29">
+<h3><a class="toc-backref" href="#id80">Test command</a><a class="headerlink" href="#id29" title="Permalink to this heading"></a></h3>
+<p>The test command tests the existence of the command and provides information about the type of its subparameters.</p>
+<section id="id30">
+<h4>Syntax<a class="headerlink" href="#id30" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#TCPHANGUP=?</span>
+</pre></div>
+</div>
+</section>
+<section id="id31">
+<h4>Response syntax<a class="headerlink" href="#id31" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#TCPHANGUP: &lt;handle&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="id32">
+<h4>Examples<a class="headerlink" href="#id32" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AT</span><span class="c1">#TCPHANGUP=?</span>
+<span class="c1">#TCPHANGUP: &lt;handle&gt;</span>
+<span class="n">OK</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="tcp-receive-data">
+<h2><a class="toc-backref" href="#id81">TCP receive data</a><a class="headerlink" href="#tcp-receive-data" title="Permalink to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">data</span><span class="o">&gt;</span>
+<span class="c1">#XTCPDATA: &lt;size&gt;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;data&gt;</span></code> parameter is a string that contains the data received.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;size&gt;</span></code> parameter is the size of the string, which is present only when SLM is not operating in <code class="docutils literal notranslate"><span class="pre">slm_data_mode</span></code>.</p></li>
+</ul>
+</section>
+<section id="udp-server-xudpsvr">
+<h2><a class="toc-backref" href="#id82">UDP server #XUDPSVR</a><a class="headerlink" href="#udp-server-xudpsvr" title="Permalink to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">#XUDPSVR</span></code> command allows you to start and stop the UDP server.
+NOTE DTLS server is not supported by nRF9160.</p>
+<section id="id33">
+<h3><a class="toc-backref" href="#id83">Set command</a><a class="headerlink" href="#id33" title="Permalink to this heading"></a></h3>
+<p>The set command allows you to start and stop the UDP server.</p>
+<section id="id34">
+<h4>Syntax<a class="headerlink" href="#id34" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#XUDPSVR=&lt;op&gt;[,&lt;port&gt;]</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;op&gt;</span></code> parameter can accept one of the following values:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">0</span></code> - Stop the server.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">1</span></code> - Start the server for IP protocol family version 4.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">2</span></code> - Start the server for IP protocol family version 6.</p></li>
+</ul>
+</li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;port&gt;</span></code> parameter is an unsigned 16-bit integer (0 - 65535).
+It represents the UDP service port.
+It is mandatory for starting the server.</p></li>
+</ul>
+</section>
+<section id="id35">
+<h4>Response syntax<a class="headerlink" href="#id35" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#XUDPSVR: &lt;handle&gt;,&quot;started&quot;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;handle&gt;</span></code> value is an integer.
+It indicates the handle of the successfully opened listening socket.</p></li>
+</ul>
+</section>
+<section id="id36">
+<h4>Examples<a class="headerlink" href="#id36" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AT</span><span class="c1">#XUDPSVR=1,3442</span>
+<span class="c1">#XUDPSVR: 2,&quot;started&quot;</span>
+<span class="n">OK</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id37">
+<h3><a class="toc-backref" href="#id84">Read command</a><a class="headerlink" href="#id37" title="Permalink to this heading"></a></h3>
+<p>The read command allows you to check the current value of the subparameters.</p>
+<section id="id38">
+<h4>Syntax<a class="headerlink" href="#id38" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#XUDPSVR?</span>
+</pre></div>
+</div>
+</section>
+<section id="id39">
+<h4>Response syntax<a class="headerlink" href="#id39" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#XUDPSVR: &lt;handle&gt;,&lt;family&gt;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;handle&gt;</span></code> value is an integer.
+When positive, it indicates the handle of the successfully opened socket.
+When negative, it indicates that it failed to open.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;family&gt;</span></code> value is an integer.</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">1</span></code> - IP protocol family version 4.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">2</span></code> - IP protocol family version 6.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="id40">
+<h3><a class="toc-backref" href="#id85">Test command</a><a class="headerlink" href="#id40" title="Permalink to this heading"></a></h3>
+<p>The test command tests the existence of the command and provides information about the type of its subparameters.</p>
+<section id="id41">
+<h4>Syntax<a class="headerlink" href="#id41" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#XUDPSVR=?</span>
+</pre></div>
+</div>
+</section>
+<section id="id42">
+<h4>Response syntax<a class="headerlink" href="#id42" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#XUDPSVR: (list of op value),&lt;port&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="id43">
+<h4>Examples<a class="headerlink" href="#id43" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AT</span><span class="c1">#XUDPSVR=?</span>
+<span class="c1">#XUDPSVR: (0,1,2),&lt;port&gt;</span>
+<span class="n">OK</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="udp-dtls-client-xudpcli">
+<h2><a class="toc-backref" href="#id86">UDP/DTLS client #XUDPCLI</a><a class="headerlink" href="#udp-dtls-client-xudpcli" title="Permalink to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">#XUDPCLI</span></code> command allows you to create a UDP/DTLS client and to connect to a server.
+NOTE the UDP/DTLS client always works in a connection-oriented way.</p>
+<section id="id44">
+<h3><a class="toc-backref" href="#id87">Set command</a><a class="headerlink" href="#id44" title="Permalink to this heading"></a></h3>
+<p>The set command allows you to create a UDP/DTLS client and connect to a server.</p>
+<section id="id45">
+<h4>Syntax<a class="headerlink" href="#id45" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#XUDPCLI=&lt;op&gt;[,&lt;url&gt;,&lt;port&gt;[,&lt;sec_tag&gt;]</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;op&gt;</span></code> parameter can accept one of the following values:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">0</span></code> - Disconnect.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">1</span></code> - Connect to the server for IP protocol family version 4.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">2</span></code> - Connect to the server for IP protocol family version 6.</p></li>
+</ul>
+</li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;url&gt;</span></code> parameter is a string.
+It indicates the hostname or the IP address to connect to.
+Its maximum size can be 128 bytes.
+When the parameter is an IP address, it supports both IPv4 and IPv6.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;port&gt;</span></code> parameter is an unsigned 16-bit integer (0 - 65535).
+It represents the UDP/DTLS service port on the remote server.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;sec_tag&gt;</span></code> parameter is an integer.
+If it is given, a DTLS client will be started.
+It indicates to the modem the credential of the security tag used for establishing a secure connection.</p></li>
+</ul>
+</section>
+<section id="id46">
+<h4>Response syntax<a class="headerlink" href="#id46" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#XUDPCLI: &lt;handle&gt;,&quot;connected&quot;</span>
+
+<span class="c1">#XUDPCLI: &lt;handle&gt;,&quot;not connected&quot;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;handle&gt;</span></code> value is an integer.
+When positive, it indicates the handle of the successfully opened socket.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;error&gt;</span></code> value is an integer.
+It represents the error value according to the standard POSIX <em>errno</em>.</p></li>
+</ul>
+</section>
+<section id="id47">
+<h4>Examples<a class="headerlink" href="#id47" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AT</span><span class="c1">#XUDPCLI=1,&quot;remote.host&quot;,2442</span>
+<span class="c1">#XUDPCLI: 2,&quot;connected&quot;</span>
+<span class="n">OK</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id48">
+<h3><a class="toc-backref" href="#id88">Read command</a><a class="headerlink" href="#id48" title="Permalink to this heading"></a></h3>
+<p>The read command allows you to check the current value of the subparameters.</p>
+<section id="id49">
+<h4>Syntax<a class="headerlink" href="#id49" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#XUDPCLI?</span>
+</pre></div>
+</div>
+</section>
+<section id="id50">
+<h4>Response syntax<a class="headerlink" href="#id50" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#XUDPCLI: &lt;handle&gt;,&lt;family&gt;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;handle&gt;</span></code> value is an integer.
+When positive, it indicates the handle of the successfully opened socket.
+When negative, it indicates that it failed to open.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;family&gt;</span></code> value is an integer.</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">1</span></code> - IP protocol family version 4.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">2</span></code> - IP protocol family version 6.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="id51">
+<h3><a class="toc-backref" href="#id89">Test command</a><a class="headerlink" href="#id51" title="Permalink to this heading"></a></h3>
+<p>The test command tests the existence of the command and provides information about the type of its subparameters.</p>
+<section id="id52">
+<h4>Syntax<a class="headerlink" href="#id52" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#XUDPCLI: (op list),&lt;url&gt;,&lt;port&gt;,&lt;sec_tag&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="id53">
+<h4>Examples<a class="headerlink" href="#id53" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AT</span><span class="c1">#XUDPCLI=?</span>
+<span class="c1">#XUDPCLI: (0,1,2),&lt;url&gt;,&lt;port&gt;,&lt;sec_tag&gt;</span>
+<span class="n">OK</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="udp-send-data-xudpsend">
+<h2><a class="toc-backref" href="#id90">UDP send data #XUDPSEND</a><a class="headerlink" href="#udp-send-data-xudpsend" title="Permalink to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">#XUDPSEND</span></code> command allows you to send data over the connection.</p>
+<section id="id54">
+<h3><a class="toc-backref" href="#id91">Set command</a><a class="headerlink" href="#id54" title="Permalink to this heading"></a></h3>
+<p>The set command allows you to send data over the connection.</p>
+<section id="id55">
+<h4>Syntax<a class="headerlink" href="#id55" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#XUDPSEND=&lt;data&gt;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;data&gt;</span></code> parameter is a string that contains the data to be sent.
+The maximum size of the data is 1024 bytes.
+When the parameter is not specified, SLM enters <code class="docutils literal notranslate"><span class="pre">slm_data_mode</span></code>.</p></li>
+</ul>
+</section>
+<section id="id56">
+<h4>Response syntax<a class="headerlink" href="#id56" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#XUDPSEND: &lt;size&gt;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;size&gt;</span></code> value is an integer.
+It indicates the actual number of bytes sent.</p></li>
+</ul>
+</section>
+<section id="id57">
+<h4>Examples<a class="headerlink" href="#id57" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AT</span><span class="c1">#XUDPSEND=&quot;Test UDP by hostname&quot;</span>
+<span class="c1">#XUDPSEND: 20</span>
+<span class="n">OK</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id58">
+<h3><a class="toc-backref" href="#id92">Read command</a><a class="headerlink" href="#id58" title="Permalink to this heading"></a></h3>
+<p>The read command is not supported.</p>
+</section>
+<section id="id59">
+<h3><a class="toc-backref" href="#id93">Test command</a><a class="headerlink" href="#id59" title="Permalink to this heading"></a></h3>
+<p>The test command is not supported.</p>
+</section>
+</section>
+<section id="udp-receive-data">
+<h2><a class="toc-backref" href="#id94">UDP receive data</a><a class="headerlink" href="#udp-receive-data" title="Permalink to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">data</span><span class="o">&gt;</span>
+<span class="c1">#XUDPDATA: &lt;size&gt;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;data&gt;</span></code> parameter is a string that contains the data received.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;size&gt;</span></code> parameter is the size of the string, which is present only when SLM is not operating in <code class="docutils literal notranslate"><span class="pre">slm_data_mode</span></code>.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="ICMP_AT_commands.html" class="btn btn-neutral float-right" title="ICMP AT commands" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="SOCKET_AT_commands.html" class="btn btn-neutral" title="Socket AT commands" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

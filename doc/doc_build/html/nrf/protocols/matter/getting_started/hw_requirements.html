@@ -1,0 +1,2433 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Matter hardware and memory requirements &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script src="../../../_static/tabs.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../../_static/js/ncs.js"
+></script>
+<script src="../../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Testing Matter in the nRF Connect SDK" href="testing/index.html" />
+    <link rel="prev" title="Getting started with Matter" href="index.html" />
+<link
+  href="../../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../protocols.html">Protocols</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../ble/index.html">Bluetooth LE Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../bt_mesh/index.html">Bluetooth mesh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../esb/index.html">Enhanced ShockBurst (ESB)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gazell/index.html">Gazell</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Matter</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../overview/index.html">Matter overview</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Getting started with Matter</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Matter hardware and memory requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="testing/index.html">Testing Matter in the nRF Connect SDK</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tools.html">Matter tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="kconfig.html">Enabling Matter in Kconfig</a></li>
+<li class="toctree-l4"><a class="reference internal" href="advanced_kconfigs.html">Advanced Matter Kconfig options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="low_power_configuration.html">Reducing power consumption in Matter applications</a></li>
+<li class="toctree-l4"><a class="reference internal" href="transmission_power.html">Configuring transmission power</a></li>
+<li class="toctree-l4"><a class="reference internal" href="adding_clusters.html">Adding clusters to Matter application</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ecosystem_compatibility_testing.html">Testing with commercial Matter ecosystems</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../end_product/index.html">How to create Matter end product</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../multiprotocol/index.html">Multiprotocol support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nfc/index.html">Near Field Communication (NFC)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../thread/index.html">Thread</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../wifi/index.html">Wi-Fi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../zigbee/index.html">Zigbee</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../drivers.html">Drivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../protocols.html">Protocols</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Matter</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Getting started with Matter</a></li>
+      <li class="breadcrumb-item active">Matter hardware and memory requirements</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/protocols/matter/getting_started/hw_requirements.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="matter-hardware-and-memory-requirements">
+<span id="ug-matter-hw-requirements"></span><h1>Matter hardware and memory requirements<a class="headerlink" href="#matter-hardware-and-memory-requirements" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#supported-socs" id="id6">Supported SoCs</a></p>
+<ul>
+<li><p><a class="reference internal" href="#front-end-modules" id="id7">Front-End Modules</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#external-flash" id="id8">External flash</a></p></li>
+<li><p><a class="reference internal" href="#ram-and-flash-memory-requirements" id="id9">RAM and flash memory requirements</a></p></li>
+<li><p><a class="reference internal" href="#reference-matter-memory-layouts" id="id10">Reference Matter memory layouts</a></p></li>
+</ul>
+</div>
+<p>Hardware that runs Matter protocol applications must meet specification requirements, including providing the right amount of flash memory and being able to run Bluetooth LE and Thread concurrently.</p>
+<section id="supported-socs">
+<span id="ug-matter-hw-requirements-socs"></span><h2><a class="toc-backref" href="#id6">Supported SoCs</a><a class="headerlink" href="#supported-socs" title="Permalink to this heading"></a></h2>
+<p>Currently the following SoCs from Nordic Semiconductor are supported for use with the Matter protocol:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../../app_dev/board_support/index.html#gs-programming-board-names"><span class="std std-ref">nRF5340</span></a> (Matter over Thread and Matter over Wi-Fi through the <code class="docutils literal notranslate"><span class="pre">nrf7002_ek</span></code> shield)</p></li>
+<li><p><a class="reference internal" href="../../../app_dev/board_support/index.html#gs-programming-board-names"><span class="std std-ref">nRF5340 + nRF7002</span></a> (Matter over Thread and Matter over Wi-Fi)</p></li>
+<li><p><a class="reference internal" href="../../../app_dev/board_support/index.html#gs-programming-board-names"><span class="std std-ref">nRF52840</span></a> (Matter over Thread)</p></li>
+</ul>
+<section id="front-end-modules">
+<h3><a class="toc-backref" href="#id7">Front-End Modules</a><a class="headerlink" href="#front-end-modules" title="Permalink to this heading"></a></h3>
+<p>SoCs from Nordic Semiconductor that can run the Matter protocol over Thread can also work with external Front-End Modules.
+For more information about the FEM support in the nRF Connect SDK, see <a class="reference internal" href="../../../app_dev/working_with_fem/index.html#ug-radio-fem"><span class="std std-ref">Working with RF front-end modules</span></a> and <a class="reference internal" href="../../../app_dev/board_support/index.html#gs-programming-board-names"><span class="std std-ref">nRF21540 DK</span></a>.</p>
+</section>
+</section>
+<section id="external-flash">
+<span id="ug-matter-hw-requirements-external-flash"></span><h2><a class="toc-backref" href="#id8">External flash</a><a class="headerlink" href="#external-flash" title="Permalink to this heading"></a></h2>
+<p>For the currently supported SoCs, you must use an external memory with at least 1 MB of flash for nRF52840 and 1.5MB for nRF5340.
+This is required to perform the DFU operation.</p>
+<p>The development kits for the supported SoCs from Nordic Semiconductor are supplied with the MX25R64 type of external flash that meets these memory requirements.
+However, it is possible to configure the SoCs with different QSPI or SPI memory if it is supported by Zephyr.
+For this purpose, check the reference design for Nordic DKs for information about how to connect the external memory with SoC, specifically whether the pins are designed for the QSPI or the high-speed SPIM operations.</p>
+</section>
+<section id="ram-and-flash-memory-requirements">
+<span id="ug-matter-hw-requirements-ram-flash"></span><h2><a class="toc-backref" href="#id9">RAM and flash memory requirements</a><a class="headerlink" href="#ram-and-flash-memory-requirements" title="Permalink to this heading"></a></h2>
+<p>RAM and flash memory requirement values differ depending on the DK and the programmed sample.</p>
+<p>The following tables list memory requirement values for Matter samples.</p>
+<p>Values are provided in kilobytes (KB).</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">nRF52840 DK</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">nRF5340 DK</button><button aria-controls="panel-0-0-2" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-2" name="0-2" role="tab" tabindex="-1">Nordic Thingy:53</button><button aria-controls="panel-0-0-3" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-3" name="0-3" role="tab" tabindex="-1">nRF7002 DK</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><p>The following table lists memory requirements for samples running on the <a class="reference internal" href="../../../app_dev/board_support/index.html#gs-programming-board-names"><span class="std std-ref">nRF52840 DK</span></a> (<span class="xref std std-ref">nrf52840dk_nrf52840</span>).</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 48%" />
+<col style="width: 9%" />
+<col style="width: 11%" />
+<col style="width: 9%" />
+<col style="width: 7%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Sample</p></th>
+<th class="head"><p>MCUBoot ROM</p></th>
+<th class="head"><p>Application ROM</p></th>
+<th class="head"><p>Factory data</p></th>
+<th class="head"><p>Settings</p></th>
+<th class="head"><p>Total ROM</p></th>
+<th class="head"><p>Total RAM</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../samples/matter/light_bulb/README.html#matter-light-bulb-sample"><span class="std std-ref">Light Bulb</span></a> (Debug)</p></td>
+<td><p>28</p></td>
+<td><p>895</p></td>
+<td><p>4</p></td>
+<td><p>16</p></td>
+<td><p>943</p></td>
+<td><p>233</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../samples/matter/light_bulb/README.html#matter-light-bulb-sample"><span class="std std-ref">Light Bulb</span></a> (Debug with Amazon FFS)</p></td>
+<td><p>28</p></td>
+<td><p>897</p></td>
+<td><p>4</p></td>
+<td><p>16</p></td>
+<td><p>945</p></td>
+<td><p>233</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../samples/matter/light_bulb/README.html#matter-light-bulb-sample"><span class="std std-ref">Light Bulb</span></a> (Release)</p></td>
+<td><p>28</p></td>
+<td><p>723</p></td>
+<td><p>4</p></td>
+<td><p>16</p></td>
+<td><p>771</p></td>
+<td><p>224</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../samples/matter/light_bulb/README.html#matter-light-bulb-sample"><span class="std std-ref">Light Bulb</span></a> (Debug with DFU over SMP)</p></td>
+<td><p>28</p></td>
+<td><p>905</p></td>
+<td><p>4</p></td>
+<td><p>16</p></td>
+<td><p>953</p></td>
+<td><p>247</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../samples/matter/light_switch/README.html#matter-light-switch-sample"><span class="std std-ref">Light Switch</span></a> (Debug)</p></td>
+<td><p>28</p></td>
+<td><p>841</p></td>
+<td><p>4</p></td>
+<td><p>16</p></td>
+<td><p>889</p></td>
+<td><p>224</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../samples/matter/light_switch/README.html#matter-light-switch-sample"><span class="std std-ref">Light Switch</span></a> (Release)</p></td>
+<td><p>28</p></td>
+<td><p>679</p></td>
+<td><p>4</p></td>
+<td><p>16</p></td>
+<td><p>727</p></td>
+<td><p>214</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../samples/matter/light_switch/README.html#matter-light-switch-sample"><span class="std std-ref">Light Switch</span></a> (Debug with DFU over SMP)</p></td>
+<td><p>28</p></td>
+<td><p>851</p></td>
+<td><p>4</p></td>
+<td><p>16</p></td>
+<td><p>899</p></td>
+<td><p>239</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../samples/matter/lock/README.html#matter-lock-sample"><span class="std std-ref">Lock</span></a> (Debug)</p></td>
+<td><p>28</p></td>
+<td><p>860</p></td>
+<td><p>4</p></td>
+<td><p>16</p></td>
+<td><p>908</p></td>
+<td><p>224</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../samples/matter/lock/README.html#matter-lock-sample"><span class="std std-ref">Lock</span></a> (Release)</p></td>
+<td><p>28</p></td>
+<td><p>680</p></td>
+<td><p>4</p></td>
+<td><p>16</p></td>
+<td><p>728</p></td>
+<td><p>215</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../samples/matter/lock/README.html#matter-lock-sample"><span class="std std-ref">Lock</span></a> (Debug with DFU over SMP)</p></td>
+<td><p>28</p></td>
+<td><p>870</p></td>
+<td><p>4</p></td>
+<td><p>16</p></td>
+<td><p>918</p></td>
+<td><p>238</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../samples/matter/template/README.html#matter-template-sample"><span class="std std-ref">Template</span></a> (Debug)</p></td>
+<td><p>28</p></td>
+<td><p>812</p></td>
+<td><p>4</p></td>
+<td><p>16</p></td>
+<td><p>860</p></td>
+<td><p>222</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../samples/matter/template/README.html#matter-template-sample"><span class="std std-ref">Template</span></a> (Release)</p></td>
+<td><p>28</p></td>
+<td><p>657</p></td>
+<td><p>4</p></td>
+<td><p>16</p></td>
+<td><p>705</p></td>
+<td><p>213</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../samples/matter/window_covering/README.html#matter-window-covering-sample"><span class="std std-ref">Window Covering</span></a> (Debug)</p></td>
+<td><p>28</p></td>
+<td><p>834</p></td>
+<td><p>4</p></td>
+<td><p>16</p></td>
+<td><p>882</p></td>
+<td><p>223</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../samples/matter/window_covering/README.html#matter-window-covering-sample"><span class="std std-ref">Window Covering</span></a> (Release)</p></td>
+<td><p>28</p></td>
+<td><p>672</p></td>
+<td><p>4</p></td>
+<td><p>16</p></td>
+<td><p>720</p></td>
+<td><p>214</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../samples/matter/window_covering/README.html#matter-window-covering-sample"><span class="std std-ref">Window Covering</span></a> (Debug with DFU over SMP)</p></td>
+<td><p>28</p></td>
+<td><p>844</p></td>
+<td><p>4</p></td>
+<td><p>16</p></td>
+<td><p>892</p></td>
+<td><p>237</p></td>
+</tr>
+</tbody>
+</table>
+</div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><p>The following table lists memory requirements for samples running on the <a class="reference internal" href="../../../app_dev/board_support/index.html#gs-programming-board-names"><span class="std std-ref">nRF5340 DK</span></a> (<span class="xref std std-ref">nrf5340dk_nrf5340_cpuapp</span>).</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 48%" />
+<col style="width: 9%" />
+<col style="width: 11%" />
+<col style="width: 9%" />
+<col style="width: 7%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Sample</p></th>
+<th class="head"><p>MCUBoot ROM</p></th>
+<th class="head"><p>Application ROM</p></th>
+<th class="head"><p>Factory data</p></th>
+<th class="head"><p>Settings</p></th>
+<th class="head"><p>Total ROM</p></th>
+<th class="head"><p>Total RAM</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../samples/matter/light_bulb/README.html#matter-light-bulb-sample"><span class="std std-ref">Light Bulb</span></a> (Debug)</p></td>
+<td><p>32</p></td>
+<td><p>807</p></td>
+<td><p>4</p></td>
+<td><p>16</p></td>
+<td><p>859</p></td>
+<td><p>233</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../samples/matter/light_bulb/README.html#matter-light-bulb-sample"><span class="std std-ref">Light Bulb</span></a> (Debug with Amazon FFS)</p></td>
+<td><p>32</p></td>
+<td><p>809</p></td>
+<td><p>4</p></td>
+<td><p>16</p></td>
+<td><p>861</p></td>
+<td><p>233</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../samples/matter/light_bulb/README.html#matter-light-bulb-sample"><span class="std std-ref">Light Bulb</span></a> (Release)</p></td>
+<td><p>32</p></td>
+<td><p>635</p></td>
+<td><p>4</p></td>
+<td><p>16</p></td>
+<td><p>687</p></td>
+<td><p>224</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../samples/matter/light_bulb/README.html#matter-light-bulb-sample"><span class="std std-ref">Light Bulb</span></a> (Debug with DFU over SMP)</p></td>
+<td><p>32</p></td>
+<td><p>817</p></td>
+<td><p>4</p></td>
+<td><p>16</p></td>
+<td><p>869</p></td>
+<td><p>247</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../samples/matter/light_switch/README.html#matter-light-switch-sample"><span class="std std-ref">Light Switch</span></a> (Debug)</p></td>
+<td><p>32</p></td>
+<td><p>753</p></td>
+<td><p>4</p></td>
+<td><p>16</p></td>
+<td><p>805</p></td>
+<td><p>224</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../samples/matter/light_switch/README.html#matter-light-switch-sample"><span class="std std-ref">Light Switch</span></a> (Release)</p></td>
+<td><p>32</p></td>
+<td><p>590</p></td>
+<td><p>4</p></td>
+<td><p>16</p></td>
+<td><p>642</p></td>
+<td><p>214</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../samples/matter/light_switch/README.html#matter-light-switch-sample"><span class="std std-ref">Light Switch</span></a> (Debug with DFU over SMP)</p></td>
+<td><p>32</p></td>
+<td><p>763</p></td>
+<td><p>4</p></td>
+<td><p>16</p></td>
+<td><p>815</p></td>
+<td><p>238</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../samples/matter/lock/README.html#matter-lock-sample"><span class="std std-ref">Lock</span></a> (Debug)</p></td>
+<td><p>32</p></td>
+<td><p>772</p></td>
+<td><p>4</p></td>
+<td><p>16</p></td>
+<td><p>824</p></td>
+<td><p>224</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../samples/matter/lock/README.html#matter-lock-sample"><span class="std std-ref">Lock</span></a> (Release)</p></td>
+<td><p>32</p></td>
+<td><p>592</p></td>
+<td><p>4</p></td>
+<td><p>16</p></td>
+<td><p>644</p></td>
+<td><p>215</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../samples/matter/lock/README.html#matter-lock-sample"><span class="std std-ref">Lock</span></a> (Debug with DFU over SMP)</p></td>
+<td><p>32</p></td>
+<td><p>782</p></td>
+<td><p>4</p></td>
+<td><p>16</p></td>
+<td><p>834</p></td>
+<td><p>238</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../samples/matter/template/README.html#matter-template-sample"><span class="std std-ref">Template</span></a> (Debug)</p></td>
+<td><p>32</p></td>
+<td><p>725</p></td>
+<td><p>4</p></td>
+<td><p>16</p></td>
+<td><p>777</p></td>
+<td><p>223</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../samples/matter/template/README.html#matter-template-sample"><span class="std std-ref">Template</span></a> (Release)</p></td>
+<td><p>32</p></td>
+<td><p>569</p></td>
+<td><p>4</p></td>
+<td><p>16</p></td>
+<td><p>621</p></td>
+<td><p>213</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../samples/matter/window_covering/README.html#matter-window-covering-sample"><span class="std std-ref">Window Covering</span></a> (Debug)</p></td>
+<td><p>32</p></td>
+<td><p>746</p></td>
+<td><p>4</p></td>
+<td><p>16</p></td>
+<td><p>798</p></td>
+<td><p>223</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../samples/matter/window_covering/README.html#matter-window-covering-sample"><span class="std std-ref">Window Covering</span></a> (Release)</p></td>
+<td><p>32</p></td>
+<td><p>584</p></td>
+<td><p>4</p></td>
+<td><p>16</p></td>
+<td><p>636</p></td>
+<td><p>214</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../samples/matter/window_covering/README.html#matter-window-covering-sample"><span class="std std-ref">Window Covering</span></a> (Debug with DFU over SMP)</p></td>
+<td><p>32</p></td>
+<td><p>756</p></td>
+<td><p>4</p></td>
+<td><p>16</p></td>
+<td><p>808</p></td>
+<td><p>237</p></td>
+</tr>
+</tbody>
+</table>
+</div><div aria-labelledby="tab-0-0-2" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-2" name="0-2" role="tabpanel" tabindex="0"><p>The following table lists memory requirements for samples running on the <a class="reference internal" href="../../../app_dev/board_support/index.html#gs-programming-board-names"><span class="std std-ref">Thingy:53</span></a> (<span class="xref std std-ref">thingy53_nrf5340</span>).</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 9%" />
+<col style="width: 11%" />
+<col style="width: 9%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Sample</p></th>
+<th class="head"><p>MCUBoot ROM</p></th>
+<th class="head"><p>Application ROM</p></th>
+<th class="head"><p>Factory data</p></th>
+<th class="head"><p>Settings</p></th>
+<th class="head"><p>Total ROM</p></th>
+<th class="head"><p>Total RAM</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../applications/matter_weather_station/README.html#matter-weather-station-app"><span class="std std-ref">Weather Station</span></a> (Debug)</p></td>
+<td><p>64</p></td>
+<td><p>800</p></td>
+<td><p>0</p></td>
+<td><p>64</p></td>
+<td><p>928</p></td>
+<td><p>260</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../applications/matter_weather_station/README.html#matter-weather-station-app"><span class="std std-ref">Weather Station</span></a> (Factory Data partition supported)</p></td>
+<td><p>64</p></td>
+<td><p>801</p></td>
+<td><p>4</p></td>
+<td><p>60</p></td>
+<td><p>929</p></td>
+<td><p>260</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../applications/matter_weather_station/README.html#matter-weather-station-app"><span class="std std-ref">Weather Station</span></a> (Release)</p></td>
+<td><p>64</p></td>
+<td><p>598</p></td>
+<td><p>0</p></td>
+<td><p>64</p></td>
+<td><p>726</p></td>
+<td><p>226</p></td>
+</tr>
+</tbody>
+</table>
+</div><div aria-labelledby="tab-0-0-3" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-3" name="0-3" role="tabpanel" tabindex="0"><p>The following table lists memory requirements for samples running on the <a class="reference internal" href="../../../app_dev/board_support/index.html#gs-programming-board-names"><span class="std std-ref">nRF7002 DK</span></a> (<a class="reference internal" href="../../../working_with_nrf/nrf70/gs.html#nrf7002dk-nrf5340"><span class="std std-ref">nrf7002dk_nrf5340_cpuapp</span></a>).</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 45%" />
+<col style="width: 9%" />
+<col style="width: 12%" />
+<col style="width: 10%" />
+<col style="width: 7%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Sample</p></th>
+<th class="head"><p>MCUBoot ROM</p></th>
+<th class="head"><p>Application ROM</p></th>
+<th class="head"><p>Factory data</p></th>
+<th class="head"><p>Settings</p></th>
+<th class="head"><p>Total ROM</p></th>
+<th class="head"><p>Total RAM</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../samples/matter/light_bulb/README.html#matter-light-bulb-sample"><span class="std std-ref">Light Bulb</span></a> (Debug)</p></td>
+<td><p>48</p></td>
+<td><p>901</p></td>
+<td><p>4</p></td>
+<td><p>16</p></td>
+<td><p>969</p></td>
+<td><p>413</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../samples/matter/light_bulb/README.html#matter-light-bulb-sample"><span class="std std-ref">Light Bulb</span></a> (Release)</p></td>
+<td><p>48</p></td>
+<td><p>726</p></td>
+<td><p>4</p></td>
+<td><p>16</p></td>
+<td><p>794</p></td>
+<td><p>404</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../samples/matter/light_switch/README.html#matter-light-switch-sample"><span class="std std-ref">Light Switch</span></a> (Debug for nRF7002 DK)</p></td>
+<td><p>48</p></td>
+<td><p>901</p></td>
+<td><p>4</p></td>
+<td><p>16</p></td>
+<td><p>969</p></td>
+<td><p>414</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../samples/matter/light_switch/README.html#matter-light-switch-sample"><span class="std std-ref">Light Switch</span></a> (Release)</p></td>
+<td><p>48</p></td>
+<td><p>728</p></td>
+<td><p>4</p></td>
+<td><p>16</p></td>
+<td><p>796</p></td>
+<td><p>404</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../samples/matter/lock/README.html#matter-lock-sample"><span class="std std-ref">Lock</span></a> (Debug)</p></td>
+<td><p>48</p></td>
+<td><p>920</p></td>
+<td><p>4</p></td>
+<td><p>16</p></td>
+<td><p>988</p></td>
+<td><p>414</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../samples/matter/lock/README.html#matter-lock-sample"><span class="std std-ref">Lock</span></a> (Release)</p></td>
+<td><p>48</p></td>
+<td><p>730</p></td>
+<td><p>4</p></td>
+<td><p>16</p></td>
+<td><p>798</p></td>
+<td><p>405</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../samples/matter/lock/README.html#matter-lock-sample"><span class="std std-ref">Lock</span></a> (Debug with DFU over SMP)</p></td>
+<td><p>48</p></td>
+<td><p>929</p></td>
+<td><p>4</p></td>
+<td><p>16</p></td>
+<td><p>997</p></td>
+<td><p>426</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../samples/matter/template/README.html#matter-template-sample"><span class="std std-ref">Template</span></a> (Debug for nRF7002 DK)</p></td>
+<td><p>48</p></td>
+<td><p>871</p></td>
+<td><p>4</p></td>
+<td><p>16</p></td>
+<td><p>939</p></td>
+<td><p>412</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../samples/matter/template/README.html#matter-template-sample"><span class="std std-ref">Template</span></a> (Release)</p></td>
+<td><p>48</p></td>
+<td><p>706</p></td>
+<td><p>4</p></td>
+<td><p>16</p></td>
+<td><p>774</p></td>
+<td><p>403</p></td>
+</tr>
+</tbody>
+</table>
+</div></div>
+</section>
+<section id="reference-matter-memory-layouts">
+<span id="ug-matter-hw-requirements-layouts"></span><h2><a class="toc-backref" href="#id10">Reference Matter memory layouts</a><a class="headerlink" href="#reference-matter-memory-layouts" title="Permalink to this heading"></a></h2>
+<p>The following sections show how the <a class="reference internal" href="../overview/integration.html#ug-matter-overview-architecture-integration-stack"><span class="std std-ref">Matter stack architecture in the nRF Connect SDK</span></a> translates to actual memory maps for each of the available <a class="reference internal" href="../overview/integration.html#ug-matter-overview-architecture-integration-designs"><span class="std std-ref">Matter platform designs (System-on-Chip, multiprotocol)</span></a>.
+The memory values match <a class="reference internal" href="#ram-and-flash-memory-requirements">RAM and flash memory requirements</a> listed above.</p>
+<p>The following tabs show the memory maps for the development kits supported by the Matter protocol, including two memory maps for the <a class="reference internal" href="../../../applications/matter_weather_station/README.html#matter-weather-station-app"><span class="std std-ref">Thingy:53: Matter weather station</span></a>, which uses Nordic Thingy:53.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-1-1-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-1-1-0" name="1-0" role="tab" tabindex="0">nRF52840 DK</button><button aria-controls="panel-1-1-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-1-1-1" name="1-1" role="tab" tabindex="-1">nRF5340 DK</button><button aria-controls="panel-1-1-2" aria-selected="false" class="sphinx-tabs-tab" id="tab-1-1-2" name="1-2" role="tab" tabindex="-1">Nordic Thingy:53</button><button aria-controls="panel-1-1-3" aria-selected="false" class="sphinx-tabs-tab" id="tab-1-1-3" name="1-3" role="tab" tabindex="-1">Nordic Thingy:53 (factory data)</button><button aria-controls="panel-1-1-4" aria-selected="false" class="sphinx-tabs-tab" id="tab-1-1-4" name="1-4" role="tab" tabindex="-1">nRF7002 DK</button></div><div aria-labelledby="tab-1-1-0" class="sphinx-tabs-panel" id="panel-1-1-0" name="1-0" role="tabpanel" tabindex="0"><p>The following memory map is valid for Matter applications running on the <a class="reference internal" href="../../../app_dev/board_support/index.html#gs-programming-board-names"><span class="std std-ref">nRF52840 DK</span></a> (<span class="xref std std-ref">nrf52840dk_nrf52840</span>).</p>
+<dl>
+<dt>Internal flash (size: 0x100000 = 1024kB)</dt><dd><table class="docutils align-default">
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 15%" />
+<col style="width: 14%" />
+<col style="width: 15%" />
+<col style="width: 12%" />
+<col style="width: 14%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Partition</p></th>
+<th class="head"><p>Offset</p></th>
+<th class="head"><p>Size</p></th>
+<th class="head"><p>Partition elements</p></th>
+<th class="head"><p>Element offset</p></th>
+<th class="head"><p>Element size</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Bootloader (mcuboot)</p></td>
+<td><p>0kB (0x0)</p></td>
+<td><p>28kB (0x7000)</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td rowspan="2"><p>Application (mcuboot_primary)</p></td>
+<td rowspan="2"><p>28kB (0x7000)</p></td>
+<td rowspan="2"><p>976kB (0xf4000)</p></td>
+<td><p>mcuboot_pad</p></td>
+<td><p>28kB (0x7000)</p></td>
+<td><p>512B (0x200)</p></td>
+</tr>
+<tr class="row-even"><td><p>mcuboot_primary_app</p></td>
+<td><p>28.5kB (0x7200)</p></td>
+<td><p>975.5kB (0xf3e00)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Factory data (factory_data)</p></td>
+<td><p>1004kB (0xfb000)</p></td>
+<td><p>4kB (0x1000)</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><p>Non-volatile storage (settings_storage)</p></td>
+<td><p>1008kB (0xfc000)</p></td>
+<td><p>16kB (0x4000)</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt>SRAM primary (size: 0x40000 = 256kB)</dt><dd><p>SRAM is located at the address <code class="docutils literal notranslate"><span class="pre">0x20000000</span></code> in the memory address space of the application.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 16%" />
+<col style="width: 14%" />
+<col style="width: 15%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Partition</p></th>
+<th class="head"><p>Offset</p></th>
+<th class="head"><p>Size</p></th>
+<th class="head"><p>Partition elements</p></th>
+<th class="head"><p>Element offset</p></th>
+<th class="head"><p>Element size</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Static RAM (sram_primary)</p></td>
+<td><p>0kB (0x0)</p></td>
+<td><p>256kB (0x40000)</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt>External flash (size: 0x800000 = 8192kB)</dt><dd><table class="docutils align-default">
+<colgroup>
+<col style="width: 31%" />
+<col style="width: 12%" />
+<col style="width: 15%" />
+<col style="width: 16%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Partition</p></th>
+<th class="head"><p>Offset</p></th>
+<th class="head"><p>Size</p></th>
+<th class="head"><p>Partition elements</p></th>
+<th class="head"><p>Element offset</p></th>
+<th class="head"><p>Element size</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Application DFU (mcuboot_secondary)</p></td>
+<td><p>0kB (0x0)</p></td>
+<td><p>976kB (0xf4000)</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>Free space (external_flash)</p></td>
+<td><p>976kB (0xf4000)</p></td>
+<td><p>7216kB (0x70c000)</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</div><div aria-labelledby="tab-1-1-1" class="sphinx-tabs-panel" hidden="true" id="panel-1-1-1" name="1-1" role="tabpanel" tabindex="0"><p>The following memory map is valid for Matter applications running on the <a class="reference internal" href="../../../app_dev/board_support/index.html#gs-programming-board-names"><span class="std std-ref">nRF5340 DK</span></a> (<span class="xref std std-ref">nrf5340dk_nrf5340_cpuapp</span>).</p>
+<dl>
+<dt>Application core flash (size: 0x100000 = 1024kB)</dt><dd><table class="docutils align-default">
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 15%" />
+<col style="width: 14%" />
+<col style="width: 15%" />
+<col style="width: 12%" />
+<col style="width: 14%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Partition</p></th>
+<th class="head"><p>Offset</p></th>
+<th class="head"><p>Size</p></th>
+<th class="head"><p>Partition elements</p></th>
+<th class="head"><p>Element offset</p></th>
+<th class="head"><p>Element size</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>MCUboot bootloader (mcuboot)</p></td>
+<td><p>0kB (0x0)</p></td>
+<td><p>32kB (0x8000)</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td rowspan="2"><p>Application (mcuboot_primary)</p></td>
+<td rowspan="2"><p>32kB (0x8000)</p></td>
+<td rowspan="2"><p>972kB (0xf3000)</p></td>
+<td><p>mcuboot_pad</p></td>
+<td><p>32kB (0x8000)</p></td>
+<td><p>512B (0x200)</p></td>
+</tr>
+<tr class="row-even"><td><p>mcuboot_primary_app</p></td>
+<td><p>32.5kB (0x8200)</p></td>
+<td><p>971.5kB (0xf2e00)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Factory data (factory_data)</p></td>
+<td><p>1004kB (0xfb000)</p></td>
+<td><p>4kB (0x1000)</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><p>Non-volatile storage (settings_storage)</p></td>
+<td><p>1008kB (0xfc000)</p></td>
+<td><p>16kB (0x4000)</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt>Application core SRAM primary (size: 0x80000 = 512kB)</dt><dd><p>SRAM is located at the address <code class="docutils literal notranslate"><span class="pre">0x20000000</span></code> in the memory address space of the application.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 15%" />
+<col style="width: 13%" />
+<col style="width: 15%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Partition</p></th>
+<th class="head"><p>Offset</p></th>
+<th class="head"><p>Size</p></th>
+<th class="head"><p>Partition elements</p></th>
+<th class="head"><p>Element offset</p></th>
+<th class="head"><p>Element size</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../libraries/dfu/pcd.html#subsys-pcd"><span class="std std-ref">Peripheral CPU DFU (PCD)</span></a> (pcd_sram)</p></td>
+<td><p>0kB (0x0)</p></td>
+<td><p>8kB (0x2000)</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>Static RAM (sram_primary)</p></td>
+<td><p>8kB (0x2000)</p></td>
+<td><p>440kB (0x6e000)</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><p>Network core shared memory (rpmsg_nrf53_sram)</p></td>
+<td><p>448kB (0x70000)</p></td>
+<td><p>64kB (0x10000)</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt>External flash (size: 0x800000 = 8192kB)</dt><dd><table class="docutils align-default">
+<colgroup>
+<col style="width: 31%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 16%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Partition</p></th>
+<th class="head"><p>Offset</p></th>
+<th class="head"><p>Size</p></th>
+<th class="head"><p>Partition elements</p></th>
+<th class="head"><p>Element offset</p></th>
+<th class="head"><p>Element size</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Application DFU (mcuboot_secondary)</p></td>
+<td><p>0kB (0x0)</p></td>
+<td><p>972kB (0xf3000)</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>Network Core DFU (mcuboot_secondary_1)</p></td>
+<td><p>972kB (0xf3000)</p></td>
+<td><p>256kB (0x40000)</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><p>Free space (external_flash)</p></td>
+<td><p>1228kB (0x133000)</p></td>
+<td><p>6964kB (0x6cd000)</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt>Network core flash (size: 0x40000 = 256kB)</dt><dd><p>The network core flash is located at the address <code class="docutils literal notranslate"><span class="pre">0x1000000</span></code> in the memory address space of the application.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 37%" />
+<col style="width: 13%" />
+<col style="width: 12%" />
+<col style="width: 13%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Partition</p></th>
+<th class="head"><p>Offset</p></th>
+<th class="head"><p>Size</p></th>
+<th class="head"><p>Partition elements</p></th>
+<th class="head"><p>Element offset</p></th>
+<th class="head"><p>Element size</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td rowspan="2"><p><a class="reference internal" href="../../../samples/nrf5340/netboot/README.html#nc-bootloader"><span class="std std-ref">B0n bootloader</span></a> (b0n_container)</p></td>
+<td rowspan="2"><p>0kB (0x0)</p></td>
+<td rowspan="2"><p>34kB (0x8800)</p></td>
+<td><p>b0n</p></td>
+<td><p>0kB (0x0)</p></td>
+<td><p>33.375kB (0x8580)</p></td>
+</tr>
+<tr class="row-odd"><td><p>provision</p></td>
+<td><p>33.375kB (0x8580)</p></td>
+<td><p>640B (0x280)</p></td>
+</tr>
+<tr class="row-even"><td><p>Network application (app)</p></td>
+<td><p>34kB (0x8800)</p></td>
+<td><p>222kB (0x37800)</p></td>
+<td><p>multiprotocol_rpmsg</p></td>
+<td><p>34kB (0x8800)</p></td>
+<td><p>222kB (0x37800)</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt>Network core SRAM (size: 0x10000 = 64kB)</dt><dd><p>SRAM is located at the address <code class="docutils literal notranslate"><span class="pre">0x21000000</span></code> in the memory address space of the application.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 15%" />
+<col style="width: 14%" />
+<col style="width: 15%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Partition</p></th>
+<th class="head"><p>Offset</p></th>
+<th class="head"><p>Size</p></th>
+<th class="head"><p>Partition elements</p></th>
+<th class="head"><p>Element offset</p></th>
+<th class="head"><p>Element size</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Static RAM (sram_primary)</p></td>
+<td><p>0kB (0x0)</p></td>
+<td><p>64kB (0x10000)</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt>One-Time-Programmable region of UICR (size: 0x2fc = 764B)</dt><dd><p>OTP is located at the address <code class="docutils literal notranslate"><span class="pre">0xff8100</span></code> in the memory address space of the application.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 15%" />
+<col style="width: 14%" />
+<col style="width: 15%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Partition</p></th>
+<th class="head"><p>Offset</p></th>
+<th class="head"><p>Size</p></th>
+<th class="head"><p>Partition elements</p></th>
+<th class="head"><p>Element offset</p></th>
+<th class="head"><p>Element size</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>OTP Memory (otp)</p></td>
+<td><p>0kB (0x0)</p></td>
+<td><p>764B (0x2fc)</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</div><div aria-labelledby="tab-1-1-2" class="sphinx-tabs-panel" hidden="true" id="panel-1-1-2" name="1-2" role="tabpanel" tabindex="0"><p>The following memory map is valid for the <a class="reference internal" href="../../../applications/matter_weather_station/README.html#matter-weather-station-app"><span class="std std-ref">Matter weather station</span></a> application running on the <a class="reference internal" href="../../../app_dev/board_support/index.html#gs-programming-board-names"><span class="std std-ref">Thingy:53</span></a> (<span class="xref std std-ref">thingy53_nrf5340</span>).
+The values are valid for the <code class="docutils literal notranslate"><span class="pre">debug</span></code> and <code class="docutils literal notranslate"><span class="pre">release</span></code> build types.</p>
+<dl>
+<dt>Application core flash (size: 0x100000 = 1024kB)</dt><dd><table class="docutils align-default">
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 15%" />
+<col style="width: 14%" />
+<col style="width: 15%" />
+<col style="width: 12%" />
+<col style="width: 14%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Partition</p></th>
+<th class="head"><p>Offset</p></th>
+<th class="head"><p>Size</p></th>
+<th class="head"><p>Partition elements</p></th>
+<th class="head"><p>Element offset</p></th>
+<th class="head"><p>Element size</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>MCUboot bootloader (mcuboot)</p></td>
+<td><p>0kB (0x0)</p></td>
+<td><p>64kB (0x10000)</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td rowspan="2"><p>Application (mcuboot_primary)</p></td>
+<td rowspan="2"><p>64kB (0x10000)</p></td>
+<td rowspan="2"><p>896kB (0xe0000)</p></td>
+<td><p>mcuboot_pad</p></td>
+<td><p>64kB (0x10000)</p></td>
+<td><p>512B (0x200)</p></td>
+</tr>
+<tr class="row-even"><td><p>mcuboot_primary_app</p></td>
+<td><p>64.5kB (0x10200)</p></td>
+<td><p>895.5kB (0xdfe00)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Non-volatile storage (settings_storage)</p></td>
+<td><p>960kB (0xf0000)</p></td>
+<td><p>64kB (0x10000)</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt>Application core SRAM primary (size: 0x80000 = 512kB)</dt><dd><p>SRAM is located at the address <code class="docutils literal notranslate"><span class="pre">0x20000000</span></code> in the memory address space of the application.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 15%" />
+<col style="width: 13%" />
+<col style="width: 15%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Partition</p></th>
+<th class="head"><p>Offset</p></th>
+<th class="head"><p>Size</p></th>
+<th class="head"><p>Partition elements</p></th>
+<th class="head"><p>Element offset</p></th>
+<th class="head"><p>Element size</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../libraries/dfu/pcd.html#subsys-pcd"><span class="std std-ref">Peripheral CPU DFU (PCD)</span></a> (pcd_sram)</p></td>
+<td><p>0kB (0x0)</p></td>
+<td><p>8kB (0x2000)</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>Static RAM (sram_primary)</p></td>
+<td><p>8kB (0x2000)</p></td>
+<td><p>440kB (0x6e000)</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><p>Network core shared memory (rpmsg_nrf53_sram)</p></td>
+<td><p>448kB (0x70000)</p></td>
+<td><p>64kB (0x10000)</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt>External flash (size: 0x800000 = 8192kB)</dt><dd><table class="docutils align-default">
+<colgroup>
+<col style="width: 31%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 16%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Partition</p></th>
+<th class="head"><p>Offset</p></th>
+<th class="head"><p>Size</p></th>
+<th class="head"><p>Partition elements</p></th>
+<th class="head"><p>Element offset</p></th>
+<th class="head"><p>Element size</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Application DFU (mcuboot_secondary)</p></td>
+<td><p>0kB (0x0)</p></td>
+<td><p>896kB (0xe0000)</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>Network Core DFU (mcuboot_secondary_1)</p></td>
+<td><p>896kB (0xe0000)</p></td>
+<td><p>256kB (0x40000)</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><p>Free space (external_flash)</p></td>
+<td><p>1152kB (0x120000)</p></td>
+<td><p>7040kB (0x6e0000)</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt>Network core flash (size: 0x40000 = 256kB)</dt><dd><p>The network core flash is located at the address <code class="docutils literal notranslate"><span class="pre">0x1000000</span></code> in the memory address space of the application.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 37%" />
+<col style="width: 14%" />
+<col style="width: 12%" />
+<col style="width: 14%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Partition</p></th>
+<th class="head"><p>Offset</p></th>
+<th class="head"><p>Size</p></th>
+<th class="head"><p>Partition elements</p></th>
+<th class="head"><p>Element offset</p></th>
+<th class="head"><p>Element size</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td rowspan="2"><p><a class="reference internal" href="../../../samples/nrf5340/netboot/README.html#nc-bootloader"><span class="std std-ref">B0n bootloader</span></a> (b0n_container)</p></td>
+<td rowspan="2"><p>0kB (0x0)</p></td>
+<td rowspan="2"><p>34kB (0x8800)</p></td>
+<td><p>b0n</p></td>
+<td><p>0kB (0x0)</p></td>
+<td><p>33.375kB (0x8580)</p></td>
+</tr>
+<tr class="row-odd"><td><p>provision</p></td>
+<td><p>33.375kB (0x8580)</p></td>
+<td><p>640B (0x280)</p></td>
+</tr>
+<tr class="row-even"><td><p>Network application (app)</p></td>
+<td><p>34kB (0x8800)</p></td>
+<td><p>222kB (0x37800)</p></td>
+<td><p>multiprotocol_rpmsg</p></td>
+<td><p>34kB (0x8800)</p></td>
+<td><p>222kB (0x37800)</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt>Network core SRAM flash (size: 0x10000 = 64kB)</dt><dd><p>SRAM is located at the address <code class="docutils literal notranslate"><span class="pre">0x21000000</span></code> in the memory address space of the application.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 15%" />
+<col style="width: 14%" />
+<col style="width: 15%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Partition</p></th>
+<th class="head"><p>Offset</p></th>
+<th class="head"><p>Size</p></th>
+<th class="head"><p>Partition elements</p></th>
+<th class="head"><p>Element offset</p></th>
+<th class="head"><p>Element size</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Static RAM (sram_primary)</p></td>
+<td><p>0kB (0x0)</p></td>
+<td><p>64kB (0x10000)</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt>One-Time-Programmable region of UICR (size: 0x2fc = 764B)</dt><dd><p>OTP is located at the address <code class="docutils literal notranslate"><span class="pre">0xff8100</span></code> in the memory address space of the application.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 15%" />
+<col style="width: 14%" />
+<col style="width: 15%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Partition</p></th>
+<th class="head"><p>Offset</p></th>
+<th class="head"><p>Size</p></th>
+<th class="head"><p>Partition elements</p></th>
+<th class="head"><p>Element offset</p></th>
+<th class="head"><p>Element size</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>OTP Memory (otp)</p></td>
+<td><p>0kB (0x0)</p></td>
+<td><p>764B (0x2fc)</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</div><div aria-labelledby="tab-1-1-3" class="sphinx-tabs-panel" hidden="true" id="panel-1-1-3" name="1-3" role="tabpanel" tabindex="0"><p>The following memory map is valid for the <a class="reference internal" href="../../../applications/matter_weather_station/README.html#matter-weather-station-app"><span class="std std-ref">Matter weather station</span></a> application running on the <a class="reference internal" href="../../../app_dev/board_support/index.html#gs-programming-board-names"><span class="std std-ref">Thingy:53</span></a> (<span class="xref std std-ref">thingy53_nrf5340</span>).
+The values are valid for the <code class="docutils literal notranslate"><span class="pre">factory_data</span></code> build type.</p>
+<dl>
+<dt>Application core flash (size: 0x100000 = 1024kB)</dt><dd><table class="docutils align-default">
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 15%" />
+<col style="width: 14%" />
+<col style="width: 15%" />
+<col style="width: 12%" />
+<col style="width: 14%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Partition</p></th>
+<th class="head"><p>Offset</p></th>
+<th class="head"><p>Size</p></th>
+<th class="head"><p>Partition elements</p></th>
+<th class="head"><p>Element offset</p></th>
+<th class="head"><p>Element size</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>MCUboot bootloader (mcuboot)</p></td>
+<td><p>0kB (0x0)</p></td>
+<td><p>64kB (0x10000)</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td rowspan="2"><p>Application (mcuboot_primary)</p></td>
+<td rowspan="2"><p>64kB (0x10000)</p></td>
+<td rowspan="2"><p>896kB (0xe0000)</p></td>
+<td><p>mcuboot_pad</p></td>
+<td><p>64kB (0x10000)</p></td>
+<td><p>512B (0x200)</p></td>
+</tr>
+<tr class="row-even"><td><p>mcuboot_primary_app</p></td>
+<td><p>64.5kB (0x10200)</p></td>
+<td><p>895.5kB (0xdfe00)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Non-volatile storage (settings_storage)</p></td>
+<td><p>960kB (0xf0000)</p></td>
+<td><p>60kB (0xf000)</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><p>Factory data (factory_data)</p></td>
+<td><p>1020kB (0xff000)</p></td>
+<td><p>4kB (0x1000)</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt>Application core SRAM primary (size: 0x80000 = 512kB)</dt><dd><p>SRAM is located at the address <code class="docutils literal notranslate"><span class="pre">0x20000000</span></code> in the memory address space of the application.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 15%" />
+<col style="width: 13%" />
+<col style="width: 15%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Partition</p></th>
+<th class="head"><p>Offset</p></th>
+<th class="head"><p>Size</p></th>
+<th class="head"><p>Partition elements</p></th>
+<th class="head"><p>Element offset</p></th>
+<th class="head"><p>Element size</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../libraries/dfu/pcd.html#subsys-pcd"><span class="std std-ref">Peripheral CPU DFU (PCD)</span></a> (pcd_sram)</p></td>
+<td><p>0kB (0x0)</p></td>
+<td><p>8kB (0x2000)</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>Static RAM (sram_primary)</p></td>
+<td><p>8kB (0x2000)</p></td>
+<td><p>440kB (0x6e000)</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><p>Network core shared memory (rpmsg_nrf53_sram)</p></td>
+<td><p>448kB (0x70000)</p></td>
+<td><p>64kB (0x10000)</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt>External flash (size: 0x800000 = 8192kB)</dt><dd><table class="docutils align-default">
+<colgroup>
+<col style="width: 31%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 16%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Partition</p></th>
+<th class="head"><p>Offset</p></th>
+<th class="head"><p>Size</p></th>
+<th class="head"><p>Partition elements</p></th>
+<th class="head"><p>Element offset</p></th>
+<th class="head"><p>Element size</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Application DFU (mcuboot_secondary)</p></td>
+<td><p>0kB (0x0)</p></td>
+<td><p>896kB (0xe0000)</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>Network Core DFU (mcuboot_secondary_1)</p></td>
+<td><p>896kB (0xe0000)</p></td>
+<td><p>256kB (0x40000)</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><p>Free space (external_flash)</p></td>
+<td><p>1152kB (0x120000)</p></td>
+<td><p>7040kB (0x6e0000)</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt>Network core flash (size: 0x40000 = 256kB)</dt><dd><p>The network core flash is located at the address <code class="docutils literal notranslate"><span class="pre">0x1000000</span></code> in the memory address space of the application.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 37%" />
+<col style="width: 14%" />
+<col style="width: 12%" />
+<col style="width: 14%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Partition</p></th>
+<th class="head"><p>Offset</p></th>
+<th class="head"><p>Size</p></th>
+<th class="head"><p>Partition elements</p></th>
+<th class="head"><p>Element offset</p></th>
+<th class="head"><p>Element size</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td rowspan="2"><p><a class="reference internal" href="../../../samples/nrf5340/netboot/README.html#nc-bootloader"><span class="std std-ref">B0n bootloader</span></a> (b0n_container)</p></td>
+<td rowspan="2"><p>0kB (0x0)</p></td>
+<td rowspan="2"><p>34kB (0x8800)</p></td>
+<td><p>b0n</p></td>
+<td><p>0kB (0x0)</p></td>
+<td><p>33.375kB (0x8580)</p></td>
+</tr>
+<tr class="row-odd"><td><p>provision</p></td>
+<td><p>33.375kB (0x8580)</p></td>
+<td><p>640B (0x280)</p></td>
+</tr>
+<tr class="row-even"><td><p>Network application (app)</p></td>
+<td><p>34kB (0x8800)</p></td>
+<td><p>222kB (0x37800)</p></td>
+<td><p>multiprotocol_rpmsg</p></td>
+<td><p>34kB (0x8800)</p></td>
+<td><p>222kB (0x37800)</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt>Network core SRAM flash (size: 0x10000 = 64kB)</dt><dd><p>SRAM is located at the address <code class="docutils literal notranslate"><span class="pre">0x21000000</span></code> in the memory address space of the application.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 15%" />
+<col style="width: 14%" />
+<col style="width: 15%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Partition</p></th>
+<th class="head"><p>Offset</p></th>
+<th class="head"><p>Size</p></th>
+<th class="head"><p>Partition elements</p></th>
+<th class="head"><p>Element offset</p></th>
+<th class="head"><p>Element size</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Static RAM (sram_primary)</p></td>
+<td><p>0kB (0x0)</p></td>
+<td><p>64kB (0x10000)</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt>One-Time-Programmable region of UICR (size: 0x2fc = 764B)</dt><dd><p>OTP is located at the address <code class="docutils literal notranslate"><span class="pre">0xff8100</span></code> in the memory address space of the application.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 15%" />
+<col style="width: 14%" />
+<col style="width: 15%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Partition</p></th>
+<th class="head"><p>Offset</p></th>
+<th class="head"><p>Size</p></th>
+<th class="head"><p>Partition elements</p></th>
+<th class="head"><p>Element offset</p></th>
+<th class="head"><p>Element size</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>OTP Memory (otp)</p></td>
+<td><p>0kB (0x0)</p></td>
+<td><p>764B (0x2fc)</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</div><div aria-labelledby="tab-1-1-4" class="sphinx-tabs-panel" hidden="true" id="panel-1-1-4" name="1-4" role="tabpanel" tabindex="0"><p>The following memory map is valid for Matter applications running on the <a class="reference internal" href="../../../app_dev/board_support/index.html#gs-programming-board-names"><span class="std std-ref">nRF7002 DK</span></a> (<a class="reference internal" href="../../../working_with_nrf/nrf70/gs.html#nrf7002dk-nrf5340"><span class="std std-ref">nrf7002dk_nrf5340</span></a>).</p>
+<dl>
+<dt>Application core flash (size: 0x100000 = 1024kB)</dt><dd><table class="docutils align-default">
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 15%" />
+<col style="width: 14%" />
+<col style="width: 15%" />
+<col style="width: 12%" />
+<col style="width: 14%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Partition</p></th>
+<th class="head"><p>Offset</p></th>
+<th class="head"><p>Size</p></th>
+<th class="head"><p>Partition elements</p></th>
+<th class="head"><p>Element offset</p></th>
+<th class="head"><p>Element size</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>MCUboot bootloader (mcuboot)</p></td>
+<td><p>0kB (0x0)</p></td>
+<td><p>48kB (0xc000)</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td rowspan="2"><p>Application (mcuboot_primary)</p></td>
+<td rowspan="2"><p>48kB (0xc000)</p></td>
+<td rowspan="2"><p>956kB (0xef000)</p></td>
+<td><p>mcuboot_pad</p></td>
+<td><p>48kB (0xc000)</p></td>
+<td><p>512B (0x200)</p></td>
+</tr>
+<tr class="row-even"><td><p>mcuboot_primary_app</p></td>
+<td><p>48.5kB (0xc200)</p></td>
+<td><p>955.5kB (0xeee00)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Factory data (factory_data)</p></td>
+<td><p>1004kB (0xfb000)</p></td>
+<td><p>4kB (0x1000)</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><p>Non-volatile storage (settings_storage)</p></td>
+<td><p>1008kB (0xfc000)</p></td>
+<td><p>16kB (0x4000)</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt>Application core SRAM primary (size: 0x80000 = 512kB)</dt><dd><p>SRAM is located at the address <code class="docutils literal notranslate"><span class="pre">0x20000000</span></code> in the memory address space of the application.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 15%" />
+<col style="width: 13%" />
+<col style="width: 15%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Partition</p></th>
+<th class="head"><p>Offset</p></th>
+<th class="head"><p>Size</p></th>
+<th class="head"><p>Partition elements</p></th>
+<th class="head"><p>Element offset</p></th>
+<th class="head"><p>Element size</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../libraries/dfu/pcd.html#subsys-pcd"><span class="std std-ref">Peripheral CPU DFU (PCD)</span></a> (pcd_sram)</p></td>
+<td><p>0kB (0x0)</p></td>
+<td><p>8kB (0x2000)</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>Static RAM (sram_primary)</p></td>
+<td><p>8kB (0x2000)</p></td>
+<td><p>440kB (0x6e000)</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><p>Network core shared memory (rpmsg_nrf53_sram)</p></td>
+<td><p>448kB (0x70000)</p></td>
+<td><p>64kB (0x10000)</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt>External flash (size: 0x800000 = 8192kB)</dt><dd><table class="docutils align-default">
+<colgroup>
+<col style="width: 31%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 16%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Partition</p></th>
+<th class="head"><p>Offset</p></th>
+<th class="head"><p>Size</p></th>
+<th class="head"><p>Partition elements</p></th>
+<th class="head"><p>Element offset</p></th>
+<th class="head"><p>Element size</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Application DFU (mcuboot_secondary)</p></td>
+<td><p>0kB (0x0)</p></td>
+<td><p>956kB (0xef000)</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>Network Core DFU (mcuboot_secondary_1)</p></td>
+<td><p>956kB (0xef000)</p></td>
+<td><p>256kB (0x40000)</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><p>Free space (external_flash)</p></td>
+<td><p>1212kB (0x12f000)</p></td>
+<td><p>6980kB (0x6d1000)</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt>Network core flash (size: 0x40000 = 256kB)</dt><dd><p>The network core flash is located at the address <code class="docutils literal notranslate"><span class="pre">0x1000000</span></code> in the memory address space of the application.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 37%" />
+<col style="width: 14%" />
+<col style="width: 12%" />
+<col style="width: 14%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Partition</p></th>
+<th class="head"><p>Offset</p></th>
+<th class="head"><p>Size</p></th>
+<th class="head"><p>Partition elements</p></th>
+<th class="head"><p>Element offset</p></th>
+<th class="head"><p>Element size</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td rowspan="2"><p><a class="reference internal" href="../../../samples/nrf5340/netboot/README.html#nc-bootloader"><span class="std std-ref">B0n bootloader</span></a> (b0n_container)</p></td>
+<td rowspan="2"><p>0kB (0x0)</p></td>
+<td rowspan="2"><p>34kB (0x8800)</p></td>
+<td><p>b0n</p></td>
+<td><p>0kB (0x0)</p></td>
+<td><p>33.375kB (0x8580)</p></td>
+</tr>
+<tr class="row-odd"><td><p>provision</p></td>
+<td><p>33.375kB (0x8580)</p></td>
+<td><p>640B (0x280)</p></td>
+</tr>
+<tr class="row-even"><td><p>Network application (app)</p></td>
+<td><p>34kB (0x8800)</p></td>
+<td><p>222kB (0x37800)</p></td>
+<td><p>hci_rpmsg</p></td>
+<td><p>34kB (0x8800)</p></td>
+<td><p>222kB (0x37800)</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt>Network core SRAM flash (size: 0x10000 = 64kB)</dt><dd><p>SRAM is located at the address <code class="docutils literal notranslate"><span class="pre">0x21000000</span></code> in the memory address space of the application.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 15%" />
+<col style="width: 14%" />
+<col style="width: 15%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Partition</p></th>
+<th class="head"><p>Offset</p></th>
+<th class="head"><p>Size</p></th>
+<th class="head"><p>Partition elements</p></th>
+<th class="head"><p>Element offset</p></th>
+<th class="head"><p>Element size</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Static RAM (sram_primary)</p></td>
+<td><p>0kB (0x0)</p></td>
+<td><p>64kB (0x10000)</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt>One-Time-Programmable region of UICR (size: 0x2fc = 764B)</dt><dd><p>OTP is located at the address <code class="docutils literal notranslate"><span class="pre">0xff8100</span></code> in the memory address space of the application.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 15%" />
+<col style="width: 14%" />
+<col style="width: 15%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Partition</p></th>
+<th class="head"><p>Offset</p></th>
+<th class="head"><p>Size</p></th>
+<th class="head"><p>Partition elements</p></th>
+<th class="head"><p>Element offset</p></th>
+<th class="head"><p>Element size</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>OTP Memory (otp)</p></td>
+<td><p>0kB (0x0)</p></td>
+<td><p>764B (0x2fc)</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</div></div>
+<p>You can generate <a class="reference internal" href="../../../scripts/partition_manager/partition_manager.html#pm-partition-reports"><span class="std std-ref">Partition Manager’s ASCII representation</span></a> of these tables by running the following command for your respective <em>&lt;build_target&gt;</em>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">west build -b &lt;build_target&gt; -t partition_manager_report</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="testing/index.html" class="btn btn-neutral float-right" title="Testing Matter in the nRF Connect SDK" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Getting started with Matter" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

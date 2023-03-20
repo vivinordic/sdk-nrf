@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Memfault integration &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../_static/js/ncs.js"
+></script>
+<script src="../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="AVSystem integration" href="avsystem.html" />
+    <link rel="prev" title="Edge Impulse integration" href="edge_impulse.html" />
+<link
+  href="../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../ecosystem_integration.html">Ecosystems integration</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="bt_coex.html">Bluetooth external radio coexistence integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bt_fast_pair.html">Using Google Fast Pair with the nRF Connect SDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="edge_impulse.html">Edge Impulse integration</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Memfault integration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#solution-architecture">Solution architecture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#integration-overview">Integration overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#configuring-memfault">Configuring Memfault</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#error-tracking">Error Tracking</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#collecting-metrics">Collecting Metrics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuration-options">Configuration options</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#applications-and-samples">Applications and samples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#library-support">Library support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dependencies">Dependencies</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="avsystem.html">AVSystem integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nrf_cloud.html">Using nRF Cloud with the nRF Connect SDK</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../drivers.html">Drivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../ecosystem_integration.html">Ecosystems integration</a></li>
+      <li class="breadcrumb-item active">Memfault integration</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/external_comp/memfault.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="memfault-integration">
+<span id="ug-memfault"></span><h1>Memfault integration<a class="headerlink" href="#memfault-integration" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#prerequisites" id="id7">Prerequisites</a></p></li>
+<li><p><a class="reference internal" href="#solution-architecture" id="id8">Solution architecture</a></p></li>
+<li><p><a class="reference internal" href="#integration-overview" id="id9">Integration overview</a></p>
+<ul>
+<li><p><a class="reference internal" href="#configuring-memfault" id="id10">Configuring Memfault</a></p></li>
+<li><p><a class="reference internal" href="#error-tracking" id="id11">Error Tracking</a></p></li>
+<li><p><a class="reference internal" href="#collecting-metrics" id="id12">Collecting Metrics</a></p></li>
+<li><p><a class="reference internal" href="#configuration-options" id="id13">Configuration options</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#applications-and-samples" id="id14">Applications and samples</a></p></li>
+<li><p><a class="reference internal" href="#library-support" id="id15">Library support</a></p></li>
+<li><p><a class="reference internal" href="#dependencies" id="id16">Dependencies</a></p></li>
+</ul>
+</div>
+<p><a class="reference external" href="https://memfault.com/">Memfault</a> is a cloud-based web application with nRF Connect SDK compatibility that monitors devices and allows you to debug issues remotely.
+Memfault integration provides the following features to nRF Connect SDK:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.memfault.com/docs/platform/introduction#debugging">Remote debugging</a> - Memfault issues can be efficiently resolved with automatic detection, alerts, deduplication, and actionable insights sent through the cloud.</p></li>
+<li><p><a class="reference external" href="https://docs.memfault.com/docs/platform/introduction#metrics">Continuous monitoring</a> - Monitors device and fleet-level metrics like connectivity and low power state in real-time dashboards and displays prepopulated metrics for your devices.
+You can access device level data to resolve bugs faster.</p></li>
+</ul>
+<p>See the <a class="reference external" href="https://docs.memfault.com/docs/platform/introduction">Memfault documentation</a> for more details.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Memfault has been integrated in nRF Connect SDK since the v1.6.0 release.</p>
+</div>
+<section id="prerequisites">
+<h2><a class="toc-backref" href="#id7">Prerequisites</a><a class="headerlink" href="#prerequisites" title="Permalink to this heading"></a></h2>
+<p>Before you start the nRF Connect SDK integration with Memfault, make sure that the following prerequisites are completed:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference internal" href="../getting_started.html#getting-started"><span class="std std-ref">Setup of nRF Connect SDK</span></a> environment.</p></li>
+<li><p><a class="reference internal" href="../working_with_nrf/nrf91/nrf9160_gs.html#ug-nrf9160-gs"><span class="std std-ref">Setup of nRF9160 DK</span></a>.</p></li>
+<li><p>Sign up in the <a class="reference external" href="https://app.memfault.com/register-nordic">Memfault registration page</a> and <a class="reference external" href="https://docs.memfault.com/docs/platform/projects-and-fleets#creating-a-new-project">create a new project in Memfault</a>.
+You will be directed to the Integration guide for Memfault.
+You receive the <code class="docutils literal notranslate"><span class="pre">project</span> <span class="pre">key</span></code> here to set in the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MEMFAULT_NCS_PROJECT_KEY</span></code> Kconfig option.
+After registration, you can connect up to 100 devices for free.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="solution-architecture">
+<h2><a class="toc-backref" href="#id8">Solution architecture</a><a class="headerlink" href="#solution-architecture" title="Permalink to this heading"></a></h2>
+<p>The SDK provides functionality to collect debug information from your devices in the form of coredumps, error traces, metrics, logs, and more.
+Memfault saves the data to a configurable storage, after which it is broken into chunks.
+These chunks are then forwarded at an interval that is set through the application’s configuration (<code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MEMFAULT_HTTP_PERIODIC_UPLOAD_INTERVAL_SECS</span></code>) to Memfault’s cloud solution for further analysis.
+If the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MEMFAULT_HTTP_PERIODIC_UPLOAD</span></code> Kconfig option is disabled, the application calls the appropriate APIs to send the data chunks.
+Communication with the Memfault Cloud is handled by APIs available in <a class="reference external" href="https://github.com/memfault/memfault-firmware-sdk">Memfault-SDK</a>, while the integration code of the SDK in nRF Connect SDK provides some additional functionality.
+The Memfault cloud reassembles the data before analyzing and deduplicates the data.
+The overall fleet health of the issues can be examined through the dashboard of the Memfault web application.
+See the <a class="reference external" href="https://docs.memfault.com/docs/mcu/introduction">Memfault MCU Guide</a> for more information.</p>
+<figure class="align-default" id="id6">
+<img alt="Memfault Solution architecture" src="../_images/Memfault_architecture.svg" /><figcaption>
+<p><span class="caption-text">Memfault Solution architecture</span><a class="headerlink" href="#id6" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="integration-overview">
+<span id="using-memfault"></span><h2><a class="toc-backref" href="#id9">Integration overview</a><a class="headerlink" href="#integration-overview" title="Permalink to this heading"></a></h2>
+<p>The SDK version is included in the <a class="reference external" href="https://github.com/nrfconnect/sdk-nrf/blob/main/west.yml">west manifest file</a> in nRF Connect SDK and is automatically downloaded when running <code class="docutils literal notranslate"><span class="pre">west</span> <span class="pre">update</span></code>.
+By default, it is downloaded to <code class="docutils literal notranslate"><span class="pre">ncs/modules/lib/memfault-firmware-sdk/</span></code>.</p>
+<p>Complete the following steps to integrate Memfault into nRF Connect SDK:</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#ug-memfault-config"><span class="std std-ref">Configure Memfault</span></a></p></li>
+<li><p><a class="reference internal" href="#ug-memfault-error"><span class="std std-ref">Track errors</span></a></p></li>
+<li><p><a class="reference internal" href="#ug-memfault-metrics"><span class="std std-ref">Collect metrices</span></a></p></li>
+</ol>
+<section id="configuring-memfault">
+<span id="ug-memfault-config"></span><h3><a class="toc-backref" href="#id10">Configuring Memfault</a><a class="headerlink" href="#configuring-memfault" title="Permalink to this heading"></a></h3>
+<p>To include Memfault in your build, add the following Kconfig option in your <code class="file docutils literal notranslate"><span class="pre">prj.conf</span></code> file:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">CONFIG_MEMFAULT=y</span>
+<span class="go">CONFIG_MEMFAULT_NCS_PROJECT_KEY=&quot;&quot;</span>
+</pre></div>
+</div>
+<p>The APIs in the Memfault SDK can then be linked into your application.
+You can get your project key after signing up with Memfault.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In the <a class="reference internal" href="../samples/nrf9160/memfault/README.html#memfault-sample"><span class="std std-ref">nRF9160: Memfault</span></a> sample folder, the aforementioned Memfault configurations are already included.
+Make sure to add your project key in the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MEMFAULT_NCS_PROJECT_KEY</span></code> Kconfig option.</p>
+</div>
+<p>You can also add the configurations using a Kconfig configuration fragment file.
+See the following example on how to set an overlay configuration for Memfault integration:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">west build -b nrf9160dk_nrf9160_ns -- -DOVERLAY_CONFIG=overlay-memfault.conf</span>
+</pre></div>
+</div>
+<section id="configuration-files">
+<h4>Configuration files<a class="headerlink" href="#configuration-files" title="Permalink to this heading"></a></h4>
+<p>Memfault SDK requires the three files in the include path during the build process.
+You can avoid adding these user configuration files by disabling the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MEMFAULT_USER_CONFIG_ENABLE</span></code> option.
+You can also skip these steps by enabling the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MEMFAULT_USER_CONFIG_SILENT_FAIL</span></code> option, even if the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MEMFAULT_USER_CONFIG_ENABLE</span></code> option is enabled.</p>
+<p>To add the user configuration files, create a new folder in your project called <code class="file docutils literal notranslate"><span class="pre">config</span></code> and add the following three files:</p>
+<ul class="simple">
+<li><p><code class="file docutils literal notranslate"><span class="pre">memfault_platform_config.h</span></code> - Sets Memfault SDK configurations that are not covered by Kconfig options.</p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">memfault_metrics_heartbeat_config.def</span></code> - Defines application-specific metrics.</p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">memfault_trace_reason_user_config.def</span></code> - Defines application-specific trace reasons.</p></li>
+</ul>
+<p>Add the following code in the <code class="file docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> file to have these configuration files in the include path:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">zephyr_include_directories(config)</span>
+</pre></div>
+</div>
+<p>See the <a class="reference external" href="https://docs.memfault.com/docs/mcu/nrf-connect-sdk-guide">Memfault nRF Connect SDK integration guide</a> for more details.</p>
+</section>
+</section>
+<section id="error-tracking">
+<span id="ug-memfault-error"></span><h3><a class="toc-backref" href="#id11">Error Tracking</a><a class="headerlink" href="#error-tracking" title="Permalink to this heading"></a></h3>
+<p>Memfault captures all faults that happen at any time.
+The crash data is sent to the Memfault cloud for further inspection and analysis.
+The faults are tracked using the following methods.</p>
+<section id="reboot-reason-tracking">
+<h4>Reboot reason tracking<a class="headerlink" href="#reboot-reason-tracking" title="Permalink to this heading"></a></h4>
+<p>The device might reboot due to a crash, a brownout, or a firmware update.
+The reboot events for each device are captured and displayed in the Memfault UI along with the recorded reboot reason.</p>
+<p>See <a class="reference external" href="https://docs.memfault.com/docs/mcu/reboot-reason-tracking">Memfault: Reboot tracking</a> for detailed documentation.</p>
+</section>
+<section id="error-tracking-with-trace-events">
+<h4>Error tracking with trace events<a class="headerlink" href="#error-tracking-with-trace-events" title="Permalink to this heading"></a></h4>
+<p>You can use the trace event method if you want to track errors without capturing full coredump traces (that use less storage) and keep the device up and running.
+The following samples implement a user-defined trace reason for demonstration purposes.</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../samples/nrf9160/memfault/README.html#memfault-sample"><span class="std std-ref">nRF9160: Memfault</span></a></p></li>
+<li><p><a class="reference internal" href="../samples/bluetooth/peripheral_mds/README.html#peripheral-mds"><span class="std std-ref">Bluetooth: Peripheral Memfault Diagnostic Service (MDS)</span></a></p></li>
+</ul>
+<p>Read the <strong>Error Tracking with trace events</strong> section of these sample documents for more information.</p>
+<p>See <a class="reference external" href="https://docs.memfault.com/docs/embedded/trace-events/">Memfault: Error Tracking with Trace Events</a> for detailed documentation.
+Faults are captured and displayed on the <strong>Issues</strong> page of Memfault UI.</p>
+</section>
+<section id="ram-backed-stack-dump-collection-coredumps">
+<h4>RAM-backed stack dump collection (Coredumps)<a class="headerlink" href="#ram-backed-stack-dump-collection-coredumps" title="Permalink to this heading"></a></h4>
+<p>The coredumps can be triggered to track the fault.
+The <strong>Coredumps</strong> section of the following sample documents provides more information:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../samples/nrf9160/memfault/README.html#memfault-sample"><span class="std std-ref">nRF9160: Memfault</span></a></p></li>
+<li><p><a class="reference internal" href="../samples/bluetooth/peripheral_mds/README.html#peripheral-mds"><span class="std std-ref">Bluetooth: Peripheral Memfault Diagnostic Service (MDS)</span></a></p></li>
+</ul>
+<p>See <a class="reference external" href="https://docs.memfault.com/docs/mcu/coredumps">Memfault: Coredumps</a> for detailed documentation.
+Faults are captured and displayed on the <strong>Issues</strong> page of the Memfault UI.</p>
+</section>
+</section>
+<section id="collecting-metrics">
+<span id="ug-memfault-metrics"></span><h3><a class="toc-backref" href="#id12">Collecting Metrics</a><a class="headerlink" href="#collecting-metrics" title="Permalink to this heading"></a></h3>
+<p>Memfault collects data from each device and visualizes it in a graph.
+The Memfault SDK integration layer in nRF Connect SDK adds the system property metrics.
+There are also some metrics specific to nRF Connect SDK.
+See <strong>Metrics</strong> section of the following sample documents for more information:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../samples/nrf9160/memfault/README.html#memfault-sample"><span class="std std-ref">nRF9160: Memfault</span></a></p></li>
+<li><p><a class="reference internal" href="../samples/bluetooth/peripheral_mds/README.html#peripheral-mds"><span class="std std-ref">Bluetooth: Peripheral Memfault Diagnostic Service (MDS)</span></a></p></li>
+</ul>
+<p>See <a class="reference external" href="https://docs.memfault.com/docs/embedded/metrics-api">Memfault: Collecting Device Metrics</a> for detailed documentation.</p>
+</section>
+<section id="configuration-options">
+<h3><a class="toc-backref" href="#id13">Configuration options</a><a class="headerlink" href="#configuration-options" title="Permalink to this heading"></a></h3>
+<p>There are different configuration options defined for the Memfault SDK in nRF Connect SDK.
+The configuration options are defined both in <a class="reference external" href="https://github.com/memfault/memfault-firmware-sdk">Memfault-SDK</a> and in the integration layer, which integrates the SDK into nRF Connect SDK.
+The configuration options of the integration layer are in <code class="file docutils literal notranslate"><span class="pre">modules/memfault/Kconfig</span></code>.
+See the Configuration section of the following library documents for different Memfault SDK configuration options defined in nRF Connect SDK:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../libraries/others/memfault_ncs.html#mod-memfault"><span class="std std-ref">Memfault</span></a></p></li>
+<li><p><a class="reference internal" href="../samples/bluetooth/peripheral_mds/README.html#peripheral-mds"><span class="std std-ref">Bluetooth: Peripheral Memfault Diagnostic Service (MDS)</span></a></p></li>
+</ul>
+</section>
+</section>
+<section id="applications-and-samples">
+<h2><a class="toc-backref" href="#id14">Applications and samples</a><a class="headerlink" href="#applications-and-samples" title="Permalink to this heading"></a></h2>
+<p>The following applications use the Memfault integration in nRF Connect SDK:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../applications/asset_tracker_v2/README.html#asset-tracker-v2"><span class="std std-ref">nRF9160: Asset Tracker v2</span></a> - The debug module of <a class="reference internal" href="../applications/asset_tracker_v2/README.html#asset-tracker-v2"><span class="std std-ref">nRF9160: Asset Tracker v2</span></a> uses <a class="reference external" href="https://docs.memfault.com/docs/embedded/introduction/">Memfault SDK</a> to track nRF Connect SDK specific metrics such as LTE and stack metrics.
+See the <a class="reference internal" href="../applications/asset_tracker_v2/doc/debug_module.html#asset-tracker-v2-debug-module"><span class="std std-ref">Debug module</span></a> documentation for more details.
+The <a class="reference internal" href="../applications/asset_tracker_v2/README.html#asset-tracker-v2"><span class="std std-ref">nRF9160: Asset Tracker v2</span></a> application also uses Memfault on a custom transport, without using Memfault’s own HTTPS transport.
+See the <a class="reference internal" href="../applications/asset_tracker_v2/doc/debug_module.html#asset-tracker-v2-ext-transport"><span class="std std-ref">Custom transport</span></a> section for more details.</p></li>
+<li><p><a class="reference external" href="https://nordicsemiconductor.github.io/asset-tracker-cloud-docs/v2.1.x/docs/project/Index.html">nRF Asset Tracker project</a> - The <a class="reference external" href="https://github.com/NordicSemiconductor/asset-tracker-cloud-memfault-aws-js">nRF Asset Tracker Memfault integration for AWS IoT</a> or the <a class="reference external" href="https://github.com/NordicSemiconductor/asset-tracker-cloud-memfault-azure-js">nRF Asset Tracker Memfault integration for Azure IoT Hub</a> provide the necessary cloud resources to send Memfault data using the established MQTT cloud connection.
+See the <a class="reference external" href="https://nordicsemiconductor.github.io/asset-tracker-cloud-docs/v2.2.x/docs/memfault/Index.html">nRF Asset Tracker Memfault integration</a> documentation for more details.</p></li>
+</ul>
+<p>The following samples demonstrate the Memfault integration in nRF Connect SDK:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../samples/bluetooth/peripheral_mds/README.html#peripheral-mds"><span class="std std-ref">Bluetooth: Peripheral Memfault Diagnostic Service (MDS)</span></a> - This sample has an implementation of the Memfault Diagnostic Service (MDS).
+It sends data to the Memfault cloud through a Bluetooth gateway.</p></li>
+<li><p><a class="reference internal" href="../samples/nrf9160/memfault/README.html#memfault-sample"><span class="std std-ref">nRF9160: Memfault</span></a> - This sample connects to the LTE network and sends data using HTTPS.
+It supports nRF9160-based build targets.</p></li>
+</ul>
+</section>
+<section id="library-support">
+<h2><a class="toc-backref" href="#id15">Library support</a><a class="headerlink" href="#library-support" title="Permalink to this heading"></a></h2>
+<p>The following nRF Connect SDK libraries support the Memfault integration:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../libraries/others/memfault_ncs.html#mod-memfault"><span class="std std-ref">Memfault</span></a></p></li>
+<li><p><a class="reference internal" href="../libraries/bluetooth_services/services/mds.html#mds-readme"><span class="std std-ref">Memfault Diagnostic Service (MDS)</span></a></p></li>
+</ul>
+</section>
+<section id="dependencies">
+<h2><a class="toc-backref" href="#id16">Dependencies</a><a class="headerlink" href="#dependencies" title="Permalink to this heading"></a></h2>
+<p>It uses the following secure firmware component:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../app_dev/tfm/index.html#ug-tfm"><span class="std std-ref">Trusted Firmware-M</span></a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="avsystem.html" class="btn btn-neutral float-right" title="AVSystem integration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="edge_impulse.html" class="btn btn-neutral" title="Edge Impulse integration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

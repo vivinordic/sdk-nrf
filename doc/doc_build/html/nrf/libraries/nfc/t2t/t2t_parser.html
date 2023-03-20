@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Type 2 Tag parser &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../../_static/js/ncs.js"
+></script>
+<script src="../../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Type 4 Tag" href="../t4t/index.html" />
+    <link rel="prev" title="Type 2 Tag" href="index.html" />
+<link
+  href="../../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../drivers.html">Drivers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Libraries</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../bin/index.html">Binary libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../bluetooth_services/index.html">Bluetooth libraries and services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../bootloader/index.html">Bootloader libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../caf/index.html">Common Application Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../debug/index.html">Debug libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../dfu/index.html">DFU libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gazell/index.html">Gazell libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../modem/index.html">Modem libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mpsl/index.html">Multiprotocol Service Layer libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../networking/index.html">Libraries for networking</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Libraries for NFC</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../ndef/index.html">NFC Data Exchange Format (NDEF)</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Type 2 Tag</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Type 2 Tag parser</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../t4t/index.html">Type 4 Tag</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tnep/index.html">Tag NDEF Exchange Protocol (TNEP)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../nrf_rpc/index.html">nRF RPC libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../others/index.html">Other libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../shell/index.html">Shell libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tfm/index.html">TF-M libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../zigbee/index.html">Libraries for Zigbee</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Libraries</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Libraries for NFC</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Type 2 Tag</a></li>
+      <li class="breadcrumb-item active">Type 2 Tag parser</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/libraries/nfc/t2t/t2t_parser.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="type-2-tag-parser">
+<span id="nfc-t2t-parser-readme"></span><h1>Type 2 Tag parser<a class="headerlink" href="#type-2-tag-parser" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#api-documentation" id="id7">API documentation</a></p>
+<ul>
+<li><p><a class="reference internal" href="#nfc-type-2-tag-parser" id="id8">NFC Type 2 Tag parser</a></p></li>
+<li><p><a class="reference internal" href="#type-2-tag-tlv-blocks" id="id9">Type 2 Tag TLV blocks</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>The nRF Connect SDK provides functionality to read the content of an NFC tag.
+Note that an nRF5 Series IC does not provide the hardware that is required for a polling device.
+If you want to create a polling device, you can use an ST25R3911B NFC shield together with an nRF5 Development Kit.</p>
+<p>Using the <a class="reference internal" href="../../others/st25r3911b_nfc.html#st25r3911b-nfc-readme"><span class="std std-ref">NFC Reader ST25R3911B</span></a>, you can read raw data from a Type 2 Tag, such as:</p>
+<ul class="simple">
+<li><p>Number of TLV structures in the tag</p></li>
+<li><p>Type 2 Tag internal bytes</p></li>
+<li><p>Type 2 Tag lock bytes</p></li>
+<li><p>Type 2 Tag capability container</p></li>
+<li><p>Array of pointer to the TLV structures of the tag</p></li>
+</ul>
+<p>See the <a class="reference internal" href="../../../samples/nfc/tag_reader/README.html#nfc-tag-reader"><span class="std std-ref">NFC: Tag reader</span></a> sample for more information on how to do this.</p>
+<p>The following code example shows how to parse the raw data from a Type 2 Tag:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/* Buffer with raw data from a Type 2 Tag. */</span>
+<span class="kt">uint8_t</span><span class="w"> </span><span class="n">raw_tag_data</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">..;</span>
+
+<span class="cm">/* Declaration of Type 2 Tag structure which</span>
+<span class="cm"> * can contain a maximum of 10 TLV blocks.</span>
+<span class="cm"> */</span>
+<span class="n">NFC_T2T_DESC_DEF</span><span class="p">(</span><span class="n">tag_data</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">nfc_t2t</span><span class="w"> </span><span class="o">*</span><span class="n">t2t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">NFC_T2T_DESC</span><span class="p">(</span><span class="n">tag_data</span><span class="p">);</span>
+
+<span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nfc_t2t_parse</span><span class="p">(</span><span class="n">t2t</span><span class="p">,</span><span class="w"> </span><span class="n">raw_tag_data</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">printk</span><span class="p">(</span><span class="s">&quot;Not enough memory to read the whole tag. Printing what has been read.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="cm">/* Print the tag data. */</span>
+<span class="n">nfc_t2t_printout</span><span class="p">(</span><span class="n">t2t</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Note that the data can be further parsed by the <a class="reference internal" href="../ndef/msg_parser.html#nfc-ndef-parser-readme"><span class="std std-ref">Parser for messages and records</span></a>, given that the type of the analyzed TLV block is NDEF TLV.</p>
+<section id="api-documentation">
+<h2><a class="toc-backref" href="#id7">API documentation</a><a class="headerlink" href="#api-documentation" title="Permalink to this heading"></a></h2>
+<section id="nfc-type-2-tag-parser">
+<h3><a class="toc-backref" href="#id8">NFC Type 2 Tag parser</a><a class="headerlink" href="#nfc-type-2-tag-parser" title="Permalink to this heading"></a></h3>
+<div class="line-block">
+<div class="line">Header file: <code class="file docutils literal notranslate"><span class="pre">include/nfc/t2t/t2t_parser.h</span></code></div>
+<div class="line">Source file: <code class="file docutils literal notranslate"><span class="pre">subsys/nfc/t2t/parser.c</span></code></div>
+</div>
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="group__nfc__t2t__parser"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">nfc_t2t_parser</span></span></dt>
+<dd><p>NFC Type 2 Tag parser. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-defines">Defines</p>
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.NFC_T2T_DESC_DEF">
+<span class="target" id="group__nfc__t2t__parser_1ga25f701fac758c2c6602253b3d2763695"></span><span class="sig-name descname"><span class="n"><span class="pre">NFC_T2T_DESC_DEF</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">_name</span></span>, <span class="n"><span class="pre">_max_blocks</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.NFC_T2T_DESC_DEF" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Create and initialize a Type 2 Tag descriptor. </p>
+<p>This macro creates and initializes a static instance of an <a class="reference internal" href="#structnfc__t2t"><span class="std std-ref">nfc_t2t</span></a> structure and an array of <a class="reference internal" href="#group__nfc__t2t__tlv__block"><span class="std std-ref">Type 2 Tag TLV blocks</span></a> descriptors.</p>
+<p>Use the macro <a class="reference internal" href="#group__nfc__t2t__parser_1ga7e0592a96292d15600d8abe46c3674cd"><span class="std std-ref">NFC_T2T_DESC</span></a> to access the Type 2 Tag descriptor instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>_name</strong> – <strong>[in]</strong> Name of the created descriptor instance. </p></li>
+<li><p><strong>_max_blocks</strong> – <strong>[in]</strong> Maximum number of <a class="reference internal" href="#group__nfc__t2t__tlv__block"><span class="std std-ref">Type 2 Tag TLV blocks</span></a> descriptors that can be stored in the array. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.NFC_T2T_DESC">
+<span class="target" id="group__nfc__t2t__parser_1ga7e0592a96292d15600d8abe46c3674cd"></span><span class="sig-name descname"><span class="n"><span class="pre">NFC_T2T_DESC</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">_name</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.NFC_T2T_DESC" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Access the <a class="reference internal" href="#structnfc__t2t"><span class="std std-ref">nfc_t2t</span></a> instance that was created with <a class="reference internal" href="#group__nfc__t2t__parser_1ga25f701fac758c2c6602253b3d2763695"><span class="std std-ref">NFC_T2T_DESC_DEF</span></a>. </p>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.NFC_T2T_NFC_FORUM_DEFINED_DATA">
+<span class="target" id="group__nfc__t2t__parser_1ga102ad794bb6029cf11cd537e65161fb8"></span><span class="sig-name descname"><span class="n"><span class="pre">NFC_T2T_NFC_FORUM_DEFINED_DATA</span></span></span><a class="headerlink" href="#c.NFC_T2T_NFC_FORUM_DEFINED_DATA" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Value indicating that the Type 2 Tag contains NFC Forum defined data. </p>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.NFC_T2T_UID_BCC_CASCADE_BYTE">
+<span class="target" id="group__nfc__t2t__parser_1gab55123039b381beb70bc9d2f4f6b080b"></span><span class="sig-name descname"><span class="n"><span class="pre">NFC_T2T_UID_BCC_CASCADE_BYTE</span></span></span><a class="headerlink" href="#c.NFC_T2T_UID_BCC_CASCADE_BYTE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Value used for calculating the first BCC byte of a Type 2 Tag serial number. </p>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.NFC_T2T_SUPPORTED_MAJOR_VERSION">
+<span class="target" id="group__nfc__t2t__parser_1ga4e51e1a30a6ac1782a58974c0a45d558"></span><span class="sig-name descname"><span class="n"><span class="pre">NFC_T2T_SUPPORTED_MAJOR_VERSION</span></span></span><a class="headerlink" href="#c.NFC_T2T_SUPPORTED_MAJOR_VERSION" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Supported major version of the Type 2 Tag specification. </p>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.NFC_T2T_SUPPORTED_MINOR_VERSION">
+<span class="target" id="group__nfc__t2t__parser_1ga9e7069153bb658cf30367199823f6c09"></span><span class="sig-name descname"><span class="n"><span class="pre">NFC_T2T_SUPPORTED_MINOR_VERSION</span></span></span><a class="headerlink" href="#c.NFC_T2T_SUPPORTED_MINOR_VERSION" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Supported minor version of the Type 2 Tag specification. </p>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.NFC_T2T_BLOCK_SIZE">
+<span class="target" id="group__nfc__t2t__parser_1gaf1c87f814fe5e0e4e8a4e4d497d69b28"></span><span class="sig-name descname"><span class="n"><span class="pre">NFC_T2T_BLOCK_SIZE</span></span></span><a class="headerlink" href="#c.NFC_T2T_BLOCK_SIZE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Type 2 Tag block size in bytes. </p>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.NFC_T2T_CC_BLOCK_OFFSET">
+<span class="target" id="group__nfc__t2t__parser_1ga992bc2e3dff817a1857630e95bb8bb8c"></span><span class="sig-name descname"><span class="n"><span class="pre">NFC_T2T_CC_BLOCK_OFFSET</span></span></span><a class="headerlink" href="#c.NFC_T2T_CC_BLOCK_OFFSET" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Offset of the Capability Container area in the Type 2 Tag. </p>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.NFC_T2T_FIRST_DATA_BLOCK_OFFSET">
+<span class="target" id="group__nfc__t2t__parser_1gac759ddf1b1dedcd9ead7c79b545c6740"></span><span class="sig-name descname"><span class="n"><span class="pre">NFC_T2T_FIRST_DATA_BLOCK_OFFSET</span></span></span><a class="headerlink" href="#c.NFC_T2T_FIRST_DATA_BLOCK_OFFSET" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Offset of the data area in the Type 2 Tag. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.nfc_t2t_clear">
+<span class="target" id="group__nfc__t2t__parser_1ga534e5604b9e598368f14e7e97c753a89"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nfc_t2t_clear</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.nfc_t2t" title="nfc_t2t"><span class="n"><span class="pre">nfc_t2t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">t2t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.nfc_t2t_clear" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Clear the <a class="reference internal" href="#structnfc__t2t"><span class="std std-ref">nfc_t2t</span></a> structure. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>t2t</strong> – <strong>[inout]</strong> Pointer to the structure that should be cleared. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.nfc_t2t_parse">
+<span class="target" id="group__nfc__t2t__parser_1ga3c9d4d75f246211fcfc84ec2062f8ea7"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nfc_t2t_parse</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.nfc_t2t" title="nfc_t2t"><span class="n"><span class="pre">nfc_t2t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">t2t</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">raw_data</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.nfc_t2t_parse" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Parse raw data that was read from a Type 2 Tag. </p>
+<p>This function parses the header and the following TLV blocks of a Type 2 Tag. The data is read from a buffer and stored in a <a class="reference internal" href="#structnfc__t2t"><span class="std std-ref">nfc_t2t</span></a> structure.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>t2t</strong> – <strong>[out]</strong> Pointer to the structure that will be filled with parsed data. </p></li>
+<li><p><strong>raw_data</strong> – <strong>[in]</strong> Pointer to the buffer with raw data from the tag (should point at the first byte of the first block of the tag).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><p><strong>0</strong> – If the operation was successful. Otherwise, a (negative) error code is returned. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.nfc_t2t_printout">
+<span class="target" id="group__nfc__t2t__parser_1ga7337e690d90bd306cd10b5ea593dcc31"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nfc_t2t_printout</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.nfc_t2t" title="nfc_t2t"><span class="n"><span class="pre">nfc_t2t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">t2t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.nfc_t2t_printout" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Print parsed contents of the Type 2 Tag. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>t2t</strong> – <strong>[in]</strong> Pointer to the structure that should be printed. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.nfc_t2t_sn">
+<span class="target" id="structnfc__t2t__sn"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nfc_t2t_sn</span></span></span><a class="headerlink" href="#c.nfc_t2t_sn" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;parser.h&gt;</em></div>
+<p>Descriptor for the internal bytes of a Type 2 Tag. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.nfc_t2t_sn.manufacturer_id">
+<span class="target" id="structnfc__t2t__sn_1aabb60644317e9ac690b10f424dcf2d45"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">manufacturer_id</span></span></span><a class="headerlink" href="#c.nfc_t2t_sn.manufacturer_id" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Manufacturer ID (the most significant byte of the UID/serial number). </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.nfc_t2t_sn.serial_number_part_1">
+<span class="target" id="structnfc__t2t__sn_1a45c0edb9ba5ed45cab94be15949ec022"></span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">serial_number_part_1</span></span></span><a class="headerlink" href="#c.nfc_t2t_sn.serial_number_part_1" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Bytes 5-4 of the tag UID. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.nfc_t2t_sn.serial_number_part_2">
+<span class="target" id="structnfc__t2t__sn_1ad62036d18fb0b69c5a0215f13fb768e0"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">serial_number_part_2</span></span></span><a class="headerlink" href="#c.nfc_t2t_sn.serial_number_part_2" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Bytes 3-0 of the tag UID. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.nfc_t2t_sn.check_byte_0">
+<span class="target" id="structnfc__t2t__sn_1aee4644a13ecb81ffdfd53c795971a878"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">check_byte_0</span></span></span><a class="headerlink" href="#c.nfc_t2t_sn.check_byte_0" title="Permalink to this definition"></a><br /></dt>
+<dd><p>First block check character byte (XOR of the cascade tag byte, manufacturer ID byte, and the serial_number_part_1 bytes). </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.nfc_t2t_sn.check_byte_1">
+<span class="target" id="structnfc__t2t__sn_1ab53fad5ea9899388032bdae36dc781bb"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">check_byte_1</span></span></span><a class="headerlink" href="#c.nfc_t2t_sn.check_byte_1" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Second block check character byte (XOR of the serial_number_part_2 bytes). </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.nfc_t2t_sn.internal">
+<span class="target" id="structnfc__t2t__sn_1a35f55942d46816bb60623605da3d076f"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">internal</span></span></span><a class="headerlink" href="#c.nfc_t2t_sn.internal" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Tag internal bytes. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.nfc_t2t_cc">
+<span class="target" id="structnfc__t2t__cc"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nfc_t2t_cc</span></span></span><a class="headerlink" href="#c.nfc_t2t_cc" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;parser.h&gt;</em></div>
+<p>Descriptor for the Capability Container (CC) bytes of a Type 2 Tag. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.nfc_t2t_cc.major_version">
+<span class="target" id="structnfc__t2t__cc_1ac49a0a1d33bd9645f8f8007b5ee1deba"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">major_version</span></span></span><a class="headerlink" href="#c.nfc_t2t_cc.major_version" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Major version of the supported Type 2 Tag specification. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.nfc_t2t_cc.minor_version">
+<span class="target" id="structnfc__t2t__cc_1a917a70e226ddf040361f765f6c8ce6ec"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">minor_version</span></span></span><a class="headerlink" href="#c.nfc_t2t_cc.minor_version" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Minor version of the supported Type 2 Tag specification. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.nfc_t2t_cc.data_area_size">
+<span class="target" id="structnfc__t2t__cc_1abf0e73e03b6baeed6d62550720d7b6b7"></span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">data_area_size</span></span></span><a class="headerlink" href="#c.nfc_t2t_cc.data_area_size" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Size of the data area in bytes. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.nfc_t2t_cc.read_access">
+<span class="target" id="structnfc__t2t__cc_1a115c20480b4d3e93f572df99839e4c7d"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">read_access</span></span></span><a class="headerlink" href="#c.nfc_t2t_cc.read_access" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Read access for the data area. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.nfc_t2t_cc.write_access">
+<span class="target" id="structnfc__t2t__cc_1a6a3da10ddce4146c9bd4f9593841d4d5"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">write_access</span></span></span><a class="headerlink" href="#c.nfc_t2t_cc.write_access" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Write access for the data area. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.nfc_t2t">
+<span class="target" id="structnfc__t2t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nfc_t2t</span></span></span><a class="headerlink" href="#c.nfc_t2t" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;parser.h&gt;</em></div>
+<p>Type 2 Tag descriptor. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.nfc_t2t.sn">
+<span class="target" id="structnfc__t2t_1a391bc16311562db60f47cd32760af5a3"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.nfc_t2t_sn" title="nfc_t2t_sn"><span class="n"><span class="pre">nfc_t2t_sn</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">sn</span></span></span><a class="headerlink" href="#c.nfc_t2t.sn" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Values within the serial number area of the tag. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.nfc_t2t.lock_bytes">
+<span class="target" id="structnfc__t2t_1a7e33c69a56963a1b462a1641e9a926dd"></span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lock_bytes</span></span></span><a class="headerlink" href="#c.nfc_t2t.lock_bytes" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Value of the lock bytes. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.nfc_t2t.cc">
+<span class="target" id="structnfc__t2t_1a23c1c6139d937b7783161fc4f5803621"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.nfc_t2t_cc" title="nfc_t2t_cc"><span class="n"><span class="pre">nfc_t2t_cc</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cc</span></span></span><a class="headerlink" href="#c.nfc_t2t.cc" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Values within the Capability Container area of the tag. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.nfc_t2t.max_tlv_blocks">
+<span class="target" id="structnfc__t2t_1a885979963531c504d6a37422b061f706"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">max_tlv_blocks</span></span></span><a class="headerlink" href="#c.nfc_t2t.max_tlv_blocks" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Maximum number of TLV blocks that can be stored. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.nfc_t2t.tlv_block_array">
+<span class="target" id="structnfc__t2t_1a712736f4ecbb894915a13f425fea084d"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.nfc_t2t_tlv_block" title="nfc_t2t_tlv_block"><span class="n"><span class="pre">nfc_t2t_tlv_block</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">tlv_block_array</span></span></span><a class="headerlink" href="#c.nfc_t2t.tlv_block_array" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Pointer to the array for TLV blocks. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.nfc_t2t.tlv_count">
+<span class="target" id="structnfc__t2t_1a2ad84b7ffce8fb889798f3f4830f79b4"></span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">tlv_count</span></span></span><a class="headerlink" href="#c.nfc_t2t.tlv_count" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Number of TLV blocks stored in the Type 2 Tag. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="type-2-tag-tlv-blocks">
+<h3><a class="toc-backref" href="#id9">Type 2 Tag TLV blocks</a><a class="headerlink" href="#type-2-tag-tlv-blocks" title="Permalink to this heading"></a></h3>
+<div class="line-block">
+<div class="line">Header file: <code class="file docutils literal notranslate"><span class="pre">include/nfc/t2t/tlv_block.h</span></code></div>
+</div>
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="group__nfc__t2t__tlv__block"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">nfc_t2t_tlv_block</span></span></dt>
+<dd><p>Descriptor for a Type 2 Tag TLV block. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-defines">Defines</p>
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.NFC_T2T_TLV_T_LENGTH">
+<span class="target" id="group__nfc__t2t__tlv__block_1ga236c33f4ecde49460218a4ebccd06f0b"></span><span class="sig-name descname"><span class="n"><span class="pre">NFC_T2T_TLV_T_LENGTH</span></span></span><a class="headerlink" href="#c.NFC_T2T_TLV_T_LENGTH" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Length of a tag field. </p>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.NFC_T2T_TLV_L_SHORT_LENGTH">
+<span class="target" id="group__nfc__t2t__tlv__block_1ga9345d14742077c3abc53c46b13a8286c"></span><span class="sig-name descname"><span class="n"><span class="pre">NFC_T2T_TLV_L_SHORT_LENGTH</span></span></span><a class="headerlink" href="#c.NFC_T2T_TLV_L_SHORT_LENGTH" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Length of a short length field. </p>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.NFC_T2T_TLV_L_LONG_LENGTH">
+<span class="target" id="group__nfc__t2t__tlv__block_1ga38213f803cc080876da633f22ccb0d83"></span><span class="sig-name descname"><span class="n"><span class="pre">NFC_T2T_TLV_L_LONG_LENGTH</span></span></span><a class="headerlink" href="#c.NFC_T2T_TLV_L_LONG_LENGTH" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Length of an extended length field. </p>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.NFC_T2T_TLV_L_FORMAT_FLAG">
+<span class="target" id="group__nfc__t2t__tlv__block_1ga1e108c1073b9d95cc798a6a362de2699"></span><span class="sig-name descname"><span class="n"><span class="pre">NFC_T2T_TLV_L_FORMAT_FLAG</span></span></span><a class="headerlink" href="#c.NFC_T2T_TLV_L_FORMAT_FLAG" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Value indicating the use of an extended length field. </p>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.NFC_T2T_TLV_NULL_TERMINATOR_LEN">
+<span class="target" id="group__nfc__t2t__tlv__block_1ga3edd9ef045bebfa1743964cda786cb48"></span><span class="sig-name descname"><span class="n"><span class="pre">NFC_T2T_TLV_NULL_TERMINATOR_LEN</span></span></span><a class="headerlink" href="#c.NFC_T2T_TLV_NULL_TERMINATOR_LEN" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Predefined length of the NULL and TERMINATOR TLV blocks. </p>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.NFC_T2T_TLV_LOCK_MEMORY_CTRL_LEN">
+<span class="target" id="group__nfc__t2t__tlv__block_1ga94621509a28d3673f345ee7754049621"></span><span class="sig-name descname"><span class="n"><span class="pre">NFC_T2T_TLV_LOCK_MEMORY_CTRL_LEN</span></span></span><a class="headerlink" href="#c.NFC_T2T_TLV_LOCK_MEMORY_CTRL_LEN" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Predefined length of the LOCK CONTROL and MEMORY CONTROL blocks. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-enums">Enums</p>
+<dl class="c enum">
+<dt class="sig sig-object c" id="c.nfc_t2t_tlv_block_types">
+<span class="target" id="group__nfc__t2t__tlv__block_1ga85bc26660e942b445b9e3303e98562c2"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nfc_t2t_tlv_block_types</span></span></span><a class="headerlink" href="#c.nfc_t2t_tlv_block_types" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Tag field values. </p>
+<p>Possible values for the tag field in a TLV block. </p>
+<p><em>Values:</em></p>
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.nfc_t2t_tlv_block_types.NFC_T2T_TLV_NULL">
+<span class="target" id="group__nfc__t2t__tlv__block_1gga85bc26660e942b445b9e3303e98562c2afb7d9ace0f53d45107be3230514e3bd8"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">NFC_T2T_TLV_NULL</span></span></span><a class="headerlink" href="#c.nfc_t2t_tlv_block_types.NFC_T2T_TLV_NULL" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Can be used for padding of memory areas. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.nfc_t2t_tlv_block_types.NFC_T2T_TLV_LOCK_CONTROL">
+<span class="target" id="group__nfc__t2t__tlv__block_1gga85bc26660e942b445b9e3303e98562c2abe8f97aaa61e89ef8409dae92b9bd812"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">NFC_T2T_TLV_LOCK_CONTROL</span></span></span><a class="headerlink" href="#c.nfc_t2t_tlv_block_types.NFC_T2T_TLV_LOCK_CONTROL" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Defines details of the lock bits. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.nfc_t2t_tlv_block_types.NFC_T2T_TLV_MEMORY_CONTROL">
+<span class="target" id="group__nfc__t2t__tlv__block_1gga85bc26660e942b445b9e3303e98562c2a14570e3c496fb99939ce3c901dd5be4b"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">NFC_T2T_TLV_MEMORY_CONTROL</span></span></span><a class="headerlink" href="#c.nfc_t2t_tlv_block_types.NFC_T2T_TLV_MEMORY_CONTROL" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Identifies reserved memory areas. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.nfc_t2t_tlv_block_types.NFC_T2T_TLV_NDEF_MESSAGE">
+<span class="target" id="group__nfc__t2t__tlv__block_1gga85bc26660e942b445b9e3303e98562c2a2ba0e998f79bc85795774b2d3452a23f"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">NFC_T2T_TLV_NDEF_MESSAGE</span></span></span><a class="headerlink" href="#c.nfc_t2t_tlv_block_types.NFC_T2T_TLV_NDEF_MESSAGE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Contains an NDEF message. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.nfc_t2t_tlv_block_types.NFC_T2T_TLV_PROPRIETARY">
+<span class="target" id="group__nfc__t2t__tlv__block_1gga85bc26660e942b445b9e3303e98562c2a6b1e8cd83efc2a858bbfde590502f506"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">NFC_T2T_TLV_PROPRIETARY</span></span></span><a class="headerlink" href="#c.nfc_t2t_tlv_block_types.NFC_T2T_TLV_PROPRIETARY" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Tag proprietary information. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.nfc_t2t_tlv_block_types.NFC_T2T_TLV_TERMINATOR">
+<span class="target" id="group__nfc__t2t__tlv__block_1gga85bc26660e942b445b9e3303e98562c2a48330973f3e3f53f6e19f3aa77e33b26"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">NFC_T2T_TLV_TERMINATOR</span></span></span><a class="headerlink" href="#c.nfc_t2t_tlv_block_types.NFC_T2T_TLV_TERMINATOR" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Last TLV block in the data area. </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.nfc_t2t_tlv_block">
+<span class="target" id="structnfc__t2t__tlv__block"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nfc_t2t_tlv_block</span></span></span><a class="headerlink" href="#c.nfc_t2t_tlv_block" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;tlv_block.h&gt;</em></div>
+<p>TLV block descriptor. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.nfc_t2t_tlv_block.tag">
+<span class="target" id="structnfc__t2t__tlv__block_1aaaad82d330624013855b3c19ff4060d1"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">tag</span></span></span><a class="headerlink" href="#c.nfc_t2t_tlv_block.tag" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Type of the TLV block. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.nfc_t2t_tlv_block.length">
+<span class="target" id="structnfc__t2t__tlv__block_1a70d1c83f6d3df394204889015f1a3e1c"></span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">length</span></span></span><a class="headerlink" href="#c.nfc_t2t_tlv_block.length" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Length of the value field. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.nfc_t2t_tlv_block.value">
+<span class="target" id="structnfc__t2t__tlv__block_1a9060d2f759dd66ac48207b25fbd6c60b"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">value</span></span></span><a class="headerlink" href="#c.nfc_t2t_tlv_block.value" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Pointer to the value field (NULL if no value field is present in the block). </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../t4t/index.html" class="btn btn-neutral float-right" title="Type 4 Tag" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Type 2 Tag" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

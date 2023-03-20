@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Configuring Thread in the nRF Connect SDK &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../_static/js/ncs.js"
+></script>
+<script src="../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Pre-built libraries" href="prebuilt_libs.html" />
+    <link rel="prev" title="OpenThread commissioning" href="overview/commissioning.html" />
+<link
+  href="../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../protocols.html">Protocols</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../ble/index.html">Bluetooth LE Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bt_mesh/index.html">Bluetooth mesh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../esb/index.html">Enhanced ShockBurst (ESB)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gazell/index.html">Gazell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../matter/index.html">Matter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multiprotocol/index.html">Multiprotocol support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nfc/index.html">Near Field Communication (NFC)</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Thread</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="overview/index.html">OpenThread overview</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Configuring Thread in the nRF Connect SDK</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#required-configuration">Required configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#additional-configuration-options">Additional configuration options</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="prebuilt_libs.html">Pre-built libraries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tools.html">Thread tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="certification.html">Thread certification</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../wifi/index.html">Wi-Fi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../zigbee/index.html">Zigbee</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drivers.html">Drivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../protocols.html">Protocols</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Thread</a></li>
+      <li class="breadcrumb-item active">Configuring Thread in the nRF Connect SDK</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/protocols/thread/configuring.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="configuring-thread-in-the-ncs">
+<span id="ug-thread-configuring"></span><h1>Configuring Thread in the nRF Connect SDK<a class="headerlink" href="#configuring-thread-in-the-ncs" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#required-configuration" id="id6">Required configuration</a></p>
+<ul>
+<li><p><a class="reference internal" href="#enable-zephyr-modules" id="id7">Enable Zephyr modules</a></p></li>
+<li><p><a class="reference internal" href="#enable-openthread-in-the-ncs" id="id8">Enable OpenThread in the nRF Connect SDK</a></p></li>
+<li><p><a class="reference internal" href="#select-openthread-libraries" id="id9">Select OpenThread libraries</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#additional-configuration-options" id="id10">Additional configuration options</a></p>
+<ul>
+<li><p><a class="reference internal" href="#thread-specification-options" id="id11">Thread Specification options</a></p></li>
+<li><p><a class="reference internal" href="#ieee-802-15-4-eui-64-configuration-options" id="id12">IEEE 802.15.4 EUI-64 configuration options</a></p></li>
+<li><p><a class="reference internal" href="#hardware-accelerated-cryptography-options" id="id13">Hardware-accelerated cryptography options</a></p></li>
+<li><p><a class="reference internal" href="#thread-commissioning-options" id="id14">Thread commissioning options</a></p></li>
+<li><p><a class="reference internal" href="#openthread-stack-logging-options" id="id15">OpenThread stack logging options</a></p></li>
+<li><p><a class="reference internal" href="#zephyr-l2-logging-options" id="id16">Zephyr L2 logging options</a></p></li>
+<li><p><a class="reference internal" href="#device-type-options" id="id17">Device type options</a></p></li>
+<li><p><a class="reference internal" href="#trusted-firmware-m-support-options" id="id18">Trusted Firmware-M support options</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>This page describes the configuration you need to start working with Thread in the nRF Connect SDK.</p>
+<p>The page also lists additional options you can use to configure your Thread application.
+See <a class="reference internal" href="../../getting_started/modifying.html#configure-application"><span class="std std-ref">Configuring your application</span></a> for instructions on how to update the configuration for your application, permanently or temporarily.</p>
+<section id="required-configuration">
+<span id="ug-thread-required-configuration"></span><h2><a class="toc-backref" href="#id6">Required configuration</a><a class="headerlink" href="#required-configuration" title="Permalink to this heading"></a></h2>
+<p>Thread requires the following configuration when working in the nRF Connect SDK.
+All <a class="reference internal" href="../../samples/thread.html#openthread-samples"><span class="std std-ref">Thread samples</span></a> in the nRF Connect SDK have these set by default.</p>
+<section id="enable-zephyr-modules">
+<span id="ug-thread-configuring-modules"></span><h3><a class="toc-backref" href="#id7">Enable Zephyr modules</a><a class="headerlink" href="#enable-zephyr-modules" title="Permalink to this heading"></a></h3>
+<p>Thread requires the following Zephyr modules to properly operate in the nRF Connect SDK:</p>
+<ul class="simple">
+<li><p><span class="xref std std-ref">zephyr:ieee802154_interface</span> radio driver - This library is automatically enabled when working with OpenThread on Nordic Semiconductor’s development kits.</p></li>
+<li><p><span class="xref std std-ref">zephyr:settings_api</span> subsystem - This subsystem is required to allow Thread to store settings in the non-volatile memory.</p></li>
+</ul>
+</section>
+<section id="enable-openthread-in-the-ncs">
+<span id="ug-thread-configuring-basic"></span><span id="ug-thread-enable"></span><h3><a class="toc-backref" href="#id8">Enable OpenThread in the nRF Connect SDK</a><a class="headerlink" href="#enable-openthread-in-the-ncs" title="Permalink to this heading"></a></h3>
+<p>To use the Thread protocol in the nRF Connect SDK, set the following Kconfig options:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NETWORKING</span></code> - This option enables the generic link layer and the IP networking support.</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NET_L2_OPENTHREAD</span></code> - This option enables the OpenThread stack required for the correct operation of the Thread protocol and allows you to use it.</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MPSL</span></code> - This option enables the <span class="xref std std-ref">nrfxlib:mpsl</span> (MPSL) implementation, which provides services for both <a class="reference internal" href="overview/architectures.html#ug-thread-architectures"><span class="std std-ref">single-protocol and multi-protocol implementations</span></a>.
+This is automatically set for all samples in the nRF Connect SDK that use the <span class="xref std std-ref">zephyr:ieee802154_interface</span> radio driver.</p></li>
+</ul>
+</section>
+<section id="select-openthread-libraries">
+<span id="ug-thread-configuring-basic-building"></span><span id="ug-thread-select-libraries"></span><h3><a class="toc-backref" href="#id9">Select OpenThread libraries</a><a class="headerlink" href="#select-openthread-libraries" title="Permalink to this heading"></a></h3>
+<p>After enabling OpenThread in the nRF Connect SDK, you must choose which OpenThread libraries to use.
+You can choose to either build the libraries from source or use <a class="reference internal" href="prebuilt_libs.html#ug-thread-prebuilt-libs"><span class="std std-ref">pre-built variants</span></a> of the libraries.</p>
+<p>Building the OpenThread libraries from source gives you full flexibility in configuration.
+Using pre-built variants can be useful for certification purposes.</p>
+<ul>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_OPENTHREAD_SOURCES</span></code> - This option enables building the OpenThread libraries from source.
+This option is selected by default.</p>
+<p>Building from source allows you to define <a class="reference internal" href="#ug-thread-configuring-additional"><span class="std std-ref">Additional configuration options</span></a> one by one.
+By default, the <a class="reference internal" href="prebuilt_libs.html#thread-ug-feature-sets"><span class="std std-ref">Feature sets</span></a> option is set to custom (<code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_OPENTHREAD_USER_CUSTOM_LIBRARY</span></code>), which allows you to create your own OpenThread stack configuration.
+However, you can select other feature sets as a basis.</p>
+<p>When building the OpenThread libraries from source, you can also <a class="reference internal" href="prebuilt_libs.html#thread-ug-feature-updating-libs"><span class="std std-ref">update the pre-built OpenThread libraries</span></a>.</p>
+</li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_OPENTHREAD_LIBRARY</span></code> - This option enables OpenThread to use pre-built libraries.</p>
+<p>You must select one of the <a class="reference internal" href="prebuilt_libs.html#thread-ug-feature-sets"><span class="std std-ref">Feature sets</span></a> by enabling <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_OPENTHREAD_NORDIC_LIBRARY_MASTER</span></code>, <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_OPENTHREAD_NORDIC_LIBRARY_FTD</span></code>, or <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_OPENTHREAD_NORDIC_LIBRARY_MTD</span></code>.</p>
+<p>This disables building OpenThread from source files and links pre-built libraries instead.</p>
+</li>
+</ul>
+</section>
+</section>
+<section id="additional-configuration-options">
+<span id="ug-thread-configuring-additional"></span><h2><a class="toc-backref" href="#id10">Additional configuration options</a><a class="headerlink" href="#additional-configuration-options" title="Permalink to this heading"></a></h2>
+<p>In addition to the required configuration, you can configure other features such as which Thread Specification to use and whether to enable hardware-accelerated cryptography.</p>
+<p>Depending on your configuration needs, you can also set the following options:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NET_SOCKETS</span></code> - This option enables API similar to BSD Sockets on top of the native Zephyr networking API.
+This configuration is needed for managing networking protocols.</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_OPENTHREAD_SHELL</span></code> - This option enables OpenThread CLI (see <a class="reference external" href="https://github.com/openthread/openthread/blob/main/src/cli/README.md">OpenThread CLI Reference</a>).</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_COAP</span></code> - This option enables Zephyr’s <span class="xref std std-ref">zephyr:coap_sock_interface</span> support.</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_COAP_UTILS</span></code> - This option enables the <a class="reference internal" href="../../libraries/networking/coap_utils.html#coap-utils-readme"><span class="std std-ref">CoAP utils library</span></a>.</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_OPENTHREAD_COAP</span></code> - This option enables OpenThread’s native CoAP API.</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_OPENTHREAD_CHANNEL</span></code> - By default set to <code class="docutils literal notranslate"><span class="pre">11</span></code>.
+You can set any value ranging from <code class="docutils literal notranslate"><span class="pre">11</span></code> to <code class="docutils literal notranslate"><span class="pre">26</span></code>.</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_OPENTHREAD_PANID</span></code> - By default set to <code class="docutils literal notranslate"><span class="pre">43981</span></code>.
+You can set any value ranging from <code class="docutils literal notranslate"><span class="pre">0</span></code> to <code class="docutils literal notranslate"><span class="pre">65535</span></code>.</p></li>
+</ul>
+<p>See the following files for more options that you might want to change:</p>
+<ul class="simple">
+<li><p><code class="file docutils literal notranslate"><span class="pre">zephyr/subsys/net/l2/openthread/Kconfig.features</span></code> - OpenThread stack features.</p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">zephyr/subsys/net/l2/openthread/Kconfig.thread</span></code> - Thread network configuration options.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can find the default configuration for all <a class="reference internal" href="../../samples/thread.html#openthread-samples"><span class="std std-ref">Thread samples</span></a> in the <code class="file docutils literal notranslate"><span class="pre">nrf/subsys/net/openthread/Kconfig.defconfig</span></code> file.</p>
+</div>
+<section id="thread-specification-options">
+<span id="thread-ug-thread-specification-options"></span><h3><a class="toc-backref" href="#id11">Thread Specification options</a><a class="headerlink" href="#thread-specification-options" title="Permalink to this heading"></a></h3>
+<p>The OpenThread stack can be configured to operate in compliance with either the Thread 1.1 Specification, the <a class="reference internal" href="overview/supported_features.html#thread-ug-supported-features-v12"><span class="std std-ref">Thread 1.2 Specification</span></a>, or the <a class="reference internal" href="overview/supported_features.html#thread-ug-supported-features-v13"><span class="std std-ref">Thread 1.3 Specification</span></a>.
+You can change the stack version by using the following Kconfig options:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_OPENTHREAD_THREAD_VERSION_1_1</span></code> - Selects the Thread stack version that is compliant with the Thread 1.1 Specification.</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_OPENTHREAD_THREAD_VERSION_1_2</span></code> - Selects the Thread stack version that is compliant with the Thread 1.2 Specification.</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_OPENTHREAD_THREAD_VERSION_1_3</span></code> - Selects the Thread stack version that is compliant with the Thread 1.3 Specification.
+This option is enabled by default if no other option is selected.</p></li>
+</ul>
+<p>By enabling support for Thread 1.2, you enable the following <a class="reference internal" href="overview/supported_features.html#thread-ug-supported-features-v12"><span class="std std-ref">Thread 1.2 features</span></a> in addition to the Thread 1.1 features:</p>
+<ul class="simple">
+<li><p>Coordinated Sampled Listening (CSL)</p></li>
+<li><p>Link Metrics Probing</p></li>
+<li><p>Multicast across Thread networks</p></li>
+<li><p>Thread Domain unicast addressing</p></li>
+<li><p>Enhanced Frame Pending</p></li>
+<li><p>Enhanced Keep Alive</p></li>
+</ul>
+<p>By selecting support for Thread 1.3, you enable the following features in addition to the <a class="reference internal" href="overview/supported_features.html#thread-ug-supported-features"><span class="std std-ref">Thread 1.2 features</span></a>:</p>
+<ul class="simple">
+<li><p>Service Registration Protocol (SRP) client</p></li>
+</ul>
+<p>For a list of all supported features in the nRF Connect SDK, see the <a class="reference internal" href="prebuilt_libs.html#thread-ug-feature-sets"><span class="std std-ref">Feature sets</span></a>.
+For more information about Thread 1.2 features, see the <a class="reference external" href="https://www.threadgroup.org/Portals/0/documents/support/Thread%201.2%20Base%20Features.pdf">Thread 1.2 Base Features</a> document.</p>
+</section>
+<section id="ieee-802-15-4-eui-64-configuration-options">
+<span id="ug-thread-configuring-eui64"></span><h3><a class="toc-backref" href="#id12">IEEE 802.15.4 EUI-64 configuration options</a><a class="headerlink" href="#ieee-802-15-4-eui-64-configuration-options" title="Permalink to this heading"></a></h3>
+<p>An IEEE EUI-64 address consists of two parts:</p>
+<ul class="simple">
+<li><p>Company ID - a 24-bit MA-L (MAC Address Block Large), formerly called OUI (Organizationally Unique Identifier)</p></li>
+<li><p>Extension identifier - a 40-bit device unique identifier</p></li>
+</ul>
+<p>You can configure the EUI-64 for a device in the following ways:</p>
+<dl>
+<dt>Use the default</dt><dd><p>By default, the company ID is set to Nordic Semiconductor’s MA-L (<code class="docutils literal notranslate"><span class="pre">f4-ce-36</span></code>).
+The extension identifier is set to the DEVICEID from the factory information configuration registers (FICR).</p>
+</dd>
+<dt>Replace the company ID</dt><dd><p>You can enable <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_IEEE802154_VENDOR_OUI_ENABLE</span></code> to replace Nordic Semiconductor’s company ID with your own company ID.
+Specify your company ID in <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_IEEE802154_VENDOR_OUI</span></code>.</p>
+<p>The extension identifier is set to the default, namely the DEVICEID from FICR.</p>
+</dd>
+<dt>Replace the full EUI-64</dt><dd><p>You can provide the full EUI-64 value by programming certain user information configuration registers (UICR).
+For nRF52 Series devices, the CUSTOMER registers block is used.
+For nRF53 Series devices, the OTP registers block is used.</p>
+<p>To use the EUI-64 value from the UICR, enable <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_IEEE802154_NRF5_UICR_EUI64_ENABLE</span></code> and set <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_IEEE802154_NRF5_UICR_EUI64_REG</span></code> to the base of the two consecutive registers that contain your EUI-64 value.</p>
+<p>The following example shows how to replace the full EUI-64 on an nRF52840 device:</p>
+<ol class="arabic">
+<li><p>Enable <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_IEEE802154_NRF5_UICR_EUI64_ENABLE</span></code>.</p></li>
+<li><p>Specify the offset for the UICR registers in <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_IEEE802154_NRF5_UICR_EUI64_REG</span></code>.
+This example uses UICR-&gt;CUSTOMER[0] and UICR-&gt;CUSTOMER[1], which means that you can keep the default value <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p></li>
+<li><p>Build and program your application erasing the whole memory (replace <em>serial_number</em> with the serial number of your debugger):</p>
+<pre class="highlight literal-block"> west build -b nrf52840dk_nrf52840 -p always
+ west flash --snr <em>serial_number</em> --erase</pre>
+</li>
+<li><p>Program the registers UICR-&gt;CUSTOMER[0] and UICR-&gt;CUSTOMER[1] with your EUI-64 value (replace <em>serial_number</em> with the serial number of your debugger):</p>
+<pre class="highlight literal-block"> nrfjprog --snr <em>serial_number</em> --memwr 0x10001080 --val 0x11223344
+ nrfjprog --snr <em>serial_number</em> --memwr 0x10001084 --val 0x55667788
+ nrfjprog --snr <em>serial_number</em> --reset</pre>
+<p>If you used a different value for <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_IEEE802154_NRF5_UICR_EUI64_REG</span></code>, you must use different register addresses.</p>
+</li>
+</ol>
+</dd>
+</dl>
+<p>At the end of the configuration process, you can check the EUI-64 value using OpenThread CLI:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">uart:~$ </span>ot<span class="w"> </span>eui64
+<span class="go">8877665544332211</span>
+<span class="go">Done</span>
+</pre></div>
+</div>
+</section>
+<section id="hardware-accelerated-cryptography-options">
+<span id="ug-thread-configuring-crypto"></span><h3><a class="toc-backref" href="#id13">Hardware-accelerated cryptography options</a><a class="headerlink" href="#hardware-accelerated-cryptography-options" title="Permalink to this heading"></a></h3>
+<p>You can enable hardware-accelerated cryptography by using the <span class="xref std std-ref">nrfxlib:nrf_security</span> (nrf_security).
+To do this, modify the setting of the following Kconfig option:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_OPENTHREAD_MBEDTLS</span></code> - Disable this option to disable the default Mbed TLS configuration for OpenThread.
+The nrf_security module is enabled by default when Mbed TLS for OpenThread is disabled.</p></li>
+</ul>
+<p>For more configuration options, read the module documentation.</p>
+</section>
+<section id="thread-commissioning-options">
+<span id="ug-thread-configure-commission"></span><h3><a class="toc-backref" href="#id14">Thread commissioning options</a><a class="headerlink" href="#thread-commissioning-options" title="Permalink to this heading"></a></h3>
+<p>Thread commissioning is the process of adding new Thread devices to the network.
+See <a class="reference internal" href="overview/commissioning.html#thread-ot-commissioning"><span class="std std-ref">OpenThread commissioning</span></a> for more information.</p>
+<p>Configuring this process is optional, because the <a class="reference internal" href="../../samples/thread.html#openthread-samples"><span class="std std-ref">Thread samples</span></a> in the nRF Connect SDK use hardcoded network information.</p>
+<p>If you want to manually enable the Thread network Commissioner role on a device, set the following Kconfig option to the provided value:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_OPENTHREAD_COMMISSIONER</span></code> to <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p></li>
+</ul>
+<p>To enable the Thread network Joiner role on a device, set the following Kconfig option to the provided value:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_OPENTHREAD_JOINER</span></code> to <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p></li>
+</ul>
+<p>You can also configure how the commissioning process is to be started.
+The following options are available:</p>
+<ul class="simple">
+<li><p>Start automatically after the Joiner powers up.
+To configure this option, configure the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_OPENTHREAD_JOINER_AUTOSTART</span></code> option for the Joiner device.</p></li>
+<li><p>Start from the application.</p></li>
+<li><p>Trigger by Command Line Interface commands.
+In this case, the shell stack size must be increased to at least 3 KB by setting the following option:</p>
+<ul>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_SHELL_STACK_SIZE</span></code> to <code class="docutils literal notranslate"><span class="pre">3168</span></code>.</p></li>
+</ul>
+</li>
+</ul>
+<p>For more details about the commissioning process, see <a class="reference external" href="https://openthread.io/guides/build/commissioning">Thread Commissioning on OpenThread portal</a>.</p>
+</section>
+<section id="openthread-stack-logging-options">
+<span id="thread-ug-logging-options"></span><h3><a class="toc-backref" href="#id15">OpenThread stack logging options</a><a class="headerlink" href="#openthread-stack-logging-options" title="Permalink to this heading"></a></h3>
+<p>You can enable the OpenThread stack logging for your project with the following options:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LOG</span></code> - This option enables Zephyr’s <span class="xref std std-ref">zephyr:logging_api</span>.</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_OPENTHREAD_DEBUG</span></code> - This option enables logging for the OpenThread stack.</p></li>
+</ul>
+<p>Both options must be enabled to allow logging.
+Use the <code class="file docutils literal notranslate"><span class="pre">overlay-logging.conf</span></code> configuration file to enable both options for the Thread samples in the nRF Connect SDK.</p>
+<p>After setting these options, you can choose one of several <a class="reference internal" href="../../app_dev/logging/index.html#ug-logging-backends"><span class="std std-ref">logging backends</span></a> available in Zephyr and supported in the nRF Connect SDK.
+The <code class="file docutils literal notranslate"><span class="pre">overlay-logging.conf</span></code> configuration file enables <a class="reference internal" href="../../app_dev/logging/index.html#ug-logging-backends-rtt"><span class="std std-ref">RTT</span></a> as the logging backend by default.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you are working with Thread samples, enabling logging and logging backend is optional.</p>
+</div>
+<section id="logging-levels">
+<h4>Logging levels<a class="headerlink" href="#logging-levels" title="Permalink to this heading"></a></h4>
+<p>Select one of the following logging levels to customize the logging output:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_OPENTHREAD_LOG_LEVEL_CRIT</span></code> - This option enables critical error logging only.</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_OPENTHREAD_LOG_LEVEL_WARN</span></code> - This option enables warning logging in addition to critical errors.</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_OPENTHREAD_LOG_LEVEL_NOTE</span></code> - This option additionally enables notice logging.</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_OPENTHREAD_LOG_LEVEL_INFO</span></code> - This option additionally enables informational logging.</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_OPENTHREAD_LOG_LEVEL_DEBG</span></code> - This option additionally enables debug logging.</p></li>
+</ul>
+<p>The more detailed logging level you select, the bigger logging buffer you need to have to see all messages.
+Use the following Kconfig option for this purpose:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LOG_BUFFER_SIZE</span></code> - This option specifies the number of bytes dedicated to the logger internal buffer.</p></li>
+</ul>
+</section>
+</section>
+<section id="zephyr-l2-logging-options">
+<h3><a class="toc-backref" href="#id16">Zephyr L2 logging options</a><a class="headerlink" href="#zephyr-l2-logging-options" title="Permalink to this heading"></a></h3>
+<p>If you want to get logging output related to Zephyr’s L2 layer, enable one of the following Kconfig options:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_OPENTHREAD_L2_LOG_LEVEL_ERR</span></code> - Enables logging only for errors.</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_OPENTHREAD_L2_LOG_LEVEL_WRN</span></code> - Enables logging for errors and warnings.</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_OPENTHREAD_L2_LOG_LEVEL_INF</span></code> - Enables logging for informational messages, errors, and warnings.</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_OPENTHREAD_L2_LOG_LEVEL_DBG</span></code> - Enables logging for debug messages, informational messages, errors, and warnings.</p></li>
+</ul>
+<p>Choosing one of these options enables writing the appropriate information in the L2 debug log.</p>
+<p>Additionally, enabling <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_OPENTHREAD_L2_LOG_LEVEL_DBG</span></code> allows you to set the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_OPENTHREAD_L2_DEBUG</span></code> option, which in turn has the following settings:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_OPENTHREAD_L2_DEBUG_DUMP_15_4</span></code> - Enables dumping 802.15.4 frames in the debug log output.</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_OPENTHREAD_L2_DEBUG_DUMP_IPV6</span></code> - Enables dumping IPv6 frames in the debug log output.</p></li>
+</ul>
+<p>You can disable writing to log with the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_OPENTHREAD_L2_LOG_LEVEL_OFF</span></code> option.</p>
+</section>
+<section id="device-type-options">
+<span id="thread-ug-device-type"></span><h3><a class="toc-backref" href="#id17">Device type options</a><a class="headerlink" href="#device-type-options" title="Permalink to this heading"></a></h3>
+<p>You can configure OpenThread devices to run as a specific <a class="reference internal" href="overview/commissioning.html#thread-ot-device-types"><span class="std std-ref">device type</span></a>.</p>
+<dl>
+<dt>Full Thread Device (FTD)</dt><dd><p>Set <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_OPENTHREAD_FTD</span></code> to configure the device as FTD.
+This is the default configuration.</p>
+</dd>
+<dt>Minimal Thread Device (MTD)</dt><dd><p>Set <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_OPENTHREAD_MTD</span></code> to configure the device as MTD.</p>
+<p>By default, the MTD operates as Minimal End Device (MED).
+To make it operate as Sleepy End Device (SED), set <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_OPENTHREAD_MTD_SED</span></code>.</p>
+</dd>
+</dl>
+</section>
+<section id="trusted-firmware-m-support-options">
+<span id="thread-ug-tfm-support"></span><h3><a class="toc-backref" href="#id18">Trusted Firmware-M support options</a><a class="headerlink" href="#trusted-firmware-m-support-options" title="Permalink to this heading"></a></h3>
+<p>To configure your Thread application on the nRF5340 DK to run with Trusted Firmware-M, use the <code class="docutils literal notranslate"><span class="pre">nrf5340dk_nrf5340_cpuapp_ns</span></code> build target and enable the following Kconfig options:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BUILD_WITH_TFM</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_OPENTHREAD_CRYPTO_PSA</span></code></p></li>
+</ul>
+<p>In the nRF Connect SDK, these options are enabled by default for the <a class="reference internal" href="../../working_with_nrf/nrf53/nrf5340.html#ug-nrf5340-intro-app-core"><span class="std std-ref">application core</span></a> of the <a class="reference internal" href="../../samples/thread.html#openthread-samples"><span class="std std-ref">Thread samples</span></a> that can be programmed with the <code class="docutils literal notranslate"><span class="pre">nrf5340dk_nrf5340_cpuapp_ns</span></code> build target.</p>
+<p>For more Trusted Firmware-M documentation, see <a class="reference internal" href="../../app_dev/tfm/index.html#ug-tfm"><span class="std std-ref">Running applications with Trusted Firmware-M</span></a> and the official <a class="reference external" href="https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/tfm/index.html">TF-M documentation</a>.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="prebuilt_libs.html" class="btn btn-neutral float-right" title="Pre-built libraries" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="overview/commissioning.html" class="btn btn-neutral" title="OpenThread commissioning" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,1454 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GATT Human Interface Device Service (HIDS) Client &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script src="../../../_static/tabs.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../../_static/js/ncs.js"
+></script>
+<script src="../../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="GATT Heart Rate Service (HRS) Client" href="hrs_client.html" />
+    <link rel="prev" title="GATT Human Interface Device (HID) Service" href="hids.html" />
+<link
+  href="../../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../drivers.html">Drivers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Libraries</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../bin/index.html">Binary libraries</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Bluetooth libraries and services</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../adv_prov.html">Bluetooth LE advertising providers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../conn_ctx.html">Bluetooth connection context</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../enocean.html">Bluetooth EnOcean</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gatt_dm.html">GATT Discovery Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gatt_pool.html">Bluetooth GATT attribute pools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mesh.html">Bluetooth mesh profile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../rpc.html">Bluetooth Low Energy Remote Procedure Call</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../scan.html">Scanning module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ams_client.html">Apple Media Service (AMS) Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ancs_client.html">Apple Notification Center Service (ANCS) Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bas_client.html">GATT Battery Service (BAS) Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bms.html">GATT Bond Management Service (BMS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cgms.html">GATT Continuous Glucose Monitoring Service (CGMS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cts_client.html">GATT Current Time Service (CTS) Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ddfs.html">Direction and Distance Finding Service (DDFS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dfu_smp.html">GATT DFU SMP Service Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fast_pair.html">Google Fast Pair Service (GFPS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gattp.html">Generic Attribute (GATT) Profile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hids.html">GATT Human Interface Device (HID) Service</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">GATT Human Interface Device Service (HIDS) Client</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuration">Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#usage">Usage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#samples-using-the-library">Samples using the library</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#additional-information">Additional information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#api-documentation">API documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="hrs_client.html">GATT Heart Rate Service (HRS) Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="latency.html">GATT Latency Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="latency_client.html">GATT Latency Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lbs.html">LED Button Service (LBS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mds.html">Memfault Diagnostic Service (MDS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nsms.html">Nordic Status Message Service (NSMS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nus.html">Nordic UART Service (NUS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nus_client.html">Nordic UART Service (NUS) Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rscs.html">Running Speed and Cadence Service (RSCS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="throughput.html">GATT Throughput Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wifi_prov.html">Wi-Fi Provisioning Service</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../bootloader/index.html">Bootloader libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../caf/index.html">Common Application Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../debug/index.html">Debug libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../dfu/index.html">DFU libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gazell/index.html">Gazell libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../modem/index.html">Modem libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mpsl/index.html">Multiprotocol Service Layer libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../networking/index.html">Libraries for networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nfc/index.html">Libraries for NFC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nrf_rpc/index.html">nRF RPC libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../others/index.html">Other libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../shell/index.html">Shell libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tfm/index.html">TF-M libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../zigbee/index.html">Libraries for Zigbee</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Libraries</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Bluetooth libraries and services</a></li>
+      <li class="breadcrumb-item active">GATT Human Interface Device Service (HIDS) Client</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/libraries/bluetooth_services/services/hogp.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="gatt-human-interface-device-service-hids-client">
+<span id="hogp-readme"></span><h1>GATT Human Interface Device Service (HIDS) Client<a class="headerlink" href="#gatt-human-interface-device-service-hids-client" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#overview" id="id7">Overview</a></p></li>
+<li><p><a class="reference internal" href="#configuration" id="id8">Configuration</a></p></li>
+<li><p><a class="reference internal" href="#usage" id="id9">Usage</a></p>
+<ul>
+<li><p><a class="reference internal" href="#retrieving-the-hids-client-readiness-state" id="id10">Retrieving the HIDS Client readiness state</a></p></li>
+<li><p><a class="reference internal" href="#reading-the-report-map" id="id11">Reading the report map</a></p></li>
+<li><p><a class="reference internal" href="#accessing-the-reports" id="id12">Accessing the reports</a></p></li>
+<li><p><a class="reference internal" href="#changing-protocol-mode" id="id13">Changing protocol mode</a></p></li>
+<li><p><a class="reference internal" href="#suspending-and-resuming" id="id14">Suspending and resuming</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#samples-using-the-library" id="id15">Samples using the library</a></p></li>
+<li><p><a class="reference internal" href="#additional-information" id="id16">Additional information</a></p></li>
+<li><p><a class="reference internal" href="#dependencies" id="id17">Dependencies</a></p></li>
+<li><p><a class="reference internal" href="#api-documentation" id="id18">API documentation</a></p></li>
+</ul>
+</div>
+<p>The HIDS Client uses the <a class="reference internal" href="../gatt_dm.html#gatt-dm-readme"><span class="std std-ref">GATT Discovery Manager</span></a> module to acquire all attribute handles that are required to interact with the HIDS server.</p>
+<section id="overview">
+<h2><a class="toc-backref" href="#id7">Overview</a><a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+<p>Some additional data must be read from the discovered descriptors before the HIDS Client is ready.
+This process is started automatically just after the handles are assigned.
+If the process finishes successfully, the <a class="reference internal" href="#c.bt_hogp_ready_cb" title="bt_hogp_ready_cb"><code class="xref c c-type docutils literal notranslate"><span class="pre">bt_hogp_ready_cb</span></code></a> function is called.
+Otherwise, <a class="reference internal" href="#c.bt_hogp_prep_fail_cb" title="bt_hogp_prep_fail_cb"><code class="xref c c-type docutils literal notranslate"><span class="pre">bt_hogp_prep_fail_cb</span></code></a> is called.</p>
+</section>
+<section id="configuration">
+<h2><a class="toc-backref" href="#id8">Configuration</a><a class="headerlink" href="#configuration" title="Permalink to this heading"></a></h2>
+<p>Use the following Kconfig options to configure the library:</p>
+<ul>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_HOGP</span></code> - Enable the library in the application build.</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_HOGP_REPORTS_MAX</span></code> - Set the maximum number of total reports supported by the library.</p>
+<p>The report memory is shared with all HIDS Client objects, so set this option to the maximum total number of reports supported by the application.</p>
+</li>
+</ul>
+</section>
+<section id="usage">
+<h2><a class="toc-backref" href="#id9">Usage</a><a class="headerlink" href="#usage" title="Permalink to this heading"></a></h2>
+<p>You can use the GATT HIDS Client module to interact with a connected HIDS server.</p>
+<section id="retrieving-the-hids-client-readiness-state">
+<h3><a class="toc-backref" href="#id10">Retrieving the HIDS Client readiness state</a><a class="headerlink" href="#retrieving-the-hids-client-readiness-state" title="Permalink to this heading"></a></h3>
+<p>The following functions are available to retrieve the readiness state of the service client object:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#c.bt_hogp_assign_check" title="bt_hogp_assign_check"><code class="xref c c-func docutils literal notranslate"><span class="pre">bt_hogp_assign_check()</span></code></a> - Check if <a class="reference internal" href="#c.bt_hogp_handles_assign" title="bt_hogp_handles_assign"><code class="xref c c-func docutils literal notranslate"><span class="pre">bt_hogp_handles_assign()</span></code></a> was called and the post-discovery process started.</p></li>
+<li><p><a class="reference internal" href="#c.bt_hogp_ready_check" title="bt_hogp_ready_check"><code class="xref c c-func docutils literal notranslate"><span class="pre">bt_hogp_ready_check()</span></code></a> - Check if the client object is ready to interact with the HIDS server.
+The ready flag is set just before the <a class="reference internal" href="#c.bt_hogp_ready_cb" title="bt_hogp_ready_cb"><code class="xref c c-type docutils literal notranslate"><span class="pre">bt_hogp_ready_cb</span></code></a> function is called.</p></li>
+</ul>
+</section>
+<section id="reading-the-report-map">
+<h3><a class="toc-backref" href="#id11">Reading the report map</a><a class="headerlink" href="#reading-the-report-map" title="Permalink to this heading"></a></h3>
+<p>To read the report map, call <a class="reference internal" href="#c.bt_hogp_map_read" title="bt_hogp_map_read"><code class="xref c c-func docutils literal notranslate"><span class="pre">bt_hogp_map_read()</span></code></a>.
+If the report map does not fit into a single PDU, call the function repeatedly with different offsets.</p>
+<p>There is no specific support for HIDS report map interpretation implemented in the HIDS Client.</p>
+</section>
+<section id="accessing-the-reports">
+<h3><a class="toc-backref" href="#id12">Accessing the reports</a><a class="headerlink" href="#accessing-the-reports" title="Permalink to this heading"></a></h3>
+<p>To read or write a report, use one of the following functions:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#c.bt_hogp_rep_read" title="bt_hogp_rep_read"><code class="xref c c-func docutils literal notranslate"><span class="pre">bt_hogp_rep_read()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#c.bt_hogp_rep_write" title="bt_hogp_rep_write"><code class="xref c c-func docutils literal notranslate"><span class="pre">bt_hogp_rep_write()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#c.bt_hogp_rep_write_wo_rsp" title="bt_hogp_rep_write_wo_rsp"><code class="xref c c-func docutils literal notranslate"><span class="pre">bt_hogp_rep_write_wo_rsp()</span></code></a></p></li>
+</ul>
+<p>To manage input report notifications, use the following functions:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#c.bt_hogp_rep_subscribe" title="bt_hogp_rep_subscribe"><code class="xref c c-func docutils literal notranslate"><span class="pre">bt_hogp_rep_subscribe()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#c.bt_hogp_rep_unsubscribe" title="bt_hogp_rep_unsubscribe"><code class="xref c c-func docutils literal notranslate"><span class="pre">bt_hogp_rep_unsubscribe()</span></code></a></p></li>
+</ul>
+<p>The report size is always updated before the callback function is called while reading or notifying.
+It can be obtained by calling <a class="reference internal" href="#c.bt_hogp_rep_size" title="bt_hogp_rep_size"><code class="xref c c-func docutils literal notranslate"><span class="pre">bt_hogp_rep_size()</span></code></a>.</p>
+<p>All report operations require a report info pointer as input.
+How to retrieve this pointer depends on if you are processing a normal report or a boot report.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-Tm9ybWFsIHJlcG9ydA==" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-0-Tm9ybWFsIHJlcG9ydA==" name="Tm9ybWFsIHJlcG9ydA==" role="tab" tabindex="0">Normal report</button><button aria-controls="panel-0-Qm9vdCByZXBvcnQ=" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-0-Qm9vdCByZXBvcnQ=" name="Qm9vdCByZXBvcnQ=" role="tab" tabindex="-1">Boot report</button></div><div aria-labelledby="tab-0-Tm9ybWFsIHJlcG9ydA==" class="sphinx-tabs-panel group-tab" id="panel-0-Tm9ybWFsIHJlcG9ydA==" name="Tm9ybWFsIHJlcG9ydA==" role="tabpanel" tabindex="0"><p>Call the <a class="reference internal" href="#c.bt_hogp_rep_next" title="bt_hogp_rep_next"><code class="xref c c-func docutils literal notranslate"><span class="pre">bt_hogp_rep_next()</span></code></a> function to retrieve the report info pointer.
+This function iterates through all detected reports (excluding boot reports).</p>
+<p>Use the <a class="reference internal" href="#c.bt_hogp_rep_find" title="bt_hogp_rep_find"><code class="xref c c-func docutils literal notranslate"><span class="pre">bt_hogp_rep_find()</span></code></a> function to find a specific report.
+This function locates a report based on its type and ID.</p>
+</div><div aria-labelledby="tab-0-Qm9vdCByZXBvcnQ=" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-0-Qm9vdCByZXBvcnQ=" name="Qm9vdCByZXBvcnQ=" role="tabpanel" tabindex="0"><p>If the connected device supports the boot protocol, it must have mouse or keyboard boot reports available.
+This means that:</p>
+<ul class="simple">
+<li><p>For the mouse boot protocol, the function <a class="reference internal" href="#c.bt_hogp_rep_boot_mouse_in" title="bt_hogp_rep_boot_mouse_in"><code class="xref c c-func docutils literal notranslate"><span class="pre">bt_hogp_rep_boot_mouse_in()</span></code></a> returns a non-NULL value.</p></li>
+<li><p>For the keyboard boot protocol, the two functions <a class="reference internal" href="#c.bt_hogp_rep_boot_kbd_in" title="bt_hogp_rep_boot_kbd_in"><code class="xref c c-func docutils literal notranslate"><span class="pre">bt_hogp_rep_boot_kbd_in()</span></code></a> and <a class="reference internal" href="#c.bt_hogp_rep_boot_kbd_out" title="bt_hogp_rep_boot_kbd_out"><code class="xref c c-func docutils literal notranslate"><span class="pre">bt_hogp_rep_boot_kbd_out()</span></code></a> return a non-NULL value.</p></li>
+</ul>
+<p>All these functions return report pointers that may be used in the access functions.
+Note, however, that these pointers cannot be used as a previous record pointer in <a class="reference internal" href="#c.bt_hogp_rep_next" title="bt_hogp_rep_next"><code class="xref c c-func docutils literal notranslate"><span class="pre">bt_hogp_rep_next()</span></code></a>.</p>
+</div></div>
+</section>
+<section id="changing-protocol-mode">
+<h3><a class="toc-backref" href="#id13">Changing protocol mode</a><a class="headerlink" href="#changing-protocol-mode" title="Permalink to this heading"></a></h3>
+<p>To manage protocol modes, use the following functions:</p>
+<ul>
+<li><p><a class="reference internal" href="#c.bt_hogp_pm_write" title="bt_hogp_pm_write"><code class="xref c c-func docutils literal notranslate"><span class="pre">bt_hogp_pm_write()</span></code></a> - Switch between Boot Protocol Mode and Report Protocol Mode.</p>
+<p>Every time the protocol mode is changed, the <a class="reference internal" href="#c.bt_hogp_pm_update_cb" title="bt_hogp_pm_update_cb"><code class="xref c c-type docutils literal notranslate"><span class="pre">bt_hogp_pm_update_cb</span></code></a> function is called.</p>
+</li>
+<li><p><a class="reference internal" href="#c.bt_hogp_pm_get" title="bt_hogp_pm_get"><code class="xref c c-func docutils literal notranslate"><span class="pre">bt_hogp_pm_get()</span></code></a> - Retrieve the current protocol.</p>
+<p>This function returns the internally cached version of the current protocol mode.</p>
+</li>
+<li><p><a class="reference internal" href="#c.bt_hogp_pm_update" title="bt_hogp_pm_update"><code class="xref c c-func docutils literal notranslate"><span class="pre">bt_hogp_pm_update()</span></code></a> - Update the protocol mode value directly from the device.</p></li>
+</ul>
+</section>
+<section id="suspending-and-resuming">
+<h3><a class="toc-backref" href="#id14">Suspending and resuming</a><a class="headerlink" href="#suspending-and-resuming" title="Permalink to this heading"></a></h3>
+<p>To suspend or resume the connected device, call the following functions:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#c.bt_hogp_suspend" title="bt_hogp_suspend"><code class="xref c c-func docutils literal notranslate"><span class="pre">bt_hogp_suspend()</span></code></a> - Suspend the connected device.</p></li>
+<li><p><a class="reference internal" href="#c.bt_hogp_exit_suspend" title="bt_hogp_exit_suspend"><code class="xref c c-func docutils literal notranslate"><span class="pre">bt_hogp_exit_suspend()</span></code></a> - Resume the connected device.</p></li>
+</ul>
+</section>
+</section>
+<section id="samples-using-the-library">
+<h2><a class="toc-backref" href="#id15">Samples using the library</a><a class="headerlink" href="#samples-using-the-library" title="Permalink to this heading"></a></h2>
+<p>The following nRF Connect SDK modules use this library:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="hids.html#hids-readme"><span class="std std-ref">GATT Human Interface Device (HID) Service</span></a></p></li>
+<li><p><a class="reference internal" href="../../../applications/nrf_desktop/doc/hid_forward.html#nrf-desktop-hid-forward"><span class="std std-ref">HID forward module</span></a></p></li>
+</ul>
+<p>The following nRF Connect SDK application uses this library:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../../applications/nrf_desktop/README.html#nrf-desktop"><span class="std std-ref">nRF Desktop</span></a></p></li>
+</ul>
+</section>
+<section id="additional-information">
+<h2><a class="toc-backref" href="#id16">Additional information</a><a class="headerlink" href="#additional-information" title="Permalink to this heading"></a></h2>
+<p>Do not access any of the values in the <a class="reference internal" href="#c.bt_hogp" title="bt_hogp"><code class="xref c c-struct docutils literal notranslate"><span class="pre">bt_hogp</span></code></a> object structure directly.
+All values that should be accessed have accessor functions.
+The structure is fully defined to allow the application to allocate the memory for it.</p>
+</section>
+<section id="dependencies">
+<h2><a class="toc-backref" href="#id17">Dependencies</a><a class="headerlink" href="#dependencies" title="Permalink to this heading"></a></h2>
+<p>There are no dependencies for using this library.</p>
+</section>
+<section id="api-documentation">
+<h2><a class="toc-backref" href="#id18">API documentation</a><a class="headerlink" href="#api-documentation" title="Permalink to this heading"></a></h2>
+<div class="line-block">
+<div class="line">Header file: <code class="file docutils literal notranslate"><span class="pre">include/bluetooth/services/hogp.h</span></code></div>
+<div class="line">Source file: <code class="file docutils literal notranslate"><span class="pre">subsys/bluetooth/services/hogp.c</span></code></div>
+</div>
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="group__bt__hogp"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">bt_hogp</span></span></dt>
+<dd><p>API for the Bluetooth LE GATT HID Service (HIDS) Client. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-typedefs">Typedefs</p>
+<dl class="c type">
+<dt class="sig sig-object c" id="c.bt_hogp_read_cb">
+<span class="target" id="group__bt__hogp_1gaa298d01e1a7003acf6d8e6ff3ad6b012"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">bt_hogp_read_cb</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_hogp" title="bt_hogp"><span class="n"><span class="pre">bt_hogp</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">hogp</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">bt_hogp_rep_info</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">rep</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">err</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#c.bt_hogp_read_cb" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Callback function that is called when a notification or read response is received. </p>
+<p>This function is called when new data related to the given report object appears. The data size can be obtained from the report object from the <em>bt_hogp_rep_info::size</em> field.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Param hogp</dt>
+<dd class="field-odd"><p>HOGP object. </p>
+</dd>
+<dt class="field-even">Param rep</dt>
+<dd class="field-even"><p>Report object. </p>
+</dd>
+<dt class="field-odd">Param err</dt>
+<dd class="field-odd"><p>ATT error code. </p>
+</dd>
+<dt class="field-even">Param data</dt>
+<dd class="field-even"><p>Pointer to the received data.</p>
+</dd>
+<dt class="field-odd">Retval BT_GATT_ITER_STOP</dt>
+<dd class="field-odd"><p>Stop notification. </p>
+</dd>
+<dt class="field-even">Retval BT_GATT_ITER_CONTINUE</dt>
+<dd class="field-even"><p>Continue notification. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c type">
+<dt class="sig sig-object c" id="c.bt_hogp_write_cb">
+<span class="target" id="group__bt__hogp_1ga18305771e08492f0286674cd5a63933a"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">bt_hogp_write_cb</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_hogp" title="bt_hogp"><span class="n"><span class="pre">bt_hogp</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">hogp</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">bt_hogp_rep_info</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">rep</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">err</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#c.bt_hogp_write_cb" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Callback function that is called when a write response is received. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Param hogp</dt>
+<dd class="field-odd"><p>HOGP object. </p>
+</dd>
+<dt class="field-even">Param rep</dt>
+<dd class="field-even"><p>Report object. </p>
+</dd>
+<dt class="field-odd">Param err</dt>
+<dd class="field-odd"><p>ATT error code. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c type">
+<dt class="sig sig-object c" id="c.bt_hogp_ready_cb">
+<span class="target" id="group__bt__hogp_1gaf54d197d81f1cb498f1e68a0081ebe07"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">bt_hogp_ready_cb</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_hogp" title="bt_hogp"><span class="n"><span class="pre">bt_hogp</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">hogp</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#c.bt_hogp_ready_cb" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Callback function that is called when the HIDS client is ready. </p>
+<p>When the <a class="reference internal" href="#group__bt__hogp_1ga54f074bbf4687b4c008b216a7aebdda1"><span class="std std-ref">bt_hogp_handles_assign</span></a> function is called, the module starts reading all additional information it needs to work. When this process is finished, this callback function is called.</p>
+<p><div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>bt_hogp_assign_error_cb </p>
+</div>
+</p>
+<dl class="field-list simple">
+<dt class="field-odd">Param hogp</dt>
+<dd class="field-odd"><p>HOGP object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c type">
+<dt class="sig sig-object c" id="c.bt_hogp_prep_fail_cb">
+<span class="target" id="group__bt__hogp_1gaa400ad3c297b4234c09269ec4362b980"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">bt_hogp_prep_fail_cb</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_hogp" title="bt_hogp"><span class="n"><span class="pre">bt_hogp</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">hogp</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">err</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#c.bt_hogp_prep_fail_cb" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Callback function that is called when an error is detected during HIDS client preparation. </p>
+<p>When the <a class="reference internal" href="#group__bt__hogp_1ga54f074bbf4687b4c008b216a7aebdda1"><span class="std std-ref">bt_hogp_handles_assign</span></a> function is called, the module starts reading all additional information it needs to work. If an error is detected during this process, this callback function is called.</p>
+<p><div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#group__bt__hogp_1gaf54d197d81f1cb498f1e68a0081ebe07"><span class="std std-ref">bt_hogp_ready_cb</span></a> </p>
+</div>
+</p>
+<dl class="field-list simple">
+<dt class="field-odd">Param hogp</dt>
+<dd class="field-odd"><p>HOGP object. </p>
+</dd>
+<dt class="field-even">Param err</dt>
+<dd class="field-even"><p>Negative internal error code or positive ATT error code.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c type">
+<dt class="sig sig-object c" id="c.bt_hogp_map_cb">
+<span class="target" id="group__bt__hogp_1ga178dbe3c54eb57554e207b6b8974e2ff"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">bt_hogp_map_cb</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_hogp" title="bt_hogp"><span class="n"><span class="pre">bt_hogp</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">hogp</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">err</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#c.bt_hogp_map_cb" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Callback function that is called when a chunk of a report map data is received. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Param hogp</dt>
+<dd class="field-odd"><p>HOGP object. </p>
+</dd>
+<dt class="field-even">Param err</dt>
+<dd class="field-even"><p>ATT error code. </p>
+</dd>
+<dt class="field-odd">Param data</dt>
+<dd class="field-odd"><p>Pointer to the data, or NULL if there is an error or no more data. </p>
+</dd>
+<dt class="field-even">Param size</dt>
+<dd class="field-even"><p>The size of the received data chunk. </p>
+</dd>
+<dt class="field-odd">Param offset</dt>
+<dd class="field-odd"><p>Current data chunk offset. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c type">
+<dt class="sig sig-object c" id="c.bt_hogp_pm_update_cb">
+<span class="target" id="group__bt__hogp_1gae538730256abee4e677df9753f440fb7"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">bt_hogp_pm_update_cb</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_hogp" title="bt_hogp"><span class="n"><span class="pre">bt_hogp</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">hogp</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#c.bt_hogp_pm_update_cb" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Callback function that is called when the protocol mode is updated. </p>
+<p>This function is called when a protocol mode read or write finishes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Param hogp</dt>
+<dd class="field-odd"><p>HOGP object. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_hogp_init">
+<span class="target" id="group__bt__hogp_1gac501c266d8015909fbfcd8d695c1d956"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_hogp_init</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_hogp" title="bt_hogp"><span class="n"><span class="pre">bt_hogp</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">hogp</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_hogp_init_params" title="bt_hogp_init_params"><span class="n"><span class="pre">bt_hogp_init_params</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">params</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_hogp_init" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Initialize the HIDS client instance. </p>
+<p>You must call this function on the HOGP object before any other function.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This function clears the whole memory occupied by the object. Do not call it on the object in use.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hogp</strong> – HOGP object. </p></li>
+<li><p><strong>params</strong> – Initialization parameters. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_hogp_handles_assign">
+<span class="target" id="group__bt__hogp_1ga54f074bbf4687b4c008b216a7aebdda1"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_hogp_handles_assign</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">bt_gatt_dm</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">dm</span></span>, <span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_hogp" title="bt_hogp"><span class="n"><span class="pre">bt_hogp</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">hogp</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_hogp_handles_assign" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Assign handlers to the HIDS client instance. </p>
+<p>This function should be called when a link with a peer has been established, to associate the link to this instance of the module. This makes it possible to handle several links and associate each link to a particular instance of this module. The GATT attribute handles are provided by the GATT Discovery Manager.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This function starts the report discovery process. Wait for one of the functions in <a class="reference internal" href="#structbt__hogp__init__params"><span class="std std-ref">bt_hogp_init_params</span></a> before using the HIDS object.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dm</strong> – Discovery object. </p></li>
+<li><p><strong>hogp</strong> – HOGP object.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>0</strong> – If the operation was successful. Otherwise, a (negative) error code is returned. </p></li>
+<li><p><strong>(-ENOTSUP)</strong> – Special error code used when the UUID of the service does not match the expected UUID. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_hogp_release">
+<span class="target" id="group__bt__hogp_1gaed961a4e32dcfdda7242ea3b85b57d5b"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_hogp_release</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_hogp" title="bt_hogp"><span class="n"><span class="pre">bt_hogp</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">hogp</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_hogp_release" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Release the HIDS client instance. </p>
+<p>This function releases all dynamic memory allocated by the HIDS client instance and clears all the instance data.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Do not call this function on an instance that was not initialized (see <a class="reference internal" href="#group__bt__hogp_1gac501c266d8015909fbfcd8d695c1d956"><span class="std std-ref">bt_hogp_init</span></a>). After the instance is initialized, it is safe to call this function multiple times.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hogp</strong> – HOGP object. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_hogp_abort_all">
+<span class="target" id="group__bt__hogp_1gaa50f91449d182c9243f6c8c934cb84a3"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_hogp_abort_all</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_hogp" title="bt_hogp"><span class="n"><span class="pre">bt_hogp</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">hogp</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_hogp_abort_all" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Abort all pending transfers. </p>
+<p>Call this function only when the server is disconnected. Otherwise, if any read or write transfers are pending, the HOGP object might permanently return an EBUSY error on the following transfer attempts.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This function disables transfers inside the HIDS client library. It does not abort any pending transfers in the Bluetooth LE stack.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hogp</strong> – HOGP object. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_hogp_assign_check">
+<span class="target" id="group__bt__hogp_1ga79458e8a46985f8637934492e15088c2"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_hogp_assign_check</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_hogp" title="bt_hogp"><span class="n"><span class="pre">bt_hogp</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">hogp</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_hogp_assign_check" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Check if the assignment function was called. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hogp</strong> – HOGP object.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>true</strong> – If the HIDS client has handlers assigned already. </p></li>
+<li><p><strong>false</strong> – If the HIDS client is released. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_hogp_ready_check">
+<span class="target" id="group__bt__hogp_1ga77d9a53ca67772973cf4dda863eb4fc2"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_hogp_ready_check</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_hogp" title="bt_hogp"><span class="n"><span class="pre">bt_hogp</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">hogp</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_hogp_ready_check" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Check if the HIDS client is ready to work. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If <a class="reference internal" href="#group__bt__hogp_1ga79458e8a46985f8637934492e15088c2"><span class="std std-ref">bt_hogp_assign_check</span></a> returns <code class="docutils literal notranslate"><span class="pre">true</span></code> while this function returns <code class="docutils literal notranslate"><span class="pre">false</span></code>, it means that initialization is in progress.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hogp</strong> – HOGP object.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>true</strong> – If the HIDS client is ready to work. </p></li>
+<li><p><strong>false</strong> – If the HIDS client is not ready. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_hogp_rep_read">
+<span class="target" id="group__bt__hogp_1ga5513db5cc14cd2af75694e28f2546eeb"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_hogp_rep_read</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_hogp" title="bt_hogp"><span class="n"><span class="pre">bt_hogp</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">hogp</span></span>, <span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">bt_hogp_rep_info</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">rep</span></span>, <a class="reference internal" href="#c.bt_hogp_read_cb" title="bt_hogp_read_cb"><span class="n"><span class="pre">bt_hogp_read_cb</span></span></a><span class="w"> </span><span class="n"><span class="pre">func</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_hogp_rep_read" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Send a read request addressing the report value descriptor. </p>
+<p>This function can be used on any type of report.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hogp</strong> – HOGP object. </p></li>
+<li><p><strong>rep</strong> – Report object. </p></li>
+<li><p><strong>func</strong> – Function to be called to process the response.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><p><strong>0</strong> – If the operation was successful. Otherwise, a (negative) error code is returned. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_hogp_rep_write">
+<span class="target" id="group__bt__hogp_1ga7edb844daaefb9f6daeeded6502e7ab4"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_hogp_rep_write</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_hogp" title="bt_hogp"><span class="n"><span class="pre">bt_hogp</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">hogp</span></span>, <span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">bt_hogp_rep_info</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">rep</span></span>, <a class="reference internal" href="#c.bt_hogp_write_cb" title="bt_hogp_write_cb"><span class="n"><span class="pre">bt_hogp_write_cb</span></span></a><span class="w"> </span><span class="n"><span class="pre">func</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">data</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">length</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_hogp_rep_write" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Send a write request addressing the report value descriptor. </p>
+<p>Note that In reports might not support this function. In this case, this function may succeed but pass an ATT error code to the callback function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hogp</strong> – HOGP object. </p></li>
+<li><p><strong>rep</strong> – Report object. </p></li>
+<li><p><strong>func</strong> – Function to be called to process the response. </p></li>
+<li><p><strong>data</strong> – Data to be sent. </p></li>
+<li><p><strong>length</strong> – Data size.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><p><strong>0</strong> – If the operation was successful. Otherwise, a (negative) error code is returned. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_hogp_rep_write_wo_rsp">
+<span class="target" id="group__bt__hogp_1ga5ca74b1aeaf7d34a728b73e3ba0a7739"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_hogp_rep_write_wo_rsp</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_hogp" title="bt_hogp"><span class="n"><span class="pre">bt_hogp</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">hogp</span></span>, <span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">bt_hogp_rep_info</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">rep</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">data</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">length</span></span>, <a class="reference internal" href="#c.bt_hogp_write_cb" title="bt_hogp_write_cb"><span class="n"><span class="pre">bt_hogp_write_cb</span></span></a><span class="w"> </span><span class="n"><span class="pre">func</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_hogp_rep_write_wo_rsp" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Send a write command addressing the report value descriptor. </p>
+<p>Note that in case of an error, no error response from the server is received. If the server cannot execute the command, it is just ignored.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hogp</strong> – HOGP object. </p></li>
+<li><p><strong>rep</strong> – Report object. </p></li>
+<li><p><strong>data</strong> – Data to be sent. </p></li>
+<li><p><strong>length</strong> – Data size. </p></li>
+<li><p><strong>func</strong> – Function to be called when operation is completed.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><p><strong>0</strong> – If the operation was successful. Otherwise, a (negative) error code is returned. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_hogp_rep_subscribe">
+<span class="target" id="group__bt__hogp_1gae5394eb403dea9a447dcc6b2cde71a1a"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_hogp_rep_subscribe</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_hogp" title="bt_hogp"><span class="n"><span class="pre">bt_hogp</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">hogp</span></span>, <span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">bt_hogp_rep_info</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">rep</span></span>, <a class="reference internal" href="#c.bt_hogp_read_cb" title="bt_hogp_read_cb"><span class="n"><span class="pre">bt_hogp_read_cb</span></span></a><span class="w"> </span><span class="n"><span class="pre">func</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_hogp_rep_subscribe" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Subscribe to report notifications. </p>
+<p>This function may be called only on Input type reports.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hogp</strong> – HOGP object. </p></li>
+<li><p><strong>rep</strong> – Report object. </p></li>
+<li><p><strong>func</strong> – Function to be called to handle the notificated value.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><p><strong>0</strong> – If the operation was successful. Otherwise, a (negative) error code is returned. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_hogp_rep_unsubscribe">
+<span class="target" id="group__bt__hogp_1ga6b8cb1e5656cd9f3db6c905ffc75f346"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_hogp_rep_unsubscribe</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_hogp" title="bt_hogp"><span class="n"><span class="pre">bt_hogp</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">hogp</span></span>, <span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">bt_hogp_rep_info</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">rep</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_hogp_rep_unsubscribe" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Remove the subscription for a selected report. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hogp</strong> – HOGP object. </p></li>
+<li><p><strong>rep</strong> – Report object.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><p><strong>0</strong> – If the operation was successful. Otherwise, a (negative) error code is returned. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_hogp_map_read">
+<span class="target" id="group__bt__hogp_1gabfbb99e34e7b8fd5a344fcd468ff1e8b"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_hogp_map_read</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_hogp" title="bt_hogp"><span class="n"><span class="pre">bt_hogp</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">hogp</span></span>, <a class="reference internal" href="#c.bt_hogp_map_cb" title="bt_hogp_map_cb"><span class="n"><span class="pre">bt_hogp_map_cb</span></span></a><span class="w"> </span><span class="n"><span class="pre">func</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n"><span class="pre">offset</span></span>, <span class="n"><span class="pre">k_timeout_t</span></span><span class="w"> </span><span class="n"><span class="pre">timeout</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_hogp_map_read" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Read part of the report map. </p>
+<p>This function sends a read request to the report map value. Depending on the <code class="docutils literal notranslate"><span class="pre">offset</span></code>, either read or read blob is sent.</p>
+<p>The report map might not fit into a single PDU. To read the whole map, call this function repeatedly with a different offset.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This function uses the common read parameters structure inside the HIDS client object. This object may be used by other functions and is protected by semaphore.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hogp</strong> – HOGP object. </p></li>
+<li><p><strong>func</strong> – Function to be called to process the response. </p></li>
+<li><p><strong>offset</strong> – Byte offset where to start data read. </p></li>
+<li><p><strong>timeout</strong> – Time-out for the common read structure usage.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><p><strong>0</strong> – If the operation was successful. Otherwise, a (negative) error code is returned. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_hogp_pm_update">
+<span class="target" id="group__bt__hogp_1ga738cb169259d80cbe8e2f792762a11b1"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_hogp_pm_update</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_hogp" title="bt_hogp"><span class="n"><span class="pre">bt_hogp</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">hogp</span></span>, <span class="n"><span class="pre">k_timeout_t</span></span><span class="w"> </span><span class="n"><span class="pre">timeout</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_hogp_pm_update" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Read the current protocol mode from the server. </p>
+<p>The callback is called when a read response is received.</p>
+<p><div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#group__bt__hogp_1ga0dc8dea6233a8fbd929705d35dda3395"><span class="std std-ref">bt_hogp_pm_get</span></a></p>
+</div>
+</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><ul class="simple">
+<li><p>Usually, the protocol mode value is read during HIDS client preparation, and its value is followed after that. This function may be used in an error recovery situation and should not be required in normal usage.</p></li>
+<li><p>This function uses the common read parameters structure inside the HOGP object. This object may be used by other functions and is protected by semaphore.</p></li>
+</ul>
+</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hogp</strong> – HOGP object. </p></li>
+<li><p><strong>timeout</strong> – Time-out for the common read structure usage.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><p><strong>0</strong> – If the operation was successful. Otherwise, a (negative) error code is returned. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_hogp_pm_get">
+<span class="target" id="group__bt__hogp_1ga0dc8dea6233a8fbd929705d35dda3395"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="hids.html#c.bt_hids_pm" title="bt_hids_pm"><span class="n"><span class="pre">bt_hids_pm</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_hogp_pm_get</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_hogp" title="bt_hogp"><span class="n"><span class="pre">bt_hogp</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">hogp</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_hogp_pm_get" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the current protocol mode. </p>
+<p>This function returns the protocol mode stored in the HOGP object. It does not generate any traffic on the radio.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hogp</strong> – HOGP object.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Current protocol mode. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_hogp_pm_write">
+<span class="target" id="group__bt__hogp_1gad4775d1ca22c828707e9613a81078112"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_hogp_pm_write</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_hogp" title="bt_hogp"><span class="n"><span class="pre">bt_hogp</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">hogp</span></span>, <span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="hids.html#c.bt_hids_pm" title="bt_hids_pm"><span class="n"><span class="pre">bt_hids_pm</span></span></a><span class="w"> </span><span class="n"><span class="pre">pm</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_hogp_pm_write" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Set the current protocol mode. </p>
+<p>This function sends a write command to the Protocol Mode value.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For the Protocol Mode value, only Write Without Response is used, so there is no control over the real Protocol Mode value if the write does not succeed.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hogp</strong> – HOGP object. </p></li>
+<li><p><strong>pm</strong> – Protocol mode to select.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><p><strong>0</strong> – If the operation was successful. Otherwise, a (negative) error code is returned. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_hogp_suspend">
+<span class="target" id="group__bt__hogp_1ga192ef8cbcc16e0c14f5d451becbd0006"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_hogp_suspend</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_hogp" title="bt_hogp"><span class="n"><span class="pre">bt_hogp</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">hogp</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_hogp_suspend" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Suspend the device. </p>
+<p>This function sends a SUSPEND command using the Control Point Characteristic. It should be called when the HOST enters SUSPEND state.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hogp</strong> – HOGP object.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><p><strong>0</strong> – If the operation was successful. Otherwise, a (negative) error code is returned. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_hogp_exit_suspend">
+<span class="target" id="group__bt__hogp_1gac332299d31c6a02cad0d0a60cf9635c5"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_hogp_exit_suspend</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_hogp" title="bt_hogp"><span class="n"><span class="pre">bt_hogp</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">hogp</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_hogp_exit_suspend" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Exit suspend and resume. </p>
+<p>This function is used to inform the device that the HOST exits SUSPEND state.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hogp</strong> – HOGP object.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><p><strong>0</strong> – If the operation was successful. Otherwise, a (negative) error code is returned. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_hogp_conn">
+<span class="target" id="group__bt__hogp_1gab3da6bf977c9f8a02230b270df23cb57"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">bt_conn</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">bt_hogp_conn</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_hogp" title="bt_hogp"><span class="n"><span class="pre">bt_hogp</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">hogp</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_hogp_conn" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the connection object from the HIDS client. </p>
+<p>This function gets the connection object that is used with a given HIDS client.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hogp</strong> – HOGP object.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Connection object. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_hogp_conn_info_val">
+<span class="target" id="group__bt__hogp_1ga0700f4e455d9d26099d85924d34581e6"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="hids.html#c.bt_hids_info" title="bt_hids_info"><span class="n"><span class="pre">bt_hids_info</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">bt_hogp_conn_info_val</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_hogp" title="bt_hogp"><span class="n"><span class="pre">bt_hogp</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">hogp</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_hogp_conn_info_val" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Access the HID information value. </p>
+<p>This function accesses the structure with the decoded HID Information Characteristic value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hogp</strong> – HOGP object.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Pointer to the decoded HID information structure. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_hogp_rep_boot_kbd_in">
+<span class="target" id="group__bt__hogp_1gae78d86639ecfff331116e6daa6d253c3"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">bt_hogp_rep_info</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">bt_hogp_rep_boot_kbd_in</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_hogp" title="bt_hogp"><span class="n"><span class="pre">bt_hogp</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">hogp</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_hogp_rep_boot_kbd_in" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Access boot keyboard input report. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hogp</strong> – HOGP object.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The report pointer, or NULL if the device does not support boot keyboard protocol mode. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_hogp_rep_boot_kbd_out">
+<span class="target" id="group__bt__hogp_1gab7742d0fc750b51f0a0bfabc89fd9c94"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">bt_hogp_rep_info</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">bt_hogp_rep_boot_kbd_out</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_hogp" title="bt_hogp"><span class="n"><span class="pre">bt_hogp</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">hogp</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_hogp_rep_boot_kbd_out" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Access boot keyboard output report. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hogp</strong> – HOGP object.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The report pointer, or NULL if the device does not support boot keyboard protocol mode. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_hogp_rep_boot_mouse_in">
+<span class="target" id="group__bt__hogp_1gafa972ac869983065435ea8674ce5cd12"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">bt_hogp_rep_info</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">bt_hogp_rep_boot_mouse_in</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_hogp" title="bt_hogp"><span class="n"><span class="pre">bt_hogp</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">hogp</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_hogp_rep_boot_mouse_in" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Access boot mouse input report. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hogp</strong> – HOGP object.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The report pointer, or NULL if the device does not support boot mouse protocol mode. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_hogp_rep_count">
+<span class="target" id="group__bt__hogp_1gae5b428366acce526cd1ffb788b032cb5"></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_hogp_rep_count</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_hogp" title="bt_hogp"><span class="n"><span class="pre">bt_hogp</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">hogp</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_hogp_rep_count" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the number of HID reports in the device. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This function does not take boot records into account. They can be accessed using separate functions.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hogp</strong> – HOGP object.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The number of records. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_hogp_rep_next">
+<span class="target" id="group__bt__hogp_1ga8549620378a587dcf5ae651ecf9d5efc"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">bt_hogp_rep_info</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">bt_hogp_rep_next</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_hogp" title="bt_hogp"><span class="n"><span class="pre">bt_hogp</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">hogp</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">bt_hogp_rep_info</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">rep</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_hogp_rep_next" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the next report in the HOGP object. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hogp</strong> – HOGP object. </p></li>
+<li><p><strong>rep</strong> – The record before the one to access, or NULL to access the first record.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The next report according to <code class="docutils literal notranslate"><span class="pre">rep</span></code>, or NULL if no more reports are available. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_hogp_rep_find">
+<span class="target" id="group__bt__hogp_1gaa6eac27a3cd77149b18a26dd1e703cdf"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">bt_hogp_rep_info</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">bt_hogp_rep_find</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_hogp" title="bt_hogp"><span class="n"><span class="pre">bt_hogp</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">hogp</span></span>, <span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="hids.html#c.bt_hids_report_type" title="bt_hids_report_type"><span class="n"><span class="pre">bt_hids_report_type</span></span></a><span class="w"> </span><span class="n"><span class="pre">type</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">id</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_hogp_rep_find" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Find a report. </p>
+<p>This function searches for a report with the given type and identifier.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hogp</strong> – HOGP object. </p></li>
+<li><p><strong>type</strong> – The report type to find. </p></li>
+<li><p><strong>id</strong> – The identifier to find. Note that valid identifiers start from 1, but the value 0 may be used for devices that have one report of each type and there is no report ID inside the report map.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The report that was found, or NULL. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_hogp_rep_user_data_set">
+<span class="target" id="group__bt__hogp_1gae2c47b5dac051d0c735fe5de2bd3d98d"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_hogp_rep_user_data_set</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">bt_hogp_rep_info</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">rep</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">data</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_hogp_rep_user_data_set" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Set user data in report. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rep</strong> – Report object. </p></li>
+<li><p><strong>data</strong> – User data pointer to set. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_hogp_rep_user_data">
+<span class="target" id="group__bt__hogp_1ga7e085e2321b42d1c828b44b8ffe05955"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">bt_hogp_rep_user_data</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">bt_hogp_rep_info</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">rep</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_hogp_rep_user_data" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get user data from report. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rep</strong> – Report object.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>User data pointer. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_hogp_rep_id">
+<span class="target" id="group__bt__hogp_1gabd249ed143b0eb9e88cddd7853e78cdd"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_hogp_rep_id</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">bt_hogp_rep_info</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">rep</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_hogp_rep_id" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get report identifier. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rep</strong> – Report object.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Report identifier. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_hogp_rep_type">
+<span class="target" id="group__bt__hogp_1gaee428c9d1f268f6182f283d58c95dce7"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="hids.html#c.bt_hids_report_type" title="bt_hids_report_type"><span class="n"><span class="pre">bt_hids_report_type</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_hogp_rep_type</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">bt_hogp_rep_info</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">rep</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_hogp_rep_type" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get report type. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rep</strong> – Report object.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Report type. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_hogp_rep_size">
+<span class="target" id="group__bt__hogp_1gac43f9248803bb9ffa09c30cf229d8265"></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_hogp_rep_size</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">bt_hogp_rep_info</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">rep</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_hogp_rep_size" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get report size. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can rely on this function after completing the read procedure for your target HID report with the <a class="reference internal" href="#group__bt__hogp_1ga5513db5cc14cd2af75694e28f2546eeb"><span class="std std-ref">bt_hogp_rep_read</span></a> API. The completion is reported by the appropriate callback. Alternatively, you can subscribe to your target report with <a class="reference internal" href="#group__bt__hogp_1gae5394eb403dea9a447dcc6b2cde71a1a"><span class="std std-ref">bt_hogp_rep_subscribe</span></a> API and start using the function below once you receive the first notification. In all other cases, the size information is not available.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rep</strong> – Report object.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The size of the report or 0 if not available. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.bt_hogp_init_params">
+<span class="target" id="structbt__hogp__init__params"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_hogp_init_params</span></span></span><a class="headerlink" href="#c.bt_hogp_init_params" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;hogp.h&gt;</em></div>
+<p>HIDS client parameters for the initialization function. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_hogp_init_params.ready_cb">
+<span class="target" id="structbt__hogp__init__params_1ae9a49b355dc0e3d71e3958289c376d27"></span><a class="reference internal" href="#c.bt_hogp_ready_cb" title="bt_hogp_ready_cb"><span class="n"><span class="pre">bt_hogp_ready_cb</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ready_cb</span></span></span><a class="headerlink" href="#c.bt_hogp_init_params.ready_cb" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Function to call when the HID client is ready. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_hogp_init_params.prep_error_cb">
+<span class="target" id="structbt__hogp__init__params_1a35a7d2a7a0fbdfd89c6e6d888ec5a45f"></span><a class="reference internal" href="#c.bt_hogp_prep_fail_cb" title="bt_hogp_prep_fail_cb"><span class="n"><span class="pre">bt_hogp_prep_fail_cb</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">prep_error_cb</span></span></span><a class="headerlink" href="#c.bt_hogp_init_params.prep_error_cb" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Function to call if HID preparation fails. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_hogp_init_params.pm_update_cb">
+<span class="target" id="structbt__hogp__init__params_1a37bc7b9e6b4a5504990f001812532b25"></span><a class="reference internal" href="#c.bt_hogp_pm_update_cb" title="bt_hogp_pm_update_cb"><span class="n"><span class="pre">bt_hogp_pm_update_cb</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pm_update_cb</span></span></span><a class="headerlink" href="#c.bt_hogp_init_params.pm_update_cb" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Function to call when the protocol mode is updated. </p>
+<p>This function is called every time the protocol mode is read or written. The old value is not checked. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.bt_hogp">
+<span class="target" id="structbt__hogp"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_hogp</span></span></span><a class="headerlink" href="#c.bt_hogp" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;hogp.h&gt;</em></div>
+<p>HOGP object. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This structure is defined here to allow the user to allocate the memory for it in an application-dependent manner. Do not use any of the fields here directly, but use the accessor functions. There are accessors for every field you might need. </p>
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_hogp.conn">
+<span class="target" id="structbt__hogp_1a1949bbc5fd973619e91e223f5daae99c"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">bt_conn</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">conn</span></span></span><a class="headerlink" href="#c.bt_hogp.conn" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Connection object. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_hogp.info_val">
+<span class="target" id="structbt__hogp_1a11158a2022b25ceda89ae92e5f8ce5fa"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="hids.html#c.bt_hids_info" title="bt_hids_info"><span class="n"><span class="pre">bt_hids_info</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">info_val</span></span></span><a class="headerlink" href="#c.bt_hogp.info_val" title="Permalink to this definition"></a><br /></dt>
+<dd><p>HIDS client information. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_hogp.ready_cb">
+<span class="target" id="structbt__hogp_1ab1114c68e8cc1fcab7e4e4290a003411"></span><a class="reference internal" href="#c.bt_hogp_ready_cb" title="bt_hogp_ready_cb"><span class="n"><span class="pre">bt_hogp_ready_cb</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ready_cb</span></span></span><a class="headerlink" href="#c.bt_hogp.ready_cb" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Callback for HIDS client ready (see <a class="reference internal" href="#group__bt__hogp_1gaf54d197d81f1cb498f1e68a0081ebe07"><span class="std std-ref">bt_hogp_ready_cb</span></a>). </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_hogp.prep_error_cb">
+<span class="target" id="structbt__hogp_1a9fb1a4623b2cac6c6e4a22d99708fb01"></span><a class="reference internal" href="#c.bt_hogp_prep_fail_cb" title="bt_hogp_prep_fail_cb"><span class="n"><span class="pre">bt_hogp_prep_fail_cb</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">prep_error_cb</span></span></span><a class="headerlink" href="#c.bt_hogp.prep_error_cb" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Callback for HIDS client preparation failed. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_hogp.pm_update_cb">
+<span class="target" id="structbt__hogp_1af3abd49b3c4f97cfbbe80d9706ce78d1"></span><a class="reference internal" href="#c.bt_hogp_pm_update_cb" title="bt_hogp_pm_update_cb"><span class="n"><span class="pre">bt_hogp_pm_update_cb</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pm_update_cb</span></span></span><a class="headerlink" href="#c.bt_hogp.pm_update_cb" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Callback for protocol mode updated. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_hogp.map_cb">
+<span class="target" id="structbt__hogp_1afd1604df528edd21be798ec46d75bd8c"></span><a class="reference internal" href="#c.bt_hogp_map_cb" title="bt_hogp_map_cb"><span class="n"><span class="pre">bt_hogp_map_cb</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">map_cb</span></span></span><a class="headerlink" href="#c.bt_hogp.map_cb" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Callback for report map data chunk received. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_hogp.read_params">
+<span class="target" id="structbt__hogp_1a1f377e124e06c75502ad445d35dd3246"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">bt_gatt_read_params</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">read_params</span></span></span><a class="headerlink" href="#c.bt_hogp.read_params" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Internal read parameters used when reading Protocol Mode or Report Map. This struct might also be used during initialization. </p>
+<p><div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#structbt__hogp_1a36f674b59797544d66b5d3d69ad0756a"><span class="std std-ref">bt_hogp::read_params_sem</span></a> </p>
+</div>
+</p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_hogp.read_params_sem">
+<span class="target" id="structbt__hogp_1a36f674b59797544d66b5d3d69ad0756a"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">k_sem</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">read_params_sem</span></span></span><a class="headerlink" href="#c.bt_hogp.read_params_sem" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The semaphore for common read parameters protection. </p>
+<p>This semaphore must be used when <a class="reference internal" href="#structbt__hogp_1a1f377e124e06c75502ad445d35dd3246"><span class="std std-ref">bt_hogp::read_params</span></a> can be used. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_hogp.rep_idx">
+<span class="target" id="structbt__hogp_1a93b2d6574e22e615128ec01b26d3ede9"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">rep_idx</span></span></span><a class="headerlink" href="#c.bt_hogp.rep_idx" title="Permalink to this definition"></a><br /></dt>
+<dd><p>During the initialization process, all reports reference information is read. This structure helps tracking the current state of this process. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_hogp.kbd_inp">
+<span class="target" id="structbt__hogp_1a8f564d399f7f169fc4e3ab40e46972c7"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">bt_hogp_rep_info</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">kbd_inp</span></span></span><a class="headerlink" href="#c.bt_hogp.kbd_inp" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Keyboard input boot report. Input and Output keyboard reports come in pairs. It is not valid that only one of the keyboard reports is present. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_hogp.kbd_out">
+<span class="target" id="structbt__hogp_1a96f07b06e53ab1aa21fb1a42aacd7f69"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">bt_hogp_rep_info</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">kbd_out</span></span></span><a class="headerlink" href="#c.bt_hogp.kbd_out" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Keyboard output boot report. Input and Output keyboard reports come in pairs. It is not valid that only one of the keyboard reports is present. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_hogp.mouse_inp">
+<span class="target" id="structbt__hogp_1a9de6189e88429bce0b7ae1c94c85c5ee"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">bt_hogp_rep_info</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">mouse_inp</span></span></span><a class="headerlink" href="#c.bt_hogp.mouse_inp" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Mouse input boot report. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_hogp.rep_info">
+<span class="target" id="structbt__hogp_1a4eaece7349c0941c0e054afaf5dbb420"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">bt_hogp_rep_info</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">rep_info</span></span></span><a class="headerlink" href="#c.bt_hogp.rep_info" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Array of report information structures. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_hogp.rep_count">
+<span class="target" id="structbt__hogp_1afe31ab9d0cd687a8951311fce85f6902"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">rep_count</span></span></span><a class="headerlink" href="#c.bt_hogp.rep_count" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Number of records. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_hogp.ready">
+<span class="target" id="structbt__hogp_1a8094c2549a449d2f71fa14b6218070be"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ready</span></span></span><a class="headerlink" href="#c.bt_hogp.ready" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Current state. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_hogp.pm">
+<span class="target" id="structbt__hogp_1a141b93231a69db8f6507e8448b866dfc"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="hids.html#c.bt_hids_pm" title="bt_hids_pm"><span class="n"><span class="pre">bt_hids_pm</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pm</span></span></span><a class="headerlink" href="#c.bt_hogp.pm" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Current protocol mode. </p>
+</dd></dl>
+
+</div>
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.bt_hogp.bt_hogp_handlers">
+<span class="target" id="structbt__hogp_1_1bt__hogp__handlers"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_hogp_handlers</span></span></span><a class="headerlink" href="#c.bt_hogp.bt_hogp_handlers" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;hogp.h&gt;</em></div>
+<p>Handlers for descriptors </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_hogp.bt_hogp_handlers.pm">
+<span class="target" id="structbt__hogp_1_1bt__hogp__handlers_1aba015eb64574b1ca74fda6c3e85e4ef5"></span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pm</span></span></span><a class="headerlink" href="#c.bt_hogp.bt_hogp_handlers.pm" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Protocol Mode Characteristic value handle. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_hogp.bt_hogp_handlers.rep_map">
+<span class="target" id="structbt__hogp_1_1bt__hogp__handlers_1af0853b4766eab7a8828574932b49c2f4"></span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">rep_map</span></span></span><a class="headerlink" href="#c.bt_hogp.bt_hogp_handlers.rep_map" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Report Map descriptor handle. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_hogp.bt_hogp_handlers.info">
+<span class="target" id="structbt__hogp_1_1bt__hogp__handlers_1aae8215923ecbf272da71e9e381fe2972"></span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">info</span></span></span><a class="headerlink" href="#c.bt_hogp.bt_hogp_handlers.info" title="Permalink to this definition"></a><br /></dt>
+<dd><p>HID Information Characteristic handle. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_hogp.bt_hogp_handlers.cp">
+<span class="target" id="structbt__hogp_1_1bt__hogp__handlers_1ac3e3771364ff2bc9f07da533c07ac52c"></span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cp</span></span></span><a class="headerlink" href="#c.bt_hogp.bt_hogp_handlers.cp" title="Permalink to this definition"></a><br /></dt>
+<dd><p>HID Control Point Characteristic handle. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="hrs_client.html" class="btn btn-neutral float-right" title="GATT Heart Rate Service (HRS) Client" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="hids.html" class="btn btn-neutral" title="GATT Human Interface Device (HID) Service" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

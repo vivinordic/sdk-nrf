@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bluetooth: Mesh sensor &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script src="../../../../_static/tabs.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../../../_static/js/ncs.js"
+></script>
+<script src="../../../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Bluetooth: Mesh Silvair EnOcean" href="../silvair_enocean/README.html" />
+    <link rel="prev" title="Bluetooth: Mesh sensor observer" href="../sensor_client/README.html" />
+<link
+  href="../../../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../applications.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../../samples.html">Samples</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../../bl.html">Bluetooth samples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../central_and_peripheral_hr/README.html">Bluetooth: Central and Peripheral HRS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../central_bas/README.html">Bluetooth: Central BAS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../central_hids/README.html">Bluetooth: Central HIDS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../central_hr_coded/README.html">Bluetooth: Central Heart Rate Monitor with Coded PHY</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../central_nfc_pairing/README.html">Bluetooth: Central NFC pairing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../central_smp_client/README.html">Bluetooth: Central SMP Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../central_uart/README.html">Bluetooth: Central UART</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../direct_test_mode/README.html">Bluetooth: Direct Test Mode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../direction_finding_central/README.html">Bluetooth: Direction finding central</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../direction_finding_connectionless_rx/README.html">Bluetooth: Direction finding connectionless locator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../direction_finding_connectionless_tx/README.html">Bluetooth: Direction finding connectionless beacon</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../direction_finding_peripheral/README.html">Bluetooth: Direction finding peripheral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../enocean/README.html">Bluetooth: EnOcean</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../hci_lpuart/README.html">Bluetooth: HCI low power UART</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../llpm/README.html">Bluetooth: LLPM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../multiple_adv_sets/README.html">Bluetooth: Multiple advertising sets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../nrf_dm/README.html">Bluetooth: nRF Distance Measurement with Bluetooth LE discovery</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../peripheral_ams_client/README.html">Bluetooth: Peripheral AMS client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../peripheral_ancs_client/README.html">Bluetooth: Peripheral ANCS client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../peripheral_bms/README.html">Bluetooth: Peripheral Bond Management Service (BMS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../peripheral_cgms/README.html">Bluetooth: Continuous Glucose Monitoring Service (CGMS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../peripheral_cts_client/README.html">Bluetooth: Peripheral CTS client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../peripheral_fast_pair/README.html">Bluetooth: Fast Pair</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../peripheral_gatt_dm/README.html">Bluetooth: Peripheral GATT Discovery Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../peripheral_hids_keyboard/README.html">Bluetooth: Peripheral HIDS keyboard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../peripheral_hids_mouse/README.html">Bluetooth: Peripheral HIDS mouse</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../peripheral_hr_coded/README.html">Bluetooth: Peripheral Heart Rate Monitor with Coded PHY</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../peripheral_lbs/README.html">Bluetooth: Peripheral LBS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../peripheral_mds/README.html">Bluetooth: Peripheral Memfault Diagnostic Service (MDS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../peripheral_nfc_pairing/README.html">Bluetooth: NFC pairing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../peripheral_power_profiling/README.html">Bluetooth: Peripheral power profiling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../peripheral_rscs/README.html">Bluetooth: Peripheral Running Speed and Cadence Service (RSCS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../peripheral_status/README.html">Bluetooth: Peripheral Status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../peripheral_uart/README.html">Bluetooth: Peripheral UART</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../radio_coex_1wire/README.html">Bluetooth: External radio coexistence using 1-wire interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../rpc_host/README.html">Bluetooth: Host for nRF RPC Bluetooth Low Energy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../shell_bt_nus/README.html">Bluetooth: NUS shell transport</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../throughput/README.html">Bluetooth: Throughput</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ble_peripheral_lbs_coex/README.html">Bluetooth: Mesh and peripheral coexistence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../chat/README.html">Bluetooth: Mesh chat</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../light/README.html">Bluetooth: Mesh light</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../light_ctrl/README.html">Bluetooth: Mesh light fixture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../light_switch/README.html">Bluetooth: Mesh light switch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../sensor_client/README.html">Bluetooth: Mesh sensor observer</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Bluetooth: Mesh sensor</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#requirements">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#user-interface">User interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuration">Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#building-and-running">Building and running</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dependencies">Dependencies</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../silvair_enocean/README.html">Bluetooth: Mesh Silvair EnOcean</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../crypto.html">Cryptography samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../edge.html">Edge Impulse samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../gazell.html">Gazell samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../matter.html">Matter samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../nfc.html">NFC samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../nrf5340.html">nRF5340 samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../nrf9160.html">nRF9160 samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tfm.html">Trusted Firmware-M (TF-M) samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../thread.html">Thread samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../zigbee.html">Zigbee samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../wifi.html">Wi-Fi samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../other.html">Other samples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../drivers.html">Drivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../../samples.html">Samples</a></li>
+          <li class="breadcrumb-item"><a href="../../../bl.html">Bluetooth samples</a></li>
+      <li class="breadcrumb-item active">Bluetooth: Mesh sensor</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/samples/bluetooth/mesh/sensor_server/README.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="bluetooth-mesh-sensor">
+<span id="bluetooth-mesh-sensor-server"></span><h1>Bluetooth: Mesh sensor<a class="headerlink" href="#bluetooth-mesh-sensor" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#requirements" id="id6">Requirements</a></p></li>
+<li><p><a class="reference internal" href="#overview" id="id7">Overview</a></p>
+<ul>
+<li><p><a class="reference internal" href="#provisioning" id="id8">Provisioning</a></p></li>
+<li><p><a class="reference internal" href="#models" id="id9">Models</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#user-interface" id="id10">User interface</a></p></li>
+<li><p><a class="reference internal" href="#configuration" id="id11">Configuration</a></p>
+<ul>
+<li><p><a class="reference internal" href="#source-file-setup" id="id12">Source file setup</a></p></li>
+<li><p><a class="reference internal" href="#fem-support" id="id13">FEM support</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#building-and-running" id="id14">Building and running</a></p>
+<ul>
+<li><p><a class="reference internal" href="#testing" id="id15">Testing</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#dependencies" id="id16">Dependencies</a></p></li>
+</ul>
+</div>
+<p>The Bluetooth® mesh sensor sample demonstrates how to set up a basic mesh Sensor Server model application that provides sensor data to one <a class="reference internal" href="../../../../libraries/bluetooth_services/mesh/sensor_cli.html#bt-mesh-sensor-cli-readme"><span class="std std-ref">Sensor Client</span></a> model.
+Four different sensor types are used to showcase different ways for the server to publish data.
+In addition, the samples demonstrate usage of both <a class="reference internal" href="../../../../libraries/bluetooth_services/mesh/sensor.html#bt-mesh-sensor-types-channels"><span class="std std-ref">single-channel sensor types and sensor series types</span></a>, as well as how to add and write to a sensor setting.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This sample must be paired with the <a class="reference internal" href="../sensor_client/README.html#bluetooth-mesh-sensor-client"><span class="std std-ref">Bluetooth: Mesh sensor observer</span></a> sample to show any functionality.
+The mesh sensor provides the sensor data used by the observer.</p>
+</div>
+<section id="requirements">
+<h2><a class="toc-backref" href="#id6">Requirements</a><a class="headerlink" href="#requirements" title="Permalink to this heading"></a></h2>
+<p>The sample supports the following development kits:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 28%" />
+<col style="width: 7%" />
+<col style="width: 40%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Hardware platforms</p></th>
+<th class="head"><p>PCA</p></th>
+<th class="head"><p>Board name</p></th>
+<th class="head"><p>Build target</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../../working_with_nrf/nrf53/thingy53.html#ug-thingy53"><span class="std std-ref">Thingy:53</span></a></p></td>
+<td><p>PCA20053</p></td>
+<td><p><span class="xref std std-ref">thingy53_nrf5340</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">thingy53_nrf5340_cpuapp_ns</span></code>
+<code class="docutils literal notranslate"><span class="pre">thingy53_nrf5340_cpuapp</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../../working_with_nrf/nrf52/developing.html#ug-nrf52"><span class="std std-ref">nRF52 DK</span></a></p></td>
+<td><p>PCA10040</p></td>
+<td><p><span class="xref std std-ref">nrf52dk_nrf52832</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nrf52dk_nrf52832</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../../working_with_nrf/nrf52/developing.html#ug-nrf52"><span class="std std-ref">nRF52840 DK</span></a></p></td>
+<td><p>PCA10056</p></td>
+<td><p><span class="xref std std-ref">nrf52840dk_nrf52840</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nrf52840dk_nrf52840</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../../app_dev/working_with_fem/index.html#ug-radio-fem"><span class="std std-ref">nRF21540 DK</span></a></p></td>
+<td><p>PCA10112</p></td>
+<td><p><span class="xref std std-ref">nrf21540dk_nrf52840</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nrf21540dk_nrf52840</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>For provisioning and configuring of the mesh model instances, the sample requires a smartphone with Nordic Semiconductor’s nRF Mesh mobile app installed in one of the following versions:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://play.google.com/store/apps/details?id=no.nordicsemi.android.nrfmeshprovisioner">nRF Mesh mobile app for Android</a></p></li>
+<li><p><a class="reference external" href="https://apps.apple.com/us/app/nrf-mesh/id1380726771">nRF Mesh mobile app for iOS</a></p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you build this application for Thingy:53, it enables additional features. See <a class="reference internal" href="../../../../working_with_nrf/nrf53/thingy53.html#thingy53-app-guide"><span class="std std-ref">Thingy:53 application guide</span></a> for details.</p>
+</div>
+<p>Additionally, the sample requires the <a class="reference internal" href="../sensor_client/README.html#bluetooth-mesh-sensor-client"><span class="std std-ref">Bluetooth: Mesh sensor observer</span></a> sample application.
+The application needs to be programmed on a separate device, and configured according to the sensor observer sample’s <a class="reference internal" href="#bluetooth-mesh-sensor-server-testing"><span class="std std-ref">testing guide</span></a>.</p>
+<p>When built for an <code class="docutils literal notranslate"><span class="pre">_ns</span></code> build target, the sample is configured to compile and run as a non-secure application with <a class="reference internal" href="../../../../app_dev/board_support/index.html#app-boards-spe-nspe-cpuapp-ns"><span class="std std-ref">Cortex-M Security Extensions enabled</span></a>.
+Therefore, it automatically includes <a class="reference internal" href="../../../../app_dev/tfm/index.html#ug-tfm"><span class="std std-ref">Trusted Firmware-M</span></a> that prepares the required peripherals and secure services to be available for the application.</p>
+</section>
+<section id="overview">
+<h2><a class="toc-backref" href="#id7">Overview</a><a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+<p>The following Bluetooth mesh sensor types are used in this sample:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../../../libraries/bluetooth_services/mesh/sensor_types.html#c.bt_mesh_sensor_present_dev_op_temp" title="bt_mesh_sensor_present_dev_op_temp"><code class="xref c c-var docutils literal notranslate"><span class="pre">bt_mesh_sensor_present_dev_op_temp</span></code></a> - Published by the server according to its publishing period (see <a class="reference internal" href="#bluetooth-mesh-sensor-server-conf-models"><span class="std std-ref">Configuring models</span></a>).</p></li>
+<li><p><a class="reference internal" href="../../../../libraries/bluetooth_services/mesh/sensor_types.html#c.bt_mesh_sensor_dev_op_temp_range_spec" title="bt_mesh_sensor_dev_op_temp_range_spec"><code class="xref c c-var docutils literal notranslate"><span class="pre">bt_mesh_sensor_dev_op_temp_range_spec</span></code></a> - Used as a setting for the <a class="reference internal" href="../../../../libraries/bluetooth_services/mesh/sensor_types.html#c.bt_mesh_sensor_present_dev_op_temp" title="bt_mesh_sensor_present_dev_op_temp"><code class="xref c c-var docutils literal notranslate"><span class="pre">bt_mesh_sensor_present_dev_op_temp</span></code></a> sensor type to set the range of reported temperatures.</p></li>
+<li><p><a class="reference internal" href="../../../../libraries/bluetooth_services/mesh/sensor_types.html#c.bt_mesh_sensor_rel_runtime_in_a_dev_op_temp_range" title="bt_mesh_sensor_rel_runtime_in_a_dev_op_temp_range"><code class="xref c c-var docutils literal notranslate"><span class="pre">bt_mesh_sensor_rel_runtime_in_a_dev_op_temp_range</span></code></a> - Periodically requested by the client.</p></li>
+<li><p><a class="reference internal" href="../../../../libraries/bluetooth_services/mesh/sensor_types.html#c.bt_mesh_sensor_presence_detected" title="bt_mesh_sensor_presence_detected"><code class="xref c c-var docutils literal notranslate"><span class="pre">bt_mesh_sensor_presence_detected</span></code></a> - Published when a button is pressed on the server.</p></li>
+<li><p><a class="reference internal" href="../../../../libraries/bluetooth_services/mesh/sensor_types.html#c.bt_mesh_sensor_time_since_presence_detected" title="bt_mesh_sensor_time_since_presence_detected"><code class="xref c c-var docutils literal notranslate"><span class="pre">bt_mesh_sensor_time_since_presence_detected</span></code></a> - Periodically requested by the client and published by the server according to its publishing period (see <a class="reference internal" href="#bluetooth-mesh-sensor-server-conf-models"><span class="std std-ref">Configuring models</span></a>).</p></li>
+</ul>
+<p>Moreover, the on-chip <code class="docutils literal notranslate"><span class="pre">TEMP_NRF5</span></code> temperature sensor is used for the nRF52 series, and the <code class="docutils literal notranslate"><span class="pre">BME680</span></code> temperature sensor for Thingy:53.</p>
+<section id="provisioning">
+<h3><a class="toc-backref" href="#id8">Provisioning</a><a class="headerlink" href="#provisioning" title="Permalink to this heading"></a></h3>
+<p>The provisioning is handled by the <a class="reference internal" href="../../../../libraries/bluetooth_services/mesh/dk_prov.html#bt-mesh-dk-prov"><span class="std std-ref">Bluetooth mesh provisioning handler for Nordic DKs</span></a>.
+It supports four types of out-of-band (OOB) authentication methods, and uses the Hardware Information driver to generate a deterministic UUID to uniquely represent the device.</p>
+<p>Use <a class="reference external" href="https://www.nordicsemi.com/Software-and-Tools/Development-Tools/nRF-Mesh">nRF Mesh mobile app</a> for provisioning and configuring of models supported by the sample.</p>
+</section>
+<section id="models">
+<h3><a class="toc-backref" href="#id9">Models</a><a class="headerlink" href="#models" title="Permalink to this heading"></a></h3>
+<p>The following table shows the Bluetooth mesh sensor composition data for this sample:</p>
+<blockquote>
+<div><table class="docutils align-default">
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Element 1</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Config Server</p></td>
+</tr>
+<tr class="row-odd"><td><p>Health Server</p></td>
+</tr>
+<tr class="row-even"><td><p>Sensor Server</p></td>
+</tr>
+<tr class="row-odd"><td><p>Sensor Setup Server</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>The models are used for the following purposes:</p>
+<ul class="simple">
+<li><p>Config Server allows configurator devices to configure the node remotely.</p></li>
+<li><p>Health Server provides <code class="docutils literal notranslate"><span class="pre">attention</span></code> callbacks that are used during provisioning to call your attention to the device.
+These callbacks trigger blinking of the LEDs.</p></li>
+<li><p>Sensor Server provides sensor data to one or more <a class="reference internal" href="../../../../libraries/bluetooth_services/mesh/sensor_cli.html#bt-mesh-sensor-cli-readme"><span class="std std-ref">mesh sensor observers</span></a>.</p></li>
+<li><p>Sensor Setup Server is used for configuration of the Sensor Server.</p></li>
+</ul>
+<p>The model handling is implemented in <code class="file docutils literal notranslate"><span class="pre">src/model_handler.c</span></code>.
+It uses the TEMP_NRF5 or BME680 temperature sensor depending on the platform.</p>
+<p>The sample has a descriptor related to the <a class="reference internal" href="../../../../libraries/bluetooth_services/mesh/sensor_types.html#c.bt_mesh_sensor_present_dev_op_temp" title="bt_mesh_sensor_present_dev_op_temp"><code class="xref c c-var docutils literal notranslate"><span class="pre">bt_mesh_sensor_present_dev_op_temp</span></code></a> sensor, which specifies tolerance values for the <code class="docutils literal notranslate"><span class="pre">TEMP_NRF5</span></code> temperature sensor calculated based on the <a class="reference external" href="https://infocenter.nordicsemi.com/topic/com.nordic.infocenter.nrf52832.ps.v1.1/temp.html?cp=4_2_0_26_1_0#unique_339758917">nRF52832 Temperature Sensor Electrical Specification</a>.
+The descriptor also specifies the temperature sensor’s sampling type, which is <a class="reference internal" href="../../../../libraries/bluetooth_services/mesh/sensor.html#c.bt_mesh_sensor_sampling.BT_MESH_SENSOR_SAMPLING_INSTANTANEOUS" title="BT_MESH_SENSOR_SAMPLING_INSTANTANEOUS"><code class="xref c c-var docutils literal notranslate"><span class="pre">BT_MESH_SENSOR_SAMPLING_INSTANTANEOUS</span></code></a>.</p>
+<p>The <a class="reference internal" href="../../../../libraries/others/dk_buttons_and_leds.html#dk-buttons-and-leds-readme"><span class="std std-ref">DK Buttons and LEDs</span></a> library is used to detect button presses.</p>
+<p>The <span class="xref std std-ref">Zephyr settings API</span> is used to persistently store the sensor range setting for the temperature sensor, given that <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_SETTING</span></code> is enabled.</p>
+</section>
+</section>
+<section id="user-interface">
+<h2><a class="toc-backref" href="#id10">User interface</a><a class="headerlink" href="#user-interface" title="Permalink to this heading"></a></h2>
+<dl class="simple">
+<dt>Buttons:</dt><dd><p>Can be used to input the OOB authentication value during provisioning.
+All buttons have the same functionality during the provisioning procedure.</p>
+</dd>
+<dt>Button 1:</dt><dd><p>Simulates presence detected (after the provisioning procedure is finished).</p>
+</dd>
+</dl>
+</section>
+<section id="configuration">
+<h2><a class="toc-backref" href="#id11">Configuration</a><a class="headerlink" href="#configuration" title="Permalink to this heading"></a></h2>
+<p>See <a class="reference internal" href="../../../../getting_started/modifying.html#configure-application"><span class="std std-ref">Configuring your application</span></a> for information about how to permanently or temporarily change the configuration.</p>
+<p>For nRF5340 and Thingy:53, the extended advertiser has to be set manually for the network core, because the Bluetooth® Low Energy does not know that the Bluetooth mesh is enabled when built for this core. This is already done for this sample by setting <code class="docutils literal notranslate"><span class="pre">CONFIG_BT_EXT_ADV=y</span></code> for the network core.</p>
+<section id="source-file-setup">
+<h3><a class="toc-backref" href="#id12">Source file setup</a><a class="headerlink" href="#source-file-setup" title="Permalink to this heading"></a></h3>
+<p>This sample is split into the following source files:</p>
+<ul class="simple">
+<li><p>A <code class="file docutils literal notranslate"><span class="pre">main.c</span></code> file to handle initialization.</p></li>
+<li><p>A file for handling mesh models, <code class="file docutils literal notranslate"><span class="pre">model_handler.c</span></code>.</p></li>
+</ul>
+</section>
+<section id="fem-support">
+<h3><a class="toc-backref" href="#id13">FEM support</a><a class="headerlink" href="#fem-support" title="Permalink to this heading"></a></h3>
+<p>You can add support for the nRF21540 front-end module to this sample by using one of the following options, depending on your hardware:</p>
+<ul>
+<li><p>Build the sample for one board that contains the nRF21540 FEM, such as <span class="xref std std-ref">nrf21540dk_nrf52840</span>.</p></li>
+<li><p>Manually create a devicetree overlay file that describes how FEM is connected to the nRF5 SoC in your device.
+See <span class="xref std std-ref">zephyr:set-devicetree-overlays</span> for different ways of adding the overlay file.</p></li>
+<li><p>Provide nRF21540 FEM capabilities by using a <span class="xref std std-ref">shield</span>, for example the <a class="reference internal" href="../../../../app_dev/working_with_fem/index.html#ug-radio-fem-nrf21540-ek"><span class="std std-ref">nRF21540 EK</span></a> shield that is available in the nRF Connect SDK.
+In this case, build the project for a board connected to the shield you are using with an appropriate variable included in the build command, for example <code class="docutils literal notranslate"><span class="pre">SHIELD=nrf21540_ek</span></code>.
+This variable instructs the build system to append the appropriate devicetree overlay file.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-blJGIENvbm5lY3QgZm9yIFZTIENvZGU=" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-0-blJGIENvbm5lY3QgZm9yIFZTIENvZGU=" name="blJGIENvbm5lY3QgZm9yIFZTIENvZGU=" role="tab" tabindex="0">nRF Connect for VS Code</button><button aria-controls="panel-0-Q29tbWFuZCBsaW5l" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-0-Q29tbWFuZCBsaW5l" name="Q29tbWFuZCBsaW5l" role="tab" tabindex="-1">Command line</button></div><div aria-labelledby="tab-0-blJGIENvbm5lY3QgZm9yIFZTIENvZGU=" class="sphinx-tabs-panel group-tab" id="panel-0-blJGIENvbm5lY3QgZm9yIFZTIENvZGU=" name="blJGIENvbm5lY3QgZm9yIFZTIENvZGU=" role="tabpanel" tabindex="0"><p>To build the sample in the nRF Connect for VS Code IDE for an nRF52840 DK with the nRF21540 EK attached, add the shield variable in the build configuration’s <span class="guilabel">Extra CMake arguments</span> and rebuild the build configuration.
+For example: <code class="docutils literal notranslate"><span class="pre">-DSHIELD=nrf21540_ek</span></code>.</p>
+<p>See <a class="reference external" href="https://nrfconnect.github.io/vscode-nrf-connect/guides/build_config.html">nRF Connect for VS Code extension pack</a> documentation for more information.</p>
+</div><div aria-labelledby="tab-0-Q29tbWFuZCBsaW5l" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-0-Q29tbWFuZCBsaW5l" name="Q29tbWFuZCBsaW5l" role="tabpanel" tabindex="0"><p>To build the sample from the command line for an nRF52840 DK with the nRF21540 EK attached, use the following command within the sample directory:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">west build -b nrf52840dk_nrf52840 -- -DSHIELD=nrf21540_ek</span>
+</pre></div>
+</div>
+</div></div>
+<p>See <a class="reference internal" href="../../../../app_dev/working_with_fem/index.html#ug-radio-fem-nrf21540-ek-programming"><span class="std std-ref">Programming nRF21540 EK</span></a> for information about how to program when you are using a board with a network core, for example nRF5340 DK.</p>
+</li>
+</ul>
+<p>Each of these options adds the description of the nRF21540 FEM to the devicetree.
+See <a class="reference internal" href="../../../../app_dev/working_with_fem/index.html#ug-radio-fem"><span class="std std-ref">Working with RF front-end modules</span></a> for more information about FEM in the nRF Connect SDK.</p>
+<p>To add support for other front-end modules, add the respective devicetree file entries to the board devicetree file or the devicetree overlay file.</p>
+</section>
+</section>
+<section id="building-and-running">
+<h2><a class="toc-backref" href="#id14">Building and running</a><a class="headerlink" href="#building-and-running" title="Permalink to this heading"></a></h2>
+<p>This sample can be found under <code class="file docutils literal notranslate"><span class="pre">samples/bluetooth/mesh/sensor_server</span></code> in the nRF Connect SDK folder structure.</p>
+<p>When built as firmware image for the <code class="docutils literal notranslate"><span class="pre">_ns</span></code> build target, the sample has Cortex-M Security Extensions (CMSE) enabled and separates the firmware between Non-Secure Processing Environment (NSPE) and Secure Processing Environment (SPE).
+Because of this, it automatically includes the <a class="reference internal" href="../../../../app_dev/tfm/index.html#ug-tfm"><span class="std std-ref">Trusted Firmware-M (TF-M)</span></a>.
+To read more about CMSE, see <a class="reference internal" href="../../../../app_dev/board_support/index.html#app-boards-spe-nspe"><span class="std std-ref">Processing environments</span></a>.</p>
+<p>To build the sample with Visual Studio Code, follow the steps listed on the <a class="reference external" href="https://nrfconnect.github.io/vscode-nrf-connect/get_started/build_app_ncs.html">How to build an application</a> page in the nRF Connect for VS Code extension documentation.
+See <a class="reference internal" href="../../../../getting_started/programming.html#gs-programming"><span class="std std-ref">Building and programming an application</span></a> for other building and programming scenarios and <a class="reference internal" href="../../../../getting_started/testing.html#gs-testing"><span class="std std-ref">Testing and debugging an application</span></a> for general information about testing and debugging in the nRF Connect SDK.</p>
+<section id="testing">
+<span id="bluetooth-mesh-sensor-server-testing"></span><h3><a class="toc-backref" href="#id15">Testing</a><a class="headerlink" href="#testing" title="Permalink to this heading"></a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The Bluetooth mesh sensor sample cannot demonstrate any functionality on its own, and needs a device with the <a class="reference internal" href="../sensor_client/README.html#bluetooth-mesh-sensor-client"><span class="std std-ref">Bluetooth: Mesh sensor observer</span></a> sample running in the same mesh network.
+Before testing the sensor sample, go through the sensor observer sample’s <a class="reference internal" href="../sensor_client/README.html#bluetooth-mesh-sensor-client-testing"><span class="std std-ref">testing guide</span></a> with a different development kit.</p>
+</div>
+<p>After programming the sample to your development kit, you can test it by using a smartphone with <a class="reference external" href="https://www.nordicsemi.com/Software-and-Tools/Development-Tools/nRF-Mesh">nRF Mesh mobile app</a> installed.
+Testing consists of provisioning the device, and configuring it for communication with the mesh models.</p>
+<section id="provisioning-the-device">
+<h4>Provisioning the device<a class="headerlink" href="#provisioning-the-device" title="Permalink to this heading"></a></h4>
+<p>The provisioning assigns an address range to the device, and adds it to the mesh network.
+Complete the following steps in the nRF Mesh app:</p>
+<ol class="arabic simple">
+<li><p>Tap <span class="guilabel">Add node</span> to start scanning for unprovisioned mesh devices.</p></li>
+<li><p>Select the <span class="guilabel">Mesh Sensor</span> device to connect to it.</p></li>
+<li><p>Tap <span class="guilabel">Identify</span>, and then <span class="guilabel">Provision</span>, to provision the device.</p></li>
+<li><p>When prompted, select an OOB method and follow the instructions in the app.</p></li>
+</ol>
+<p>Once the provisioning is complete, the app returns to the Network screen.</p>
+</section>
+<section id="configuring-models">
+<span id="bluetooth-mesh-sensor-server-conf-models"></span><h4>Configuring models<a class="headerlink" href="#configuring-models" title="Permalink to this heading"></a></h4>
+<p>See <a class="reference internal" href="../../../../protocols/bt_mesh/model_config_app.html#ug-bt-mesh-model-config-app"><span class="std std-ref">Configuring mesh models using the nRF Mesh mobile app</span></a> for details on how to configure the mesh models with the nRF Mesh mobile app.</p>
+<p>Configure the Sensor Server model on the <strong>Mesh Sensor</strong> node:</p>
+<ul class="simple">
+<li><p>Bind the model to <strong>Application Key 1</strong>.</p></li>
+<li><p>Set the publication parameters:</p>
+<ul>
+<li><p>Destination/publish address: Select an existing group or create a new one, but make sure that the Sensor Client subscribes to the same group.</p></li>
+<li><p>Retransmit count: Set the count to zero (<strong>Disabled</strong>), to avoid duplicate logging in the <a class="reference internal" href="../../../../libraries/bluetooth_services/mesh/sensor_cli.html#bt-mesh-sensor-cli-readme"><span class="std std-ref">Sensor Client</span></a>’s UART terminal.</p></li>
+</ul>
+</li>
+<li><p>Set the subscription parameters: Select an existing group or create a new one, but make sure that the Sensor Client publishes to the same group.</p></li>
+</ul>
+<p>The Sensor Server model is now configured and able to send data to the Sensor Client.</p>
+<p>Configure the Sensor Setup Server model on the <strong>Mesh Sensor</strong> node:</p>
+<ul class="simple">
+<li><p>Bind the model to <strong>Application Key 1</strong>.</p></li>
+<li><p>Set the subscription parameters: Select an existing group or create a new one, but make sure that the Sensor Client publishes to the same group.</p></li>
+</ul>
+<p>The Sensor Setup Server model is now configured and able to receive sensor setting messages from the Sensor Client.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To enable Sensor Server configuration by a Sensor Client, an application key must be bound to the Sensor Setup Server.
+This functionality must also be programmed in the <a class="reference internal" href="../../../../libraries/bluetooth_services/mesh/sensor_cli.html#bt-mesh-sensor-cli-readme"><span class="std std-ref">Sensor Client</span></a> device.</p>
+</div>
+</section>
+</section>
+</section>
+<section id="dependencies">
+<h2><a class="toc-backref" href="#id16">Dependencies</a><a class="headerlink" href="#dependencies" title="Permalink to this heading"></a></h2>
+<p>This sample uses the following nRF Connect SDK libraries:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../../../libraries/bluetooth_services/mesh/sensor_srv.html#bt-mesh-sensor-srv-readme"><span class="std std-ref">Sensor Server</span></a></p></li>
+<li><p><a class="reference internal" href="../../../../libraries/bluetooth_services/mesh/dk_prov.html#bt-mesh-dk-prov"><span class="std std-ref">Bluetooth mesh provisioning handler for Nordic DKs</span></a></p></li>
+<li><p><a class="reference internal" href="../../../../libraries/others/dk_buttons_and_leds.html#dk-buttons-and-leds-readme"><span class="std std-ref">DK Buttons and LEDs</span></a></p></li>
+</ul>
+<p>In addition, it uses the following Zephyr libraries:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">include/drivers/hwinfo.h</span></code></p></li>
+<li><p><span class="xref std std-ref">zephyr:kernel_api</span>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">include/kernel.h</span></code></p></li>
+</ul>
+</li>
+<li><p><span class="xref std std-ref">zephyr:bluetooth_api</span>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">include/bluetooth/bluetooth.h</span></code></p></li>
+</ul>
+</li>
+<li><p><span class="xref std std-ref">zephyr:bluetooth_mesh</span>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">include/bluetooth/mesh.h</span></code></p></li>
+</ul>
+</li>
+<li><p><span class="xref std std-ref">zephyr:settings_api</span>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">include/settings/settings.h</span></code></p></li>
+</ul>
+</li>
+</ul>
+<p>The sample also uses the following secure firmware component:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../../../app_dev/tfm/index.html#ug-tfm"><span class="std std-ref">Trusted Firmware-M</span></a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../silvair_enocean/README.html" class="btn btn-neutral float-right" title="Bluetooth: Mesh Silvair EnOcean" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../sensor_client/README.html" class="btn btn-neutral" title="Bluetooth: Mesh sensor observer" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

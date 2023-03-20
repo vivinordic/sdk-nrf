@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DFU target &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../_static/js/ncs.js"
+></script>
+<script src="../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Full modem firmware update from flash device" href="fmfu_fdev.html" />
+    <link rel="prev" title="DFU multi-image" href="dfu_multi_image.html" />
+<link
+  href="../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drivers.html">Drivers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Libraries</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../bin/index.html">Binary libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bluetooth_services/index.html">Bluetooth libraries and services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bootloader/index.html">Bootloader libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../caf/index.html">Common Application Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../debug/index.html">Debug libraries</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">DFU libraries</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="dfu_multi_image.html">DFU multi-image</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">DFU target</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuration">Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#api-documentation">API documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="fmfu_fdev.html">Full modem firmware update from flash device</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fmfu_mgmt.html">Mcumgr based full modem update</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pcd.html">Peripheral CPU DFU (PCD)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../gazell/index.html">Gazell libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modem/index.html">Modem libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mpsl/index.html">Multiprotocol Service Layer libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../networking/index.html">Libraries for networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nfc/index.html">Libraries for NFC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nrf_rpc/index.html">nRF RPC libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../others/index.html">Other libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../shell/index.html">Shell libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tfm/index.html">TF-M libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../zigbee/index.html">Libraries for Zigbee</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Libraries</a></li>
+          <li class="breadcrumb-item"><a href="index.html">DFU libraries</a></li>
+      <li class="breadcrumb-item active">DFU target</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/libraries/dfu/dfu_target.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="dfu-target">
+<span id="lib-dfu-target"></span><h1>DFU target<a class="headerlink" href="#dfu-target" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#overview" id="id7">Overview</a></p>
+<ul>
+<li><p><a class="reference internal" href="#common-application-flow" id="id8">Common application flow</a></p></li>
+<li><p><a class="reference internal" href="#supported-upgrade-types" id="id9">Supported upgrade types</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#configuration" id="id10">Configuration</a></p>
+<ul>
+<li><p><a class="reference internal" href="#enabling-the-library" id="id11">Enabling the library</a></p></li>
+<li><p><a class="reference internal" href="#disabling-support-for-specific-dfu-targets" id="id12">Disabling support for specific DFU targets</a></p></li>
+<li><p><a class="reference internal" href="#maintaining-writing-progress-after-reboot" id="id13">Maintaining writing progress after reboot</a></p></li>
+<li><p><a class="reference internal" href="#using-a-dedicated-partition-for-full-modem-upgrades" id="id14">Using a dedicated partition for full modem upgrades</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#api-documentation" id="id15">API documentation</a></p></li>
+</ul>
+</div>
+<p>The DFU target library provides an API that supports different types of firmware upgrades against a single interface.</p>
+<section id="overview">
+<h2><a class="toc-backref" href="#id7">Overview</a><a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+<p>The DFU target library collects sequentially the image data received from a transport protocol.
+It then saves the data using buffered writes, resulting in fewer write operations and faster response times seen by the application.
+The library also takes away, from the application, the responsibility of calculating the data-chunk write offset.</p>
+<section id="common-application-flow">
+<h3><a class="toc-backref" href="#id8">Common application flow</a><a class="headerlink" href="#common-application-flow" title="Permalink to this heading"></a></h3>
+<p>Each of the supported upgrade types follow the common DFU flow.</p>
+<ol class="arabic">
+<li><p>Initialize the specific DFU target by calling the <a class="reference internal" href="#c.dfu_target_init" title="dfu_target_init"><code class="xref c c-func docutils literal notranslate"><span class="pre">dfu_target_init()</span></code></a> function.</p>
+<p>Internally, it uses the image type and image number to decide which target to initialize.</p>
+</li>
+<li><p>Ask the offset of already downloaded blocks by calling the <a class="reference internal" href="#c.dfu_target_offset_get" title="dfu_target_offset_get"><code class="xref c c-func docutils literal notranslate"><span class="pre">dfu_target_offset_get()</span></code></a> function.</p>
+<p>This step is optional, but it allows the application to skip the blocks that are already downloaded.
+All targets do not necessarily support it.</p>
+</li>
+<li><p>Write a block of DFU image into the target by calling the <a class="reference internal" href="#c.dfu_target_write" title="dfu_target_write"><code class="xref c c-func docutils literal notranslate"><span class="pre">dfu_target_write()</span></code></a> function.</p>
+<p>Repeat until all blocks have been downloaded.</p>
+</li>
+<li><p>When all downloads have completed, call the <a class="reference internal" href="#c.dfu_target_done" title="dfu_target_done"><code class="xref c c-func docutils literal notranslate"><span class="pre">dfu_target_done()</span></code></a> function to tell the DFU library that the process has completed.</p></li>
+<li><p>When the application is ready to install the image, call the <a class="reference internal" href="#c.dfu_target_schedule_update" title="dfu_target_schedule_update"><code class="xref c c-func docutils literal notranslate"><span class="pre">dfu_target_schedule_update()</span></code></a> function to mark it as ready for update.</p>
+<p>Some targets perform the installation automatically on next boot.</p>
+</li>
+</ol>
+<p>To cancel an ongoing operation, call the <a class="reference internal" href="#c.dfu_target_reset" title="dfu_target_reset"><code class="xref c c-func docutils literal notranslate"><span class="pre">dfu_target_reset()</span></code></a> function.
+This clears up any images that have already been downloaded or even marked to be updated.
+This is different than aborting a download by calling the <a class="reference internal" href="#c.dfu_target_done" title="dfu_target_done"><code class="xref c c-func docutils literal notranslate"><span class="pre">dfu_target_done()</span></code></a> function, in which case the same download can be resumed later by initializing the same target.</p>
+</section>
+<section id="supported-upgrade-types">
+<h3><a class="toc-backref" href="#id9">Supported upgrade types</a><a class="headerlink" href="#supported-upgrade-types" title="Permalink to this heading"></a></h3>
+<p>The DFU target library supports the following types of firmware upgrades:</p>
+<ul class="simple">
+<li><p>MCUboot-style upgrades</p></li>
+<li><p>Modem delta upgrades</p></li>
+<li><p>Full modem firmware upgrades</p></li>
+</ul>
+<section id="mcuboot-style-upgrades">
+<h4>MCUboot-style upgrades<a class="headerlink" href="#mcuboot-style-upgrades" title="Permalink to this heading"></a></h4>
+<p>You can use MCUboot-style firmware upgrades for updates to the application and to the upgradable bootloader.
+This type of DFU writes the data given to the <a class="reference internal" href="#c.dfu_target_write" title="dfu_target_write"><code class="xref c c-func docutils literal notranslate"><span class="pre">dfu_target_write()</span></code></a> function into the secondary slot specified by MCUboot’s flash memory partitions.
+Depending on the type of upgrade, it has the following behavior:</p>
+<ul class="simple">
+<li><p>For application updates, the new image replaces the existing application.</p></li>
+<li><p>For bootloader updates, the new firmware is placed in the non-active partition (slot 0 or slot 1, see <a class="reference internal" href="../../app_dev/bootloaders_and_dfu/bootloader.html#upgradable-bootloader"><span class="std std-ref">Second-stage Upgradable bootloader</span></a>).</p></li>
+</ul>
+<p>The MCUboot target type supports multiple image pairs, like the application core image pair and the network core image pair, to support multi-image updates where the device contains two or more executable images at once.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When updating the bootloader, ensure that the provided bootloader firmware is linked against the correct partition.
+This is handled automatically by the <a class="reference internal" href="../networking/fota_download.html#lib-fota-download"><span class="std std-ref">FOTA download</span></a> library.</p>
+</div>
+<p>When the image data transfer is completed, the application using the DFU target library must do the following:</p>
+<ol class="arabic simple">
+<li><p>Call the <a class="reference internal" href="#c.dfu_target_done" title="dfu_target_done"><code class="xref c c-func docutils literal notranslate"><span class="pre">dfu_target_done()</span></code></a> function to finish the image data collection.</p></li>
+<li><p>Call the <a class="reference internal" href="#c.dfu_target_schedule_update" title="dfu_target_schedule_update"><code class="xref c c-func docutils literal notranslate"><span class="pre">dfu_target_schedule_update()</span></code></a> function to mark the firmware as <em>ready to be booted</em>.
+On the next reboot, the device will run with the new firmware.</p></li>
+</ol>
+<p>After that, the application can call the <a class="reference internal" href="#c.dfu_target_init" title="dfu_target_init"><code class="xref c c-func docutils literal notranslate"><span class="pre">dfu_target_init()</span></code></a> function for another image pair index.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The application can schedule the upgrade of all the image pairs at once using the <a class="reference internal" href="#c.dfu_target_schedule_update" title="dfu_target_schedule_update"><code class="xref c c-func docutils literal notranslate"><span class="pre">dfu_target_schedule_update()</span></code></a> function.</p>
+</div>
+</section>
+<section id="modem-delta-upgrades">
+<h4>Modem delta upgrades<a class="headerlink" href="#modem-delta-upgrades" title="Permalink to this heading"></a></h4>
+<p>This type of firmware upgrade is used for delta upgrades to the modem firmware (see: <span class="xref std std-ref">nrf_modem_delta_dfu</span>).
+The modem stores the data in the memory location reserved for firmware patches.
+If there is already a firmware patch stored in the modem, the library requests the modem to delete the old firmware patch to make space for the new patch.</p>
+<p>When the transfer has completed, the application must call the <a class="reference internal" href="#c.dfu_target_done" title="dfu_target_done"><code class="xref c c-func docutils literal notranslate"><span class="pre">dfu_target_done()</span></code></a> function to release modem resources and then call <a class="reference internal" href="#c.dfu_target_schedule_update" title="dfu_target_schedule_update"><code class="xref c c-func docutils literal notranslate"><span class="pre">dfu_target_schedule_update()</span></code></a> to request the modem to apply the patch.
+On the next reboot, the modem tries to apply the patch.</p>
+<p>If an existing image needs to be removed, even if it is marked to be updated, the application may call the <a class="reference internal" href="#c.dfu_target_reset" title="dfu_target_reset"><code class="xref c c-func docutils literal notranslate"><span class="pre">dfu_target_reset()</span></code></a> function, which erases the DFU area and prepares it for next download.</p>
+</section>
+<section id="full-modem-upgrades">
+<span id="lib-dfu-target-full-modem-update"></span><h4>Full modem upgrades<a class="headerlink" href="#full-modem-upgrades" title="Permalink to this heading"></a></h4>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>An external flash memory with minimum 4 MB is required for this type of upgrade.</p>
+</div>
+<p>This type of firmware upgrade supports updating the modem firmware using the serialized firmware bundled in the zip file of the modem firmware release.
+The serialized firmware file uses the <code class="file docutils literal notranslate"><span class="pre">.cbor</span></code> extension.</p>
+<p>This DFU target downloads the serialized modem firmware to an external flash memory.
+Once the modem firmware has been downloaded, the application should use <a class="reference internal" href="fmfu_fdev.html#lib-fmfu-fdev"><span class="std std-ref">Full modem firmware update from flash device</span></a> to write the firmware to the modem.
+The DFU target library does not perform the upgrade and calling the <a class="reference internal" href="#c.dfu_target_schedule_update" title="dfu_target_schedule_update"><code class="xref c c-func docutils literal notranslate"><span class="pre">dfu_target_schedule_update()</span></code></a> function has no effect.</p>
+</section>
+</section>
+</section>
+<section id="configuration">
+<h2><a class="toc-backref" href="#id10">Configuration</a><a class="headerlink" href="#configuration" title="Permalink to this heading"></a></h2>
+<p>Configuring the library requires making edits to your component and using Kconfig options.</p>
+<section id="enabling-the-library">
+<h3><a class="toc-backref" href="#id11">Enabling the library</a><a class="headerlink" href="#enabling-the-library" title="Permalink to this heading"></a></h3>
+<p>Every supported DFU target must implement the set of functions defined in <code class="file docutils literal notranslate"><span class="pre">subsys/dfu/src/dfu_target.c</span></code>.</p>
+<p>When initializing the DFU target library, you must provide information about the type of firmware upgrade.
+To do so automatically, send the first fragment of the firmware to the function <a class="reference internal" href="#c.dfu_target_img_type" title="dfu_target_img_type"><code class="xref c c-func docutils literal notranslate"><span class="pre">dfu_target_img_type()</span></code></a>.
+This function can identify all supported firmware upgrade types.
+The result of this call can then be given as input to the <a class="reference internal" href="#c.dfu_target_init" title="dfu_target_init"><code class="xref c c-func docutils literal notranslate"><span class="pre">dfu_target_init()</span></code></a> function.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>After starting a DFU procedure for a given target, you cannot initialize a new DFU procedure with a different firmware file for the same target until the pending DFU procedure has completed successfully or the device has been restarted.</p>
+</div>
+</section>
+<section id="disabling-support-for-specific-dfu-targets">
+<h3><a class="toc-backref" href="#id12">Disabling support for specific DFU targets</a><a class="headerlink" href="#disabling-support-for-specific-dfu-targets" title="Permalink to this heading"></a></h3>
+<p>You can disable support for specific DFU targets using the following options:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_DFU_TARGET_MCUBOOT</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_DFU_TARGET_MODEM_DELTA</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_DFU_TARGET_FULL_MODEM</span></code></p></li>
+</ul>
+</section>
+<section id="maintaining-writing-progress-after-reboot">
+<h3><a class="toc-backref" href="#id13">Maintaining writing progress after reboot</a><a class="headerlink" href="#maintaining-writing-progress-after-reboot" title="Permalink to this heading"></a></h3>
+<p>You can let the application maintain the writing progress in case the device reboots.
+To do so, enable the following options:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_SETTINGS</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_DFU_TARGET_STREAM_SAVE_PROGRESS</span></code>.</p></li>
+</ul>
+<p>The MCUboot target will then use the <span class="xref std std-ref">zephyr:settings_api</span> subsystem in Zephyr to store the current progress used by the <a class="reference internal" href="#c.dfu_target_write" title="dfu_target_write"><code class="xref c c-func docutils literal notranslate"><span class="pre">dfu_target_write()</span></code></a> function across power failures and device resets.</p>
+</section>
+<section id="using-a-dedicated-partition-for-full-modem-upgrades">
+<h3><a class="toc-backref" href="#id14">Using a dedicated partition for full modem upgrades</a><a class="headerlink" href="#using-a-dedicated-partition-for-full-modem-upgrades" title="Permalink to this heading"></a></h3>
+<p>Enable the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">DFU_TARGET_FULL_MODEM_USE_EXT_PARTITION</span></code> Kconfig option to use <a class="reference internal" href="../../scripts/partition_manager/partition_manager.html#partition-manager"><span class="std std-ref">Partition Manager</span></a> for creating a dedicated partition for full modem upgrades.
+External flash partitions require <code class="docutils literal notranslate"><span class="pre">nordic,pm-ext-flash</span></code> to be set in the devicetree; see <a class="reference internal" href="../../scripts/partition_manager/partition_manager.html#partition-manager"><span class="std std-ref">Partition Manager</span></a> for details.</p>
+</section>
+</section>
+<section id="api-documentation">
+<h2><a class="toc-backref" href="#id15">API documentation</a><a class="headerlink" href="#api-documentation" title="Permalink to this heading"></a></h2>
+<div class="line-block">
+<div class="line">Header file: <code class="file docutils literal notranslate"><span class="pre">include/dfu/dfu_target.h</span></code></div>
+<div class="line">Source files: <code class="file docutils literal notranslate"><span class="pre">subsys/dfu/dfu_target/src/</span></code></div>
+</div>
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="group__dfu__target"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">dfu_target</span></span></dt>
+<dd><p>DFU Target. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-typedefs">Typedefs</p>
+<dl class="c type">
+<dt class="sig sig-object c" id="c.dfu_target_callback_t">
+<span class="target" id="group__dfu__target_1gaa44ceb54189d4c0dba08f4e8044a5981"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">dfu_target_callback_t</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#c.dfu_target_evt_id" title="dfu_target_evt_id"><span class="n"><span class="pre">dfu_target_evt_id</span></span></a><span class="w"> </span><span class="n"><span class="pre">evt_id</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#c.dfu_target_callback_t" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-enums">Enums</p>
+<dl class="c enum">
+<dt class="sig sig-object c" id="c.dfu_target_image_type">
+<span class="target" id="group__dfu__target_1gad3de6472dd7ff6c41abd911a16b67a79"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dfu_target_image_type</span></span></span><a class="headerlink" href="#c.dfu_target_image_type" title="Permalink to this definition"></a><br /></dt>
+<dd><p>DFU image type. </p>
+<p>Bitmasks of different image types. </p>
+<p><em>Values:</em></p>
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.dfu_target_image_type.DFU_TARGET_IMAGE_TYPE_NONE">
+<span class="target" id="group__dfu__target_1ggad3de6472dd7ff6c41abd911a16b67a79a0606e296febdc61b15eba9510db52526"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">DFU_TARGET_IMAGE_TYPE_NONE</span></span></span><a class="headerlink" href="#c.dfu_target_image_type.DFU_TARGET_IMAGE_TYPE_NONE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Not a DFU image </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.dfu_target_image_type.DFU_TARGET_IMAGE_TYPE_MCUBOOT">
+<span class="target" id="group__dfu__target_1ggad3de6472dd7ff6c41abd911a16b67a79a971e80b0ea81a9d208e46aef4dd4d5f2"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">DFU_TARGET_IMAGE_TYPE_MCUBOOT</span></span></span><a class="headerlink" href="#c.dfu_target_image_type.DFU_TARGET_IMAGE_TYPE_MCUBOOT" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Application image in MCUBoot format </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.dfu_target_image_type.DFU_TARGET_IMAGE_TYPE_MODEM_DELTA">
+<span class="target" id="group__dfu__target_1ggad3de6472dd7ff6c41abd911a16b67a79aa7f0de8d6936c577ba3c983d9edf38fd"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">DFU_TARGET_IMAGE_TYPE_MODEM_DELTA</span></span></span><a class="headerlink" href="#c.dfu_target_image_type.DFU_TARGET_IMAGE_TYPE_MODEM_DELTA" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Modem delta-update image </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.dfu_target_image_type.DFU_TARGET_IMAGE_TYPE_FULL_MODEM">
+<span class="target" id="group__dfu__target_1ggad3de6472dd7ff6c41abd911a16b67a79a62e2ebd66c771dca682dd941b0b0dd35"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">DFU_TARGET_IMAGE_TYPE_FULL_MODEM</span></span></span><a class="headerlink" href="#c.dfu_target_image_type.DFU_TARGET_IMAGE_TYPE_FULL_MODEM" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Full update image for modem </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.dfu_target_image_type.DFU_TARGET_IMAGE_TYPE_ANY_APPLICATION">
+<span class="target" id="group__dfu__target_1ggad3de6472dd7ff6c41abd911a16b67a79a1c9c99be3dc7a3f569bb47ec2e03ddb7"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">DFU_TARGET_IMAGE_TYPE_ANY_APPLICATION</span></span></span><a class="headerlink" href="#c.dfu_target_image_type.DFU_TARGET_IMAGE_TYPE_ANY_APPLICATION" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Any application image type </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.dfu_target_image_type.DFU_TARGET_IMAGE_TYPE_ANY_MODEM">
+<span class="target" id="group__dfu__target_1ggad3de6472dd7ff6c41abd911a16b67a79a301c54768dfa8860c789528931353a99"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">DFU_TARGET_IMAGE_TYPE_ANY_MODEM</span></span></span><a class="headerlink" href="#c.dfu_target_image_type.DFU_TARGET_IMAGE_TYPE_ANY_MODEM" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Any modem image </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.dfu_target_image_type.DFU_TARGET_IMAGE_TYPE_ANY">
+<span class="target" id="group__dfu__target_1ggad3de6472dd7ff6c41abd911a16b67a79a29662e95b0547c1870d583d441c4aa9d"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">DFU_TARGET_IMAGE_TYPE_ANY</span></span></span><a class="headerlink" href="#c.dfu_target_image_type.DFU_TARGET_IMAGE_TYPE_ANY" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Any DFU image type </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="c enum">
+<dt class="sig sig-object c" id="c.dfu_target_evt_id">
+<span class="target" id="group__dfu__target_1ga9206912ee74cd457d34f3d717793a709"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dfu_target_evt_id</span></span></span><a class="headerlink" href="#c.dfu_target_evt_id" title="Permalink to this definition"></a><br /></dt>
+<dd><p><em>Values:</em></p>
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.dfu_target_evt_id.DFU_TARGET_EVT_TIMEOUT">
+<span class="target" id="group__dfu__target_1gga9206912ee74cd457d34f3d717793a709a9f71f6924ab2990963b50dd6f7da831e"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">DFU_TARGET_EVT_TIMEOUT</span></span></span><a class="headerlink" href="#c.dfu_target_evt_id.DFU_TARGET_EVT_TIMEOUT" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.dfu_target_evt_id.DFU_TARGET_EVT_ERASE_DONE">
+<span class="target" id="group__dfu__target_1gga9206912ee74cd457d34f3d717793a709a30ecc081254e15d567a5e831264e2b2a"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">DFU_TARGET_EVT_ERASE_DONE</span></span></span><a class="headerlink" href="#c.dfu_target_evt_id.DFU_TARGET_EVT_ERASE_DONE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.dfu_target_img_type">
+<span class="target" id="group__dfu__target_1gaa93e6e95392abe0cce100c9098e00ac1"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#c.dfu_target_image_type" title="dfu_target_image_type"><span class="n"><span class="pre">dfu_target_image_type</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dfu_target_img_type</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">buf</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n"><span class="pre">len</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.dfu_target_img_type" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Find the image type for the buffer of bytes received. Used to determine what DFU target to initialize. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>buf</strong> – <strong>[in]</strong> A buffer of bytes which are the start of a binary firmware image. </p></li>
+<li><p><strong>len</strong> – <strong>[in]</strong> The length of the provided buffer.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Identifier for a supported image type or DFU_TARGET_IMAGE_TYPE_NONE if image type is not recognized. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.dfu_target_init">
+<span class="target" id="group__dfu__target_1ga3e2f3839f898cb6866467210fed33e32"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dfu_target_init</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">img_type</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">img_num</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n"><span class="pre">file_size</span></span>, <a class="reference internal" href="#c.dfu_target_callback_t" title="dfu_target_callback_t"><span class="n"><span class="pre">dfu_target_callback_t</span></span></a><span class="w"> </span><span class="n"><span class="pre">cb</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.dfu_target_init" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Initialize the resources needed for the specific image type DFU target. </p>
+<p>If a target update is in progress, and the same target is given as input, then calling the ‘init()’ function of that target is skipped.</p>
+<p>To allow continuation of an aborted DFU procedure, call the ‘dfu_target_offset_get’ function after invoking this function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>img_type</strong> – <strong>[in]</strong> Image type identifier. </p></li>
+<li><p><strong>img_num</strong> – <strong>[in]</strong> Image pair index. Value different than 0 are supported only for DFU_TARGET_IMAGE_TYPE_MCUBOOT image type currently. </p></li>
+<li><p><strong>file_size</strong> – <strong>[in]</strong> Size of the current file being downloaded. </p></li>
+<li><p><strong>cb</strong> – <strong>[in]</strong> Callback function in case the DFU operation requires additional procedures to be called.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>0 for a supported image type or a negative error code indicating reason of failure. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.dfu_target_offset_get">
+<span class="target" id="group__dfu__target_1gab4b88b8b9da5954ea84bda8c48ab5f7c"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dfu_target_offset_get</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">offset</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.dfu_target_offset_get" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get offset of the firmware upgrade. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>offset</strong> – <strong>[out]</strong> Returns the offset of the firmware upgrade.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>0 if success, otherwise negative value if unable to get the offset </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.dfu_target_write">
+<span class="target" id="group__dfu__target_1gaa03afef7cf2545969f6e1ef55cd211f7"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dfu_target_write</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">buf</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n"><span class="pre">len</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.dfu_target_write" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Write the given buffer to the initialized DFU target. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>buf</strong> – <strong>[in]</strong> A buffer of bytes which contains part of a binary firmware image. </p></li>
+<li><p><strong>len</strong> – <strong>[in]</strong> The length of the provided buffer.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Positive identifier for a supported image type or a negative error code indicating reason of failure. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.dfu_target_done">
+<span class="target" id="group__dfu__target_1ga0017dc97c4e8e9a00be3c2a06977cbef"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dfu_target_done</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n"><span class="pre">successful</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.dfu_target_done" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Release the resources that were needed for the current DFU target. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>successful</strong> – <strong>[in]</strong> Indicate whether the process completed successfully or was aborted.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>0 for a successful deinitialization or a negative error code indicating reason of failure. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.dfu_target_reset">
+<span class="target" id="group__dfu__target_1ga41a02c7f06085a9cbade90d76672a6ac"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dfu_target_reset</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.dfu_target_reset" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Release the resources that were needed for the current DFU target if any and resets the current DFU target. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>0 for a successful deinitialization and reset or a negative error code indicating reason of failure. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.dfu_target_schedule_update">
+<span class="target" id="group__dfu__target_1gaa586822fd1a282263cfd0c4d40d4b269"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dfu_target_schedule_update</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">img_num</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.dfu_target_schedule_update" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Schedule update of one or more images. </p>
+<p>This call requests images update. Time of update depends on image type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>img_num</strong> – <strong>[in]</strong> For DFU_TARGET_IMAGE_TYPE_MCUBOOT image type: given image pair index or -1 for all of image pair indexes. Disregard otherwise.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>0 for a successful request or a negative error code indicating reason of failure. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.dfu_target">
+<span class="target" id="structdfu__target"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dfu_target</span></span></span><a class="headerlink" href="#c.dfu_target" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;dfu_target.h&gt;</em></div>
+<p>Functions which needs to be supported by all DFU targets. </p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="fmfu_fdev.html" class="btn btn-neutral float-right" title="Full modem firmware update from flash device" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="dfu_multi_image.html" class="btn btn-neutral" title="DFU multi-image" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

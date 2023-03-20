@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Testing the bootloader chain &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script src="../../_static/tabs.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../_static/js/ncs.js"
+></script>
+<script src="../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Using external flash memory partitions" href="bootloader_external_flash.html" />
+    <link rel="prev" title="Adding a bootloader chain" href="bootloader_adding.html" />
+<link
+  href="../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev_model.html">Development model</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../app_dev.html">Application development</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../board_support/index.html">Board support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pin_control/index.html">Pin control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../build_and_config_system/index.html">Build and configuration system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../optimizing/index.html">Optimizing application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ap_protect/index.html">Enabling access port protection mechanism</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Bootloaders and Device Firmware Updates</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="bootloader.html">Secure bootloader chain</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bootloader_adding.html">Adding a bootloader chain</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Testing the bootloader chain</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bootloader_external_flash.html">Using external flash memory partitions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bootloader_config.html">Customizing the bootloader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fw_update.html">Firmware updates</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../logging/index.html">Logging in nRF Connect SDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multi_image/index.html">Multi-image builds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../testing_unity_cmock/index.html">Testing with Unity and CMock</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tfm/index.html">Running applications with Trusted Firmware-M</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_fem/index.html">Working with RF front-end modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../wifi_coex/index.html">Adding Wi-Fi Coexistence support to short-range radio applications</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drivers.html">Drivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../app_dev.html">Application development</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Bootloaders and Device Firmware Updates</a></li>
+      <li class="breadcrumb-item active">Testing the bootloader chain</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/app_dev/bootloaders_and_dfu/bootloader_testing.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="testing-the-bootloader-chain">
+<span id="ug-bootloader-testing"></span><h1>Testing the bootloader chain<a class="headerlink" href="#testing-the-bootloader-chain" title="Permalink to this heading"></a></h1>
+<p>To test either of the bootloaders and the secure bootloader chain, build and program them with any sample as described in <a class="reference internal" href="bootloader_adding.html#ug-bootloader-adding"><span class="std std-ref">Adding a bootloader chain</span></a>.</p>
+<p>By default, both nRF Secure Immutable Bootloader and MCUboot print information to their serial output on boot.
+This output includes information about the validation of images in its slots, as well as firmware-specific information if using <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_FW_INFO</span></code> with the nRF Secure Immutable Bootloader.
+To see this output:</p>
+<ol class="arabic simple">
+<li><p>Connect to the kit with a terminal emulator (for example, PuTTY).
+See <a class="reference internal" href="../../getting_started/testing.html#putty"><span class="std std-ref">How to connect with PuTTY</span></a> for the required settings.</p></li>
+<li><p>Reset the development kit.</p></li>
+<li><p>Observe that each bootloader in the chain prints its information upon boot (some values may vary by build):</p></li>
+</ol>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">nRF Secure Immutable Bootloader</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">MCUboot</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Attempting</span> <span class="n">to</span> <span class="n">boot</span> <span class="n">slot</span> <span class="mf">0.</span>
+<span class="n">Attempting</span> <span class="n">to</span> <span class="n">boot</span> <span class="kn">from</span> <span class="nn">address</span> <span class="mh">0x9000</span><span class="o">.</span>
+<span class="n">Verifying</span> <span class="n">signature</span> <span class="n">against</span> <span class="n">key</span> <span class="mf">0.</span>
+<span class="n">Hash</span><span class="p">:</span> <span class="mh">0xc0</span><span class="o">..</span><span class="mf">.71</span>
+<span class="n">Firmware</span> <span class="n">signature</span> <span class="n">verified</span><span class="o">.</span>
+<span class="n">Firmware</span> <span class="n">version</span> <span class="mi">1</span>
+<span class="n">Setting</span> <span class="n">monotonic</span> <span class="n">counter</span> <span class="p">(</span><span class="n">version</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="n">slot</span><span class="p">:</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mf">00.359</span><span class="p">,</span><span class="mi">039</span><span class="p">]</span> <span class="o">&lt;</span><span class="n">inf</span><span class="o">&gt;</span> <span class="n">mcuboot</span><span class="p">:</span> <span class="n">Starting</span> <span class="n">bootloader</span>
+<span class="p">[</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mf">00.365</span><span class="p">,</span><span class="mi">295</span><span class="p">]</span> <span class="o">&lt;</span><span class="n">inf</span><span class="o">&gt;</span> <span class="n">mcuboot</span><span class="p">:</span> <span class="n">Primary</span> <span class="n">image</span><span class="p">:</span> <span class="n">magic</span><span class="o">=</span><span class="n">unset</span><span class="p">,</span> <span class="n">swap_type</span><span class="o">=</span><span class="mh">0x1</span><span class="p">,</span> <span class="n">copy_done</span><span class="o">=</span><span class="mh">0x3</span><span class="p">,</span> <span class="n">image_ok</span><span class="o">=</span><span class="mh">0x3</span>
+<span class="p">[</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mf">00.375</span><span class="p">,</span><span class="mi">671</span><span class="p">]</span> <span class="o">&lt;</span><span class="n">inf</span><span class="o">&gt;</span> <span class="n">mcuboot</span><span class="p">:</span> <span class="n">Secondary</span> <span class="n">image</span><span class="p">:</span> <span class="n">magic</span><span class="o">=</span><span class="n">unset</span><span class="p">,</span> <span class="n">swap_type</span><span class="o">=</span><span class="mh">0x1</span><span class="p">,</span> <span class="n">copy_done</span><span class="o">=</span><span class="mh">0x3</span><span class="p">,</span> <span class="n">image_ok</span><span class="o">=</span><span class="mh">0x3</span>
+<span class="p">[</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mf">00.386</span><span class="p">,</span><span class="mi">169</span><span class="p">]</span> <span class="o">&lt;</span><span class="n">inf</span><span class="o">&gt;</span> <span class="n">mcuboot</span><span class="p">:</span> <span class="n">Boot</span> <span class="n">source</span><span class="p">:</span> <span class="n">none</span>
+<span class="p">[</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mf">00.391</span><span class="p">,</span><span class="mi">815</span><span class="p">]</span> <span class="o">&lt;</span><span class="n">inf</span><span class="o">&gt;</span> <span class="n">mcuboot</span><span class="p">:</span> <span class="n">Swap</span> <span class="nb">type</span><span class="p">:</span> <span class="n">none</span>
+<span class="p">[</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mf">00.420</span><span class="p">,</span><span class="mi">166</span><span class="p">]</span> <span class="o">&lt;</span><span class="n">inf</span><span class="o">&gt;</span> <span class="n">mcuboot</span><span class="p">:</span> <span class="n">Bootloader</span> <span class="n">chainload</span> <span class="n">address</span> <span class="n">offset</span><span class="p">:</span> <span class="mh">0xc000</span>
+<span class="p">[</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mf">00.428</span><span class="p">,</span><span class="mi">039</span><span class="p">]</span> <span class="o">&lt;</span><span class="n">inf</span><span class="o">&gt;</span> <span class="n">mcuboot</span><span class="p">:</span> <span class="n">Jumping</span> <span class="n">to</span> <span class="n">the</span> <span class="n">first</span> <span class="n">image</span> <span class="n">slot</span>
+</pre></div>
+</div>
+</div></div>
+<p>When compiled with minimal configurations that disable logging output, such as <code class="docutils literal notranslate"><span class="pre">prj_minimal.conf</span></code>, you can disable the bootloader information output altogether or per-bootloader.
+Refer to the source code directories of each bootloader to see what minimal configuration options are already available, or add them through a custom Kconfig fragment if desired.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="bootloader_external_flash.html" class="btn btn-neutral float-right" title="Using external flash memory partitions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="bootloader_adding.html" class="btn btn-neutral" title="Adding a bootloader chain" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

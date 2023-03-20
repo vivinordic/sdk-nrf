@@ -1,0 +1,1546 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apple Notification Center Service (ANCS) Client &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../../_static/js/ncs.js"
+></script>
+<script src="../../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="GATT Battery Service (BAS) Client" href="bas_client.html" />
+    <link rel="prev" title="Apple Media Service (AMS) Client" href="ams_client.html" />
+<link
+  href="../../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../drivers.html">Drivers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Libraries</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../bin/index.html">Binary libraries</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Bluetooth libraries and services</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../adv_prov.html">Bluetooth LE advertising providers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../conn_ctx.html">Bluetooth connection context</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../enocean.html">Bluetooth EnOcean</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gatt_dm.html">GATT Discovery Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gatt_pool.html">Bluetooth GATT attribute pools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mesh.html">Bluetooth mesh profile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../rpc.html">Bluetooth Low Energy Remote Procedure Call</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../scan.html">Scanning module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ams_client.html">Apple Media Service (AMS) Client</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Apple Notification Center Service (ANCS) Client</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuration">Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#usage">Usage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#samples-using-the-library">Samples using the library</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#api-documentation">API documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="bas_client.html">GATT Battery Service (BAS) Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bms.html">GATT Bond Management Service (BMS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cgms.html">GATT Continuous Glucose Monitoring Service (CGMS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cts_client.html">GATT Current Time Service (CTS) Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ddfs.html">Direction and Distance Finding Service (DDFS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dfu_smp.html">GATT DFU SMP Service Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fast_pair.html">Google Fast Pair Service (GFPS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gattp.html">Generic Attribute (GATT) Profile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hids.html">GATT Human Interface Device (HID) Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hogp.html">GATT Human Interface Device Service (HIDS) Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hrs_client.html">GATT Heart Rate Service (HRS) Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="latency.html">GATT Latency Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="latency_client.html">GATT Latency Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lbs.html">LED Button Service (LBS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mds.html">Memfault Diagnostic Service (MDS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nsms.html">Nordic Status Message Service (NSMS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nus.html">Nordic UART Service (NUS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nus_client.html">Nordic UART Service (NUS) Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rscs.html">Running Speed and Cadence Service (RSCS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="throughput.html">GATT Throughput Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wifi_prov.html">Wi-Fi Provisioning Service</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../bootloader/index.html">Bootloader libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../caf/index.html">Common Application Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../debug/index.html">Debug libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../dfu/index.html">DFU libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gazell/index.html">Gazell libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../modem/index.html">Modem libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mpsl/index.html">Multiprotocol Service Layer libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../networking/index.html">Libraries for networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nfc/index.html">Libraries for NFC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nrf_rpc/index.html">nRF RPC libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../others/index.html">Other libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../shell/index.html">Shell libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tfm/index.html">TF-M libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../zigbee/index.html">Libraries for Zigbee</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Libraries</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Bluetooth libraries and services</a></li>
+      <li class="breadcrumb-item active">Apple Notification Center Service (ANCS) Client</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/libraries/bluetooth_services/services/ancs_client.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="apple-notification-center-service-ancs-client">
+<span id="ancs-client-readme"></span><h1>Apple Notification Center Service (ANCS) Client<a class="headerlink" href="#apple-notification-center-service-ancs-client" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#overview" id="id7">Overview</a></p></li>
+<li><p><a class="reference internal" href="#configuration" id="id8">Configuration</a></p></li>
+<li><p><a class="reference internal" href="#usage" id="id9">Usage</a></p></li>
+<li><p><a class="reference internal" href="#samples-using-the-library" id="id10">Samples using the library</a></p></li>
+<li><p><a class="reference internal" href="#dependencies" id="id11">Dependencies</a></p></li>
+<li><p><a class="reference internal" href="#api-documentation" id="id12">API documentation</a></p></li>
+</ul>
+</div>
+<p>The ANCS Client module is used for implementation of the Apple Notification Center Service (ANCS) client.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Disclaimer: Nordic Semiconductor ASA can change the client implementation of the Apple Notification Center Service at any time.
+Apple can change the server implementations such as the ones found in iOS at any time, which may cause this client implementation to stop working.</p>
+</div>
+<section id="overview">
+<h2><a class="toc-backref" href="#id7">Overview</a><a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+<p>The ANCS client can be used as a Notification Consumer (NC) that receives data notifications from a Notification Provider (NP).
+The NP is typically an iOS device that is acting as a server.
+For detailed information about the Apple Notification Center Service, see <a class="reference external" href="https://developer.apple.com/library/archive/documentation/CoreBluetooth/Reference/AppleNotificationCenterServiceSpecification/Introduction/Introduction.html">Apple Developer Documentation</a>.</p>
+<p>In this module, iOS notifications are received through the GATT notifications.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The term <em>notification</em> is used in two different meanings:</p>
+<ul class="simple">
+<li><p>An iOS notification is the data received from the Notification Provider.</p></li>
+<li><p>A GATT notification is a way to transfer data with Bluetooth® Low Energy.</p></li>
+</ul>
+<p><em>iOS notification</em> and <em>GATT notification</em> are used where required to avoid confusion.</p>
+</div>
+</section>
+<section id="configuration">
+<h2><a class="toc-backref" href="#id8">Configuration</a><a class="headerlink" href="#configuration" title="Permalink to this heading"></a></h2>
+<p>Upon initializing the module, add different iOS notification attributes you want to receive for iOS notifications (see <a class="reference internal" href="#c.bt_ancs_register_attr" title="bt_ancs_register_attr"><code class="xref c c-func docutils literal notranslate"><span class="pre">bt_ancs_register_attr()</span></code></a>).</p>
+<p>Once a connection is established with a central device, the module needs a service discovery to discover the ANCS server handles.
+If this succeeds, the handles for the ANCS server must be assigned to an ANCS client instance using the <a class="reference internal" href="#c.bt_ancs_handles_assign" title="bt_ancs_handles_assign"><code class="xref c c-func docutils literal notranslate"><span class="pre">bt_ancs_handles_assign()</span></code></a> function.</p>
+<p>The application can now subscribe to iOS notifications with <a class="reference internal" href="#c.bt_ancs_subscribe_notification_source" title="bt_ancs_subscribe_notification_source"><code class="xref c c-func docutils literal notranslate"><span class="pre">bt_ancs_subscribe_notification_source()</span></code></a>.</p>
+</section>
+<section id="usage">
+<h2><a class="toc-backref" href="#id9">Usage</a><a class="headerlink" href="#usage" title="Permalink to this heading"></a></h2>
+<p>The notifications arrive through the callback function of the notification source subscription.</p>
+<p>Use the following functions to perform activities related to notifications:</p>
+<ul>
+<li><p><a class="reference internal" href="#c.bt_ancs_request_attrs" title="bt_ancs_request_attrs"><code class="xref c c-func docutils literal notranslate"><span class="pre">bt_ancs_request_attrs()</span></code></a> - Request attributes for the notifications.</p>
+<p>The attributes arrive through the callback function of the data source subscription with the <a class="reference internal" href="#c.bt_ancs_cmd_id_val.BT_ANCS_COMMAND_ID_GET_NOTIF_ATTRIBUTES" title="BT_ANCS_COMMAND_ID_GET_NOTIF_ATTRIBUTES"><code class="xref c c-enumerator docutils literal notranslate"><span class="pre">BT_ANCS_COMMAND_ID_GET_NOTIF_ATTRIBUTES</span></code></a> Command ID.</p>
+</li>
+<li><p><a class="reference internal" href="#c.bt_ancs_request_app_attr" title="bt_ancs_request_app_attr"><code class="xref c c-func docutils literal notranslate"><span class="pre">bt_ancs_request_app_attr()</span></code></a> - Request attributes of the app that issued the notifications.</p>
+<p>The app attributes arrive through the callback function of the data source subscription with the <a class="reference internal" href="#c.bt_ancs_cmd_id_val.BT_ANCS_COMMAND_ID_GET_APP_ATTRIBUTES" title="BT_ANCS_COMMAND_ID_GET_APP_ATTRIBUTES"><code class="xref c c-enumerator docutils literal notranslate"><span class="pre">BT_ANCS_COMMAND_ID_GET_APP_ATTRIBUTES</span></code></a> Command ID.</p>
+</li>
+<li><p><a class="reference internal" href="#c.bt_ancs_notification_action" title="bt_ancs_notification_action"><code class="xref c c-func docutils literal notranslate"><span class="pre">bt_ancs_notification_action()</span></code></a> - Make the Notification Provider perform an action based on the provided notification.</p></li>
+</ul>
+<p class="mscgen">
+msc {
+hscale = &quot;2.0&quot;;
+Application, ANCS_Client;
+|||;
+Application=&gt;ANCS_Client   [label = &quot;bt_ancs_client_init(ancs_instance)&quot;];
+Application=&gt;ANCS_Client   [label = &quot;bt_ancs_register_attr(attribute)&quot;];
+...;
+Application=&gt;ANCS_Client   [label = &quot;bt_ancs_handles_assign(dm, ancs_instance)&quot;];
+Application=&gt;ANCS_Client   [label = &quot;bt_ancs_subscribe_notification_source(ancs_instance, callback)&quot;];
+Application=&gt;ANCS_Client   [label = &quot;bt_ancs_subscribe_data_source(ancs_instance, callback)&quot;];
+|||;
+...;
+|||;
+Application&lt;&lt;=ANCS_Client  [label = &quot;notification_source callback(notif)&quot;];
+|||;
+...;
+|||;
+Application=&gt;ANCS_Client   [label = &quot;bt_ancs_request_attrs(notif)&quot;];
+Application&lt;&lt;=ANCS_Client  [label = &quot;data_source callback(attr_response)&quot;];
+|||;
+}
+</p>
+</section>
+<section id="samples-using-the-library">
+<h2><a class="toc-backref" href="#id10">Samples using the library</a><a class="headerlink" href="#samples-using-the-library" title="Permalink to this heading"></a></h2>
+<p>The following nRF Connect SDK sample uses this library:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../../samples/bluetooth/peripheral_ancs_client/README.html#peripheral-ancs-client"><span class="std std-ref">Bluetooth: Peripheral ANCS client</span></a></p></li>
+</ul>
+</section>
+<section id="dependencies">
+<h2><a class="toc-backref" href="#id11">Dependencies</a><a class="headerlink" href="#dependencies" title="Permalink to this heading"></a></h2>
+<p>There are no dependencies for using this library.</p>
+</section>
+<section id="api-documentation">
+<h2><a class="toc-backref" href="#id12">API documentation</a><a class="headerlink" href="#api-documentation" title="Permalink to this heading"></a></h2>
+<div class="line-block">
+<div class="line">Header file: <code class="file docutils literal notranslate"><span class="pre">include/bluetooth/services/ancs_client.h</span></code></div>
+<div class="line">Source files:</div>
+</div>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="file docutils literal notranslate"><span class="pre">subsys/bluetooth/services/ancs_client.c</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">subsys/bluetooth/services/ancs_attr_parser.c</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">subsys/bluetooth/services/ancs_app_attr_get.c</span></code></p></li>
+</ul>
+</div></blockquote>
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="group__bt__ancs__client"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">bt_ancs_client</span></span></dt>
+<dd><p>Apple Notification Center Service Client module. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-defines">Defines</p>
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.BT_UUID_ANCS_VAL">
+<span class="target" id="group__bt__ancs__client_1gab3c3b656bf8e17c351d2c169e12ded80"></span><span class="sig-name descname"><span class="n"><span class="pre">BT_UUID_ANCS_VAL</span></span></span><a class="headerlink" href="#c.BT_UUID_ANCS_VAL" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Apple Notification Center Service UUID. </p>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.BT_UUID_ANCS_NOTIFICATION_SOURCE_VAL">
+<span class="target" id="group__bt__ancs__client_1gafbb3df82ff5a4d06c8a02c474ba4803f"></span><span class="sig-name descname"><span class="n"><span class="pre">BT_UUID_ANCS_NOTIFICATION_SOURCE_VAL</span></span></span><a class="headerlink" href="#c.BT_UUID_ANCS_NOTIFICATION_SOURCE_VAL" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Notification Source Characteristic UUID. </p>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.BT_UUID_ANCS_CONTROL_POINT_VAL">
+<span class="target" id="group__bt__ancs__client_1ga7aafaf48e7218ccbc52ed209fafa4c3f"></span><span class="sig-name descname"><span class="n"><span class="pre">BT_UUID_ANCS_CONTROL_POINT_VAL</span></span></span><a class="headerlink" href="#c.BT_UUID_ANCS_CONTROL_POINT_VAL" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Control Point Characteristic UUID. </p>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.BT_UUID_ANCS_DATA_SOURCE_VAL">
+<span class="target" id="group__bt__ancs__client_1ga75546ad677c50fbbbdf31276021a4c12"></span><span class="sig-name descname"><span class="n"><span class="pre">BT_UUID_ANCS_DATA_SOURCE_VAL</span></span></span><a class="headerlink" href="#c.BT_UUID_ANCS_DATA_SOURCE_VAL" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Data Source Characteristic UUID. </p>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.BT_UUID_ANCS">
+<span class="target" id="group__bt__ancs__client_1gae85bbf86dd4774a07c302e6d5702d113"></span><span class="sig-name descname"><span class="n"><span class="pre">BT_UUID_ANCS</span></span></span><a class="headerlink" href="#c.BT_UUID_ANCS" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.BT_UUID_ANCS_NOTIFICATION_SOURCE">
+<span class="target" id="group__bt__ancs__client_1ga8b367b961cc773cf1c7a606e57dec259"></span><span class="sig-name descname"><span class="n"><span class="pre">BT_UUID_ANCS_NOTIFICATION_SOURCE</span></span></span><a class="headerlink" href="#c.BT_UUID_ANCS_NOTIFICATION_SOURCE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.BT_UUID_ANCS_CONTROL_POINT">
+<span class="target" id="group__bt__ancs__client_1gac6acd9cab7e5b9b2ff2e823f1332c028"></span><span class="sig-name descname"><span class="n"><span class="pre">BT_UUID_ANCS_CONTROL_POINT</span></span></span><a class="headerlink" href="#c.BT_UUID_ANCS_CONTROL_POINT" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.BT_UUID_ANCS_DATA_SOURCE">
+<span class="target" id="group__bt__ancs__client_1gaac91ff57eab66a22c533890bb4a98660"></span><span class="sig-name descname"><span class="n"><span class="pre">BT_UUID_ANCS_DATA_SOURCE</span></span></span><a class="headerlink" href="#c.BT_UUID_ANCS_DATA_SOURCE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.BT_ANCS_ATTR_DATA_MAX">
+<span class="target" id="group__bt__ancs__client_1ga4903008f9e8371bad1e37d4e0be3207d"></span><span class="sig-name descname"><span class="n"><span class="pre">BT_ANCS_ATTR_DATA_MAX</span></span></span><a class="headerlink" href="#c.BT_ANCS_ATTR_DATA_MAX" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Maximum data length of an iOS notification attribute. </p>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.BT_ANCS_CATEGORY_ID_COUNT">
+<span class="target" id="group__bt__ancs__client_1ga09543b99bcf3d77a2ffb22b2ea427801"></span><span class="sig-name descname"><span class="n"><span class="pre">BT_ANCS_CATEGORY_ID_COUNT</span></span></span><a class="headerlink" href="#c.BT_ANCS_CATEGORY_ID_COUNT" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Number of iOS notification categories: Other, Incoming Call, Missed Call, Voice Mail, Social, Schedule, Email, News, Health and Fitness, Business and Finance, Location, Entertainment. </p>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.BT_ANCS_NOTIF_ATTR_COUNT">
+<span class="target" id="group__bt__ancs__client_1ga1bf95f570098a8e89126ff1449bf7089"></span><span class="sig-name descname"><span class="n"><span class="pre">BT_ANCS_NOTIF_ATTR_COUNT</span></span></span><a class="headerlink" href="#c.BT_ANCS_NOTIF_ATTR_COUNT" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Number of iOS notification attributes: AppIdentifier, Title, Subtitle, Message, MessageSize, Date, PositiveActionLabel, NegativeActionLabel. </p>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.BT_ANCS_APP_ATTR_COUNT">
+<span class="target" id="group__bt__ancs__client_1gae4e02e6caa190c1da949156465dd978d"></span><span class="sig-name descname"><span class="n"><span class="pre">BT_ANCS_APP_ATTR_COUNT</span></span></span><a class="headerlink" href="#c.BT_ANCS_APP_ATTR_COUNT" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Number of iOS application attributes: DisplayName. </p>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.BT_ANCS_EVT_ID_COUNT">
+<span class="target" id="group__bt__ancs__client_1ga871b021868ef36756d31ca7927ad880c"></span><span class="sig-name descname"><span class="n"><span class="pre">BT_ANCS_EVT_ID_COUNT</span></span></span><a class="headerlink" href="#c.BT_ANCS_EVT_ID_COUNT" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Number of iOS notification events: Added, Modified, Removed. </p>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.BT_ANCS_NOTIF_DATA_LENGTH">
+<span class="target" id="group__bt__ancs__client_1ga765df094404430864c725f4ac447227c"></span><span class="sig-name descname"><span class="n"><span class="pre">BT_ANCS_NOTIF_DATA_LENGTH</span></span></span><a class="headerlink" href="#c.BT_ANCS_NOTIF_DATA_LENGTH" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Length of the iOS notification data. </p>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.BT_ANCS_EVENT_FLAG_SILENT">
+<span class="target" id="group__bt__ancs__client_1ga20c955b94403e3d250d5c2dee1b1ae2a"></span><span class="sig-name descname"><span class="n"><span class="pre">BT_ANCS_EVENT_FLAG_SILENT</span></span></span><a class="headerlink" href="#c.BT_ANCS_EVENT_FLAG_SILENT" title="Permalink to this definition"></a><br /></dt>
+<dd><p>0b…….1 Silent: First (LSB) bit is set. All flags can be active at the same time. </p>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.BT_ANCS_EVENT_FLAG_IMPORTANT">
+<span class="target" id="group__bt__ancs__client_1ga6b6d6dc0a6cc893a391634fee6527aed"></span><span class="sig-name descname"><span class="n"><span class="pre">BT_ANCS_EVENT_FLAG_IMPORTANT</span></span></span><a class="headerlink" href="#c.BT_ANCS_EVENT_FLAG_IMPORTANT" title="Permalink to this definition"></a><br /></dt>
+<dd><p>0b……1. Important: Second (LSB) bit is set. All flags can be active at the same time. </p>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.BT_ANCS_EVENT_FLAG_PREEXISTING">
+<span class="target" id="group__bt__ancs__client_1gaa8cc1687aa6ffcb9926553d93ff88663"></span><span class="sig-name descname"><span class="n"><span class="pre">BT_ANCS_EVENT_FLAG_PREEXISTING</span></span></span><a class="headerlink" href="#c.BT_ANCS_EVENT_FLAG_PREEXISTING" title="Permalink to this definition"></a><br /></dt>
+<dd><p>0b…..1.. Pre-existing: Third (LSB) bit is set. All flags can be active at the same time. </p>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.BT_ANCS_EVENT_FLAG_POSITIVE_ACTION">
+<span class="target" id="group__bt__ancs__client_1ga4ee4f3d7483b38b3eac67107b7a3aaf8"></span><span class="sig-name descname"><span class="n"><span class="pre">BT_ANCS_EVENT_FLAG_POSITIVE_ACTION</span></span></span><a class="headerlink" href="#c.BT_ANCS_EVENT_FLAG_POSITIVE_ACTION" title="Permalink to this definition"></a><br /></dt>
+<dd><p>0b….1… Positive action: Fourth (LSB) bit is set. All flags can be active at the same time. </p>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.BT_ANCS_EVENT_FLAG_NEGATIVE_ACTION">
+<span class="target" id="group__bt__ancs__client_1ga3af8e0a09e39324e27b3ec2cf9e5a123"></span><span class="sig-name descname"><span class="n"><span class="pre">BT_ANCS_EVENT_FLAG_NEGATIVE_ACTION</span></span></span><a class="headerlink" href="#c.BT_ANCS_EVENT_FLAG_NEGATIVE_ACTION" title="Permalink to this definition"></a><br /></dt>
+<dd><p>0b…1…. Negative action: Fifth (LSB) bit is set. All flags can be active at the same time. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-typedefs">Typedefs</p>
+<dl class="c type">
+<dt class="sig sig-object c" id="c.bt_ancs_ns_notif_cb">
+<span class="target" id="group__bt__ancs__client_1ga01d8b60e12b2de32330e5730459baa71"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">bt_ancs_ns_notif_cb</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_ancs_client" title="bt_ancs_client"><span class="n"><span class="pre">bt_ancs_client</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ancs_c</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">err</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_ancs_evt_notif" title="bt_ancs_evt_notif"><span class="n"><span class="pre">bt_ancs_evt_notif</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">notif</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#c.bt_ancs_ns_notif_cb" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Notification Source notification callback function. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Param ancs_c</dt>
+<dd class="field-odd"><p><strong>[in]</strong> ANCS client instance. </p>
+</dd>
+<dt class="field-even">Param err</dt>
+<dd class="field-even"><p><strong>[in]</strong> 0 if the notification is valid. Otherwise, contains a (negative) error code. </p>
+</dd>
+<dt class="field-odd">Param notif</dt>
+<dd class="field-odd"><p><strong>[in]</strong> iOS notification structure. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c type">
+<dt class="sig sig-object c" id="c.bt_ancs_ds_notif_cb">
+<span class="target" id="group__bt__ancs__client_1gadeb66d8c1af4a77668cbff3d035a6bfd"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">bt_ancs_ds_notif_cb</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_ancs_client" title="bt_ancs_client"><span class="n"><span class="pre">bt_ancs_client</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ancs_c</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_ancs_attr_response" title="bt_ancs_attr_response"><span class="n"><span class="pre">bt_ancs_attr_response</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">response</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#c.bt_ancs_ds_notif_cb" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Data Source notification callback function. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Param ancs_c</dt>
+<dd class="field-odd"><p><strong>[in]</strong> ANCS client instance. </p>
+</dd>
+<dt class="field-even">Param response</dt>
+<dd class="field-even"><p><strong>[in]</strong> Attribute response structure. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c type">
+<dt class="sig sig-object c" id="c.bt_ancs_write_cb">
+<span class="target" id="group__bt__ancs__client_1ga0194ae4d50ec7baa561b4474940df4db"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">bt_ancs_write_cb</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_ancs_client" title="bt_ancs_client"><span class="n"><span class="pre">bt_ancs_client</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ancs_c</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">err</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#c.bt_ancs_write_cb" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Write response callback function. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Param ancs_c</dt>
+<dd class="field-odd"><p><strong>[in]</strong> ANCS client instance. </p>
+</dd>
+<dt class="field-even">Param err</dt>
+<dd class="field-even"><p><strong>[in]</strong> ATT error code. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-enums">Enums</p>
+<dl class="c enum">
+<dt class="sig sig-object c" id="c.bt_ancs_category_id_val">
+<span class="target" id="group__bt__ancs__client_1ga77a8ed99169c1dc5b9d7896a6302c35f"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_ancs_category_id_val</span></span></span><a class="headerlink" href="#c.bt_ancs_category_id_val" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Category IDs for iOS notifications. </p>
+<p><em>Values:</em></p>
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_ancs_category_id_val.BT_ANCS_CATEGORY_ID_OTHER">
+<span class="target" id="group__bt__ancs__client_1gga77a8ed99169c1dc5b9d7896a6302c35fa527472b96bd62156500ccb0f98055ebd"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_ANCS_CATEGORY_ID_OTHER</span></span></span><a class="headerlink" href="#c.bt_ancs_category_id_val.BT_ANCS_CATEGORY_ID_OTHER" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The iOS notification belongs to the “Other” category. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_ancs_category_id_val.BT_ANCS_CATEGORY_ID_INCOMING_CALL">
+<span class="target" id="group__bt__ancs__client_1gga77a8ed99169c1dc5b9d7896a6302c35fa5b93b3b3ae0599727b9cf6790d3ead3a"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_ANCS_CATEGORY_ID_INCOMING_CALL</span></span></span><a class="headerlink" href="#c.bt_ancs_category_id_val.BT_ANCS_CATEGORY_ID_INCOMING_CALL" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The iOS notification belongs to the “Incoming Call” category. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_ancs_category_id_val.BT_ANCS_CATEGORY_ID_MISSED_CALL">
+<span class="target" id="group__bt__ancs__client_1gga77a8ed99169c1dc5b9d7896a6302c35fa6de6ea14f323f5c0ceb8235c4ef22754"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_ANCS_CATEGORY_ID_MISSED_CALL</span></span></span><a class="headerlink" href="#c.bt_ancs_category_id_val.BT_ANCS_CATEGORY_ID_MISSED_CALL" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The iOS notification belongs to the “Missed Call” category. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_ancs_category_id_val.BT_ANCS_CATEGORY_ID_VOICE_MAIL">
+<span class="target" id="group__bt__ancs__client_1gga77a8ed99169c1dc5b9d7896a6302c35fac4580a28ee2765d30c87a65bc36bab31"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_ANCS_CATEGORY_ID_VOICE_MAIL</span></span></span><a class="headerlink" href="#c.bt_ancs_category_id_val.BT_ANCS_CATEGORY_ID_VOICE_MAIL" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The iOS notification belongs to the “Voice Mail” category. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_ancs_category_id_val.BT_ANCS_CATEGORY_ID_SOCIAL">
+<span class="target" id="group__bt__ancs__client_1gga77a8ed99169c1dc5b9d7896a6302c35fab7faf9cc46deae539ce37726611b863c"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_ANCS_CATEGORY_ID_SOCIAL</span></span></span><a class="headerlink" href="#c.bt_ancs_category_id_val.BT_ANCS_CATEGORY_ID_SOCIAL" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The iOS notification belongs to the “Social” category. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_ancs_category_id_val.BT_ANCS_CATEGORY_ID_SCHEDULE">
+<span class="target" id="group__bt__ancs__client_1gga77a8ed99169c1dc5b9d7896a6302c35fa75aeadffdd5f4cad4f9cfeab4f29a5aa"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_ANCS_CATEGORY_ID_SCHEDULE</span></span></span><a class="headerlink" href="#c.bt_ancs_category_id_val.BT_ANCS_CATEGORY_ID_SCHEDULE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The iOS notification belongs to the “Schedule” category. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_ancs_category_id_val.BT_ANCS_CATEGORY_ID_EMAIL">
+<span class="target" id="group__bt__ancs__client_1gga77a8ed99169c1dc5b9d7896a6302c35faf9a043339a414049fbea61a6eb387bd9"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_ANCS_CATEGORY_ID_EMAIL</span></span></span><a class="headerlink" href="#c.bt_ancs_category_id_val.BT_ANCS_CATEGORY_ID_EMAIL" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The iOS notification belongs to the “Email” category. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_ancs_category_id_val.BT_ANCS_CATEGORY_ID_NEWS">
+<span class="target" id="group__bt__ancs__client_1gga77a8ed99169c1dc5b9d7896a6302c35fac177782913a2c7ce48e7aeea7c476322"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_ANCS_CATEGORY_ID_NEWS</span></span></span><a class="headerlink" href="#c.bt_ancs_category_id_val.BT_ANCS_CATEGORY_ID_NEWS" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The iOS notification belongs to the “News” category. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_ancs_category_id_val.BT_ANCS_CATEGORY_ID_HEALTH_AND_FITNESS">
+<span class="target" id="group__bt__ancs__client_1gga77a8ed99169c1dc5b9d7896a6302c35fac943b882e6b7beb95d5d8a1daada49af"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_ANCS_CATEGORY_ID_HEALTH_AND_FITNESS</span></span></span><a class="headerlink" href="#c.bt_ancs_category_id_val.BT_ANCS_CATEGORY_ID_HEALTH_AND_FITNESS" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The iOS notification belongs to the “Health and Fitness” category. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_ancs_category_id_val.BT_ANCS_CATEGORY_ID_BUSINESS_AND_FINANCE">
+<span class="target" id="group__bt__ancs__client_1gga77a8ed99169c1dc5b9d7896a6302c35fa173cb2152863ec5272097b7bf9aa1e02"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_ANCS_CATEGORY_ID_BUSINESS_AND_FINANCE</span></span></span><a class="headerlink" href="#c.bt_ancs_category_id_val.BT_ANCS_CATEGORY_ID_BUSINESS_AND_FINANCE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The iOS notification belongs to the “Business and Finance” category. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_ancs_category_id_val.BT_ANCS_CATEGORY_ID_LOCATION">
+<span class="target" id="group__bt__ancs__client_1gga77a8ed99169c1dc5b9d7896a6302c35fa4e94a280cccc9173e13c2a51673f6c20"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_ANCS_CATEGORY_ID_LOCATION</span></span></span><a class="headerlink" href="#c.bt_ancs_category_id_val.BT_ANCS_CATEGORY_ID_LOCATION" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The iOS notification belongs to the “Location” category. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_ancs_category_id_val.BT_ANCS_CATEGORY_ID_ENTERTAINMENT">
+<span class="target" id="group__bt__ancs__client_1gga77a8ed99169c1dc5b9d7896a6302c35fa0d05cbe52605bdeaa48e8a604c568c90"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_ANCS_CATEGORY_ID_ENTERTAINMENT</span></span></span><a class="headerlink" href="#c.bt_ancs_category_id_val.BT_ANCS_CATEGORY_ID_ENTERTAINMENT" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The iOS notification belongs to the “Entertainment” category. </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="c enum">
+<dt class="sig sig-object c" id="c.bt_ancs_evt_id_values">
+<span class="target" id="group__bt__ancs__client_1gac26f4374d0d464984c1b11e13f9b969b"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_ancs_evt_id_values</span></span></span><a class="headerlink" href="#c.bt_ancs_evt_id_values" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Event IDs for iOS notifications. </p>
+<p><em>Values:</em></p>
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_ancs_evt_id_values.BT_ANCS_EVENT_ID_NOTIFICATION_ADDED">
+<span class="target" id="group__bt__ancs__client_1ggac26f4374d0d464984c1b11e13f9b969bab3afe17476ad55e85ae3d9a57efec6bf"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_ANCS_EVENT_ID_NOTIFICATION_ADDED</span></span></span><a class="headerlink" href="#c.bt_ancs_evt_id_values.BT_ANCS_EVENT_ID_NOTIFICATION_ADDED" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The iOS notification was added. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_ancs_evt_id_values.BT_ANCS_EVENT_ID_NOTIFICATION_MODIFIED">
+<span class="target" id="group__bt__ancs__client_1ggac26f4374d0d464984c1b11e13f9b969ba901cf3781630b72ab9cae479f15b4db7"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_ANCS_EVENT_ID_NOTIFICATION_MODIFIED</span></span></span><a class="headerlink" href="#c.bt_ancs_evt_id_values.BT_ANCS_EVENT_ID_NOTIFICATION_MODIFIED" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The iOS notification was modified. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_ancs_evt_id_values.BT_ANCS_EVENT_ID_NOTIFICATION_REMOVED">
+<span class="target" id="group__bt__ancs__client_1ggac26f4374d0d464984c1b11e13f9b969bac7cb03c83622555f5b20c883cc1e5c18"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_ANCS_EVENT_ID_NOTIFICATION_REMOVED</span></span></span><a class="headerlink" href="#c.bt_ancs_evt_id_values.BT_ANCS_EVENT_ID_NOTIFICATION_REMOVED" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The iOS notification was removed. </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="c enum">
+<dt class="sig sig-object c" id="c.bt_ancs_cmd_id_val">
+<span class="target" id="group__bt__ancs__client_1gaea2b08813c4cebb99af5460c8dc66bd2"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_ancs_cmd_id_val</span></span></span><a class="headerlink" href="#c.bt_ancs_cmd_id_val" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Control point command IDs that the Notification Consumer can send to the Notification Provider. </p>
+<p><em>Values:</em></p>
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_ancs_cmd_id_val.BT_ANCS_COMMAND_ID_GET_NOTIF_ATTRIBUTES">
+<span class="target" id="group__bt__ancs__client_1ggaea2b08813c4cebb99af5460c8dc66bd2ac90e496cd64985c5ea0d84818f093390"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_ANCS_COMMAND_ID_GET_NOTIF_ATTRIBUTES</span></span></span><a class="headerlink" href="#c.bt_ancs_cmd_id_val.BT_ANCS_COMMAND_ID_GET_NOTIF_ATTRIBUTES" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Requests attributes to be sent from the NP to the NC for a given notification. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_ancs_cmd_id_val.BT_ANCS_COMMAND_ID_GET_APP_ATTRIBUTES">
+<span class="target" id="group__bt__ancs__client_1ggaea2b08813c4cebb99af5460c8dc66bd2a020b2ba527e443de2c7b2d5de0ad0de2"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_ANCS_COMMAND_ID_GET_APP_ATTRIBUTES</span></span></span><a class="headerlink" href="#c.bt_ancs_cmd_id_val.BT_ANCS_COMMAND_ID_GET_APP_ATTRIBUTES" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Requests attributes to be sent from the NP to the NC for a given iOS app. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_ancs_cmd_id_val.BT_ANCS_COMMAND_ID_PERFORM_NOTIF_ACTION">
+<span class="target" id="group__bt__ancs__client_1ggaea2b08813c4cebb99af5460c8dc66bd2a5a3ba39e81952ff87036ba9d18af2d8f"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_ANCS_COMMAND_ID_PERFORM_NOTIF_ACTION</span></span></span><a class="headerlink" href="#c.bt_ancs_cmd_id_val.BT_ANCS_COMMAND_ID_PERFORM_NOTIF_ACTION" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Requests an action to be performed on a given notification. For example, dismiss an alarm. </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="c enum">
+<dt class="sig sig-object c" id="c.bt_ancs_action_id_values">
+<span class="target" id="group__bt__ancs__client_1ga8d26a58bbc3eb9e7758318002e2bf111"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_ancs_action_id_values</span></span></span><a class="headerlink" href="#c.bt_ancs_action_id_values" title="Permalink to this definition"></a><br /></dt>
+<dd><p>IDs for actions that can be performed for iOS notifications. </p>
+<p><em>Values:</em></p>
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_ancs_action_id_values.BT_ANCS_ACTION_ID_POSITIVE">
+<span class="target" id="group__bt__ancs__client_1gga8d26a58bbc3eb9e7758318002e2bf111a0840efb3b45fb612676c7fca069614cd"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_ANCS_ACTION_ID_POSITIVE</span></span></span><a class="headerlink" href="#c.bt_ancs_action_id_values.BT_ANCS_ACTION_ID_POSITIVE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Positive action. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_ancs_action_id_values.BT_ANCS_ACTION_ID_NEGATIVE">
+<span class="target" id="group__bt__ancs__client_1gga8d26a58bbc3eb9e7758318002e2bf111ad765de856d36236fd0b16e0c46ce4650"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_ANCS_ACTION_ID_NEGATIVE</span></span></span><a class="headerlink" href="#c.bt_ancs_action_id_values.BT_ANCS_ACTION_ID_NEGATIVE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Negative action. </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="c enum">
+<dt class="sig sig-object c" id="c.bt_ancs_app_attr_id_val">
+<span class="target" id="group__bt__ancs__client_1ga3e8d4afcc9865d3647cea5b406b4755a"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_ancs_app_attr_id_val</span></span></span><a class="headerlink" href="#c.bt_ancs_app_attr_id_val" title="Permalink to this definition"></a><br /></dt>
+<dd><p>App attribute ID values. </p>
+<p>Currently, only one value is defined. However, the number of app attributes might increase. For this reason, they are stored in an enumeration. </p>
+<p><em>Values:</em></p>
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_ancs_app_attr_id_val.BT_ANCS_APP_ATTR_ID_DISPLAY_NAME">
+<span class="target" id="group__bt__ancs__client_1gga3e8d4afcc9865d3647cea5b406b4755aa764ad5b6269c3523c7aca070d10a4541"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_ANCS_APP_ATTR_ID_DISPLAY_NAME</span></span></span><a class="headerlink" href="#c.bt_ancs_app_attr_id_val.BT_ANCS_APP_ATTR_ID_DISPLAY_NAME" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Command used to get the display name for an app identifier. </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="c enum">
+<dt class="sig sig-object c" id="c.bt_ancs_notif_attr_id_val">
+<span class="target" id="group__bt__ancs__client_1gab270403132c9a7cfb1ad43992bf73b83"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_ancs_notif_attr_id_val</span></span></span><a class="headerlink" href="#c.bt_ancs_notif_attr_id_val" title="Permalink to this definition"></a><br /></dt>
+<dd><p>IDs for iOS notification attributes. </p>
+<p><em>Values:</em></p>
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_ancs_notif_attr_id_val.BT_ANCS_NOTIF_ATTR_ID_APP_IDENTIFIER">
+<span class="target" id="group__bt__ancs__client_1ggab270403132c9a7cfb1ad43992bf73b83ad52b1ad25668f439308d4eea9f5d5501"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_ANCS_NOTIF_ATTR_ID_APP_IDENTIFIER</span></span></span><a class="headerlink" href="#c.bt_ancs_notif_attr_id_val.BT_ANCS_NOTIF_ATTR_ID_APP_IDENTIFIER" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Identifies that the attribute data is of an “App Identifier” type. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_ancs_notif_attr_id_val.BT_ANCS_NOTIF_ATTR_ID_TITLE">
+<span class="target" id="group__bt__ancs__client_1ggab270403132c9a7cfb1ad43992bf73b83ace82549f9e033ace74337c23c11db370"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_ANCS_NOTIF_ATTR_ID_TITLE</span></span></span><a class="headerlink" href="#c.bt_ancs_notif_attr_id_val.BT_ANCS_NOTIF_ATTR_ID_TITLE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Identifies that the attribute data is a “Title”. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_ancs_notif_attr_id_val.BT_ANCS_NOTIF_ATTR_ID_SUBTITLE">
+<span class="target" id="group__bt__ancs__client_1ggab270403132c9a7cfb1ad43992bf73b83a53e6e4890559c7d10b1320b343ca2c47"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_ANCS_NOTIF_ATTR_ID_SUBTITLE</span></span></span><a class="headerlink" href="#c.bt_ancs_notif_attr_id_val.BT_ANCS_NOTIF_ATTR_ID_SUBTITLE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Identifies that the attribute data is a “Subtitle”. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_ancs_notif_attr_id_val.BT_ANCS_NOTIF_ATTR_ID_MESSAGE">
+<span class="target" id="group__bt__ancs__client_1ggab270403132c9a7cfb1ad43992bf73b83a0f4151f0bc9fb79212448a420dd17b07"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_ANCS_NOTIF_ATTR_ID_MESSAGE</span></span></span><a class="headerlink" href="#c.bt_ancs_notif_attr_id_val.BT_ANCS_NOTIF_ATTR_ID_MESSAGE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Identifies that the attribute data is a “Message”. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_ancs_notif_attr_id_val.BT_ANCS_NOTIF_ATTR_ID_MESSAGE_SIZE">
+<span class="target" id="group__bt__ancs__client_1ggab270403132c9a7cfb1ad43992bf73b83a4355c0a59896beb7f900c5e7501f431a"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_ANCS_NOTIF_ATTR_ID_MESSAGE_SIZE</span></span></span><a class="headerlink" href="#c.bt_ancs_notif_attr_id_val.BT_ANCS_NOTIF_ATTR_ID_MESSAGE_SIZE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Identifies that the attribute data is a “Message Size”. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_ancs_notif_attr_id_val.BT_ANCS_NOTIF_ATTR_ID_DATE">
+<span class="target" id="group__bt__ancs__client_1ggab270403132c9a7cfb1ad43992bf73b83ad38a572699bfe5a046e8d99b7cbbd1b1"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_ANCS_NOTIF_ATTR_ID_DATE</span></span></span><a class="headerlink" href="#c.bt_ancs_notif_attr_id_val.BT_ANCS_NOTIF_ATTR_ID_DATE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Identifies that the attribute data is a “Date”. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_ancs_notif_attr_id_val.BT_ANCS_NOTIF_ATTR_ID_POSITIVE_ACTION_LABEL">
+<span class="target" id="group__bt__ancs__client_1ggab270403132c9a7cfb1ad43992bf73b83a9dd0884990166732902f9b0759a76200"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_ANCS_NOTIF_ATTR_ID_POSITIVE_ACTION_LABEL</span></span></span><a class="headerlink" href="#c.bt_ancs_notif_attr_id_val.BT_ANCS_NOTIF_ATTR_ID_POSITIVE_ACTION_LABEL" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The notification has a “Positive action” that can be executed associated with it. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_ancs_notif_attr_id_val.BT_ANCS_NOTIF_ATTR_ID_NEGATIVE_ACTION_LABEL">
+<span class="target" id="group__bt__ancs__client_1ggab270403132c9a7cfb1ad43992bf73b83ab6f11c41b8c359dbd033baad129c6182"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_ANCS_NOTIF_ATTR_ID_NEGATIVE_ACTION_LABEL</span></span></span><a class="headerlink" href="#c.bt_ancs_notif_attr_id_val.BT_ANCS_NOTIF_ATTR_ID_NEGATIVE_ACTION_LABEL" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The notification has a “Negative action” that can be executed associated with it. </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="c enum">
+<dt class="sig sig-object c" id="c.bt_ancs_parse_state">
+<span class="target" id="group__bt__ancs__client_1gac6979db89c35b9750706b6e7d007cb15"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_ancs_parse_state</span></span></span><a class="headerlink" href="#c.bt_ancs_parse_state" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Parsing states for received iOS notification and app attributes. </p>
+<p><em>Values:</em></p>
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_ancs_parse_state.BT_ANCS_PARSE_STATE_COMMAND_ID">
+<span class="target" id="group__bt__ancs__client_1ggac6979db89c35b9750706b6e7d007cb15afe39d50bf4387948f90ba43eba24c7b5"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_ANCS_PARSE_STATE_COMMAND_ID</span></span></span><a class="headerlink" href="#c.bt_ancs_parse_state.BT_ANCS_PARSE_STATE_COMMAND_ID" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Parsing the command ID. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_ancs_parse_state.BT_ANCS_PARSE_STATE_NOTIF_UID">
+<span class="target" id="group__bt__ancs__client_1ggac6979db89c35b9750706b6e7d007cb15a69fab90ffcec7af11e4cdcc289d69bdd"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_ANCS_PARSE_STATE_NOTIF_UID</span></span></span><a class="headerlink" href="#c.bt_ancs_parse_state.BT_ANCS_PARSE_STATE_NOTIF_UID" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Parsing the notification UID. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_ancs_parse_state.BT_ANCS_PARSE_STATE_APP_ID">
+<span class="target" id="group__bt__ancs__client_1ggac6979db89c35b9750706b6e7d007cb15ab7038b04ff708b54b5b080a950abbebb"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_ANCS_PARSE_STATE_APP_ID</span></span></span><a class="headerlink" href="#c.bt_ancs_parse_state.BT_ANCS_PARSE_STATE_APP_ID" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Parsing app ID. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_ancs_parse_state.BT_ANCS_PARSE_STATE_ATTR_ID">
+<span class="target" id="group__bt__ancs__client_1ggac6979db89c35b9750706b6e7d007cb15a85afeb1f4c8858072c483728559f99f6"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_ANCS_PARSE_STATE_ATTR_ID</span></span></span><a class="headerlink" href="#c.bt_ancs_parse_state.BT_ANCS_PARSE_STATE_ATTR_ID" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Parsing attribute ID. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_ancs_parse_state.BT_ANCS_PARSE_STATE_ATTR_LEN1">
+<span class="target" id="group__bt__ancs__client_1ggac6979db89c35b9750706b6e7d007cb15a5d74b3334f338cb60f887253dae4c311"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_ANCS_PARSE_STATE_ATTR_LEN1</span></span></span><a class="headerlink" href="#c.bt_ancs_parse_state.BT_ANCS_PARSE_STATE_ATTR_LEN1" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Parsing the LSB of the attribute length. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_ancs_parse_state.BT_ANCS_PARSE_STATE_ATTR_LEN2">
+<span class="target" id="group__bt__ancs__client_1ggac6979db89c35b9750706b6e7d007cb15a9f604e8c831612879c4bfc01f1669e88"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_ANCS_PARSE_STATE_ATTR_LEN2</span></span></span><a class="headerlink" href="#c.bt_ancs_parse_state.BT_ANCS_PARSE_STATE_ATTR_LEN2" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Parsing the MSB of the attribute length. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_ancs_parse_state.BT_ANCS_PARSE_STATE_ATTR_DATA">
+<span class="target" id="group__bt__ancs__client_1ggac6979db89c35b9750706b6e7d007cb15adb0f5f41841a99c1e821aff9e58feb5f"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_ANCS_PARSE_STATE_ATTR_DATA</span></span></span><a class="headerlink" href="#c.bt_ancs_parse_state.BT_ANCS_PARSE_STATE_ATTR_DATA" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Parsing the attribute data. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_ancs_parse_state.BT_ANCS_PARSE_STATE_ATTR_SKIP">
+<span class="target" id="group__bt__ancs__client_1ggac6979db89c35b9750706b6e7d007cb15a151355aa7fc8862be8512d64c8f07c9a"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_ANCS_PARSE_STATE_ATTR_SKIP</span></span></span><a class="headerlink" href="#c.bt_ancs_parse_state.BT_ANCS_PARSE_STATE_ATTR_SKIP" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Parsing is skipped for the rest of an attribute (or entire attribute). </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_ancs_parse_state.BT_ANCS_PARSE_STATE_DONE">
+<span class="target" id="group__bt__ancs__client_1ggac6979db89c35b9750706b6e7d007cb15a05abe02e126d406cb364a11135a903d9"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_ANCS_PARSE_STATE_DONE</span></span></span><a class="headerlink" href="#c.bt_ancs_parse_state.BT_ANCS_PARSE_STATE_DONE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Parsing for one attribute is done. </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_ancs_client_init">
+<span class="target" id="group__bt__ancs__client_1gac70611e08cbbd2965389ba940de0df43"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_ancs_client_init</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_ancs_client" title="bt_ancs_client"><span class="n"><span class="pre">bt_ancs_client</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ancs_c</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_ancs_client_init" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Function for initializing the ANCS client. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ancs_c</strong> – <strong>[out]</strong> ANCS client instance. This structure must be supplied by the application. It is initialized by this function and will later be used to identify this particular client instance.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><p><strong>0</strong> – If the client was initialized successfully. Otherwise, a (negative) error code is returned. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_ancs_subscribe_notification_source">
+<span class="target" id="group__bt__ancs__client_1gaed557ade7e70d932f1598a0e85cbe826"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_ancs_subscribe_notification_source</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_ancs_client" title="bt_ancs_client"><span class="n"><span class="pre">bt_ancs_client</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ancs_c</span></span>, <a class="reference internal" href="#c.bt_ancs_ns_notif_cb" title="bt_ancs_ns_notif_cb"><span class="n"><span class="pre">bt_ancs_ns_notif_cb</span></span></a><span class="w"> </span><span class="n"><span class="pre">func</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_ancs_subscribe_notification_source" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Function for writing to the CCCD to enable notifications from the Apple Notification Service. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ancs_c</strong> – <strong>[in]</strong> ANCS client instance. </p></li>
+<li><p><strong>func</strong> – <strong>[in]</strong> Callback function for handling notification.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><p><strong>0</strong> – If writing to the CCCD was successful. Otherwise, a (negative) error code is returned. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_ancs_subscribe_data_source">
+<span class="target" id="group__bt__ancs__client_1ga26fc894972066e3fe900777e443e8a03"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_ancs_subscribe_data_source</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_ancs_client" title="bt_ancs_client"><span class="n"><span class="pre">bt_ancs_client</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ancs_c</span></span>, <a class="reference internal" href="#c.bt_ancs_ds_notif_cb" title="bt_ancs_ds_notif_cb"><span class="n"><span class="pre">bt_ancs_ds_notif_cb</span></span></a><span class="w"> </span><span class="n"><span class="pre">func</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_ancs_subscribe_data_source" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Function for writing to the CCCD to enable data source notifications from the ANCS. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ancs_c</strong> – <strong>[in]</strong> ANCS client instance. </p></li>
+<li><p><strong>func</strong> – <strong>[in]</strong> Callback function for handling notification.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><p><strong>0</strong> – If writing to the CCCD was successful. Otherwise, a (negative) error code is returned. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_ancs_unsubscribe_notification_source">
+<span class="target" id="group__bt__ancs__client_1gacf2e72760d954046ae8b4086b6d3c43e"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_ancs_unsubscribe_notification_source</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_ancs_client" title="bt_ancs_client"><span class="n"><span class="pre">bt_ancs_client</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ancs_c</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_ancs_unsubscribe_notification_source" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Function for writing to the CCCD to disable notifications from the ANCS. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ancs_c</strong> – <strong>[in]</strong> ANCS client instance</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><p><strong>0</strong> – If writing to the CCCD was successful. Otherwise, a (negative) error code is returned. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_ancs_unsubscribe_data_source">
+<span class="target" id="group__bt__ancs__client_1ga157d0522c31dc138627834ce7e70f598"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_ancs_unsubscribe_data_source</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_ancs_client" title="bt_ancs_client"><span class="n"><span class="pre">bt_ancs_client</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ancs_c</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_ancs_unsubscribe_data_source" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Function for writing to the CCCD to disable data source notifications from the ANCS. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ancs_c</strong> – <strong>[in]</strong> ANCS client instance.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><p><strong>0</strong> – If writing to the CCCD was successful. Otherwise, a (negative) error code is returned. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_ancs_register_attr">
+<span class="target" id="group__bt__ancs__client_1ga371ce5da7b03b642d806c686eafcc73c"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_ancs_register_attr</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_ancs_client" title="bt_ancs_client"><span class="n"><span class="pre">bt_ancs_client</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ancs_c</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_ancs_notif_attr_id_val" title="bt_ancs_notif_attr_id_val"><span class="n"><span class="pre">bt_ancs_notif_attr_id_val</span></span></a><span class="w"> </span><span class="n"><span class="pre">id</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">data</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">len</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_ancs_register_attr" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Function for registering attributes that will be requested when <a class="reference internal" href="#group__bt__ancs__client_1ga67237a15a7926fa229249feeac8cbb43"><span class="std std-ref">bt_ancs_request_attrs</span></a> is called. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ancs_c</strong> – <strong>[in]</strong> ANCS client instance on which the attribute is registered. </p></li>
+<li><p><strong>id</strong> – <strong>[in]</strong> ID of the attribute that is added. </p></li>
+<li><p><strong>data</strong> – <strong>[in]</strong> Pointer to the buffer where the data of the attribute can be stored. </p></li>
+<li><p><strong>len</strong> – <strong>[in]</strong> Length of the buffer where the data of the attribute can be stored.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><p><strong>0</strong> – If all operations are successful. Otherwise, a (negative) error code is returned. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_ancs_register_app_attr">
+<span class="target" id="group__bt__ancs__client_1ga64ee40e8ccc444c89186b4c1c9801ce0"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_ancs_register_app_attr</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_ancs_client" title="bt_ancs_client"><span class="n"><span class="pre">bt_ancs_client</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ancs_c</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_ancs_app_attr_id_val" title="bt_ancs_app_attr_id_val"><span class="n"><span class="pre">bt_ancs_app_attr_id_val</span></span></a><span class="w"> </span><span class="n"><span class="pre">id</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">data</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">len</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_ancs_register_app_attr" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Function for registering attributes that will be requested when <a class="reference internal" href="#group__bt__ancs__client_1gae11cb0d6242d42443c3d3c6cf929c9ba"><span class="std std-ref">bt_ancs_request_app_attr</span></a> is called. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ancs_c</strong> – <strong>[in]</strong> ANCS client instance on which the attribute is registered. </p></li>
+<li><p><strong>id</strong> – <strong>[in]</strong> ID of the attribute that is added. </p></li>
+<li><p><strong>data</strong> – <strong>[in]</strong> Pointer to the buffer where the data of the attribute can be stored. </p></li>
+<li><p><strong>len</strong> – <strong>[in]</strong> Length of the buffer where the data of the attribute can be stored.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><p><strong>0</strong> – If all operations are successful. Otherwise, a (negative) error code is returned. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_ancs_request_attrs">
+<span class="target" id="group__bt__ancs__client_1ga67237a15a7926fa229249feeac8cbb43"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_ancs_request_attrs</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_ancs_client" title="bt_ancs_client"><span class="n"><span class="pre">bt_ancs_client</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ancs_c</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_ancs_evt_notif" title="bt_ancs_evt_notif"><span class="n"><span class="pre">bt_ancs_evt_notif</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">notif</span></span>, <a class="reference internal" href="#c.bt_ancs_write_cb" title="bt_ancs_write_cb"><span class="n"><span class="pre">bt_ancs_write_cb</span></span></a><span class="w"> </span><span class="n"><span class="pre">func</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_ancs_request_attrs" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Function for requesting attributes for a notification. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ancs_c</strong> – <strong>[in]</strong> ANCS client instance. </p></li>
+<li><p><strong>notif</strong> – <strong>[in]</strong> Pointer to the notification whose attributes will be requested from the Notification Provider. </p></li>
+<li><p><strong>func</strong> – <strong>[in]</strong> Callback function for handling NP write response.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><p><strong>0</strong> – If all operations are successful. Otherwise, a (negative) error code is returned. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_ancs_request_app_attr">
+<span class="target" id="group__bt__ancs__client_1gae11cb0d6242d42443c3d3c6cf929c9ba"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_ancs_request_app_attr</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_ancs_client" title="bt_ancs_client"><span class="n"><span class="pre">bt_ancs_client</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ancs_c</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">app_id</span></span>, <span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n"><span class="pre">len</span></span>, <a class="reference internal" href="#c.bt_ancs_write_cb" title="bt_ancs_write_cb"><span class="n"><span class="pre">bt_ancs_write_cb</span></span></a><span class="w"> </span><span class="n"><span class="pre">func</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_ancs_request_app_attr" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Function for requesting attributes for a given app. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ancs_c</strong> – <strong>[in]</strong> ANCS client instance. </p></li>
+<li><p><strong>app_id</strong> – <strong>[in]</strong> App identifier of the app for which the app attributes are requested. </p></li>
+<li><p><strong>len</strong> – <strong>[in]</strong> Length of the app identifier. </p></li>
+<li><p><strong>func</strong> – <strong>[in]</strong> Callback function for handling NP write response.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><p><strong>0</strong> – If all operations are successful. Otherwise, a (negative) error code is returned. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_ancs_notification_action">
+<span class="target" id="group__bt__ancs__client_1gaafd27f6a3a7771da280e5e2a7f1145b4"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_ancs_notification_action</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_ancs_client" title="bt_ancs_client"><span class="n"><span class="pre">bt_ancs_client</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ancs_c</span></span>, <span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n"><span class="pre">uuid</span></span>, <span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_ancs_action_id_values" title="bt_ancs_action_id_values"><span class="n"><span class="pre">bt_ancs_action_id_values</span></span></a><span class="w"> </span><span class="n"><span class="pre">action_id</span></span>, <a class="reference internal" href="#c.bt_ancs_write_cb" title="bt_ancs_write_cb"><span class="n"><span class="pre">bt_ancs_write_cb</span></span></a><span class="w"> </span><span class="n"><span class="pre">func</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_ancs_notification_action" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Function for performing a notification action. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ancs_c</strong> – <strong>[in]</strong> ANCS client instance. </p></li>
+<li><p><strong>uuid</strong> – <strong>[in]</strong> The UUID of the notification for which to perform the action. </p></li>
+<li><p><strong>action_id</strong> – <strong>[in]</strong> Perform a positive or negative action. </p></li>
+<li><p><strong>func</strong> – <strong>[in]</strong> Callback function for handling NP write response.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><p><strong>0</strong> – If the operation is successful. Otherwise, a (negative) error code is returned. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_ancs_handles_assign">
+<span class="target" id="group__bt__ancs__client_1gaf127b9ef82ff0ccc57efe00aff1fc697"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_ancs_handles_assign</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">bt_gatt_dm</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">dm</span></span>, <span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_ancs_client" title="bt_ancs_client"><span class="n"><span class="pre">bt_ancs_client</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ancs_c</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_ancs_handles_assign" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Function for assigning handles to ANCS client instance. </p>
+<p>Call this function when a link has been established with a peer to associate the link to this instance of the module. This makes it possible to handle several links and associate each link to a particular instance of this module.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dm</strong> – <strong>[in]</strong> Discovery object. </p></li>
+<li><p><strong>ancs_c</strong> – <strong>[inout]</strong> ANCS client instance for associating the link.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><p><strong>0</strong> – If the operation is successful. Otherwise, a (negative) error code is returned. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.bt_ancs_notif_flags">
+<span class="target" id="structbt__ancs__notif__flags"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_ancs_notif_flags</span></span></span><a class="headerlink" href="#c.bt_ancs_notif_flags" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;ancs_client.h&gt;</em></div>
+<p>Flags for iOS notifications. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ancs_notif_flags.silent">
+<span class="target" id="structbt__ancs__notif__flags_1a23e9f811611e5a6ff5b0a5877ff9f0a9"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">silent</span></span></span><a class="headerlink" href="#c.bt_ancs_notif_flags.silent" title="Permalink to this definition"></a><br /></dt>
+<dd><p>If this flag is set, the notification has a low priority. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ancs_notif_flags.important">
+<span class="target" id="structbt__ancs__notif__flags_1a331684846c246ffe7cba5fec9b1b7e29"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">important</span></span></span><a class="headerlink" href="#c.bt_ancs_notif_flags.important" title="Permalink to this definition"></a><br /></dt>
+<dd><p>If this flag is set, the notification has a high priority. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ancs_notif_flags.pre_existing">
+<span class="target" id="structbt__ancs__notif__flags_1a13aeb945b19a72fb1561f4aaf28f8d03"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pre_existing</span></span></span><a class="headerlink" href="#c.bt_ancs_notif_flags.pre_existing" title="Permalink to this definition"></a><br /></dt>
+<dd><p>If this flag is set, the notification is pre-existing. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ancs_notif_flags.positive_action">
+<span class="target" id="structbt__ancs__notif__flags_1a2be8f53199b2a3888acba051e4361979"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">positive_action</span></span></span><a class="headerlink" href="#c.bt_ancs_notif_flags.positive_action" title="Permalink to this definition"></a><br /></dt>
+<dd><p>If this flag is set, the notification has a positive action that can be taken. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ancs_notif_flags.negative_action">
+<span class="target" id="structbt__ancs__notif__flags_1a16f53189763335ac34e08ea00c5ced1a"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">negative_action</span></span></span><a class="headerlink" href="#c.bt_ancs_notif_flags.negative_action" title="Permalink to this definition"></a><br /></dt>
+<dd><p>If this flag is set, the notification has a negative action that can be taken. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.bt_ancs_evt_notif">
+<span class="target" id="structbt__ancs__evt__notif"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_ancs_evt_notif</span></span></span><a class="headerlink" href="#c.bt_ancs_evt_notif" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;ancs_client.h&gt;</em></div>
+<p>iOS notification structure. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ancs_evt_notif.notif_uid">
+<span class="target" id="structbt__ancs__evt__notif_1acb89602acd3884a3df0ec087352b095e"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">notif_uid</span></span></span><a class="headerlink" href="#c.bt_ancs_evt_notif.notif_uid" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Notification UID. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ancs_evt_notif.evt_id">
+<span class="target" id="structbt__ancs__evt__notif_1a762b9062e2596c36ca92e357a8afa31a"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_ancs_evt_id_values" title="bt_ancs_evt_id_values"><span class="n"><span class="pre">bt_ancs_evt_id_values</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">evt_id</span></span></span><a class="headerlink" href="#c.bt_ancs_evt_notif.evt_id" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Whether the notification was added, removed, or modified. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ancs_evt_notif.evt_flags">
+<span class="target" id="structbt__ancs__evt__notif_1a835f03da8d137d785e07b5cf4414b2b0"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_ancs_notif_flags" title="bt_ancs_notif_flags"><span class="n"><span class="pre">bt_ancs_notif_flags</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">evt_flags</span></span></span><a class="headerlink" href="#c.bt_ancs_evt_notif.evt_flags" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Bitmask to signal whether a special condition applies to the notification. For example, “Silent” or “Important”. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ancs_evt_notif.category_id">
+<span class="target" id="structbt__ancs__evt__notif_1abaa55e70df8cb7cd61e0ec2ad7e12ae6"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_ancs_category_id_val" title="bt_ancs_category_id_val"><span class="n"><span class="pre">bt_ancs_category_id_val</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">category_id</span></span></span><a class="headerlink" href="#c.bt_ancs_evt_notif.category_id" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Classification of the notification type. For example, email or location. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ancs_evt_notif.category_count">
+<span class="target" id="structbt__ancs__evt__notif_1a337e4272eecc3a306fef06ac8b4ad5b1"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">category_count</span></span></span><a class="headerlink" href="#c.bt_ancs_evt_notif.category_count" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Current number of active notifications for this category ID. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.bt_ancs_attr">
+<span class="target" id="structbt__ancs__attr"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_ancs_attr</span></span></span><a class="headerlink" href="#c.bt_ancs_attr" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;ancs_client.h&gt;</em></div>
+<p>iOS attribute structure. This type is used for both notification attributes and app attributes. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ancs_attr.attr_len">
+<span class="target" id="structbt__ancs__attr_1afbd32d89d0c4138ee0bcc40a41367b31"></span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">attr_len</span></span></span><a class="headerlink" href="#c.bt_ancs_attr.attr_len" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Length of the received attribute data. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ancs_attr.attr_id">
+<span class="target" id="structbt__ancs__attr_1a10a13e571e473866a4be881be4e984d3"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">attr_id</span></span></span><a class="headerlink" href="#c.bt_ancs_attr.attr_id" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Classification of the attribute type. For example, “Title” or “Date”. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ancs_attr.attr_data">
+<span class="target" id="structbt__ancs__attr_1a3f22c12f870b768f1dc4acb63eb98426"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">attr_data</span></span></span><a class="headerlink" href="#c.bt_ancs_attr.attr_data" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Pointer to where the memory is allocated for storing incoming attributes. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.bt_ancs_attr_list">
+<span class="target" id="structbt__ancs__attr__list"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_ancs_attr_list</span></span></span><a class="headerlink" href="#c.bt_ancs_attr_list" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;ancs_client.h&gt;</em></div>
+<p>iOS notification attribute content requested by the application. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ancs_attr_list.get">
+<span class="target" id="structbt__ancs__attr__list_1aa6f9a05b02a6de11a36de4b1f6905045"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get</span></span></span><a class="headerlink" href="#c.bt_ancs_attr_list.get" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Boolean to determine whether this attribute will be requested from the Notification Provider. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ancs_attr_list.attr_id">
+<span class="target" id="structbt__ancs__attr__list_1a8315f278ab5362e790a6c6b333e1d665"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">attr_id</span></span></span><a class="headerlink" href="#c.bt_ancs_attr_list.attr_id" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Attribute ID: AppIdentifier(0), Title(1), Subtitle(2), Message(3), MessageSize(4), Date(5), PositiveActionLabel(6), NegativeActionLabel(7). </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ancs_attr_list.attr_len">
+<span class="target" id="structbt__ancs__attr__list_1a04f2842e711d872a7ce887b128d7b21b"></span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">attr_len</span></span></span><a class="headerlink" href="#c.bt_ancs_attr_list.attr_len" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Length of the attribute. If more data is received from the Notification Provider, all the data beyond this length is discarded. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ancs_attr_list.attr_data">
+<span class="target" id="structbt__ancs__attr__list_1aa1e16f37aaf45a4f645b1da1912c94e7"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">attr_data</span></span></span><a class="headerlink" href="#c.bt_ancs_attr_list.attr_data" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Pointer to where the memory is allocated for storing incoming attributes. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.bt_ancs_attr_response">
+<span class="target" id="structbt__ancs__attr__response"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_ancs_attr_response</span></span></span><a class="headerlink" href="#c.bt_ancs_attr_response" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;ancs_client.h&gt;</em></div>
+<p>Attribute response structure. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ancs_attr_response.command_id">
+<span class="target" id="structbt__ancs__attr__response_1a83af091fe0719fde482b361b8f20a3d0"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_ancs_cmd_id_val" title="bt_ancs_cmd_id_val"><span class="n"><span class="pre">bt_ancs_cmd_id_val</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">command_id</span></span></span><a class="headerlink" href="#c.bt_ancs_attr_response.command_id" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Command ID. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ancs_attr_response.attr">
+<span class="target" id="structbt__ancs__attr__response_1a15c7c13b893050a47d1bc4bb20f95a3e"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_ancs_attr" title="bt_ancs_attr"><span class="n"><span class="pre">bt_ancs_attr</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">attr</span></span></span><a class="headerlink" href="#c.bt_ancs_attr_response.attr" title="Permalink to this definition"></a><br /></dt>
+<dd><p>iOS notification attribute or app attribute, depending on the Command ID. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ancs_attr_response.notif_uid">
+<span class="target" id="structbt__ancs__attr__response_1a59aa45d93a1db35806853ce804cb84eb"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">notif_uid</span></span></span><a class="headerlink" href="#c.bt_ancs_attr_response.notif_uid" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Notification UID. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ancs_attr_response.app_id">
+<span class="target" id="structbt__ancs__attr__response_1ae8dea3dd54739ea4e45928c6cbbdb948"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">app_id</span></span></span><span class="p"><span class="pre">[</span></span><span class="m"><span class="pre">32</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#c.bt_ancs_attr_response.app_id" title="Permalink to this definition"></a><br /></dt>
+<dd><p>App identifier. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.bt_ancs_parse_sm">
+<span class="target" id="structbt__ancs__parse__sm"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_ancs_parse_sm</span></span></span><a class="headerlink" href="#c.bt_ancs_parse_sm" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;ancs_client.h&gt;</em></div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ancs_parse_sm.attr_list">
+<span class="target" id="structbt__ancs__parse__sm_1a146d854954db7ea475b404a630dca0be"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_ancs_attr_list" title="bt_ancs_attr_list"><span class="n"><span class="pre">bt_ancs_attr_list</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">attr_list</span></span></span><a class="headerlink" href="#c.bt_ancs_parse_sm.attr_list" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The current list of attributes that are being parsed. This will point to either ancs_notif_attr_list or ancs_app_attr_list in struct <a class="reference internal" href="#structbt__ancs__client"><span class="std std-ref">bt_ancs_client</span></a>. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ancs_parse_sm.attr_count">
+<span class="target" id="structbt__ancs__parse__sm_1a8f2bb284462a7be6a6b28d69f572a6f7"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">attr_count</span></span></span><a class="headerlink" href="#c.bt_ancs_parse_sm.attr_count" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Number of possible attributes. When parsing begins, it is set to either <a class="reference internal" href="#group__bt__ancs__client_1ga1bf95f570098a8e89126ff1449bf7089"><span class="std std-ref">BT_ANCS_NOTIF_ATTR_COUNT</span></a> or <a class="reference internal" href="#group__bt__ancs__client_1gae4e02e6caa190c1da949156465dd978d"><span class="std std-ref">BT_ANCS_APP_ATTR_COUNT</span></a>. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ancs_parse_sm.expected_number_of_attrs">
+<span class="target" id="structbt__ancs__parse__sm_1ad721afe235fa17aa3239225e420373a3"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">expected_number_of_attrs</span></span></span><a class="headerlink" href="#c.bt_ancs_parse_sm.expected_number_of_attrs" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The number of attributes expected upon receiving attributes. Keeps track of when to stop reading incoming attributes. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ancs_parse_sm.parse_state">
+<span class="target" id="structbt__ancs__parse__sm_1af3380e14f7f332f02870fcd84d26accf"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_ancs_parse_state" title="bt_ancs_parse_state"><span class="n"><span class="pre">bt_ancs_parse_state</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">parse_state</span></span></span><a class="headerlink" href="#c.bt_ancs_parse_sm.parse_state" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ANCS notification attribute parsing state. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ancs_parse_sm.command_id">
+<span class="target" id="structbt__ancs__parse__sm_1a5de7adb458ae232669f5b76ed1b8b5b9"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_ancs_cmd_id_val" title="bt_ancs_cmd_id_val"><span class="n"><span class="pre">bt_ancs_cmd_id_val</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">command_id</span></span></span><a class="headerlink" href="#c.bt_ancs_parse_sm.command_id" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Variable to keep track of what command type is being parsed ( <a class="reference internal" href="#group__bt__ancs__client_1ggaea2b08813c4cebb99af5460c8dc66bd2ac90e496cd64985c5ea0d84818f093390"><span class="std std-ref">BT_ANCS_COMMAND_ID_GET_NOTIF_ATTRIBUTES</span></a> or <a class="reference internal" href="#group__bt__ancs__client_1ggaea2b08813c4cebb99af5460c8dc66bd2a020b2ba527e443de2c7b2d5de0ad0de2"><span class="std std-ref">BT_ANCS_COMMAND_ID_GET_APP_ATTRIBUTES</span></a>). </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ancs_parse_sm.data_dest">
+<span class="target" id="structbt__ancs__parse__sm_1a50fce3f0a08e168d6cbe9a8ab212ef40"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">data_dest</span></span></span><a class="headerlink" href="#c.bt_ancs_parse_sm.data_dest" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Attribute that the parsed data is copied into. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ancs_parse_sm.current_attr_index">
+<span class="target" id="structbt__ancs__parse__sm_1aab2b9a3f46c6035cc2cf61c930f945bf"></span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">current_attr_index</span></span></span><a class="headerlink" href="#c.bt_ancs_parse_sm.current_attr_index" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Variable to keep track of the parsing progress, for the given attribute. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ancs_parse_sm.current_app_id_index">
+<span class="target" id="structbt__ancs__parse__sm_1ac69f5afb98462592f3bf03c9cb932fa3"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">current_app_id_index</span></span></span><a class="headerlink" href="#c.bt_ancs_parse_sm.current_app_id_index" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Variable to keep track of the parsing progress, for the given app identifier. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.bt_ancs_client">
+<span class="target" id="structbt__ancs__client"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_ancs_client</span></span></span><a class="headerlink" href="#c.bt_ancs_client" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;ancs_client.h&gt;</em></div>
+<p>ANCS client instance, which contains various status information. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ancs_client.conn">
+<span class="target" id="structbt__ancs__client_1a186c7f0f46b03d363be43ddf318eb66a"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">bt_conn</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">conn</span></span></span><a class="headerlink" href="#c.bt_ancs_client.conn" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Connection object. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ancs_client.state">
+<span class="target" id="structbt__ancs__client_1a723b2d5ea091dc8b251b84d5453dd162"></span><span class="n"><span class="pre">atomic_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">state</span></span></span><a class="headerlink" href="#c.bt_ancs_client.state" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Internal state. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ancs_client.handle_cp">
+<span class="target" id="structbt__ancs__client_1ad781c870ad716e5cce3695dc814ccf82"></span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">handle_cp</span></span></span><a class="headerlink" href="#c.bt_ancs_client.handle_cp" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Handle of the Control Point Characteristic. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ancs_client.handle_ns">
+<span class="target" id="structbt__ancs__client_1ab20d061012e88974f46faf3ac9691707"></span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">handle_ns</span></span></span><a class="headerlink" href="#c.bt_ancs_client.handle_ns" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Handle of the Notification Source Characteristic. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ancs_client.handle_ns_ccc">
+<span class="target" id="structbt__ancs__client_1aaab17a4377de234cc58ee812a9213226"></span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">handle_ns_ccc</span></span></span><a class="headerlink" href="#c.bt_ancs_client.handle_ns_ccc" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Handle of the CCCD of the Notification Source Characteristic. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ancs_client.handle_ds">
+<span class="target" id="structbt__ancs__client_1a2ebb3484ee99f6aae3c4e78c765c3533"></span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">handle_ds</span></span></span><a class="headerlink" href="#c.bt_ancs_client.handle_ds" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Handle of the Data Source Characteristic. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ancs_client.handle_ds_ccc">
+<span class="target" id="structbt__ancs__client_1aa0302fe31fb476eb596d5b7c60335b49"></span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">handle_ds_ccc</span></span></span><a class="headerlink" href="#c.bt_ancs_client.handle_ds_ccc" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Handle of the CCCD of the Data Source Characteristic. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ancs_client.cp_write_params">
+<span class="target" id="structbt__ancs__client_1abd863fbdef516e22da293ec9c38a2718"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">bt_gatt_write_params</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cp_write_params</span></span></span><a class="headerlink" href="#c.bt_ancs_client.cp_write_params" title="Permalink to this definition"></a><br /></dt>
+<dd><p>GATT write parameters for Control Point Characteristic. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ancs_client.cp_write_cb">
+<span class="target" id="structbt__ancs__client_1a2b10cfb6338f51f55514ed198c587917"></span><a class="reference internal" href="#c.bt_ancs_write_cb" title="bt_ancs_write_cb"><span class="n"><span class="pre">bt_ancs_write_cb</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cp_write_cb</span></span></span><a class="headerlink" href="#c.bt_ancs_client.cp_write_cb" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Callback function for Control Point GATT write. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ancs_client.cp_data">
+<span class="target" id="structbt__ancs__client_1a32fcc5230c7a9ff8fb3b0ab2c30c0839"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cp_data</span></span></span><span class="p"><span class="pre">[</span></span><span class="n"><span class="pre">CONFIG_BT_ANCS_CLIENT_CP_BUFF_SIZE</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#c.bt_ancs_client.cp_data" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Data buffer for Control Point GATT write. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ancs_client.ns_notif_params">
+<span class="target" id="structbt__ancs__client_1a1c4df58713798b57601bac429f99fdf0"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">bt_gatt_subscribe_params</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ns_notif_params</span></span></span><a class="headerlink" href="#c.bt_ancs_client.ns_notif_params" title="Permalink to this definition"></a><br /></dt>
+<dd><p>GATT subscribe parameters for Notification Source Characteristic. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ancs_client.ns_notif_cb">
+<span class="target" id="structbt__ancs__client_1a25727049aba74dd536c585f8c1f3d787"></span><a class="reference internal" href="#c.bt_ancs_ns_notif_cb" title="bt_ancs_ns_notif_cb"><span class="n"><span class="pre">bt_ancs_ns_notif_cb</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ns_notif_cb</span></span></span><a class="headerlink" href="#c.bt_ancs_client.ns_notif_cb" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Callback function for Notification Source notification. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ancs_client.ds_notif_params">
+<span class="target" id="structbt__ancs__client_1a8af9f133d2b0c931a1f45acc8bd73737"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">bt_gatt_subscribe_params</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ds_notif_params</span></span></span><a class="headerlink" href="#c.bt_ancs_client.ds_notif_params" title="Permalink to this definition"></a><br /></dt>
+<dd><p>GATT subscribe parameters for Data Source Characteristic. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ancs_client.ds_notif_cb">
+<span class="target" id="structbt__ancs__client_1a235a7f73ff8d81ba40e6a3c091ef0a7a"></span><a class="reference internal" href="#c.bt_ancs_ds_notif_cb" title="bt_ancs_ds_notif_cb"><span class="n"><span class="pre">bt_ancs_ds_notif_cb</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ds_notif_cb</span></span></span><a class="headerlink" href="#c.bt_ancs_client.ds_notif_cb" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Callback function for Data Source notification. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ancs_client.ancs_notif_attr_list">
+<span class="target" id="structbt__ancs__client_1a42a6c113fbb61a584c71146e6e1f8681"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_ancs_attr_list" title="bt_ancs_attr_list"><span class="n"><span class="pre">bt_ancs_attr_list</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ancs_notif_attr_list</span></span></span><span class="p"><span class="pre">[</span></span><span class="m"><span class="pre">8</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#c.bt_ancs_client.ancs_notif_attr_list" title="Permalink to this definition"></a><br /></dt>
+<dd><p>For all attributes: contains information about whether the attributes are to be requested upon attribute request, and the length and buffer of where to store attribute data. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ancs_client.ancs_app_attr_list">
+<span class="target" id="structbt__ancs__client_1a2bd73840b380554701786b1567ddf2d3"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_ancs_attr_list" title="bt_ancs_attr_list"><span class="n"><span class="pre">bt_ancs_attr_list</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ancs_app_attr_list</span></span></span><span class="p"><span class="pre">[</span></span><span class="m"><span class="pre">1</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#c.bt_ancs_client.ancs_app_attr_list" title="Permalink to this definition"></a><br /></dt>
+<dd><p>For all app attributes: contains information about whether the attributes are to be requested upon attribute request, and the length and buffer of where to store attribute data. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ancs_client.number_of_requested_attr">
+<span class="target" id="structbt__ancs__client_1af56b5c8a384b5f48a5722f8cca15d287"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">number_of_requested_attr</span></span></span><a class="headerlink" href="#c.bt_ancs_client.number_of_requested_attr" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The number of attributes that are to be requested when an iOS notification attribute request is made. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ancs_client.parse_info">
+<span class="target" id="structbt__ancs__client_1a9eb72ca4bdd6294509729e04a20810d8"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_ancs_parse_sm" title="bt_ancs_parse_sm"><span class="n"><span class="pre">bt_ancs_parse_sm</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">parse_info</span></span></span><a class="headerlink" href="#c.bt_ancs_client.parse_info" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Structure containing different information used to parse incoming attributes correctly (from data_source characteristic). </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ancs_client.attr_response">
+<span class="target" id="structbt__ancs__client_1af61c4a5906379158bfd7683d101bad29"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_ancs_attr_response" title="bt_ancs_attr_response"><span class="n"><span class="pre">bt_ancs_attr_response</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">attr_response</span></span></span><a class="headerlink" href="#c.bt_ancs_client.attr_response" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Allocate memory for the attribute response here. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="bas_client.html" class="btn btn-neutral float-right" title="GATT Battery Service (BAS) Client" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="ams_client.html" class="btn btn-neutral" title="Apple Media Service (AMS) Client" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Configuring Zigbee libraries in nRF Connect SDK &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../_static/js/ncs.js"
+></script>
+<script src="../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Configuring ZBOSS traces in nRF Connect SDK" href="configuring_zboss_traces.html" />
+    <link rel="prev" title="Configuring Zigbee in nRF Connect SDK" href="configuring.html" />
+<link
+  href="../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../protocols.html">Protocols</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../ble/index.html">Bluetooth LE Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bt_mesh/index.html">Bluetooth mesh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../esb/index.html">Enhanced ShockBurst (ESB)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gazell/index.html">Gazell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../matter/index.html">Matter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multiprotocol/index.html">Multiprotocol support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nfc/index.html">Near Field Communication (NFC)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../thread/index.html">Thread</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../wifi/index.html">Wi-Fi</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Zigbee</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="qsg.html">Zigbee quick start guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="supported_features.html">Supported Zigbee features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architectures.html">Zigbee architectures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="commissioning.html">Zigbee commissioning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="memory.html">Zigbee memory requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configuring.html">Configuring Zigbee in nRF Connect SDK</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Configuring Zigbee libraries in nRF Connect SDK</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#configuring-zboss-osif">Configuring ZBOSS OSIF</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuring-zigbee-application-utilities">Configuring Zigbee application utilities</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuring-zigbee-error-handler">Configuring Zigbee error handler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuring-zigbee-fota">Configuring Zigbee FOTA</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuring-zigbee-endpoint-logger">Configuring Zigbee endpoint logger</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuring-zigbee-zcl-scene-helper">Configuring Zigbee ZCL scene helper</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuring-zigbee-shell">Configuring Zigbee shell</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="configuring_zboss_traces.html">Configuring ZBOSS traces in nRF Connect SDK</a></li>
+<li class="toctree-l3"><a class="reference internal" href="adding_clusters.html">Adding ZCL clusters to application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="other_ecosystems.html">Configuring Zigbee samples for other ecosystems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tools.html">Zigbee tools</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drivers.html">Drivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../protocols.html">Protocols</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Zigbee</a></li>
+      <li class="breadcrumb-item active">Configuring Zigbee libraries in nRF Connect SDK</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/protocols/zigbee/configuring_libraries.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="configuring-zigbee-libraries-in-ncs">
+<span id="ug-zigbee-configuring-libraries"></span><h1>Configuring Zigbee libraries in nRF Connect SDK<a class="headerlink" href="#configuring-zigbee-libraries-in-ncs" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#configuring-zboss-osif" id="id6">Configuring ZBOSS OSIF</a></p></li>
+<li><p><a class="reference internal" href="#configuring-zigbee-application-utilities" id="id7">Configuring Zigbee application utilities</a></p>
+<ul>
+<li><p><a class="reference internal" href="#default-signal-handler" id="id8">Default signal handler</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#configuring-zigbee-error-handler" id="id9">Configuring Zigbee error handler</a></p></li>
+<li><p><a class="reference internal" href="#configuring-zigbee-fota" id="id10">Configuring Zigbee FOTA</a></p>
+<ul>
+<li><p><a class="reference internal" href="#enabling-zigbee-fota-in-an-application" id="id11">Enabling Zigbee FOTA in an application</a></p></li>
+<li><p><a class="reference internal" href="#options-for-generating-zigbee-fota-upgrade-image" id="id12">Options for generating Zigbee FOTA upgrade image</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#configuring-zigbee-endpoint-logger" id="id13">Configuring Zigbee endpoint logger</a></p></li>
+<li><p><a class="reference internal" href="#configuring-zigbee-zcl-scene-helper" id="id14">Configuring Zigbee ZCL scene helper</a></p></li>
+<li><p><a class="reference internal" href="#configuring-zigbee-shell" id="id15">Configuring Zigbee shell</a></p></li>
+</ul>
+</div>
+<p>The Zigbee protocol in nRF Connect SDK can be customized by enabling and configuring several <a class="reference internal" href="../../libraries/zigbee/index.html#lib-zigbee"><span class="std std-ref">Zigbee libraries</span></a>.
+This page lists options and steps required for configuring each of them.</p>
+<section id="configuring-zboss-osif">
+<span id="ug-zigbee-configuring-components-osif"></span><h2><a class="toc-backref" href="#id6">Configuring ZBOSS OSIF</a><a class="headerlink" href="#configuring-zboss-osif" title="Permalink to this heading"></a></h2>
+<p>The Zigbee ZBOSS OSIF layer subsystem acts as the linking layer between the <span class="xref std std-ref">nrfxlib:zboss</span> and the nRF Connect SDK.
+The layer is automatically enabled when you enable the ZBOSS library with the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZIGBEE</span></code> Kconfig option.</p>
+<p>For more information about the library, see <a class="reference internal" href="../../libraries/zigbee/osif.html#lib-zigbee-osif"><span class="std std-ref">Zigbee ZBOSS OSIF</span></a>.</p>
+</section>
+<section id="configuring-zigbee-application-utilities">
+<span id="ug-zigbee-configuring-components-application-utilities"></span><h2><a class="toc-backref" href="#id7">Configuring Zigbee application utilities</a><a class="headerlink" href="#configuring-zigbee-application-utilities" title="Permalink to this heading"></a></h2>
+<p>The <a class="reference internal" href="../../libraries/zigbee/zigbee_app_utils.html#lib-zigbee-application-utilities"><span class="std std-ref">Zigbee application utilities</span></a> library provides a set of components that are ready for use in Zigbee applications.</p>
+<p>To enable and use this library, set the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZIGBEE_APP_UTILS</span></code> Kconfig option.</p>
+<p>For additional logs for this library, configure the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZIGBEE_APP_UTILS_LOG_LEVEL</span></code> Kconfig option.
+See <a class="reference internal" href="configuring.html#zigbee-ug-logging-logger-options"><span class="std std-ref">Zephyr’s logger options</span></a> for more information.</p>
+<section id="default-signal-handler">
+<h3><a class="toc-backref" href="#id8">Default signal handler</a><a class="headerlink" href="#default-signal-handler" title="Permalink to this heading"></a></h3>
+<p>The default signal handler provides the default logic for handling ZBOSS stack signals.
+For more information, see <a class="reference internal" href="../../libraries/zigbee/zigbee_app_utils.html#lib-zigbee-signal-handler"><span class="std std-ref">Zigbee default signal handler</span></a>.</p>
+<p>After enabling the Zigbee application utilities library, you can use this component by calling the <a class="reference internal" href="../../libraries/zigbee/zigbee_app_utils.html#c.zigbee_default_signal_handler" title="zigbee_default_signal_handler"><code class="xref c c-func docutils literal notranslate"><span class="pre">zigbee_default_signal_handler()</span></code></a> in the application’s <code class="xref c c-func docutils literal notranslate"><span class="pre">zboss_signal_handler()</span></code> implementation.</p>
+</section>
+</section>
+<section id="configuring-zigbee-error-handler">
+<span id="ug-zigbee-configuring-components-error-handler"></span><h2><a class="toc-backref" href="#id9">Configuring Zigbee error handler</a><a class="headerlink" href="#configuring-zigbee-error-handler" title="Permalink to this heading"></a></h2>
+<p>The Zigbee error handler library provides a set of macros that can be used to assert on nrfxlib’s Zigbee ZBOSS stack API return codes.</p>
+<p>To use this library, include its <code class="file docutils literal notranslate"><span class="pre">zigbee_error_handler.h</span></code> header in your application and pass the error code that should be checked using its macros.</p>
+<p>For more information about the library, see <a class="reference internal" href="../../libraries/zigbee/zigbee_error_handler.html#lib-zigbee-error-handler"><span class="std std-ref">Zigbee error handler</span></a>.</p>
+</section>
+<section id="configuring-zigbee-fota">
+<span id="ug-zigbee-configuring-components-ota"></span><h2><a class="toc-backref" href="#id10">Configuring Zigbee FOTA</a><a class="headerlink" href="#configuring-zigbee-fota" title="Permalink to this heading"></a></h2>
+<p>The Zigbee Over The Air Device Firmware Upgrade (<a class="reference internal" href="../../libraries/zigbee/zigbee_fota.html#lib-zigbee-fota"><span class="std std-ref">Zigbee FOTA</span></a>) library provides a mechanism to upgrade the firmware of the device through the Zigbee network.</p>
+<p>To enable and configure the library, you must set the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZIGBEE_FOTA</span></code> Kconfig option.
+Other <a class="reference internal" href="../../libraries/zigbee/zigbee_fota.html#lib-zigbee-fota-options"><span class="std std-ref">Zigbee FOTA Kconfig options</span></a> can be used with default values.</p>
+<p>Because the Zigbee OTA DFU performs the upgrade using the <a class="reference internal" href="../../libraries/dfu/dfu_target.html#lib-dfu-target"><span class="std std-ref">DFU target</span></a> library, the are several non-Zigbee options that must be set to configure the update process:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MCUBOOT_IMAGE_VERSION</span></code> - This option specifies the current image version.</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_DFU_TARGET_MCUBOOT</span></code> - This option enables updates that are performed by MCUboot.</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_IMG_MANAGER</span></code> - This option enables the support for managing the DFU image downloaded using MCUboot.</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_IMG_ERASE_PROGRESSIVELY</span></code> - This option instructs MCUboot to erase the flash memory progressively.
+This allows to avoid long wait times at the beginning of the DFU process.</p></li>
+</ul>
+<p>Configuring these options and updating the default values (at least updating the <code class="docutils literal notranslate"><span class="pre">image_version</span></code> to the application version) allows you to use Zigbee FOTA in the <a class="reference internal" href="../../samples/zigbee/light_switch/README.html#zigbee-light-switch-sample"><span class="std std-ref">Zigbee: Light switch</span></a> sample.</p>
+<section id="enabling-zigbee-fota-in-an-application">
+<h3><a class="toc-backref" href="#id11">Enabling Zigbee FOTA in an application</a><a class="headerlink" href="#enabling-zigbee-fota-in-an-application" title="Permalink to this heading"></a></h3>
+<p>If you want to use the Zigbee FOTA functionality in your application, you must add several code snippets to its main file:</p>
+<ul>
+<li><p>Because the Zigbee OTA DFU library provides only the definition of the OTA endpoint, the application has to include it inside the device context:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;zigbee_fota.h&gt;</span>
+<span class="k">extern</span><span class="w"> </span><span class="n">zb_af_endpoint_desc_t</span><span class="w"> </span><span class="n">ota_upgrade_client_ep</span><span class="p">;</span>
+<span class="n">ZBOSS_DECLARE_DEVICE_CTX_2_EP</span><span class="p">(</span><span class="o">&lt;</span><span class="n">your_device</span><span class="o">&gt;</span><span class="n">_ctx</span><span class="p">,</span><span class="w"> </span><span class="n">ota_upgrade_client_ep</span><span class="p">,</span><span class="w"> </span><span class="o">&lt;</span><span class="n">your_application</span><span class="o">&gt;</span><span class="n">_ep</span><span class="p">);</span>
+</pre></div>
+</div>
+</li>
+<li><p>The application is informed about the update status though a callback.
+The callback must reboot the device once the firmware update is completed:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">ota_evt_handler</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">zigbee_fota_evt</span><span class="w"> </span><span class="o">*</span><span class="n">evt</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">evt</span><span class="o">-&gt;</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="no">ZIGBEE_FOTA_EVT_FINISHED</span><span class="p">:</span>
+<span class="w">        </span><span class="n">LOG_INF</span><span class="p">(</span><span class="s">&quot;Reboot application.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="cm">/* Power on unused sections of RAM to allow MCUboot to use it. */</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">IS_ENABLED</span><span class="p">(</span><span class="n">CONFIG_RAM_POWER_DOWN_LIBRARY</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">power_up_unused_ram</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">sys_reboot</span><span class="p">(</span><span class="n">SYS_REBOOT_COLD</span><span class="p">);</span>
+<span class="w">        </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p>Apart from the library initialization, the application must pass ZCL events to the Zigbee FOTA library.
+If the application does not implement additional ZCL event handlers, the Zigbee FOTA handler may be passed directly to the ZBOSS stack:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/* Initialize Zigbee FOTA download service. */</span>
+<span class="n">zigbee_fota_init</span><span class="p">(</span><span class="n">ota_evt_handler</span><span class="p">);</span>
+<span class="cm">/* Register callback for handling ZCL commands. */</span>
+<span class="n">ZB_ZCL_REGISTER_DEVICE_CB</span><span class="p">(</span><span class="n">zigbee_fota_zcl_cb</span><span class="p">);</span>
+</pre></div>
+</div>
+</li>
+<li><p>The periodical OTA server discovery must be started from the signal handler.
+The application should pass the received signals to the Zigbee FOTA library:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">zboss_signal_handler</span><span class="p">(</span><span class="n">zb_bufid_t</span><span class="w"> </span><span class="n">bufid</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="cm">/* Pass signal to the OTA client implementation. */</span>
+<span class="w">    </span><span class="n">zigbee_fota_signal_handler</span><span class="p">(</span><span class="n">bufid</span><span class="p">);</span>
+<span class="w">    </span><span class="p">...</span>
+</pre></div>
+</div>
+</li>
+<li><p>To inform the MCUboot about successful device firmware upgrade, the application must call the following function once it is sure that all intended functionalities work after the upgrade:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">boot_write_img_confirmed</span><span class="p">();</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>See the <code class="file docutils literal notranslate"><span class="pre">samples/zigbee/light_switch/src/main.c</span></code> file of the <a class="reference internal" href="../../samples/zigbee/light_switch/README.html#zigbee-light-switch-sample"><span class="std std-ref">Zigbee: Light switch</span></a> sample for an example implementation of the Zigbee FOTA in an application.</p>
+</section>
+<section id="options-for-generating-zigbee-fota-upgrade-image">
+<h3><a class="toc-backref" href="#id12">Options for generating Zigbee FOTA upgrade image</a><a class="headerlink" href="#options-for-generating-zigbee-fota-upgrade-image" title="Permalink to this heading"></a></h3>
+<p>By enabling the Zigbee OTA DFU, the west tool will automatically generate the upgrade image.
+To specify the target device of the generated image, use the following Kconfig options:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZIGBEE_FOTA_COMMENT</span></code> - This option allows to specify a human-readable image name.</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ENABLE_ZIGBEE_FOTA_MIN_HW_VERSION</span></code> and <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZIGBEE_FOTA_MIN_HW_VERSION</span></code> - These options allow to specify the minimum hardware version of the device that will accept the generated image.
+No value makes these options unused.</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ENABLE_ZIGBEE_FOTA_MAX_HW_VERSION</span></code> and <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZIGBEE_FOTA_MAX_HW_VERSION</span></code> - These options allow to specify the maximum hardware version of the device that will accept the generated image.
+No value makes these options unused.</p></li>
+</ul>
+<p>The manufacturer ID, image type and version of the generated image are obtained from the application settings.</p>
+<p>The upgrade image will be created in a dedicated directory in the <code class="file docutils literal notranslate"><span class="pre">build/zephyr/</span></code> directory.</p>
+</section>
+</section>
+<section id="configuring-zigbee-endpoint-logger">
+<span id="ug-zigbee-configuring-components-logger-ep"></span><h2><a class="toc-backref" href="#id13">Configuring Zigbee endpoint logger</a><a class="headerlink" href="#configuring-zigbee-endpoint-logger" title="Permalink to this heading"></a></h2>
+<p>The Zigbee endpoint logger library provides an endpoint handler for parsing and logging incoming ZCL frames with all their fields.</p>
+<p>To enable the endpoint logger library in your application, complete the following steps:</p>
+<ol class="arabic">
+<li><p>Enable the library by setting the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZIGBEE_LOGGER_EP</span></code> Kconfig option.</p></li>
+<li><p>Define the logging level for the library by setting the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZIGBEE_LOGGER_EP_LOG_LEVEL</span></code> Kconfig option.
+See <a class="reference internal" href="configuring.html#zigbee-ug-logging-logger-options"><span class="std std-ref">Zephyr’s logger options</span></a> for more information.</p></li>
+<li><p>Include the required header file <code class="file docutils literal notranslate"><span class="pre">include/zigbee/zigbee_logger_eprxzcl.h</span></code> into your project.</p></li>
+<li><p>Register <a class="reference internal" href="../../libraries/zigbee/zigbee_logger_eprxzcl.html#c.zigbee_logger_eprxzcl_ep_handler" title="zigbee_logger_eprxzcl_ep_handler"><code class="xref c c-func docutils literal notranslate"><span class="pre">zigbee_logger_eprxzcl_ep_handler()</span></code></a> as handler for the given <em>your_ep_number</em> endpoint using <code class="xref c c-macro docutils literal notranslate"><span class="pre">ZB_AF_SET_ENDPOINT_HANDLER</span></code>, after the device context is registered with <code class="xref c c-macro docutils literal notranslate"><span class="pre">ZB_AF_REGISTER_DEVICE_CTX</span></code>, but before starting the Zigbee stack:</p>
+<pre class="highlight literal-block">ZB_AF_REGISTER_DEVICE_CTX(&amp;your_device_ctx);
+ZB_AF_SET_ENDPOINT_HANDLER(<em>your_ep_number</em>, zigbee_logger_eprxzcl_ep_handler);</pre>
+<p>For applications that implement multiple handlers, <a class="reference internal" href="../../libraries/zigbee/zigbee_logger_eprxzcl.html#c.zigbee_logger_eprxzcl_ep_handler" title="zigbee_logger_eprxzcl_ep_handler"><code class="xref c c-func docutils literal notranslate"><span class="pre">zigbee_logger_eprxzcl_ep_handler()</span></code></a> can be registered as handler for each endpoint.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If <a class="reference internal" href="../../libraries/zigbee/shell.html#lib-zigbee-shell"><span class="std std-ref">Zigbee shell</span></a> is already enabled and configured for the given endpoint, set the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZIGBEE_SHELL_DEBUG_CMD</span></code> Kconfig option to enable the endpoint logger instead of registering a handler.
+This is because the Zigbee shell library registers its own handler for the endpoint.</p>
+</div>
+</li>
+</ol>
+<p>For more information about the library, see <a class="reference internal" href="../../libraries/zigbee/zigbee_logger_eprxzcl.html#lib-zigbee-logger-endpoint"><span class="std std-ref">Zigbee endpoint logger</span></a>.</p>
+</section>
+<section id="configuring-zigbee-zcl-scene-helper">
+<span id="ug-zigbee-configuring-components-scene-helper"></span><h2><a class="toc-backref" href="#id14">Configuring Zigbee ZCL scene helper</a><a class="headerlink" href="#configuring-zigbee-zcl-scene-helper" title="Permalink to this heading"></a></h2>
+<p>The Zigbee ZCL scene helper library provides a set of functions that implement the callbacks required by the ZCL scene cluster in the application.</p>
+<p>To enable the Zigbee ZCL scene helper library, set the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZIGBEE_SCENES</span></code> Kconfig option.</p>
+<p>Because the library uses Zephyr’s <span class="xref std std-ref">settings_api</span> subsystem, the application must call the following functions for the library to work correctly:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../libraries/zigbee/zigbee_zcl_scenes.html#c.zcl_scenes_init" title="zcl_scenes_init"><code class="xref c c-func docutils literal notranslate"><span class="pre">zcl_scenes_init()</span></code></a></p></li>
+<li><p><a class="reference internal" href="../../libraries/zigbee/zigbee_zcl_scenes.html#c.zcl_scenes_cb" title="zcl_scenes_cb"><code class="xref c c-func docutils literal notranslate"><span class="pre">zcl_scenes_cb()</span></code></a></p></li>
+<li><p><code class="xref c c-func docutils literal notranslate"><span class="pre">settings_subsys_init()</span></code></p></li>
+<li><p><code class="xref c c-func docutils literal notranslate"><span class="pre">settings_load()</span></code></p></li>
+</ul>
+<p>For more information about the library, see <a class="reference internal" href="../../libraries/zigbee/zigbee_zcl_scenes.html#lib-zigbee-zcl-scenes"><span class="std std-ref">Zigbee ZCL scene helper</span></a>.</p>
+</section>
+<section id="configuring-zigbee-shell">
+<span id="ug-zigbee-configuring-components-shell"></span><h2><a class="toc-backref" href="#id15">Configuring Zigbee shell</a><a class="headerlink" href="#configuring-zigbee-shell" title="Permalink to this heading"></a></h2>
+<p>The Zigbee shell library implements a set of <a class="reference internal" href="../../libraries/zigbee/shell.html#zigbee-shell-reference"><span class="std std-ref">Zigbee shell commands</span></a> that can be used with all Zigbee samples for testing and debugging.</p>
+<p>You can add support for Zigbee shell commands to any of the available <a class="reference internal" href="../../samples/zigbee.html#zigbee-samples"><span class="std std-ref">Zigbee samples</span></a>, except for the <a class="reference internal" href="../../samples/zigbee/ncp/README.html#zigbee-ncp-sample"><span class="std std-ref">NCP sample</span></a>.
+Some of the commands use an endpoint for sending packets, so no endpoint handler is allowed to be registered for this endpoint.</p>
+<p>To extend a sample with the Zigbee shell command support, set the following Kconfig options:</p>
+<ul>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZIGBEE_SHELL</span></code> - This option enables Zigbee shell and Zephyr’s <span class="xref std std-ref">zephyr:shell_api</span>.</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZIGBEE_SHELL_ENDPOINT</span></code> - This option specifies the endpoint number to be used by the Zigbee shell instance.
+The endpoint must be present at the device and you must not register an endpoint handler for this endpoint.</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZIGBEE_SHELL_DEBUG_CMD</span></code> - This option enables commands useful for testing and debugging.
+This option also enables logging of the incoming ZCL frames.
+Logging of the incoming ZCL frames uses the logging level set in <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZIGBEE_LOGGER_EP_LOG_LEVEL</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Using debug commands can make the device unstable.</p>
+</div>
+</li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZIGBEE_SHELL_LOG_LEVEL</span></code> - This option sets the logging level for Zigbee shell logs.
+See <a class="reference internal" href="configuring.html#zigbee-ug-logging-logger-options"><span class="std std-ref">Zephyr’s logger options</span></a> for more information.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="configuring_zboss_traces.html" class="btn btn-neutral float-right" title="Configuring ZBOSS traces in nRF Connect SDK" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="configuring.html" class="btn btn-neutral" title="Configuring Zigbee in nRF Connect SDK" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

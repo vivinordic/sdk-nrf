@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Matter network commissioning &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../../_static/js/ncs.js"
+></script>
+<script src="../../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Matter multiple fabrics feature" href="multi_fabrics.html" />
+    <link rel="prev" title="Matter network security" href="security.html" />
+<link
+  href="../../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../protocols.html">Protocols</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../ble/index.html">Bluetooth LE Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../bt_mesh/index.html">Bluetooth mesh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../esb/index.html">Enhanced ShockBurst (ESB)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gazell/index.html">Gazell</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Matter</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Matter overview</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="architecture.html">Matter architecture</a></li>
+<li class="toctree-l4"><a class="reference internal" href="data_model.html">Matter Data Model and device types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="int_model.html">Matter Interaction Model and interaction types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="network_topologies.html">Matter network topology and concepts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="security.html">Matter network security</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Matter network commissioning</a></li>
+<li class="toctree-l4"><a class="reference internal" href="multi_fabrics.html">Matter multiple fabrics feature</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dfu.html">Matter OTA</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dev_model.html">Matter development model and compatible ecosystems</a></li>
+<li class="toctree-l4"><a class="reference internal" href="integration.html">Matter integration in the nRF Connect SDK</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../getting_started/index.html">Getting started with Matter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../end_product/index.html">How to create Matter end product</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../multiprotocol/index.html">Multiprotocol support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nfc/index.html">Near Field Communication (NFC)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../thread/index.html">Thread</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../wifi/index.html">Wi-Fi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../zigbee/index.html">Zigbee</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../drivers.html">Drivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../protocols.html">Protocols</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Matter</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Matter overview</a></li>
+      <li class="breadcrumb-item active">Matter network commissioning</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/protocols/matter/overview/commissioning.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="matter-network-commissioning">
+<span id="ug-matter-network-topologies-commissioning"></span><span id="ug-matter-overview-commissioning"></span><h1>Matter network commissioning<a class="headerlink" href="#matter-network-commissioning" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#commissioning-device-roles" id="id7">Commissioning device roles</a></p></li>
+<li><p><a class="reference internal" href="#commissioning-prerequisites" id="id8">Commissioning prerequisites</a></p>
+<ul>
+<li><p><a class="reference internal" href="#onboarding-information-formats" id="id9">Onboarding information formats</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#commissioning-stages" id="id10">Commissioning stages</a></p>
+<ul>
+<li><p><a class="reference internal" href="#device-discovery" id="id11">Device discovery</a></p></li>
+<li><p><a class="reference internal" href="#security-setup-with-pase" id="id12">Security setup with PASE</a></p></li>
+<li><p><a class="reference internal" href="#establishing-fail-safe" id="id13">Establishing fail-safe</a></p></li>
+<li><p><a class="reference internal" href="#preliminary-node-configuration" id="id14">Preliminary node configuration</a></p></li>
+<li><p><a class="reference internal" href="#device-attestation-certificate-verification" id="id15">Device Attestation Certificate verification</a></p></li>
+<li><p><a class="reference internal" href="#installing-operational-credentials" id="id16">Installing operational credentials</a></p></li>
+<li><p><a class="reference internal" href="#network-commissioning" id="id17">Network commissioning</a></p></li>
+<li><p><a class="reference internal" href="#operational-discovery" id="id18">Operational discovery</a></p></li>
+<li><p><a class="reference internal" href="#security-setup-with-case" id="id19">Security setup with CASE</a></p></li>
+<li><p><a class="reference internal" href="#disarming-fail-safe" id="id20">Disarming fail-safe</a></p></li>
+<li><p><a class="reference internal" href="#message-exchange" id="id21">Message exchange</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#commissioning-connection-scenarios" id="id22">Commissioning connection scenarios</a></p></li>
+<li><p><a class="reference internal" href="#commissioning-results" id="id23">Commissioning results</a></p></li>
+</ul>
+</div>
+<p>The commissioning in Matter is a process of joining a device to a fabric (operational network).</p>
+<section id="commissioning-device-roles">
+<h2><a class="toc-backref" href="#id7">Commissioning device roles</a><a class="headerlink" href="#commissioning-device-roles" title="Permalink to this heading"></a></h2>
+<p>The process takes place between the following devices:</p>
+<ul class="simple">
+<li><p>Commissioner device, which is the Matter controller that is carrying out the commissioning.</p></li>
+<li><p>Commissionee device, which is the Matter accessory device that is being added to the fabric.</p></li>
+</ul>
+</section>
+<section id="commissioning-prerequisites">
+<h2><a class="toc-backref" href="#id8">Commissioning prerequisites</a><a class="headerlink" href="#commissioning-prerequisites" title="Permalink to this heading"></a></h2>
+<p>To start the commissioning procedure, the controller must get the onboarding information from the Matter accessory device.
+The data payload includes the following information, among other things:</p>
+<ul class="simple">
+<li><p>16-bit Vendor ID and 16-bit Product ID</p></li>
+<li><p>12-bit device discriminator</p></li>
+<li><p>27-bit setup passcode</p></li>
+<li><p>8-bit Discovery Capabilities Bitmask</p></li>
+</ul>
+<section id="onboarding-information-formats">
+<span id="ug-matter-network-topologies-commissioning-onboarding-formats"></span><h3><a class="toc-backref" href="#id9">Onboarding information formats</a><a class="headerlink" href="#onboarding-information-formats" title="Permalink to this heading"></a></h3>
+<p>The data payload can be encoded in one of the following ways, either included on-device or in the packaging for the end products (or both):</p>
+<ul class="simple">
+<li><p>Manual Pairing Code - which provides the onboarding information as a sequence of digits that can be used with most Matter commissioners.</p></li>
+<li><p>QR Code - which you can scan using the appropriate mobile application for your ecosystem.</p></li>
+<li><p>QR Code Payload - which is a alphanumeric code that you can use in command-line tools.
+For testing purposes, it can be printed to the UART console or be shared using an NFC tag.
+This code is represented visually by the QR Code.</p></li>
+</ul>
+<p>Manual Pairing Code must always be supported, while the QR Code is recommended.
+Different ecosystems can also define their own methods of providing the discriminator and setup passcode.</p>
+</section>
+</section>
+<section id="commissioning-stages">
+<h2><a class="toc-backref" href="#id10">Commissioning stages</a><a class="headerlink" href="#commissioning-stages" title="Permalink to this heading"></a></h2>
+<p>The commissioning procedure consists of the stages presented on the following figure.
+Each is discussed in the following sections.</p>
+<figure class="align-default" id="id6">
+<img alt="Matter commissioning overview" src="../../../_images/matter_network_commissioning.svg" /><figcaption>
+<p><span class="caption-text">Matter commissioning overview</span><a class="headerlink" href="#id6" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<section id="device-discovery">
+<h3><a class="toc-backref" href="#id11">Device discovery</a><a class="headerlink" href="#device-discovery" title="Permalink to this heading"></a></h3>
+<p>The commissioner discovers devices that can be commissioned onto the network.</p>
+<p>The devices that are to be commissioned need to let the commissioner know about their existence, that is <em>advertise</em> their presence.
+This can happen using the following advertising methods:</p>
+<ul class="simple">
+<li><p>Bluetooth® LE - This method is used especially if the node is being added to its first Matter fabric.</p></li>
+<li><p>DNS-SD - This method is commonly used if the node is connected to Ethernet or is already a member of a Wi-Fi or Thread network.</p></li>
+<li><p>Planned for future releases: Wi-Fi Access Point - This method will use the Wi-Fi Soft-AP functionality and will be used for devices that are not yet members of any network.</p></li>
+</ul>
+<p>The advertisement priority is defined within the Discovery Capabilities Bitmask, provided in the onboarding data.</p>
+</section>
+<section id="security-setup-with-pase">
+<h3><a class="toc-backref" href="#id12">Security setup with PASE</a><a class="headerlink" href="#security-setup-with-pase" title="Permalink to this heading"></a></h3>
+<p>The commissioner runs the Passcode-Authenticated Session Establishment (PASE) protocol, which is exclusive to the commissioning process.
+This protocol is used to establish the first session between devices that take part in commissioning.
+The session is established with a passcode provided out-of-band and that is used to derive encryption keys.
+This passcode is known only to the commissioner and the commissionee.</p>
+<p>There can be only one ongoing PASE sessions at a time.</p>
+</section>
+<section id="establishing-fail-safe">
+<h3><a class="toc-backref" href="#id13">Establishing fail-safe</a><a class="headerlink" href="#establishing-fail-safe" title="Permalink to this heading"></a></h3>
+<p>The commissioner requests the commissionee to back up its original configuration.
+The fail-safe acts as a back-up, but it also starts a timer that sets a limit for the whole commissioning process.
+The timer is disabled with the disarming of the fail-safe at the end of commissioning.</p>
+</section>
+<section id="preliminary-node-configuration">
+<h3><a class="toc-backref" href="#id14">Preliminary node configuration</a><a class="headerlink" href="#preliminary-node-configuration" title="Permalink to this heading"></a></h3>
+<p>The commissioner reads the Basic Information Cluster attributes of the commissionee and its device type.
+It then configures the commissionee with regulatory information, such as location and country, and the current UTC time.</p>
+</section>
+<section id="device-attestation-certificate-verification">
+<h3><a class="toc-backref" href="#id15">Device Attestation Certificate verification</a><a class="headerlink" href="#device-attestation-certificate-verification" title="Permalink to this heading"></a></h3>
+<p>The commissioner checks whether the commissionee is a certified Matter device.
+As part of this verification, the commissioner generates a random 32-bit attestation nonce and sends it to the commissionee, who should return the signed attestation information that includes the nonce.
+Usage of a nonce prevents replay attacks against commissioners.
+The commissioner then validates the attestation information.</p>
+<p>The verification succeeds if the device is able to prove the validity and ownership of the mandatory <a class="reference internal" href="../end_product/attestation.html#ug-matter-device-attestation"><span class="std std-ref">Matter Device Attestation</span></a> elements.
+If the validity and ownership cannot be proven, the verification fails.
+The commissioner can then either terminate or continue the commissioning procedure.</p>
+</section>
+<section id="installing-operational-credentials">
+<h3><a class="toc-backref" href="#id16">Installing operational credentials</a><a class="headerlink" href="#installing-operational-credentials" title="Permalink to this heading"></a></h3>
+<p>The commissioner installs Node Operational Certificate (NOC) and Operational ID on the commissionee.
+The commissionee becomes the new node of the Matter fabric.
+The node is identified by a tuple consisting of the Root PK, Fabric ID, and Node ID.
+(While the fabric is identified by a tuple consisting of the Root PK and the Fabric ID.)</p>
+</section>
+<section id="network-commissioning">
+<h3><a class="toc-backref" href="#id17">Network commissioning</a><a class="headerlink" href="#network-commissioning" title="Permalink to this heading"></a></h3>
+<p>The commissioner provisions the commissionee node with the operational network credentials, either Wi-Fi or Thread, and requests the commissionee to connect to the network.</p>
+</section>
+<section id="operational-discovery">
+<h3><a class="toc-backref" href="#id18">Operational discovery</a><a class="headerlink" href="#operational-discovery" title="Permalink to this heading"></a></h3>
+<p>The commissioner discovers the commissionee node on the operational network using DNS-SD.
+This way, the commissioner learns the IP address of the node.</p>
+</section>
+<section id="security-setup-with-case">
+<h3><a class="toc-backref" href="#id19">Security setup with CASE</a><a class="headerlink" href="#security-setup-with-case" title="Permalink to this heading"></a></h3>
+<p>The commissioner and the node use the Certificate-Authenticated Session Establishment (CASE) protocol to establish secure communication.
+The CASE protocol is in charge of exchanging NOCs to set up a session secured with a new pair of keys.
+The CASE connection is reset each time a device breaks the connection.</p>
+</section>
+<section id="disarming-fail-safe">
+<h3><a class="toc-backref" href="#id20">Disarming fail-safe</a><a class="headerlink" href="#disarming-fail-safe" title="Permalink to this heading"></a></h3>
+<p>The commissioner requests the commissionee node to remove the stored configuration backup.
+This also stops the fail-safe timer.</p>
+</section>
+<section id="message-exchange">
+<h3><a class="toc-backref" href="#id21">Message exchange</a><a class="headerlink" href="#message-exchange" title="Permalink to this heading"></a></h3>
+<p>The commissioner and the commissionee start exchanging AES-encrypted messages on the operational network.</p>
+</section>
+</section>
+<section id="commissioning-connection-scenarios">
+<h2><a class="toc-backref" href="#id22">Commissioning connection scenarios</a><a class="headerlink" href="#commissioning-connection-scenarios" title="Permalink to this heading"></a></h2>
+<p>The commissioning stages can take place in one of the following connection scenarios between the commissioner and the commissionee:</p>
+<ul class="simple">
+<li><p>Concurrent connection commissioning flow – where it is possible to have two network connections simultaneously: one on the operational network and one on the commissioning channel.</p></li>
+<li><p>Non-concurrent connection commissioning flow – where the connection to the operational network immediately breaks the connection on the commissioning channel.</p></li>
+</ul>
+<p>This is because the commissioning process can take place over a different network interface (for example Bluetooth LE) than the interface used for connection with the operational network (for example Thread or Wi-Fi).</p>
+</section>
+<section id="commissioning-results">
+<h2><a class="toc-backref" href="#id23">Commissioning results</a><a class="headerlink" href="#commissioning-results" title="Permalink to this heading"></a></h2>
+<p>At the end of the commissioning procedure, the device that has successfully joined the Matter fabric will have the following information configured:</p>
+<ul class="simple">
+<li><p>New instance name, constructed using the fabric ID and the node ID (assigned by the commissioner)</p></li>
+<li><p>New Node Operational Certificate for the Matter fabric it has joined</p></li>
+<li><p>New Private Key for NOC</p></li>
+<li><p>New Access Control List</p></li>
+<li><p>Information about operational network</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="multi_fabrics.html" class="btn btn-neutral float-right" title="Matter multiple fabrics feature" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="security.html" class="btn btn-neutral" title="Matter network security" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

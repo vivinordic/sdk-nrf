@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Evaluating LwM2M Advanced Firmware Update &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../../_static/js/ncs.js"
+></script>
+<script src="../../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Preparing for production" href="provisioning.html" />
+    <link rel="prev" title="Sample description" href="sample_description.html" />
+<link
+  href="../../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../applications.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../samples.html">Samples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../bl.html">Bluetooth samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../crypto.html">Cryptography samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../edge.html">Edge Impulse samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gazell.html">Gazell samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../matter.html">Matter samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nfc.html">NFC samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nrf5340.html">nRF5340 samples</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../nrf9160.html">nRF9160 samples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../at_client/README.html">nRF9160: AT Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../at_monitor/README.html">nRF9160: AT monitor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../aws_iot/README.html">nRF9160: AWS IoT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../azure_fota/README.html">nRF9160: Azure FOTA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../azure_iot_hub/README.html">nRF9160: Azure IoT Hub</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ciphersuites/README.html">nRF9160: TLS cipher suites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../coap_client/README.html">nRF9160: nRF CoAP Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../download/README.html">nRF9160: Download client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fmfu_smp_svr/README.html">nRF9160: Full modem firmware update using SMP Server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gnss/README.html">nRF9160: GNSS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../https_client/README.html">nRF9160: HTTPS Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../location/README.html">nRF9160: Location</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../lte_ble_gateway/README.html">nRF9160: LTE Sensor Gateway</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../lwm2m_carrier/README.html">nRF9160: LwM2M carrier</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="README.html">nRF9160: LwM2M Client</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="sample_description.html">Sample description</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Evaluating LwM2M Advanced Firmware Update</a></li>
+<li class="toctree-l4"><a class="reference internal" href="provisioning.html">Preparing for production</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../memfault/README.html">nRF9160: Memfault</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modem_callbacks/README.html">nRF9160: Modem callbacks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modem_shell/README.html">nRF9160: Modem Shell</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modem_trace_backend/README.html">nRF9160: Modem trace backend</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modem_trace_flash/README.html">nRF9160: Modem trace external flash backend</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../nidd/README.html">nRF9160: NIDD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../nrf_cloud_mqtt_multi_service/README.html">nRF9160: nRF Cloud MQTT multi-service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../nrf_cloud_rest_cell_location/README.html">nRF9160: nRF Cloud REST cellular location</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../nrf_cloud_rest_device_message/README.html">nRF9160: nRF Cloud REST Device Message</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../nrf_cloud_rest_fota/README.html">nRF9160: nRF Cloud REST FOTA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pdn/README.html">nRF9160: PDN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../slm_shell/README.html">nRF9160: SLM Shell</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../sms/README.html">nRF9160: SMS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../udp/README.html">nRF9160: UDP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../net/mqtt/README.html">MQTT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../http_update/application_update/README.html">nRF9160: HTTP application update</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../http_update/full_modem_update/README.html">nRF9160: HTTP full modem update</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../http_update/modem_delta_update/README.html">nRF9160: HTTP modem delta update</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../tfm.html">Trusted Firmware-M (TF-M) samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../thread.html">Thread samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../zigbee.html">Zigbee samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../wifi.html">Wi-Fi samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../other.html">Other samples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../drivers.html">Drivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../samples.html">Samples</a></li>
+          <li class="breadcrumb-item"><a href="../../nrf9160.html">nRF9160 samples</a></li>
+          <li class="breadcrumb-item"><a href="README.html">nRF9160: LwM2M Client</a></li>
+      <li class="breadcrumb-item active">Evaluating LwM2M Advanced Firmware Update</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/samples/nrf9160/lwm2m_client/fota.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="evaluating-lwm2m-advanced-firmware-update">
+<span id="lwm2m-client-fota"></span><h1>Evaluating LwM2M Advanced Firmware Update<a class="headerlink" href="#evaluating-lwm2m-advanced-firmware-update" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#extended-resources" id="id6">Extended resources</a></p></li>
+<li><p><a class="reference internal" href="#extended-update-execute-resource" id="id7">Extended update execute resource</a></p></li>
+<li><p><a class="reference internal" href="#library-support" id="id8">Library support</a></p>
+<ul>
+<li><p><a class="reference internal" href="#configuration-option" id="id9">Configuration option</a></p></li>
+<li><p><a class="reference internal" href="#initializing" id="id10">Initializing</a></p></li>
+<li><p><a class="reference internal" href="#lwm2m-client-utilities-library-setup" id="id11">LwM2M Client utilities library setup</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#advanced-firmware-update-helper-script" id="id12">Advanced Firmware Update helper script</a></p>
+<ul>
+<li><p><a class="reference internal" href="#fota-upload-command" id="id13">FOTA upload command</a></p></li>
+<li><p><a class="reference internal" href="#fota-update-command" id="id14">FOTA update command</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#testing-advanced-fota" id="id15">Testing advanced FOTA</a></p></li>
+</ul>
+</div>
+<p>The Advanced Firmware Update object (object id <code class="docutils literal notranslate"><span class="pre">33629</span></code>) is an experimental object under development.
+It allows to update multiple firmware packages from a device without deviating from the standard LwM2M Firmware Update object.
+Advanced Firmware Update shares the first 13 resources with the <a class="reference external" href="https://www.openmobilealliance.org/release/LightweightM2M/V1_2-20201110-A/OMA-TS-LightweightM2M_Core-V1_2-20201110-A.pdf#page=118">OMA LwM2M Firmware Update object v1.1</a> (object id <code class="docutils literal notranslate"><span class="pre">5</span></code>).
+However, Zephyr only implements version 1.0 of the Firmware Update object.</p>
+<p>The main difference between these two versions is that the Advanced Firmware Update object is multi-instance.
+For more information about the differences, see <a class="reference external" href="http://www.openmobilealliance.org/release/LightweightM2M/V1_2-20201110-A/OMA-TS-LightweightM2M_Core-V1_2-20201110-A.pdf">LwM2M Firmware Update version 1.1</a>.</p>
+<section id="extended-resources">
+<h2><a class="toc-backref" href="#id6">Extended resources</a><a class="headerlink" href="#extended-resources" title="Permalink to this heading"></a></h2>
+<p>The following table describes the extensions in the object compared to the standard Firmware Update object:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 20%" />
+<col style="width: 12%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Resource ID</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Operation</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>14</p></td>
+<td><p>Component name</p></td>
+<td><p>Read</p></td>
+<td><p>Name of the component handled by this instance of
+the Advanced Firmware Update object.</p></td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>Current version</p></td>
+<td><p>Read</p></td>
+<td><p>Version number of the package that is currently
+installed and running for the component handled
+by this instance of the Advanced Firmware Update
+object.</p></td>
+</tr>
+<tr class="row-even"><td><p>16</p></td>
+<td><p>Linked instance</p></td>
+<td><p>Read</p></td>
+<td><p>When multiple instances of the Advanced Firmware
+Update object are in the <code class="docutils literal notranslate"><span class="pre">downloaded</span></code> state,
+this resource lists all other instances that will
+be updated in a batch if the Firmware Update
+resource is executed on this instance with no
+arguments. Each of the instances listed must be
+in the <code class="docutils literal notranslate"><span class="pre">downloaded</span></code> state.</p></td>
+</tr>
+<tr class="row-odd"><td><p>17</p></td>
+<td><p>Conflicting
+instances</p></td>
+<td><p>Read</p></td>
+<td><p>When the download or update fails and the Update
+Result resource value is set to <code class="docutils literal notranslate"><span class="pre">12</span></code> or <code class="docutils literal notranslate"><span class="pre">13</span></code>,
+this resource must be present and must contain
+references to the Advanced Firmware Update object
+instances that caused the conflict.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="extended-update-execute-resource">
+<h2><a class="toc-backref" href="#id7">Extended update execute resource</a><a class="headerlink" href="#extended-update-execute-resource" title="Permalink to this heading"></a></h2>
+<p>Following table lists the execute resource compared to the standard Firmware Update object:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 11%" />
+<col style="width: 76%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Resource ID</p></th>
+<th class="head"><p>Operation</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>Execute</p></td>
+<td><p>Updates firmware by using the firmware package stored in the package, or
+by using the firmware downloaded from the package URI. This resource is
+only executable when the value of the state resource is <code class="docutils literal notranslate"><span class="pre">downloaded</span></code>.</p></td>
+</tr>
+</tbody>
+</table>
+<p>If multiple instances of the Advanced Firmware Update object are in the <code class="docutils literal notranslate"><span class="pre">downloaded</span></code> state, the device might update multiple components in one go.
+In this case, the linked instances resource must list all other components that update alongside the current one.</p>
+<p>The server might override this behavior by including the argument <code class="docutils literal notranslate"><span class="pre">0</span></code> in the Execute operation.
+If the argument is present but has no value, the LwM2M Client must attempt to update only the component handled by the current instance.
+If the argument is present with a value containing a list of the Advanced Firmware Update object instances specified as a core link format (for example, when the argument might read <code class="docutils literal notranslate"><span class="pre">0='&lt;/33629/1&gt;</span></code>), the LwM2M Client must attempt to update the components handled by the current instance and the instances listed in the argument and must not attempt to update any other components.
+If the client is not able to satisfy such a request, the update process will fail with the Update Result resource set to <code class="docutils literal notranslate"><span class="pre">13</span></code>.</p>
+</section>
+<section id="library-support">
+<h2><a class="toc-backref" href="#id8">Library support</a><a class="headerlink" href="#library-support" title="Permalink to this heading"></a></h2>
+<p>Advanced Firmware update is implemented in the <a class="reference internal" href="../../../libraries/networking/lwm2m_client_utils.html#lib-lwm2m-client-utils"><span class="std std-ref">LwM2M client utils</span></a> library and is designed to support modem and application binary updates.</p>
+<section id="configuration-option">
+<h3><a class="toc-backref" href="#id9">Configuration option</a><a class="headerlink" href="#configuration-option" title="Permalink to this heading"></a></h3>
+<p>Enable the following Kconfig options to use advanced FOTA:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">CONFIG_LWM2M_CLIENT_UTILS=y</span>
+<span class="go">CONFIG_LWM2M_CLIENT_UTILS_ADV_FIRMWARE_UPDATE_OBJ_SUPPORT=y</span>
+<span class="go">CONFIG_LWM2M_CLIENT_UTILS_FIRMWARE_UPDATE_OBJ_SUPPORT=y</span>
+<span class="go">CONFIG_LWM2M_FIRMWARE_UPDATE_OBJ_SUPPORT=n</span>
+<span class="go">CONFIG_FOTA_CLIENT_AUTOSCHEDULE_UPDATE=n</span>
+</pre></div>
+</div>
+<p>The <code class="file docutils literal notranslate"><span class="pre">overlay-adv-firmware.conf</span></code> configuration file includes these options.</p>
+</section>
+<section id="initializing">
+<h3><a class="toc-backref" href="#id10">Initializing</a><a class="headerlink" href="#initializing" title="Permalink to this heading"></a></h3>
+<p>The Advanced Firmware Update functionality is implemented in <code class="file docutils literal notranslate"><span class="pre">lwm2m_firmware.c</span></code> and <code class="file docutils literal notranslate"><span class="pre">lwm2m_adv_firmware.c</span></code>.
+The Advanced Firmware Update object shares the same API with the standard LwM2M Firmware Update object as implemented in the <a class="reference internal" href="../../../libraries/networking/lwm2m_client_utils.html#lib-lwm2m-client-utils"><span class="std std-ref">LwM2M client utils</span></a> library.
+This object is initialized by calling the <a class="reference internal" href="../../../libraries/networking/lwm2m_client_utils.html#c.lwm2m_init_firmware" title="lwm2m_init_firmware"><code class="xref c c-func docutils literal notranslate"><span class="pre">lwm2m_init_firmware()</span></code></a> function and by confirming the currently booted application image as valid by calling the <a class="reference internal" href="../../../libraries/networking/lwm2m_client_utils.html#c.lwm2m_init_image" title="lwm2m_init_image"><code class="xref c c-func docutils literal notranslate"><span class="pre">lwm2m_init_image()</span></code></a> function.
+The validation of the image marks the FOTA process as complete, and the result is reported to the server.
+The modem FOTA process is automatically validated.</p>
+</section>
+<section id="lwm2m-client-utilities-library-setup">
+<h3><a class="toc-backref" href="#id11">LwM2M Client utilities library setup</a><a class="headerlink" href="#lwm2m-client-utilities-library-setup" title="Permalink to this heading"></a></h3>
+<p>By default, the Advanced Firmware Update object supports two instances that are configured in the following way:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 73%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Instance ID</p></th>
+<th class="head"><p>Owner</p></th>
+<th class="head"><p>DFU types</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>Application</p></td>
+<td><p>DFU_TARGET_IMAGE_TYPE_MCUBOOT</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>Modem</p></td>
+<td><p>DFU_TARGET_IMAGE_TYPE_MODEM_DELTA, DFU_TARGET_IMAGE_TYPE_FULL_MODEM</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="advanced-firmware-update-helper-script">
+<h2><a class="toc-backref" href="#id12">Advanced Firmware Update helper script</a><a class="headerlink" href="#advanced-firmware-update-helper-script" title="Permalink to this heading"></a></h2>
+<p>For working with the <a class="reference external" href="https://www.avsystem.com/products/coiote-iot-device-management-platform/">AVSystem Coiote server</a>, a helper script has been provided.
+To automate the firmware update, you can use the script <code class="file docutils literal notranslate"><span class="pre">fota.py</span></code> that is available in the <code class="file docutils literal notranslate"><span class="pre">samples/nrf9160/lwm2m_client/scripts/</span></code> folder.
+The <code class="file docutils literal notranslate"><span class="pre">fota.py</span></code> file supports <code class="docutils literal notranslate"><span class="pre">update</span></code> and <code class="docutils literal notranslate"><span class="pre">upload</span></code> commands for firmware updates.</p>
+<p>The commands can be used in the following way:</p>
+<pre class="literal-block">./scripts/fota.py -id <em>device_id</em> -to <em>time_out</em> update <em>instance_id</em> <em>binary_type</em> <em>binary_src</em>
+./scripts/fota.py upload <em>instance_id</em> <em>binary_name</em></pre>
+<section id="fota-upload-command">
+<h3><a class="toc-backref" href="#id13">FOTA upload command</a><a class="headerlink" href="#fota-upload-command" title="Permalink to this heading"></a></h3>
+<p>The FOTA <code class="docutils literal notranslate"><span class="pre">upload</span></code> command allocates a resource ID and uploads the binary to Coiote Device Management server.
+Currently, the script defines resource ID based on the given instance ID: <code class="docutils literal notranslate"><span class="pre">lwm2m_client_fota_instance_&lt;instance_id&gt;</span></code>.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">./scripts/fota.py upload 0 app_update.bin</span>
+</pre></div>
+</div>
+<p>The following example output shows the allocation of a resource id <code class="docutils literal notranslate"><span class="pre">lwm2m_client_fota_instance_0</span></code> on the server side:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">[INFO] fota.py - Upload app_update.bin with instance 0 to Coiote</span>
+<span class="go">[INFO] fota.py - Binary app_update.bin, Size 336032 (bytes)</span>
+<span class="go">[INFO] coiote.py - Creating fota resource for binary app_update.bin with id lwm2m_client_fota_instance_0</span>
+<span class="go">[INFO] fota.py - Allocated Resource id lwm2m_client_fota_instance_0 for instance 0</span>
+</pre></div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">./scripts/fota.py upload 1 mfw_nrf9160_update_from_1.3.4_to_1.3.4-FOTA-TEST.bin</span>
+</pre></div>
+</div>
+<p>The following example output shows the allocation of a resource id <code class="docutils literal notranslate"><span class="pre">lwm2m_client_fota_instance_0</span></code> on the server side:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">[INFO] fota.py - Upload mfw_nrf9160_update_from_1.3.4_to_1.3.4-FOTA-TEST.bin with instance 1 to Coiote</span>
+<span class="go">[INFO] fota.py - Binary mfw_nrf9160_update_from_1.3.4_to_1.3.4-FOTA-TEST.bin, Size 14472 (bytes)</span>
+<span class="go">[INFO] coiote.py - Creating fota resource for binary mfw_nrf9160_update_from_1.3.4_to_1.3.4-FOTA-TEST.bin with id lwm2m_client_fota_instance_1</span>
+<span class="go">[INFO] fota.py - Allocated Resource id lwm2m_client_fota_instance_1 for instance 1</span>
+</pre></div>
+</div>
+</section>
+<section id="fota-update-command">
+<h3><a class="toc-backref" href="#id14">FOTA update command</a><a class="headerlink" href="#fota-update-command" title="Permalink to this heading"></a></h3>
+<p>For running the full FOTA process, the firmware can be given as a resource ID that already exists on the server side, or as a binary file that will be uploaded automatically.</p>
+<p>To use a binary name, run the script with the following parameters:</p>
+<pre class="literal-block">./scripts/fota.py -id <em>device_id</em> -to <em>timeout</em> update <em>instance_id</em> file <em>binary_name</em></pre>
+<p>When binary type is <code class="docutils literal notranslate"><span class="pre">file</span></code>, script tries to discover given binary name from the <code class="file docutils literal notranslate"><span class="pre">samples/nrf9160/lwm2m_client/</span></code> file, or the <code class="file docutils literal notranslate"><span class="pre">samples/nrf9160/lwm2m_client/build/zephyr</span></code>.
+The <code class="docutils literal notranslate"><span class="pre">update</span></code> command uploads and generates binary resource IDs automatically when a binary file is used.
+The update default task timeout is 800 seconds.</p>
+<p>Following is an example of updating a modem instance by giving a binary file:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">./scripts/fota.py -id urn:imei:351358811331351 update 1 file mfw_nrf9160_update_from_1.3.4_to_1.3.4-FOTA-TEST.bin</span>
+</pre></div>
+</div>
+<p>To use existing resource IDs, run the script with the following parameters:</p>
+<pre class="literal-block">./scripts/fota.py -id <em>device_id</em> update <em>instance_id</em> resource <em>resource_id</em></pre>
+<p>Following is an example of uploading a binary and updating a modem by referring to the uploaded resource ID:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">./scripts/fota.py upload 1 mfw_nrf9160_update_from_1.3.4-FOTA-TEST_to_1.3.4.bin</span>
+<span class="go">./scripts/fota.py -id urn:imei:351358811331351 update 1 resource lwm2m_client_fota_instance_1</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="testing-advanced-fota">
+<h2><a class="toc-backref" href="#id15">Testing advanced FOTA</a><a class="headerlink" href="#testing-advanced-fota" title="Permalink to this heading"></a></h2>
+<p>Complete the following steps to test the advanced FOTA firmware update with the lwM2M client sample and the <code class="file docutils literal notranslate"><span class="pre">/scripts/fota.py</span></code> file.</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p>Download the latest released modem zip file from <a class="reference external" href="https://www.nordicsemi.com/Products/Development-hardware/nRF9160-DK/Download#infotabs">nRF9160 DK Downloads</a>.</p></li>
+<li><p>Update the modem firmware using the nRF Programmer app of <a class="reference external" href="https://www.nordicsemi.com/Software-and-Tools/Development-Tools/nRF-Connect-for-desktop">nRF Connect for Desktop</a>.</p></li>
+<li><p>Copy the binaries with the following naming format from the zip file to the folder <code class="file docutils literal notranslate"><span class="pre">/nrf/samples/nrf9160/lwm2m_client</span></code>:</p>
+<ul class="simple">
+<li><p><code class="file docutils literal notranslate"><span class="pre">mfw_nrf9160_update_from_1.x.x_to_1.x.x-FOTA-TEST.bin</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">mfw_nrf9160_update_from_1.x.x-FOTA-TEST_to_1.x.x.bin</span></code></p></li>
+</ul>
+<p>where 1.x.x is the latest modem release version.</p>
+</li>
+<li><p>To set up the script, you must set the username and password that you used in AVSystem’s Coiote Device Management server as the environment variables.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Setup<span class="w"> </span>phase
+<span class="go">export COIOTE_PASSWD=&#39;my-password&#39;</span>
+<span class="go">export COIOTE_USER=&#39;my-username&#39;</span>
+</pre></div>
+</div>
+</li>
+<li><p>To use the <a class="reference internal" href="README.html#lwm2m-client"><span class="std std-ref">nRF9160: LwM2M Client</span></a> sample after updating the firmware, you must build the sample with the following overlays:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="file docutils literal notranslate"><span class="pre">overlay-avsystems.conf</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">overlay-lwm2m-1.1.conf</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">overlay-fota_helper.conf</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">overlay-adv-firmware.conf</span></code></p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Register your device with the Coiote Device management server.</p></li>
+<li><p>Flash the compiled sample using the erase flash option.</p></li>
+<li><p>Wait for the device registration to be complete.</p></li>
+<li><p>Open the <code class="file docutils literal notranslate"><span class="pre">src/prj.conf</span></code> file.</p></li>
+<li><p>Change <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MCUBOOT_IMAGE_VERSION</span></code> to <code class="docutils literal notranslate"><span class="pre">1.0.1</span></code> and rebuild the sample.</p></li>
+<li><p>Update the application and modem firmware by using the <code class="file docutils literal notranslate"><span class="pre">/scripts/fota.py</span></code> script:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">./scripts/fota.py -id urn:imei:351358811331351 update 0 file app_update.bin update 1 file mfw_nrf9160_update_from_1.x.x_to_1.x.x-FOTA-TEST.bin</span>
+</pre></div>
+</div>
+<p>Following is an example output of the command:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">[INFO] fota.py - Client identity: urn:imei:351358811331351</span>
+<span class="go">[INFO] fota.py - Binary app_update.bin, Size 336032 (bytes)</span>
+<span class="go">[INFO] coiote.py - Creating fota resource for binary app_update.bin with id lwm2m_client_fota_instance_0</span>
+<span class="go">[INFO] fota.py - Init setup for instance 0 firmware Update resource:lwm2m_client_fota_instance_0</span>
+<span class="go">[INFO] fota.py - Binary mfw_nrf9160_update_from_1.3.4_to_1.3.4-FOTA-TEST.bin, Size 14472 (bytes)</span>
+<span class="go">[INFO] coiote.py - Creating fota resource for binary mfw_nrf9160_update_from_1.3.4_to_1.3.4-FOTA-TEST.bin with id lwm2m_client_fota_instance_1</span>
+<span class="go">[INFO] fota.py - Init setup for instance 1 firmware Update resource:lwm2m_client_fota_instance_1</span>
+<span class="go">[INFO] fota.py - Start Firmware Update</span>
+<span class="go">[INFO] fota.py - Delete Observation Advanced Firmware Update</span>
+<span class="go">[WARNING] coiote.py - Coiote: Path Advanced Firmware Update was not observed</span>
+<span class="go">[INFO] fota.py - Write Fota Download url to Advanced Firmware Update.0.Package URI</span>
+<span class="go">[INFO] fota.py - Write Fota Download url to Advanced Firmware Update.1.Package URI</span>
+<span class="go">[INFO] coiote.py - Device is Queuemode Coiote have to wait next Registration Update</span>
+<span class="go">[INFO] fota.py - Download Url Write done</span>
+<span class="go">[INFO] fota.py - Enable Observation Advanced Firmware Update</span>
+<span class="go">[INFO] fota.py - Downloading instance: 0</span>
+<span class="go">[INFO] fota.py - Downloading instance: 1</span>
+<span class="go">[INFO] fota.py - Download ready instance: 0</span>
+<span class="go">[INFO] fota.py - Download ready instance: 1</span>
+<span class="go">[INFO] coiote.py - Device is Queuemode Coiote have to wait next Registration Update</span>
+<span class="go">[INFO] fota.py - Update started instance: 0</span>
+<span class="go">[INFO] fota.py - Update started instance: 1</span>
+<span class="go">[INFO] fota.py - Firmware Update Successfully instance: 0</span>
+<span class="go">[INFO] fota.py - From:1.0.0-0 to 1.0.1-0</span>
+<span class="go">[INFO] fota.py - Firmware Update Successfully instance: 1</span>
+<span class="go">[INFO] fota.py - From:mfw_nrf9160_1.3.4 to mfw_nrf9160_1.3.4-FOTA-TEST</span>
+<span class="go">[INFO] fota.py - Firmware update process finished</span>
+<span class="go">[INFO] fota.py - Delete Observation Advanced Firmware Update</span>
+</pre></div>
+</div>
+</li>
+<li><p>Update the modem firmware back to the original released version:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">./scripts/fota.py -id urn:imei:351358811331351 update 1 file mfw_nrf9160_update_from_1.x.x-FOTA-TEST_to_1.x.x.bin</span>
+</pre></div>
+</div>
+<p>Following is an example output of the command:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">[INFO] fota.py - Client identity: urn:imei:351358811331351</span>
+<span class="go">[INFO] fota.py - Binary mfw_nrf9160_update_from_1.3.4-FOTA-TEST_to_1.3.4.bin, Size 14504 (bytes)</span>
+<span class="go">[INFO] coiote.py - Creating fota resource for binary mfw_nrf9160_update_from_1.3.4-FOTA-TEST_to_1.3.4.bin with id lwm2m_client_fota_instance_1</span>
+<span class="go">[INFO] fota.py - Init setup for instance 1 firmware Update resource:lwm2m_client_fota_instance_1</span>
+<span class="go">[INFO] fota.py - Start Firmware Update</span>
+<span class="go">[INFO] fota.py - Delete Observation Advanced Firmware Update</span>
+<span class="go">[WARNING] coiote.py - Coiote: Path Advanced Firmware Update was not observed</span>
+<span class="go">[INFO] fota.py - Write Fota Download url to Advanced Firmware Update.1.Package URI</span>
+<span class="go">[INFO] coiote.py - Device is Queuemode Coiote have to wait next Registration Update</span>
+<span class="go">[INFO] fota.py - Download Url Write done</span>
+<span class="go">[INFO] fota.py - Enable Observation Advanced Firmware Update</span>
+<span class="go">[INFO] fota.py - Downloading instance: 1</span>
+<span class="go">[INFO] fota.py - Download ready instance: 1</span>
+<span class="go">[INFO] coiote.py - Device is Queuemode Coiote have to wait next Registration Update</span>
+<span class="go">[INFO] fota.py - Update started instance: 1</span>
+<span class="go">[INFO] fota.py - Firmware Update Successfully instance: 1</span>
+<span class="go">[INFO] fota.py - From:mfw_nrf9160_1.3.4-FOTA-TEST to mfw_nrf9160_1.3.4</span>
+<span class="go">[INFO] fota.py - Firmware update process finished</span>
+<span class="go">[INFO] fota.py - Delete Observation Advanced Firmware Update</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div></blockquote>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="provisioning.html" class="btn btn-neutral float-right" title="Preparing for production" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="sample_description.html" class="btn btn-neutral" title="Sample description" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

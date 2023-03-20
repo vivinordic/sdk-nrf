@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Working with RF front-end modules &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../_static/js/ncs.js"
+></script>
+<script src="../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Adding Wi-Fi Coexistence support to short-range radio applications" href="../wifi_coex/index.html" />
+    <link rel="prev" title="Running applications with Trusted Firmware-M" href="../tfm/index.html" />
+<link
+  href="../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev_model.html">Development model</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../app_dev.html">Application development</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../board_support/index.html">Board support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pin_control/index.html">Pin control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../build_and_config_system/index.html">Build and configuration system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../optimizing/index.html">Optimizing application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ap_protect/index.html">Enabling access port protection mechanism</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bootloaders_and_dfu/index.html">Bootloaders and Device Firmware Updates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../logging/index.html">Logging in nRF Connect SDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multi_image/index.html">Multi-image builds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../testing_unity_cmock/index.html">Testing with Unity and CMock</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tfm/index.html">Running applications with Trusted Firmware-M</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Working with RF front-end modules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#software-support">Software support</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#using-mpsl">Using MPSL</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#direct-support">Direct support</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#hardware-description">Hardware description</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#adding-support-for-nrf21540">Adding support for nRF21540</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#adding-support-for-skyworks-front-end-module">Adding support for Skyworks front-end module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#use-case-of-incomplete-physical-connections-to-the-fem-module">Use case of incomplete physical connections to the FEM module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#hardware-support">Hardware support</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#nrf21540-dk">nRF21540 DK</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#shields">Shields</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../wifi_coex/index.html">Adding Wi-Fi Coexistence support to short-range radio applications</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drivers.html">Drivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../app_dev.html">Application development</a></li>
+      <li class="breadcrumb-item active">Working with RF front-end modules</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/app_dev/working_with_fem/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="working-with-rf-front-end-modules">
+<span id="ug-radio-fem"></span><h1>Working with RF front-end modules<a class="headerlink" href="#working-with-rf-front-end-modules" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#software-support" id="id14">Software support</a></p>
+<ul>
+<li><p><a class="reference internal" href="#using-mpsl" id="id15">Using MPSL</a></p>
+<ul>
+<li><p><a class="reference internal" href="#enabling-fem-and-mpsl" id="id16">Enabling FEM and MPSL</a></p></li>
+<li><p><a class="reference internal" href="#setting-the-fem-output-power" id="id17">Setting the FEM output power</a></p></li>
+<li><p><a class="reference internal" href="#using-fem-power-models" id="id18">Using FEM power models</a></p>
+<ul>
+<li><p><a class="reference internal" href="#using-nrf21540-gpio-spi-built-in-power-model" id="id19">Using nRF21540 GPIO+SPI built-in power model</a></p></li>
+<li><p><a class="reference internal" href="#adding-custom-power-models" id="id20">Adding custom power models</a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#direct-support" id="id21">Direct support</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#hardware-description" id="id22">Hardware description</a></p>
+<ul>
+<li><p><a class="reference internal" href="#adding-support-for-nrf21540" id="id23">Adding support for nRF21540</a></p>
+<ul>
+<li><p><a class="reference internal" href="#gpio-mode" id="id24">GPIO mode</a></p></li>
+<li><p><a class="reference internal" href="#spi-gpio-mode" id="id25">SPI/GPIO mode</a></p></li>
+<li><p><a class="reference internal" href="#optional-properties" id="id26">Optional properties</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#adding-support-for-skyworks-front-end-module" id="id27">Adding support for Skyworks front-end module</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id1" id="id28">Optional properties</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#use-case-of-incomplete-physical-connections-to-the-fem-module" id="id29">Use case of incomplete physical connections to the FEM module</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#hardware-support" id="id30">Hardware support</a></p>
+<ul>
+<li><p><a class="reference internal" href="#nrf21540-dk" id="id31">nRF21540 DK</a></p></li>
+<li><p><a class="reference internal" href="#shields" id="id32">Shields</a></p>
+<ul>
+<li><p><a class="reference internal" href="#nrf21540-ek" id="id33">nRF21540 EK</a></p>
+<ul>
+<li><p><a class="reference internal" href="#overview" id="id34">Overview</a></p></li>
+<li><p><a class="reference internal" href="#pin-assignment" id="id35">Pin assignment</a></p></li>
+<li><p><a class="reference internal" href="#programming" id="id36">Programming</a></p></li>
+<li><p><a class="reference internal" href="#references" id="id37">References</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#shields-with-2-pin-pa-lna-interface" id="id38">Shields with 2-pin PA/LNA interface</a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<p>An RF front-end module (FEM) is a device that amplifies the RF signal, to increase the range distance, the strength, and the robustness of a link connection.
+A more robust link reduces packet loss, causing fewer retransmissions and increasing the probability of successfully receiving the first packet, resulting in a lower link latency.</p>
+<p>FEMs provide a power amplifier (PA) that increases the TX power and a low-noise amplifier (LNA) that increases the RX sensitivity.
+Some FEMs, like the nRF21540, also provide a power down (PDN) control that powers down the FEM internal circuits, to reduce energy consumption.</p>
+<p>For testing purposes, a FEM is usually integrated in either a development kit or a shield that you can connect to a development kit.</p>
+<p>This guide describes how to add support for 2 different front-end module (FEM) implementations to your application in nRF Connect SDK.</p>
+<section id="software-support">
+<span id="ug-radio-fem-sw-support"></span><h2><a class="toc-backref" href="#id14">Software support</a><a class="headerlink" href="#software-support" title="Permalink to this heading"></a></h2>
+<p>To use radio protocols and a FEM with your application, enable <span class="xref std std-ref">nrfxlib:mpsl_fem</span> in the <span class="xref std std-ref">nrfxlib:mpsl</span> (MPSL) library.</p>
+<p>The following test samples support FEM control:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../samples/peripheral/radio_test/README.html#radio-test"><span class="std std-ref">Radio test (short-range)</span></a></p></li>
+<li><p><a class="reference internal" href="../../samples/bluetooth/direct_test_mode/README.html#direct-test-mode"><span class="std std-ref">Bluetooth: Direct Test Mode</span></a></p></li>
+</ul>
+<p>You can also use your own FEM driver when required.</p>
+<section id="using-mpsl">
+<span id="ug-radio-fem-sw-support-mpsl"></span><h3><a class="toc-backref" href="#id15">Using MPSL</a><a class="headerlink" href="#using-mpsl" title="Permalink to this heading"></a></h3>
+<p>The MPSL library provides the following GPIO interface implementations:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#ug-radio-fem-nrf21540-spi-gpio"><span class="std std-ref">SPI/GPIO mode</span></a> - For the nRF21540 GPIO+SPI implementation that uses a 3-pin interface and an SPI interface with the nRF21540.</p></li>
+<li><p><a class="reference internal" href="#ug-radio-fem-nrf21540-gpio"><span class="std std-ref">GPIO mode</span></a> - For the nRF21540 GPIO implementation that uses a 3-pin interface with the nRF21540.</p></li>
+<li><p><a class="reference internal" href="#ug-radio-fem-skyworks"><span class="std std-ref">Adding support for Skyworks front-end module</span></a> - For the Simple GPIO implementation that uses a 2-pin interface with the SKY66112-11 device.</p></li>
+</ul>
+<p>To use these implementations, your application must use a protocol driver that enables the FEM feature.</p>
+<p>The library provides multiprotocol support, but you can also use it in applications that require only one protocol.
+To avoid conflicts, check the protocol documentation to see if the protocol uses the FEM support provided by MPSL.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Currently, the following protocols use the FEM support provided by MPSL:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../protocols/thread/index.html#ug-thread"><span class="std std-ref">Thread</span></a></p></li>
+<li><p><a class="reference internal" href="../../protocols/zigbee/index.html#ug-zigbee"><span class="std std-ref">Zigbee</span></a></p></li>
+<li><p><a class="reference internal" href="../../protocols/ble/index.html#ug-ble-controller"><span class="std std-ref">Bluetooth LE Controller</span></a></p></li>
+<li><p><a class="reference internal" href="../../protocols/multiprotocol/index.html#ug-multiprotocol-support"><span class="std std-ref">Multiprotocol support</span></a></p></li>
+</ul>
+</div>
+<section id="enabling-fem-and-mpsl">
+<span id="ug-radio-fem-requirements"></span><h4><a class="toc-backref" href="#id16">Enabling FEM and MPSL</a><a class="headerlink" href="#enabling-fem-and-mpsl" title="Permalink to this heading"></a></h4>
+<p>Before you add the devicetree node in your application, complete the following steps:</p>
+<ol class="arabic simple">
+<li><p>Add support for the MPSL library in your application.
+The MPSL library provides API to configure FEM.
+See <span class="xref std std-ref">nrfxlib:mpsl_lib</span> in the nrfxlib documentation for details.</p></li>
+<li><p>Enable support for MPSL implementation in nRF Connect SDK by setting the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MPSL</span></code> Kconfig option to <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p></li>
+<li><p>Enable support for the FEM subsystem in nRF Connect SDK by setting the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MPSL_FEM</span></code> Kconfig option to <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p></li>
+<li><p>Choose the used FEM implementation by selecting the appropriate Kconfig option.</p></li>
+</ol>
+<p>The following FEM implementations are supported:</p>
+<ul class="simple">
+<li><p>The nRF21540 GPIO implementation, see <a class="reference internal" href="#ug-radio-fem-nrf21540-gpio"><span class="std std-ref">GPIO mode</span></a>.
+To use it, set the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MPSL_FEM_NRF21540_GPIO</span></code> Kconfig option to <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p></li>
+<li><p>The nRF21540 GPIO+SPI implementation, see <a class="reference internal" href="#ug-radio-fem-nrf21540-spi-gpio"><span class="std std-ref">SPI/GPIO mode</span></a>.
+To use it, set the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MPSL_FEM_NRF21540_GPIO_SPI</span></code> Kconfig option to <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p></li>
+<li><p>The nRF21540 2-pin simple GPIO implementation.
+To use it, set the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MPSL_FEM_SIMPLE_GPIO</span></code> Kconfig option to <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p></li>
+</ul>
+<p>It is possible to only use the <span class="xref std std-ref">nrfxlib:mpsl_fem</span> API if your application does not require other MPSL features.
+This could be useful when you want to run simple radio protocols that are not intended to be used concurrently with other protocols.
+You can do that by setting the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MPSL_FEM_ONLY</span></code> Kconfig option to <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p>
+<p>Some applications can perform calls to the <span class="xref std std-ref">nrfxlib:mpsl_fem</span> API even though no RF Front-End module is physically connected to the device and the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MPSL_FEM</span></code> Kconfig option is set to <code class="docutils literal notranslate"><span class="pre">n</span></code>.
+In that case, ensure that the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MPSL_FEM_API_AVAILABLE</span></code> Kconfig option is set to <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p>
+</section>
+<section id="setting-the-fem-output-power">
+<span id="ug-radio-fem-sw-support-mpsl-fem-output"></span><h4><a class="toc-backref" href="#id17">Setting the FEM output power</a><a class="headerlink" href="#setting-the-fem-output-power" title="Permalink to this heading"></a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">tx_gain_db</span></code> property in devicetree provides the FEM gain value to use with the simple GPIO FEM implementation.
+The property must represent the real gain of the FEM.
+This implementation does not support controlling the gain value during runtime.</p>
+<p>nRF21540 implementations have the gain set to <code class="docutils literal notranslate"><span class="pre">10</span></code> by default.
+You can set a different gain value to use through the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MPSL_FEM_NRF21540_TX_GAIN_DB</span></code>  option, but it has to match the value of one of the POUTA (<code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MPSL_FEM_NRF21540_TX_GAIN_DB_POUTA</span></code> ) or POUTB (<code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MPSL_FEM_NRF21540_TX_GAIN_DB_POUTB</span></code>) gains.</p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MPSL_FEM_NRF21540_TX_GAIN_DB_POUTA</span></code> and <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MPSL_FEM_NRF21540_TX_GAIN_DB_POUTB</span></code> are by default set to <code class="docutils literal notranslate"><span class="pre">20</span></code> and <code class="docutils literal notranslate"><span class="pre">10</span></code> and these are factory-precalibrated gain values.
+Do not change these values, unless POUTA and POUTB were calibrated to different values on specific request.</p>
+</div>
+<p>To enable runtime control of the gain, set the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MPSL_FEM_NRF21540_RUNTIME_PA_GAIN_CONTROL</span></code> to <code class="docutils literal notranslate"><span class="pre">y</span></code>.
+This option makes the gain of the FEM to be adjusted dynamically during runtime, depending on the power requested by the protocol driver for each transmission.
+For the nRF21540 GPIO implementation, you must enable the <strong>MODE</strong> pin in devicetree.
+For the nRF21540 GPIO+SPI implementation, no additional configuration is needed as the gain setting is transmitted over the SPI bus to the nRF21540.</p>
+</section>
+<section id="using-fem-power-models">
+<h4><a class="toc-backref" href="#id18">Using FEM power models</a><a class="headerlink" href="#using-fem-power-models" title="Permalink to this heading"></a></h4>
+<p>When a protocol driver requests a given transmission power to be output, MPSL splits the power into the following components: the SoC Power and the FEM gain.
+This gain is considered constant and accurate even if external conditions, such as temperature, might affect the effective gain achieved by the Front-End Module.</p>
+<p>To perform the split differently (for example, to compensate for external conditions), you can use a FEM power model, either using one of the built-in ones or providing your own custom model.</p>
+<p>To use FEM power models, set the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MPSL_FEM_POWER_MODEL</span></code> Kconfig option to <code class="docutils literal notranslate"><span class="pre">y</span></code>  and either select one of the built-in models or provide a custom model, as described in the following chapters.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In case of nRF21540 GPIO+SPI, the <a class="reference internal" href="#ug-radio-fem-nrf21540-gpio-spi-builtin-power-model"><span class="std std-ref">Using nRF21540 GPIO+SPI built-in power model</span></a> is enabled by default.</p>
+</div>
+<section id="using-nrf21540-gpio-spi-built-in-power-model">
+<span id="ug-radio-fem-nrf21540-gpio-spi-builtin-power-model"></span><h5><a class="toc-backref" href="#id19">Using nRF21540 GPIO+SPI built-in power model</a><a class="headerlink" href="#using-nrf21540-gpio-spi-built-in-power-model" title="Permalink to this heading"></a></h5>
+<p>The nRF21540 GPIO+SPI built-in power model attempts to keep the nRF21540’s gain constant and as close to the currently selected value of gain as possible.
+The model compensates varying external conditions, which results in the nRF21540 gain being independent of their changes.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Only the factory-precalibrated values of gain represented by the default values of <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MPSL_FEM_NRF21540_TX_GAIN_DB_POUTA</span></code> and <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MPSL_FEM_NRF21540_TX_GAIN_DB_POUTB</span></code> are supported.
+There are no guarantees on the correctness of the model if applied to compensate external conditions for other values of gain.</p>
+</div>
+<p>The nRF21540 built-in power model compensates for the following external conditions:</p>
+<ul class="simple">
+<li><p>Temperature</p></li>
+<li><p>FEM supply voltage</p></li>
+<li><p>Carrier frequency</p></li>
+<li><p>FEM input power.</p></li>
+</ul>
+<p>The model assumes that the FEM supply voltage is constant.
+To provide the value of this voltage to the MPSL subsystem, use the <code class="docutils literal notranslate"><span class="pre">supply-voltage-mv</span></code> property of nRF21540 devicetree node.</p>
+<p>This model is enabled by default, provided that nRF21540 GPIO+SPI is enabled and selected.
+To enable and select nRF21540 GPIO+SPI, see <a class="reference internal" href="#ug-radio-fem-nrf21540-spi-gpio"><span class="std std-ref">SPI/GPIO mode</span></a>.</p>
+<p>Although the built-in model significantly improves the performance of nRF21540 in varying external conditions, in certain scenarios you might want to disable it, for example, to save memory.
+To disable the model and the resulting compensation, set <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MPSL_FEM_POWER_MODEL</span></code> to <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p>
+<p>The figures below summarize the performance improvement of the nRF21540 when the built-in model is used.
+The data points in the figures are results of nRF21540 gain measurements performed in controlled, laboratory conditions.
+Each of the figures compares the gain achieved by a nRF21540 device in two cases: when the built-in model is used to control the nRF21540 gain settings, and when the model is disabled.
+All the external conditions the model compensates for, like temperature, supply voltage, carrier frequency, and input power, are presented in the figures.</p>
+<p>The figures are divided into three groups, each of the group representing performance improvement over frequency and one other external condition for the two factory-precalibrated values of gain.</p>
+<figure class="align-center" id="id7">
+<img alt="Figure 1a. nRF21540 gain vs input power over frequency sweep for 10dB setting" src="../../_images/nrf21540_builtin_model_10db_freq_input_gain.png" />
+<figcaption>
+<p><span class="caption-text">Figure 1a. nRF21540 gain vs input power over frequency sweep for 10dB setting</span><a class="headerlink" href="#id7" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id8">
+<img alt="Figure 1b. nRF21540 gain vs input power over frequency sweep for 20dB setting" src="../../_images/nrf21540_builtin_model_20db_freq_input_gain.png" />
+<figcaption>
+<p><span class="caption-text">Figure 1b. nRF21540 gain vs input power over frequency sweep for 20dB setting</span><a class="headerlink" href="#id8" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id9">
+<img alt="Figure 2a. nRF21540 gain vs temperature over frequency sweep for 10dB setting" src="../../_images/nrf21540_builtin_model_10db_freq_temp_gain.png" />
+<figcaption>
+<p><span class="caption-text">Figure 2a. nRF21540 gain vs temperature over frequency sweep for 10dB setting</span><a class="headerlink" href="#id9" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id10">
+<img alt="Figure 2b. nRF21540 gain vs temperature over frequency sweep for 20dB setting" src="../../_images/nrf21540_builtin_model_20db_freq_temp_gain.png" />
+<figcaption>
+<p><span class="caption-text">Figure 2b. nRF21540 gain vs temperature over frequency sweep for 20dB setting</span><a class="headerlink" href="#id10" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id11">
+<img alt="Figure 3a. nRF21540 gain vs supply voltage over frequency sweep for 10dB setting" src="../../_images/nrf21540_builtin_model_10db_freq_volt_gain.png" />
+<figcaption>
+<p><span class="caption-text">Figure 3a. nRF21540 gain vs supply voltage over frequency sweep for 10dB setting</span><a class="headerlink" href="#id11" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id12">
+<img alt="Figure 3b. nRF21540 gain vs supply voltage over frequency sweep for 20dB setting" src="../../_images/nrf21540_builtin_model_20db_freq_volt_gain.png" />
+<figcaption>
+<p><span class="caption-text">Figure 3b. nRF21540 gain vs supply voltage over frequency sweep for 20dB setting</span><a class="headerlink" href="#id12" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="adding-custom-power-models">
+<h5><a class="toc-backref" href="#id20">Adding custom power models</a><a class="headerlink" href="#adding-custom-power-models" title="Permalink to this heading"></a></h5>
+<p>If the way MPSL splits the TX power into components does not meet your requirements, or if you wish to implement a custom compensation model, you can provide one as follows:</p>
+<ol class="arabic simple">
+<li><p>Set <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MPSL_FEM_POWER_MODEL</span></code> to <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p></li>
+<li><p>Provide an implementation of the <code class="docutils literal notranslate"><span class="pre">mpsl_fem_power_model_to_use_get()</span></code> function.
+This function should return a pointer to a variable of the type <code class="docutils literal notranslate"><span class="pre">mpsl_fem_power_model_t</span></code> which contains pointers to the model’s callbacks.</p></li>
+<li><p>Mandatorily implement the model’s <code class="docutils literal notranslate"><span class="pre">fetch</span></code> callback (details explained below).</p></li>
+<li><p>Optionally implement the model’s <code class="docutils literal notranslate"><span class="pre">init</span></code> callback (details explained below).
+If no <code class="docutils literal notranslate"><span class="pre">init</span></code> callback is provided, pass <code class="docutils literal notranslate"><span class="pre">NULL</span></code> as the pointer to the callback.</p></li>
+<li><p>You can also optionally extend the <code class="docutils literal notranslate"><span class="pre">MPSL_FEM_POWER_MODEL_CHOICE</span></code> Kconfig choice with an option to select your custom model, for example, if you want to test multiple custom models.</p></li>
+</ol>
+<p>The <code class="docutils literal notranslate"><span class="pre">init</span></code> callback is called by MPSL once, after FEM configuration finishes.
+Calibration data (acquired from FEM internal registers, Kconfig options, and devicetree files) is passed to this function using a parameter of the <code class="docutils literal notranslate"><span class="pre">mpsl_fem_calibration_data_t</span></code> type.
+The meaning of the calibration data stored in this parameter is implementation-specific.
+For details, see the <code class="docutils literal notranslate"><span class="pre">mpsl_fem_calibration_data_t</span></code> type documentation.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">fetch</span></code> callback is used to split the power between the SoC output power and the FEM gain.
+It is called every time this split needs to be recalculated.
+For 802.15.4, this happens before every transmission.
+For Bluetooth® Low Energy, this happens every time the channel changes.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This function is called in a time-critical path.
+Please refer to the documentation of <code class="docutils literal notranslate"><span class="pre">mpsl_fem_power_model_t</span></code> on timing constraints.
+Any complex calculations have to be done outside this function (for example, using a look up table).
+Failing to meet the timing requirements will lead to an undefined behavior of the protocol stacks.</p>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">fetch</span></code> callback must fill out all the fields of the <code class="docutils literal notranslate"><span class="pre">p_output</span></code> output parameter.
+For more details, see the <code class="docutils literal notranslate"><span class="pre">mpsl_fem_power_model_output_t</span></code> type documentation.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">soc_power</span></code> field value must be one of the output power values supported by the given nRF SoC, otherwise the behavior is undefined.
+The user can meet this requirement by converting the requested SoC power using the <code class="docutils literal notranslate"><span class="pre">mpsl_tx_power_radio_supported_power_adjust</span></code> function.</p>
+</div>
+</section>
+</section>
+</section>
+<section id="direct-support">
+<span id="ug-radio-fem-direct-support"></span><h3><a class="toc-backref" href="#id21">Direct support</a><a class="headerlink" href="#direct-support" title="Permalink to this heading"></a></h3>
+<p>If your application cannot use MPSL or if the FEM driver in MPSL does not support all features you need, you can implement your own driver for the nRF21540.
+The other solution is to use only the <span class="xref std std-ref">nrfxlib:mpsl_fem</span> API from the MPSL.
+Enable the following Kconfig options:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MPSL</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MPSL_FEM_ONLY</span></code></p></li>
+</ul>
+<p>See the <a class="reference internal" href="../../samples/bluetooth/direct_test_mode/README.html#direct-test-mode"><span class="std std-ref">Bluetooth: Direct Test Mode</span></a> sample for an example use case.</p>
+</section>
+</section>
+<section id="hardware-description">
+<h2><a class="toc-backref" href="#id22">Hardware description</a><a class="headerlink" href="#hardware-description" title="Permalink to this heading"></a></h2>
+<p>The nRF Connect SDK provides a wrapper that configures FEM based on devicetree (DTS) and Kconfig information.
+To enable FEM support, you must add an <code class="docutils literal notranslate"><span class="pre">nrf_radio_fem</span></code> node in the devicetree file.
+The node can also be provided by the devicetree file of the target development kit or by an overlay file.
+See <span class="xref std std-ref">zephyr:dt-guide</span> for more information about the DTS data structure, and <span class="xref std std-ref">zephyr:dt_vs_kconfig</span> for information about differences between DTS and Kconfig.</p>
+<section id="adding-support-for-nrf21540">
+<h3><a class="toc-backref" href="#id23">Adding support for nRF21540</a><a class="headerlink" href="#adding-support-for-nrf21540" title="Permalink to this heading"></a></h3>
+<p>The nRF21540 device is a range extender that you can use with nRF52 and nRF53 Series devices.
+For more information about nRF21540, see the <a class="reference external" href="https://infocenter.nordicsemi.com/topic/struct_fem/struct/nrf21540.html">nRF21540</a> documentation.</p>
+<section id="gpio-mode">
+<span id="ug-radio-fem-nrf21540-gpio"></span><h4><a class="toc-backref" href="#id24">GPIO mode</a><a class="headerlink" href="#gpio-mode" title="Permalink to this heading"></a></h4>
+<p>The nRF21540 GPIO mode implementation of FEM is compatible with this device and implements the 3-pin PA/LNA interface.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In the naming convention used in the API of the MPSL library, the functionalities designated as <code class="docutils literal notranslate"><span class="pre">PA</span></code> and <code class="docutils literal notranslate"><span class="pre">LNA</span></code> apply to the <code class="docutils literal notranslate"><span class="pre">tx-en-gpios</span></code> and <code class="docutils literal notranslate"><span class="pre">rx-en-gpios</span></code> pins listed below, respectively.</p>
+</div>
+<p>To use nRF21540 in GPIO mode, complete the following steps:</p>
+<ol class="arabic">
+<li><p>Add the following node in the devicetree file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span> <span class="p">{</span>
+      <span class="n">nrf_radio_fem</span><span class="p">:</span> <span class="n">name_of_fem_node</span> <span class="p">{</span>
+         <span class="n">compatible</span>  <span class="o">=</span> <span class="s2">&quot;nordic,nrf21540-fem&quot;</span><span class="p">;</span>
+         <span class="n">tx</span><span class="o">-</span><span class="n">en</span><span class="o">-</span><span class="n">gpios</span> <span class="o">=</span> <span class="o">&lt;&amp;</span><span class="n">gpio0</span> <span class="mi">13</span> <span class="n">GPIO_ACTIVE_HIGH</span><span class="o">&gt;</span><span class="p">;</span>
+         <span class="n">rx</span><span class="o">-</span><span class="n">en</span><span class="o">-</span><span class="n">gpios</span> <span class="o">=</span> <span class="o">&lt;&amp;</span><span class="n">gpio0</span> <span class="mi">14</span> <span class="n">GPIO_ACTIVE_HIGH</span><span class="o">&gt;</span><span class="p">;</span>
+         <span class="n">pdn</span><span class="o">-</span><span class="n">gpios</span>   <span class="o">=</span> <span class="o">&lt;&amp;</span><span class="n">gpio0</span> <span class="mi">15</span> <span class="n">GPIO_ACTIVE_HIGH</span><span class="o">&gt;</span><span class="p">;</span>
+   <span class="p">};</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</li>
+<li><p>Optionally replace the node name <code class="docutils literal notranslate"><span class="pre">name_of_fem_node</span></code>.</p></li>
+<li><p>Replace the pin numbers provided for each of the required properties:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">tx-en-gpios</span></code> - GPIO characteristic of the device that controls the <code class="docutils literal notranslate"><span class="pre">TX_EN</span></code> signal of nRF21540.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rx-en-gpios</span></code> - GPIO characteristic of the device that controls the <code class="docutils literal notranslate"><span class="pre">RX_EN</span></code> signal of nRF21540.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pdn-gpios</span></code> - GPIO characteristic of the device that controls the <code class="docutils literal notranslate"><span class="pre">PDN</span></code> signal of nRF21540.</p></li>
+</ul>
+<p>These properties correspond to <code class="docutils literal notranslate"><span class="pre">TX_EN</span></code>, <code class="docutils literal notranslate"><span class="pre">RX_EN</span></code>, and <code class="docutils literal notranslate"><span class="pre">PDN</span></code> pins of nRF21540 that are supported by software FEM.</p>
+<p>Type <code class="docutils literal notranslate"><span class="pre">phandle-array</span></code> is used here, which is common in Zephyr’s devicetree to describe GPIO signals.
+The first element <code class="docutils literal notranslate"><span class="pre">&amp;gpio0</span></code> refers to the GPIO port (“port 0” has been selected in the example shown).
+The second element is the pin number on that port.
+The last element must be <code class="docutils literal notranslate"><span class="pre">GPIO_ACTIVE_HIGH</span></code> for nRF21540, but for a different FEM module you can use <code class="docutils literal notranslate"><span class="pre">GPIO_ACTIVE_LOW</span></code>.</p>
+<p>The state of the remaining control pins should be set in other ways and according to <a class="reference external" href="https://infocenter.nordicsemi.com/topic/struct_fem/struct/nrf21540_ps.html">nRF21540 Product Specification</a>.</p>
+</li>
+<li><p>On nRF53 devices, you must also apply the same devicetree node mentioned in step 1 to the network core.
+To do so, apply the overlay to the correct network core child image by creating an overlay file named <code class="file docutils literal notranslate"><span class="pre">child_image/*childImageName*.overlay</span></code> in your application directory, for example <code class="file docutils literal notranslate"><span class="pre">child_image/multiprotocol_rpmsg.overlay</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">*childImageName*</span></code> string must be one of the following values:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">multiprotocol_rpmsg</span></code> for multiprotocol applications having support for both 802.15.4 and Bluetooth.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">802154_rpmsg</span></code> for applications having support for 802.15.4, but not for Bluetooth.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hci_rpmsg</span></code> for application having support for Bluetooth, but not for 802.15.4.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This step is not needed when testing with <a class="reference internal" href="../../samples/bluetooth/direct_test_mode/README.html#direct-test-mode"><span class="std std-ref">Bluetooth: Direct Test Mode</span></a> and <a class="reference internal" href="../../samples/peripheral/radio_test/README.html#radio-test"><span class="std std-ref">Radio test (short-range)</span></a> on the nRF53 Series devices.</p>
+</div>
+</li>
+</ol>
+</section>
+<section id="spi-gpio-mode">
+<span id="ug-radio-fem-nrf21540-spi-gpio"></span><h4><a class="toc-backref" href="#id25">SPI/GPIO mode</a><a class="headerlink" href="#spi-gpio-mode" title="Permalink to this heading"></a></h4>
+<p>The nRF21540 features an SPI interface.
+You can use it to fully control your front-end module or you can use a combination of SPI and GPIO interface.
+The SPI interface enables you, for example, to set the output power of the nRF21540.</p>
+<p>To use nRF21540 in SPI or mixed mode, complete the following steps:</p>
+<ol class="arabic">
+<li><p>Add the following node in the devicetree file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span> <span class="p">{</span>
+      <span class="n">nrf_radio_fem</span><span class="p">:</span> <span class="n">name_of_fem_node</span> <span class="p">{</span>
+         <span class="n">compatible</span>  <span class="o">=</span> <span class="s2">&quot;nordic,nrf21540-fem&quot;</span><span class="p">;</span>
+         <span class="n">tx</span><span class="o">-</span><span class="n">en</span><span class="o">-</span><span class="n">gpios</span> <span class="o">=</span> <span class="o">&lt;&amp;</span><span class="n">gpio0</span> <span class="mi">13</span> <span class="n">GPIO_ACTIVE_HIGH</span><span class="o">&gt;</span><span class="p">;</span>
+         <span class="n">rx</span><span class="o">-</span><span class="n">en</span><span class="o">-</span><span class="n">gpios</span> <span class="o">=</span> <span class="o">&lt;&amp;</span><span class="n">gpio0</span> <span class="mi">14</span> <span class="n">GPIO_ACTIVE_HIGH</span><span class="o">&gt;</span><span class="p">;</span>
+         <span class="n">pdn</span><span class="o">-</span><span class="n">gpios</span>   <span class="o">=</span> <span class="o">&lt;&amp;</span><span class="n">gpio0</span> <span class="mi">15</span> <span class="n">GPIO_ACTIVE_HIGH</span><span class="o">&gt;</span><span class="p">;</span>
+         <span class="n">spi</span><span class="o">-</span><span class="k">if</span> <span class="o">=</span> <span class="o">&lt;&amp;</span><span class="n">nrf_radio_fem_spi</span><span class="o">&gt;</span>
+   <span class="p">};</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</li>
+<li><p>Optionally replace the device name <code class="docutils literal notranslate"><span class="pre">name_of_fem_node</span></code>.</p></li>
+<li><p>Replace the pin numbers provided for each of the required properties:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">tx-en-gpios</span></code> - GPIO characteristic of the device that controls the <code class="docutils literal notranslate"><span class="pre">TX_EN</span></code> signal of nRF21540.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rx-en-gpios</span></code> - GPIO characteristic of the device that controls the <code class="docutils literal notranslate"><span class="pre">RX_EN</span></code> signal of nRF21540.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pdn-gpios</span></code> - GPIO characteristic of the device that controls the <code class="docutils literal notranslate"><span class="pre">PDN</span></code> signal of nRF21540.</p></li>
+</ul>
+<p>These properties correspond to <code class="docutils literal notranslate"><span class="pre">TX_EN</span></code>, <code class="docutils literal notranslate"><span class="pre">RX_EN</span></code>, and <code class="docutils literal notranslate"><span class="pre">PDN</span></code> pins of nRF21540 that are supported by software FEM.</p>
+<p>The``phandle-array`` type is commonly used for describing GPIO signals in Zephyr’s devicetree.
+The first element <code class="docutils literal notranslate"><span class="pre">&amp;gpio0</span></code> refers to the GPIO port (“port 0” has been selected in the example shown).
+The second element is the pin number on that port.
+The last element must be <code class="docutils literal notranslate"><span class="pre">GPIO_ACTIVE_HIGH</span></code> for nRF21540, but for a different FEM module you can use <code class="docutils literal notranslate"><span class="pre">GPIO_ACTIVE_LOW</span></code>.</p>
+<p>Set the state of the remaining control pins according to the <a class="reference external" href="https://infocenter.nordicsemi.com/topic/struct_fem/struct/nrf21540_ps.html">nRF21540 Product Specification</a>.</p>
+</li>
+<li><p>Add a following SPI bus device node on the devicetree file:</p>
+<div class="highlight-devicetree notranslate"><div class="highlight"><pre><span></span><span class="o">&amp;</span><span class="na">pinctrl</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="nl">spi3_default_alt</span><span class="p">:</span><span class="w"> </span><span class="nf">spi3_default_alt</span><span class="cm"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nf">group1</span><span class="cm"> </span><span class="p">{</span>
+<span class="w">         </span><span class="n">psels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="na">NRF_PSEL</span><span class="p">(</span><span class="na">SPI_SCK</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span>
+<span class="w">                 </span><span class="o">&lt;</span><span class="na">NRF_PSEL</span><span class="p">(</span><span class="na">SPI_MISO</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">14</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span>
+<span class="w">                 </span><span class="o">&lt;</span><span class="na">NRF_PSEL</span><span class="p">(</span><span class="na">SPI_MOSI</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">)</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">      </span><span class="p">};</span>
+<span class="w">   </span><span class="p">};</span>
+
+<span class="w">   </span><span class="nl">spi3_sleep_alt</span><span class="p">:</span><span class="w"> </span><span class="nf">spi3_sleep_alt</span><span class="cm"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nf">group1</span><span class="cm"> </span><span class="p">{</span>
+<span class="w">         </span><span class="n">psels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="na">NRF_PSEL</span><span class="p">(</span><span class="na">SPI_SCK</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span>
+<span class="w">                 </span><span class="o">&lt;</span><span class="na">NRF_PSEL</span><span class="p">(</span><span class="na">SPI_MISO</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">14</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span>
+<span class="w">                 </span><span class="o">&lt;</span><span class="na">NRF_PSEL</span><span class="p">(</span><span class="na">SPI_MOSI</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">)</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">         </span><span class="n">low-power-enable</span><span class="p">;</span>
+<span class="w">      </span><span class="p">};</span>
+<span class="w">   </span><span class="p">};</span>
+<span class="p">};</span>
+
+<span class="nl">fem_spi</span><span class="p">:</span><span class="w"> </span><span class="o">&amp;</span><span class="nf">spi3</span><span class="cm"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kr">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;okay&quot;</span><span class="p">;</span>
+<span class="w">   </span><span class="n">pinctrl-0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;&amp;</span><span class="na">spi3_default_alt</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">   </span><span class="n">pinctrl-1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;&amp;</span><span class="na">spi3_sleep_alt</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">   </span><span class="n">pinctrl-names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;default&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;sleep&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">cs-gpios</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;&amp;</span><span class="na">gpio0</span><span class="w"> </span><span class="mi">21</span><span class="w"> </span><span class="na">GPIO_ACTIVE_LOW</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="w">        </span><span class="nl">nrf_radio_fem_spi</span><span class="p">:</span><span class="w"> </span><span class="nf">nrf21540_fem_spi</span><span class="o">@</span><span class="mi">0</span><span class="cm"> </span><span class="p">{</span>
+<span class="w">                </span><span class="kr">compatible</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;nordic,nrf21540-fem-spi&quot;</span><span class="p">;</span>
+<span class="w">                </span><span class="kr">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;okay&quot;</span><span class="p">;</span>
+<span class="w">                </span><span class="kr">reg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="mi">0</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">                </span><span class="n">spi-max-frequency</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="mi">8000000</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">        </span><span class="p">};</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>In this example, the nRF21540 is controlled by the <code class="docutils literal notranslate"><span class="pre">spi3</span></code> bus.
+Replace the SPI bus according to your hardware design.</p>
+</li>
+<li><p>Create alternative pinctrl entries for SPI3 and replace the <code class="docutils literal notranslate"><span class="pre">pinctrl-N</span></code> and <code class="docutils literal notranslate"><span class="pre">pinctrl-names</span></code> properties.</p></li>
+</ol>
+</section>
+<section id="optional-properties">
+<h4><a class="toc-backref" href="#id26">Optional properties</a><a class="headerlink" href="#optional-properties" title="Permalink to this heading"></a></h4>
+<p>The following properties are optional and you can add them to the devicetree node if needed.</p>
+<ul>
+<li><p>Properties that control the other pins:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">ant-sel-gpios</span></code> - GPIO characteristic of the device that controls the <code class="docutils literal notranslate"><span class="pre">ANT_SEL</span></code> signal of the nRF21540.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mode-gpios</span></code> - GPIO characteristic of the device that controls the <code class="docutils literal notranslate"><span class="pre">MODE</span></code> signal of the nRF21540.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">MODE</span></code> signal of the nRF21540 switches between two values of PA gain.
+The pin can either be set to a fixed state on initialization, which results in a constant PA gain, or it can be switched in run-time by the protocol drivers to match the transmission power requested by the application.</p>
+<p>To enable run-time <code class="docutils literal notranslate"><span class="pre">MODE</span></code> pin switching, you must enable <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MPSL_FEM_NRF21540_RUNTIME_PA_GAIN_CONTROL</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The state of the <code class="docutils literal notranslate"><span class="pre">MODE</span></code> pin is selected based on the available PA gains and the required transmission power.
+To achieve reliable performance, <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MPSL_FEM_NRF21540_TX_GAIN_DB_POUTA</span></code> and <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MPSL_FEM_NRF21540_TX_GAIN_DB_POUTB</span></code> must reflect the content of the nRF21540 registers.
+Their default values match chip production defaults.
+For details, see the <a class="reference external" href="https://infocenter.nordicsemi.com/topic/struct_fem/struct/nrf21540_ps.html">nRF21540 Product Specification</a>.</p>
+</div>
+<p>If the run-time <code class="docutils literal notranslate"><span class="pre">MODE</span></code> pin switching is disabled, the PA gain is constant and equal to <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MPSL_FEM_NRF21540_TX_GAIN_DB</span></code>.</p>
+</li>
+</ul>
+</li>
+<li><p>Properties that control the timing of interface signals:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">tx-en-settle-time-us</span></code> - Minimal time interval between asserting the <code class="docutils literal notranslate"><span class="pre">TX_EN</span></code> signal and starting the radio transmission, in microseconds.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rx-en-settle-time-us</span></code> - Minimal time interval between asserting the <code class="docutils literal notranslate"><span class="pre">RX_EN</span></code> signal and starting the radio transmission, in microseconds.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Values for these two properties cannot be higher than the Radio Ramp-Up time defined by <code class="xref c c-macro docutils literal notranslate"><span class="pre">TX_RAMP_UP_TIME</span></code> and <code class="xref c c-macro docutils literal notranslate"><span class="pre">RX_RAMP_UP_TIME</span></code>.
+If the value is too high, the radio driver will not work properly and will not control FEM.
+Moreover, setting a value that is lower than the default value can cause disturbances in the radio transmission, because FEM may be triggered too late.</p>
+</div>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pdn-settle-time-us</span></code> - Time interval before the PA or LNA activation reserved for the FEM ramp-up, in microseconds.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">trx-hold-time-us</span></code> - Time interval for which the FEM is kept powered up after the event that triggers the PDN deactivation, in microseconds.</p></li>
+</ul>
+<p>The default values of these properties are appropriate for default hardware and most use cases.
+You can override them if you need additional capacitors, for example when using custom hardware.
+In such cases, add the property name under the required properties in the devicetree node and set a new custom value.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>These values have some constraints.
+For details, see <a class="reference external" href="https://infocenter.nordicsemi.com/topic/struct_fem/struct/nrf21540_ps.html">nRF21540 Product Specification</a>.</p>
+</div>
+</li>
+</ul>
+</section>
+</section>
+<section id="adding-support-for-skyworks-front-end-module">
+<span id="ug-radio-fem-skyworks"></span><h3><a class="toc-backref" href="#id27">Adding support for Skyworks front-end module</a><a class="headerlink" href="#adding-support-for-skyworks-front-end-module" title="Permalink to this heading"></a></h3>
+<p>You can use the Skyworks range extenders with nRF52 and nRF53 Series devices.
+SKY66112-11 is one of many FEM devices that support the 2-pin PA/LNA interface.
+The nRF Connect SDK provides also devicetree bindings for the SKY66114-11 and SKY66403-11.
+You can use SKY66112-11 as an example on how to create bindings for different devices that support the 2-pin PA/LNA interface.
+For more details about devicetree binding, see: <span class="xref std std-ref">Zephyr documentation</span>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In the naming convention used in the API of the MPSL library, the functionalities designated as <code class="docutils literal notranslate"><span class="pre">PA</span></code> and <code class="docutils literal notranslate"><span class="pre">LNA</span></code> apply to the <code class="docutils literal notranslate"><span class="pre">ctx-gpios</span></code> and <code class="docutils literal notranslate"><span class="pre">crx-gpios</span></code> pins listed below, respectively.</p>
+</div>
+<p>To use the Simple GPIO implementation of FEM with SKY66112-11, complete the following steps:</p>
+<ol class="arabic">
+<li><p>Add the following node in the devicetree file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span> <span class="p">{</span>
+   <span class="n">nrf_radio_fem</span><span class="p">:</span> <span class="n">name_of_fem_node</span> <span class="p">{</span>
+      <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;skyworks,sky66112-11&quot;</span><span class="p">,</span> <span class="s2">&quot;generic-fem-two-ctrl-pins&quot;</span><span class="p">;</span>
+      <span class="n">ctx</span><span class="o">-</span><span class="n">gpios</span> <span class="o">=</span> <span class="o">&lt;&amp;</span><span class="n">gpio0</span> <span class="mi">13</span> <span class="n">GPIO_ACTIVE_HIGH</span><span class="o">&gt;</span><span class="p">;</span>
+      <span class="n">crx</span><span class="o">-</span><span class="n">gpios</span> <span class="o">=</span> <span class="o">&lt;&amp;</span><span class="n">gpio0</span> <span class="mi">14</span> <span class="n">GPIO_ACTIVE_HIGH</span><span class="o">&gt;</span><span class="p">;</span>
+   <span class="p">};</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</li>
+<li><p>Optionally replace the node name <code class="docutils literal notranslate"><span class="pre">name_of_fem_node</span></code>.</p></li>
+<li><p>Replace the pin numbers provided for each of the required properties:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ctx-gpios</span></code> - GPIO characteristic of the device that controls the <code class="docutils literal notranslate"><span class="pre">CTX</span></code> signal of SKY66112-11.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">crx-gpios</span></code> - GPIO characteristic of the device that controls the <code class="docutils literal notranslate"><span class="pre">CRX</span></code> signal of SKY66112-11.</p></li>
+</ul>
+<p>These properties correspond to <code class="docutils literal notranslate"><span class="pre">CTX</span></code> and <code class="docutils literal notranslate"><span class="pre">CRX</span></code> pins of SKY66112-11 that are supported by software FEM.</p>
+<p>Type <code class="docutils literal notranslate"><span class="pre">phandle-array</span></code> is used here, which is common in Zephyr’s devicetree to describe GPIO signals.
+The first element <code class="docutils literal notranslate"><span class="pre">&amp;gpio0</span></code> refers to the GPIO port (“port 0” has been selected in the example shown).
+The second element is the pin number on that port.
+The last element must be <code class="docutils literal notranslate"><span class="pre">GPIO_ACTIVE_HIGH</span></code> for SKY66112-11, but for a different FEM module you can use <code class="docutils literal notranslate"><span class="pre">GPIO_ACTIVE_LOW</span></code>.</p>
+<p>The state of the other control pins should be set according to the SKY66112-11 documentation.
+See the official <a class="reference external" href="https://www.skyworksinc.com/en/Products/Front-end-Modules/SKY66112-11">SKY66112-11 page</a> for more information.</p>
+</li>
+</ol>
+<section id="id1">
+<h4><a class="toc-backref" href="#id28">Optional properties</a><a class="headerlink" href="#id1" title="Permalink to this heading"></a></h4>
+<p>The following properties are optional and   you can add them to the devicetree node if needed.</p>
+<ul>
+<li><p>Properties that control the other pins:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>csd-gpios - GPIO characteristic of the device that controls the CSD signal of SKY66112-11.</p></li>
+<li><p>cps-gpios - GPIO characteristic of the device that controls the CPS signal of SKY66112-11.</p></li>
+<li><p>chl-gpios - GPIO characteristic of the device that controls the CHL signal of SKY66112-11.</p></li>
+<li><p>ant-sel-gpios - GPIO characteristic of the device that controls the ANT_SEL signal of devices that support antenna diversity, for example SKY66403-11.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Properties that control the timing of interface signals:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ctx-settle-time-us</span></code> - Minimal time interval between asserting the <code class="docutils literal notranslate"><span class="pre">CTX</span></code> signal and starting the radio transmission, in microseconds.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">crx-settle-time-us</span></code> - Minimal time interval between asserting the <code class="docutils literal notranslate"><span class="pre">CRX</span></code> signal and starting the radio transmission, in microseconds.</p></li>
+</ul>
+<p>The default values of these properties are appropriate for default hardware and most use cases.
+You can override them if you need additional capacitors, for example when using custom hardware.
+In such cases, add the property name under the required properties in the devicetree node and set a new custom value.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>These values have some constraints.
+For details, see the official documentation at the <a class="reference external" href="https://www.skyworksinc.com/en/Products/Front-end-Modules/SKY66112-11">SKY66112-11 page</a>.</p>
+</div>
+</li>
+<li><p>Properties that inform protocol drivers about gains provided by SKY66112-11:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">tx-gain-db</span></code> - Transmission gain value in dB.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rx-gain-db</span></code> - Reception gain value in dB.</p></li>
+</ul>
+<p>The default values are accurate for SKY66112-11 but can be overridden when using a similar device with a different gain.</p>
+</li>
+</ul>
+</section>
+</section>
+<section id="use-case-of-incomplete-physical-connections-to-the-fem-module">
+<span id="ug-radio-fem-incomplete-connections"></span><h3><a class="toc-backref" href="#id29">Use case of incomplete physical connections to the FEM module</a><a class="headerlink" href="#use-case-of-incomplete-physical-connections-to-the-fem-module" title="Permalink to this heading"></a></h3>
+<p>The method of configuring FEM using the devicetree file allows you to opt out of using some pins.
+For example, if power consumption is not critical, the nRF21540 module PDN pin can be connected to a fixed logic level.
+Then there is no need to define a GPIO to control the PDN signal. The line <code class="docutils literal notranslate"><span class="pre">pdn-gpios</span> <span class="pre">=</span> <span class="pre">&lt;</span> <span class="pre">..</span> <span class="pre">&gt;;</span></code> can then be removed from the devicetree file.</p>
+<p>Generally, if pin <code class="docutils literal notranslate"><span class="pre">X</span></code> is not used, the <code class="docutils literal notranslate"><span class="pre">X-gpios</span> <span class="pre">=</span> <span class="pre">&lt;</span> <span class="pre">..</span> <span class="pre">&gt;;</span></code> property can be removed.
+This applies to all properties with a <code class="docutils literal notranslate"><span class="pre">-gpios</span></code> suffix, for both nRF21540 and SKY66112-11.</p>
+</section>
+</section>
+<section id="hardware-support">
+<span id="ug-radio-fem-boards"></span><h2><a class="toc-backref" href="#id30">Hardware support</a><a class="headerlink" href="#hardware-support" title="Permalink to this heading"></a></h2>
+<p>Two nRF21540 boards are available, showcasing the possibilities of the nRF21540 FEM:</p>
+<ul class="simple">
+<li><p><span class="xref std std-ref">nRF21540 DK</span></p></li>
+<li><p><a class="reference internal" href="#ug-radio-fem-nrf21540-ek"><span class="std std-ref">nRF21540 EK</span></a></p></li>
+</ul>
+<p>Also, various Skyworks front-end modules are supported.
+For example, SKY66112-11EK has a 2-pin PA/LNA interface.</p>
+<p>The front-end module feature is supported on the nRF52 and nRF53 Series devices.</p>
+<section id="nrf21540-dk">
+<h3><a class="toc-backref" href="#id31">nRF21540 DK</a><a class="headerlink" href="#nrf21540-dk" title="Permalink to this heading"></a></h3>
+<p>The nRF21540 DK is a development kit that features the nRF52840 device combined with the additional nRF21540 front-end module.
+You can use it the same way as <span class="xref std std-ref">zephyr:nrf52840dk_nrf52840</span>.
+It is an easy way to start testing front-end modules.
+For more details, see <span class="xref std std-ref">nRF21540 DK</span>.</p>
+</section>
+<section id="shields">
+<h3><a class="toc-backref" href="#id32">Shields</a><a class="headerlink" href="#shields" title="Permalink to this heading"></a></h3>
+<p>Shields are add-ons that you can attach to the development kit to extend its feature and functionalities.</p>
+<section id="nrf21540-ek">
+<span id="ug-radio-fem-nrf21540-ek"></span><h4><a class="toc-backref" href="#id33">nRF21540 EK</a><a class="headerlink" href="#nrf21540-ek" title="Permalink to this heading"></a></h4>
+<p>The nRF21540 EK (Evaluation Kit) is an RF front-end module (FEM) for Bluetooth Low Energy, Bluetooth mesh, 2.4 GHz proprietary, Thread, and Zigbee range extension.
+When combined with an nRF52 or nRF53 Series SoC, the nRF21540 RF FEM’s +21 dBm TX output power and 13 dB RX gain ensure a superior link budget for up to 16x range extension.</p>
+<section id="overview">
+<h5><a class="toc-backref" href="#id34">Overview</a><a class="headerlink" href="#overview" title="Permalink to this heading"></a></h5>
+<p>The nRF21540 complementary device has a 50 Ω SMA transceiver interface and 2x 50 Ω SMA antenna interfaces.
+This enables connecting an SoC or a signal generator to the input.
+It also enables connecting the outputs to measurement tools or to antennas directly.
+The FEM can be configured through the pins available on the Arduino headers.</p>
+<p>The nRF21540’s gain control, antenna switching, and modes are controlled using GPIO or SPI, or a combination of both.
+GPIO and SPI are accessible through the Arduino Uno Rev3 compatible headers.
+The shield also features two additional SMA connectors hooked to the dual antenna ports from the RF FEM, to monitor the performance of the RF FEM using any equipment desired.
+The FEM SMA input can be connected to the nRF52 or nRF53 Series SoC RF output with a coaxial RF cable with SMASWF connectors.</p>
+<figure class="align-center" id="id13">
+<a class="reference internal image-reference" href="../../_images/nrf21540_ek.png"><img alt="nRF21540_EK" src="../../_images/nrf21540_ek.png" style="width: 350px;" /></a>
+<figcaption>
+<p><span class="caption-text">nRF21540 EK shield</span><a class="headerlink" href="#id13" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="pin-assignment">
+<h5><a class="toc-backref" href="#id35">Pin assignment</a><a class="headerlink" href="#pin-assignment" title="Permalink to this heading"></a></h5>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 46%" />
+<col style="width: 20%" />
+<col style="width: 34%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Shield connector pin</p></th>
+<th class="head"><p>SIGNAL</p></th>
+<th class="head"><p>FEM function</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>D2</p></td>
+<td><p>GPIO</p></td>
+<td><p>Mode Select</p></td>
+</tr>
+<tr class="row-odd"><td><p>D3</p></td>
+<td><p>GPIO</p></td>
+<td><p>RX Enable</p></td>
+</tr>
+<tr class="row-even"><td><p>D4</p></td>
+<td><p>GPIO</p></td>
+<td><p>Antenna Select</p></td>
+</tr>
+<tr class="row-odd"><td><p>D5</p></td>
+<td><p>GPIO</p></td>
+<td><p>TX Enable</p></td>
+</tr>
+<tr class="row-even"><td><p>D9</p></td>
+<td><p>GPIO</p></td>
+<td><p>Power Down</p></td>
+</tr>
+<tr class="row-odd"><td><p>D10</p></td>
+<td><p>SPI CS</p></td>
+<td><p>Chip Select</p></td>
+</tr>
+<tr class="row-even"><td><p>D11</p></td>
+<td><p>SPI MOSI</p></td>
+<td><p>Serial Data In</p></td>
+</tr>
+<tr class="row-odd"><td><p>D12</p></td>
+<td><p>SPI MISO</p></td>
+<td><p>Serial Data Out</p></td>
+</tr>
+<tr class="row-even"><td><p>D13</p></td>
+<td><p>SPI SCK</p></td>
+<td><p>Serial Clock</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="programming">
+<span id="ug-radio-fem-nrf21540-ek-programming"></span><h5><a class="toc-backref" href="#id36">Programming</a><a class="headerlink" href="#programming" title="Permalink to this heading"></a></h5>
+<p>Set <code class="docutils literal notranslate"><span class="pre">-DSHIELD=nrf21540_ek</span></code> when you invoke <code class="docutils literal notranslate"><span class="pre">west</span> <span class="pre">build</span></code> or <code class="docutils literal notranslate"><span class="pre">cmake</span></code> in your Zephyr application.</p>
+<p>Alternatively, add the shield in the project’s <code class="file docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> file:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>set(SHIELD nrf21540_ek)
+</pre></div>
+</div>
+<p>To build with the nRF Connect for VS Code extension, specify <code class="docutils literal notranslate"><span class="pre">-DSHIELD=nrf21540_ek</span></code> in the <strong>Extra Cmake arguments</strong> field.
+See <a class="reference internal" href="../../getting_started/modifying.html#cmake-options"><span class="std std-ref">Providing CMake options</span></a>.</p>
+<p>When building for a board with an additional network core, like the nRF5340, add the <code class="docutils literal notranslate"><span class="pre">-DSHIELD</span></code> variable with the <em>childImageName_</em> parameter between <code class="docutils literal notranslate"><span class="pre">-D</span></code> and <code class="docutils literal notranslate"><span class="pre">SHIELD</span></code> to build for the network core.
+In this case, the application core is only responsible for forwarding to the network core the pins needed to control the nRF21540 .
+The application core can be set up to forward the needed pins using the <code class="docutils literal notranslate"><span class="pre">-DSHIELD=nrf21540_ek_fwd</span></code> setting.
+For example:</p>
+<div class="highlight highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">west</span> <span class="n">build</span> <span class="o">-</span><span class="n">b</span> <span class="n">nrf5340dk_nrf5340_cpuapp</span> <span class="o">--</span> <span class="o">-</span><span class="n">DSHIELD</span><span class="o">=</span><span class="n">nrf21540_ek_fwd</span> <span class="o">-</span><span class="n">Dmultiprotocol_rpmsg_SHIELD</span><span class="o">=</span><span class="n">nrf21540_ek</span>
+</pre></div>
+</div>
+<p>In this command, the <em>childImageName_</em> parameter has the <code class="docutils literal notranslate"><span class="pre">multiprotocol_rpmsg_</span></code> value and builds a multiprotocol application with support for 802.15.4 and Bluetooth.
+The <em>childImageName_</em> parameter can take the following values:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">multiprotocol_rpmsg_</span></code> for multiprotocol applications with support for 802.15.4 and Bluetooth</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">802154_rpmsg_</span></code> for applications with support for 802.15.4, but without support for Bluetooth</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hci_rpmsg_</span></code> for application with support for Bluetooth, but without support for 802.15.4</p></li>
+</ul>
+</section>
+<section id="references">
+<h5><a class="toc-backref" href="#id37">References</a><a class="headerlink" href="#references" title="Permalink to this heading"></a></h5>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.nordicsemi.com/Products/Low-power-short-range-wireless/nRF21540">nRF21540 DK product page</a></p></li>
+<li><p><a class="reference external" href="https://infocenter.nordicsemi.com/topic/struct_fem/struct/nrf21540_ps.html">nRF21540 Product Specification</a></p></li>
+<li><p><a class="reference external" href="https://infocenter.nordicsemi.com/topic/struct_fem/struct/nrf21540.html">nRF21540</a></p></li>
+</ul>
+</section>
+</section>
+<section id="shields-with-2-pin-pa-lna-interface">
+<h4><a class="toc-backref" href="#id38">Shields with 2-pin PA/LNA interface</a><a class="headerlink" href="#shields-with-2-pin-pa-lna-interface" title="Permalink to this heading"></a></h4>
+<p>The SKY66112-11EK is an example of a shield with the 2-pin PA/LNA interface.</p>
+<p>Perform the following steps to use it:</p>
+<ol class="arabic simple">
+<li><p>Connect the shield to the development kit.</p></li>
+<li><p>Follow the steps in the <a class="reference internal" href="#ug-radio-fem-skyworks"><span class="std std-ref">Adding support for Skyworks front-end module</span></a> to add a FEM node in the devicetree.</p></li>
+<li><p>Build your project.</p></li>
+<li><p>Program the development kit with the created binary file.</p></li>
+</ol>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../wifi_coex/index.html" class="btn btn-neutral float-right" title="Adding Wi-Fi Coexistence support to short-range radio applications" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../tfm/index.html" class="btn btn-neutral" title="Running applications with Trusted Firmware-M" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

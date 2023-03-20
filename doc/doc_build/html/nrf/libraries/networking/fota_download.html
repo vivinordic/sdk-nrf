@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FOTA download &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../_static/js/ncs.js"
+></script>
+<script src="../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="FTP client" href="ftp_client.html" />
+    <link rel="prev" title="Download client" href="download_client.html" />
+<link
+  href="../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drivers.html">Drivers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Libraries</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../bin/index.html">Binary libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bluetooth_services/index.html">Bluetooth libraries and services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bootloader/index.html">Bootloader libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../caf/index.html">Common Application Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../debug/index.html">Debug libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dfu/index.html">DFU libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gazell/index.html">Gazell libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modem/index.html">Modem libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mpsl/index.html">Multiprotocol Service Layer libraries</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Libraries for networking</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="aws_fota.html">AWS FOTA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="aws_iot.html">AWS IoT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="aws_jobs.html">AWS jobs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="azure_fota.html">Azure FOTA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="azure_iot_hub.html">Azure IoT Hub</a></li>
+<li class="toctree-l3"><a class="reference internal" href="coap_utils.html">CoAP utils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="download_client.html">Download client</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">FOTA download</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#configuration-and-implementation">Configuration and implementation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#https-downloads">HTTPS downloads</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#second-stage-bootloader-upgrades">Second-stage bootloader upgrades</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#api-documentation">API documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ftp_client.html">FTP client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="icalendar_parser.html">iCalendar parser</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lwm2m_client_utils.html">LwM2M client utils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lwm2m_location_assistance.html">LwM2M location assistance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mqtt_helper.html">MQTT helper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="multicell_location.html">Multicell location</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nrf_cloud.html">nRF Cloud</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nrf_cloud_agps.html">nRF Cloud A-GPS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nrf_cloud_alerts.html">nRF Cloud Alerts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nrf_cloud_location.html">nRF Cloud location</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nrf_cloud_pgps.html">nRF Cloud P-GPS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nrf_cloud_rest.html">nRF Cloud REST</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rest_client.html">REST client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wifi_credentials.html">Wi-Fi credentials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wifi_mgmt_ext.html">Wi-Fi management extension</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../nfc/index.html">Libraries for NFC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nrf_rpc/index.html">nRF RPC libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../others/index.html">Other libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../shell/index.html">Shell libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tfm/index.html">TF-M libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../zigbee/index.html">Libraries for Zigbee</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Libraries</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Libraries for networking</a></li>
+      <li class="breadcrumb-item active">FOTA download</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/libraries/networking/fota_download.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="fota-download">
+<span id="lib-fota-download"></span><h1>FOTA download<a class="headerlink" href="#fota-download" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#configuration-and-implementation" id="id7">Configuration and implementation</a></p></li>
+<li><p><a class="reference internal" href="#https-downloads" id="id8">HTTPS downloads</a></p></li>
+<li><p><a class="reference internal" href="#second-stage-bootloader-upgrades" id="id9">Second-stage bootloader upgrades</a></p></li>
+<li><p><a class="reference internal" href="#api-documentation" id="id10">API documentation</a></p></li>
+</ul>
+</div>
+<p>The firmware over-the-air (FOTA) download library provides functions for downloading a firmware file as an upgrade candidate to the DFU target that is used in the <a class="reference internal" href="../dfu/dfu_target.html#lib-dfu-target"><span class="std std-ref">DFU target</span></a> library.</p>
+<section id="configuration-and-implementation">
+<h2><a class="toc-backref" href="#id7">Configuration and implementation</a><a class="headerlink" href="#configuration-and-implementation" title="Permalink to this heading"></a></h2>
+<p>To start a FOTA download, provide the URL for the file that should be downloaded, specifying the required arguments as follows:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">host</span></code> - It indicates the hostname of the target host.
+For example, <code class="docutils literal notranslate"><span class="pre">my_domain.com</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">file</span></code> - It indicates the path to the file.
+For example, <code class="docutils literal notranslate"><span class="pre">path/to/resource/file.bin</span></code>.</p></li>
+</ul>
+</div></blockquote>
+<p>The FOTA library downloads the image using the <a class="reference internal" href="download_client.html#lib-download-client"><span class="std std-ref">Download client</span></a> library.
+After downloading the first fragment, it uses the <a class="reference internal" href="../dfu/dfu_target.html#lib-dfu-target"><span class="std std-ref">DFU target</span></a> library to identify the type of image that is being downloaded.
+Examples of image types are <em>modem upgrades</em> and upgrades handled by a <em>second-stage bootloader</em>.</p>
+<p>Once the library starts the download, all received data fragments are passed to the <a class="reference internal" href="../dfu/dfu_target.html#lib-dfu-target"><span class="std std-ref">DFU target</span></a> library.
+The <a class="reference internal" href="../dfu/dfu_target.html#lib-dfu-target"><span class="std std-ref">DFU target</span></a> library handles the location where the upgrade candidate is stored, depending on the image type that is being downloaded.</p>
+<p>When the download client sends the event indicating that the download has been completed, the FOTA library tags the received firmware as an upgrade candidate, and it instructs the download client to disconnect from the server.
+The library then sends a <a class="reference internal" href="#c.fota_download_evt_id.FOTA_DOWNLOAD_EVT_FINISHED" title="FOTA_DOWNLOAD_EVT_FINISHED"><code class="xref c c-enumerator docutils literal notranslate"><span class="pre">FOTA_DOWNLOAD_EVT_FINISHED</span></code></a> callback event.
+When the application using the library receives this event, it must issue a reboot command to apply the upgrade.</p>
+<p>You can set <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_FOTA_DOWNLOAD_NATIVE_TLS</span></code> to configure the socket to be native for TLS instead of offloading TLS operations to the modem.</p>
+</section>
+<section id="https-downloads">
+<h2><a class="toc-backref" href="#id8">HTTPS downloads</a><a class="headerlink" href="#https-downloads" title="Permalink to this heading"></a></h2>
+<p>The FOTA download library is used in the <a class="reference internal" href="../../samples/nrf9160/http_update/application_update/README.html#http-application-update-sample"><span class="std std-ref">nRF9160: HTTP application update</span></a> sample.</p>
+<p>By default, the FOTA download library uses HTTP for downloading the firmware file.
+To use HTTPS, apply the changes described in <a class="reference internal" href="download_client.html#download-client-https"><span class="std std-ref">the HTTPS section of the download client documentation</span></a> to the library.</p>
+</section>
+<section id="second-stage-bootloader-upgrades">
+<h2><a class="toc-backref" href="#id9">Second-stage bootloader upgrades</a><a class="headerlink" href="#second-stage-bootloader-upgrades" title="Permalink to this heading"></a></h2>
+<p>To upgrade the second-stage upgradable bootloader, you must provide two firmware files: one linked against the S0 partition and one linked against the S1 partition.
+See <a class="reference internal" href="../../app_dev/bootloaders_and_dfu/bootloader.html#upgradable-bootloader"><span class="std std-ref">Second-stage Upgradable bootloader</span></a> for more information.</p>
+<p>To do this, provide two paths in the <code class="docutils literal notranslate"><span class="pre">file</span></code> argument, separated by a space character:</p>
+<ul class="simple">
+<li><p>The first entry must point to the second-stage upgradable bootloader variant linked against the S0 partition.</p></li>
+<li><p>The second entry must point to the second-stage upgradable bootloader variant linked against the S1 partition.</p></li>
+</ul>
+<p>When an upgradeable bootloader, like MCUboot, is included in the project, the FOTA download library uses <a class="reference internal" href="../../app_dev/tfm/index.html#ug-tfm"><span class="std std-ref">Trusted Firmware-M (TF-M)</span></a> to detect the active second-stage upgradable bootloader partition (S0 or S1).
+If the <code class="docutils literal notranslate"><span class="pre">file</span></code> argument contains a space character, it is internally updated to contain only the entry that corresponds to the non-active slot.
+This updated path is then used to download the image.
+A device reset triggers the second-stage upgradable bootloader to copy the image from the update bank to the non-active slot.
+An additional reset is then required for the first-stage immutable bootloader to select and use the upgraded second-stage bootloader.</p>
+</section>
+<section id="api-documentation">
+<h2><a class="toc-backref" href="#id10">API documentation</a><a class="headerlink" href="#api-documentation" title="Permalink to this heading"></a></h2>
+<div class="line-block">
+<div class="line">Header file: <code class="file docutils literal notranslate"><span class="pre">include/net/fota_download.h</span></code></div>
+<div class="line">Source files: <code class="file docutils literal notranslate"><span class="pre">subsys/net/lib/fota_download/src/</span></code></div>
+</div>
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="group__fota__download"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">fota_download</span></span></dt>
+<dd><p>Library for downloading a firmware update over the air. </p>
+<p>Downloads the specified file from the specified host to the secondary partition of MCUboot. After the file has been downloaded, the secondary slot is tagged as having valid firmware inside it. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-typedefs">Typedefs</p>
+<dl class="c type">
+<dt class="sig sig-object c" id="c.fota_download_callback_t">
+<span class="target" id="group__fota__download_1ga95d0d50155479a91d7f0322ae32fbd60"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">fota_download_callback_t</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.fota_download_evt" title="fota_download_evt"><span class="n"><span class="pre">fota_download_evt</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">evt</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#c.fota_download_callback_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>FOTA download asynchronous callback function. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Param evt</dt>
+<dd class="field-odd"><p>Event. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-enums">Enums</p>
+<dl class="c enum">
+<dt class="sig sig-object c" id="c.fota_download_evt_id">
+<span class="target" id="group__fota__download_1ga217989aeef171680eed63a79a9238ba2"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fota_download_evt_id</span></span></span><a class="headerlink" href="#c.fota_download_evt_id" title="Permalink to this definition"></a><br /></dt>
+<dd><p>FOTA download event IDs. </p>
+<p><em>Values:</em></p>
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.fota_download_evt_id.FOTA_DOWNLOAD_EVT_PROGRESS">
+<span class="target" id="group__fota__download_1gga217989aeef171680eed63a79a9238ba2a3ee5ed910cbf3ac83377a6325f311c10"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">FOTA_DOWNLOAD_EVT_PROGRESS</span></span></span><a class="headerlink" href="#c.fota_download_evt_id.FOTA_DOWNLOAD_EVT_PROGRESS" title="Permalink to this definition"></a><br /></dt>
+<dd><p>FOTA download progress report. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.fota_download_evt_id.FOTA_DOWNLOAD_EVT_FINISHED">
+<span class="target" id="group__fota__download_1gga217989aeef171680eed63a79a9238ba2a0c04c54557619b099e43d8fd636f89cc"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">FOTA_DOWNLOAD_EVT_FINISHED</span></span></span><a class="headerlink" href="#c.fota_download_evt_id.FOTA_DOWNLOAD_EVT_FINISHED" title="Permalink to this definition"></a><br /></dt>
+<dd><p>FOTA download finished. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.fota_download_evt_id.FOTA_DOWNLOAD_EVT_ERASE_PENDING">
+<span class="target" id="group__fota__download_1gga217989aeef171680eed63a79a9238ba2a517790928651330e8caa51c8d0d8f77c"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">FOTA_DOWNLOAD_EVT_ERASE_PENDING</span></span></span><a class="headerlink" href="#c.fota_download_evt_id.FOTA_DOWNLOAD_EVT_ERASE_PENDING" title="Permalink to this definition"></a><br /></dt>
+<dd><p>FOTA download erase pending. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.fota_download_evt_id.FOTA_DOWNLOAD_EVT_ERASE_DONE">
+<span class="target" id="group__fota__download_1gga217989aeef171680eed63a79a9238ba2a2de19fa91dd40b0fa971c206f38993cb"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">FOTA_DOWNLOAD_EVT_ERASE_DONE</span></span></span><a class="headerlink" href="#c.fota_download_evt_id.FOTA_DOWNLOAD_EVT_ERASE_DONE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>FOTA download erase done. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.fota_download_evt_id.FOTA_DOWNLOAD_EVT_ERROR">
+<span class="target" id="group__fota__download_1gga217989aeef171680eed63a79a9238ba2a64a984f35c689c50e656b4659c1904bf"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">FOTA_DOWNLOAD_EVT_ERROR</span></span></span><a class="headerlink" href="#c.fota_download_evt_id.FOTA_DOWNLOAD_EVT_ERROR" title="Permalink to this definition"></a><br /></dt>
+<dd><p>FOTA download error. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.fota_download_evt_id.FOTA_DOWNLOAD_EVT_CANCELLED">
+<span class="target" id="group__fota__download_1gga217989aeef171680eed63a79a9238ba2a69388889f788bbb78a2bbefd0efc23e4"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">FOTA_DOWNLOAD_EVT_CANCELLED</span></span></span><a class="headerlink" href="#c.fota_download_evt_id.FOTA_DOWNLOAD_EVT_CANCELLED" title="Permalink to this definition"></a><br /></dt>
+<dd><p>FOTA download cancelled. </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="c enum">
+<dt class="sig sig-object c" id="c.fota_download_error_cause">
+<span class="target" id="group__fota__download_1ga9dc903c6231f7c7de49dfa9d6a5c5d47"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fota_download_error_cause</span></span></span><a class="headerlink" href="#c.fota_download_error_cause" title="Permalink to this definition"></a><br /></dt>
+<dd><p>FOTA download error cause values. </p>
+<p><em>Values:</em></p>
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.fota_download_error_cause.FOTA_DOWNLOAD_ERROR_CAUSE_NO_ERROR">
+<span class="target" id="group__fota__download_1gga9dc903c6231f7c7de49dfa9d6a5c5d47ae63598a676a80135354ad93d46e62e1e"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">FOTA_DOWNLOAD_ERROR_CAUSE_NO_ERROR</span></span></span><a class="headerlink" href="#c.fota_download_error_cause.FOTA_DOWNLOAD_ERROR_CAUSE_NO_ERROR" title="Permalink to this definition"></a><br /></dt>
+<dd><p>No error, used when event ID is not FOTA_DOWNLOAD_EVT_ERROR. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.fota_download_error_cause.FOTA_DOWNLOAD_ERROR_CAUSE_DOWNLOAD_FAILED">
+<span class="target" id="group__fota__download_1gga9dc903c6231f7c7de49dfa9d6a5c5d47a1c114feabab49dfe5beb222f327ce220"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">FOTA_DOWNLOAD_ERROR_CAUSE_DOWNLOAD_FAILED</span></span></span><a class="headerlink" href="#c.fota_download_error_cause.FOTA_DOWNLOAD_ERROR_CAUSE_DOWNLOAD_FAILED" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Downloading the update failed. The download may be retried. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.fota_download_error_cause.FOTA_DOWNLOAD_ERROR_CAUSE_INVALID_UPDATE">
+<span class="target" id="group__fota__download_1gga9dc903c6231f7c7de49dfa9d6a5c5d47aafc18fa3147519e7974ee40207a483c9"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">FOTA_DOWNLOAD_ERROR_CAUSE_INVALID_UPDATE</span></span></span><a class="headerlink" href="#c.fota_download_error_cause.FOTA_DOWNLOAD_ERROR_CAUSE_INVALID_UPDATE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The update is invalid and was rejected. Retry will not help. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.fota_download_error_cause.FOTA_DOWNLOAD_ERROR_CAUSE_TYPE_MISMATCH">
+<span class="target" id="group__fota__download_1gga9dc903c6231f7c7de49dfa9d6a5c5d47ace44cc359b9974dd8b45e7d4c5ebd3de"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">FOTA_DOWNLOAD_ERROR_CAUSE_TYPE_MISMATCH</span></span></span><a class="headerlink" href="#c.fota_download_error_cause.FOTA_DOWNLOAD_ERROR_CAUSE_TYPE_MISMATCH" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Actual firmware type does not match expected. Retry will not help. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.fota_download_error_cause.FOTA_DOWNLOAD_ERROR_CAUSE_INTERNAL">
+<span class="target" id="group__fota__download_1gga9dc903c6231f7c7de49dfa9d6a5c5d47a535e618342537505cb839f5fd61b7e3a"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">FOTA_DOWNLOAD_ERROR_CAUSE_INTERNAL</span></span></span><a class="headerlink" href="#c.fota_download_error_cause.FOTA_DOWNLOAD_ERROR_CAUSE_INTERNAL" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Generic error on device side. </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.fota_download_init">
+<span class="target" id="group__fota__download_1gacb88d80a30bf57dc5865d330a298aee9"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fota_download_init</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#c.fota_download_callback_t" title="fota_download_callback_t"><span class="n"><span class="pre">fota_download_callback_t</span></span></a><span class="w"> </span><span class="n"><span class="pre">client_callback</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.fota_download_init" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Initialize the firmware over-the-air download library. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>client_callback</strong> – Callback for the generated events.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><p><strong>0</strong> – If successfully initialized. Otherwise, a negative value is returned. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.fota_download_start">
+<span class="target" id="group__fota__download_1ga7dc5a6a165f00dd04f82770ea6a84844"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fota_download_start</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">host</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">file</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">sec_tag</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">pdn_id</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n"><span class="pre">fragment_size</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.fota_download_start" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Start downloading the given file from the given host. </p>
+<p>When the download is complete, the secondary slot of MCUboot is tagged as having valid firmware inside it. The completion is reported through an event.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>host</strong> – Name of host to start downloading from. Can include scheme and port number, e.g. <a class="reference external" href="https://google.com:443">https://google.com:443</a> </p></li>
+<li><p><strong>file</strong> – Path to the file you wish to download. May be either a single file path, relative to host (for example “path/to/binary.bin”), or, if bootloader FOTA is enabled, can be two paths (both relative to host), separated by a space (for example “path/to/s0.bin path/to/s1.bin”). If two paths are provided, the download will be assumed to be a bootloader download, both paths will be treated as upgradable bootloader slot 0 and slot 1 binaries respectively, and only the binary corresponding to the currently inactive bootloader slot will be selected and downloaded. See <a class="reference external" href="https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/nrf/ug_bootloader.html">Secure Bootloader Chain Docs</a> for details regarding the upgradable bootloader slots. </p></li>
+<li><p><strong>sec_tag</strong> – Security tag you want to use with HTTPS set to -1 to Disable. </p></li>
+<li><p><strong>pdn_id</strong> – Packet Data Network ID to use for the download, or 0 to use the default. </p></li>
+<li><p><strong>fragment_size</strong> – Fragment size to be used for the download. If 0,<span> <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_DOWNLOAD_CLIENT_HTTP_FRAG_SIZE</span></code> </span> is used.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>0</strong> – If download has started successfully. </p></li>
+<li><p><strong>-EALREADY</strong> – If download is already ongoing. Otherwise, a negative value is returned. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.fota_download_start_with_image_type">
+<span class="target" id="group__fota__download_1ga49f9983d2492c6c7d1097e32b6666b0c"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fota_download_start_with_image_type</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">host</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">file</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">sec_tag</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">pdn_id</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n"><span class="pre">fragment_size</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="../dfu/dfu_target.html#c.dfu_target_image_type" title="dfu_target_image_type"><span class="n"><span class="pre">dfu_target_image_type</span></span></a><span class="w"> </span><span class="n"><span class="pre">expected_type</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.fota_download_start_with_image_type" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Start downloading the given file from the given host. Validate that the file type matches the expected type before starting the installation. </p>
+<p>When the download is complete, the secondary slot of MCUboot is tagged as having valid firmware inside it. The completion is reported through an event.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>host</strong> – Name of host to start downloading from. Can include scheme and port number, for example <a class="reference external" href="https://google.com:443">https://google.com:443</a> </p></li>
+<li><p><strong>file</strong> – Path to the file you wish to download. See <a class="reference internal" href="#group__fota__download_1ga7dc5a6a165f00dd04f82770ea6a84844"><span class="std std-ref">fota_download_start()</span></a> for details on expected format. </p></li>
+<li><p><strong>sec_tag</strong> – Security tag you want to use with HTTPS set to -1 to Disable. </p></li>
+<li><p><strong>pdn_id</strong> – Packet Data Network ID to use for the download, or 0 to use the default. </p></li>
+<li><p><strong>fragment_size</strong> – Fragment size to be used for the download. If 0,<span> <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_DOWNLOAD_CLIENT_HTTP_FRAG_SIZE</span></code> </span> is used. </p></li>
+<li><p><strong>expected_type</strong> – Type of firmware file to be downloaded and installed.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>0</strong> – If download has started successfully. </p></li>
+<li><p><strong>-EALREADY</strong> – If download is already ongoing. Otherwise, a negative value is returned. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.fota_download_cancel">
+<span class="target" id="group__fota__download_1gaac764ae25e1c7ed8ee34921c90873318"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fota_download_cancel</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.fota_download_cancel" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Cancel FOTA image downloading. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Return values</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>0</strong> – If FOTA download is cancelled successfully. </p></li>
+<li><p><strong>-EAGAIN</strong> – If download is not started, aborted or completed. Otherwise, a negative value is returned. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.fota_download_target">
+<span class="target" id="group__fota__download_1ga98282fb0ca9256c4ef71285a3dce18b8"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fota_download_target</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.fota_download_target" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get target image type. </p>
+<p>Image type becomes known after download starts.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return values</dt>
+<dd class="field-odd"><p><strong>0</strong> – Unknown type before download starts. Otherwise, a type defined in enum dfu_target_image_type. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.fota_download_s0_active_get">
+<span class="target" id="group__fota__download_1ga1c2516eb21ef7e45bf3b081a8f2cefc2"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fota_download_s0_active_get</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">s0_active</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.fota_download_s0_active_get" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the active bootloader (B1) slot, s0 or s1. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s0_active</strong> – <strong>[out]</strong> Set to ‘true’ if s0 is active slot, ‘false’ otherwise</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><p><strong>0</strong> – If successful. Otherwise, a (negative) error code is returned. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.fota_download_evt">
+<span class="target" id="structfota__download__evt"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fota_download_evt</span></span></span><a class="headerlink" href="#c.fota_download_evt" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;fota_download.h&gt;</em></div>
+<p>FOTA download event data. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.fota_download_evt.cause">
+<span class="target" id="structfota__download__evt_1a2c524190ee0e8747ff83015be38a64bb"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#c.fota_download_error_cause" title="fota_download_error_cause"><span class="n"><span class="pre">fota_download_error_cause</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cause</span></span></span><a class="headerlink" href="#c.fota_download_evt.cause" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Error cause. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.fota_download_evt.progress">
+<span class="target" id="structfota__download__evt_1ac6b7bf171b953f375635645f57802a98"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">progress</span></span></span><a class="headerlink" href="#c.fota_download_evt.progress" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Download progress %. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="ftp_client.html" class="btn btn-neutral float-right" title="FTP client" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="download_client.html" class="btn btn-neutral" title="Download client" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

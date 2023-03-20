@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Requirements and application limitations &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../../_static/js/ncs.js"
+></script>
+<script src="../../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Message sequence charts" href="msc.html" />
+    <link rel="prev" title="Application integration" href="app_integration.html" />
+<link
+  href="../../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../drivers.html">Drivers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Libraries</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Binary libraries</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">LwM2M carrier</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="certification.html">Certification and version dependencies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="app_integration.html">Application integration</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Requirements and application limitations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="msc.html">Message sequence charts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="API_documentation.html">API documentation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="CHANGELOG.html">Changelog</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../bluetooth_services/index.html">Bluetooth libraries and services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../bootloader/index.html">Bootloader libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../caf/index.html">Common Application Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../debug/index.html">Debug libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../dfu/index.html">DFU libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gazell/index.html">Gazell libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../modem/index.html">Modem libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mpsl/index.html">Multiprotocol Service Layer libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../networking/index.html">Libraries for networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nfc/index.html">Libraries for NFC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nrf_rpc/index.html">nRF RPC libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../others/index.html">Other libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../shell/index.html">Shell libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tfm/index.html">TF-M libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../zigbee/index.html">Libraries for Zigbee</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Libraries</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Binary libraries</a></li>
+          <li class="breadcrumb-item"><a href="index.html">LwM2M carrier</a></li>
+      <li class="breadcrumb-item active">Requirements and application limitations</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/libraries/bin/lwm2m_carrier/requirements.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="requirements-and-application-limitations">
+<span id="req-appln-limitations"></span><h1>Requirements and application limitations<a class="headerlink" href="#requirements-and-application-limitations" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#library-size" id="id6">Library size</a></p></li>
+</ul>
+</div>
+<p>Following are some of the requirements and limitations of the application while running this module:</p>
+<ul>
+<li><p>The application must not call the <a class="reference internal" href="../../modem/nrf_modem_lib.html#c.nrf_modem_lib_init" title="nrf_modem_lib_init"><code class="xref c c-func docutils literal notranslate"><span class="pre">nrf_modem_lib_init()</span></code></a> function.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>The LwM2M carrier library initializes and uses the <span class="xref std std-ref">nrf_modem</span>.
+This library is needed to track the modem FOTA states.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>The LwM2M carrier library registers to receive several AT event reports using the <a class="reference internal" href="../../modem/at_monitor.html#at-monitor-readme"><span class="std std-ref">AT monitor</span></a> library. The following notifications must not be deregistered by the application:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>SMS events (<code class="docutils literal notranslate"><span class="pre">AT+CNMI</span></code>).</p></li>
+<li><p>Packet Domain events (<code class="docutils literal notranslate"><span class="pre">AT+CGEREP</span></code>).</p></li>
+<li><p>Extended signal quality events (<code class="docutils literal notranslate"><span class="pre">AT+CESQ</span></code>).</p></li>
+<li><p>ODIS events (<code class="docutils literal notranslate"><span class="pre">AT+ODISNTF</span></code>).</p></li>
+<li><p>Universal Integrated Circuit Card events (<code class="docutils literal notranslate"><span class="pre">AT%XSIM</span></code>).</p></li>
+<li><p>Network Time events (<code class="docutils literal notranslate"><span class="pre">AT%XTIME</span></code>).</p></li>
+<li><p>Modem Domain events (<code class="docutils literal notranslate"><span class="pre">AT%MDMEV</span></code>).</p></li>
+<li><p>Report Network Error Codes events (<code class="docutils literal notranslate"><span class="pre">AT+CNEC</span></code>) - EPS Session Management events are used by the LwM2M carrier library. The application may enable or disable EPS Mobility Management events.</p></li>
+<li><p>Network Registration Status events (<code class="docutils literal notranslate"><span class="pre">AT+CEREG</span></code>) - Notification Level 4 is used by the LwM2M carrier library. The application can increase this level but must not decrease it.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>If the application wants to use eDRX, it must enable mode 2, since the LwM2M carrier library requires the unsolicited result code.</p></li>
+<li><p>The Connectivity statistics AT command (AT%XCONNSTAT) should not be used by the application.</p>
+<ul class="simple">
+<li><p>This command is used by the LwM2M carrier library to update the Connectivity Statistics object.</p></li>
+</ul>
+</li>
+<li><p>The application must prioritize the LwM2M carrier library requests to connect and disconnect from the network.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>The LwM2M carrier library stores keys into the modem, which requires disconnecting from the LTE link and connecting to it.</p></li>
+<li><p>The events to indicate connection and disconnection are <a class="reference internal" href="API_documentation.html#c.LWM2M_CARRIER_EVENT_LTE_LINK_UP" title="LWM2M_CARRIER_EVENT_LTE_LINK_UP"><code class="xref c c-macro docutils literal notranslate"><span class="pre">LWM2M_CARRIER_EVENT_LTE_LINK_UP</span></code></a> and <a class="reference internal" href="API_documentation.html#c.LWM2M_CARRIER_EVENT_LTE_LINK_DOWN" title="LWM2M_CARRIER_EVENT_LTE_LINK_DOWN"><code class="xref c c-macro docutils literal notranslate"><span class="pre">LWM2M_CARRIER_EVENT_LTE_LINK_DOWN</span></code></a>.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>The LwM2M carrier library uses the TLS socket for FOTA.</p>
+<ul class="simple">
+<li><p>If the application is using the TLS socket, it must immediately close it when the <a class="reference internal" href="API_documentation.html#c.LWM2M_CARRIER_EVENT_FOTA_START" title="LWM2M_CARRIER_EVENT_FOTA_START"><code class="xref c c-macro docutils literal notranslate"><span class="pre">LWM2M_CARRIER_EVENT_FOTA_START</span></code></a> event is received.</p></li>
+<li><p>The socket is released by the library again upon the next reboot, or in the event of a FOTA error.</p></li>
+<li><p>If the application always needs a TLS socket, it can use <a class="reference external" href="https://developer.trustedfirmware.org/w/mbed-tls/">Mbed TLS</a>.</p></li>
+</ul>
+</li>
+<li><p>The LwM2M carrier library uses both the DTLS sessions made available through the modem. Therefore, the application cannot run any DTLS sessions.</p></li>
+<li><p>The LwM2M carrier library provisions the necessary security credentials to the security tags 25, 26, 27, 28.
+These tags must not be used by the application.</p></li>
+<li><p>The CA certificates that are used for out-of-band FOTA must be provided by the application.
+Out-of-band FOTA updates are done by the <a class="reference internal" href="../../networking/download_client.html#lib-download-client"><span class="std std-ref">Download client</span></a>.
+Although the certificates are updated as part of the nRF Connect SDK releases, you must check the requirements from your carrier to know which certificates are applicable.</p></li>
+<li><p>The LwM2M carrier library uses the following NVS record key range: 0xCA00 - 0xCAFF.
+This range must not be used by the application.</p></li>
+</ul>
+<section id="library-size">
+<span id="lwm2m-lib-size"></span><h2><a class="toc-backref" href="#id6">Library size</a><a class="headerlink" href="#library-size" title="Permalink to this heading"></a></h2>
+<p>The following library sizes are reported in the <a class="reference internal" href="CHANGELOG.html#liblwm2m-carrier-changelog"><span class="std std-ref">Changelog</span></a>:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Library size (binary) - This shows the standalone size of the library. This size includes all objects since the library is not linked. This size will change when linking the library to an application.</p></li>
+<li><p>Library size (reference application) - This size shows the <em>total</em> memory impact of enabling the LwM2M carrier library in the <a class="reference internal" href="../../../samples/nrf9160/lwm2m_carrier/README.html#lwm2m-carrier"><span class="std std-ref">nRF9160: LwM2M carrier</span></a> sample.
+This size accounts for the library, abstraction layer and the associated heap and stack requirements. It also includes all the resources for all the dependencies, except <span class="xref std std-ref">nrf_modem</span>.
+See <a class="reference internal" href="app_integration.html#lwm2m-app-int"><span class="std std-ref">Application integration</span></a> for more information.</p></li>
+</ul>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Enabling the LwM2M carrier library into the <a class="reference internal" href="../../../samples/nrf9160/lwm2m_carrier/README.html#lwm2m-carrier"><span class="std std-ref">nRF9160: LwM2M carrier</span></a> sample serves only as a reference.
+The increase in memory size due to the inclusion of the LwM2M carrier library depends on the application that it is being integrated into.
+For example, an application such as the <a class="reference internal" href="../../../applications/asset_tracker_v2/README.html#asset-tracker-v2"><span class="std std-ref">nRF9160: Asset Tracker v2</span></a> already uses several libraries which the LwM2M carrier library depends on. This makes the added memory requirement considerably smaller.</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="msc.html" class="btn btn-neutral float-right" title="Message sequence charts" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="app_integration.html" class="btn btn-neutral" title="Application integration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

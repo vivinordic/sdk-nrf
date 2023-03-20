@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bootloader crypto &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../_static/js/ncs.js"
+></script>
+<script src="../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Bootloader storage" href="bl_storage.html" />
+    <link rel="prev" title="Bootloader libraries" href="index.html" />
+<link
+  href="../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drivers.html">Drivers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Libraries</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../bin/index.html">Binary libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bluetooth_services/index.html">Bluetooth libraries and services</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Bootloader libraries</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Bootloader crypto</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#backends">Backends</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#api-documentation">API documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="bl_storage.html">Bootloader storage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bl_validation.html">Bootloader firmware validation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../caf/index.html">Common Application Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../debug/index.html">Debug libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dfu/index.html">DFU libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gazell/index.html">Gazell libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modem/index.html">Modem libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mpsl/index.html">Multiprotocol Service Layer libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../networking/index.html">Libraries for networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nfc/index.html">Libraries for NFC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nrf_rpc/index.html">nRF RPC libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../others/index.html">Other libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../shell/index.html">Shell libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tfm/index.html">TF-M libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../zigbee/index.html">Libraries for Zigbee</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Libraries</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Bootloader libraries</a></li>
+      <li class="breadcrumb-item active">Bootloader crypto</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/libraries/bootloader/bl_crypto.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="bootloader-crypto">
+<span id="doc-bl-crypto"></span><h1>Bootloader crypto<a class="headerlink" href="#bootloader-crypto" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#backends" id="id7">Backends</a></p></li>
+<li><p><a class="reference internal" href="#api-documentation" id="id8">API documentation</a></p></li>
+</ul>
+</div>
+<p>The bootloader crypto library is the cryptography library that is used by the <a class="reference internal" href="../../samples/bootloader/README.html#bootloader"><span class="std std-ref">nRF Secure Immutable Bootloader</span></a>.</p>
+<p>The API is public because applications that are booted by the immutable bootloader can call functions from this library using the bootloader’s code, through external APIs.
+See <a class="reference internal" href="../others/fw_info.html#doc-fw-info-ext-api"><span class="std std-ref">External APIs</span></a> for more information.</p>
+<p>The library provides the following functionality:</p>
+<ul class="simple">
+<li><p>SHA256 hashing</p></li>
+<li><p>SECP256R1 signature validation</p></li>
+<li><p>Root-of-trust firmware validation, which is the function the bootloader uses to validate a firmware’s signature and digest, using the SHA256 and SECP256R1 algorithms</p></li>
+</ul>
+<p>These functions are available as separate external APIs.
+The API can be used the same way regardless of which backend is used.</p>
+<section id="backends">
+<h2><a class="toc-backref" href="#id7">Backends</a><a class="headerlink" href="#backends" title="Permalink to this heading"></a></h2>
+<p>When using the library, you can choose between the following backends:</p>
+<ul class="simple">
+<li><p>Hardware backend <span class="xref std std-ref">nrf_cc310_bl_readme</span> (can only be used if Arm CryptoCell CC310 is available)</p></li>
+<li><p>Software backend <span class="xref std std-ref">nrf_oberon_readme</span></p></li>
+<li><p>Another image’s instance of the bootloader crypto library, called through external APIs.
+The other image chooses its own backend.</p></li>
+</ul>
+<p>To configure which backend is used for hashing, set one of the following configuration options:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_SB_CRYPTO_OBERON_SHA256</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_SB_CRYPTO_CC310_SHA256</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_SB_CRYPTO_CLIENT_SHA256</span></code></p></li>
+</ul>
+<p>To configure which backend is used for firmware verification, set one of the following configuration options:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_SB_CRYPTO_CC310_ECDSA_SECP256R1</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_SB_CRYPTO_OBERON_ECDSA_SECP256R1</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_SB_CRYPTO_CLIENT_ECDSA_SECP256R1</span></code></p></li>
+</ul>
+</section>
+<section id="api-documentation">
+<h2><a class="toc-backref" href="#id8">API documentation</a><a class="headerlink" href="#api-documentation" title="Permalink to this heading"></a></h2>
+<div class="line-block">
+<div class="line">Header file: <code class="file docutils literal notranslate"><span class="pre">include/bl_crypto.h</span></code></div>
+<div class="line">Source files: <code class="file docutils literal notranslate"><span class="pre">subsys/bootloader/bl_crypto/</span></code> and <code class="file docutils literal notranslate"><span class="pre">subsys/bootloader/bl_crypto_client/</span></code></div>
+</div>
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="group__bl__crypto"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">bl_crypto</span></span></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-defines">Defines</p>
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.EHASHINV">
+<span class="target" id="group__bl__crypto_1gacd5893395511e2e8c580b84b29ef8409"></span><span class="sig-name descname"><span class="n"><span class="pre">EHASHINV</span></span></span><a class="headerlink" href="#c.EHASHINV" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.ESIGINV">
+<span class="target" id="group__bl__crypto_1ga40994c60d4f9c4b2326351e2f33368ad"></span><span class="sig-name descname"><span class="n"><span class="pre">ESIGINV</span></span></span><a class="headerlink" href="#c.ESIGINV" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.SHA256_CTX_SIZE">
+<span class="target" id="group__bl__crypto_1gaae07206ced2981c3f9fb9e7f71d97c7a"></span><span class="sig-name descname"><span class="n"><span class="pre">SHA256_CTX_SIZE</span></span></span><a class="headerlink" href="#c.SHA256_CTX_SIZE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-typedefs">Typedefs</p>
+<dl class="c type">
+<dt class="sig sig-object c" id="c.bl_sha256_ctx_t">
+<span class="target" id="group__bl__crypto_1gaefc5c12ca3aab7648becfdde421a99de"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bl_sha256_ctx_t</span></span></span><span class="p"><span class="pre">[</span></span><span class="m"><span class="pre">256</span></span><span class="w"> </span><span class="o"><span class="pre">/</span></span><span class="w"> </span><span class="m"><span class="pre">4</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#c.bl_sha256_ctx_t" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c type">
+<dt class="sig sig-object c" id="c.bl_root_of_trust_verify_t">
+<span class="target" id="group__bl__crypto_1gae834e35f1667645ff403a6ef60c4f987"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">bl_root_of_trust_verify_t</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">public_key</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">public_key_hash</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">signature</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">firmware</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n"><span class="pre">firmware_len</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#c.bl_root_of_trust_verify_t" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c type">
+<dt class="sig sig-object c" id="c.bl_sha256_init_t">
+<span class="target" id="group__bl__crypto_1gab1342c07a14778b98847daa8a600f67a"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">bl_sha256_init_t</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><a class="reference internal" href="#c.bl_sha256_ctx_t" title="bl_sha256_ctx_t"><span class="n"><span class="pre">bl_sha256_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#c.bl_sha256_init_t" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c type">
+<dt class="sig sig-object c" id="c.bl_sha256_update_t">
+<span class="target" id="group__bl__crypto_1ga0fbac294c6f20be7b1594345dee33013"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">bl_sha256_update_t</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><a class="reference internal" href="#c.bl_sha256_ctx_t" title="bl_sha256_ctx_t"><span class="n"><span class="pre">bl_sha256_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n"><span class="pre">data_len</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#c.bl_sha256_update_t" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c type">
+<dt class="sig sig-object c" id="c.bl_sha256_finalize_t">
+<span class="target" id="group__bl__crypto_1gad6f8dd85c3e7628376f734430a65287d"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">bl_sha256_finalize_t</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><a class="reference internal" href="#c.bl_sha256_ctx_t" title="bl_sha256_ctx_t"><span class="n"><span class="pre">bl_sha256_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">output</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#c.bl_sha256_finalize_t" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c type">
+<dt class="sig sig-object c" id="c.bl_sha256_verify_t">
+<span class="target" id="group__bl__crypto_1ga6cd13b98dca4433e1efbfae8b166cd22"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">bl_sha256_verify_t</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n"><span class="pre">data_len</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">expected</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#c.bl_sha256_verify_t" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c type">
+<dt class="sig sig-object c" id="c.bl_secp256r1_validate_t">
+<span class="target" id="group__bl__crypto_1ga1ecd7e46b7de7eea0f72fdcd3631dd96"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">bl_secp256r1_validate_t</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">hash</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n"><span class="pre">hash_len</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">signature</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">public_key</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#c.bl_secp256r1_validate_t" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bl_crypto_init">
+<span class="target" id="group__bl__crypto_1ga0dbe95016ff4106f7a2dce7083b1d561"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bl_crypto_init</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bl_crypto_init" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Initialize bootloader crypto module. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Return values</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>0</strong> – On success. </p></li>
+<li><p><strong>-EFAULT</strong> – If crypto module reported an error. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bl_root_of_trust_verify">
+<span class="target" id="group__bl__crypto_1ga31a903b706ec13c0d8f63e889caaa6cd"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bl_root_of_trust_verify</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">public_key</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">public_key_hash</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">signature</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">firmware</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n"><span class="pre">firmware_len</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bl_root_of_trust_verify" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Verify a signature using configured signature and SHA-256. </p>
+<p>Verifies the public key against the public key hash, then verifies the hash of the signed data against the signature using the public key.</p>
+<p><div class="remark admonition">
+<p class="admonition-title">Remark</p>
+<p>No parameter can be NULL. </p>
+</div>
+</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>public_key</strong> – <strong>[in]</strong> Public key. </p></li>
+<li><p><strong>public_key_hash</strong> – <strong>[in]</strong> Expected hash of the public key. This is the root of trust. </p></li>
+<li><p><strong>signature</strong> – <strong>[in]</strong> Firmware signature. </p></li>
+<li><p><strong>firmware</strong> – <strong>[in]</strong> Firmware. </p></li>
+<li><p><strong>firmware_len</strong> – <strong>[in]</strong> Length of firmware.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>0</strong> – On success. </p></li>
+<li><p><strong>-EHASHINV</strong> – If public_key_hash didn’t match public_key. </p></li>
+<li><p><strong>-ESIGINV</strong> – If signature validation failed. </p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Any error code from <a class="reference internal" href="#group__bl__crypto_1ga6c9de0639068e3b2e80f1afc597560dc"><span class="std std-ref">bl_sha256_init</span></a>, <a class="reference internal" href="#group__bl__crypto_1gafe0b1e8b06aeae0345e9e96bb78c5b00"><span class="std std-ref">bl_sha256_update</span></a>, <a class="reference internal" href="#group__bl__crypto_1gab578bf1e4b469e3353600b66e6d09a35"><span class="std std-ref">bl_sha256_finalize</span></a>, or <a class="reference internal" href="#group__bl__crypto_1ga2f513ec8f1399aa5fdd21556ce70d941"><span class="std std-ref">bl_secp256r1_validate</span></a> if something else went wrong.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bl_root_of_trust_verify_external">
+<span class="target" id="group__bl__crypto_1gafb546ece5a1b86f5dc2be7aca2c0427e"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bl_root_of_trust_verify_external</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">public_key</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">public_key_hash</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">signature</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">firmware</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n"><span class="pre">firmware_len</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bl_root_of_trust_verify_external" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Implementation of rot_verify that is safe to be called from EXT_API. </p>
+<p>See <a class="reference internal" href="#group__bl__crypto_1ga31a903b706ec13c0d8f63e889caaa6cd"><span class="std std-ref">bl_root_of_trust_verify</span></a> for docs. </p>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bl_sha256_init">
+<span class="target" id="group__bl__crypto_1ga6c9de0639068e3b2e80f1afc597560dc"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bl_sha256_init</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#c.bl_sha256_ctx_t" title="bl_sha256_ctx_t"><span class="n"><span class="pre">bl_sha256_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bl_sha256_init" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Initialize a sha256 operation context variable. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ctx</strong> – <strong>[out]</strong> Context to be initialized.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>0</strong> – On success. </p></li>
+<li><p><strong>-EINVAL</strong> – If <code class="docutils literal notranslate"><span class="pre">ctx</span></code> was NULL. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bl_sha256_update">
+<span class="target" id="group__bl__crypto_1gafe0b1e8b06aeae0345e9e96bb78c5b00"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bl_sha256_update</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#c.bl_sha256_ctx_t" title="bl_sha256_ctx_t"><span class="n"><span class="pre">bl_sha256_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">data</span></span>, <span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n"><span class="pre">data_len</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bl_sha256_update" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Hash a portion of data. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">ctx</span></code> must be initialized before being used in this function. An uninitialized <code class="docutils literal notranslate"><span class="pre">ctx</span></code> might not be reported as an error. Also, <code class="docutils literal notranslate"><span class="pre">ctx</span></code> must not be used if it has been finalized, though this might also not be reported as an error.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ctx</strong> – <strong>[in]</strong> Context variable. Must have been initialized. </p></li>
+<li><p><strong>data</strong> – <strong>[in]</strong> Data to hash. </p></li>
+<li><p><strong>data_len</strong> – <strong>[in]</strong> Length of <code class="docutils literal notranslate"><span class="pre">data</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>0</strong> – On success. </p></li>
+<li><p><strong>-EINVAL</strong> – If <code class="docutils literal notranslate"><span class="pre">ctx</span></code> was NULL, uninitialized, or corrupted. </p></li>
+<li><p><strong>-ENOSYS</strong> – If the context has already been finalized. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bl_sha256_finalize">
+<span class="target" id="group__bl__crypto_1gab578bf1e4b469e3353600b66e6d09a35"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bl_sha256_finalize</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#c.bl_sha256_ctx_t" title="bl_sha256_ctx_t"><span class="n"><span class="pre">bl_sha256_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">output</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bl_sha256_finalize" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Finalize a hash result. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ctx</strong> – <strong>[in]</strong> Context variable. </p></li>
+<li><p><strong>output</strong> – <strong>[out]</strong> Where to put the resulting digest. Must be at least 32 bytes long.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>0</strong> – On success. </p></li>
+<li><p><strong>-EINVAL</strong> – If <code class="docutils literal notranslate"><span class="pre">ctx</span></code> was NULL or corrupted, or <code class="docutils literal notranslate"><span class="pre">output</span></code> was NULL. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bl_sha256_verify">
+<span class="target" id="group__bl__crypto_1gab4e4bdd0d92fd1f41837b60b069c13ea"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bl_sha256_verify</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">data</span></span>, <span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n"><span class="pre">data_len</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">expected</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bl_sha256_verify" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Calculate a digest and verify it directly. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> – <strong>[in]</strong> The data to hash. </p></li>
+<li><p><strong>data_len</strong> – <strong>[in]</strong> The length of <code class="docutils literal notranslate"><span class="pre">data</span></code>. </p></li>
+<li><p><strong>expected</strong> – <strong>[in]</strong> The expected digest over <code class="docutils literal notranslate"><span class="pre">data</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>0</strong> – If the procedure succeeded and the resulting digest is identical to <code class="docutils literal notranslate"><span class="pre">expected</span></code>. </p></li>
+<li><p><strong>-EHASHINV</strong> – If the procedure succeeded, but the digests don’t match. </p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Any error code from <a class="reference internal" href="#group__bl__crypto_1ga6c9de0639068e3b2e80f1afc597560dc"><span class="std std-ref">bl_sha256_init</span></a>, <a class="reference internal" href="#group__bl__crypto_1gafe0b1e8b06aeae0345e9e96bb78c5b00"><span class="std std-ref">bl_sha256_update</span></a>, or <a class="reference internal" href="#group__bl__crypto_1gab578bf1e4b469e3353600b66e6d09a35"><span class="std std-ref">bl_sha256_finalize</span></a> if something else went wrong. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bl_secp256r1_validate">
+<span class="target" id="group__bl__crypto_1ga2f513ec8f1399aa5fdd21556ce70d941"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bl_secp256r1_validate</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">hash</span></span>, <span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n"><span class="pre">hash_len</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">signature</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">public_key</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bl_secp256r1_validate" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Validate a secp256r1 signature. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hash</strong> – <strong>[in]</strong> The hash to validate against. </p></li>
+<li><p><strong>hash_len</strong> – <strong>[in]</strong> The length of the hash. </p></li>
+<li><p><strong>signature</strong> – <strong>[in]</strong> The signature to validate. </p></li>
+<li><p><strong>public_key</strong> – <strong>[in]</strong> The public key to validate with.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>0</strong> – The operation succeeded and the signature is valid for the hash. </p></li>
+<li><p><strong>-EINVAL</strong> – A parameter was NULL, or the <code class="docutils literal notranslate"><span class="pre">hash_len</span></code> was not 32 bytes. </p></li>
+<li><p><strong>-ESIGINV</strong> – The signature validation failed. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.bl_rot_verify_ext_api">
+<span class="target" id="structbl__rot__verify__ext__api"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bl_rot_verify_ext_api</span></span></span><a class="headerlink" href="#c.bl_rot_verify_ext_api" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;bl_crypto.h&gt;</em></div>
+<p>Structure describing the BL_ROT_VERIFY EXT_API. </p>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.bl_sha256_ext_api">
+<span class="target" id="structbl__sha256__ext__api"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bl_sha256_ext_api</span></span></span><a class="headerlink" href="#c.bl_sha256_ext_api" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;bl_crypto.h&gt;</em></div>
+<p>Structure describing the BL_SHA256 EXT_API. </p>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.bl_secp256r1_ext_api">
+<span class="target" id="structbl__secp256r1__ext__api"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bl_secp256r1_ext_api</span></span></span><a class="headerlink" href="#c.bl_secp256r1_ext_api" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;bl_crypto.h&gt;</em></div>
+<p>Structure describing the BL_SECP256R1 EXT_API. </p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="bl_storage.html" class="btn btn-neutral float-right" title="Bootloader storage" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Bootloader libraries" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

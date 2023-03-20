@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Adding your own code &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../_static/js/ncs.js"
+></script>
+<script src="../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Redistributing the nRF Connect SDK" href="ncs_distro.html" />
+    <link rel="prev" title="Managing the code base" href="managing_code.html" />
+<link
+  href="../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../dev_model.html">Development model</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="code_base.html">nRF Connect SDK code base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="managing_code.html">Managing the code base</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Adding your own code</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#user-workflows">User workflows</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#workflow-1-avoid-git-and-west">Workflow 1: Avoid Git and west</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#workflow-2-out-of-tree-application-repository">Workflow 2: Out-of-tree application repository</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#workflow-3-application-in-a-fork-of-sdk-nrf">Workflow 3: Application in a fork of sdk-nrf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#workflow-4-application-as-the-manifest-repository">Workflow 4: Application as the manifest repository</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ncs_distro.html">Redistributing the nRF Connect SDK</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../drivers.html">Drivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../dev_model.html">Development model</a></li>
+      <li class="breadcrumb-item active">Adding your own code</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/developing/adding_code.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="adding-your-own-code">
+<span id="dm-adding-code"></span><h1>Adding your own code<a class="headerlink" href="#adding-your-own-code" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#user-workflows" id="id6">User workflows</a></p>
+<ul>
+<li><p><a class="reference internal" href="#workflow-1-avoid-git-and-west" id="id7">Workflow 1: Avoid Git and west</a></p></li>
+<li><p><a class="reference internal" href="#workflow-2-out-of-tree-application-repository" id="id8">Workflow 2: Out-of-tree application repository</a></p></li>
+<li><p><a class="reference internal" href="#workflow-3-application-in-a-fork-of-sdk-nrf" id="id9">Workflow 3: Application in a fork of sdk-nrf</a></p></li>
+<li><p><a class="reference internal" href="#workflow-4-application-as-the-manifest-repository" id="id10">Workflow 4: Application as the manifest repository</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>To maintain an application that uses the nRF Connect SDK, you should use the same tools that Nordic Semiconductor employs to develop it.
+This section describes suggested user workflows to develop and maintain an application based on the nRF Connect SDK.</p>
+<p>See <a class="reference internal" href="code_base.html#dm-code-base"><span class="std std-ref">nRF Connect SDK code base</span></a> for detailed information on how the nRF Connect SDK repositories are organized.</p>
+<section id="user-workflows">
+<span id="dm-user-workflows"></span><h2><a class="toc-backref" href="#id6">User workflows</a><a class="headerlink" href="#user-workflows" title="Permalink to this heading"></a></h2>
+<p>The following workflows present different ways of adding your own code to the nRF Connect SDK.
+They describe the actual practicalities of developing an application that is based on the nRF Connect SDK from a version control and maintenance point of view.</p>
+<p>Which user workflow to choose depends on the type of application, the timeframe to develop it, and the need to update the nRF Connect SDK version used.</p>
+<p>All workflows are described under the following basic assumptions:</p>
+<ul class="simple">
+<li><p>One or more applications are to be developed using the nRF Connect SDK.</p></li>
+<li><p>Additional board definitions might be required by the user.</p></li>
+<li><p>Additional libraries might be required by the user.</p></li>
+<li><p>The term <em>application</em> refers to the application code and any board definitions and libraries it requires.</p></li>
+<li><p>The application(s) will require updates of the nRF Connect SDK revision.</p></li>
+</ul>
+<section id="workflow-1-avoid-git-and-west">
+<h3><a class="toc-backref" href="#id7">Workflow 1: Avoid Git and west</a><a class="headerlink" href="#workflow-1-avoid-git-and-west" title="Permalink to this heading"></a></h3>
+<p>If you have your own version control tools, you might want to simply not use Git or west at all, and instead rely on your own toolset.
+In such case, you must obtain a copy of the nRF Connect SDK on your file system and then manage the source code of both the SDK and your application yourself.</p>
+<p>Since no downloadable packages of the nRF Connect SDK are currently available, the simplest path to obtain the source code is to follow the instructions in the <a class="reference internal" href="managing_code.html#dm-wf-get-ncs"><span class="std std-ref">corresponding section</span></a> of the documentation.
+This requires you to install Git and west, but you can then ignore them from that point onwards.
+If you need to update the copy of the nRF Connect SDK you are working with, you can <a class="reference internal" href="managing_code.html#dm-wf-get-ncs"><span class="std std-ref">obtain the source code</span></a> again, or, if you have kept the original set of repositories, <a class="reference internal" href="managing_code.html#dm-wf-update-ncs"><span class="std std-ref">update it instead</span></a>.
+Once you have obtained a copy of the nRF Connect SDK source code, which is self-contained in a single folder, you can then proceed to manage that code in any way you see fit.</p>
+<p>Unless you take some <span class="xref std std-ref">additional steps</span>, west itself must still be installed in order to build applications.</p>
+</section>
+<section id="workflow-2-out-of-tree-application-repository">
+<h3><a class="toc-backref" href="#id8">Workflow 2: Out-of-tree application repository</a><a class="headerlink" href="#workflow-2-out-of-tree-application-repository" title="Permalink to this heading"></a></h3>
+<p>Another approach to maintaining your application is to completely decouple it from the nRF Connect SDK repositories and instead host it wherever you prefer - in Git, another version control system, or simply on your hard drive.
+This is typically also known as “out-of-tree” application, meaning that the application, board definitions, and any other libraries are actually outside any of the repositories provided by the nRF Connect SDK and can be placed anywhere at all.
+As long as you do not need to make any changes to any of the repositories of the nRF Connect SDK, you can use the procedures to <a class="reference internal" href="managing_code.html#dm-wf-get-ncs"><span class="std std-ref">get the source code</span></a> and later <a class="reference internal" href="managing_code.html#dm-wf-update-ncs"><span class="std std-ref">update it</span></a>, and manage your application separately, inside or outside the top folder of the nRF Connect SDK.</p>
+<p>If you choose to have your application outside of the folder hierarchy of the nRF Connect SDK, the build system will find the location of the SDK through the <strong class="makevar">ZEPHYR_BASE</strong> environment variable, which is set either through a script or manually in an IDE.
+More information about application development and the nRF Connect SDK build and configuration system can be found in the <a class="reference internal" href="../app_dev/build_and_config_system/index.html#app-build-system"><span class="std std-ref">Build and configuration system</span></a> documentation section.</p>
+<p>The drawback with this approach is that any changes you make to the set of nRF Connect SDK repositories are not directly trackable using Git, since you do not have any of the nRF Connect SDK repositories forked.
+If you are tracking the main branch of the nRF Connect SDK, you can instead send the changes you require to the official repositories as Pull Requests, so that they are incorporated into the codebase.</p>
+</section>
+<section id="workflow-3-application-in-a-fork-of-sdk-nrf">
+<h3><a class="toc-backref" href="#id9">Workflow 3: Application in a fork of sdk-nrf</a><a class="headerlink" href="#workflow-3-application-in-a-fork-of-sdk-nrf" title="Permalink to this heading"></a></h3>
+<p>Forking the <a class="reference external" href="https://github.com/nrfconnect/sdk-nrf">sdk-nrf</a> repository and adding the application to it is another valid option to develop and maintain your application.
+This approach also allows you to fork additional nRF Connect SDK repositories and point to those.
+This can be useful if you have to make changes to those repositories beyond adding your own application to the manifest repository.</p>
+<p>In order to use this approach, you first need to <a class="reference internal" href="managing_code.html#dm-wf-get-ncs"><span class="std std-ref">get the source code</span></a>, and then <a class="reference internal" href="managing_code.html#dm-wf-fork"><span class="std std-ref">fork the sdk-nrf repository</span></a>.
+Once you have your own fork, you can start adding your application to your fork’s tree and push it to your own Git server.
+Every time you want to update the revision of the nRF Connect SDK that you want to use as a basis for your application, you must follow the <a class="reference internal" href="managing_code.html#dm-wf-update-ncs"><span class="std std-ref">instructions to update</span></a> on your own fork of <code class="docutils literal notranslate"><span class="pre">sdk-nrf</span></code>.</p>
+<p>If you have changes in additional repositories beyond <a class="reference external" href="https://github.com/nrfconnect/sdk-nrf">sdk-nrf</a> itself, you can point to your own forks of those in the <code class="file docutils literal notranslate"><span class="pre">west.yml</span></code> included in your fork.</p>
+</section>
+<section id="workflow-4-application-as-the-manifest-repository">
+<span id="dm-workflow-4"></span><h3><a class="toc-backref" href="#id10">Workflow 4: Application as the manifest repository</a><a class="headerlink" href="#workflow-4-application-as-the-manifest-repository" title="Permalink to this heading"></a></h3>
+<p>An additional possibility is to take advantage of west to manage your own set of repositories.
+This workflow is particularly beneficial if your application is split among multiple repositories or, just like in the previous workflow, if you want to make changes to one or more nRF Connect SDK repositories, since it allows you to define the full set of repositories yourself.</p>
+<p>In order to implement this approach, you first need to create a manifest repository of your own, which just means a repository that contains a <code class="file docutils literal notranslate"><span class="pre">west.yml</span></code> manifest file in its root.
+Next you must populate the manifest file with the list of repositories and their revisions.</p>
+<p>You have a couple of different options to create your own repository.</p>
+<p>Once you have your new manifest repository hosted online, you can use it with west just like you use the <a class="reference external" href="https://github.com/nrfconnect/sdk-nrf">sdk-nrf</a>  repository when <a class="reference internal" href="managing_code.html#dm-wf-get-ncs"><span class="std std-ref">getting</span></a> and later <a class="reference internal" href="managing_code.html#dm-wf-update-ncs"><span class="std std-ref">updating</span></a> the source code.
+You just need to replace <code class="docutils literal notranslate"><span class="pre">sdk-nrf</span></code> and <code class="docutils literal notranslate"><span class="pre">nrf</span></code> with the repository name and path you have chosen for your manifest repository (<em>your-name/your-application</em> and <em>your-app-workspace</em>, respectively), as shown in the following code:</p>
+<pre class="highlight literal-block">west init -m https://github.com/<em>your-name/your-application</em> <em>your-app-worskpace</em>
+cd <em>your-app-workspace</em>
+west update</pre>
+<p>After that, to modify the nRF Connect SDK version associated with your app, change the <code class="docutils literal notranslate"><span class="pre">revision</span></code> value in the manifest file to the <a class="reference external" href="https://github.com/nrfconnect/sdk-nrf">sdk-nrf</a> Git tag, SHA, or the branch you want to use, save the file, and run <code class="docutils literal notranslate"><span class="pre">west</span> <span class="pre">update</span></code>.
+See <span class="xref std std-ref">zephyr:west-basics</span> for more details.</p>
+<section id="recommended-using-the-example-application-repository">
+<h4>Recommended: Using the example application repository<a class="headerlink" href="#recommended-using-the-example-application-repository" title="Permalink to this heading"></a></h4>
+<p>Nordic Semiconductor maintains a templated example repository as a reference for users that choose this workflow, <a class="reference external" href="https://github.com/nrfconnect/ncs-example-application">ncs-example-application</a>.
+This repository showcases the following features of both the nRF Connect SDK and Zephyr:</p>
+<ul class="simple">
+<li><p>Basic <span class="xref std std-ref">Zephyr application</span> skeleton</p></li>
+<li><p><span class="xref std std-ref">Zephyr workspace applications</span></p></li>
+<li><p><span class="xref std std-ref">West T2 topology</span></p></li>
+<li><p><span class="xref std std-ref">Custom boards</span></p></li>
+<li><p>Custom <span class="xref std std-ref">devicetree bindings</span></p></li>
+<li><p>Out-of-tree <span class="xref std std-ref">drivers</span></p></li>
+<li><p>Out-of-tree libraries</p></li>
+<li><p>Example CI configuration (using Github Actions)</p></li>
+<li><p>Custom <span class="xref std std-ref">west extension</span></p></li>
+</ul>
+<p>It is highly recommended to use this templated repository as a starting point for your own application manifest repository.
+Click the <span class="guilabel">Use this template</span> button on the GitHub web user interface.
+Once you have your own copy of the repository, you can then modify it.
+You can add your own projects to the manifest file, as well as your own boards, drivers, and libraries as required by your application.</p>
+<p>The <a class="reference external" href="https://github.com/nrfconnect/ncs-example-application">ncs-example-application</a> repository is tagged every time a new release of the nRF Connect SDK is launched (starting with v2.3.0), using the same version number.
+This allows you to select the tag that matches the version of the nRF Connect SDK you intend to use.</p>
+</section>
+<section id="creating-your-own-manifest-repository-from-scratch">
+<h4>Creating your own manifest repository from scratch<a class="headerlink" href="#creating-your-own-manifest-repository-from-scratch" title="Permalink to this heading"></a></h4>
+<p>If you decide not to use the example application repository as a starting point, you can start from scratch to create your own manifest repository that imports the nRF Connect SDK.</p>
+<p>To start the process, <code class="docutils literal notranslate"><span class="pre">import</span></code> <a class="reference external" href="https://github.com/nrfconnect/sdk-nrf">sdk-nrf</a> in your own <code class="file docutils literal notranslate"><span class="pre">west.yml</span></code>, using the <span class="xref std std-ref">manifest imports</span> feature of west.
+This is demonstrated by the following code, that would be placed somewhere in your repository (typically in <code class="file docutils literal notranslate"><span class="pre">root/west.yml</span></code>):</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example application-specific west.yml, using manifest imports.</span>
+<span class="nt">manifest</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">remotes</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ncs</span>
+<span class="w">      </span><span class="nt">url-base</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://github.com/nrfconnect</span>
+<span class="w">  </span><span class="nt">projects</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nrf</span>
+<span class="w">      </span><span class="nt">repo-path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sdk-nrf</span>
+<span class="w">      </span><span class="nt">remote</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ncs</span>
+<span class="w">      </span><span class="nt">revision</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v2.3.0</span>
+<span class="w">      </span><span class="nt">import</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">self</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">application</span>
+</pre></div>
+</div>
+<p>Importing the <code class="docutils literal notranslate"><span class="pre">sdk-nrf</span></code> project in your <code class="file docutils literal notranslate"><span class="pre">west.yml</span></code> also results in the addition of all the nRF Connect SDK projects, including those imported from Zephyr, into your workspace.</p>
+<p>Then, make the following changes if required:</p>
+<ul class="simple">
+<li><p>Point the entries of any nRF Connect SDK repositories that you have forked to your fork and fork revision, by adding them to the <code class="docutils literal notranslate"><span class="pre">projects</span></code> list using a new remote.</p></li>
+<li><p>Add any entries for repositories that you need that are not part of the nRF Connect SDK.</p></li>
+</ul>
+<p>For example:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example your-application/west.yml, using manifest imports, with</span>
+<span class="c1"># an nRF Connect SDK fork and a separate module</span>
+<span class="nt">manifest</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">remotes</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ncs</span>
+<span class="w">      </span><span class="nt">url-base</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://github.com/nrfconnect</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">your-remote</span>
+<span class="w">      </span><span class="nt">url-base</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://github.com/your-name</span>
+<span class="w">  </span><span class="nt">projects</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nrf</span>
+<span class="w">      </span><span class="nt">remote</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ncs</span>
+<span class="w">      </span><span class="nt">revision</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v2.3.0</span>
+<span class="w">      </span><span class="nt">import</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="c1"># Example for how to override a repository in the nRF Connect SDK with your own:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mcuboot</span>
+<span class="w">      </span><span class="nt">remote</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">your-remote</span>
+<span class="w">      </span><span class="nt">revision</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">your-mcuboot-fork-SHA-or-branch</span>
+<span class="w">    </span><span class="c1"># Example for how to add a repository not in nRF Connect SDK:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">your-custom-library</span>
+<span class="w">      </span><span class="nt">remote</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">your-remote</span>
+<span class="w">      </span><span class="nt">revision</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">your-library-SHA-or-branch</span>
+<span class="w">  </span><span class="nt">self</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">application</span>
+</pre></div>
+</div>
+<p>The variable values starting with <em>your-</em> in the above code block are just examples and you can replace them as needed.
+The above example includes a fork of the <code class="docutils literal notranslate"><span class="pre">mcuboot</span></code> project, but you can fork any project in <code class="file docutils literal notranslate"><span class="pre">nrf/west.yml</span></code>.</p>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="ncs_distro.html" class="btn btn-neutral float-right" title="Redistributing the nRF Connect SDK" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="managing_code.html" class="btn btn-neutral" title="Managing the code base" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

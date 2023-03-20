@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OpenThread integration &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../../_static/js/ncs.js"
+></script>
+<script src="../../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="OpenThread memory requirements" href="ot_memory.html" />
+    <link rel="prev" title="OpenThread co-processor communication" href="communication.html" />
+<link
+  href="../../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../protocols.html">Protocols</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../ble/index.html">Bluetooth LE Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../bt_mesh/index.html">Bluetooth mesh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../esb/index.html">Enhanced ShockBurst (ESB)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gazell/index.html">Gazell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../matter/index.html">Matter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../multiprotocol/index.html">Multiprotocol support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nfc/index.html">Near Field Communication (NFC)</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Thread</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">OpenThread overview</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="supported_features.html">Supported Thread features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="architectures.html">OpenThread architectures</a></li>
+<li class="toctree-l4"><a class="reference internal" href="communication.html">OpenThread co-processor communication</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">OpenThread integration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ot_memory.html">OpenThread memory requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="power_consumption.html">OpenThread power consumption</a></li>
+<li class="toctree-l4"><a class="reference internal" href="commissioning.html">OpenThread commissioning</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../configuring.html">Configuring Thread in the nRF Connect SDK</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prebuilt_libs.html">Pre-built libraries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tools.html">Thread tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../certification.html">Thread certification</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../wifi/index.html">Wi-Fi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../zigbee/index.html">Zigbee</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../drivers.html">Drivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../protocols.html">Protocols</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Thread</a></li>
+          <li class="breadcrumb-item"><a href="index.html">OpenThread overview</a></li>
+      <li class="breadcrumb-item active">OpenThread integration</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/protocols/thread/overview/ot_integration.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="openthread-integration">
+<span id="id1"></span><h1>OpenThread integration<a class="headerlink" href="#openthread-integration" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#overview" id="id10">Overview</a></p></li>
+<li><p><a class="reference internal" href="#threads" id="id11">Threads</a></p></li>
+<li><p><a class="reference internal" href="#file-system-and-shim-layer" id="id12">File system and shim layer</a></p>
+<ul>
+<li><p><a class="reference internal" href="#radio-driver-s-rx-and-tx-connections" id="id13">Radio driver’s RX and TX connections</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#traffic-flow" id="id14">Traffic flow</a></p>
+<ul>
+<li><p><a class="reference internal" href="#rx-traffic-flow" id="id15">RX traffic flow</a></p></li>
+<li><p><a class="reference internal" href="#tx-traffic-flow" id="id16">TX traffic flow</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>This page explains how the OpenThread stack is integrated with Zephyr and nRF Connect SDK.
+It describes the location of components in the file structure, threads and synchronization primitives used, and the network traffic flow.</p>
+<section id="overview">
+<h2><a class="toc-backref" href="#id10">Overview</a><a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+<p>The OpenThread stack is integrated with the Zephyr RTOS through the L2 layer.
+See <span class="xref std std-ref">zephyr:network_stack_architecture</span> for more information.</p>
+<p>The OpenThread integration in the L2 layer uses the nRF variant of the <span class="xref std std-ref">zephyr:ieee802154_interface</span> radio driver, which is located underneath the L2 layer.
+It can also optionally use Zephyr’s IP stack, which is located above it.</p>
+<p>Alternatively, you can use the OpenThread API and IPv6 stack directly.
+This approach provides less flexibility when porting applications though, because the OpenThread API might not be available for all architectures.</p>
+<p>To decide which approach to use for your application, consider the following alternatives:</p>
+<dl>
+<dt>Using Zephyr’s OpenThread integration and IP stack</dt><dd><p>This approach is used by default.</p>
+<p>Zephyr’s IP stack can use Zephyr’s L3 layer, which makes it easy to port the application.
+With this approach, your application can use UDP, TCP, and ICMP built on top of Zephyr’s IP stack.</p>
+<p>The disadvantage of this approach is the reception path.
+IP packets must traverse both the OpenThread L3 layer and Zephyr’s L3 layer to reach the BSD socket.</p>
+</dd>
+<dt>Using the OpenThread API and IPv6 stack directly</dt><dd><p>For simple applications, using the OpenThread API and IPv6 stack directly can be a good approach.</p>
+<p>The OpenThread API contains built-in support for higher-level protocols like UDPv6 and CoAP.
+Using the OpenThread API directly reduces the overhead, because IP packets do not need to go through Zephyr’s stack.
+Handling them directly results in a more energy-efficient application with faster packet handling.</p>
+<p>The disadvantage of this approach is limited portability and functionality.
+Higher-level protocols provided by OpenThread are not as full-featured compared to those implemented in Zephyr.
+For example, the CoAP implementation does not support observers and the block transfer functionality, and the TCP protocol is not implemented in OpenThread.</p>
+</dd>
+</dl>
+</section>
+<section id="threads">
+<h2><a class="toc-backref" href="#id11">Threads</a><a class="headerlink" href="#threads" title="Permalink to this heading"></a></h2>
+<p>The OpenThread network stack uses the following threads:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">openthread</span></code> - Responsible for receiving IEEE 802.15.4 frames during reception.
+When the reassembled frames are an application IPv6 packet, the thread calls <code class="xref c c-func docutils literal notranslate"><span class="pre">ot_receive_handler()</span></code>, which injects the packet back to the L2 layer using <code class="xref c c-func docutils literal notranslate"><span class="pre">net_recv_data()</span></code>, so that it can later reach Zephyr’s IP stack.
+During the transmission, the thread’s job is to handle the previously scheduled OpenThread tasklet that contains the message to be sent.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rx_workq</span></code> - Responsible for receiving L2 frames and directing them either to the OpenThread process or Zephyr’s IP stack during reception, depending on whether the frame is an IEEE 802.15.4 frame or an IPv6 packet.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tx_workq</span></code> - Responsible for receiving the UDP packet, scheduling the OpenThread tasklet for transmission, and unlocking the <code class="docutils literal notranslate"><span class="pre">openthread</span></code> thread by giving the semaphore.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">workqueue</span></code> - Responsible for invoking the radio driver API to schedule a transmission.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">802154</span> <span class="pre">RX</span></code> - Responsible for the upper half processing of the radio frame reception (that is, the core stack part).
+Works on objects of type <code class="xref c c-struct docutils literal notranslate"><span class="pre">nrf5_802154_rx_frame</span></code> that are put to the <code class="xref c c-type docutils literal notranslate"><span class="pre">nrf5_data.rx_fifo</span></code> from the RX IRQ context.
+The thread is responsible for creating the <code class="xref c c-struct docutils literal notranslate"><span class="pre">net_pkt</span></code> structure and passing it to the upper layer with <code class="xref c c-func docutils literal notranslate"><span class="pre">net_recv_data()</span></code>.</p></li>
+</ul>
+<p>Apart from these threads, the OpenThread stack also uses one or more <span class="xref std std-ref">application threads</span>.
+These threads execute the application logic.</p>
+</section>
+<section id="file-system-and-shim-layer">
+<h2><a class="toc-backref" href="#id12">File system and shim layer</a><a class="headerlink" href="#file-system-and-shim-layer" title="Permalink to this heading"></a></h2>
+<p>The OpenThread network stack components are located in the following directories:</p>
+<ul class="simple">
+<li><p>OpenThread stack: <code class="file docutils literal notranslate"><span class="pre">modules/lib/openthread/</span></code></p></li>
+<li><p>OpenThread shim layer:</p>
+<ul>
+<li><p>Thread entry point function, callbacks, utils, L2 registration: <code class="file docutils literal notranslate"><span class="pre">zephyr/subsys/net/l2/openthread/</span></code></p></li>
+<li><p>OpenThread platform layer location: <code class="file docutils literal notranslate"><span class="pre">zephyr/subsys/net/lib/openthread/platform/</span></code></p></li>
+</ul>
+</li>
+</ul>
+<p>The responsibilities of the OpenThread shim layer are as follows:</p>
+<ul class="simple">
+<li><p>Translating the data into Zephyr’s native <code class="xref c c-struct docutils literal notranslate"><span class="pre">net_pkt</span></code> structure.</p></li>
+<li><p>Providing the OpenThread thread body and synchronization API.</p></li>
+<li><p>Providing <code class="xref c c-func docutils literal notranslate"><span class="pre">openthread_send()</span></code> and <code class="xref c c-func docutils literal notranslate"><span class="pre">openthread_recv()</span></code> calls that are registered as the L2 interface API.</p></li>
+<li><p>Providing a way to initialize the OpenThread stack.</p></li>
+<li><p>Implementing callback functions used by the OpenThread stack.</p></li>
+</ul>
+<p>The nRF IEEE 802.15.4 radio driver is located in the following directories:</p>
+<ul class="simple">
+<li><p>nRF IEEE 802.15.4 radio driver shim layer: <code class="file docutils literal notranslate"><span class="pre">zephyr/drivers/ieee802154/</span></code> (<code class="file docutils literal notranslate"><span class="pre">ieee802154_nrf5.c</span></code> and <code class="file docutils literal notranslate"><span class="pre">ieee802154_nrf5.h</span></code>)</p></li>
+<li><p>nRF IEEE 802.15.4 radio driver: <code class="file docutils literal notranslate"><span class="pre">modules/hal/nordic/drivers/nrf_radio_802154</span></code></p></li>
+</ul>
+<section id="radio-driver-s-rx-and-tx-connections">
+<h3><a class="toc-backref" href="#id13">Radio driver’s RX and TX connections</a><a class="headerlink" href="#radio-driver-s-rx-and-tx-connections" title="Permalink to this heading"></a></h3>
+<p>The RX connection of the radio driver is established through the interrupt handler.
+The interrupt handler is registered using Zephyr’s mechanism with <code class="docutils literal notranslate"><span class="pre">NRF_802154_INTERNAL_RADIO_IRQ_HANDLING=0</span></code> defined.
+The registered IRQ handler uses Zephyr’s FIFO to pass the IEEE 802.15.4 frame on.
+The <code class="docutils literal notranslate"><span class="pre">802154</span> <span class="pre">RX</span></code> thread runs on the highest cooperative priority and waits for this FIFO.
+When a new frame appears, the thread continues with the processing.</p>
+<p>The TX connection of the radio driver uses the workqueue, which calls the radio driver to schedule the transmission.
+Then the RTC IRQ is used to send the frame over the air.</p>
+</section>
+</section>
+<section id="traffic-flow">
+<h2><a class="toc-backref" href="#id14">Traffic flow</a><a class="headerlink" href="#traffic-flow" title="Permalink to this heading"></a></h2>
+<p>The traffic flow is not fully symmetrical for the reception (RX) and the transmission (TX) cases.</p>
+<section id="rx-traffic-flow">
+<h3><a class="toc-backref" href="#id15">RX traffic flow</a><a class="headerlink" href="#rx-traffic-flow" title="Permalink to this heading"></a></h3>
+<p>The following figure shows the RX traffic flow when the application is using the <span class="xref std std-ref">BSD socket API</span>.</p>
+<figure class="align-center align-default" id="id8">
+<img alt="OpenThread application RX data flow" src="../../../_images/zephyr_netstack_openthread-rx_sequence.svg" /><figcaption>
+<p><span class="caption-text">OpenThread application RX data flow</span><a class="headerlink" href="#id8" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>The numbers in the figure correspond to the step numbers in the following data receiving (RX) processing flow:</p>
+<ol class="arabic">
+<li><p>A network data packet is received by the nRF IEEE 802.15.4 radio driver.</p></li>
+<li><p>The device driver places the received frame in the FIFO with <code class="xref c c-func docutils literal notranslate"><span class="pre">nrf_802154_received_timestamp_raw()</span></code>.
+The receive queues also act as a way to separate the data processing pipeline (“Bottom Half”) from the core stack part, as the device driver is running in an interrupt context and it must do its processing as fast as possible.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">802154</span> <span class="pre">RX</span></code> radio driver thread does the core stack processing of the received IEEE 802.15.4 radio frame.
+As a result, it puts a work item with <code class="xref c c-func docutils literal notranslate"><span class="pre">net_recv_data()</span></code> to have the frame processed.</p></li>
+<li><p>The work queue thread <code class="docutils literal notranslate"><span class="pre">rx_workq</span></code> calls the registered handler for every queued frame.
+In this case, the registered handler <code class="xref c c-func docutils literal notranslate"><span class="pre">openthread_recv()</span></code> checks if the frame is of the IEEE 802.15.4 type.
+If this is the case, it inserts the frame into <code class="xref c c-struct docutils literal notranslate"><span class="pre">rx_pkt_fifo</span></code> and returns <code class="docutils literal notranslate"><span class="pre">NET_OK</span></code>.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">openthread</span></code> thread gets a frame from the FIFO and processes it.
+It also handles the IP header compression and reassembly of fragmented traffic.</p></li>
+<li><p>As soon as the thread detects a valid IPv6 packet that needs to be handled by the higher layer, it calls the registered callback <code class="xref c c-func docutils literal notranslate"><span class="pre">ot_receive_handler()</span></code>.
+This callback creates a buffer for a <code class="xref c c-struct docutils literal notranslate"><span class="pre">net_pkt</span></code> structure that is going to be passed to Zephyr’s IP stack.
+It also calls <code class="xref c c-func docutils literal notranslate"><span class="pre">net_recv_data()</span></code> to have the <code class="xref c c-struct docutils literal notranslate"><span class="pre">net_pkt</span></code> structure processed.</p></li>
+<li><p>This time the <code class="xref c c-func docutils literal notranslate"><span class="pre">openthread_recv()</span></code> called by the workqueue returns <code class="docutils literal notranslate"><span class="pre">NET_CONTINUE</span></code>.
+This indicates that the valid IPv6 packet is present and needs to be processed by Zephyr’s higher layer.</p></li>
+<li><p><code class="xref c c-func docutils literal notranslate"><span class="pre">net_ipv6_input()</span></code> passes the packet to the next higher layer.</p></li>
+<li><p>The packet is passed to the L3 processing.
+If the packet is IP-based, the L3 layer processes the IPv6 packet.</p></li>
+<li><p>A socket handler finds an active socket to which the network packet belongs and puts it in a queue for that socket, in order to separate the networking code from the application.</p></li>
+<li><p>The application receives the data and can process it as needed.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The application should use the <span class="xref std std-ref">BSD socket API</span> to create a socket that will receive the data.</p>
+</div>
+</li>
+</ol>
+</section>
+<section id="tx-traffic-flow">
+<h3><a class="toc-backref" href="#id16">TX traffic flow</a><a class="headerlink" href="#tx-traffic-flow" title="Permalink to this heading"></a></h3>
+<p>The following figure shows the TX traffic flow when the application is using the <span class="xref std std-ref">BSD socket API</span>.</p>
+<figure class="align-center align-default" id="id9">
+<img alt="OpenThread Application TX data flow" src="../../../_images/zephyr_netstack_openthread-tx_sequence.svg" /><figcaption>
+<p><span class="caption-text">OpenThread Application TX data flow</span><a class="headerlink" href="#id9" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>The numbers in the figure correspond to the step numbers in the following data transmitting (TX) processing flow:</p>
+<ol class="arabic simple">
+<li><p>The application uses the <span class="xref std std-ref">BSD socket API</span> when sending the data.
+However, direct interaction with the OpenThread API is possible, for example to use its CoAP implementation.</p></li>
+<li><p>The application data is prepared for sending to the kernel space and copied to internal <code class="xref c c-struct docutils literal notranslate"><span class="pre">net_buf</span></code> structures.</p></li>
+<li><p>Depending on the socket type, a protocol header is added in front of the data.
+For example, if the socket is a UDP socket, a UDP header is constructed and placed in front of the data.</p></li>
+<li><p>A UDP <code class="xref c c-struct docutils literal notranslate"><span class="pre">net_pkt</span></code> structured is queued to be processed with <code class="xref c c-func docutils literal notranslate"><span class="pre">process_tx_packet()</span></code>.
+In the call chain, the <code class="xref c c-func docutils literal notranslate"><span class="pre">openthread_send()</span></code> is called.
+It converts the <code class="xref c c-struct docutils literal notranslate"><span class="pre">net_pkt</span></code> to the <code class="xref c c-struct docutils literal notranslate"><span class="pre">otMessage</span></code> format and invokes <code class="xref c c-func docutils literal notranslate"><span class="pre">otIp6Send()</span></code>.
+In this step, the message is processed by the OpenThread stack.</p></li>
+<li><p>The tasklet to schedule the transmission is posted and the semaphore that unlocks the <code class="docutils literal notranslate"><span class="pre">openthread</span></code> thread is given.
+Mac and Submac operations take place.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">openthread</span></code> thread creates and schedules a work item used to transmit the IEEE 802.15.4 frame.</p></li>
+<li><p>The nRF IEEE 802.15.4 radio driver sends the packet.</p></li>
+</ol>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="ot_memory.html" class="btn btn-neutral float-right" title="OpenThread memory requirements" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="communication.html" class="btn btn-neutral" title="OpenThread co-processor communication" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

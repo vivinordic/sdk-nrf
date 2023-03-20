@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Getting started with nRF5340 DK &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script src="../../_static/tabs.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../_static/js/ncs.js"
+></script>
+<script src="../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Developing with nRF5340 DK" href="nrf5340.html" />
+    <link rel="prev" title="Working with nRF53 Series" href="../../nrf53.html" />
+<link
+  href="../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../nrf53.html">Working with nRF53 Series</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Getting started with nRF5340 DK</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#minimum-requirements">Minimum requirements</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#hardware">Hardware</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#software">Software</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#installing-the-required-software">Installing the required software</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#programming-the-sample">Programming the sample</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#connecting-to-the-sample">Connecting to the sample</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing-the-sample">Testing the sample</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#next-steps">Next steps</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="nrf5340.html">Developing with nRF5340 DK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="thingy53_gs.html">Getting started with Thingy:53</a></li>
+<li class="toctree-l2"><a class="reference internal" href="thingy53.html">Developing with Thingy:53</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drivers.html">Drivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../nrf53.html">Working with nRF53 Series</a></li>
+      <li class="breadcrumb-item active">Getting started with nRF5340 DK</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/working_with_nrf/nrf53/nrf5340_gs.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="getting-started-with-nrf5340-dk">
+<span id="ug-nrf5340-gs"></span><h1>Getting started with nRF5340 DK<a class="headerlink" href="#getting-started-with-nrf5340-dk" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#minimum-requirements" id="id13">Minimum requirements</a></p>
+<ul>
+<li><p><a class="reference internal" href="#hardware" id="id14">Hardware</a></p></li>
+<li><p><a class="reference internal" href="#software" id="id15">Software</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#installing-the-required-software" id="id16">Installing the required software</a></p></li>
+<li><p><a class="reference internal" href="#programming-the-sample" id="id17">Programming the sample</a></p></li>
+<li><p><a class="reference internal" href="#connecting-to-the-sample" id="id18">Connecting to the sample</a></p></li>
+<li><p><a class="reference internal" href="#testing-the-sample" id="id19">Testing the sample</a></p></li>
+<li><p><a class="reference internal" href="#next-steps" id="id20">Next steps</a></p></li>
+</ul>
+</div>
+<p>This section gets you started with your nRF5340 <a class="reference internal" href="../../glossary.html#term-Development-Kit-DK"><span class="xref std std-term">Development Kit (DK)</span></a> using the nRF Connect SDK.
+It tells you how to install the <a class="reference internal" href="../../samples/bluetooth/peripheral_uart/README.html#peripheral-uart"><span class="std std-ref">Bluetooth: Peripheral UART</span></a> sample and perform a quick test of your DK.</p>
+<p>If you have already set up your nRF5340 DK and want to learn more, see the following documentation:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="nrf5340.html#ug-nrf5340"><span class="std std-ref">Developing with nRF5340 DK</span></a> for more advanced topics related to the nRF5340 DK if you are already familiar with the nRF Connect SDK.</p></li>
+<li><p>The <a class="reference internal" href="../../getting_started.html#getting-started"><span class="std std-ref">introductory documentation</span></a> for more information on the nRF Connect SDK and the development environment.</p></li>
+</ul>
+<section id="minimum-requirements">
+<span id="nrf5340-gs-requirements"></span><h2><a class="toc-backref" href="#id13">Minimum requirements</a><a class="headerlink" href="#minimum-requirements" title="Permalink to this heading"></a></h2>
+<p>Make sure you have all the required hardware and that your computer has one of the supported operating systems.</p>
+<section id="hardware">
+<h3><a class="toc-backref" href="#id14">Hardware</a><a class="headerlink" href="#hardware" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>nRF5340 DK</p></li>
+<li><p>Micro-USB 2.0 cable</p></li>
+</ul>
+</section>
+<section id="software">
+<h3><a class="toc-backref" href="#id15">Software</a><a class="headerlink" href="#software" title="Permalink to this heading"></a></h3>
+<p>On your computer, one of the following operating systems:</p>
+<ul class="simple">
+<li><p>Microsoft Windows</p></li>
+<li><p>macOS</p></li>
+<li><p>Ubuntu Linux</p></li>
+</ul>
+<p>The operating system versions that support the nRF Connect SDK tools are listed in the <a class="reference internal" href="../../getting_started/recommended_versions.html#gs-supported-os"><span class="std std-ref">Supported operating systems</span></a> section.</p>
+<p>On your mobile device:</p>
+<ul class="simple">
+<li><p>Android</p></li>
+<li><p>iOS</p></li>
+</ul>
+</section>
+</section>
+<section id="installing-the-required-software">
+<span id="nrf5340-gs-installing-software"></span><h2><a class="toc-backref" href="#id16">Installing the required software</a><a class="headerlink" href="#installing-the-required-software" title="Permalink to this heading"></a></h2>
+<p>On your computer, install <a class="reference external" href="https://www.nordicsemi.com/Software-and-Tools/Development-Tools/nRF-Connect-for-desktop">nRF Connect for Desktop</a>.
+After installing and starting the application, install the Programmer app.</p>
+<p>You must also install a terminal emulator, such as <a class="reference internal" href="../../getting_started/testing.html#putty"><span class="std std-ref">PuTTY</span></a> or the nRF Terminal, which is part of the <a class="reference external" href="https://nrfconnect.github.io/vscode-nrf-connect">nRF Connect for Visual Studio Code</a> extension.
+The steps detailed in <a class="reference internal" href="#nrf5340-gs-connecting"><span class="std std-ref">Connecting to the sample</span></a> use PuTTY, but any terminal emulator will work.</p>
+<p>On your mobile device, install the <a class="reference external" href="https://www.nordicsemi.com/Software-and-Tools/Development-Tools/nRF-Connect-for-mobile">nRF Connect for Mobile</a> application from the corresponding application store.</p>
+</section>
+<section id="programming-the-sample">
+<span id="nrf5340-gs-programming-sample"></span><h2><a class="toc-backref" href="#id17">Programming the sample</a><a class="headerlink" href="#programming-the-sample" title="Permalink to this heading"></a></h2>
+<p>You must program and run a precompiled version of the <a class="reference internal" href="../../samples/bluetooth/peripheral_uart/README.html#peripheral-uart"><span class="std std-ref">Bluetooth: Peripheral UART</span></a> sample on your development kit to test the functions.
+Download the precompiled version of the sample from the <a class="reference external" href="https://www.nordicsemi.com/Products/Development-hardware/nRF5340-DK/Download?lang=en#infotabs">nRF5340 DK Downloads</a> page.</p>
+<p>After downloading the zip archive, extract it to a folder of your choice.
+The archive contains the HEX file used to program the sample to your DK.</p>
+<p>To program the precompiled sample to your development kit, complete the following steps:</p>
+<ol class="arabic">
+<li><p>Open the Programmer app.</p></li>
+<li><p>Connect the nRF5340 DK to the computer with a micro-USB cable and turn on the DK.</p>
+<p><strong>LED1</strong> starts blinking.</p>
+</li>
+<li><p>Click <strong>SELECT DEVICE</strong> and select the DK from the drop-down list.</p>
+<figure class="align-default" id="id6">
+<img alt="Programmer - Select Device" src="../../_images/programmer_select_device1.png" />
+<figcaption>
+<p><span class="caption-text">Programmer - Select Device</span><a class="headerlink" href="#id6" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>The drop-down text changes to the type of the selected device, with its SEGGER ID below the name.
+The <strong>Device Memory Layout</strong> section also changes its name to the device name, and indicates that the device is connected.
+If the <strong>Auto read memory</strong> option is selected in the <strong>DEVICE</strong> section of the side panel, the memory layout will update.
+If it is not selected and you wish to see the memory layout, click <span class="guilabel">Read</span> in the <strong>DEVICE</strong> section of the side panel.</p>
+</li>
+<li><p>Click <span class="guilabel">Add file</span> in the <strong>FILE</strong> section, and select <strong>Browse</strong>.</p></li>
+<li><p>Navigate to where you extracted the HEX file and select it.</p></li>
+<li><p>Click the <span class="guilabel">Erase &amp; write</span> button in the <strong>DEVICE</strong> section to program the DK.</p>
+<p>Do not unplug or turn off the DK during this process.</p>
+</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you experience any problems during the process, press <code class="docutils literal notranslate"><span class="pre">Ctrl+R</span></code> (<code class="docutils literal notranslate"><span class="pre">command+R</span></code> on macOS) to restart the Programmer app, and try again.</p>
+</div>
+<p>After you have programmed the sample to the DK, you can connect to it and test the functions.
+If you connect to the sample now, you can go directly to Step 2 of <a class="reference internal" href="#nrf5340-gs-connecting"><span class="std std-ref">Connecting to the sample</span></a>.</p>
+</section>
+<section id="connecting-to-the-sample">
+<span id="nrf5340-gs-connecting"></span><h2><a class="toc-backref" href="#id18">Connecting to the sample</a><a class="headerlink" href="#connecting-to-the-sample" title="Permalink to this heading"></a></h2>
+<p>You can connect to the sample on the nRF5340 DK with a terminal emulator on your computer using <a class="reference internal" href="../../glossary.html#term-Universal-Asynchronous-Receiver-Transmitter-UART"><span class="xref std std-term">Universal Asynchronous Receiver/Transmitter (UART)</span></a>.
+This allows you to see the logging information the sample outputs as well as to enter console inputs.</p>
+<p>You can use an external UART to USB bridge.
+UART communication through the UART to USB CDC ACM bridge is referred to as CDC-UART.
+This is different from communication through the Nordic UART Service (NUS) over Bluetooth® Low Energy (LE).</p>
+<p>If you have problems connecting to the sample, restart the DK and start over.</p>
+<p>To connect using CDC-UART, complete the following steps:</p>
+<ol class="arabic">
+<li><p>Connect the nRF5340 DK to the computer with a micro-USB cable, and then turn on the DK.</p>
+<p><strong>LED1</strong> starts blinking.</p>
+</li>
+<li><p>Open a terminal emulator; this guide uses PuTTY.</p>
+<p>The <strong>PuTTY Configuration</strong> window opens and the <strong>Session</strong> category is chosen in the category selection tree on the left.</p>
+</li>
+<li><p>Select <strong>Serial</strong> as the <strong>Connection type</strong> under <strong>Basic options for your PuTTY session</strong>.</p>
+<p>The text fields above the selection change to <strong>Serial line</strong> and <strong>Speed</strong>.</p>
+</li>
+<li><p>Click the <strong>Terminal</strong> category in the category selection tree to see options controlling the terminal.</p></li>
+<li><p>Enable the following options:</p>
+<ul class="simple">
+<li><p>Implicit CR in every LF</p></li>
+<li><p>Implicit LF in every CR</p></li>
+<li><p>Local echo: Force on</p></li>
+<li><p>Local line editing: Force on</p></li>
+</ul>
+<figure class="align-default" id="id7">
+<img alt="PuTTY configuration for sending commands through UART" src="../../_images/putty.svg" /><figcaption>
+<p><span class="caption-text">PuTTY configuration for sending commands through UART</span><a class="headerlink" href="#id7" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</li>
+<li><p>Click the <strong>Serial</strong> category under the <strong>Connection</strong> category in the category selection tree to see options controlling the local serial line.</p></li>
+<li><p>Type the COM port corresponding to your DK in the <strong>Serial line to connect to</strong> field.</p>
+<p>Depending on what devices you have connected to your computer, you might have several choices.
+To find the correct port (in Windows):</p>
+<ol class="loweralpha">
+<li><p>Right-click on the Windows Start menu, and select <strong>Device Manager</strong>.</p></li>
+<li><p>In the <strong>Device Manager</strong> window, scroll down and expand <strong>Ports (COM &amp; LPT)</strong>.</p></li>
+<li><p>Find the port named <em>JLink CDC UART Port</em> and note down the number in parentheses.</p>
+<p>If you have more than one J-Link UART Port, unplug the one that you want to use, plug it back in, and observe which one appeared last.</p>
+<p>Your DK can show up as two consecutive COM ports.
+If this is the case, you need to test which COM port is the correct one.</p>
+</li>
+</ol>
+</li>
+<li><p>Configure the following settings in the <strong>Configure the serial line</strong> section:</p>
+<ul class="simple">
+<li><p><strong>Speed (baud):</strong> 115200</p></li>
+<li><p><strong>Data bits:</strong> 8</p></li>
+<li><p><strong>Stop bits:</strong> 1</p></li>
+<li><p><strong>Parity:</strong> None</p></li>
+<li><p><strong>Flow control:</strong> RTS/CTS</p></li>
+</ul>
+</li>
+<li><p>Click <span class="guilabel">Open</span>.</p>
+<p>The terminal window opens.</p>
+</li>
+</ol>
+<p>The connection has now been established.
+If you test the sample now, you can go directly to Step 2 of <a class="reference internal" href="#nrf5340-gs-testing"><span class="std std-ref">Testing the sample</span></a>.</p>
+</section>
+<section id="testing-the-sample">
+<span id="nrf5340-gs-testing"></span><h2><a class="toc-backref" href="#id19">Testing the sample</a><a class="headerlink" href="#testing-the-sample" title="Permalink to this heading"></a></h2>
+<p>You can test the <a class="reference internal" href="../../samples/bluetooth/peripheral_uart/README.html#peripheral-uart"><span class="std std-ref">Bluetooth: Peripheral UART</span></a> sample on your nRF5340 DK using the <a class="reference external" href="https://www.nordicsemi.com/Software-and-Tools/Development-Tools/nRF-Connect-for-mobile">nRF Connect for Mobile</a> application.
+The test requires that you have <a class="reference internal" href="#nrf5340-gs-connecting"><span class="std std-ref">connected to the sample</span></a> and have the connected terminal emulator open.</p>
+<p>To perform tests, complete the following steps:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-QW5kcm9pZA==" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-0-QW5kcm9pZA==" name="QW5kcm9pZA==" role="tab" tabindex="0">Android</button><button aria-controls="panel-0-aU9T" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-0-aU9T" name="aU9T" role="tab" tabindex="-1">iOS</button></div><div aria-labelledby="tab-0-QW5kcm9pZA==" class="sphinx-tabs-panel group-tab" id="panel-0-QW5kcm9pZA==" name="QW5kcm9pZA==" role="tabpanel" tabindex="0"><ol class="arabic">
+<li><p>Connect the nRF5340 DK to the computer with a micro-USB cable and turn on the DK.</p>
+<p><strong>LED1</strong> starts blinking.</p>
+</li>
+<li><p>Open the nRF Connect for Mobile application on your Android device.</p></li>
+<li><p>In nRF Connect for Mobile, tap <span class="guilabel">Scan</span>.</p></li>
+<li><p>Find the DK in the list, select it and tap <span class="guilabel">Connect</span>.</p>
+<p>The default device name for the Peripheral UART sample is <strong>Nordic_UART_Service</strong>.</p>
+</li>
+<li><p>When connected, tap the three-dot menu below the device name, and select <strong>Enable CCCDs</strong>.</p>
+<p>This example communicates over Bluetooth Low Energy using the Nordic UART Service (NUS).</p>
+<figure class="align-default" id="id8">
+<img alt="nRF Connect for Mobile - Enable services option" src="../../_images/nrf52_enable_cccds.png" />
+<figcaption>
+<p><span class="caption-text">nRF Connect for Mobile - Enable services option</span><a class="headerlink" href="#id8" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</li>
+<li><p>Tap the three-dot menu next to <strong>Disconnect</strong> and select <strong>Show log</strong>.</p></li>
+<li><p>On your computer, in the terminal emulator connected to the sample through CDC-UART, type <code class="docutils literal notranslate"><span class="pre">hello</span></code> and send it to the DK.</p>
+<p>The text is sent through the nRF5340 DK to your mobile device over a Bluetooth LE link.
+The device displays the text in the nRF Connect for Mobile log:</p>
+<figure class="align-default" id="id9">
+<img alt="nRF Connect for Mobile - Text shown in the log" src="../../_images/nrf52_connect_log.png" />
+<figcaption>
+<p><span class="caption-text">nRF Connect for Mobile - Text shown in the log</span><a class="headerlink" href="#id9" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</li>
+</ol>
+</div><div aria-labelledby="tab-0-aU9T" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-0-aU9T" name="aU9T" role="tabpanel" tabindex="0"><ol class="arabic">
+<li><p>Connect the nRF5340 DK to the computer with a micro-USB cable and turn on the DK.</p>
+<p><strong>LED1</strong> starts blinking.</p>
+</li>
+<li><p>Open the nRF Connect for Mobile application on your iOS device.</p></li>
+<li><p>If the application does not automatically start scanning, tap the <strong>Play</strong> icon in the upper right corner.</p></li>
+<li><p>Find the DK in the list and tap the corresponding <span class="guilabel">Connect</span> button.
+The default device name for the Peripheral UART sample is <strong>Nordic_UART_Service</strong>.</p>
+<p>This opens a new window with information on the device.</p>
+</li>
+<li><p>In the new window, select the <strong>Client</strong> tab and scroll to the bottom so you can see the <strong>Client Characteristic Configuration</strong> entry.</p>
+<figure class="align-default" id="id10">
+<img alt="nRF Connect for Mobile - Client tab" src="../../_images/nrf52_connect_client_ios.png" />
+<figcaption>
+<p><span class="caption-text">nRF Connect for Mobile - Client tab</span><a class="headerlink" href="#id10" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</li>
+<li><p>Tap the up arrow button under <strong>Client Characteristic Configuration</strong> to write a value to the sample.</p>
+<p>The <strong>Write Value</strong> window opens.</p>
+</li>
+<li><p>In this window, select the <strong>Bool</strong> tab and set the toggle to <strong>True</strong>.</p>
+<p>This enables messages sent to the DK to show up in nRF Connect for Mobile.</p>
+<figure class="align-default" id="id11">
+<img alt="nRF Connect for Mobile - Write Value window" src="../../_images/nrf52_connect_write_ios.png" />
+<figcaption>
+<p><span class="caption-text">nRF Connect for Mobile - Write Value window</span><a class="headerlink" href="#id11" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</li>
+<li><p>Tap <strong>Write</strong> to write the command to the DK.</p>
+<p>The <strong>Write Value</strong> window closes.</p>
+</li>
+<li><p>Select the <strong>Log</strong> tab.</p></li>
+<li><p>On your computer, in the terminal emulator connected to the sample through CDC-UART, type <code class="docutils literal notranslate"><span class="pre">hello</span></code> and send it to the DK.</p>
+<p>The text is sent through the nRF5340 DK to your mobile device over a Bluetooth LE link.
+The device displays the text in the nRF Connect for Mobile log:</p>
+<figure class="align-default" id="id12">
+<img alt="nRF Connect for Mobile - Text shown in the log" src="../../_images/nrf52_connect_log_ios.png" />
+<figcaption>
+<p><span class="caption-text">nRF Connect for Mobile - Text shown in the log</span><a class="headerlink" href="#id12" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</li>
+</ol>
+</div></div>
+</section>
+<section id="next-steps">
+<h2><a class="toc-backref" href="#id20">Next steps</a><a class="headerlink" href="#next-steps" title="Permalink to this heading"></a></h2>
+<p>You have now completed getting started with the nRF5340 DK.
+See the following links for where to go next:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="nrf5340.html#ug-nrf5340"><span class="std std-ref">Developing with nRF5340 DK</span></a> documentation for more advanced topics related to the nRF5340 DK.</p></li>
+<li><p>The <a class="reference internal" href="../../getting_started.html#getting-started"><span class="std std-ref">introductory documentation</span></a> for more information on the nRF Connect SDK and the development environment.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="nrf5340.html" class="btn btn-neutral float-right" title="Developing with nRF5340 DK" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../../nrf53.html" class="btn btn-neutral" title="Working with nRF53 Series" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

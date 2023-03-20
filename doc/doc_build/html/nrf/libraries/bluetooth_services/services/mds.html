@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Memfault Diagnostic Service (MDS) &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../../_static/js/ncs.js"
+></script>
+<script src="../../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Nordic Status Message Service (NSMS)" href="nsms.html" />
+    <link rel="prev" title="LED Button Service (LBS)" href="lbs.html" />
+<link
+  href="../../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../drivers.html">Drivers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Libraries</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../bin/index.html">Binary libraries</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Bluetooth libraries and services</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../adv_prov.html">Bluetooth LE advertising providers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../conn_ctx.html">Bluetooth connection context</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../enocean.html">Bluetooth EnOcean</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gatt_dm.html">GATT Discovery Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gatt_pool.html">Bluetooth GATT attribute pools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mesh.html">Bluetooth mesh profile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../rpc.html">Bluetooth Low Energy Remote Procedure Call</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../scan.html">Scanning module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ams_client.html">Apple Media Service (AMS) Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ancs_client.html">Apple Notification Center Service (ANCS) Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bas_client.html">GATT Battery Service (BAS) Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bms.html">GATT Bond Management Service (BMS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cgms.html">GATT Continuous Glucose Monitoring Service (CGMS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cts_client.html">GATT Current Time Service (CTS) Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ddfs.html">Direction and Distance Finding Service (DDFS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dfu_smp.html">GATT DFU SMP Service Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fast_pair.html">Google Fast Pair Service (GFPS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gattp.html">Generic Attribute (GATT) Profile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hids.html">GATT Human Interface Device (HID) Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hogp.html">GATT Human Interface Device Service (HIDS) Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hrs_client.html">GATT Heart Rate Service (HRS) Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="latency.html">GATT Latency Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="latency_client.html">GATT Latency Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lbs.html">LED Button Service (LBS)</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Memfault Diagnostic Service (MDS)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#service-uuid">Service UUID</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#characteristics">Characteristics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuration">Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#implementation-details">Implementation details</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#restricting-access">Restricting access</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#api-documentation">API documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="nsms.html">Nordic Status Message Service (NSMS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nus.html">Nordic UART Service (NUS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nus_client.html">Nordic UART Service (NUS) Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rscs.html">Running Speed and Cadence Service (RSCS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="throughput.html">GATT Throughput Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wifi_prov.html">Wi-Fi Provisioning Service</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../bootloader/index.html">Bootloader libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../caf/index.html">Common Application Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../debug/index.html">Debug libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../dfu/index.html">DFU libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gazell/index.html">Gazell libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../modem/index.html">Modem libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mpsl/index.html">Multiprotocol Service Layer libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../networking/index.html">Libraries for networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nfc/index.html">Libraries for NFC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nrf_rpc/index.html">nRF RPC libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../others/index.html">Other libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../shell/index.html">Shell libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tfm/index.html">TF-M libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../zigbee/index.html">Libraries for Zigbee</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Libraries</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Bluetooth libraries and services</a></li>
+      <li class="breadcrumb-item active">Memfault Diagnostic Service (MDS)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/libraries/bluetooth_services/services/mds.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="memfault-diagnostic-service-mds">
+<span id="mds-readme"></span><h1>Memfault Diagnostic Service (MDS)<a class="headerlink" href="#memfault-diagnostic-service-mds" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#service-uuid" id="id7">Service UUID</a></p></li>
+<li><p><a class="reference internal" href="#characteristics" id="id8">Characteristics</a></p></li>
+<li><p><a class="reference internal" href="#configuration" id="id9">Configuration</a></p></li>
+<li><p><a class="reference internal" href="#implementation-details" id="id10">Implementation details</a></p></li>
+<li><p><a class="reference internal" href="#restricting-access" id="id11">Restricting access</a></p>
+<ul>
+<li><p><a class="reference internal" href="#bluetooth-privacy" id="id12">Bluetooth privacy</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#api-documentation" id="id13">API documentation</a></p></li>
+</ul>
+</div>
+<p>The Bluetooth® LE GATT Memfault Diagnostic Service is a custom service that forwards diagnostic data collected by firmware through a Bluetooth gateway.
+The diagnostic data is collected by the <a class="reference external" href="https://docs.memfault.com/docs/embedded/introduction/">Memfault SDK</a> integrated with the nRF Connect SDK.</p>
+<p>To get started with Memfault integration in nRF Connect SDK, see <a class="reference internal" href="../../../external_comp/memfault.html#ug-memfault"><span class="std std-ref">Memfault integration</span></a>.</p>
+<p>The MDS is used in the <a class="reference internal" href="../../../samples/bluetooth/peripheral_mds/README.html#peripheral-mds"><span class="std std-ref">Bluetooth: Peripheral Memfault Diagnostic Service (MDS)</span></a> sample.</p>
+<section id="service-uuid">
+<h2><a class="toc-backref" href="#id7">Service UUID</a><a class="headerlink" href="#service-uuid" title="Permalink to this heading"></a></h2>
+<p>The 128-bit service UUID is <strong>54220000-f6a5-4007-a371-722f4ebd8436</strong>.</p>
+</section>
+<section id="characteristics">
+<h2><a class="toc-backref" href="#id8">Characteristics</a><a class="headerlink" href="#characteristics" title="Permalink to this heading"></a></h2>
+<p>The MDS characteristics are described in detail in the <a class="reference external" href="https://memfault.notion.site/Memfault-Diagnostic-GATT-Service-MDS-ffd5a430062649cd9bf6edbf64e2563b">Memfault Diagnostic GATT Service</a> documentation.
+The service implementation available in the nRF Connect SDK follows these requirements.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Access restriction to diagnostic data is implemented differently from the one described in the <a class="reference external" href="https://memfault.notion.site/Memfault-Diagnostic-GATT-Service-MDS-ffd5a430062649cd9bf6edbf64e2563b">Memfault Diagnostic GATT Service</a> documentation.
+See <a class="reference internal" href="#mds-readme-access-restriction"><span class="std std-ref">Restricting access</span></a> for more details.</p>
+</div>
+</section>
+<section id="configuration">
+<h2><a class="toc-backref" href="#id9">Configuration</a><a class="headerlink" href="#configuration" title="Permalink to this heading"></a></h2>
+<p>Set the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_MDS</span></code> to enable the service.</p>
+<p>The following configuration options are available for this module:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_MDS_MAX_URI_LENGTH</span></code> sets the maximum length of the URI to which diagnostic data should be forwarded.
+The URI contains the device ID.
+See <a class="reference internal" href="../../others/memfault_ncs.html#mod-memfault"><span class="std std-ref">Memfault</span></a> for more details.</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_MDS_PERM</span></code> provides permission to the service characteristic.
+In the default configuration, it is set to <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_MDS_PERM_RW_ENCRYPT</span></code>.
+This is because the potentially sensitive Memfault project key and diagnostic data are sent through service’s characteristics.
+There is not hard requirement for access restriction to diagnostic data.</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_MDS_PIPELINE_COUNT</span></code> sets the maximum number of service notifications that can be queued in the Bluetooth stack.</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_MDS_DATA_POLL_INTERVAL</span></code> sets the interval of checking if any diagnostic data is available for sending.</p></li>
+</ul>
+</div></blockquote>
+<p>See the Kconfig help for details.</p>
+</section>
+<section id="implementation-details">
+<h2><a class="toc-backref" href="#id10">Implementation details</a><a class="headerlink" href="#implementation-details" title="Permalink to this heading"></a></h2>
+<p>The implementation uses <code class="xref c c-macro docutils literal notranslate"><span class="pre">BT_GATT_SERVICE_DEFINE</span></code> to statically define and register the Memfault Diagnostic GATT service.
+The service automatically checks if there is data available to be sent with the interval defined by the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_MDS_DATA_POLL_INTERVAL</span></code> and sends it using the notification mechanism.
+No application input is required to send diagnostic data.
+However, if you pass <a class="reference internal" href="#c.bt_mds_cb" title="bt_mds_cb"><code class="xref c c-struct docutils literal notranslate"><span class="pre">bt_mds_cb</span></code></a> to the <a class="reference internal" href="#c.bt_mds_cb_register" title="bt_mds_cb_register"><code class="xref c c-func docutils literal notranslate"><span class="pre">bt_mds_cb_register()</span></code></a> function, the application needs to confirm that the connected client can access the diagnostic data every time the client performs a read or write operation on the service characteristic.</p>
+<p>Use the <a class="reference internal" href="#c.bt_mds_cb_register" title="bt_mds_cb_register"><code class="xref c c-func docutils literal notranslate"><span class="pre">bt_mds_cb_register()</span></code></a> function to register callbacks the service.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Call the <a class="reference internal" href="#c.bt_mds_cb_register" title="bt_mds_cb_register"><code class="xref c c-func docutils literal notranslate"><span class="pre">bt_mds_cb_register()</span></code></a> function before enabling Bluetooth stack to ensure a proper access restriction to MDS service data.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Only one connected client can operate on the MDS characteristic and receive a notification with diagnostic data.</p>
+</div>
+</section>
+<section id="restricting-access">
+<span id="mds-readme-access-restriction"></span><h2><a class="toc-backref" href="#id11">Restricting access</a><a class="headerlink" href="#restricting-access" title="Permalink to this heading"></a></h2>
+<p>The Memfault service characteristics data might contain sensitive data.
+It is recommended to use the Bluetooth privacy and encrypted link to access the diagnostic data.
+Enable the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_SMP</span></code> option to require encryption for access in the default configuration.
+It is also highly recommended to implement the <code class="xref c c-func docutils literal notranslate"><span class="pre">access_enable()</span></code> callback.
+See <a class="reference internal" href="../../../samples/bluetooth/peripheral_mds/README.html#peripheral-mds"><span class="std std-ref">Bluetooth: Peripheral Memfault Diagnostic Service (MDS)</span></a> for an implementation example.</p>
+<section id="bluetooth-privacy">
+<h3><a class="toc-backref" href="#id12">Bluetooth privacy</a><a class="headerlink" href="#bluetooth-privacy" title="Permalink to this heading"></a></h3>
+<p>It is recommended to use the Bluetooth Privacy feature when you use this service.
+To enable privacy, set the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_PRIVACY</span></code> option.</p>
+</section>
+</section>
+<section id="api-documentation">
+<h2><a class="toc-backref" href="#id13">API documentation</a><a class="headerlink" href="#api-documentation" title="Permalink to this heading"></a></h2>
+<div class="line-block">
+<div class="line">Header file: <code class="file docutils literal notranslate"><span class="pre">include/mds.h</span></code></div>
+<div class="line">Source file: <code class="file docutils literal notranslate"><span class="pre">subsys/bluetooth/services/mds.c</span></code></div>
+</div>
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="group__bt__mds"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">bt_mds</span></span></dt>
+<dd><p>API for the Memfault Diagnostic GATT service (MDS). </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-defines">Defines</p>
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.BT_UUID_MDS_VAL">
+<span class="target" id="group__bt__mds_1gafb529fbcbfe985b4611c8ba6bb167206"></span><span class="sig-name descname"><span class="n"><span class="pre">BT_UUID_MDS_VAL</span></span></span><a class="headerlink" href="#c.BT_UUID_MDS_VAL" title="Permalink to this definition"></a><br /></dt>
+<dd><p>UUID of the Memfault Diagnostic Service. </p>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.BT_UUID_MDS_SUPPORTED_FEATURES_VAL">
+<span class="target" id="group__bt__mds_1gaa989396c2500967eaec550a8fa38ca9a"></span><span class="sig-name descname"><span class="n"><span class="pre">BT_UUID_MDS_SUPPORTED_FEATURES_VAL</span></span></span><a class="headerlink" href="#c.BT_UUID_MDS_SUPPORTED_FEATURES_VAL" title="Permalink to this definition"></a><br /></dt>
+<dd><p>UUID of the MDS Supported Features Characteristic. </p>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.BT_UUID_MDS_DEVICE_IDENTIFIER_VAL">
+<span class="target" id="group__bt__mds_1gaeeb1e593e5ab47b27192b692a45cb28c"></span><span class="sig-name descname"><span class="n"><span class="pre">BT_UUID_MDS_DEVICE_IDENTIFIER_VAL</span></span></span><a class="headerlink" href="#c.BT_UUID_MDS_DEVICE_IDENTIFIER_VAL" title="Permalink to this definition"></a><br /></dt>
+<dd><p>UUID of the MDS Device Identifier Characteristic. </p>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.BT_UUID_MDS_DATA_URI_VAL">
+<span class="target" id="group__bt__mds_1ga00f131861876697777c995e9a1bb4333"></span><span class="sig-name descname"><span class="n"><span class="pre">BT_UUID_MDS_DATA_URI_VAL</span></span></span><a class="headerlink" href="#c.BT_UUID_MDS_DATA_URI_VAL" title="Permalink to this definition"></a><br /></dt>
+<dd><p>UUID of the MDS Data URI Characteristic. </p>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.BT_UUID_MDS_AUTHORIZATION_VAL">
+<span class="target" id="group__bt__mds_1ga3093d88e3b1eaa3a76a3a55c0c904461"></span><span class="sig-name descname"><span class="n"><span class="pre">BT_UUID_MDS_AUTHORIZATION_VAL</span></span></span><a class="headerlink" href="#c.BT_UUID_MDS_AUTHORIZATION_VAL" title="Permalink to this definition"></a><br /></dt>
+<dd><p>UUID of the MDS Authorization Characteristic. </p>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.BT_UUID_MDS_DATA_EXPORT_VAL">
+<span class="target" id="group__bt__mds_1ga437ee748755ef398faff773a0bf0af7a"></span><span class="sig-name descname"><span class="n"><span class="pre">BT_UUID_MDS_DATA_EXPORT_VAL</span></span></span><a class="headerlink" href="#c.BT_UUID_MDS_DATA_EXPORT_VAL" title="Permalink to this definition"></a><br /></dt>
+<dd><p>UUID of the MDS Data Export Characteristic. </p>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.BT_UUID_MEMFAULT_DIAG">
+<span class="target" id="group__bt__mds_1gab394d768c1a0f92c45cd2c8cd6fe13ba"></span><span class="sig-name descname"><span class="n"><span class="pre">BT_UUID_MEMFAULT_DIAG</span></span></span><a class="headerlink" href="#c.BT_UUID_MEMFAULT_DIAG" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.BT_UUID_MDS_SUPPORTED_FEATURES">
+<span class="target" id="group__bt__mds_1ga1059813cd0792b10348a2e0194cb94ce"></span><span class="sig-name descname"><span class="n"><span class="pre">BT_UUID_MDS_SUPPORTED_FEATURES</span></span></span><a class="headerlink" href="#c.BT_UUID_MDS_SUPPORTED_FEATURES" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.BT_UUID_MDS_DEVICE_IDENTIFIER">
+<span class="target" id="group__bt__mds_1ga0e9e085d732602968a3c3a2ef6a98b14"></span><span class="sig-name descname"><span class="n"><span class="pre">BT_UUID_MDS_DEVICE_IDENTIFIER</span></span></span><a class="headerlink" href="#c.BT_UUID_MDS_DEVICE_IDENTIFIER" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.BT_UUID_MDS_DATA_URI">
+<span class="target" id="group__bt__mds_1ga632d6927cd898c43c07766c60373aedc"></span><span class="sig-name descname"><span class="n"><span class="pre">BT_UUID_MDS_DATA_URI</span></span></span><a class="headerlink" href="#c.BT_UUID_MDS_DATA_URI" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.BT_UUID_MDS_AUTHORIZATION">
+<span class="target" id="group__bt__mds_1ga7b6fb4b2b59cfdf8b121207ee1f73a81"></span><span class="sig-name descname"><span class="n"><span class="pre">BT_UUID_MDS_AUTHORIZATION</span></span></span><a class="headerlink" href="#c.BT_UUID_MDS_AUTHORIZATION" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.BT_UUID_MDS_DATA_EXPORT">
+<span class="target" id="group__bt__mds_1ga1afcfce0b2ed2662e6973e28cd5ebd32"></span><span class="sig-name descname"><span class="n"><span class="pre">BT_UUID_MDS_DATA_EXPORT</span></span></span><a class="headerlink" href="#c.BT_UUID_MDS_DATA_EXPORT" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_mds_cb_register">
+<span class="target" id="group__bt__mds_1ga86e2d3c3dc87ce81c4a02f21179384c6"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_mds_cb_register</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_mds_cb" title="bt_mds_cb"><span class="n"><span class="pre">bt_mds_cb</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">cb</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_mds_cb_register" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Register the Memfault Diagnostic service callback. </p>
+<p>This function should be called before enabling Bluetooth stack to ensure proper access grating to MDS characteristics data through <code class="docutils literal notranslate"><span class="pre">access_enable</span></code> callback.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cb</strong> – <strong>[in]</strong> Memfault callback structure. This parameter can be set to NULL but it will let the first connected client access the Memfault data without authentication.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><p><strong>0</strong> – If the operation was successful. Otherwise, a negative error code is returned </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.bt_mds_cb">
+<span class="target" id="structbt__mds__cb"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_mds_cb</span></span></span><a class="headerlink" href="#c.bt_mds_cb" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;mds.h&gt;</em></div>
+<p>Memfault Diagnostic Service callback structure. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_mds_cb.access_enable">
+<span class="target" id="structbt__mds__cb_1a3246e9671011b9ff104309c3e20b386d"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">access_enable</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">bt_conn</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">conn</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#c.bt_mds_cb.access_enable" title="Permalink to this definition"></a><br /></dt>
+<dd><p>A callback for enabling Memfault access. </p>
+<p>If this callback is not implemented, any connected peer can access the Memfault characteristics and descriptors data, including write access to them, without authentication.</p>
+<p>The Memfault Diagnostic service allows only one client subscription.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Param conn</dt>
+<dd class="field-odd"><p><strong>[in]</strong> Connection object.</p>
+</dd>
+<dt class="field-even">Retval True</dt>
+<dd class="field-even"><p>if peer associated with connection object has granted access to the Memfault data. False if access to the Memfault data is forbidden. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="nsms.html" class="btn btn-neutral float-right" title="Nordic Status Message Service (NSMS)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="lbs.html" class="btn btn-neutral" title="LED Button Service (LBS)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

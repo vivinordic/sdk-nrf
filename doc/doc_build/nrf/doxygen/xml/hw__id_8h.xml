@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="hw__id_8h" kind="file" language="C++">
+    <compoundname>hw_id.h</compoundname>
+    <includes local="no">zephyr/types.h</includes>
+    <incdepgraph>
+      <node id="1">
+        <label>include/hw_id.h</label>
+        <link refid="hw__id_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>zephyr/types.h</label>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__hw__id_ga38a53c0ba2e99a6c073464dcaf4d9ce1_1ga38a53c0ba2e99a6c073464dcaf4d9ce1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int hw_id_get</definition>
+        <argsstring>(char *buf, size_t buf_len)</argsstring>
+        <name>hw_id_get</name>
+        <param>
+          <type>char *</type>
+          <declname>buf</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>buf_len</declname>
+        </param>
+        <briefdescription>
+<para>Fetch unique device ID. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>The buffer should be at least HW_ID_LEN bytes long.</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">buf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>destination buffer </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">buf_len</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>length of destination buffer </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>0 If the operation was successful. </para>
+</simplesect>
+<simplesect kind="return"><para>-EINVAL If the passed in pointer is NULL or buffer is too small. </para>
+</simplesect>
+<simplesect kind="return"><para>-EIO If requesting platform ID failed. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/hw_id.h" line="44" column="5" declfile="include/hw_id.h" declline="44" declcolumn="5"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="2"><highlight class="comment"><sp/>*<sp/>Copyright<sp/>(c)<sp/>2022<sp/>Nordic<sp/>Semiconductor<sp/>ASA</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/>*<sp/>SPDX-License-Identifier:<sp/>LicenseRef-Nordic-5-Clause</highlight></codeline>
+<codeline lineno="5"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>HW_ID_H__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>HW_ID_H__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;zephyr/types.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;C&quot;</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>defined(CONFIG_HW_ID_LIBRARY_SOURCE_BLE_MAC)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>HW_ID_LEN<sp/>(12<sp/>+<sp/>1)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="preprocessor">#elif<sp/>defined(CONFIG_HW_ID_LIBRARY_SOURCE_DEVICE_ID)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>HW_ID_LEN<sp/>(16<sp/>+<sp/>1)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="preprocessor">#elif<sp/>defined(CONFIG_HW_ID_LIBRARY_SOURCE_UUID)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="modem__jwt_8h" kindref="compound">modem/modem_jwt.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>HW_ID_LEN<sp/>(NRF_UUID_V4_STR_LEN<sp/>+<sp/>1)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="preprocessor">#elif<sp/>defined(CONFIG_HW_ID_LIBRARY_SOURCE_IMEI)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>HW_ID_LEN<sp/>(15<sp/>+<sp/>1)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight><highlight class="preprocessor">#elif<sp/>defined(CONFIG_HW_ID_LIBRARY_SOURCE_NET_MAC)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>HW_ID_LEN<sp/>(12<sp/>+<sp/>1)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight></codeline>
+<codeline lineno="44" refid="group__hw__id_ga38a53c0ba2e99a6c073464dcaf4d9ce1_1ga38a53c0ba2e99a6c073464dcaf4d9ce1" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="group__hw__id_ga38a53c0ba2e99a6c073464dcaf4d9ce1_1ga38a53c0ba2e99a6c073464dcaf4d9ce1" kindref="member">hw_id_get</ref>(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*buf,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>buf_len);</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="47"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>HW_ID_H__<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="include/hw_id.h"/>
+  </compounddef>
+</doxygen>

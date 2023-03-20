@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FOTA AT commands &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../../_static/js/ncs.js"
+></script>
+<script src="../../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="DFU AT commands" href="DFU_AT_commands.html" />
+    <link rel="prev" title="ICMP AT commands" href="ICMP_AT_commands.html" />
+<link
+  href="../../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../protocols.html">Protocols</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../applications.html">Applications</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../connectivity_bridge/README.html">Connectivity bridge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../asset_tracker_v2/README.html">nRF9160: Asset Tracker v2</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../README.html">nRF9160: Serial LTE modem</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="slm_description.html">Application description</a></li>
+<li class="toctree-l3"><a class="reference internal" href="slm_testing.html">Testing scenarios</a></li>
+<li class="toctree-l3"><a class="reference internal" href="slm_extending.html">Extending the application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="slm_data_mode.html">Running in data mode</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="AT_commands_intro.html">SLM-specific AT commands</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="Generic_AT_commands.html">Generic AT commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SOCKET_AT_commands.html">Socket AT commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="TCPIP_AT_commands.html">TCP and UDP AT commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ICMP_AT_commands.html">ICMP AT commands</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">FOTA AT commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DFU_AT_commands.html">DFU AT commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SMS_AT_commands.html">SMS AT commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="FTP_AT_commands.html">FTP AT commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="GNSS_AT_commands.html">GNSS AT commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="MQTT_AT_commands.html">MQTT client AT commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="HTTPC_AT_commands.html">HTTP client AT commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="TWI_AT_commands.html">TWI AT commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="GPIO_AT_commands.html">GPIO AT commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="CARRIER_AT_commands.html">LwM2M carrier library AT commands</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../nrf_desktop/README.html">nRF Desktop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nrf5340_audio/README.html">nRF5340 Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../machine_learning/README.html">nRF Machine Learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../matter_weather_station/README.html">Thingy:53: Matter weather station</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../zigbee_weather_station/README.html">Thingy:53: Zigbee weather station</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../drivers.html">Drivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../applications.html">Applications</a></li>
+          <li class="breadcrumb-item"><a href="../README.html">nRF9160: Serial LTE modem</a></li>
+          <li class="breadcrumb-item"><a href="AT_commands_intro.html">SLM-specific AT commands</a></li>
+      <li class="breadcrumb-item active">FOTA AT commands</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/applications/serial_lte_modem/doc/FOTA_AT_commands.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="fota-at-commands">
+<span id="slm-at-fota"></span><h1>FOTA AT commands<a class="headerlink" href="#fota-at-commands" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#fota-request-xfota" id="id8">FOTA request #XFOTA</a></p>
+<ul>
+<li><p><a class="reference internal" href="#set-command" id="id9">Set command</a></p></li>
+<li><p><a class="reference internal" href="#read-command" id="id10">Read command</a></p></li>
+<li><p><a class="reference internal" href="#test-command" id="id11">Test command</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>The following commands list contains AT commands related to firmware-over-the-air updates (FOTA) requests.</p>
+<section id="fota-request-xfota">
+<h2><a class="toc-backref" href="#id8">FOTA request #XFOTA</a><a class="headerlink" href="#fota-request-xfota" title="Permalink to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">#XFOTA</span></code> command sends various types of FOTA requests, based on specific operation codes.</p>
+<section id="set-command">
+<h3><a class="toc-backref" href="#id9">Set command</a><a class="headerlink" href="#set-command" title="Permalink to this heading"></a></h3>
+<p>The set command allows you to send a FOTA request.</p>
+<section id="syntax">
+<h4>Syntax<a class="headerlink" href="#syntax" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AT</span><span class="c1">#XFOTA=&lt;op&gt;,&lt;file_url&gt;[,&lt;sec_tag&gt;[,&lt;pdn_id&gt;]]</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;op&gt;</span></code> parameter can accept one of the following values:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">0</span></code> - Cancel FOTA (during download only).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">1</span></code> - Start FOTA for application update.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">2</span></code> - Start FOTA for modem delta update.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">3</span></code> - Start FOTA for bootloader update (optional if <a class="reference internal" href="../../../samples/bootloader/README.html#bootloader"><span class="std std-ref">nRF Secure Immutable Bootloader (NSIB)</span></a> enabled).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">6</span></code> - Read application image size and version (optional for application FOTA).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">7</span></code> - Read modem scratch space size and offset (optional for modem FOTA).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">8</span></code> - Erase MCUboot secondary slot (optional for application FOTA).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">9</span></code> - Erase modem scratch space (optional for modem FOTA).</p></li>
+</ul>
+</li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;file</span> <span class="pre">url&gt;</span></code> parameter is a string.
+It represents the full HTTP or HTTPS path of the target image to download.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;sec_tag&gt;</span></code> parameter is an integer.
+It indicates to the modem the credential of the security tag used for establishing a secure connection for downloading the image.
+It is associated with the certificate or PSK.
+Specifying the <code class="docutils literal notranslate"><span class="pre">&lt;sec_tag&gt;</span></code> is mandatory when using HTTPS.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;pdn_id&gt;</span></code> parameter is an integer.
+It represents the Packet Data Network (PDN) ID that can be used instead of the default PDN for downloading.</p></li>
+</ul>
+</section>
+<section id="response-syntax">
+<h4>Response syntax<a class="headerlink" href="#response-syntax" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#XFOTA: &lt;primary_partition_id&gt;,&lt;MCUBOOT_version&gt;,&lt;img_size&gt;,&lt;img_version&gt;</span>
+<span class="c1">#XFOTA: &lt;secondary_partition_id&gt;,&lt;MCUBOOT_version&gt;,&lt;img_size&gt;,&lt;img_version&gt;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;primary_partition_id&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;secondary_partition_id&gt;</span></code> integers give the partition ID.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;MCUBOOT_version&gt;</span></code> major version integer. Value 1 corresponds to MCUboot versions 1.x.y.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;img_size&gt;</span></code> integer gives the size of the application image in this partition in bytes.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;img_version&gt;</span></code> string gives the version of the application image as “&lt;major&gt;.&lt;minor&gt;.&lt;revision&gt;+&lt;build_number&gt;”.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#XFOTA: &lt;size&gt;,&lt;offset&gt;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;size&gt;</span></code> integer gives the size of the modem DFU area in bytes.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;offset&gt;</span></code> integer gives the offset of the firmware image in the modem DFU area.</p></li>
+</ul>
+</section>
+<section id="example">
+<h4>Example<a class="headerlink" href="#example" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Read</span> <span class="n">image</span> <span class="n">size</span> <span class="ow">and</span> <span class="n">version</span>
+<span class="n">at</span><span class="c1">#xfota=6</span>
+<span class="c1">#XFOTA: 3,1,295288,&quot;0.0.0+0&quot;</span>
+<span class="c1">#XFOTA: 7,1,294376,&quot;0.0.0+0&quot;</span>
+<span class="n">OK</span>
+
+<span class="n">Application</span> <span class="n">download</span> <span class="ow">and</span> <span class="n">activate</span>
+<span class="n">AT</span><span class="c1">#XFOTA=1,&quot;http://remote.host/fota/slm_app_update.bin&quot;</span>
+<span class="n">OK</span>
+<span class="c1">#XFOTA: 1,0,0</span>
+<span class="o">...</span>
+<span class="c1">#XFOTA:4,0</span>
+<span class="n">AT</span><span class="c1">#XRESET</span>
+<span class="n">OK</span>
+<span class="n">READY</span>
+<span class="c1">#XFOTA: 5,0</span>
+
+<span class="n">Erase</span> <span class="n">previous</span> <span class="n">image</span> <span class="n">after</span> <span class="n">FOTA</span>
+<span class="n">AT</span><span class="c1">#XFOTA=8</span>
+<span class="n">OK</span>
+
+<span class="n">Read</span> <span class="n">modem</span> <span class="n">scratch</span> <span class="n">space</span> <span class="n">size</span> <span class="ow">and</span> <span class="n">offset</span>
+<span class="n">at</span><span class="c1">#xfota=7</span>
+<span class="c1">#XFOTA: 368640,0</span>
+<span class="n">OK</span>
+
+<span class="n">Erase</span> <span class="n">modem</span> <span class="n">scratch</span> <span class="n">space</span> <span class="n">before</span> <span class="n">FOTA</span>
+<span class="n">AT</span><span class="c1">#XFOTA=9</span>
+<span class="n">OK</span>
+
+<span class="n">Modem</span> <span class="n">download</span> <span class="ow">and</span> <span class="n">activate</span>
+<span class="n">AT</span><span class="c1">#XFOTA=2,&quot;http://remote.host/fota/mfw_nrf9160_update_from_1.3.0_to_1.3.0-FOTA-TEST.bin&quot;</span>
+<span class="n">OK</span>
+<span class="c1">#XFOTA: 1,0,0</span>
+<span class="o">...</span>
+<span class="c1">#XFOTA: 4,0</span>
+<span class="n">AT</span><span class="c1">#XRESET</span>
+<span class="n">OK</span>
+<span class="n">READY</span>
+<span class="c1">#XFOTA: 5,0</span>
+
+<span class="n">Application</span> <span class="n">download</span> <span class="ow">and</span> <span class="n">activate</span> <span class="k">if</span> <span class="n">NSIB</span> <span class="ow">is</span> <span class="n">enabled</span>
+<span class="n">AT</span><span class="c1">#XFOTA=1,&quot;http://remote.host/fota/slm_app_update.bin+slm_app_update.bin&quot;</span>
+<span class="n">OK</span>
+<span class="c1">#XFOTA: 1,0,0</span>
+<span class="o">...</span>
+<span class="c1">#XFOTA:4,0</span>
+<span class="n">AT</span><span class="c1">#XRESET</span>
+<span class="n">OK</span>
+<span class="n">READY</span>
+<span class="c1">#XFOTA: 5,0</span>
+
+<span class="n">Bootloader</span> <span class="n">download</span> <span class="ow">and</span> <span class="n">activate</span> <span class="k">if</span> <span class="n">NSIB</span> <span class="ow">is</span> <span class="n">enabled</span>
+<span class="n">AT</span><span class="c1">#XFOTA=3,&quot;http://remote.host/fota/signed_by_mcuboot_and_b0_s0_image_update.bin+signed_by_mcuboot_and_b0_s1_image_update.bin&quot;</span>
+<span class="n">OK</span>
+<span class="c1">#XFOTA: 1,0,0</span>
+<span class="o">...</span>
+<span class="c1">#XFOTA:4,0</span>
+<span class="n">AT</span><span class="c1">#XRESET</span>
+<span class="n">OK</span>
+<span class="n">READY</span>
+<span class="c1">#XFOTA: 5,0</span>
+</pre></div>
+</div>
+</section>
+<section id="unsolicited-notification">
+<h4>Unsolicited notification<a class="headerlink" href="#unsolicited-notification" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#XFOTA: &lt;fota_stage&gt;,&lt;fota_status&gt;[,&lt;fota_info&gt;]</span>
+</pre></div>
+</div>
+<ul>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;fota_stage&gt;</span></code> value is an integer and can return one of the following values:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">0</span></code> - Init</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">1</span></code> - Download</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">2</span></code> - Download, erase pending (modem FOTA only)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">3</span></code> - Download, erased (modem FOTA only)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">4</span></code> - Downloaded, to be activated</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">5</span></code> - Complete</p></li>
+</ul>
+</li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;fota_status&gt;</span></code> value is an integer and can return one of the following values:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">0</span></code> - OK</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">1</span></code> - Error</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">2</span></code> - Cancelled</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">3</span></code> - Reverted (application FOTA only)</p></li>
+</ul>
+</li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;fota_info&gt;</span></code> value is an integer.
+Its value can have different meanings based on the values returned by <code class="docutils literal notranslate"><span class="pre">&lt;fota_stage&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;fota_status&gt;</span></code>.
+See the following table:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 19%" />
+<col style="width: 18%" />
+<col style="width: 2%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p><code class="docutils literal notranslate"><span class="pre">&lt;fota_stage&gt;</span></code> value</p></th>
+<th class="head" colspan="2"><p><code class="docutils literal notranslate"><span class="pre">&lt;fota_status&gt;</span></code> value</p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">&lt;fota_info&gt;</span></code> value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">1</span></code> (namely <em>Download</em>)</p></td>
+<td colspan="2"><p><code class="docutils literal notranslate"><span class="pre">0</span></code> (namely <em>OK</em>)</p></td>
+<td><p>Percentage of the download</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">1</span></code> (namely <em>Download</em>)</p></td>
+<td colspan="2"><p><code class="docutils literal notranslate"><span class="pre">1</span></code> (namely <em>ERROR</em>)</p></td>
+<td><p>Error Code</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">5</span></code> (namely <em>Complete</em>)</p></td>
+<td colspan="2"><p><code class="docutils literal notranslate"><span class="pre">1</span></code> (namely <em>ERROR</em>)</p></td>
+<td><p>Error Code</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">1</span></code> (namely <em>Download</em>)</p></td>
+<td colspan="2"><p><code class="docutils literal notranslate"><span class="pre">2</span></code> (namely <em>CANCELLED</em>)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0</span></code> - Downloading is cancelled before completion</p></td>
+</tr>
+</tbody>
+</table>
+<p>The error codes can be the following:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">1</span></code> - Download failed</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">2</span></code> - Update image rejected (for example modem firmware version error)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">3</span></code> - Update image mismatch (for example <code class="docutils literal notranslate"><span class="pre">&lt;op&gt;</span></code> is <code class="docutils literal notranslate"><span class="pre">1</span></code> but <code class="docutils literal notranslate"><span class="pre">&lt;file_url&gt;</span></code> points to a modem image)</p></li>
+</ul>
+<p>For modem FOTA, the error codes can be the following:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">0x4400001u</span></code> - The modem encountered a fatal internal error during firmware update.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">0x4400002u</span></code> - The modem encountered a fatal hardware error during firmware update.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">0x4400003u</span></code> - Modem firmware update failed, due to an authentication error.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">0x4400004u</span></code> - Modem firmware update failed, due to UUID mismatch.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="read-command">
+<h3><a class="toc-backref" href="#id10">Read command</a><a class="headerlink" href="#read-command" title="Permalink to this heading"></a></h3>
+<p>The read command is not supported.</p>
+</section>
+<section id="test-command">
+<h3><a class="toc-backref" href="#id11">Test command</a><a class="headerlink" href="#test-command" title="Permalink to this heading"></a></h3>
+<p>The test command tests the existence of the command and provides information about the type of its subparameters.</p>
+<section id="id1">
+<h4>Syntax<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#XFOTA=?</span>
+</pre></div>
+</div>
+</section>
+<section id="id2">
+<h4>Response syntax<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#XFOTA: &lt;list of op value&gt;,&lt;file_url&gt;,&lt;sec_tag&gt;,&lt;apn&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="examples">
+<h4>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AT</span><span class="c1">#XFOTA=?</span>
+
+<span class="c1">#XFOTA: (0,1,2,6,7,8,9),&lt;file_url&gt;,&lt;sec_tag&gt;,&lt;apn&gt;</span>
+
+<span class="n">OK</span>
+</pre></div>
+</div>
+</section>
+<section id="examples-if-nsib-is-enabled">
+<h4>Examples(if NSIB is enabled)<a class="headerlink" href="#examples-if-nsib-is-enabled" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AT</span><span class="c1">#XFOTA=?</span>
+
+<span class="c1">#XFOTA: (0,1,2,3,6,7,8,9),&lt;file_url&gt;,&lt;sec_tag&gt;,&lt;apn&gt;</span>
+
+<span class="n">OK</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="DFU_AT_commands.html" class="btn btn-neutral float-right" title="DFU AT commands" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="ICMP_AT_commands.html" class="btn btn-neutral" title="ICMP AT commands" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

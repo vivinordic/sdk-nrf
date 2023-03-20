@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Running Speed and Cadence Service (RSCS) &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../../_static/js/ncs.js"
+></script>
+<script src="../../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="GATT Throughput Service" href="throughput.html" />
+    <link rel="prev" title="Nordic UART Service (NUS) Client" href="nus_client.html" />
+<link
+  href="../../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../drivers.html">Drivers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Libraries</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../bin/index.html">Binary libraries</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Bluetooth libraries and services</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../adv_prov.html">Bluetooth LE advertising providers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../conn_ctx.html">Bluetooth connection context</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../enocean.html">Bluetooth EnOcean</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gatt_dm.html">GATT Discovery Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gatt_pool.html">Bluetooth GATT attribute pools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mesh.html">Bluetooth mesh profile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../rpc.html">Bluetooth Low Energy Remote Procedure Call</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../scan.html">Scanning module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ams_client.html">Apple Media Service (AMS) Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ancs_client.html">Apple Notification Center Service (ANCS) Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bas_client.html">GATT Battery Service (BAS) Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bms.html">GATT Bond Management Service (BMS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cgms.html">GATT Continuous Glucose Monitoring Service (CGMS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cts_client.html">GATT Current Time Service (CTS) Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ddfs.html">Direction and Distance Finding Service (DDFS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dfu_smp.html">GATT DFU SMP Service Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fast_pair.html">Google Fast Pair Service (GFPS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gattp.html">Generic Attribute (GATT) Profile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hids.html">GATT Human Interface Device (HID) Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hogp.html">GATT Human Interface Device Service (HIDS) Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hrs_client.html">GATT Heart Rate Service (HRS) Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="latency.html">GATT Latency Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="latency_client.html">GATT Latency Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lbs.html">LED Button Service (LBS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mds.html">Memfault Diagnostic Service (MDS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nsms.html">Nordic Status Message Service (NSMS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nus.html">Nordic UART Service (NUS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nus_client.html">Nordic UART Service (NUS) Client</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Running Speed and Cadence Service (RSCS)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#api-documentation">API documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="throughput.html">GATT Throughput Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wifi_prov.html">Wi-Fi Provisioning Service</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../bootloader/index.html">Bootloader libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../caf/index.html">Common Application Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../debug/index.html">Debug libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../dfu/index.html">DFU libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gazell/index.html">Gazell libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../modem/index.html">Modem libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mpsl/index.html">Multiprotocol Service Layer libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../networking/index.html">Libraries for networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nfc/index.html">Libraries for NFC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nrf_rpc/index.html">nRF RPC libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../others/index.html">Other libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../shell/index.html">Shell libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tfm/index.html">TF-M libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../zigbee/index.html">Libraries for Zigbee</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Libraries</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Bluetooth libraries and services</a></li>
+      <li class="breadcrumb-item active">Running Speed and Cadence Service (RSCS)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/libraries/bluetooth_services/services/rscs.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="running-speed-and-cadence-service-rscs">
+<span id="rscs-readme"></span><h1>Running Speed and Cadence Service (RSCS)<a class="headerlink" href="#running-speed-and-cadence-service-rscs" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#api-documentation" id="id7">API documentation</a></p></li>
+</ul>
+</div>
+<p>This module implements the Running Speed and Cadence Service with the corresponding set of characteristics defined in the <a class="reference external" href="https://www.bluetooth.com/specifications/specs/running-speed-and-cadence-service-1-0/">Running Speed and Cadence Service Specification</a>.</p>
+<p>The RSCS is used in the <a class="reference internal" href="../../../samples/bluetooth/peripheral_rscs/README.html#peripheral-rscs"><span class="std std-ref">Bluetooth: Peripheral Running Speed and Cadence Service (RSCS)</span></a> sample.</p>
+<section id="api-documentation">
+<h2><a class="toc-backref" href="#id7">API documentation</a><a class="headerlink" href="#api-documentation" title="Permalink to this heading"></a></h2>
+<div class="line-block">
+<div class="line">Header file: <code class="file docutils literal notranslate"><span class="pre">include/bluetooth/services/rscs.h</span></code></div>
+<div class="line">Source file: <code class="file docutils literal notranslate"><span class="pre">subsys/bluetooth/services/rscs.c</span></code></div>
+</div>
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="group__bt__rscs"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">bt_rscs</span></span></dt>
+<dd><p>API for the Running Speed and Cadence Service (RSCS). </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-typedefs">Typedefs</p>
+<dl class="c type">
+<dt class="sig sig-object c" id="c.bt_rscs_evt_handler">
+<span class="target" id="group__bt__rscs_1gac831ad9ae949de8a046921a7a4361f99"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">bt_rscs_evt_handler</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_rscs_evt" title="bt_rscs_evt"><span class="n"><span class="pre">bt_rscs_evt</span></span></a><span class="w"> </span><span class="n"><span class="pre">evt</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#c.bt_rscs_evt_handler" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Running Speed and Cadence Service event handler type. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-enums">Enums</p>
+<dl class="c enum">
+<dt class="sig sig-object c" id="c.bt_rscs_location">
+<span class="target" id="group__bt__rscs_1gaedd524a7087566075a8d47508f5f8645"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_rscs_location</span></span></span><a class="headerlink" href="#c.bt_rscs_location" title="Permalink to this definition"></a><br /></dt>
+<dd><p>RSC Sensor Locations. </p>
+<p><em>Values:</em></p>
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_rscs_location.RSC_LOC_OTHER">
+<span class="target" id="group__bt__rscs_1ggaedd524a7087566075a8d47508f5f8645a743948513d40304b9c690618bebc029c"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">RSC_LOC_OTHER</span></span></span><a class="headerlink" href="#c.bt_rscs_location.RSC_LOC_OTHER" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_rscs_location.RSC_LOC_TOP_OF_SHOE">
+<span class="target" id="group__bt__rscs_1ggaedd524a7087566075a8d47508f5f8645a05c08d84fae4c56f1f968ffb3451d631"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">RSC_LOC_TOP_OF_SHOE</span></span></span><a class="headerlink" href="#c.bt_rscs_location.RSC_LOC_TOP_OF_SHOE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_rscs_location.RSC_LOC_IN_SHOE">
+<span class="target" id="group__bt__rscs_1ggaedd524a7087566075a8d47508f5f8645a9298d37a233d428dfa04e6c10527af4f"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">RSC_LOC_IN_SHOE</span></span></span><a class="headerlink" href="#c.bt_rscs_location.RSC_LOC_IN_SHOE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_rscs_location.RSC_LOC_HIP">
+<span class="target" id="group__bt__rscs_1ggaedd524a7087566075a8d47508f5f8645a7f199ecf093b52e7595e06eca1cd3a43"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">RSC_LOC_HIP</span></span></span><a class="headerlink" href="#c.bt_rscs_location.RSC_LOC_HIP" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_rscs_location.RSC_LOC_FRONT_WHEEL">
+<span class="target" id="group__bt__rscs_1ggaedd524a7087566075a8d47508f5f8645a062a8744c16ea6691dd2177c8736e87e"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">RSC_LOC_FRONT_WHEEL</span></span></span><a class="headerlink" href="#c.bt_rscs_location.RSC_LOC_FRONT_WHEEL" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_rscs_location.RSC_LOC_LEFT_CRANK">
+<span class="target" id="group__bt__rscs_1ggaedd524a7087566075a8d47508f5f8645aaebf1ceeafed3b3aad188dd5dbe8455f"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">RSC_LOC_LEFT_CRANK</span></span></span><a class="headerlink" href="#c.bt_rscs_location.RSC_LOC_LEFT_CRANK" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_rscs_location.RSC_LOC_RIGHT_CRANK">
+<span class="target" id="group__bt__rscs_1ggaedd524a7087566075a8d47508f5f8645ae6c6db4f211637dd63902ce33dfc732d"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">RSC_LOC_RIGHT_CRANK</span></span></span><a class="headerlink" href="#c.bt_rscs_location.RSC_LOC_RIGHT_CRANK" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_rscs_location.RSC_LOC_LEFT_PEDAL">
+<span class="target" id="group__bt__rscs_1ggaedd524a7087566075a8d47508f5f8645a7b22e23c0753c4ad5883177428cc714f"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">RSC_LOC_LEFT_PEDAL</span></span></span><a class="headerlink" href="#c.bt_rscs_location.RSC_LOC_LEFT_PEDAL" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_rscs_location.RSC_LOC_RIGHT_PEDAL">
+<span class="target" id="group__bt__rscs_1ggaedd524a7087566075a8d47508f5f8645ae0c0bd423dfafe52e6e2ae8572badef5"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">RSC_LOC_RIGHT_PEDAL</span></span></span><a class="headerlink" href="#c.bt_rscs_location.RSC_LOC_RIGHT_PEDAL" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_rscs_location.RSC_LOC_FRONT_HUB">
+<span class="target" id="group__bt__rscs_1ggaedd524a7087566075a8d47508f5f8645a1ae3582e7d9910fdfa2065ff90df4cbf"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">RSC_LOC_FRONT_HUB</span></span></span><a class="headerlink" href="#c.bt_rscs_location.RSC_LOC_FRONT_HUB" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_rscs_location.RSC_LOC_REAR_DROPOUT">
+<span class="target" id="group__bt__rscs_1ggaedd524a7087566075a8d47508f5f8645a8f8253bfa68630814280942f247a746d"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">RSC_LOC_REAR_DROPOUT</span></span></span><a class="headerlink" href="#c.bt_rscs_location.RSC_LOC_REAR_DROPOUT" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_rscs_location.RSC_LOC_CHAINSTAY">
+<span class="target" id="group__bt__rscs_1ggaedd524a7087566075a8d47508f5f8645ab86edc46702bd808f3080d5a48ff502f"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">RSC_LOC_CHAINSTAY</span></span></span><a class="headerlink" href="#c.bt_rscs_location.RSC_LOC_CHAINSTAY" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_rscs_location.RSC_LOC_REAR_WHEEL">
+<span class="target" id="group__bt__rscs_1ggaedd524a7087566075a8d47508f5f8645a5ac49d2b0cbd1219cd0474508cac01d6"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">RSC_LOC_REAR_WHEEL</span></span></span><a class="headerlink" href="#c.bt_rscs_location.RSC_LOC_REAR_WHEEL" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_rscs_location.RSC_LOC_REAR_HUB">
+<span class="target" id="group__bt__rscs_1ggaedd524a7087566075a8d47508f5f8645a0b22ae994fdcb38d63047fe183349984"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">RSC_LOC_REAR_HUB</span></span></span><a class="headerlink" href="#c.bt_rscs_location.RSC_LOC_REAR_HUB" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_rscs_location.RSC_LOC_CHEST">
+<span class="target" id="group__bt__rscs_1ggaedd524a7087566075a8d47508f5f8645a1a1ab499a21bda8c0e777bfeaeaa6cb6"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">RSC_LOC_CHEST</span></span></span><a class="headerlink" href="#c.bt_rscs_location.RSC_LOC_CHEST" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_rscs_location.RSC_LOC_SPIDER">
+<span class="target" id="group__bt__rscs_1ggaedd524a7087566075a8d47508f5f8645af55424e4bd122586468d0ce3e9337faf"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">RSC_LOC_SPIDER</span></span></span><a class="headerlink" href="#c.bt_rscs_location.RSC_LOC_SPIDER" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_rscs_location.RSC_LOC_CHAIN_RING">
+<span class="target" id="group__bt__rscs_1ggaedd524a7087566075a8d47508f5f8645a730916c6ec1ce05f6a094f5af31ac952"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">RSC_LOC_CHAIN_RING</span></span></span><a class="headerlink" href="#c.bt_rscs_location.RSC_LOC_CHAIN_RING" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_rscs_location.RSC_LOC_AMT">
+<span class="target" id="group__bt__rscs_1ggaedd524a7087566075a8d47508f5f8645ac8cacbae8b08bb65a565e9874236c79f"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">RSC_LOC_AMT</span></span></span><a class="headerlink" href="#c.bt_rscs_location.RSC_LOC_AMT" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="c enum">
+<dt class="sig sig-object c" id="c.bt_rscs_evt">
+<span class="target" id="group__bt__rscs_1ga3f78bfa4c6d97a8205b22ac795620f57"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_rscs_evt</span></span></span><a class="headerlink" href="#c.bt_rscs_evt" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Running Speed and Cadence Service events. </p>
+<p><em>Values:</em></p>
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_rscs_evt.RSCS_EVT_MEAS_NOTIFY_ENABLE">
+<span class="target" id="group__bt__rscs_1gga3f78bfa4c6d97a8205b22ac795620f57a9097216795b86beb1ce49df006239955"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">RSCS_EVT_MEAS_NOTIFY_ENABLE</span></span></span><a class="headerlink" href="#c.bt_rscs_evt.RSCS_EVT_MEAS_NOTIFY_ENABLE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Measurement notification enable. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_rscs_evt.RSCS_EVT_MEAS_NOTIFY_DISABLE">
+<span class="target" id="group__bt__rscs_1gga3f78bfa4c6d97a8205b22ac795620f57a0d3d10eb136c3337364f59a9f6c43141"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">RSCS_EVT_MEAS_NOTIFY_DISABLE</span></span></span><a class="headerlink" href="#c.bt_rscs_evt.RSCS_EVT_MEAS_NOTIFY_DISABLE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Measurement notification disable. </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_rscs_measurement_send">
+<span class="target" id="group__bt__rscs_1ga81abdb2482f79c331c32807dc9b2eaab"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_rscs_measurement_send</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">bt_conn</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">conn</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_rscs_measurement" title="bt_rscs_measurement"><span class="n"><span class="pre">bt_rscs_measurement</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">measurement</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_rscs_measurement_send" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Function for sending Running Speed and Cadence measurement. </p>
+<p>The application calls this function after having performed a Running Speed and Cadence measurement. If notification has been enabled, the measurement data is encoded and sent to the client.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>conn</strong> – <strong>[in]</strong> Pointer to connection object, or NULL if sent to all connected peers. </p></li>
+<li><p><strong>measurement</strong> – <strong>[in]</strong> Pointer to new running speed and cadence measurement.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><p><strong>0</strong> – If the operation was successful. Otherwise, a negative error code is returned. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_rscs_init">
+<span class="target" id="group__bt__rscs_1ga3cc2e68c47512445505ca17f5811a12f"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_rscs_init</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_rscs_init_params" title="bt_rscs_init_params"><span class="n"><span class="pre">bt_rscs_init_params</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">init</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_rscs_init" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Function for initializing the Running Speed and Cadence Service. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>init</strong> – <strong>[in]</strong> Initialization parameters.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><p><strong>0</strong> – If the operation was successful. Otherwise, a negative error code is returned. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.bt_rsc_supported_loc">
+<span class="target" id="structbt__rsc__supported__loc"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_rsc_supported_loc</span></span></span><a class="headerlink" href="#c.bt_rsc_supported_loc" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;rscs.h&gt;</em></div>
+<p>Bitmask set of supported location. </p>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.bt_rscs_features">
+<span class="target" id="structbt__rscs__features"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_rscs_features</span></span></span><a class="headerlink" href="#c.bt_rscs_features" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;rscs.h&gt;</em></div>
+<p>Bitmask set of supported features. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_rscs_features.inst_stride_len">
+<span class="target" id="structbt__rscs__features_1a19b179f39499e63143ab355796d6b873"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">inst_stride_len</span></span></span><a class="headerlink" href="#c.bt_rscs_features.inst_stride_len" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Instantaneous Stride Length Measurement Supported bit. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_rscs_features.total_distance">
+<span class="target" id="structbt__rscs__features_1aa80053dec139a41f4c134d7c7ef76581"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">total_distance</span></span></span><a class="headerlink" href="#c.bt_rscs_features.total_distance" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Total Distance Measurement Supported bit. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_rscs_features.walking_or_running">
+<span class="target" id="structbt__rscs__features_1aba250abfb79dbc8a5018103f5294a573"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">walking_or_running</span></span></span><a class="headerlink" href="#c.bt_rscs_features.walking_or_running" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Walking or Running Status Supported bit. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_rscs_features.sensor_calib_proc">
+<span class="target" id="structbt__rscs__features_1ad966fc36e3cb4026d749506d7b04c6a0"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">sensor_calib_proc</span></span></span><a class="headerlink" href="#c.bt_rscs_features.sensor_calib_proc" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Calibration Procedure Supported bit. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_rscs_features.multi_sensor_loc">
+<span class="target" id="structbt__rscs__features_1abe73749bdaf57f83794bb801081a9848"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">multi_sensor_loc</span></span></span><a class="headerlink" href="#c.bt_rscs_features.multi_sensor_loc" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Multiple Sensor Locations Supported bit. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.bt_rscs_cp_cb">
+<span class="target" id="structbt__rscs__cp__cb"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_rscs_cp_cb</span></span></span><a class="headerlink" href="#c.bt_rscs_cp_cb" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;rscs.h&gt;</em></div>
+<p>SC Control Point callback structure. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_rscs_cp_cb.set_cumulative">
+<span class="target" id="structbt__rscs__cp__cb_1a3af1667b2d50f693bfcbc7b22a8ccbd0"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">set_cumulative</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n"><span class="pre">total_distance</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#c.bt_rscs_cp_cb.set_cumulative" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Set Cumulative Value Procedure. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Param total_distance</dt>
+<dd class="field-odd"><p>New value for total distance.</p>
+</dd>
+<dt class="field-even">Retval 0</dt>
+<dd class="field-even"><p>If the operation was successful. Otherwise, a negative error code is returned. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_rscs_cp_cb.calibration">
+<span class="target" id="structbt__rscs__cp__cb_1ad261f577740aaf9becd622a66938c1e9"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">calibration</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#c.bt_rscs_cp_cb.calibration" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Start Sensor Calibration Procedure. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Retval 0</dt>
+<dd class="field-odd"><p>If the operation was successful. Otherwise, a negative error code is returned. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_rscs_cp_cb.update_loc">
+<span class="target" id="structbt__rscs__cp__cb_1a0cad73ce18458d821451713cdf50423a"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">update_loc</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">location</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#c.bt_rscs_cp_cb.update_loc" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Update Sensor Location Procedure. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Param location</dt>
+<dd class="field-odd"><p>New sensor localization value. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.bt_rscs_init_params">
+<span class="target" id="structbt__rscs__init__params"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_rscs_init_params</span></span></span><a class="headerlink" href="#c.bt_rscs_init_params" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;rscs.h&gt;</em></div>
+<p>Running Speed and Cadence Service initialization parameters. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_rscs_init_params.features">
+<span class="target" id="structbt__rscs__init__params_1afde1ddb33ab0fbe205e96f4ba060f393"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_rscs_features" title="bt_rscs_features"><span class="n"><span class="pre">bt_rscs_features</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">features</span></span></span><a class="headerlink" href="#c.bt_rscs_init_params.features" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Initial value for features of sensor. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_rscs_init_params.supported_locations">
+<span class="target" id="structbt__rscs__init__params_1a0eb39cb65a57df9e668a3a0d94fa798e"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_rsc_supported_loc" title="bt_rsc_supported_loc"><span class="n"><span class="pre">bt_rsc_supported_loc</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">supported_locations</span></span></span><a class="headerlink" href="#c.bt_rscs_init_params.supported_locations" title="Permalink to this definition"></a><br /></dt>
+<dd><p>List of supported locations </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_rscs_init_params.location">
+<span class="target" id="structbt__rscs__init__params_1accad317155d1a93601e4e5dd140bf298"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_rscs_location" title="bt_rscs_location"><span class="n"><span class="pre">bt_rscs_location</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">location</span></span></span><a class="headerlink" href="#c.bt_rscs_init_params.location" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Initial value for sensor location. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_rscs_init_params.evt_handler">
+<span class="target" id="structbt__rscs__init__params_1a57766db34f71d23edd161a5cd2094326"></span><a class="reference internal" href="#c.bt_rscs_evt_handler" title="bt_rscs_evt_handler"><span class="n"><span class="pre">bt_rscs_evt_handler</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">evt_handler</span></span></span><a class="headerlink" href="#c.bt_rscs_init_params.evt_handler" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Event handler to be called for handling events in the RSC Service. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_rscs_init_params.cp_cb">
+<span class="target" id="structbt__rscs__init__params_1a4a81220ee6852e912ad2e3357a4e66ad"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_rscs_cp_cb" title="bt_rscs_cp_cb"><span class="n"><span class="pre">bt_rscs_cp_cb</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">cp_cb</span></span></span><a class="headerlink" href="#c.bt_rscs_init_params.cp_cb" title="Permalink to this definition"></a><br /></dt>
+<dd><p>SC Control Point callback structure. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.bt_rscs_measurement">
+<span class="target" id="structbt__rscs__measurement"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_rscs_measurement</span></span></span><a class="headerlink" href="#c.bt_rscs_measurement" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;rscs.h&gt;</em></div>
+<p>Running Speed and Cadence Service measurement structure. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_rscs_measurement.is_inst_stride_len">
+<span class="target" id="structbt__rscs__measurement_1a4518d0c3c61877f8d7aabe1c6b39a2a7"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_inst_stride_len</span></span></span><a class="headerlink" href="#c.bt_rscs_measurement.is_inst_stride_len" title="Permalink to this definition"></a><br /></dt>
+<dd><p>True if Instantaneous Stride Length is present in the measurement. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_rscs_measurement.is_total_distance">
+<span class="target" id="structbt__rscs__measurement_1a2020caa23eec5436ea3480f8bcc52fea"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_total_distance</span></span></span><a class="headerlink" href="#c.bt_rscs_measurement.is_total_distance" title="Permalink to this definition"></a><br /></dt>
+<dd><p>True if Total Distance is present in the measurement. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_rscs_measurement.is_running">
+<span class="target" id="structbt__rscs__measurement_1a7d2c444642077daf21206b6860207dae"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_running</span></span></span><a class="headerlink" href="#c.bt_rscs_measurement.is_running" title="Permalink to this definition"></a><br /></dt>
+<dd><p>True if running, False if walking. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_rscs_measurement.inst_speed">
+<span class="target" id="structbt__rscs__measurement_1a87ae0e05a8a824a1a853d27854945a66"></span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">inst_speed</span></span></span><a class="headerlink" href="#c.bt_rscs_measurement.inst_speed" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Instantaneous Speed. 256 units = 1 meter/second </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_rscs_measurement.inst_cadence">
+<span class="target" id="structbt__rscs__measurement_1a4e233a735f9a06a2f88638263b1285e6"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">inst_cadence</span></span></span><a class="headerlink" href="#c.bt_rscs_measurement.inst_cadence" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Instantaneous Cadence. 1 unit = 1 stride/minute </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_rscs_measurement.inst_stride_length">
+<span class="target" id="structbt__rscs__measurement_1a3b404a23ea93ca48fb02959e416e6d99"></span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">inst_stride_length</span></span></span><a class="headerlink" href="#c.bt_rscs_measurement.inst_stride_length" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Instantaneous Stride Length. 100 units = 1 meter </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_rscs_measurement.total_distance">
+<span class="target" id="structbt__rscs__measurement_1a582b2b920adc14945d43a7cfe57496ce"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">total_distance</span></span></span><a class="headerlink" href="#c.bt_rscs_measurement.total_distance" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Total Distance. 1 unit = 1 meter </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="throughput.html" class="btn btn-neutral float-right" title="GATT Throughput Service" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="nus_client.html" class="btn btn-neutral" title="Nordic UART Service (NUS) Client" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

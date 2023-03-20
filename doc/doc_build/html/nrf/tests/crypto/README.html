@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cryptography tests &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../_static/js/ncs.js"
+></script>
+<script src="../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Edge Impulse samples" href="../../samples/edge.html" />
+    <link rel="prev" title="Crypto: SHA-256" href="../../samples/crypto/sha256/README.html" />
+<link
+  href="../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../samples.html">Samples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../samples/bl.html">Bluetooth samples</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../samples/crypto.html">Cryptography samples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../samples/crypto/aes_cbc/README.html">Crypto: AES CBC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../samples/crypto/aes_ccm/README.html">Crypto: AES CCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../samples/crypto/aes_ctr/README.html">Crypto: AES CTR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../samples/crypto/aes_gcm/README.html">Crypto: AES GCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../samples/crypto/chachapoly/README.html">Crypto: Chacha20-Poly1305 example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../samples/crypto/ecdh/README.html">Crypto: ECDH</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../samples/crypto/ecdsa/README.html">Crypto: ECDSA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../samples/crypto/hkdf/README.html">Crypto: HKDF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../samples/crypto/hmac/README.html">Crypto: HMAC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../samples/crypto/persistent_key_usage/README.html">Crypto: Persistent key storage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../samples/crypto/psa_tls/README.html">Crypto: PSA TLS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../samples/crypto/rng/README.html">Crypto: RNG</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../samples/crypto/rsa/README.html">Crypto: RSA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../samples/crypto/sha256/README.html">Crypto: SHA-256</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Cryptography tests</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#requirements">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#building-and-running">Building and running</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../samples/edge.html">Edge Impulse samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../samples/gazell.html">Gazell samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../samples/matter.html">Matter samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../samples/nfc.html">NFC samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../samples/nrf5340.html">nRF5340 samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../samples/nrf9160.html">nRF9160 samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../samples/tfm.html">Trusted Firmware-M (TF-M) samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../samples/thread.html">Thread samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../samples/zigbee.html">Zigbee samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../samples/wifi.html">Wi-Fi samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../samples/other.html">Other samples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../drivers.html">Drivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../samples.html">Samples</a></li>
+          <li class="breadcrumb-item"><a href="../../samples/crypto.html">Cryptography samples</a></li>
+      <li class="breadcrumb-item active">Cryptography tests</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/tests/crypto/README.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="cryptography-tests">
+<span id="crypto-test"></span><h1>Cryptography tests<a class="headerlink" href="#cryptography-tests" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#requirements" id="id6">Requirements</a></p></li>
+<li><p><a class="reference internal" href="#overview" id="id7">Overview</a></p></li>
+<li><p><a class="reference internal" href="#building-and-running" id="id8">Building and running</a></p>
+<ul>
+<li><p><a class="reference internal" href="#ztest-custom-log-formatting" id="id9">Ztest custom log formatting</a></p></li>
+<li><p><a class="reference internal" href="#testing" id="id10">Testing</a></p></li>
+<li><p><a class="reference internal" href="#additional-test-cases-and-test-vectors" id="id11">Additional test cases and test vectors</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>Cryptography tests verify the functionality of the <span class="xref std std-ref">nrfxlib:nrf_security</span> by using known test vectors approved by the National Institute of Standards and Technology (NIST) and others.</p>
+<section id="requirements">
+<h2><a class="toc-backref" href="#id6">Requirements</a><a class="headerlink" href="#requirements" title="Permalink to this heading"></a></h2>
+<p>The tests support the following development kits:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 26%" />
+<col style="width: 7%" />
+<col style="width: 42%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Hardware platforms</p></th>
+<th class="head"><p>PCA</p></th>
+<th class="head"><p>Board name</p></th>
+<th class="head"><p>Build target</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="../../working_with_nrf/nrf53/nrf5340.html#ug-nrf5340"><span class="std std-ref">nRF5340 DK</span></a></p></td>
+<td><p>PCA10095</p></td>
+<td><p><span class="xref std std-ref">nrf5340dk_nrf5340</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nrf5340dk_nrf5340_cpuapp</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../working_with_nrf/nrf91/nrf9160.html#ug-nrf9160"><span class="std std-ref">nRF9160 DK</span></a></p></td>
+<td><p>PCA10090</p></td>
+<td><p><span class="xref std std-ref">nrf9160dk_nrf9160</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nrf9160dk_nrf9160</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../working_with_nrf/nrf52/developing.html#ug-nrf52"><span class="std std-ref">nRF52840 DK</span></a></p></td>
+<td><p>PCA10056</p></td>
+<td><p><span class="xref std std-ref">nrf52840dk_nrf52840</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nrf52840dk_nrf52840</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Nordic Semiconductor devices such as nRF51, nRF52810, or nRF52811 cannot run the full test suite because of limited flash capacity.
+A recommended approach in such case is to run subsets of the tests one by one.</p>
+</div>
+</section>
+<section id="overview">
+<h2><a class="toc-backref" href="#id7">Overview</a><a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+<p>Cryptography tests use Zephyr Test Framework (Ztest) to run the tests.
+See <span class="xref std std-ref">zephyr:test-framework</span> for details.
+The tests do not use the standard Ztest output but provide custom output for the test reports.
+See <a class="reference internal" href="#crypto-test-ztest-custom"><span class="std std-ref">Ztest custom log formatting</span></a> for details.</p>
+<p>The tests are executed if the cryptographic functionality is enabled in Kconfig.
+Make sure to configure <span class="xref std std-ref">nrfxlib:nrf_security</span> and all available hardware or software backends to enable the tests.
+See <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NORDIC_SECURITY_BACKEND</span></code>.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 11%" />
+<col style="width: 7%" />
+<col style="width: 41%" />
+<col style="width: 41%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Cryptographic mode</p></th>
+<th class="head"><p>Sub-mode</p></th>
+<th class="head"><p>Link to standard</p></th>
+<th class="head"><p>Test Vector Source</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>AES</p></td>
+<td><p>CBC</p></td>
+<td><p><a class="reference external" href="https://csrc.nist.gov/projects/cryptographic-algorithm-validation-program/block-ciphers#AES">NIST - AES</a></p></td>
+<td><p><a class="reference external" href="https://csrc.nist.gov/projects/cryptographic-algorithm-validation-program/block-ciphers#AES">NIST - AES</a></p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>CFB</p></td>
+<td></td>
+<td><p><a class="reference external" href="https://csrc.nist.gov/projects/cryptographic-algorithm-validation-program/block-ciphers#AES">NIST - AES</a></p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>ECB</p></td>
+<td></td>
+<td><p><a class="reference external" href="https://csrc.nist.gov/projects/cryptographic-algorithm-validation-program/block-ciphers#AES">NIST - AES</a></p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>CTR</p></td>
+<td><p><a class="reference external" href="https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-38a.pdf">NIST SP 800-38A</a></p></td>
+<td><p><a class="reference external" href="https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-38a.pdf">NIST SP 800-38A</a></p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>CBC MAC</p></td>
+<td><p>CBC MAC</p></td>
+<td><p>No official test vectors</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>CMAC</p></td>
+<td><p><a class="reference external" href="https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-38b.pdf">NIST SP 800-38B</a></p></td>
+<td><p><a class="reference external" href="https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-38b.pdf">NIST SP 800-38B</a></p></td>
+</tr>
+<tr class="row-even"><td><p>AEAD</p></td>
+<td><p>CCM</p></td>
+<td><p><a class="reference external" href="https://csrc.nist.gov/projects/cryptographic-algorithm-validation-program/CAVP-TESTING-BLOCK-CIPHER-MODES#CCM">NIST - CCM</a></p></td>
+<td><p><a class="reference external" href="https://csrc.nist.gov/projects/cryptographic-algorithm-validation-program/CAVP-TESTING-BLOCK-CIPHER-MODES#CCM">NIST - CCM</a></p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>CCM*</p></td>
+<td><p>Formal Specification of the CCM*
+Mode of Operation - September 9, 2005</p></td>
+<td><p>Formal Specification of the CCM*
+Mode of Operation - September 9, 2005</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>EAX</p></td>
+<td><p><a class="reference external" href="https://csrc.nist.gov/csrc/media/projects/block-cipher-techniques/documents/bcm/proposed-modes/eax/eax-spec.pdf">The EAX Mode of Operation</a></p></td>
+<td><p><a class="reference external" href="https://csrc.nist.gov/csrc/media/projects/block-cipher-techniques/documents/bcm/proposed-modes/eax/eax-spec.pdf">The EAX Mode of Operation</a></p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>GCM</p></td>
+<td><p><a class="reference external" href="https://csrc.nist.gov/projects/cryptographic-algorithm-validation-program/CAVP-TESTING-BLOCK-CIPHER-MODES#GCMVS">NIST - GCM</a></p></td>
+<td><p><a class="reference external" href="https://csrc.nist.gov/projects/cryptographic-algorithm-validation-program/CAVP-TESTING-BLOCK-CIPHER-MODES#GCMVS">NIST - GCM</a></p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>ChaCha-Poly</p></td>
+<td><p><a class="reference external" href="https://datatracker.ietf.org/doc/html/rfc7539">RFC 7539 - ChaCha20 and Poly1305 for IETF Protocols</a></p></td>
+<td><p><a class="reference external" href="https://datatracker.ietf.org/doc/html/rfc7539">RFC 7539 - ChaCha20 and Poly1305 for IETF Protocols</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>ECDH</p></td>
+<td><p>secp160r1</p></td>
+<td><p><a class="reference external" href="https://csrc.nist.gov/projects/cryptographic-algorithm-validation-program/Component-Testing#ECCCDH">NIST - ECDH</a></p></td>
+<td><p>GEC 2: Test Vectors for SEC 1</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>secp160r2</p></td>
+<td></td>
+<td><p>No test vectors</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>secp192r1</p></td>
+<td></td>
+<td><p><a class="reference external" href="https://csrc.nist.gov/projects/cryptographic-algorithm-validation-program/Component-Testing#ECCCDH">NIST - ECDH</a></p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>secp224r1</p></td>
+<td></td>
+<td><p><a class="reference external" href="https://csrc.nist.gov/projects/cryptographic-algorithm-validation-program/Component-Testing#ECCCDH">NIST - ECDH</a></p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>secp256r1</p></td>
+<td></td>
+<td><p><a class="reference external" href="https://csrc.nist.gov/projects/cryptographic-algorithm-validation-program/Component-Testing#ECCCDH">NIST - ECDH</a></p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>secp384r1</p></td>
+<td></td>
+<td><p><a class="reference external" href="https://csrc.nist.gov/projects/cryptographic-algorithm-validation-program/Component-Testing#ECCCDH">NIST - ECDH</a></p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>secp521r1</p></td>
+<td></td>
+<td><p><a class="reference external" href="https://csrc.nist.gov/projects/cryptographic-algorithm-validation-program/Component-Testing#ECCCDH">NIST - ECDH</a></p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>secp160k1</p></td>
+<td></td>
+<td><p>No test vectors</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>secp192k1</p></td>
+<td></td>
+<td><p>No test vectors</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>secp224k1</p></td>
+<td></td>
+<td><p>No test vectors</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>secp256k1</p></td>
+<td></td>
+<td><p>No test vectors</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>bp256r1</p></td>
+<td><p><a class="reference external" href="https://datatracker.ietf.org/doc/html/rfc7027">RFC 7027 - ECC Brainpool Curves for TLS</a></p></td>
+<td><p><a class="reference external" href="https://datatracker.ietf.org/doc/html/rfc7027">RFC 7027 - ECC Brainpool Curves for TLS</a></p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>bp384r1</p></td>
+<td></td>
+<td><p><a class="reference external" href="https://datatracker.ietf.org/doc/html/rfc7027">RFC 7027 - ECC Brainpool Curves for TLS</a></p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>bp512r1</p></td>
+<td></td>
+<td><p><a class="reference external" href="https://datatracker.ietf.org/doc/html/rfc7027">RFC 7027 - ECC Brainpool Curves for TLS</a></p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>Curve25519</p></td>
+<td><p><a class="reference external" href="https://datatracker.ietf.org/doc/html/rfc7748">RFC 7748 - Elliptic Curves for Security</a></p></td>
+<td><p><a class="reference external" href="https://datatracker.ietf.org/doc/html/rfc7748">RFC 7748 - Elliptic Curves for Security</a></p></td>
+</tr>
+<tr class="row-even"><td><p>ECDSA</p></td>
+<td><p>secp160r1</p></td>
+<td><p><a class="reference external" href="https://csrc.nist.gov/projects/cryptographic-algorithm-validation-program/Digital-Signatures#ecdsa2vs">NIST - ECDSA</a></p></td>
+<td><p>No test vectors</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>secp160r2</p></td>
+<td></td>
+<td><p>No test vectors</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>secp192r1</p></td>
+<td></td>
+<td><p>No test vectors</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>secp224r1</p></td>
+<td></td>
+<td><p><a class="reference external" href="https://csrc.nist.gov/projects/cryptographic-algorithm-validation-program/Digital-Signatures#ecdsa2vs">NIST - ECDSA</a></p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>secp256r1</p></td>
+<td></td>
+<td><p><a class="reference external" href="https://csrc.nist.gov/projects/cryptographic-algorithm-validation-program/Digital-Signatures#ecdsa2vs">NIST - ECDSA</a></p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>secp384r1</p></td>
+<td></td>
+<td><p><a class="reference external" href="https://csrc.nist.gov/projects/cryptographic-algorithm-validation-program/Digital-Signatures#ecdsa2vs">NIST - ECDSA</a></p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>secp521r1</p></td>
+<td></td>
+<td><p><a class="reference external" href="https://csrc.nist.gov/projects/cryptographic-algorithm-validation-program/Digital-Signatures#ecdsa2vs">NIST - ECDSA</a></p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>secp160k1</p></td>
+<td></td>
+<td><p>No test vectors</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>secp192k1</p></td>
+<td></td>
+<td><p>No test vectors</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>secp224k1</p></td>
+<td></td>
+<td><p>No test vectors</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>secp256k1</p></td>
+<td></td>
+<td><p>No test vectors</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>bp256r1</p></td>
+<td><p><a class="reference external" href="https://datatracker.ietf.org/doc/html/rfc5639">RFC 5639 - ECC Brainpool Standard Curves and Curve Generation</a></p></td>
+<td><p>No test vectors</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>bp384r1</p></td>
+<td></td>
+<td><p>No test vectors</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>bp512r1</p></td>
+<td></td>
+<td><p>No test vectors</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>EdDSA</p></td>
+<td><p><a class="reference external" href="https://datatracker.ietf.org/doc/html/rfc8032">RFC 8032 - Edwards-Curve Digital Signature Algorithm (EdDSA)</a></p></td>
+<td><p><a class="reference external" href="https://datatracker.ietf.org/doc/html/rfc8032">RFC 8032 - Edwards-Curve Digital Signature Algorithm (EdDSA)</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Hash</p></td>
+<td><p>SHA256</p></td>
+<td><p><a class="reference external" href="https://csrc.nist.gov/projects/cryptographic-algorithm-validation-program/Secure-Hashing#shavs">NIST - SHA</a></p></td>
+<td><p><a class="reference external" href="https://csrc.nist.gov/projects/cryptographic-algorithm-validation-program/Secure-Hashing#shavs">NIST - SHA</a></p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>SHA512</p></td>
+<td></td>
+<td><p><a class="reference external" href="https://csrc.nist.gov/projects/cryptographic-algorithm-validation-program/Secure-Hashing#shavs">NIST - SHA</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>HMAC</p></td>
+<td><p>HMAC SHA256</p></td>
+<td><p><a class="reference external" href="https://csrc.nist.gov/projects/cryptographic-algorithm-validation-program/message-authentication">NIST - HMAC</a></p></td>
+<td><p><a class="reference external" href="https://csrc.nist.gov/projects/cryptographic-algorithm-validation-program/message-authentication">NIST - HMAC</a></p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>HMAC SHA512</p></td>
+<td></td>
+<td><p><a class="reference external" href="https://csrc.nist.gov/projects/cryptographic-algorithm-validation-program/message-authentication">NIST - HMAC</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>HKDF</p></td>
+<td><p>HKDF SHA256</p></td>
+<td><p><a class="reference external" href="https://datatracker.ietf.org/doc/html/rfc5869">RFC 5869 - HMAC-based Extract-and-Expand Key Derivation Function (HKDF)</a></p></td>
+<td><p><a class="reference external" href="https://datatracker.ietf.org/doc/html/rfc5869">RFC 5869 - HMAC-based Extract-and-Expand Key Derivation Function (HKDF)</a></p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>HKDF SHA512</p></td>
+<td></td>
+<td><p><a class="reference external" href="https://datatracker.ietf.org/doc/html/rfc5869">RFC 5869 - HMAC-based Extract-and-Expand Key Derivation Function (HKDF)</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>EC-JPAKE</p></td>
+<td><p>secp256r1</p></td>
+<td><p><a class="reference external" href="https://datatracker.ietf.org/doc/html/rfc8236#section-3">J-PAKE: Password-Authenticated Key Exchange by Juggling</a></p></td>
+<td><p>Custom</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="building-and-running">
+<h2><a class="toc-backref" href="#id8">Building and running</a><a class="headerlink" href="#building-and-running" title="Permalink to this heading"></a></h2>
+<p>This test can be found under <code class="file docutils literal notranslate"><span class="pre">tests/crypto/</span></code> in the nRF Connect SDK folder structure.</p>
+<p>See <a class="reference internal" href="../../getting_started/programming.html#gs-programming-cmd"><span class="std std-ref">Building on the command line</span></a> for information about how to build and program the tests.</p>
+<p>There are multiple ways to build the tests.
+See <span class="xref std std-ref">nrf_security</span> for additional information about configuring the Nordic Security Module.
+You can use the following configuration files to build the test in a specific setup:</p>
+<ul class="simple">
+<li><p><code class="file docutils literal notranslate"><span class="pre">overlay-cc3xx.conf</span></code> uses hardware acceleration using the Arm CryptoCell accelerator (for cryptography and entropy for random number generation).</p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">overlay-cc3xx-oberon.conf</span></code> uses a combination of hardware acceleration, using the Arm CryptoCell, and the Oberon software library, that adds key sizes and algorithms not supported in the CryptoCell.
+This setup uses hardware acceleration as much as possible.</p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">overlay-oberon.conf</span></code> uses only the Oberon software library for all cryptographic operations.</p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">overlay-vanilla.conf</span></code> is for software only, except for a hardware-accelerated module to generate entropy for random number generation.</p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">overlay-multi.conf</span></code> uses a combination of hardware acceleration, using the Arm CryptoCell, and vanilla Mbed TLS and Oberon software implementations to support functionalities not supported by the CryptoCell.
+This setup uses hardware acceleration as much as possible.</p></li>
+</ul>
+<p>You can use one of the listed overlay configurations by adding the <code class="docutils literal notranslate"><span class="pre">--</span> <span class="pre">-DOVERLAY_CONFIG=&lt;overlay_config_file&gt;</span></code> flag to your build. Also see <a class="reference internal" href="../../getting_started/modifying.html#cmake-options"><span class="std std-ref">Providing CMake options</span></a> for instructions on how to add this option.</p>
+<section id="ztest-custom-log-formatting">
+<span id="crypto-test-ztest-custom"></span><h3><a class="toc-backref" href="#id9">Ztest custom log formatting</a><a class="headerlink" href="#ztest-custom-log-formatting" title="Permalink to this heading"></a></h3>
+<p>Cryptography tests replace the standard Ztest formatting to assure more efficient reporting of running tests and test results.
+Set the configuration option <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZTEST_TC_UTIL_USER_OVERRIDE</span></code> to replace the Ztest macros <code class="docutils literal notranslate"><span class="pre">TC_START</span></code> and <code class="docutils literal notranslate"><span class="pre">Z_TC_END_RESULT</span></code> with versions more suited for reporting results of cryptographic tests.</p>
+<p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZTEST_TC_UTIL_USER_OVERRIDE</span></code> uses <code class="file docutils literal notranslate"><span class="pre">tests/crypto/include_override/tc_util_user_override.h</span></code> to define the custom formatting.</p>
+</section>
+<section id="testing">
+<span id="crypto-test-testing"></span><h3><a class="toc-backref" href="#id10">Testing</a><a class="headerlink" href="#testing" title="Permalink to this heading"></a></h3>
+<ol class="arabic">
+<li><p>Compile and program the application.</p></li>
+<li><p>Observe the result of the different test vectors in the log using <span class="xref std std-ref">RTT Viewer</span> or a terminal emulator.
+The last line of the output indicates the test result:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PROJECT</span> <span class="n">EXECUTION</span> <span class="n">SUCCESSFUL</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="additional-test-cases-and-test-vectors">
+<h3><a class="toc-backref" href="#id11">Additional test cases and test vectors</a><a class="headerlink" href="#additional-test-cases-and-test-vectors" title="Permalink to this heading"></a></h3>
+<p>You can add test cases and test vectors to the test suite either by including additional source files or by extending the existing files.</p>
+<section id="test-case">
+<h4>Test case<a class="headerlink" href="#test-case" title="Permalink to this heading"></a></h4>
+<p>A test case is a function designed to verify parts of the functionality of a cryptographic operation.
+Most cryptographic operations, like hash calculations and ECDH, have multiple test cases to be able to cover all features.
+A typical test case is called by looping over the registered test vectors and calling the test case.
+The execution logs the verdict for each test vector.</p>
+<section id="registering-a-test-case">
+<h5>Registering a test case<a class="headerlink" href="#registering-a-test-case" title="Permalink to this heading"></a></h5>
+<p>A new test case must be registered to the <code class="docutils literal notranslate"><span class="pre">test_case_data</span></code> section using <code class="docutils literal notranslate"><span class="pre">ITEM_REGISTER</span></code>, which registers it with the named section <code class="docutils literal notranslate"><span class="pre">test_case_hmac_data</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ITEM_REGISTER</span><span class="p">(</span><span class="n">test_case_hmac_data</span><span class="p">,</span> <span class="n">test_case_t</span> <span class="n">test_hmac</span><span class="p">)</span> <span class="o">=</span> <span class="p">{</span>
+<span class="o">.</span><span class="n">p_test_case_name</span> <span class="o">=</span> <span class="s2">&quot;HMAC&quot;</span><span class="p">,</span>
+<span class="o">.</span><span class="n">setup</span> <span class="o">=</span> <span class="n">hmac_setup</span><span class="p">,</span>
+<span class="o">.</span><span class="n">exec</span> <span class="o">=</span> <span class="n">exec_test_case_hmac</span><span class="p">,</span>
+<span class="o">.</span><span class="n">teardown</span> <span class="o">=</span> <span class="n">hmac_teardown</span><span class="p">,</span>
+<span class="o">.</span><span class="n">vector_type</span> <span class="o">=</span> <span class="n">TV_HMAC</span><span class="p">,</span>
+<span class="o">.</span><span class="n">vectors_start</span> <span class="o">=</span> <span class="n">__start_test_vector_hmac_data</span><span class="p">,</span>
+<span class="o">.</span><span class="n">vectors_stop</span> <span class="o">=</span> <span class="n">__stop_test_vector_hmac_data</span><span class="p">,</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The macro call to <code class="docutils literal notranslate"><span class="pre">ITEM_REGISTER</span></code> must be done in a <code class="file docutils literal notranslate"><span class="pre">.c</span></code> file.</p>
+</div>
+</section>
+<section id="setting-up-a-test-case">
+<h5>Setting up a test case<a class="headerlink" href="#setting-up-a-test-case" title="Permalink to this heading"></a></h5>
+<p>As part of the test case setup, any previously used buffers are cleared.
+The next test vector is fetched using the <code class="docutils literal notranslate"><span class="pre">ITEM_GET</span></code> macro.
+The macro requires the following parameters:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">test_vector_hmac_data</span></code> - The section to fetch the test vector from (HMAC in this example).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">test_vector_hmac_t</span></code> - Information about which type of test vector to expect in the given section.
+In the example, <code class="docutils literal notranslate"><span class="pre">test_vector_hmac_t</span></code> is expected.
+It is the same type that is used when registering HMAC test vectors.</p></li>
+<li><p>Information about which index to fetch a test vector from.</p></li>
+</ul>
+<p>The fetched test vector is then unhexified.</p>
+<p>Test vector data is stored as strings of hexadecimal characters.
+To use them, they must be parsed to binary, which is also done in the setup procedure.</p>
+<p>The following example shows a test vector setup:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">hmac_setup</span><span class="p">(</span><span class="n">void</span><span class="p">)</span>
+<span class="p">{</span>
+   <span class="n">hmac_clear_buffers</span><span class="p">();</span>
+   <span class="n">p_test_vector</span> <span class="o">=</span> <span class="n">ITEM_GET</span><span class="p">(</span><span class="n">test_vector_hmac_data</span><span class="p">,</span> <span class="n">test_vector_hmac_t</span><span class="p">,</span>
+                <span class="n">hmac_vector_n</span><span class="p">);</span>
+   <span class="n">unhexify_hmac</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="n">void</span> <span class="n">exec_test_case_hmac</span><span class="p">(</span><span class="n">void</span><span class="p">)</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+<p>On teardown, the test vector index is incremented, so that the next call to <code class="docutils literal notranslate"><span class="pre">hmac_setup</span></code> by the Ztest framework fetches the next test vector:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">hmac_combined_teardown</span><span class="p">(</span><span class="n">void</span><span class="p">)</span>
+<span class="p">{</span>
+   <span class="n">hmac_combined_vector_n</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="executing-a-test-case">
+<h5>Executing a test case<a class="headerlink" href="#executing-a-test-case" title="Permalink to this heading"></a></h5>
+<p>An example of an HMAC test case in a simplified form is shown below:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">exec_test_case_hmac</span><span class="p">(</span><span class="n">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="nb">int</span> <span class="n">err_code</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+
+<span class="o">/*</span> <span class="n">Initialize</span> <span class="n">the</span> <span class="n">HMAC</span> <span class="n">module</span><span class="o">.</span> <span class="o">*/</span>
+<span class="n">mbedtls_md_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">md_context</span><span class="p">);</span>
+
+<span class="n">const</span> <span class="n">mbedtls_md_info_t</span> <span class="o">*</span><span class="n">p_md_info</span> <span class="o">=</span>
+        <span class="n">mbedtls_md_info_from_type</span><span class="p">(</span><span class="n">p_test_vector</span><span class="o">-&gt;</span><span class="n">digest_type</span><span class="p">);</span>
+<span class="n">err_code</span> <span class="o">=</span> <span class="n">mbedtls_md_setup</span><span class="p">(</span><span class="o">&amp;</span><span class="n">md_context</span><span class="p">,</span> <span class="n">p_md_info</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">err_code</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">LOG_WRN</span><span class="p">(</span><span class="s2">&quot;mb setup ec: -0x</span><span class="si">%02X</span><span class="s2">&quot;</span><span class="p">,</span> <span class="o">-</span><span class="n">err_code</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="n">TEST_VECTOR_ASSERT_EQUAL</span><span class="p">(</span><span class="n">err_code</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+
+<span class="n">start_time_measurement</span><span class="p">();</span>
+<span class="n">err_code</span> <span class="o">=</span> <span class="n">mbedtls_md_hmac_starts</span><span class="p">(</span><span class="o">&amp;</span><span class="n">md_context</span><span class="p">,</span> <span class="n">m_hmac_key_buf</span><span class="p">,</span> <span class="n">key_len</span><span class="p">);</span>
+<span class="n">TEST_VECTOR_ASSERT_EQUAL</span><span class="p">(</span><span class="n">err_code</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+
+<span class="n">err_code</span> <span class="o">=</span>
+        <span class="n">mbedtls_md_hmac_update</span><span class="p">(</span><span class="o">&amp;</span><span class="n">md_context</span><span class="p">,</span> <span class="n">m_hmac_input_buf</span><span class="p">,</span> <span class="n">in_len</span><span class="p">);</span>
+<span class="n">TEST_VECTOR_ASSERT_EQUAL</span><span class="p">(</span><span class="n">err_code</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+
+<span class="o">/*</span> <span class="n">Finalize</span> <span class="n">the</span> <span class="n">HMAC</span> <span class="n">computation</span><span class="o">.</span> <span class="o">*/</span>
+<span class="n">err_code</span> <span class="o">=</span> <span class="n">mbedtls_md_hmac_finish</span><span class="p">(</span><span class="o">&amp;</span><span class="n">md_context</span><span class="p">,</span> <span class="n">m_hmac_output_buf</span><span class="p">);</span>
+<span class="n">stop_time_measurement</span><span class="p">();</span>
+
+<span class="n">TEST_VECTOR_ASSERT_EQUAL</span><span class="p">(</span><span class="n">p_test_vector</span><span class="o">-&gt;</span><span class="n">expected_err_code</span><span class="p">,</span> <span class="n">err_code</span><span class="p">);</span>
+
+<span class="o">/*</span> <span class="n">Verify</span> <span class="n">the</span> <span class="n">generated</span> <span class="n">HMAC</span><span class="o">.</span> <span class="o">*/</span>
+<span class="n">TEST_VECTOR_ASSERT_EQUAL</span><span class="p">(</span><span class="n">expected_hmac_len</span><span class="p">,</span> <span class="n">hmac_len</span><span class="p">);</span>
+<span class="n">TEST_VECTOR_MEMCMP_ASSERT</span><span class="p">(</span><span class="n">m_hmac_output_buf</span><span class="p">,</span> <span class="n">m_hmac_expected_output_buf</span><span class="p">,</span>
+                          <span class="n">expected_hmac_len</span><span class="p">,</span>
+                          <span class="n">p_test_vector</span><span class="o">-&gt;</span><span class="n">expected_result</span><span class="p">,</span>
+                          <span class="s2">&quot;Incorrect hmac&quot;</span><span class="p">);</span>
+
+<span class="n">mbedtls_md_free</span><span class="p">(</span><span class="o">&amp;</span><span class="n">md_context</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="test-vectors">
+<h4>Test vectors<a class="headerlink" href="#test-vectors" title="Permalink to this heading"></a></h4>
+<p>A test vector is a set of inputs and expected outputs to verify the functionality provided in a test case:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">typedef</span> <span class="n">const</span> <span class="n">struct</span> <span class="p">{</span>
+        <span class="n">const</span> <span class="n">uint32_t</span> <span class="n">digest_type</span><span class="p">;</span>        <span class="o">/**&lt;</span> <span class="n">Digest</span> <span class="nb">type</span> <span class="n">of</span> <span class="n">HMAC</span> <span class="n">operation</span><span class="o">.</span> <span class="o">*/</span>
+        <span class="n">const</span> <span class="nb">int</span> <span class="n">expected_err_code</span><span class="p">;</span>    <span class="o">/**&lt;</span> <span class="n">Expected</span> <span class="n">error</span> <span class="n">code</span> <span class="kn">from</span> <span class="nn">HMAC</span> <span class="n">operation</span><span class="o">.</span> <span class="o">*/</span>
+        <span class="n">const</span> <span class="n">uint8_t</span> <span class="n">expected_result</span><span class="p">;</span>  <span class="o">/**&lt;</span> <span class="n">Expected</span> <span class="n">result</span> <span class="n">of</span> <span class="n">HMAC</span> <span class="n">operation</span><span class="o">.</span> <span class="o">*/</span>
+        <span class="n">const</span> <span class="n">char</span> <span class="o">*</span><span class="n">p_test_vector_name</span><span class="p">;</span> <span class="o">/**&lt;</span> <span class="n">Pointer</span> <span class="n">to</span> <span class="n">HMAC</span> <span class="n">test</span> <span class="n">vector</span> <span class="n">name</span><span class="o">.</span> <span class="o">*/</span>
+        <span class="n">const</span> <span class="n">char</span>
+                <span class="o">*</span><span class="n">p_input</span><span class="p">;</span>                   <span class="o">/**&lt;</span> <span class="n">Pointer</span> <span class="n">to</span> <span class="nb">input</span> <span class="n">message</span> <span class="ow">in</span> <span class="nb">hex</span> <span class="n">string</span> <span class="nb">format</span><span class="o">.</span> <span class="o">*/</span>
+        <span class="n">const</span> <span class="n">char</span> <span class="o">*</span><span class="n">p_key</span><span class="p">;</span>              <span class="o">/**&lt;</span> <span class="n">Pointer</span> <span class="n">to</span> <span class="n">HMAC</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">hex</span> <span class="n">string</span> <span class="nb">format</span><span class="o">.</span> <span class="o">*/</span>
+        <span class="n">const</span> <span class="n">char</span> <span class="o">*</span><span class="n">p_expected_output</span><span class="p">;</span>  <span class="o">/**&lt;</span> <span class="n">Pointer</span> <span class="n">to</span> <span class="n">expected</span> <span class="n">HMAC</span> <span class="n">digest</span> <span class="ow">in</span> <span class="nb">hex</span> <span class="n">string</span> <span class="nb">format</span><span class="o">.</span> <span class="o">*/</span>
+<span class="p">}</span> <span class="n">test_vector_hmac_t</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="registering-a-test-vector">
+<h4>Registering a test vector<a class="headerlink" href="#registering-a-test-vector" title="Permalink to this heading"></a></h4>
+<p>Test vectors are added by registering them for a section defined in the test case code.
+The test vector is registered in the section <code class="docutils literal notranslate"><span class="pre">test_vector_hmac_data</span></code>, which is defined in the test case example <code class="docutils literal notranslate"><span class="pre">exec_test_case_hmac</span></code>.
+The test vector can reuse the already defined hash test vector structure <code class="docutils literal notranslate"><span class="pre">test_vector_hmac_t</span></code>, as shown in the code block below:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/*</span> <span class="n">HMAC</span> <span class="o">-</span> <span class="n">Custom</span> <span class="n">test</span> <span class="n">vector</span> <span class="o">*/</span>
+<span class="n">ITEM_REGISTER</span><span class="p">(</span><span class="n">test_vector_hmac_data</span><span class="p">,</span>
+              <span class="n">test_vector_hmac_t</span> <span class="n">test_vector_hmac256_min_key_min_message_0</span><span class="p">)</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="o">.</span><span class="n">digest_type</span> <span class="o">=</span> <span class="n">MBEDTLS_MD_SHA256</span><span class="p">,</span>
+        <span class="o">.</span><span class="n">expected_err_code</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="o">.</span><span class="n">expected_result</span> <span class="o">=</span> <span class="n">EXPECTED_TO_PASS</span><span class="p">,</span>
+        <span class="o">.</span><span class="n">p_test_vector_name</span> <span class="o">=</span> <span class="n">TV_NAME</span><span class="p">(</span><span class="s2">&quot;SHA256 key_len=1 message_len=1 zeros&quot;</span><span class="p">),</span>
+        <span class="o">.</span><span class="n">p_input</span> <span class="o">=</span> <span class="s2">&quot;00&quot;</span><span class="p">,</span>
+        <span class="o">.</span><span class="n">p_key</span> <span class="o">=</span> <span class="s2">&quot;00&quot;</span><span class="p">,</span>
+        <span class="o">.</span><span class="n">p_expected_output</span> <span class="o">=</span>
+                <span class="s2">&quot;6620b31f2924b8c01547745f41825d322336f83ebb13d723678789d554d8a3ef&quot;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</section>
+<section id="output-logging">
+<h4>Output logging<a class="headerlink" href="#output-logging" title="Permalink to this heading"></a></h4>
+<p>The test project generates a test log using RTT or UART output.
+Executing <code class="docutils literal notranslate"><span class="pre">exec_test_case_hmac</span></code> with its registered test vectors adds the following output to the test log:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Running</span> <span class="n">test</span> <span class="n">suite</span> <span class="n">HMAC</span>
+<span class="mi">357</span><span class="p">:</span> <span class="n">SHA256</span> <span class="n">key_len</span><span class="o">=</span><span class="mi">131</span> <span class="n">message_len</span><span class="o">=</span><span class="mi">152</span> <span class="o">--</span> <span class="n">PASS</span> <span class="o">--</span> <span class="p">[</span><span class="o">../</span><span class="n">test_cases</span><span class="o">/</span><span class="n">test_vectors_hmac</span><span class="o">.</span><span class="n">c</span><span class="p">:</span><span class="mi">259</span><span class="p">]</span>
+<span class="mi">358</span><span class="p">:</span> <span class="n">SHA256</span> <span class="n">key_len</span><span class="o">=</span><span class="mi">131</span> <span class="n">message_len</span><span class="o">=</span><span class="mi">54</span> <span class="o">--</span> <span class="n">PASS</span> <span class="o">--</span> <span class="p">[</span><span class="o">../</span><span class="n">test_cases</span><span class="o">/</span><span class="n">test_vectors_hmac</span><span class="o">.</span><span class="n">c</span><span class="p">:</span><span class="mi">240</span><span class="p">]</span>
+<span class="mi">359</span><span class="p">:</span> <span class="n">SHA256</span> <span class="n">key_len</span><span class="o">=</span><span class="mi">25</span> <span class="n">message_len</span><span class="o">=</span><span class="mi">50</span> <span class="o">--</span> <span class="n">PASS</span> <span class="o">--</span> <span class="p">[</span><span class="o">../</span><span class="n">test_cases</span><span class="o">/</span><span class="n">test_vectors_hmac</span><span class="o">.</span><span class="n">c</span><span class="p">:</span><span class="mi">225</span><span class="p">]</span>
+<span class="mi">360</span><span class="p">:</span> <span class="n">SHA256</span> <span class="n">key_len</span><span class="o">=</span><span class="mi">20</span> <span class="n">message_len</span><span class="o">=</span><span class="mi">50</span> <span class="o">--</span> <span class="n">PASS</span> <span class="o">--</span> <span class="p">[</span><span class="o">../</span><span class="n">test_cases</span><span class="o">/</span><span class="n">test_vectors_hmac</span><span class="o">.</span><span class="n">c</span><span class="p">:</span><span class="mi">210</span><span class="p">]</span>
+<span class="mi">361</span><span class="p">:</span> <span class="n">SHA256</span> <span class="n">key_len</span><span class="o">=</span><span class="mi">4</span> <span class="n">message_len</span><span class="o">=</span><span class="mi">28</span> <span class="o">--</span> <span class="n">PASS</span> <span class="o">--</span> <span class="p">[</span><span class="o">../</span><span class="n">test_cases</span><span class="o">/</span><span class="n">test_vectors_hmac</span><span class="o">.</span><span class="n">c</span><span class="p">:</span><span class="mi">197</span><span class="p">]</span>
+<span class="mi">362</span><span class="p">:</span> <span class="n">SHA256</span> <span class="n">key_len</span><span class="o">=</span><span class="mi">20</span> <span class="n">message_len</span><span class="o">=</span><span class="mi">8</span> <span class="o">--</span> <span class="n">PASS</span> <span class="o">--</span> <span class="p">[</span><span class="o">../</span><span class="n">test_cases</span><span class="o">/</span><span class="n">test_vectors_hmac</span><span class="o">.</span><span class="n">c</span><span class="p">:</span><span class="mi">184</span><span class="p">]</span>
+<span class="mi">363</span><span class="p">:</span> <span class="n">SHA256</span> <span class="n">key_len</span><span class="o">=</span><span class="mi">74</span> <span class="n">message_len</span><span class="o">=</span><span class="mi">128</span> <span class="o">--</span> <span class="n">PASS</span> <span class="o">--</span> <span class="p">[</span><span class="o">../</span><span class="n">test_cases</span><span class="o">/</span><span class="n">test_vectors_hmac</span><span class="o">.</span><span class="n">c</span><span class="p">:</span><span class="mi">164</span><span class="p">]</span>
+<span class="mi">364</span><span class="p">:</span> <span class="n">SHA256</span> <span class="n">key_len</span><span class="o">=</span><span class="mi">64</span> <span class="n">message_len</span><span class="o">=</span><span class="mi">128</span> <span class="o">--</span> <span class="n">PASS</span> <span class="o">--</span> <span class="p">[</span><span class="o">../</span><span class="n">test_cases</span><span class="o">/</span><span class="n">test_vectors_hmac</span><span class="o">.</span><span class="n">c</span><span class="p">:</span><span class="mi">145</span><span class="p">]</span>
+<span class="mi">365</span><span class="p">:</span> <span class="n">SHA256</span> <span class="n">key_len</span><span class="o">=</span><span class="mi">45</span> <span class="n">message_len</span><span class="o">=</span><span class="mi">128</span> <span class="o">--</span> <span class="n">PASS</span> <span class="o">--</span> <span class="p">[</span><span class="o">../</span><span class="n">test_cases</span><span class="o">/</span><span class="n">test_vectors_hmac</span><span class="o">.</span><span class="n">c</span><span class="p">:</span><span class="mi">127</span><span class="p">]</span>
+<span class="mi">366</span><span class="p">:</span> <span class="n">SHA256</span> <span class="n">key_len</span><span class="o">=</span><span class="mi">40</span> <span class="n">message_len</span><span class="o">=</span><span class="mi">128</span> <span class="o">--</span> <span class="n">PASS</span> <span class="o">--</span> <span class="p">[</span><span class="o">../</span><span class="n">test_cases</span><span class="o">/</span><span class="n">test_vectors_hmac</span><span class="o">.</span><span class="n">c</span><span class="p">:</span><span class="mi">109</span><span class="p">]</span>
+<span class="mi">367</span><span class="p">:</span> <span class="n">SHA256</span> <span class="n">key_len</span><span class="o">=</span><span class="mi">1</span> <span class="n">message_len</span><span class="o">=</span><span class="mi">1</span> <span class="n">non</span><span class="o">-</span><span class="n">zeros</span> <span class="o">--</span> <span class="n">PASS</span> <span class="o">--</span> <span class="p">[</span><span class="o">../</span><span class="n">test_cases</span><span class="o">/</span><span class="n">test_vectors_hmac</span><span class="o">.</span><span class="n">c</span><span class="p">:</span><span class="mi">96</span><span class="p">]</span>
+<span class="mi">368</span><span class="p">:</span> <span class="n">SHA256</span> <span class="n">key_len</span><span class="o">=</span><span class="mi">1</span> <span class="n">message_len</span><span class="o">=</span><span class="mi">1</span> <span class="n">zeros</span> <span class="o">--</span> <span class="n">PASS</span> <span class="o">--</span> <span class="p">[</span><span class="o">../</span><span class="n">test_cases</span><span class="o">/</span><span class="n">test_vectors_hmac</span><span class="o">.</span><span class="n">c</span><span class="p">:</span><span class="mi">82</span><span class="p">]</span>
+<span class="mi">369</span><span class="p">:</span> <span class="n">SHA256</span> <span class="n">invalid</span> <span class="o">-</span> <span class="n">signature</span> <span class="n">changed</span> <span class="o">--</span> <span class="n">PASS</span> <span class="o">--</span> <span class="p">[</span><span class="o">../</span><span class="n">test_cases</span><span class="o">/</span><span class="n">test_vectors_hmac</span><span class="o">.</span><span class="n">c</span><span class="p">:</span><span class="mi">64</span><span class="p">]</span>
+<span class="mi">370</span><span class="p">:</span> <span class="n">SHA256</span> <span class="n">invalid</span> <span class="o">-</span> <span class="n">key</span> <span class="n">changed</span> <span class="o">--</span> <span class="n">PASS</span> <span class="o">--</span> <span class="p">[</span><span class="o">../</span><span class="n">test_cases</span><span class="o">/</span><span class="n">test_vectors_hmac</span><span class="o">.</span><span class="n">c</span><span class="p">:</span><span class="mi">46</span><span class="p">]</span>
+<span class="mi">371</span><span class="p">:</span> <span class="n">SHA256</span> <span class="n">invalid</span> <span class="o">-</span> <span class="n">message</span> <span class="n">changed</span> <span class="o">--</span> <span class="n">PASS</span> <span class="o">--</span> <span class="p">[</span><span class="o">../</span><span class="n">test_cases</span><span class="o">/</span><span class="n">test_vectors_hmac</span><span class="o">.</span><span class="n">c</span><span class="p">:</span><span class="mi">28</span><span class="p">]</span>
+<span class="n">Test</span> <span class="n">suite</span> <span class="n">HMAC</span> <span class="n">succeeded</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../samples/edge.html" class="btn btn-neutral float-right" title="Edge Impulse samples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../../samples/crypto/sha256/README.html" class="btn btn-neutral" title="Crypto: SHA-256" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

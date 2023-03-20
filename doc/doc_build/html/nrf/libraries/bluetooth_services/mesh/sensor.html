@@ -1,0 +1,1561 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bluetooth mesh sensors &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../../_static/js/ncs.js"
+></script>
+<script src="../../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Bluetooth mesh sensor types" href="sensor_types.html" />
+    <link rel="prev" title="Bluetooth mesh provisioning handler for Nordic DKs" href="dk_prov.html" />
+<link
+  href="../../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../drivers.html">Drivers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Libraries</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../bin/index.html">Binary libraries</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Bluetooth libraries and services</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../adv_prov.html">Bluetooth LE advertising providers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../conn_ctx.html">Bluetooth connection context</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../enocean.html">Bluetooth EnOcean</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gatt_dm.html">GATT Discovery Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gatt_pool.html">Bluetooth GATT attribute pools</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../mesh.html">Bluetooth mesh profile</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="model_types.html">Bluetooth mesh models overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="models.html">Bluetooth mesh models</a></li>
+<li class="toctree-l4"><a class="reference internal" href="properties.html">Bluetooth mesh properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dk_prov.html">Bluetooth mesh provisioning handler for Nordic DKs</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Bluetooth mesh sensors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sensor_types.html">Bluetooth mesh sensor types</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../rpc.html">Bluetooth Low Energy Remote Procedure Call</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../scan.html">Scanning module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../services/ams_client.html">Apple Media Service (AMS) Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../services/ancs_client.html">Apple Notification Center Service (ANCS) Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../services/bas_client.html">GATT Battery Service (BAS) Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../services/bms.html">GATT Bond Management Service (BMS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../services/cgms.html">GATT Continuous Glucose Monitoring Service (CGMS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../services/cts_client.html">GATT Current Time Service (CTS) Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../services/ddfs.html">Direction and Distance Finding Service (DDFS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../services/dfu_smp.html">GATT DFU SMP Service Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../services/fast_pair.html">Google Fast Pair Service (GFPS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../services/gattp.html">Generic Attribute (GATT) Profile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../services/hids.html">GATT Human Interface Device (HID) Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../services/hogp.html">GATT Human Interface Device Service (HIDS) Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../services/hrs_client.html">GATT Heart Rate Service (HRS) Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../services/latency.html">GATT Latency Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../services/latency_client.html">GATT Latency Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../services/lbs.html">LED Button Service (LBS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../services/mds.html">Memfault Diagnostic Service (MDS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../services/nsms.html">Nordic Status Message Service (NSMS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../services/nus.html">Nordic UART Service (NUS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../services/nus_client.html">Nordic UART Service (NUS) Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../services/rscs.html">Running Speed and Cadence Service (RSCS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../services/throughput.html">GATT Throughput Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../services/wifi_prov.html">Wi-Fi Provisioning Service</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../bootloader/index.html">Bootloader libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../caf/index.html">Common Application Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../debug/index.html">Debug libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../dfu/index.html">DFU libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gazell/index.html">Gazell libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../modem/index.html">Modem libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mpsl/index.html">Multiprotocol Service Layer libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../networking/index.html">Libraries for networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nfc/index.html">Libraries for NFC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nrf_rpc/index.html">nRF RPC libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../others/index.html">Other libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../shell/index.html">Shell libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tfm/index.html">TF-M libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../zigbee/index.html">Libraries for Zigbee</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Libraries</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Bluetooth libraries and services</a></li>
+          <li class="breadcrumb-item"><a href="../mesh.html">Bluetooth mesh profile</a></li>
+      <li class="breadcrumb-item active">Bluetooth mesh sensors</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/libraries/bluetooth_services/mesh/sensor.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="bluetooth-mesh-sensors">
+<span id="bt-mesh-sensors-readme"></span><h1>Bluetooth mesh sensors<a class="headerlink" href="#bluetooth-mesh-sensors" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#basic-example" id="id7">Basic example</a></p></li>
+<li><p><a class="reference internal" href="#sensor-types" id="id8">Sensor types</a></p>
+<ul>
+<li><p><a class="reference internal" href="#sensor-channels" id="id9">Sensor channels</a></p></li>
+<li><p><a class="reference internal" href="#sensor-series-types" id="id10">Sensor series types</a></p></li>
+<li><p><a class="reference internal" href="#sensor-setting-types" id="id11">Sensor setting types</a></p></li>
+<li><p><a class="reference internal" href="#available-sensor-types" id="id12">Available sensor types</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#sample-data-reporting" id="id13">Sample data reporting</a></p>
+<ul>
+<li><p><a class="reference internal" href="#cadence" id="id14">Cadence</a></p></li>
+<li><p><a class="reference internal" href="#delta-threshold" id="id15">Delta threshold</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#descriptors" id="id16">Descriptors</a></p></li>
+<li><p><a class="reference internal" href="#usage" id="id17">Usage</a></p>
+<ul>
+<li><p><a class="reference internal" href="#sensor-data" id="id18">Sensor data</a></p></li>
+<li><p><a class="reference internal" href="#sensor-series" id="id19">Sensor series</a></p></li>
+<li><p><a class="reference internal" href="#sensor-settings" id="id20">Sensor settings</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#api-documentation" id="id21">API documentation</a></p></li>
+</ul>
+</div>
+<p>The Bluetooth® mesh specification provides a common scheme for representing all sensors.
+A single Bluetooth mesh sensor instance represents a single physical sensor, and a mesh device may present any number of sensors to the network through a Sensor Server model.
+Sensors represent their measurements as a list of sensor channels, as described by the sensor’s assigned type.</p>
+<p>Sensors are accessed through the Sensor models, which are documented separately:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="sensor_models.html#bt-mesh-sensor-models"><span class="std std-ref">Sensor models</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="sensor_srv.html#bt-mesh-sensor-srv-readme"><span class="std std-ref">Sensor Server</span></a></p></li>
+<li><p><a class="reference internal" href="sensor_cli.html#bt-mesh-sensor-cli-readme"><span class="std std-ref">Sensor Client</span></a></p></li>
+</ul>
+</li>
+</ul>
+<section id="basic-example">
+<span id="bt-mesh-sensor-basic-example"></span><h2><a class="toc-backref" href="#id7">Basic example</a><a class="headerlink" href="#basic-example" title="Permalink to this heading"></a></h2>
+<p>A sensor reporting the device operating temperature could combine the Bluetooth mesh <a class="reference internal" href="sensor_types.html#c.bt_mesh_sensor_present_dev_op_temp" title="bt_mesh_sensor_present_dev_op_temp"><code class="xref c c-var docutils literal notranslate"><span class="pre">Present</span> <span class="pre">Device</span> <span class="pre">Operating</span> <span class="pre">Temperature</span></code></a> sensor type with the on-chip <code class="docutils literal notranslate"><span class="pre">TEMP_NRF5</span></code> temperature sensor driver:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">device</span><span class="w"> </span><span class="o">*</span><span class="n">dev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DEVICE_DT_GET_ONE</span><span class="p">(</span><span class="n">nordic_nrf_temp</span><span class="p">);</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">temp_get</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_sensor</span><span class="w"> </span><span class="o">*</span><span class="n">sensor</span><span class="p">,</span>
+<span class="w">                    </span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_msg_ctx</span><span class="w"> </span><span class="o">*</span><span class="n">ctx</span><span class="p">,</span>
+<span class="w">                    </span><span class="k">struct</span><span class="w"> </span><span class="nc">sensor_value</span><span class="w"> </span><span class="o">*</span><span class="n">rsp</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">sensor_sample_fetch</span><span class="p">(</span><span class="n">dev</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">sensor_channel_get</span><span class="p">(</span><span class="n">dev</span><span class="p">,</span><span class="w"> </span><span class="n">SENSOR_CHAN_DIE_TEMP</span><span class="p">,</span><span class="w"> </span><span class="n">rsp</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_sensor</span><span class="w"> </span><span class="n">temp_sensor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">.</span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">bt_mesh_sensor_present_dev_op_temp</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">get</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">temp_get</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">init</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">     </span><span class="n">__ASSERT</span><span class="p">(</span><span class="n">device_is_ready</span><span class="p">(</span><span class="n">dev</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;Sensor device not ready&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Additionally, a pointer to the <code class="docutils literal notranslate"><span class="pre">temp_sensor</span></code> structure should be passed to a Sensor Server to be exposed to the mesh.
+See <a class="reference internal" href="sensor_srv.html#bt-mesh-sensor-srv-readme"><span class="std std-ref">Sensor Server</span></a> for details.</p>
+</section>
+<section id="sensor-types">
+<span id="bt-mesh-sensor-types"></span><h2><a class="toc-backref" href="#id8">Sensor types</a><a class="headerlink" href="#sensor-types" title="Permalink to this heading"></a></h2>
+<p>Sensor types are the specification defined data types for the various Bluetooth mesh sensor parameters.
+Each sensor type is assigned its own Device Property ID, as specified in the Bluetooth mesh device properties specification.
+Like the Device Properties, the Sensor types are connected to a Bluetooth GATT Characteristic, which describes the unit, range, resolution and encoding scheme of the sensor type.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The Bluetooth® mesh specification only allows sensor types that have a Device Property ID in the Bluetooth mesh device properties specification.
+It’s not possible to represent vendor specific sensor values.</p>
+</div>
+<p>The sensor types may either be used as the data types of the sensor output values, or as configuration parameters for the sensors.</p>
+<p>The Bluetooth mesh Sensor type API is built to mirror and integrate well with the Zephyr <span class="xref std std-ref">zephyr:sensor_api</span> API.
+Some concepts in the Bluetooth mesh specification are changed slightly to fit better with the Zephyr Sensor API, with focus on making integration as simple as possible.</p>
+<section id="sensor-channels">
+<span id="bt-mesh-sensor-types-channels"></span><h3><a class="toc-backref" href="#id9">Sensor channels</a><a class="headerlink" href="#sensor-channels" title="Permalink to this heading"></a></h3>
+<p>Each sensor type may consist of one or more channels.
+The list of sensor channels in each sensor type is immutable, and all channels must always have a valid value when the sensor data is passed around.
+This is slightly different from the sensor type representation in the Bluetooth mesh specification, which represents multi-channel sensors as structures, rather than flat lists.</p>
+<p>Each channel in a sensor type is represented by a single <code class="xref c c-struct docutils literal notranslate"><span class="pre">sensor_value</span></code>.
+For sensor values that are represented as whole numbers, the fractional part of the value (<code class="xref c c-member docutils literal notranslate"><span class="pre">sensor_value.val2</span></code>) is ignored.
+Boolean types are inferred only from the integer part of the value (<code class="xref c c-member docutils literal notranslate"><span class="pre">sensor_value.val1</span></code>).</p>
+<p>Every sensor channel has a name and a unit, as listed in the sensor type documentation.
+The name and unit are only available if <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_MESH_SENSOR_LABELS</span></code> option is set, and can aid in debugging and presentation of the sensor output.
+Both the channel name and unit is also listed in the documentation for each sensor type.</p>
+<p>Most sensor values are reported as scalars with some scaling factor applied to them during encoding.
+This scaling factor and the encoded data type determines the resolution and range of the sensor data in a specific channel.
+For instance, if a sensor channel measuring electric current has a resolution of 0.5 Ampere, this is the highest resolution value other mesh devices will be able to read out from the sensor.
+Before encoding, the sensor values are rounded to their nearest available representation, so the following sensor value would be read as 7.5 Ampere:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/* Sensor value: 7.3123 A */</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">sensor_value</span><span class="w"> </span><span class="n">electrical_current</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">.</span><span class="n">val1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">val2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">312300</span><span class="p">,</span><span class="w"> </span><span class="cm">/* 6 digit fraction */</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>Various other encoding schemes are used to represent non-scalars.
+See the documentation or specification for the individual sensor channels for more details.</p>
+</section>
+<section id="sensor-series-types">
+<span id="bt-mesh-sensor-types-series"></span><h3><a class="toc-backref" href="#id10">Sensor series types</a><a class="headerlink" href="#sensor-series-types" title="Permalink to this heading"></a></h3>
+<p>The sensor series functionality may be used for all sensor types.
+However, some sensor types are made specifically for being used in a sensor series.
+These sensor types have one primary channel containing the sensor data and two secondary channels that denote some interval in which the primary channel’s data is captured.
+Together, the three channels are able to represent historical sensor data as a histogram, and Sensor Client models may request access to specific measurement spans from a Sensor Server model.</p>
+<p>The unit of the measurement span is defined by the sensor type, and will typically be a time interval or a range of operational parameters, like temperature or voltage level.
+For instance, the <a class="reference internal" href="sensor_types.html#c.bt_mesh_sensor_rel_dev_energy_use_in_a_period_of_day" title="bt_mesh_sensor_rel_dev_energy_use_in_a_period_of_day"><code class="xref c c-var docutils literal notranslate"><span class="pre">bt_mesh_sensor_rel_dev_energy_use_in_a_period_of_day</span></code></a> sensor type represents the energy used by the device in specific periods of the day.
+The primary channel of this sensor type measures energy usage in kWh, and the secondary channels denote the timespan in which the specific energy usage was measured.
+A sensor of this type may be queried for specific measurement periods measured in hours, and should provide the registered energy usage only for the requested time span.</p>
+</section>
+<section id="sensor-setting-types">
+<span id="bt-mesh-sensor-types-settings"></span><h3><a class="toc-backref" href="#id11">Sensor setting types</a><a class="headerlink" href="#sensor-setting-types" title="Permalink to this heading"></a></h3>
+<p>Some sensor types are made specifically to act as sensor settings.
+These values are encoded the same way as other sensor types, but typically represent a configurable sensor setting or some specification value assigned to the sensor from the manufacturer.
+For instance, the <a class="reference internal" href="sensor_types.html#c.bt_mesh_sensor_motion_threshold" title="bt_mesh_sensor_motion_threshold"><code class="xref c c-var docutils literal notranslate"><span class="pre">bt_mesh_sensor_motion_threshold</span></code></a> sensor type can be used to configure the sensitivity of a sensor reporting motion sensor data (<a class="reference internal" href="sensor_types.html#c.bt_mesh_sensor_motion_sensed" title="bt_mesh_sensor_motion_sensed"><code class="xref c c-var docutils literal notranslate"><span class="pre">bt_mesh_sensor_motion_sensed</span></code></a>).</p>
+<p>Typically, settings should only be meta data related to the sensor data type, but the API contains no restrictions for which sensor types can be used for sensor settings.</p>
+</section>
+<section id="available-sensor-types">
+<span id="bt-mesh-sensor-types-list"></span><h3><a class="toc-backref" href="#id12">Available sensor types</a><a class="headerlink" href="#available-sensor-types" title="Permalink to this heading"></a></h3>
+<p>All available sensor types are collected in the <a class="reference internal" href="sensor_types.html#bt-mesh-sensor-types-readme"><span class="std std-ref">Bluetooth mesh sensor types</span></a> module.</p>
+</section>
+</section>
+<section id="sample-data-reporting">
+<span id="bt-mesh-sensor-publishing"></span><h2><a class="toc-backref" href="#id13">Sample data reporting</a><a class="headerlink" href="#sample-data-reporting" title="Permalink to this heading"></a></h2>
+<p>Sensors may report their values to the mesh in three ways:</p>
+<ul class="simple">
+<li><p>Unprompted publications</p></li>
+<li><p>Periodic publication</p></li>
+<li><p>Polling</p></li>
+</ul>
+<p>Unprompted publications may be done at any time, and only includes the sensor data of a single sensor at a time.
+The application may generate an unprompted publication by calling <a class="reference internal" href="sensor_srv.html#c.bt_mesh_sensor_srv_sample" title="bt_mesh_sensor_srv_sample"><code class="xref c c-func docutils literal notranslate"><span class="pre">bt_mesh_sensor_srv_sample()</span></code></a>.
+This triggers the sensor’s <a class="reference internal" href="#c.bt_mesh_sensor.get" title="bt_mesh_sensor.get"><code class="xref c c-member docutils literal notranslate"><span class="pre">bt_mesh_sensor.get</span></code></a> callback, and only publishes if the sensor’s <em>Delta threshold</em> is satisfied.</p>
+<p>Unprompted publications can also be forced by calling <a class="reference internal" href="sensor_srv.html#c.bt_mesh_sensor_srv_pub" title="bt_mesh_sensor_srv_pub"><code class="xref c c-func docutils literal notranslate"><span class="pre">bt_mesh_sensor_srv_pub()</span></code></a> directly.</p>
+<p>Periodic publication is controlled by the Sensor Server model’s publication parameters, and configured by the Config models.
+The sensor Server model reports data for all its sensor instances periodically, at a rate determined by the sensors’ cadence.
+Every publication interval, the Server consolidates a list of sensors to include in the publication, and requests the most recent data from each.
+The combined data of all these sensors is published as a single message for other nodes in the mesh network.</p>
+<p>If no publication parameters are configured for the Sensor Server model, Sensor Client models may poll the most recent sensor samples directly.</p>
+<p>All three methods of reporting may be combined.</p>
+<section id="cadence">
+<span id="bt-mesh-sensor-publishing-cadence"></span><h3><a class="toc-backref" href="#id14">Cadence</a><a class="headerlink" href="#cadence" title="Permalink to this heading"></a></h3>
+<p>Each sensor may use the cadence state to control the rate at which their data is published.
+The sensor’s publication interval is defined as a divisor of the holding sensor Server’s publication interval that is always a power of two.
+Under normal circumstances, the sensor’s period divisor is always 1, and the sensor only publishes on the Server’s actual publication interval.</p>
+<p>All single-channel sensors have a configurable <em>fast cadence</em> range that automatically controls the sensor cadence.
+If the sensor’s value is within its configured fast cadence range, the sensor engages the period divisor, and starts publishing with fast cadence.</p>
+<p>The fast cadence range always starts at the cadence range <code class="docutils literal notranslate"><span class="pre">low</span></code> value, and spans to the cadence range <code class="docutils literal notranslate"><span class="pre">high</span></code> value.
+If the <code class="docutils literal notranslate"><span class="pre">high</span></code> value is lower than the <code class="docutils literal notranslate"><span class="pre">low</span></code> value, the effect is inverted, and the sensor operates at high cadence if its value is <em>outside</em> the range.</p>
+<p>To prevent sensors from saturating the mesh network, each sensor also defines a minimum publication interval, which is always taken into account when performing the period division.</p>
+<p>The period divisor, fast cadence range and minimum interval is configured by a Sensor Client model (through a Sensor Setup Server).
+The sensor’s cadence is automatically recalculated for every sample, based on its configuration.</p>
+</section>
+<section id="delta-threshold">
+<span id="bt-mesh-sensor-publishing-delta"></span><h3><a class="toc-backref" href="#id15">Delta threshold</a><a class="headerlink" href="#delta-threshold" title="Permalink to this heading"></a></h3>
+<p>All single channel sensors have a delta threshold state to aid the publication rate.
+The delta threshold state determines the smallest change in sensor value that should trigger a publication.
+Whenever a sensor value is published to the mesh network (through periodic publishing or otherwise), the sensor saves the value, and compares it to subsequent samples.
+Once a sample is sufficiently far away from the previously published value, it gets published.</p>
+<p>The delta threshold works on both periodic publication and unprompted publications.
+If periodic publication is enabled and the minimum interval has expired, the
+sensor will periodically check whether the delta threshold has been breached, so that it can publish the value on the next periodic interval.</p>
+<p>The delta threshold may either be specified as a percent wise change, or as an absolute delta.
+The percent wise change is always measured relatively to the previously published value, and allows the sensor to automatically scale its threshold to account for relative inaccuracy or noise.</p>
+<p>The sensor has separate delta thresholds for positive and negative changes.</p>
+</section>
+</section>
+<section id="descriptors">
+<span id="bt-mesh-sensor-descriptors"></span><h2><a class="toc-backref" href="#id16">Descriptors</a><a class="headerlink" href="#descriptors" title="Permalink to this heading"></a></h2>
+<p>Descriptors are optional meta information structures for every sensor.
+A sensor’s Descriptor contains parameters that may aid other mesh nodes in interpreting the data:</p>
+<ul class="simple">
+<li><p>Tolerance</p></li>
+<li><p>Sampling function</p></li>
+<li><p>Measurement period</p></li>
+<li><p>Update interval</p></li>
+</ul>
+<p>The sensor descriptor is constant throughout the sensor’s lifetime.
+If the sensor has a descriptor, a pointer to it should be passed to <a class="reference internal" href="#c.bt_mesh_sensor.descriptor" title="bt_mesh_sensor.descriptor"><code class="xref c c-member docutils literal notranslate"><span class="pre">bt_mesh_sensor.descriptor</span></code></a> on init, as for example done in the code below:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_sensor_descriptor</span><span class="w"> </span><span class="n">temp_sensor_descriptor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">.</span><span class="n">tolerance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">.</span><span class="n">negative</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">.</span><span class="n">val1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="p">.</span><span class="n">val2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">750000</span><span class="w"> </span><span class="p">},</span>
+<span class="w">        </span><span class="p">.</span><span class="n">positive</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">.</span><span class="n">val1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="p">.</span><span class="n">val2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">500000</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">.</span><span class="n">sampling_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BT_MESH_SENSOR_SAMPLING_ARITHMETIC_MEAN</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">period</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">300</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">update_interval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">50</span>
+<span class="p">};</span>
+
+<span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_sensor</span><span class="w"> </span><span class="n">temp_sensor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">.</span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">bt_mesh_sensor_present_dev_op_temp</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">get</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">temp_get</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">descriptor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">temp_sensor_descriptor</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>See <a class="reference internal" href="#c.bt_mesh_sensor_descriptor" title="bt_mesh_sensor_descriptor"><code class="xref c c-struct docutils literal notranslate"><span class="pre">bt_mesh_sensor_descriptor</span></code></a> for details.</p>
+</section>
+<section id="usage">
+<span id="bt-mesh-sensor-usage"></span><h2><a class="toc-backref" href="#id17">Usage</a><a class="headerlink" href="#usage" title="Permalink to this heading"></a></h2>
+<p>Sensors instances are generally static structures that are initialized at startup.
+Only the <a class="reference internal" href="#c.bt_mesh_sensor.type" title="bt_mesh_sensor.type"><code class="xref c c-member docutils literal notranslate"><span class="pre">bt_mesh_sensor.type</span></code></a> member is mandatory, the rest are optional.
+Apart from the Cadence and Descriptor states, all states are accessed through getter functions.
+The absence of a getter for a state marks it as not supported by the sensor.</p>
+<section id="sensor-data">
+<h3><a class="toc-backref" href="#id18">Sensor data</a><a class="headerlink" href="#sensor-data" title="Permalink to this heading"></a></h3>
+<p>Sensor data is accessed through the <a class="reference internal" href="#c.bt_mesh_sensor.get" title="bt_mesh_sensor.get"><code class="xref c c-member docutils literal notranslate"><span class="pre">bt_mesh_sensor.get</span></code></a> callback, which is expected to fill the <code class="docutils literal notranslate"><span class="pre">rsp</span></code> parameter with the most recent sensor data and return a status code.
+Each sensor channel will be encoded internally according to the sensor type.</p>
+<p>The sensor data in the callback typically comes from a sensor using the <span class="xref std std-ref">Zephyr sensor API</span>.
+The Zephyr sensor API records samples in two steps:</p>
+<p>1.
+Tell the sensor to take a sample by calling <code class="xref c c-func docutils literal notranslate"><span class="pre">sensor_sample_fetch()</span></code>.
+2.
+Read the recorded sample data with <code class="xref c c-func docutils literal notranslate"><span class="pre">sensor_channel_get()</span></code>.</p>
+<p>The first step may be done at any time.
+Typically, the sensor fetching is triggered by a timer, an external event or a sensor trigger, but it may be called in the <code class="docutils literal notranslate"><span class="pre">get</span></code> callback itself.
+Note that the <code class="docutils literal notranslate"><span class="pre">get</span></code> callback requires an immediate response, so if the sample fetching takes a significant amount of time, it should generally be done asynchronously.
+The method of sampling may be communicated to other mesh nodes through the sensor’s <a class="reference internal" href="#bt-mesh-sensor-descriptors"><span class="std std-ref">descriptor</span></a>.</p>
+<p>The read step would typically be done in the callback, to pass the sensor data to the mesh.</p>
+<p>If the Sensor Server is configured to do periodic publishing, the <code class="docutils literal notranslate"><span class="pre">get</span></code> callback will be called for every publication interval.
+Publication may also be forced by calling <a class="reference internal" href="sensor_srv.html#c.bt_mesh_sensor_srv_sample" title="bt_mesh_sensor_srv_sample"><code class="xref c c-func docutils literal notranslate"><span class="pre">bt_mesh_sensor_srv_sample()</span></code></a>, which will trigger the <code class="docutils literal notranslate"><span class="pre">get</span></code> callback and publish only if the sensor value has changed.</p>
+</section>
+<section id="sensor-series">
+<h3><a class="toc-backref" href="#id19">Sensor series</a><a class="headerlink" href="#sensor-series" title="Permalink to this heading"></a></h3>
+<p>Sensor series data can be provided for all sensor types.
+To enable the sensor’s series data feature, <a class="reference internal" href="#c.bt_mesh_sensor_series.column_count" title="bt_mesh_sensor_series.column_count"><code class="xref c c-member docutils literal notranslate"><span class="pre">bt_mesh_sensor_series.column_count</span></code></a> must be specified and the sensor series <a class="reference internal" href="#c.bt_mesh_sensor_series.get" title="bt_mesh_sensor_series.get"><code class="xref c c-member docutils literal notranslate"><span class="pre">bt_mesh_sensor_series.get</span></code></a> callback must be implemented.</p>
+<p>For sensor types with more than two channels, the series data is organized into a static set of columns, specified at init.
+The format of the column may be queried with <a class="reference internal" href="#c.bt_mesh_sensor_column_format_get" title="bt_mesh_sensor_column_format_get"><code class="xref c c-func docutils literal notranslate"><span class="pre">bt_mesh_sensor_column_format_get()</span></code></a>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">get</span></code> callback gets called with an index of one of the columns, and is expected to fill the <code class="docutils literal notranslate"><span class="pre">value</span></code> parameter with sensor data for the specified column.
+If a Sensor Client requests a series of columns, the callback may be called repeatedly, requesting data from each column.</p>
+<p>Example: A three-channel sensor (average ambient temperature in a period of day) as a sensor series:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/* 4 columns representing different hours in a day */</span>
+<span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_sensor_column</span><span class="w"> </span><span class="n">columns</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">{{</span><span class="mi">0</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="mi">6</span><span class="p">}},</span>
+<span class="w">    </span><span class="p">{{</span><span class="mi">6</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="mi">12</span><span class="p">}},</span>
+<span class="w">    </span><span class="p">{{</span><span class="mi">12</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="mi">18</span><span class="p">}},</span>
+<span class="w">    </span><span class="p">{{</span><span class="mi">18</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="mi">24</span><span class="p">}},</span>
+<span class="p">};</span>
+
+<span class="k">static</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_sensor</span><span class="w"> </span><span class="n">temp_sensor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">.</span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">bt_mesh_sensor_avg_amb_temp_in_day</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">series</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">columns</span><span class="p">,</span>
+<span class="w">        </span><span class="n">ARRAY_SIZE</span><span class="p">(</span><span class="n">columns</span><span class="p">),</span>
+<span class="w">        </span><span class="n">getter</span><span class="p">,</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="p">};</span>
+
+<span class="cm">/** Sensor data is divided into columns and filled elsewhere */</span>
+<span class="k">static</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">sensor_value</span><span class="w"> </span><span class="n">avg_temp</span><span class="p">[</span><span class="n">ARRAY_SIZE</span><span class="p">(</span><span class="n">columns</span><span class="p">)];</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">getter</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_sensor</span><span class="w"> </span><span class="o">*</span><span class="n">sensor</span><span class="p">,</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_msg_ctx</span><span class="w"> </span><span class="o">*</span><span class="n">ctx</span><span class="p">,</span>
+<span class="w">                  </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">column_index</span><span class="p">,</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">sensor_value</span><span class="w"> </span><span class="o">*</span><span class="n">value</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">avg_temp</span><span class="p">[</span><span class="n">column_index</span><span class="p">];</span>
+<span class="w">    </span><span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">columns</span><span class="p">[</span><span class="n">column_index</span><span class="p">].</span><span class="n">start</span><span class="p">;</span>
+<span class="w">    </span><span class="n">value</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">columns</span><span class="p">[</span><span class="n">column_index</span><span class="p">].</span><span class="n">end</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Example: Single-channel sensor (motion sensed) as a sensor series:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#define COLUMN_COUNT 10</span>
+
+<span class="k">static</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_sensor</span><span class="w"> </span><span class="n">motion_sensor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">.</span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">bt_mesh_sensor_motion_sensed</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">series</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="cm">/* Note: no column array necessary for 1 or 2 channel sensors */</span>
+<span class="w">         </span><span class="p">.</span><span class="n">column_count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">COLUMN_COUNT</span><span class="p">,</span>
+<span class="w">         </span><span class="p">.</span><span class="n">get</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getter</span><span class="p">,</span>
+<span class="w">     </span><span class="p">},</span>
+<span class="p">};</span>
+
+<span class="cm">/** Sensor data is divided into columns and filled elsewhere */</span>
+<span class="k">static</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">sensor_value</span><span class="w"> </span><span class="n">motion</span><span class="p">[</span><span class="n">COLUMN_COUNT</span><span class="p">];</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">getter</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_sensor</span><span class="w"> </span><span class="o">*</span><span class="n">sensor</span><span class="p">,</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_msg_ctx</span><span class="w"> </span><span class="o">*</span><span class="n">ctx</span><span class="p">,</span>
+<span class="w">                  </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">column_index</span><span class="p">,</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">sensor_value</span><span class="w"> </span><span class="o">*</span><span class="n">value</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">motion</span><span class="p">[</span><span class="n">column_index</span><span class="p">];</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="sensor-settings">
+<h3><a class="toc-backref" href="#id20">Sensor settings</a><a class="headerlink" href="#sensor-settings" title="Permalink to this heading"></a></h3>
+<p>The list of settings a sensor supports should be set on init.
+The list should be constant throughout the sensor’s lifetime, and may be declared <code class="docutils literal notranslate"><span class="pre">const</span></code>.
+Each entry in the list has a type and two access callbacks, and the list should only contain unique entry types.</p>
+<p>The <a class="reference internal" href="#c.bt_mesh_sensor_setting.get" title="bt_mesh_sensor_setting.get"><code class="xref c c-member docutils literal notranslate"><span class="pre">bt_mesh_sensor_setting.get</span></code></a> callback is mandatory, while the <a class="reference internal" href="#c.bt_mesh_sensor_setting.set" title="bt_mesh_sensor_setting.set"><code class="xref c c-member docutils literal notranslate"><span class="pre">bt_mesh_sensor_setting.set</span></code></a> is optional, allowing for read-only entries.
+The value of the settings may change at runtime, even outside the <code class="docutils literal notranslate"><span class="pre">set</span></code> callback.
+New values may be rejected by returning a negative error code from the <code class="docutils literal notranslate"><span class="pre">set</span></code> callback.
+The following code is an example of adding a setting to a sensor:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">motion_threshold_get</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_sensor_srv</span><span class="w"> </span><span class="o">*</span><span class="n">srv</span><span class="p">,</span>
+<span class="w">                                 </span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_sensor</span><span class="w"> </span><span class="o">*</span><span class="n">sensor</span><span class="p">,</span>
+<span class="w">                                 </span><span class="k">const</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_sensor_setting</span><span class="w"> </span><span class="o">*</span><span class="n">setting</span><span class="p">,</span>
+<span class="w">                                 </span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_msg_ctx</span><span class="w"> </span><span class="o">*</span><span class="n">ctx</span><span class="p">,</span>
+<span class="w">                                 </span><span class="k">struct</span><span class="w"> </span><span class="nc">sensor_value</span><span class="w"> </span><span class="o">*</span><span class="n">rsp</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">     </span><span class="cm">/** Get the current threshold in an application defined way and</span>
+<span class="cm">      *  store it in rsp.</span>
+<span class="cm">      */</span>
+<span class="w">     </span><span class="n">get_threshold</span><span class="p">(</span><span class="n">rsp</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">motion_threshold_set</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_sensor_srv</span><span class="w"> </span><span class="o">*</span><span class="n">srv</span><span class="p">,</span>
+<span class="w">                                </span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_sensor</span><span class="w"> </span><span class="o">*</span><span class="n">sensor</span><span class="p">,</span>
+<span class="w">                                </span><span class="k">const</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_sensor_setting</span><span class="w"> </span><span class="o">*</span><span class="n">setting</span><span class="p">,</span>
+<span class="w">                                </span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_msg_ctx</span><span class="w"> </span><span class="o">*</span><span class="n">ctx</span><span class="p">,</span>
+<span class="w">                                </span><span class="k">const</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">sensor_value</span><span class="w"> </span><span class="o">*</span><span class="n">value</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">     </span><span class="cm">/** Store incoming threshold in application-defined way.</span>
+<span class="cm">      *  Return error code to reject set.</span>
+<span class="cm">      */</span>
+<span class="w">     </span><span class="k">return</span><span class="w"> </span><span class="n">set_threshold</span><span class="p">(</span><span class="n">value</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_sensor_setting</span><span class="w"> </span><span class="n">settings</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="p">.</span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">bt_mesh_sensor_motion_threshold</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">get</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">motion_threshold_get</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">set</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">motion_threshold_set</span><span class="p">,</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">static</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_sensor</span><span class="w"> </span><span class="n">motion_sensor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">.</span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">bt_mesh_sensor_motion_sensed</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">get</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_motion</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">settings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">.</span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">settings</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ARRAY_SIZE</span><span class="p">(</span><span class="n">settings</span><span class="p">)</span>
+<span class="w">     </span><span class="p">}</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="api-documentation">
+<span id="bt-mesh-sensor-api"></span><h2><a class="toc-backref" href="#id21">API documentation</a><a class="headerlink" href="#api-documentation" title="Permalink to this heading"></a></h2>
+<div class="line-block">
+<div class="line">Header file: <code class="file docutils literal notranslate"><span class="pre">include/bluetooth/mesh/sensor.h</span></code></div>
+<div class="line">Source file: <code class="file docutils literal notranslate"><span class="pre">subsys/bluetooth/mesh/sensor.c</span></code></div>
+</div>
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="group__bt__mesh__sensor"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">bt_mesh_sensor</span></span></dt>
+<dd><p>API for Bluetooth mesh Sensors. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-defines">Defines</p>
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.BT_MESH_SENSOR_PERIOD_DIV_MAX">
+<span class="target" id="group__bt__mesh__sensor_1gaf63d21f71ed4efe09614eaa9df39f9b6"></span><span class="sig-name descname"><span class="n"><span class="pre">BT_MESH_SENSOR_PERIOD_DIV_MAX</span></span></span><a class="headerlink" href="#c.BT_MESH_SENSOR_PERIOD_DIV_MAX" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Largest period divisor value allowed. </p>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.BT_MESH_SENSOR_INTERVAL_MAX">
+<span class="target" id="group__bt__mesh__sensor_1ga6abeb9cc1864ac44cbd43eb2475a5a9d"></span><span class="sig-name descname"><span class="n"><span class="pre">BT_MESH_SENSOR_INTERVAL_MAX</span></span></span><a class="headerlink" href="#c.BT_MESH_SENSOR_INTERVAL_MAX" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Largest sensor interval allowed. The value is represented as 2 to the power of N milliseconds. </p>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.BT_MESH_SENSOR_CH_STR_LEN">
+<span class="target" id="group__bt__mesh__sensor_1gafbc7ef44d0908ee5a745d6abf93ef502"></span><span class="sig-name descname"><span class="n"><span class="pre">BT_MESH_SENSOR_CH_STR_LEN</span></span></span><a class="headerlink" href="#c.BT_MESH_SENSOR_CH_STR_LEN" title="Permalink to this definition"></a><br /></dt>
+<dd><p>String length for representing a single sensor channel. </p>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.BT_MESH_SENSOR_TYPE_FLAG_SERIES">
+<span class="target" id="group__bt__mesh__sensor_1ga85cd4621595890b015912b46bceceef7"></span><span class="sig-name descname"><span class="n"><span class="pre">BT_MESH_SENSOR_TYPE_FLAG_SERIES</span></span></span><a class="headerlink" href="#c.BT_MESH_SENSOR_TYPE_FLAG_SERIES" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Flag indicating this sensor type has a series representation. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-enums">Enums</p>
+<dl class="c enum">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor_sampling">
+<span class="target" id="group__bt__mesh__sensor_1ga0f4cd1a561942c6cb9e05ed2eb3c3360"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_mesh_sensor_sampling</span></span></span><a class="headerlink" href="#c.bt_mesh_sensor_sampling" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Sensor sampling type.</p>
+<p>Represents the sampling function used to produce the presented sensor value. </p>
+<p><em>Values:</em></p>
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor_sampling.BT_MESH_SENSOR_SAMPLING_UNSPECIFIED">
+<span class="target" id="group__bt__mesh__sensor_1gga0f4cd1a561942c6cb9e05ed2eb3c3360a4311aa0792b8640c9a5836e382d6dcfc"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_MESH_SENSOR_SAMPLING_UNSPECIFIED</span></span></span><a class="headerlink" href="#c.bt_mesh_sensor_sampling.BT_MESH_SENSOR_SAMPLING_UNSPECIFIED" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The sampling function is unspecified </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor_sampling.BT_MESH_SENSOR_SAMPLING_INSTANTANEOUS">
+<span class="target" id="group__bt__mesh__sensor_1gga0f4cd1a561942c6cb9e05ed2eb3c3360a55f010b4254d69de3faa26c0954b324f"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_MESH_SENSOR_SAMPLING_INSTANTANEOUS</span></span></span><a class="headerlink" href="#c.bt_mesh_sensor_sampling.BT_MESH_SENSOR_SAMPLING_INSTANTANEOUS" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The presented value is an instantaneous sample. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor_sampling.BT_MESH_SENSOR_SAMPLING_ARITHMETIC_MEAN">
+<span class="target" id="group__bt__mesh__sensor_1gga0f4cd1a561942c6cb9e05ed2eb3c3360ad7b397c8c350c629a3d0858af5ad217f"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_MESH_SENSOR_SAMPLING_ARITHMETIC_MEAN</span></span></span><a class="headerlink" href="#c.bt_mesh_sensor_sampling.BT_MESH_SENSOR_SAMPLING_ARITHMETIC_MEAN" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The presented value is the arithmetic mean of multiple samples. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor_sampling.BT_MESH_SENSOR_SAMPLING_RMS">
+<span class="target" id="group__bt__mesh__sensor_1gga0f4cd1a561942c6cb9e05ed2eb3c3360aa874e25f46c88a787cba9d447cb35e72"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_MESH_SENSOR_SAMPLING_RMS</span></span></span><a class="headerlink" href="#c.bt_mesh_sensor_sampling.BT_MESH_SENSOR_SAMPLING_RMS" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The presented value is the root mean square of multiple samples. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor_sampling.BT_MESH_SENSOR_SAMPLING_MAXIMUM">
+<span class="target" id="group__bt__mesh__sensor_1gga0f4cd1a561942c6cb9e05ed2eb3c3360a4042b89ca949a0cc228b07ba7efe4fb6"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_MESH_SENSOR_SAMPLING_MAXIMUM</span></span></span><a class="headerlink" href="#c.bt_mesh_sensor_sampling.BT_MESH_SENSOR_SAMPLING_MAXIMUM" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The presented value is the maximum of multiple samples. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor_sampling.BT_MESH_SENSOR_SAMPLING_MINIMUM">
+<span class="target" id="group__bt__mesh__sensor_1gga0f4cd1a561942c6cb9e05ed2eb3c3360a1ca8de52209c7e551f0bbb43b8072ee4"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_MESH_SENSOR_SAMPLING_MINIMUM</span></span></span><a class="headerlink" href="#c.bt_mesh_sensor_sampling.BT_MESH_SENSOR_SAMPLING_MINIMUM" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The presented value is the minimum of multiple samples. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor_sampling.BT_MESH_SENSOR_SAMPLING_ACCUMULATED">
+<span class="target" id="group__bt__mesh__sensor_1gga0f4cd1a561942c6cb9e05ed2eb3c3360ab30d086a551fe5ea0bf62255ce3ed33c"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_MESH_SENSOR_SAMPLING_ACCUMULATED</span></span></span><a class="headerlink" href="#c.bt_mesh_sensor_sampling.BT_MESH_SENSOR_SAMPLING_ACCUMULATED" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The presented value is the accumulated moving average value of the samples. The updating frequency of the moving average should be indicated in <em>bt_mesh_descriptor::update_interval</em>. The total measurement period should be indicated in <em>bt_mesh_descriptor::period</em>. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor_sampling.BT_MESH_SENSOR_SAMPLING_COUNT">
+<span class="target" id="group__bt__mesh__sensor_1gga0f4cd1a561942c6cb9e05ed2eb3c3360aa1a3b4792d9294a1b90179fe09d5473d"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_MESH_SENSOR_SAMPLING_COUNT</span></span></span><a class="headerlink" href="#c.bt_mesh_sensor_sampling.BT_MESH_SENSOR_SAMPLING_COUNT" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The presented value is a count of events in a specific measurement period. <em>bt_mesh_descriptor::period</em> should denote the measurement period, or left to 0 to indicate that the sample is a lifetime value. </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="c enum">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor_delta">
+<span class="target" id="group__bt__mesh__sensor_1ga56d81b2eeefd39c1913bc6ddcd03f48b"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_mesh_sensor_delta</span></span></span><a class="headerlink" href="#c.bt_mesh_sensor_delta" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Delta threshold type. </p>
+<p><em>Values:</em></p>
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor_delta.BT_MESH_SENSOR_DELTA_VALUE">
+<span class="target" id="group__bt__mesh__sensor_1gga56d81b2eeefd39c1913bc6ddcd03f48baa8da97affc73541d82ab2ec546412e47"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_MESH_SENSOR_DELTA_VALUE</span></span></span><a class="headerlink" href="#c.bt_mesh_sensor_delta.BT_MESH_SENSOR_DELTA_VALUE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Value based delta threshold. The delta threshold values are represented as absolute value changes. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor_delta.BT_MESH_SENSOR_DELTA_PERCENT">
+<span class="target" id="group__bt__mesh__sensor_1gga56d81b2eeefd39c1913bc6ddcd03f48ba52eb3dee342987c647a64974d6254318"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_MESH_SENSOR_DELTA_PERCENT</span></span></span><a class="headerlink" href="#c.bt_mesh_sensor_delta.BT_MESH_SENSOR_DELTA_PERCENT" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Percent based delta threshold. The delta threshold values are represented as percentages of their old value (resolution: 0.01 %). </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="c enum">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor_cadence">
+<span class="target" id="group__bt__mesh__sensor_1ga0fdc9041080c8b6252c0a9d37a99a4c1"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_mesh_sensor_cadence</span></span></span><a class="headerlink" href="#c.bt_mesh_sensor_cadence" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Sensor sampling cadence </p>
+<p><em>Values:</em></p>
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor_cadence.BT_MESH_SENSOR_CADENCE_NORMAL">
+<span class="target" id="group__bt__mesh__sensor_1gga0fdc9041080c8b6252c0a9d37a99a4c1a2eafc7103a6c12a238c7aa3d88b70b0b"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_MESH_SENSOR_CADENCE_NORMAL</span></span></span><a class="headerlink" href="#c.bt_mesh_sensor_cadence.BT_MESH_SENSOR_CADENCE_NORMAL" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Normal sensor publish interval. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor_cadence.BT_MESH_SENSOR_CADENCE_FAST">
+<span class="target" id="group__bt__mesh__sensor_1gga0fdc9041080c8b6252c0a9d37a99a4c1aad060714094772e5cea2f6a497cc3ab2"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_MESH_SENSOR_CADENCE_FAST</span></span></span><a class="headerlink" href="#c.bt_mesh_sensor_cadence.BT_MESH_SENSOR_CADENCE_FAST" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Fast sensor publish interval. </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor_delta_threshold">
+<span class="target" id="group__bt__mesh__sensor_1ga883fb49275a8c987e1cdadf95799e849"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_mesh_sensor_delta_threshold</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_mesh_sensor" title="bt_mesh_sensor"><span class="n"><span class="pre">bt_mesh_sensor</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">sensor</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">sensor_value</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">value</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_mesh_sensor_delta_threshold" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Check if a value change breaks the delta threshold. </p>
+<p>Sensors should publish their value if the measured sample is outside the delta threshold compared to the previously published value. This function checks the threshold and the previously published value for this sensor, and returns whether the sensor should publish its value.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Only single-channel sensors support cadence. Multi-channel sensors are always considered out of their threshold range, and will always return true from this function. Single-channel sensors that haven’t been assigned a threshold will return true if the value is different.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sensor</strong> – <strong>[in]</strong> The sensor instance. </p></li>
+<li><p><strong>value</strong> – <strong>[in]</strong> Sensor value.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>true if the difference between the measurements exceeds the delta threshold, false otherwise. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor_type_get">
+<span class="target" id="group__bt__mesh__sensor_1ga17ef047bf666d492ec465ce92fdb85c9"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_mesh_sensor_type" title="bt_mesh_sensor_type"><span class="n"><span class="pre">bt_mesh_sensor_type</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">bt_mesh_sensor_type_get</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">id</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_mesh_sensor_type_get" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the sensor type associated with the given Device Property ID. </p>
+<p>Only known sensor types from Sensor types will be available. Sensor types can be made known to the sensor module by enabling <span> <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_MESH_SENSOR_ALL_TYPES</span></code> </span> or by referencing them in the application.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> – <strong>[in]</strong> A Device Property ID.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The associated sensor type, or NULL if the ID is unknown. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor_value_in_column">
+<span class="target" id="group__bt__mesh__sensor_1ga4ff2dabdba48b6445721308e72d67759"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_mesh_sensor_value_in_column</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">sensor_value</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">value</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_mesh_sensor_column" title="bt_mesh_sensor_column"><span class="n"><span class="pre">bt_mesh_sensor_column</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">col</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_mesh_sensor_value_in_column" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Check whether a single channel sensor value lies within a column. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> – <strong>[in]</strong> Value to check. Only the first channel is considered. </p></li>
+<li><p><strong>col</strong> – <strong>[in]</strong> Sensor column.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>true if the value belongs in the column, false otherwise. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor_column_format_get">
+<span class="target" id="group__bt__mesh__sensor_1ga493e030d3818b0d0f8b0e6e51d83be04"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_mesh_sensor_format" title="bt_mesh_sensor_format"><span class="n"><span class="pre">bt_mesh_sensor_format</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">bt_mesh_sensor_column_format_get</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_mesh_sensor_type" title="bt_mesh_sensor_type"><span class="n"><span class="pre">bt_mesh_sensor_type</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">type</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_mesh_sensor_column_format_get" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the format of the sensor column data. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>type</strong> – <strong>[in]</strong> Sensor type.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The sensor type’s sensor column format if series access is supported. Otherwise NULL. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor_ch_to_str">
+<span class="target" id="group__bt__mesh__sensor_1gac0091a7b84c73e56e489b41b8a7a6ea1"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_mesh_sensor_ch_to_str</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">sensor_value</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ch</span></span>, <span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">str</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n"><span class="pre">len</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_mesh_sensor_ch_to_str" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get a human readable representation of a single sensor channel. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ch</strong> – <strong>[in]</strong> Sensor channel to represent. </p></li>
+<li><p><strong>str</strong> – <strong>[out]</strong> String buffer to fill. Should be <a class="reference internal" href="#group__bt__mesh__sensor_1gafbc7ef44d0908ee5a745d6abf93ef502"><span class="std std-ref">BT_MESH_SENSOR_CH_STR_LEN</span></a> bytes long. </p></li>
+<li><p><strong>len</strong> – <strong>[in]</strong> Length of <code class="docutils literal notranslate"><span class="pre">str</span></code> buffer.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Number of bytes that should have been written if <code class="docutils literal notranslate"><span class="pre">str</span></code> is sufficiently large. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor_ch_str">
+<span class="target" id="group__bt__mesh__sensor_1ga8098039efb2db7273b8e80f4b1397e1d"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">bt_mesh_sensor_ch_str</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">sensor_value</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ch</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_mesh_sensor_ch_str" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get a human readable representation of a single sensor channel. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This function is not thread safe.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ch</strong> – <strong>[in]</strong> Sensor channel to represent.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A string representing the sensor channel. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor_descriptor">
+<span class="target" id="structbt__mesh__sensor__descriptor"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_mesh_sensor_descriptor</span></span></span><a class="headerlink" href="#c.bt_mesh_sensor_descriptor" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;sensor.h&gt;</em></div>
+<p>Sensor descriptor representing various static metadata for the sensor. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor_descriptor.positive">
+<span class="target" id="structbt__mesh__sensor__descriptor_1abdb374f7df9312edf3fd9cc8f5a0b1ae"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">sensor_value</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">positive</span></span></span><a class="headerlink" href="#c.bt_mesh_sensor_descriptor.positive" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Maximum positive measurement error (in percent). A tolerance of 0 should be interpreted as “unspecified”. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor_descriptor.negative">
+<span class="target" id="structbt__mesh__sensor__descriptor_1a4aefb5b1872e964b30a164900250b274"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">sensor_value</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">negative</span></span></span><a class="headerlink" href="#c.bt_mesh_sensor_descriptor.negative" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Maximum negative measurement error (in percent). A tolerance of 0 should be interpreted as “unspecified”. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor_descriptor.tolerance">
+<span class="target" id="structbt__mesh__sensor__descriptor_1a000d73d695d80ad9ca130112b18f919d"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_mesh_sensor_descriptor" title="bt_mesh_sensor_descriptor"><span class="n"><span class="pre">bt_mesh_sensor_descriptor</span></span></a><span class="p"><span class="pre">.</span></span><span class="n"><span class="pre">[anonymous]</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">tolerance</span></span></span><a class="headerlink" href="#c.bt_mesh_sensor_descriptor.tolerance" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Sensor measurement tolerance specification. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor_descriptor.sampling_type">
+<span class="target" id="structbt__mesh__sensor__descriptor_1a3549c1f21fb5c2b432fb3e0a3736d987"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_mesh_sensor_sampling" title="bt_mesh_sensor_sampling"><span class="n"><span class="pre">bt_mesh_sensor_sampling</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">sampling_type</span></span></span><a class="headerlink" href="#c.bt_mesh_sensor_descriptor.sampling_type" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Sampling type for the sensor data. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor_descriptor.period">
+<span class="target" id="structbt__mesh__sensor__descriptor_1a56d67bc762a5a4a9e9120c5d43f8d323"></span><span class="n"><span class="pre">uint64_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">period</span></span></span><a class="headerlink" href="#c.bt_mesh_sensor_descriptor.period" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Measurement period for the samples, if applicable. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor_descriptor.update_interval">
+<span class="target" id="structbt__mesh__sensor__descriptor_1a766f676d4a797657c21182d215e9a051"></span><span class="n"><span class="pre">uint64_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">update_interval</span></span></span><a class="headerlink" href="#c.bt_mesh_sensor_descriptor.update_interval" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Update interval for the samples, if applicable. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor_threshold">
+<span class="target" id="structbt__mesh__sensor__threshold"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_mesh_sensor_threshold</span></span></span><a class="headerlink" href="#c.bt_mesh_sensor_threshold" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;sensor.h&gt;</em></div>
+<p>Sensor thresholds for publishing. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor_threshold.type">
+<span class="target" id="structbt__mesh__sensor__threshold_1a2e7cd7ebec09c2ccd2061845f77fed40"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_mesh_sensor_delta" title="bt_mesh_sensor_delta"><span class="n"><span class="pre">bt_mesh_sensor_delta</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">type</span></span></span><a class="headerlink" href="#c.bt_mesh_sensor_threshold.type" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Type of delta threshold </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor_threshold.up">
+<span class="target" id="structbt__mesh__sensor__threshold_1aa4be0ffa3088764302e3327bff8cf9bd"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">sensor_value</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">up</span></span></span><a class="headerlink" href="#c.bt_mesh_sensor_threshold.up" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Minimal delta for a positive change. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor_threshold.down">
+<span class="target" id="structbt__mesh__sensor__threshold_1ae97be306a9032c57bc001fe2a8f2f0fc"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">sensor_value</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">down</span></span></span><a class="headerlink" href="#c.bt_mesh_sensor_threshold.down" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Minimal delta for a negative change. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor_threshold.delta">
+<span class="target" id="structbt__mesh__sensor__threshold_1a5065141872c28644ff804069ef282ee5"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_mesh_sensor_threshold" title="bt_mesh_sensor_threshold"><span class="n"><span class="pre">bt_mesh_sensor_threshold</span></span></a><span class="p"><span class="pre">.</span></span><span class="n"><span class="pre">[anonymous]</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">delta</span></span></span><a class="headerlink" href="#c.bt_mesh_sensor_threshold.delta" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Delta threshold values.</p>
+<p>Denotes the minimal sensor value change that should cause the sensor to publish its value. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor_threshold.cadence">
+<span class="target" id="structbt__mesh__sensor__threshold_1a6419310364451fa7f6681fbb3cc15b28"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_mesh_sensor_cadence" title="bt_mesh_sensor_cadence"><span class="n"><span class="pre">bt_mesh_sensor_cadence</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cadence</span></span></span><a class="headerlink" href="#c.bt_mesh_sensor_threshold.cadence" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Cadence when the sensor value is inside the range.</p>
+<p>If the cadence is fast when the value is inside the range, it’s normal when it’s outside the range. If the cadence is normal when the value is inside the range, it’s fast outside the range. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor_threshold.low">
+<span class="target" id="structbt__mesh__sensor__threshold_1ab3f20eb82601ba7783baec23d11a98d3"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">sensor_value</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">low</span></span></span><a class="headerlink" href="#c.bt_mesh_sensor_threshold.low" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Lower boundary for the range based sensor cadence threshold. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor_threshold.high">
+<span class="target" id="structbt__mesh__sensor__threshold_1ae44f611505b91210e2851ec4dbfcb83c"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">sensor_value</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">high</span></span></span><a class="headerlink" href="#c.bt_mesh_sensor_threshold.high" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Upper boundary for the range based sensor cadence threshold. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor_threshold.range">
+<span class="target" id="structbt__mesh__sensor__threshold_1ac1fc84189b8413b456b46ddef63410ec"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_mesh_sensor_threshold" title="bt_mesh_sensor_threshold"><span class="n"><span class="pre">bt_mesh_sensor_threshold</span></span></a><span class="p"><span class="pre">.</span></span><span class="n"><span class="pre">[anonymous]</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">range</span></span></span><a class="headerlink" href="#c.bt_mesh_sensor_threshold.range" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Range based threshold values.</p>
+<p>Denotes the value range in which the sensor should be in fast cadence mode. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor_unit">
+<span class="target" id="structbt__mesh__sensor__unit"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_mesh_sensor_unit</span></span></span><a class="headerlink" href="#c.bt_mesh_sensor_unit" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;sensor.h&gt;</em></div>
+<p>Unit for single sensor channel values. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor_unit.name">
+<span class="target" id="structbt__mesh__sensor__unit_1a7bd9c77b6b4dd750e461dca2015cec21"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">name</span></span></span><a class="headerlink" href="#c.bt_mesh_sensor_unit.name" title="Permalink to this definition"></a><br /></dt>
+<dd><p>English name of the unit, e.g. “Decibel”. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor_unit.symbol">
+<span class="target" id="structbt__mesh__sensor__unit_1ae68a0304884816e8cb71edfa27b3b7f8"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">symbol</span></span></span><a class="headerlink" href="#c.bt_mesh_sensor_unit.symbol" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Symbol of the unit, e.g. “dB”. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor_format">
+<span class="target" id="structbt__mesh__sensor__format"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_mesh_sensor_format</span></span></span><a class="headerlink" href="#c.bt_mesh_sensor_format" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;sensor.h&gt;</em></div>
+<p>Sensor channel value format. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor_format.encode">
+<span class="target" id="structbt__mesh__sensor__format_1a27532f0cd9fc8df811cc6b21c39630e5"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">encode</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_mesh_sensor_format" title="bt_mesh_sensor_format"><span class="n"><span class="pre">bt_mesh_sensor_format</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">format</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">sensor_value</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">val</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">net_buf_simple</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">buf</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#c.bt_mesh_sensor_format.encode" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Sensor channel value encode function. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Param format</dt>
+<dd class="field-odd"><p><strong>[in]</strong> Pointer to the format structure. </p>
+</dd>
+<dt class="field-even">Param val</dt>
+<dd class="field-even"><p><strong>[in]</strong> Sensor channel value to encode. </p>
+</dd>
+<dt class="field-odd">Param buf</dt>
+<dd class="field-odd"><p><strong>[out]</strong> Buffer to encode the value into.</p>
+</dd>
+<dt class="field-even">Return</dt>
+<dd class="field-even"><p>0 on success, or (negative) error code otherwise. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor_format.decode">
+<span class="target" id="structbt__mesh__sensor__format_1a48916546dc94327835ca373c96860ae8"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">decode</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_mesh_sensor_format" title="bt_mesh_sensor_format"><span class="n"><span class="pre">bt_mesh_sensor_format</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">format</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">net_buf_simple</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">buf</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">sensor_value</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">val</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#c.bt_mesh_sensor_format.decode" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Sensor channel value decode function. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Param format</dt>
+<dd class="field-odd"><p><strong>[in]</strong> Pointer to the format structure. </p>
+</dd>
+<dt class="field-even">Param buf</dt>
+<dd class="field-even"><p><strong>[in]</strong> Buffer to decode the value from. </p>
+</dd>
+<dt class="field-odd">Param val</dt>
+<dd class="field-odd"><p><strong>[out]</strong> Resulting sensor channel value.</p>
+</dd>
+<dt class="field-even">Return</dt>
+<dd class="field-even"><p>0 on success, or (negative) error code otherwise. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor_format.user_data">
+<span class="target" id="structbt__mesh__sensor__format_1ace2c92d83a630e1436b4f84838be0168"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">user_data</span></span></span><a class="headerlink" href="#c.bt_mesh_sensor_format.user_data" title="Permalink to this definition"></a><br /></dt>
+<dd><p>User data pointer. Used internally by the sensor types. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor_format.size">
+<span class="target" id="structbt__mesh__sensor__format_1a7de792bb25c2eefbc3c3ffce07f4d045"></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">size</span></span></span><a class="headerlink" href="#c.bt_mesh_sensor_format.size" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Size of the encoded data in bytes. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor_channel">
+<span class="target" id="structbt__mesh__sensor__channel"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_mesh_sensor_channel</span></span></span><a class="headerlink" href="#c.bt_mesh_sensor_channel" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;sensor.h&gt;</em></div>
+<p>Signle sensor channel </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor_channel.format">
+<span class="target" id="structbt__mesh__sensor__channel_1aeaef5e7b36bc9708f2f41e599022c6e8"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_mesh_sensor_format" title="bt_mesh_sensor_format"><span class="n"><span class="pre">bt_mesh_sensor_format</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">format</span></span></span><a class="headerlink" href="#c.bt_mesh_sensor_channel.format" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Format for this sensor channel. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor_type">
+<span class="target" id="structbt__mesh__sensor__type"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_mesh_sensor_type</span></span></span><a class="headerlink" href="#c.bt_mesh_sensor_type" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;sensor.h&gt;</em></div>
+<p>Sensor type. Should only be instantiated in sensor_types.c. See sensor_types.h for a list of all defined sensor types. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor_type.id">
+<span class="target" id="structbt__mesh__sensor__type_1aed31940845cebac81fb571e25c2c6fbe"></span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">id</span></span></span><a class="headerlink" href="#c.bt_mesh_sensor_type.id" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Device Property ID. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor_type.flags">
+<span class="target" id="structbt__mesh__sensor__type_1ae38ae586fbdc542a1994ef2bc9520fee"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">flags</span></span></span><a class="headerlink" href="#c.bt_mesh_sensor_type.flags" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Flags, <div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#group__bt__mesh__sensor_1ga85cd4621595890b015912b46bceceef7"><span class="std std-ref">BT_MESH_SENSOR_TYPE_FLAG_SERIES</span></a> </p>
+</div>
+</p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor_type.channel_count">
+<span class="target" id="structbt__mesh__sensor__type_1a6b3f8f18c8ed98e9a08c589b1a2dcf3b"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">channel_count</span></span></span><a class="headerlink" href="#c.bt_mesh_sensor_type.channel_count" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The number of channels supported by this type. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor_type.channels">
+<span class="target" id="structbt__mesh__sensor__type_1a84d93aa99ed1eb1d0c1d868c5b37803c"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_mesh_sensor_channel" title="bt_mesh_sensor_channel"><span class="n"><span class="pre">bt_mesh_sensor_channel</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">channels</span></span></span><a class="headerlink" href="#c.bt_mesh_sensor_type.channels" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Array of channel descriptors.</p>
+<p>All channels are mandatory and immutable. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor_setting">
+<span class="target" id="structbt__mesh__sensor__setting"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_mesh_sensor_setting</span></span></span><a class="headerlink" href="#c.bt_mesh_sensor_setting" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;sensor.h&gt;</em></div>
+<p>Single sensor setting. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor_setting.type">
+<span class="target" id="structbt__mesh__sensor__setting_1a0525a9b02d8696f710a1f2d2a5e5e058"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_mesh_sensor_type" title="bt_mesh_sensor_type"><span class="n"><span class="pre">bt_mesh_sensor_type</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">type</span></span></span><a class="headerlink" href="#c.bt_mesh_sensor_setting.type" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Sensor type of this setting. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor_setting.get">
+<span class="target" id="structbt__mesh__sensor__setting_1a6142000d70307d97aee2fc039de00d3d"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">get</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="sensor_srv.html#c.bt_mesh_sensor_srv" title="bt_mesh_sensor_srv"><span class="n"><span class="pre">bt_mesh_sensor_srv</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">srv</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_mesh_sensor" title="bt_mesh_sensor"><span class="n"><span class="pre">bt_mesh_sensor</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">sensor</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_mesh_sensor_setting" title="bt_mesh_sensor_setting"><span class="n"><span class="pre">bt_mesh_sensor_setting</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">setting</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">bt_mesh_msg_ctx</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">sensor_value</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">rsp</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#c.bt_mesh_sensor_setting.get" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Getter for this sensor setting. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This handler is mandatory.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Param srv</dt>
+<dd class="field-odd"><p><strong>[in]</strong> Sensor server instance associated with this setting. </p>
+</dd>
+<dt class="field-even">Param sensor</dt>
+<dd class="field-even"><p><strong>[in]</strong> Sensor this setting belongs to. </p>
+</dd>
+<dt class="field-odd">Param setting</dt>
+<dd class="field-odd"><p><strong>[in]</strong> Pointer to this setting structure. </p>
+</dd>
+<dt class="field-even">Param ctx</dt>
+<dd class="field-even"><p><strong>[in]</strong> Context parameters for the packet this call originated from, or NULL if this call wasn’t triggered by a packet. </p>
+</dd>
+<dt class="field-odd">Param rsp</dt>
+<dd class="field-odd"><p><strong>[out]</strong> Response buffer for the setting value. Points to an array with the number of channels specified by the setting sensor type. All channels must be filled. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor_setting.set">
+<span class="target" id="structbt__mesh__sensor__setting_1a107b72fbc52353f2903030f61b43bb0c"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">set</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="sensor_srv.html#c.bt_mesh_sensor_srv" title="bt_mesh_sensor_srv"><span class="n"><span class="pre">bt_mesh_sensor_srv</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">srv</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_mesh_sensor" title="bt_mesh_sensor"><span class="n"><span class="pre">bt_mesh_sensor</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">sensor</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_mesh_sensor_setting" title="bt_mesh_sensor_setting"><span class="n"><span class="pre">bt_mesh_sensor_setting</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">setting</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">bt_mesh_msg_ctx</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">sensor_value</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#c.bt_mesh_sensor_setting.set" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Setter for this sensor setting. </p>
+<p>Should only be specified for writable sensor settings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Param srv</dt>
+<dd class="field-odd"><p><strong>[in]</strong> Sensor server instance associated with this setting. </p>
+</dd>
+<dt class="field-even">Param sensor</dt>
+<dd class="field-even"><p><strong>[in]</strong> Sensor this setting belongs to. </p>
+</dd>
+<dt class="field-odd">Param setting</dt>
+<dd class="field-odd"><p><strong>[in]</strong> Pointer to this setting structure. </p>
+</dd>
+<dt class="field-even">Param ctx</dt>
+<dd class="field-even"><p><strong>[in]</strong> Context parameters for the packet this call originated from, or NULL if this call wasn’t triggered by a packet. </p>
+</dd>
+<dt class="field-odd">Param value</dt>
+<dd class="field-odd"><p><strong>[in]</strong> New setting value. Contains the number of channels specified by the setting sensor type.</p>
+</dd>
+<dt class="field-even">Return</dt>
+<dd class="field-even"><p>0 on success, or (negative) error code otherwise. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor_column">
+<span class="target" id="structbt__mesh__sensor__column"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_mesh_sensor_column</span></span></span><a class="headerlink" href="#c.bt_mesh_sensor_column" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;sensor.h&gt;</em></div>
+<p>Single sensor series data column.</p>
+<p>The series data columns represent a range for specific measurement values, inside which a set of sensor measurements were made. The range is interpreted as a half-open interval (i.e. start &lt;= value &lt; end).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Contrary to the Bluetooth mesh specification, the column has an end value instead of a width, to match the conventional property format. This reduces implementation complexity for sensor series values that include the start and end (or min and max) of the measurement range, as the value of the column can be copied directly into the corresponding channels. </p>
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor_column.start">
+<span class="target" id="structbt__mesh__sensor__column_1a5fc3415bc5a480ea9adf7606a42f0ba5"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">sensor_value</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">start</span></span></span><a class="headerlink" href="#c.bt_mesh_sensor_column.start" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Start of the column (inclusive). </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor_column.end">
+<span class="target" id="structbt__mesh__sensor__column_1abd23e2374e50dfceed3e0079d87f1bcd"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">sensor_value</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">end</span></span></span><a class="headerlink" href="#c.bt_mesh_sensor_column.end" title="Permalink to this definition"></a><br /></dt>
+<dd><p>End of the column (exclusive). </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor_series">
+<span class="target" id="structbt__mesh__sensor__series"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_mesh_sensor_series</span></span></span><a class="headerlink" href="#c.bt_mesh_sensor_series" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;sensor.h&gt;</em></div>
+<p>Sensor series specification. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor_series.columns">
+<span class="target" id="structbt__mesh__sensor__series_1ae61f048a6c11bf5c4d4ab6730feaa845"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_mesh_sensor_column" title="bt_mesh_sensor_column"><span class="n"><span class="pre">bt_mesh_sensor_column</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">columns</span></span></span><a class="headerlink" href="#c.bt_mesh_sensor_series.columns" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Pointer to the list of columns.</p>
+<p>The columns may overlap, but the start value of each column must be unique. The list of columns do not have to cover the entire valid range, and values that don’t fit in any of the columns should be ignored. If columns overlap, samples must be present in all columns they fall into. The columns may come in any order.</p>
+<p>This list is not used for sensor types with one or two channels. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor_series.column_count">
+<span class="target" id="structbt__mesh__sensor__series_1a316cfaa47e6996e73cb72a87dedea108"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">column_count</span></span></span><a class="headerlink" href="#c.bt_mesh_sensor_series.column_count" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Number of columns. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor_series.get">
+<span class="target" id="structbt__mesh__sensor__series_1ae0510a8d2d522eecd10f1ac3fcd51eaf"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">get</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="sensor_srv.html#c.bt_mesh_sensor_srv" title="bt_mesh_sensor_srv"><span class="n"><span class="pre">bt_mesh_sensor_srv</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">srv</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_mesh_sensor" title="bt_mesh_sensor"><span class="n"><span class="pre">bt_mesh_sensor</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">sensor</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">bt_mesh_msg_ctx</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n"><span class="pre">column_index</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">sensor_value</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#c.bt_mesh_sensor_series.get" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Getter for the series values. </p>
+<p>Should return the historical data for the latest sensor readings in the given column.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Param srv</dt>
+<dd class="field-odd"><p><strong>[in]</strong> Sensor server associated with sensor instance. </p>
+</dd>
+<dt class="field-even">Param sensor</dt>
+<dd class="field-even"><p><strong>[in]</strong> Sensor pointer. </p>
+</dd>
+<dt class="field-odd">Param ctx</dt>
+<dd class="field-odd"><p><strong>[in]</strong> Message context pointer, or NULL if this call didn’t originate from a mesh message. </p>
+</dd>
+<dt class="field-even">Param column_index</dt>
+<dd class="field-even"><p><strong>[in]</strong> The index of the requested sensor column. Index into the <code class="docutils literal notranslate"><span class="pre">columns</span></code> array for sensors with more than two channels. </p>
+</dd>
+<dt class="field-odd">Param value</dt>
+<dd class="field-odd"><p><strong>[out]</strong> Sensor value response buffer. Holds the number of channels indicated by the sensor type. All channels must be filled.</p>
+</dd>
+<dt class="field-even">Return</dt>
+<dd class="field-even"><p>0 on success, or (negative) error code otherwise. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor">
+<span class="target" id="structbt__mesh__sensor"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_mesh_sensor</span></span></span><a class="headerlink" href="#c.bt_mesh_sensor" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;sensor.h&gt;</em></div>
+<p>Sensor instance. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor.type">
+<span class="target" id="structbt__mesh__sensor_1a6ad66790bc7e5c6e4f932235e31e52ac"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_mesh_sensor_type" title="bt_mesh_sensor_type"><span class="n"><span class="pre">bt_mesh_sensor_type</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">type</span></span></span><a class="headerlink" href="#c.bt_mesh_sensor.type" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Sensor type.</p>
+<p>Must be one of the specification defined types listed in Sensor types. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor.descriptor">
+<span class="target" id="structbt__mesh__sensor_1a94285b7b186ac3525c6b5203193826f5"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_mesh_sensor_descriptor" title="bt_mesh_sensor_descriptor"><span class="n"><span class="pre">bt_mesh_sensor_descriptor</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">descriptor</span></span></span><a class="headerlink" href="#c.bt_mesh_sensor.descriptor" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Optional sensor descriptor. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor.list">
+<span class="target" id="structbt__mesh__sensor_1aafdf9d18b42bb9794429f1159a9004f1"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_mesh_sensor_setting" title="bt_mesh_sensor_setting"><span class="n"><span class="pre">bt_mesh_sensor_setting</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">list</span></span></span><a class="headerlink" href="#c.bt_mesh_sensor.list" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Static array of sensor settings </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor.count">
+<span class="target" id="structbt__mesh__sensor_1a34ab6901bf53460366af9291fd715dc0"></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">count</span></span></span><a class="headerlink" href="#c.bt_mesh_sensor.count" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Number of sensor settings. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor.settings">
+<span class="target" id="structbt__mesh__sensor_1a5e451580b1b7be94e3af428ac236c1bb"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_mesh_sensor" title="bt_mesh_sensor"><span class="n"><span class="pre">bt_mesh_sensor</span></span></a><span class="p"><span class="pre">.</span></span><span class="n"><span class="pre">[anonymous]</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">settings</span></span></span><a class="headerlink" href="#c.bt_mesh_sensor.settings" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Sensor settings access specification. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor.series">
+<span class="target" id="structbt__mesh__sensor_1a964eea42aafc7f2ced58320e619a2e50"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_mesh_sensor_series" title="bt_mesh_sensor_series"><span class="n"><span class="pre">bt_mesh_sensor_series</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">series</span></span></span><a class="headerlink" href="#c.bt_mesh_sensor.series" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Sensor series specification.</p>
+<p>Only sensors who have a non-zero column-count and a defined series getter will accept series messages. Sensors with more than two channels also require a non-empty list of columns. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor.get">
+<span class="target" id="structbt__mesh__sensor_1aafcbb4ea7e0bba50957e02a542e17a97"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="sensor_srv.html#c.bt_mesh_sensor_srv" title="bt_mesh_sensor_srv"><span class="n"><span class="pre">bt_mesh_sensor_srv</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">srv</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_mesh_sensor" title="bt_mesh_sensor"><span class="n"><span class="pre">bt_mesh_sensor</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">sensor</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">bt_mesh_msg_ctx</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">sensor_value</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">rsp</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#c.bt_mesh_sensor.get" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Getter function for the sensor value. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Param srv</dt>
+<dd class="field-odd"><p><strong>[in]</strong> Sensor server associated with sensor instance. </p>
+</dd>
+<dt class="field-even">Param sensor</dt>
+<dd class="field-even"><p><strong>[in]</strong> Sensor instance. </p>
+</dd>
+<dt class="field-odd">Param ctx</dt>
+<dd class="field-odd"><p><strong>[in]</strong> Message context, or NULL if the call wasn’t triggered by a mesh message. </p>
+</dd>
+<dt class="field-even">Param rsp</dt>
+<dd class="field-even"><p><strong>[out]</strong> Value response buffer. Fits the number of channels specified by the sensor type. All channels must be filled.</p>
+</dd>
+<dt class="field-odd">Return</dt>
+<dd class="field-odd"><p>0 on success, or (negative) error code otherwise. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor.threshold">
+<span class="target" id="structbt__mesh__sensor_1ae03ddf024a868759ced017870324bfe9"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_mesh_sensor_threshold" title="bt_mesh_sensor_threshold"><span class="n"><span class="pre">bt_mesh_sensor_threshold</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">threshold</span></span></span><a class="headerlink" href="#c.bt_mesh_sensor.threshold" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Sensor threshold specification. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor.node">
+<span class="target" id="structbt__mesh__sensor_1a3c35c151523921531be28b48e306680e"></span><span class="n"><span class="pre">sys_snode_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">node</span></span></span><a class="headerlink" href="#c.bt_mesh_sensor.node" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Linked list node. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor.prev">
+<span class="target" id="structbt__mesh__sensor_1a17a1a6148a7a677249db4823272e8faf"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">sensor_value</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">prev</span></span></span><a class="headerlink" href="#c.bt_mesh_sensor.prev" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The previously published sensor value. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor.seq">
+<span class="target" id="structbt__mesh__sensor_1ac10c7c9d4601ebd5de017c244ed14a76"></span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">seq</span></span></span><a class="headerlink" href="#c.bt_mesh_sensor.seq" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Sequence number of the previous publication. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor.min_int">
+<span class="target" id="structbt__mesh__sensor_1a923dc3ccfeb625ce4c73b9ba117edeee"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">min_int</span></span></span><a class="headerlink" href="#c.bt_mesh_sensor.min_int" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Minimum possible interval for fast cadence value publishing. The value is represented as 2 to the power of N milliseconds.</p>
+<p><div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#group__bt__mesh__sensor_1ga6abeb9cc1864ac44cbd43eb2475a5a9d"><span class="std std-ref">BT_MESH_SENSOR_INTERVAL_MAX</span></a> </p>
+</div>
+</p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor.pub_div">
+<span class="target" id="structbt__mesh__sensor_1a8b353df165bebdc920252eec3641815a"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pub_div</span></span></span><a class="headerlink" href="#c.bt_mesh_sensor.pub_div" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Fast period divisor used when publishing with fast cadence. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor.fast_pub">
+<span class="target" id="structbt__mesh__sensor_1abc959f5987f2d1cafbb450385fd8752c"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fast_pub</span></span></span><a class="headerlink" href="#c.bt_mesh_sensor.fast_pub" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Flag indicating whether the sensor is in fast cadence mode. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_mesh_sensor.configured">
+<span class="target" id="structbt__mesh__sensor_1a7260e7ea750607fdd643be9d94665302"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">configured</span></span></span><a class="headerlink" href="#c.bt_mesh_sensor.configured" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Flag indicating whether the sensor cadence state has been configured. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="sensor_types.html" class="btn btn-neutral float-right" title="Bluetooth mesh sensor types" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="dk_prov.html" class="btn btn-neutral" title="Bluetooth mesh provisioning handler for Nordic DKs" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

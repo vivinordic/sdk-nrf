@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zigbee endpoint logger &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../_static/js/ncs.js"
+></script>
+<script src="../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Zigbee ZCL scene helper" href="zigbee_zcl_scenes.html" />
+    <link rel="prev" title="Zigbee FOTA" href="zigbee_fota.html" />
+<link
+  href="../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drivers.html">Drivers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Libraries</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../bin/index.html">Binary libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bluetooth_services/index.html">Bluetooth libraries and services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bootloader/index.html">Bootloader libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../caf/index.html">Common Application Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../debug/index.html">Debug libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dfu/index.html">DFU libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gazell/index.html">Gazell libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modem/index.html">Modem libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mpsl/index.html">Multiprotocol Service Layer libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../networking/index.html">Libraries for networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nfc/index.html">Libraries for NFC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nrf_rpc/index.html">nRF RPC libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../others/index.html">Other libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../shell/index.html">Shell libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tfm/index.html">TF-M libraries</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Libraries for Zigbee</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="osif.html">Zigbee ZBOSS OSIF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="shell.html">Zigbee shell</a></li>
+<li class="toctree-l3"><a class="reference internal" href="zigbee_app_utils.html">Zigbee application utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="zigbee_error_handler.html">Zigbee error handler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="zigbee_fota.html">Zigbee FOTA</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Zigbee endpoint logger</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#parsing-incoming-frames">Parsing incoming frames</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuration">Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#api-documentation">API documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zigbee_zcl_scenes.html">Zigbee ZCL scene helper</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Libraries</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Libraries for Zigbee</a></li>
+      <li class="breadcrumb-item active">Zigbee endpoint logger</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/libraries/zigbee/zigbee_logger_eprxzcl.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="zigbee-endpoint-logger">
+<span id="lib-zigbee-logger-endpoint"></span><h1>Zigbee endpoint logger<a class="headerlink" href="#zigbee-endpoint-logger" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#parsing-incoming-frames" id="id7">Parsing incoming frames</a></p></li>
+<li><p><a class="reference internal" href="#configuration" id="id8">Configuration</a></p></li>
+<li><p><a class="reference internal" href="#api-documentation" id="id9">API documentation</a></p></li>
+</ul>
+</div>
+<p>The Zigbee endpoint logger library provides the <a class="reference internal" href="#c.zigbee_logger_eprxzcl_ep_handler" title="zigbee_logger_eprxzcl_ep_handler"><code class="xref c c-func docutils literal notranslate"><span class="pre">zigbee_logger_eprxzcl_ep_handler()</span></code></a> function.
+You can use this endpoint handler function for parsing incoming ZCL frames and logging their fields and command payload.</p>
+<p>The library can work as a partial replacement of <a class="reference external" href="https://infocenter.nordicsemi.com/topic/ug_sniffer_802154/UG/sniffer_802154/intro_802154.html">nRF Sniffer for 802.15.4</a> for debugging and testing purposes.
+Unlike the sniffer, it provides logging information only for incoming ZCL frames on a specific device.</p>
+<section id="parsing-incoming-frames">
+<span id="lib-zigbee-logger-endpoint-parsing"></span><h2><a class="toc-backref" href="#id7">Parsing incoming frames</a><a class="headerlink" href="#parsing-incoming-frames" title="Permalink to this heading"></a></h2>
+<p>When you enable the library and register the handler at an endpoint, ZCL frames directed to this endpoint are intercepted and the registered handler is called.
+At that point, the handler counts and parses each frame: ZCL header is read and the payload of the command is obtained.</p>
+<p>By default, the handler returns <code class="docutils literal notranslate"><span class="pre">ZB_TRUE</span></code> when the frame has been processed or <code class="docutils literal notranslate"><span class="pre">ZB_FALSE</span></code> if the stack must <a class="reference external" href="https://developer.nordicsemi.com/nRF_Connect_SDK/doc/zboss/3.11.2.1/using_zigbee__z_c_l.html#process_zcl_cmd">process the frame</a> (as described in the ZBOSS API documentation).
+This endpoint logger, however, only reads the incoming frame, but does not process the command, and so it always returns <code class="docutils literal notranslate"><span class="pre">ZB_FALSE</span></code>.</p>
+<p>After parsing and gathering the data, the “Received ZCL command” packet entry is added to the log.
+This entry has the following fields:</p>
+<ul class="simple">
+<li><p>Source address (<code class="docutils literal notranslate"><span class="pre">src_addr</span></code>)</p></li>
+<li><p>Source endpoint (<code class="docutils literal notranslate"><span class="pre">src_ep</span></code>)</p></li>
+<li><p>Destination endpoint (<code class="docutils literal notranslate"><span class="pre">dst_ep</span></code>)</p></li>
+<li><p>Cluster ID (<code class="docutils literal notranslate"><span class="pre">cluster_id</span></code>)</p></li>
+<li><p>Profile ID (<code class="docutils literal notranslate"><span class="pre">profile_id</span></code>)</p></li>
+<li><p>Command direction (<code class="docutils literal notranslate"><span class="pre">cmd_dir</span></code>), with one of the following values:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">0</span></code> if from client to server</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">1</span></code> if from server to client</p></li>
+</ul>
+</li>
+<li><p>Common command (<code class="docutils literal notranslate"><span class="pre">common_cmd</span></code>), with one of the following values:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">0</span></code> if the command is local or specific to a cluster</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">1</span></code> if the command is global for all clusters</p></li>
+</ul>
+</li>
+<li><p>Command ID (<code class="docutils literal notranslate"><span class="pre">cmd_id</span></code>)</p></li>
+<li><p>Transaction sequence number (<code class="docutils literal notranslate"><span class="pre">cmd_seq</span></code>)</p></li>
+<li><p>Disable default response (<code class="docutils literal notranslate"><span class="pre">disable_def_resp</span></code>), with one of the following values:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">0</span></code> if the default response command is to be returned</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">1</span></code> if the default response is to be disabled and the command is not to be returned</p></li>
+</ul>
+</li>
+<li><p>Manufacturer specific data (<code class="docutils literal notranslate"><span class="pre">manuf_code</span></code>; <code class="docutils literal notranslate"><span class="pre">void</span></code> if no data is present)</p></li>
+<li><p>Payload of the command (<code class="docutils literal notranslate"><span class="pre">payload</span></code>)</p></li>
+</ul>
+<p>The parentheses after the entry name and at the end of the entry indicate the packet counter.</p>
+<p>For example, enabling the Zigbee endpoint logger library with the <a class="reference internal" href="../../samples/zigbee/light_bulb/README.html#zigbee-light-bulb-sample"><span class="std std-ref">Zigbee: Light bulb</span></a> sample allows it to log On/Off commands received from the <a class="reference internal" href="../../samples/zigbee/light_switch/README.html#zigbee-light-switch-sample"><span class="std std-ref">Zigbee: Light switch</span></a>:</p>
+<blockquote>
+<div><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>I:<span class="w"> </span>Received<span class="w"> </span>ZCL<span class="w"> </span><span class="nb">command</span><span class="w"> </span><span class="o">(</span><span class="m">0</span><span class="o">)</span>:<span class="w"> </span><span class="nv">src_addr</span><span class="o">=</span>0x03ea<span class="o">(</span>short<span class="o">)</span><span class="w"> </span><span class="nv">src_ep</span><span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="nv">dst_ep</span><span class="o">=</span><span class="m">10</span><span class="w"> </span><span class="nv">cluster_id</span><span class="o">=</span>0x0006<span class="w"> </span><span class="nv">profile_id</span><span class="o">=</span>0x0104<span class="w"> </span><span class="nv">cmd_dir</span><span class="o">=</span><span class="m">0</span><span class="w"> </span><span class="nv">common_cmd</span><span class="o">=</span><span class="m">0</span><span class="w"> </span><span class="nv">cmd_id</span><span class="o">=</span>0x00<span class="w"> </span><span class="nv">cmd_seq</span><span class="o">=</span><span class="m">14</span><span class="w"> </span><span class="nv">disable_def_resp</span><span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="nv">manuf_code</span><span class="o">=</span>void<span class="w"> </span><span class="nv">payload</span><span class="o">=[]</span><span class="w"> </span><span class="o">(</span><span class="m">0</span><span class="o">)</span>
+I:<span class="w"> </span>Received<span class="w"> </span>ZCL<span class="w"> </span><span class="nb">command</span><span class="w"> </span><span class="o">(</span><span class="m">1</span><span class="o">)</span>:<span class="w"> </span><span class="nv">src_addr</span><span class="o">=</span>0x03ea<span class="o">(</span>short<span class="o">)</span><span class="w"> </span><span class="nv">src_ep</span><span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="nv">dst_ep</span><span class="o">=</span><span class="m">10</span><span class="w"> </span><span class="nv">cluster_id</span><span class="o">=</span>0x0006<span class="w"> </span><span class="nv">profile_id</span><span class="o">=</span>0x0104<span class="w"> </span><span class="nv">cmd_dir</span><span class="o">=</span><span class="m">0</span><span class="w"> </span><span class="nv">common_cmd</span><span class="o">=</span><span class="m">0</span><span class="w"> </span><span class="nv">cmd_id</span><span class="o">=</span>0x01<span class="w"> </span><span class="nv">cmd_seq</span><span class="o">=</span><span class="m">15</span><span class="w"> </span><span class="nv">disable_def_resp</span><span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="nv">manuf_code</span><span class="o">=</span>void<span class="w"> </span><span class="nv">payload</span><span class="o">=[]</span><span class="w"> </span><span class="o">(</span><span class="m">1</span><span class="o">)</span>
+I:<span class="w"> </span>Received<span class="w"> </span>ZCL<span class="w"> </span><span class="nb">command</span><span class="w"> </span><span class="o">(</span><span class="m">2</span><span class="o">)</span>:<span class="w"> </span><span class="nv">src_addr</span><span class="o">=</span>0x03ea<span class="o">(</span>short<span class="o">)</span><span class="w"> </span><span class="nv">src_ep</span><span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="nv">dst_ep</span><span class="o">=</span><span class="m">10</span><span class="w"> </span><span class="nv">cluster_id</span><span class="o">=</span>0x0006<span class="w"> </span><span class="nv">profile_id</span><span class="o">=</span>0x0104<span class="w"> </span><span class="nv">cmd_dir</span><span class="o">=</span><span class="m">0</span><span class="w"> </span><span class="nv">common_cmd</span><span class="o">=</span><span class="m">0</span><span class="w"> </span><span class="nv">cmd_id</span><span class="o">=</span>0x00<span class="w"> </span><span class="nv">cmd_seq</span><span class="o">=</span><span class="m">16</span><span class="w"> </span><span class="nv">disable_def_resp</span><span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="nv">manuf_code</span><span class="o">=</span>void<span class="w"> </span><span class="nv">payload</span><span class="o">=[]</span><span class="w"> </span><span class="o">(</span><span class="m">2</span><span class="o">)</span>
+I:<span class="w"> </span>Received<span class="w"> </span>ZCL<span class="w"> </span><span class="nb">command</span><span class="w"> </span><span class="o">(</span><span class="m">3</span><span class="o">)</span>:<span class="w"> </span><span class="nv">src_addr</span><span class="o">=</span>0x03ea<span class="o">(</span>short<span class="o">)</span><span class="w"> </span><span class="nv">src_ep</span><span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="nv">dst_ep</span><span class="o">=</span><span class="m">10</span><span class="w"> </span><span class="nv">cluster_id</span><span class="o">=</span>0x0006<span class="w"> </span><span class="nv">profile_id</span><span class="o">=</span>0x0104<span class="w"> </span><span class="nv">cmd_dir</span><span class="o">=</span><span class="m">0</span><span class="w"> </span><span class="nv">common_cmd</span><span class="o">=</span><span class="m">0</span><span class="w"> </span><span class="nv">cmd_id</span><span class="o">=</span>0x01<span class="w"> </span><span class="nv">cmd_seq</span><span class="o">=</span><span class="m">17</span><span class="w"> </span><span class="nv">disable_def_resp</span><span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="nv">manuf_code</span><span class="o">=</span>void<span class="w"> </span><span class="nv">payload</span><span class="o">=[]</span><span class="w"> </span><span class="o">(</span><span class="m">3</span><span class="o">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="configuration">
+<span id="lib-zigbee-logger-endpoint-options"></span><h2><a class="toc-backref" href="#id8">Configuration</a><a class="headerlink" href="#configuration" title="Permalink to this heading"></a></h2>
+<p>To enable the Zigbee endpoint logger library, set the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZIGBEE_LOGGER_EP</span></code> Kconfig option.</p>
+<p>To configure the logging level of the library, use the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZIGBEE_LOGGER_EP_LOG_LEVEL</span></code> Kconfig option.</p>
+<p>For detailed steps about configuring the library in a Zigbee sample or application, see <a class="reference internal" href="../../protocols/zigbee/configuring_libraries.html#ug-zigbee-configuring-components-logger-ep"><span class="std std-ref">Configuring Zigbee endpoint logger</span></a>.</p>
+</section>
+<section id="api-documentation">
+<h2><a class="toc-backref" href="#id9">API documentation</a><a class="headerlink" href="#api-documentation" title="Permalink to this heading"></a></h2>
+<div class="line-block">
+<div class="line">Header file: <code class="file docutils literal notranslate"><span class="pre">include/zigbee/zigbee_logger_eprxzcl.h</span></code></div>
+<div class="line">Source file: <code class="file docutils literal notranslate"><span class="pre">subsys/zigbee/lib/zigbee_logger_ep/zigbee_logger_eprxzcl.c</span></code></div>
+</div>
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="group__zigbee__logger__ep"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">zigbee_logger_ep</span></span></dt>
+<dd><p>Library for logging incoming ZCL packets. </p>
+<p>Provides Zigbee endpoint handler for parsing incoming ZCL packets and logging packet’s fields and payload. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.zigbee_logger_eprxzcl_ep_handler">
+<span class="target" id="group__zigbee__logger__ep_1ga6c4249a44d074d6f6892612a4cc6e1a0"></span><span class="n"><span class="pre">zb_uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">zigbee_logger_eprxzcl_ep_handler</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">zb_bufid_t</span></span><span class="w"> </span><span class="n"><span class="pre">bufid</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.zigbee_logger_eprxzcl_ep_handler" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Handler function which may be called to log an incoming frame onto Zigbee endpoint. </p>
+<p>When this function is called as a callback bound to endpoint via ZB_AF_SET_ENDPOINT_HANDLER(), (directly or indirectly) it produces a log line similar to the following: <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Received</span> <span class="n">ZCL</span> <span class="n">command</span> <span class="p">(</span><span class="mi">17</span><span class="p">):</span> <span class="n">src_addr</span><span class="o">=</span><span class="mh">0x0000</span><span class="p">(</span><span class="n">short</span><span class="p">)</span> <span class="n">src_ep</span><span class="o">=</span><span class="mi">64</span> <span class="n">dst_ep</span><span class="o">=</span><span class="mi">64</span>
+<span class="n">cluster_id</span><span class="o">=</span><span class="mh">0x0000</span> <span class="n">profile_id</span><span class="o">=</span><span class="mh">0x0104</span> <span class="n">rssi</span><span class="o">=</span><span class="mi">0</span> <span class="n">cmd_dir</span><span class="o">=</span><span class="mi">0</span> <span class="n">common_cmd</span><span class="o">=</span><span class="mi">1</span> <span class="n">cmd_id</span><span class="o">=</span><span class="mh">0x00</span>
+<span class="n">cmd_seq</span><span class="o">=</span><span class="mi">128</span> <span class="n">disable_def_resp</span><span class="o">=</span><span class="mi">0</span> <span class="n">manuf_code</span><span class="o">=</span><span class="n">void</span> <span class="n">payload</span><span class="o">=</span><span class="p">[</span><span class="mi">0700</span><span class="p">]</span> <span class="p">(</span><span class="mi">17</span><span class="p">)</span>
+</pre></div>
+</div>
+</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bufid</strong> – Reference to Zigbee buffer holding received zcl command to be logged</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><p><strong>ZB_FALSE</strong> – in all conditions. This enables possibility to use this function directly as Zigbee stack endpoint handler. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="zigbee_zcl_scenes.html" class="btn btn-neutral float-right" title="Zigbee ZCL scene helper" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="zigbee_fota.html" class="btn btn-neutral" title="Zigbee FOTA" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

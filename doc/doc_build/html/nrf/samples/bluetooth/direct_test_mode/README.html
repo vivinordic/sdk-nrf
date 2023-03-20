@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bluetooth: Direct Test Mode &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../../_static/js/ncs.js"
+></script>
+<script src="../../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Bluetooth: Direction finding central" href="../direction_finding_central/README.html" />
+    <link rel="prev" title="Bluetooth: Central UART" href="../central_uart/README.html" />
+<link
+  href="../../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../applications.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../samples.html">Samples</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../bl.html">Bluetooth samples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../central_and_peripheral_hr/README.html">Bluetooth: Central and Peripheral HRS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../central_bas/README.html">Bluetooth: Central BAS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../central_hids/README.html">Bluetooth: Central HIDS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../central_hr_coded/README.html">Bluetooth: Central Heart Rate Monitor with Coded PHY</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../central_nfc_pairing/README.html">Bluetooth: Central NFC pairing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../central_smp_client/README.html">Bluetooth: Central SMP Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../central_uart/README.html">Bluetooth: Central UART</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Bluetooth: Direct Test Mode</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#requirements">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#debugging">Debugging</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#building-and-running">Building and running</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dependencies">Dependencies</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../direction_finding_central/README.html">Bluetooth: Direction finding central</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../direction_finding_connectionless_rx/README.html">Bluetooth: Direction finding connectionless locator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../direction_finding_connectionless_tx/README.html">Bluetooth: Direction finding connectionless beacon</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../direction_finding_peripheral/README.html">Bluetooth: Direction finding peripheral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../enocean/README.html">Bluetooth: EnOcean</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../hci_lpuart/README.html">Bluetooth: HCI low power UART</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../llpm/README.html">Bluetooth: LLPM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../multiple_adv_sets/README.html">Bluetooth: Multiple advertising sets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../nrf_dm/README.html">Bluetooth: nRF Distance Measurement with Bluetooth LE discovery</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_ams_client/README.html">Bluetooth: Peripheral AMS client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_ancs_client/README.html">Bluetooth: Peripheral ANCS client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_bms/README.html">Bluetooth: Peripheral Bond Management Service (BMS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_cgms/README.html">Bluetooth: Continuous Glucose Monitoring Service (CGMS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_cts_client/README.html">Bluetooth: Peripheral CTS client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_fast_pair/README.html">Bluetooth: Fast Pair</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_gatt_dm/README.html">Bluetooth: Peripheral GATT Discovery Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_hids_keyboard/README.html">Bluetooth: Peripheral HIDS keyboard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_hids_mouse/README.html">Bluetooth: Peripheral HIDS mouse</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_hr_coded/README.html">Bluetooth: Peripheral Heart Rate Monitor with Coded PHY</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_lbs/README.html">Bluetooth: Peripheral LBS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_mds/README.html">Bluetooth: Peripheral Memfault Diagnostic Service (MDS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_nfc_pairing/README.html">Bluetooth: NFC pairing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_power_profiling/README.html">Bluetooth: Peripheral power profiling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_rscs/README.html">Bluetooth: Peripheral Running Speed and Cadence Service (RSCS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_status/README.html">Bluetooth: Peripheral Status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_uart/README.html">Bluetooth: Peripheral UART</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../radio_coex_1wire/README.html">Bluetooth: External radio coexistence using 1-wire interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../rpc_host/README.html">Bluetooth: Host for nRF RPC Bluetooth Low Energy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../shell_bt_nus/README.html">Bluetooth: NUS shell transport</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../throughput/README.html">Bluetooth: Throughput</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mesh/ble_peripheral_lbs_coex/README.html">Bluetooth: Mesh and peripheral coexistence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mesh/chat/README.html">Bluetooth: Mesh chat</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mesh/light/README.html">Bluetooth: Mesh light</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mesh/light_ctrl/README.html">Bluetooth: Mesh light fixture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mesh/light_switch/README.html">Bluetooth: Mesh light switch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mesh/sensor_client/README.html">Bluetooth: Mesh sensor observer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mesh/sensor_server/README.html">Bluetooth: Mesh sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mesh/silvair_enocean/README.html">Bluetooth: Mesh Silvair EnOcean</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../crypto.html">Cryptography samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../edge.html">Edge Impulse samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gazell.html">Gazell samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../matter.html">Matter samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nfc.html">NFC samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nrf5340.html">nRF5340 samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nrf9160.html">nRF9160 samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tfm.html">Trusted Firmware-M (TF-M) samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../thread.html">Thread samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../zigbee.html">Zigbee samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../wifi.html">Wi-Fi samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../other.html">Other samples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../drivers.html">Drivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../samples.html">Samples</a></li>
+          <li class="breadcrumb-item"><a href="../../bl.html">Bluetooth samples</a></li>
+      <li class="breadcrumb-item active">Bluetooth: Direct Test Mode</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/samples/bluetooth/direct_test_mode/README.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="bluetooth-direct-test-mode">
+<span id="direct-test-mode"></span><h1>Bluetooth: Direct Test Mode<a class="headerlink" href="#bluetooth-direct-test-mode" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#requirements" id="id10">Requirements</a></p></li>
+<li><p><a class="reference internal" href="#overview" id="id11">Overview</a></p>
+<ul>
+<li><p><a class="reference internal" href="#dtm-sample" id="id12">DTM sample</a></p></li>
+<li><p><a class="reference internal" href="#dtm-module-interface" id="id13">DTM module interface</a></p></li>
+<li><p><a class="reference internal" href="#supported-phys" id="id14">Supported PHYs</a></p></li>
+<li><p><a class="reference internal" href="#bluetooth-direction-finding-support" id="id15">Bluetooth Direction Finding support</a></p></li>
+<li><p><a class="reference internal" href="#nrf21540-front-end-module" id="id16">nRF21540 front-end module</a></p></li>
+<li><p><a class="reference internal" href="#skyworks-front-end-module" id="id17">Skyworks front-end module</a></p></li>
+<li><p><a class="reference internal" href="#vendor-specific-packet-payload" id="id18">Vendor-specific packet payload</a></p></li>
+<li><p><a class="reference internal" href="#the-dtm-to-serial-adaptation-layer" id="id19">The DTM-to-Serial adaptation layer</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#debugging" id="id20">Debugging</a></p></li>
+<li><p><a class="reference internal" href="#building-and-running" id="id21">Building and running</a></p>
+<ul>
+<li><p><a class="reference internal" href="#usb-cdc-acm-transport-variant" id="id22">USB CDC ACM transport variant</a></p></li>
+<li><p><a class="reference internal" href="#testing" id="id23">Testing</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#dependencies" id="id24">Dependencies</a></p></li>
+</ul>
+</div>
+<p>This sample enables the Direct Test Mode functions described in <a class="reference external" href="https://www.bluetooth.com/specifications/specs/">Bluetooth® Core Specification</a>: Version 5.2, Vol. 6, Part F.</p>
+<section id="requirements">
+<h2><a class="toc-backref" href="#id10">Requirements</a><a class="headerlink" href="#requirements" title="Permalink to this heading"></a></h2>
+<p>The sample supports the following development kit:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 28%" />
+<col style="width: 7%" />
+<col style="width: 41%" />
+<col style="width: 24%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Hardware platforms</p></th>
+<th class="head"><p>PCA</p></th>
+<th class="head"><p>Board name</p></th>
+<th class="head"><p>Build target</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../working_with_nrf/nrf53/nrf5340.html#ug-nrf5340"><span class="std std-ref">nRF5340 DK</span></a></p></td>
+<td><p>PCA10095</p></td>
+<td><p><span class="xref std std-ref">nrf5340dk_nrf5340</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nrf5340dk_nrf5340_cpunet</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../app_dev/working_with_fem/index.html#ug-radio-fem"><span class="std std-ref">nRF21540 DK</span></a></p></td>
+<td><p>PCA10112</p></td>
+<td><p><span class="xref std std-ref">nrf21540dk_nrf52840</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nrf21540dk_nrf52840</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>Additionally, the sample requires one of the following testing devices:</p>
+<ul class="simple">
+<li><p>Dedicated test equipment, like an Anritsu MT8852 tester.
+See <a class="reference internal" href="#direct-test-mode-testing-anritsu"><span class="std std-ref">Testing with a certified tester</span></a>.</p></li>
+<li><p>Another development kit with the same sample.
+See <a class="reference internal" href="#direct-test-mode-testing-board"><span class="std std-ref">Testing with another development kit</span></a>.</p></li>
+<li><p>A computer with the Direct Test Mode app available in the <a class="reference external" href="https://www.nordicsemi.com/Software-and-Tools/Development-Tools/nRF-Connect-for-desktop">nRF Connect for Desktop</a>.
+See <a class="reference internal" href="#direct-test-mode-testing-app"><span class="std std-ref">Testing with nRF Connect for Desktop</span></a>.</p></li>
+</ul>
+</section>
+<section id="overview">
+<h2><a class="toc-backref" href="#id11">Overview</a><a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+<p>The sample uses Direct Test Mode (DTM) to test the operation of the following features of the radio:</p>
+<ul class="simple">
+<li><p>Transmission power and receiver sensitivity</p></li>
+<li><p>Frequency offset and drift</p></li>
+<li><p>Modulation characteristics</p></li>
+<li><p>Packet error rate</p></li>
+<li><p>Intermodulation performance</p></li>
+</ul>
+<p>Test procedures are defined in the document <a class="reference external" href="https://www.bluetooth.org/docman/handlers/DownloadDoc.ashx?doc_id=225827">Bluetooth® Low Energy RF PHY Test Specification</a>: Document number RF-PHY.TS.p15</p>
+<p>You can carry out conformance tests using dedicated test equipment, such as the Anritsu MT8852 or similar, with an nRF5 running the DTM sample set as device under test (DUT).</p>
+<section id="dtm-sample">
+<h3><a class="toc-backref" href="#id12">DTM sample</a><a class="headerlink" href="#dtm-sample" title="Permalink to this heading"></a></h3>
+<p>The DTM sample includes two parts:</p>
+<ul class="simple">
+<li><p>The DTM, Direct Test Mode library, which manages the nRF radio and controls the standard DTM procedures.</p></li>
+<li><p>A sample that provides an external interface to the library.</p></li>
+</ul>
+<p>You can find the source code of both parts here: <code class="file docutils literal notranslate"><span class="pre">samples/bluetooth/direct_test_mode/src</span></code>.</p>
+<p>The DTM sample contains a driver for a 2-wire UART interface.
+The driver maps two-octet commands and events to the DTM library, as specified by the Bluetooth Low Energy DTM specification.</p>
+<figure class="align-default">
+<img alt="nRF5 with DTM as a DUT" src="../../../_images/bt_dtm_dut.svg" /></figure>
+<p>The implementation is self-contained and requires no Bluetooth Low Energy protocol stack for its operation.
+The MPU is initialized in the standard way.
+The DTM library function <code class="docutils literal notranslate"><span class="pre">dtm_init</span></code> configures all interrupts, timers, and the radio.</p>
+<p><code class="file docutils literal notranslate"><span class="pre">main.c</span></code> may be replaced with other interface implementations, such as an HCI interface, USB, or another interface required by the Upper Tester.</p>
+<p>The interface to the Lower Tester uses the antenna connector of the chosen development kit.
+While in principle an aerial connection might be used, conformance tests cover the reading of the transmission power delivered by the DUT.
+For this reason, a coaxial connection between the DUT and the Lower Tester is employed for all conformance testing.</p>
+</section>
+<section id="dtm-module-interface">
+<h3><a class="toc-backref" href="#id13">DTM module interface</a><a class="headerlink" href="#dtm-module-interface" title="Permalink to this heading"></a></h3>
+<p>The DTM function <code class="docutils literal notranslate"><span class="pre">dtm_cmd_put</span></code> implements the four commands defined by the Bluetooth Low Energy standard:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">TEST</span> <span class="pre">SETUP</span></code> (called <code class="docutils literal notranslate"><span class="pre">RESET</span></code> in Bluetooth 4.0)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">RECEIVER_TEST</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">TRANSMITTER_TEST</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">TEST_END</span></code></p></li>
+</ul>
+<p>In the <code class="docutils literal notranslate"><span class="pre">dtm_cmd_put</span></code> interface, DTM commands are accepted in the 2-byte format.
+Parameters such as: CMD code, Frequency, Length, or Packet Type are encoded within this command.</p>
+<p>The following DTM events are polled using the <code class="docutils literal notranslate"><span class="pre">dtm_event_get</span></code> function:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">PACKET_REPORTING_EVENT</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">TEST_STATUS_EVENT</span></code> [ <code class="docutils literal notranslate"><span class="pre">SUCCESS</span></code> | <code class="docutils literal notranslate"><span class="pre">FAIL</span></code> ]</p></li>
+</ul>
+<figure class="align-default">
+<img alt="State machine overview of the DTM" src="../../../_images/bt_dtm_engine.svg" /></figure>
+</section>
+<section id="supported-phys">
+<h3><a class="toc-backref" href="#id14">Supported PHYs</a><a class="headerlink" href="#supported-phys" title="Permalink to this heading"></a></h3>
+<p>The DTM sample supports all four PHYs specified in DTM, but not all devices support all the PHYs.</p>
+<table class="docutils align-default" id="id6">
+<caption><span class="caption-text">Supported PHYs</span><a class="headerlink" href="#id6" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>PHY</p></th>
+<th class="head"><p>nRF5340</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>LE 1M</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>LE 2M</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-even"><td><p>LE Coded S=8</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>LE Coded S=2</p></td>
+<td><p>Yes</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="bluetooth-direction-finding-support">
+<h3><a class="toc-backref" href="#id15">Bluetooth Direction Finding support</a><a class="headerlink" href="#bluetooth-direction-finding-support" title="Permalink to this heading"></a></h3>
+<p>The DTM sample supports all Bluetooth Direction Finding modes specified in DTM.</p>
+<table class="docutils align-default" id="id7">
+<caption><span class="caption-text">Supported Bluetooth Direction Finding modes</span><a class="headerlink" href="#id7" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Direction Finding mode</p></th>
+<th class="head"><p>nRF5340</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>AoD 1 us slot</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>AoD 2 us slot</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-even"><td><p>AoA</p></td>
+<td><p>Yes</p></td>
+</tr>
+</tbody>
+</table>
+<p>The following antenna switching patterns are possible:</p>
+<ul class="simple">
+<li><p>1, 2, 3, …, N</p></li>
+<li><p>1, 2, 3, …, N, N - 1, N - 2, …, 1</p></li>
+</ul>
+<p>The application supports a maximum of 19 antennas in the direction finding mode.
+The RADIO can control up to 8 GPIO pins for the purpose of controlling the external antenna switches used in direction finding.</p>
+<section id="antenna-matrix-configuration">
+<h4>Antenna matrix configuration<a class="headerlink" href="#antenna-matrix-configuration" title="Permalink to this heading"></a></h4>
+<p>To use this sample to test the Bluetooth Direction Finding feature, additional configuration of GPIOs is required to control the antenna array.
+An example of such configuration is provided in a devicetree overlay file <code class="file docutils literal notranslate"><span class="pre">nrf5340dk_nrf5340_cpunet.overlay</span></code>.</p>
+<p>The overlay file provides the information about of the GPIOs to be used by the Radio peripheral to switch between antenna patches during the Constant Tone Extension (CTE) reception or transmission.
+At least one GPIO must be provided to enable antenna switching.</p>
+<p>The GPIOs are used by the radio peripheral in order given by the <code class="docutils literal notranslate"><span class="pre">dfegpio#-gpios</span></code> properties.
+The order is important because it affects the mapping of the antenna switching patterns to GPIOs (see <a class="reference internal" href="#antenna-patterns">Antenna patterns</a>).</p>
+<p>To test Direction Finding, provide the following data related to antenna matrix design:</p>
+<ul class="simple">
+<li><p>GPIO pins to <code class="docutils literal notranslate"><span class="pre">dfegpio#-gpios</span></code> properties in the <code class="file docutils literal notranslate"><span class="pre">nrf5340dk_nrf5340_cpunet.overlay</span></code> file.</p></li>
+<li><p>The default antenna to be used to receive the PDU <code class="docutils literal notranslate"><span class="pre">dfe-pdu-antenna</span></code> property in the <code class="file docutils literal notranslate"><span class="pre">nrf5340dk_nrf5340_cpunet.overlay</span></code> file.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The PDU antenna is also used for the reference period transmission and reception.</p>
+</div>
+</section>
+<section id="antenna-patterns">
+<h4>Antenna patterns<a class="headerlink" href="#antenna-patterns" title="Permalink to this heading"></a></h4>
+<p>The antenna switching pattern is a binary number where each bit is applied to a particular antenna GPIO pin.
+For example, the pattern <code class="docutils literal notranslate"><span class="pre">0x3</span></code> means that antenna GPIOs at index 0,1 is set, while the next ones are left unset.</p>
+<p>This also means that, for example, when using four GPIOs, the pattern count cannot be greater than 16 and the maximum allowed value is 15.</p>
+<p>If the number of switch-sample periods is greater than the number of stored switching patterns, the radio loops back to the first pattern.</p>
+<p>The following table presents the patterns that you can use to switch antennas on the Nordic-designed antenna matrix:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 36%" />
+<col style="width: 64%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Antenna</p></th>
+<th class="head"><p>PATTERN[3:0]</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ANT_12</p></td>
+<td><p>0 (0b0000)</p></td>
+</tr>
+<tr class="row-odd"><td><p>ANT_10</p></td>
+<td><p>1 (0b0001)</p></td>
+</tr>
+<tr class="row-even"><td><p>ANT_11</p></td>
+<td><p>2 (0b0010)</p></td>
+</tr>
+<tr class="row-odd"><td><p>RFU</p></td>
+<td><p>3 (0b0011)</p></td>
+</tr>
+<tr class="row-even"><td><p>ANT_3</p></td>
+<td><p>4 (0b0100)</p></td>
+</tr>
+<tr class="row-odd"><td><p>ANT_1</p></td>
+<td><p>5 (0b0101)</p></td>
+</tr>
+<tr class="row-even"><td><p>ANT_2</p></td>
+<td><p>6 (0b0110)</p></td>
+</tr>
+<tr class="row-odd"><td><p>RFU</p></td>
+<td><p>7 (0b0111)</p></td>
+</tr>
+<tr class="row-even"><td><p>ANT_6</p></td>
+<td><p>8 (0b1000)</p></td>
+</tr>
+<tr class="row-odd"><td><p>ANT_4</p></td>
+<td><p>9 (0b1001)</p></td>
+</tr>
+<tr class="row-even"><td><p>ANT_5</p></td>
+<td><p>10 (0b1010)</p></td>
+</tr>
+<tr class="row-odd"><td><p>RFU</p></td>
+<td><p>11 (0b1011)</p></td>
+</tr>
+<tr class="row-even"><td><p>ANT_9</p></td>
+<td><p>12 (0b1100)</p></td>
+</tr>
+<tr class="row-odd"><td><p>ANT_7</p></td>
+<td><p>13 (0b1101)</p></td>
+</tr>
+<tr class="row-even"><td><p>ANT_8</p></td>
+<td><p>14 (0b1110)</p></td>
+</tr>
+<tr class="row-odd"><td><p>RFU</p></td>
+<td><p>15 (0b1111)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="nrf21540-front-end-module">
+<h3><a class="toc-backref" href="#id16">nRF21540 front-end module</a><a class="headerlink" href="#nrf21540-front-end-module" title="Permalink to this heading"></a></h3>
+<p>You can add support for the nRF21540 front-end module (FEM) to the sample.</p>
+<p>To add support for the nRF21540 FEM, build the sample for a board containing nRF21540 FEM like <span class="xref std std-ref">nrf21540dk_nrf52840</span> or create a devicetree overlay file describing how FEM is connected to nRF5 SoC in your device.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you use the nRF21540 EK, append <code class="docutils literal notranslate"><span class="pre">nrf21540_ek</span></code> shield to your build command instructing build system to append the appropriate devicetree overlay file.
+If you use the nRF21540 DK, build your application for the <span class="xref std std-ref">nrf21540dk_nrf52840</span> board.
+The devicetree for the nRF21540 DK already contains the required FEM configuration, so you do not need to set an additional build option.</p>
+</div>
+<p>For example, to build the sample from the command line for an nRF5340 DK with an attached nRF21540 EK, invoke the following command within the sample directory:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">west build -b nrf5340dk_nrf5340_cpunet -- -DSHIELD=nrf21540_ek</span>
+</pre></div>
+</div>
+<p>For more details refer to the following documentation:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../../app_dev/working_with_fem/index.html#ug-radio-fem"><span class="std std-ref">Working with RF front-end modules</span></a></p></li>
+<li><p><a class="reference internal" href="../../../app_dev/working_with_fem/index.html#ug-radio-fem-direct-support"><span class="std std-ref">Direct support</span></a></p></li>
+<li><p><a class="reference internal" href="../../../app_dev/working_with_fem/index.html#ug-radio-fem-nrf21540-spi-gpio"><span class="std std-ref">SPI/GPIO mode</span></a></p></li>
+<li><p><a class="reference internal" href="../../../app_dev/working_with_fem/index.html#ug-radio-fem-nrf21540-ek"><span class="std std-ref">nRF21540 EK</span></a></p></li>
+</ul>
+<p>You can configure the transmitted power gain, antenna output and activation delay in nRF21540 using vendor-specific commands, see <a class="reference internal" href="#vendor-specific-packet-payload">Vendor-specific packet payload</a>.</p>
+</section>
+<section id="skyworks-front-end-module">
+<h3><a class="toc-backref" href="#id17">Skyworks front-end module</a><a class="headerlink" href="#skyworks-front-end-module" title="Permalink to this heading"></a></h3>
+<p>The Skyworks SKY66114 and SKY66403 are front-end module (FEM) devices that support the 2-pin PA/LNA interface.
+You can also use other Skyworks FEM devices that provide the same hardware interface.</p>
+<p>To use the generic FEM implementation with Skyworks front-end modules refer to <a class="reference internal" href="../../../app_dev/working_with_fem/index.html#ug-radio-fem-skyworks"><span class="std std-ref">Adding support for Skyworks front-end module</span></a> for details.</p>
+<section id="use-case-of-incomplete-physical-connections-to-the-fem-module">
+<h4>Use case of incomplete physical connections to the FEM module<a class="headerlink" href="#use-case-of-incomplete-physical-connections-to-the-fem-module" title="Permalink to this heading"></a></h4>
+<p>The devicetree configuration allows you to use a minimal pin configuration.
+Connect all unused pins to the fixed logic level as instructed in the official documentation.
+For example, <code class="docutils literal notranslate"><span class="pre">csd-gpios</span></code> is an optional pin that sets the device into sleep mode.
+If this pin is not controlled by the driver, it must be connected to the fixed logic level.</p>
+<p>You can configure the antenna output and activation delay for the Skyworks front-end module (FEM) using vendor-specific commands, see <a class="reference internal" href="#vendor-specific-packet-payload">Vendor-specific packet payload</a>.</p>
+</section>
+</section>
+<section id="vendor-specific-packet-payload">
+<h3><a class="toc-backref" href="#id18">Vendor-specific packet payload</a><a class="headerlink" href="#vendor-specific-packet-payload" title="Permalink to this heading"></a></h3>
+<p>The Bluetooth Low Energy 2-wire UART DTM interface standard reserves the Packet Type, also called payload parameter, with binary value <code class="docutils literal notranslate"><span class="pre">11</span></code> for a Vendor Specific packet payload.</p>
+<p>The DTM command is interpreted as a vendor-specific one when both the following conditions are met:</p>
+<ul class="simple">
+<li><p>Its CMD field is set to Transmitter Test, binary <code class="docutils literal notranslate"><span class="pre">10</span></code>.</p></li>
+<li><p>Its PKT field is set to vendor-specific, binary <code class="docutils literal notranslate"><span class="pre">11</span></code>.</p></li>
+</ul>
+<p>Vendor specific commands can be divided into different categories as follows:</p>
+<ul>
+<li><p>If the Length field is set to <code class="docutils literal notranslate"><span class="pre">0</span></code> (symbol <code class="docutils literal notranslate"><span class="pre">CARRIER_TEST</span></code>), an unmodulated carrier is turned on at the channel indicated by the Frequency field.
+It remains turned on until a <code class="docutils literal notranslate"><span class="pre">TEST_END</span></code> or <code class="docutils literal notranslate"><span class="pre">RESET</span></code> command is issued.</p></li>
+<li><p>If the Length field is set to <code class="docutils literal notranslate"><span class="pre">1</span></code> (symbol <code class="docutils literal notranslate"><span class="pre">CARRIER_TEST_STUDIO</span></code>), this field value is used by the nRFgo Studio to indicate that an unmodulated carrier is turned on at the channel.
+It remains turned on until a <code class="docutils literal notranslate"><span class="pre">TEST_END</span></code> or <code class="docutils literal notranslate"><span class="pre">RESET</span></code> command is issued.</p></li>
+<li><p>If the Length field is set <code class="docutils literal notranslate"><span class="pre">2</span></code> (symbol <code class="docutils literal notranslate"><span class="pre">SET_TX_POWER</span></code>), the Frequency field sets the TX power in dBm.
+The valid TX power values are specified in the product specification ranging from -40 to +4, where 0 dBm is the reset value.
+Only the 6 least significant bits will fit in the Length field.
+The two most significant bits are calculated by the DTM module.
+This is possible because the 6 least significant bits of all valid TX power values are unique.
+The TX power can be modified only when no Transmitter Test or Receiver Test is running.</p></li>
+<li><p>If the Length field is set to <code class="docutils literal notranslate"><span class="pre">3</span></code> (symbol <code class="docutils literal notranslate"><span class="pre">FEM_ANTENNA_SELECT</span></code>), the Frequency field sets the front-end module (FEM) antenna output.
+The valid values are:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>0 - ANT1 enabled, ANT2 disabled</p></li>
+<li><p>1 - ANT1 disabled, ANT2 enabled</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>If the Length field is set to <code class="docutils literal notranslate"><span class="pre">4</span></code> (symbol <code class="docutils literal notranslate"><span class="pre">FEM_GAIN_SET</span></code>), the Frequency field sets the front-end module (FEM) TX gain value in arbitrary units.
+The valid gain values are specified in your product-specific front-end module (FEM).
+For example, in the nRF21540 front-end module, the gain range is 0 - 31.</p></li>
+<li><p>If the Length field is set to <code class="docutils literal notranslate"><span class="pre">5</span></code> (symbol <code class="docutils literal notranslate"><span class="pre">FEM_ACTIVE_DELAY_SET</span></code>), the Frequency field sets the front-end module (FEM) activation delay in microseconds relative to the radio start.
+By default, this value is set to (radio ramp-up time - front-end module (FEM) TX/RX settling time).</p></li>
+<li><p>If the Length field is set to <code class="docutils literal notranslate"><span class="pre">6</span></code> (symbol <code class="docutils literal notranslate"><span class="pre">FEM_DEFAULT_PARAMS_SET</span></code>) and the Frequency field to any value, the front-end module parameters, such as antenna output, gain, and delay, are set to their default values.</p></li>
+<li><p>All other values of Frequency and Length field are reserved.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Front-end module configuration parameters, such as antenna output, gain, and active delay, are not set to their default values after the DTM reset command.
+Testers, for example Anritsu MT885, issue a reset command in the beginning of every test.
+Therefore, you cannot run automated test scripts for front-end modules with other than the default parameters.</p>
+<p>If you have changed the default parameters of the front-end module, you can restore them.
+You can either send the <code class="docutils literal notranslate"><span class="pre">FEM_DEFAULT_PARAMS_SET</span></code> command or power cycle the front-end module.</p>
+</div>
+</section>
+<section id="the-dtm-to-serial-adaptation-layer">
+<h3><a class="toc-backref" href="#id19">The DTM-to-Serial adaptation layer</a><a class="headerlink" href="#the-dtm-to-serial-adaptation-layer" title="Permalink to this heading"></a></h3>
+<p><code class="file docutils literal notranslate"><span class="pre">main.c</span></code> is an implementation of the UART interface specified in the <a class="reference external" href="https://www.bluetooth.com/specifications/specs/">Bluetooth Core Specification</a>: Vol. 6, Part F, Chap. 3.</p>
+<p>The default selection of UART pins is defined in <code class="file docutils literal notranslate"><span class="pre">zephyr/boards/arm/board_name/board_name.dts</span></code>.
+You can change the defaults using the symbols <code class="docutils literal notranslate"><span class="pre">tx-pin</span></code> and <code class="docutils literal notranslate"><span class="pre">rx-pin</span></code> in the DTS overlay file of the child image at the project level.
+The overlay files for the <a class="reference internal" href="../../nrf5340/remote_shell/README.html#nrf5340-remote-shell"><span class="std std-ref">nRF5340: Remote IPC shell</span></a> child image are located in at <code class="file docutils literal notranslate"><span class="pre">child_image/remote_shell</span></code> directory.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>On the nRF5340 development kit, the physical UART interface of the application core is used for communication with the tester device.
+This sample uses the <a class="reference internal" href="../../../drivers/uart_ipc.html#uart-ipc"><span class="std std-ref">IPC UART driver</span></a> for sending responses and receiving commands through the UART interface of the application core.</p>
+</div>
+</section>
+</section>
+<section id="debugging">
+<h2><a class="toc-backref" href="#id20">Debugging</a><a class="headerlink" href="#debugging" title="Permalink to this heading"></a></h2>
+<p>In this sample, the UART console is used to exchange commands and events defined in the DTM specification.
+Debug messages are not displayed in this UART console.
+Instead, they are printed by the RTT logger.</p>
+<p>If you want to view the debug messages, follow the procedure in <a class="reference internal" href="../../../getting_started/testing.html#testing-rtt-connect"><span class="std std-ref">Connecting using RTT</span></a>.
+For more information about debugging in the nRF Connect SDK, see <a class="reference internal" href="../../../getting_started/testing.html#gs-debugging"><span class="std std-ref">Debugging an application</span></a>.</p>
+</section>
+<section id="building-and-running">
+<h2><a class="toc-backref" href="#id21">Building and running</a><a class="headerlink" href="#building-and-running" title="Permalink to this heading"></a></h2>
+<p>This sample can be found under <code class="file docutils literal notranslate"><span class="pre">samples/bluetooth/direct_test_mode</span></code> in the nRF Connect SDK folder structure.</p>
+<p>To build the sample with Visual Studio Code, follow the steps listed on the <a class="reference external" href="https://nrfconnect.github.io/vscode-nrf-connect/get_started/build_app_ncs.html">How to build an application</a> page in the nRF Connect for VS Code extension documentation.
+See <a class="reference internal" href="../../../getting_started/programming.html#gs-programming"><span class="std std-ref">Building and programming an application</span></a> for other building and programming scenarios and <a class="reference internal" href="../../../getting_started/testing.html#gs-testing"><span class="std std-ref">Testing and debugging an application</span></a> for general information about testing and debugging in the nRF Connect SDK.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>On the nRF5340 development kit, this sample requires the <a class="reference internal" href="../../nrf5340/remote_shell/README.html#nrf5340-remote-shell"><span class="std std-ref">nRF5340: Remote IPC shell</span></a> sample on the application core.
+The Remote IPC shell sample is built and programmed automatically by default.
+If you want to program your custom solution for the application core, unset the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NCS_SAMPLE_REMOTE_SHELL_CHILD_IMAGE</span></code> Kconfig option.</p>
+</div>
+<section id="usb-cdc-acm-transport-variant">
+<h3><a class="toc-backref" href="#id22">USB CDC ACM transport variant</a><a class="headerlink" href="#usb-cdc-acm-transport-variant" title="Permalink to this heading"></a></h3>
+<p>On the nRF5340 development kit, you can build this sample configured to use the USB interface as a communication interface with the tester.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">west build samples/bluetooth/direct_test_mode -b nrf5340dk_nrf5340_cpunet -- -DCONFIG_DTM_USB=y</span>
+</pre></div>
+</div>
+<p>You can also build this sample with support for the front-end module.
+Use the following command:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">west build samples/bluetooth/direct_test_mode -b nrf5340dk_nrf5340_cpunet -- -DSHIELD=nrf21540_ek -DCONFIG_DTM_USB=y</span>
+</pre></div>
+</div>
+</section>
+<section id="testing">
+<span id="dtm-testing"></span><h3><a class="toc-backref" href="#id23">Testing</a><a class="headerlink" href="#testing" title="Permalink to this heading"></a></h3>
+<p>After programming the sample to your development kit, you can test it in the three following ways.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For the nRF5340 DK board (PCA10095), see <a class="reference internal" href="../../../working_with_nrf/nrf53/nrf5340.html#logging-cpunet"><span class="std std-ref">Getting logging output</span></a> for information about the COM terminals on which the logging output is available.</p>
+</div>
+<section id="testing-with-a-certified-tester">
+<span id="direct-test-mode-testing-anritsu"></span><h4>Testing with a certified tester<a class="headerlink" href="#testing-with-a-certified-tester" title="Permalink to this heading"></a></h4>
+<p>Conformance testing is done using a certified tester.
+The setup depends on the tester used, and details about the test operation must be found in the tester documentation.</p>
+<p>Application note  <a class="reference external" href="https://infocenter.nordicsemi.com/pdf/nan_34.pdf">nAN34</a> describes two alternatives for setting up a production test with DTM using one of our old devices.</p>
+</section>
+<section id="testing-with-another-development-kit">
+<span id="direct-test-mode-testing-board"></span><h4>Testing with another development kit<a class="headerlink" href="#testing-with-another-development-kit" title="Permalink to this heading"></a></h4>
+<ol class="arabic simple">
+<li><p>Connect both development kits to the computer using a USB cable.
+The computer assigns to the development kit a COM port on Windows or a ttyACM device on Linux, which is visible in the Device Manager.</p></li>
+<li><p>Connect to both kits with a terminal emulator.
+See <a class="reference internal" href="#direct-test-mode-terminal-connection">Direct Test Mode terminal connection</a> for the required settings.</p></li>
+<li><p>Start <code class="docutils literal notranslate"><span class="pre">TRANSMITTER_TEST</span></code> by sending the <code class="docutils literal notranslate"><span class="pre">0x80</span> <span class="pre">0x96</span></code> DTM command to one of the connected development kits.
+This command will trigger TX activity on the 2402 MHz frequency (1st channel) with <code class="docutils literal notranslate"><span class="pre">10101010</span></code> packet pattern and 37-byte packet length.</p></li>
+<li><p>Observe that you received the <code class="docutils literal notranslate"><span class="pre">TEST_STATUS_EVENT</span></code> packet in response with the SUCCESS status field: <code class="docutils literal notranslate"><span class="pre">0x00</span> <span class="pre">0x00</span></code>.</p></li>
+<li><p>Start <code class="docutils literal notranslate"><span class="pre">RECEIVER_TEST</span></code> by sending the <code class="docutils literal notranslate"><span class="pre">0x40</span> <span class="pre">0x96</span></code> DTM command to the second development kit.
+Command parameters are identical to the ones used for the <code class="docutils literal notranslate"><span class="pre">TRANSMITTER_TEST</span></code> command.</p></li>
+<li><p>Observe that you received the <code class="docutils literal notranslate"><span class="pre">TEST_STATUS_EVENT</span></code> packet in response with the SUCCESS status field: <code class="docutils literal notranslate"><span class="pre">0x00</span> <span class="pre">0x00</span></code>.</p></li>
+<li><p>Finish RX testing using the <code class="docutils literal notranslate"><span class="pre">TEST_END</span> <span class="pre">DTM</span></code> command by sending the <code class="docutils literal notranslate"><span class="pre">0xC0</span> <span class="pre">0x00</span></code> packet.</p></li>
+<li><p>Observe that you received the <code class="docutils literal notranslate"><span class="pre">PACKET_REPORTING_EVENT</span></code> packet in response.
+For example, the <code class="docutils literal notranslate"><span class="pre">0xD6</span> <span class="pre">0xAC</span></code> message indicates that 22188 Radio packets have been received.</p></li>
+<li><p>Experiment with other combinations of commands and their parameters.</p></li>
+</ol>
+</section>
+<section id="testing-with-nrf-connect-for-desktop">
+<span id="direct-test-mode-testing-app"></span><h4>Testing with nRF Connect for Desktop<a class="headerlink" href="#testing-with-nrf-connect-for-desktop" title="Permalink to this heading"></a></h4>
+<ol class="arabic simple">
+<li><p>Connect the kit to the computer using a USB cable.
+The kit is assigned a COM port (Windows) or ttyACM device (Linux), which is visible in the Device Manager.</p></li>
+<li><p>Connect to the kit with a terminal emulator (for example, PuTTY).
+See <a class="reference internal" href="../../../getting_started/testing.html#putty"><span class="std std-ref">How to connect with PuTTY</span></a> for the required settings.
+See <a class="reference internal" href="#direct-test-mode-terminal-connection">Direct Test Mode terminal connection</a> for the required settings.</p></li>
+<li><p>Start the <code class="docutils literal notranslate"><span class="pre">TRANSMITTER_TEST</span></code> by sending the <code class="docutils literal notranslate"><span class="pre">0x80</span> <span class="pre">0x96</span></code> DTM command to the connected development kit.
+This command triggers TX activity on 2402 MHz frequency (1st channel) with <code class="docutils literal notranslate"><span class="pre">10101010</span></code> packet pattern and 37-byte packet length.</p></li>
+<li><p>Observe that you received the <code class="docutils literal notranslate"><span class="pre">TEST_STATUS_EVENT</span></code> packet in response with the SUCCESS status field: <code class="docutils literal notranslate"><span class="pre">0x00</span> <span class="pre">0x00</span></code>.</p></li>
+<li><p>Start the Direct Test Mode app in nRF Connect for Desktop and select the development kit to communicate with.</p></li>
+<li><p>Set the Receiver mode and 37th channel in the test configuration menu.</p></li>
+<li><p>Start the test.</p></li>
+<li><p>On the application chart, observe that the number of RX packets is increasing for the 2402 MHz channel.</p></li>
+<li><p>Stop the test.</p></li>
+<li><p>Swap roles.
+Set the application to the RX mode and the connected development kit to the TX mode.</p></li>
+</ol>
+</section>
+<section id="direct-test-mode-terminal-connection">
+<h4>Direct Test Mode terminal connection<a class="headerlink" href="#direct-test-mode-terminal-connection" title="Permalink to this heading"></a></h4>
+<p>To send commands to and receive responses from the development kit that runs the Direct Test Mode sample, connect to it with RealTerm in Windows or Minicom in Linux.</p>
+<p>The Bluetooth Low Energy DTM UART interface standard specifies the following configuration:</p>
+<ul class="simple">
+<li><p>Eight data bits</p></li>
+<li><p>No parity</p></li>
+<li><p>One stop bit</p></li>
+<li><p>No hardware flow control</p></li>
+<li><p>A selection of bit rates from 9600 to 1000000, one of which must be supported by the DUT.
+It might be possible to run other bit rates by experimenting with parameters.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The default bit rate of the DTM UART driver is 19200 bps, which is supported by most certified testers.</p>
+</div>
+<p>You must send all commands as two-byte HEX numbers.
+The responses must have the same format.</p>
+<section id="connect-with-realterm-windows">
+<h5>Connect with RealTerm (Windows)<a class="headerlink" href="#connect-with-realterm-windows" title="Permalink to this heading"></a></h5>
+<p>The RealTerm terminal program offers a graphical interface for setting up your connection.</p>
+<figure class="align-default" id="id8">
+<img alt="RealTerm start window" src="../../../_images/realterm.png" />
+<figcaption>
+<p><span class="caption-text">The RealTerm start window</span><a class="headerlink" href="#id8" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>To test DTM with RealTerm, complete the following steps:</p>
+<ol class="arabic">
+<li><p>On the <span class="guilabel">Display</span> tab, set <strong>Display As</strong> to <strong>Hex[space]</strong>.</p>
+<figure class="align-default">
+<img alt="Set the RealTerm display format" src="../../../_images/realterm_hex_display.png" />
+</figure>
+</li>
+<li><p>Open the <span class="guilabel">Port</span> tab and configure the serial port parameters:</p>
+<ol class="loweralpha simple">
+<li><p>Set the <strong>Baud</strong> to <code class="docutils literal notranslate"><span class="pre">19200</span></code> <strong>(1)</strong>.</p></li>
+<li><p>Select your J-Link serial port from the <strong>Port</strong> list <strong>(2)</strong>.</p></li>
+<li><p>Set the port status to <code class="docutils literal notranslate"><span class="pre">Open</span></code> <strong>(3)</strong>.</p></li>
+</ol>
+<figure class="align-default">
+<img alt="RealTerm serial port settings" src="../../../_images/real_term_serial_port.png" />
+</figure>
+</li>
+<li><p>Open the <span class="guilabel">Send</span> tab:</p>
+<ol class="loweralpha simple">
+<li><p>Write the command as a hexadecimal number in the field <strong>(1)</strong>.
+For example, write <code class="docutils literal notranslate"><span class="pre">0x00</span> <span class="pre">0x00</span></code> to send a <strong>Reset</strong> command.</p></li>
+<li><p>Click the <span class="guilabel">Send Numbers</span> button <strong>(2)</strong> to send the command.</p></li>
+<li><p>Observe the response in the DTM in area <strong>(3)</strong>.
+The response is encoded as hexadecimal numbers.</p></li>
+</ol>
+<figure class="align-default">
+<img alt="RealTerm commands sending" src="../../../_images/realterm_commands.png" />
+</figure>
+</li>
+</ol>
+</section>
+<section id="connect-with-minicom-linux">
+<h5>Connect with Minicom (Linux)<a class="headerlink" href="#connect-with-minicom-linux" title="Permalink to this heading"></a></h5>
+<p>Minicom is a serial communication program that connects to the DTM device.</p>
+<p>On the Linux operating system, install a Minicom terminal.
+On Ubuntu, run:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sudo apt-get install minicom</span>
+</pre></div>
+</div>
+<ol class="arabic">
+<li><p>Run the Minicom terminal:</p>
+<pre class="highlight literal-block">sudo minicom -D <em>DTM serial port</em> -s</pre>
+<p>For example:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sudo minicom -D /dev/serial/by-id/usb-SEGGER_J-Link_000683580193-if00 -s</span>
+</pre></div>
+</div>
+<p>The <strong>-s</strong> option switches you to Minicom setup mode.</p>
+</li>
+<li><p>Configure the Minicom terminal:</p>
+<figure class="align-default" id="id9">
+<img alt="minicom configuration window" src="../../../_images/minicom_setup_window.png" />
+<figcaption>
+<p><span class="caption-text">Configuration window</span><a class="headerlink" href="#id9" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<ol class="loweralpha">
+<li><p>Select <span class="guilabel">Serial port setup</span> and set UART baudrate to <code class="docutils literal notranslate"><span class="pre">19200</span></code>.</p>
+<figure class="align-default">
+<img alt="minicom serial port settings" src="../../../_images/minicom_serial_port.png" />
+</figure>
+</li>
+<li><p>Select <span class="guilabel">Screen and keyboard</span> and press S on the keyboard to enable the <strong>Hex Display</strong>.</p></li>
+<li><p>Press Q on the keyboard to enable <strong>Local echo</strong>.</p>
+<figure class="align-default">
+<img alt="minicom terminal screen and keyboard settings" src="../../../_images/minicom_terminal_cfg.png" />
+</figure>
+</li>
+</ol>
+<p>Minicom is now configured for receiving data.
+However, you cannot use it for sending DTM commands.</p>
+</li>
+<li><p>Send DTM commands:</p>
+<p>To send DTM commands, use <code class="docutils literal notranslate"><span class="pre">echo</span></code> with <code class="docutils literal notranslate"><span class="pre">-ne</span></code> options in another terminal.
+You must encode the data as hexadecimal numbers (xHH, byte with hexadecimal value HH, 1 to 2 digits).</p>
+<pre class="highlight literal-block">sudo echo -ne &quot;<em>encoded command</em>&quot; &gt; <em>DTM serial port</em></pre>
+<p>To send a <strong>Reset</strong> command, for example, run the following command:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sudo echo -ne &quot;\x00\x00&quot; &gt; /dev/serial/by-id/usb-SEGGER_J-Link_000683580193-if00</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+</section>
+</section>
+</section>
+<section id="dependencies">
+<h2><a class="toc-backref" href="#id24">Dependencies</a><a class="headerlink" href="#dependencies" title="Permalink to this heading"></a></h2>
+<p>This sample uses the following nRF Connect SDK driver:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference internal" href="../../../drivers/uart_ipc.html#uart-ipc"><span class="std std-ref">IPC UART driver</span></a></p></li>
+</ul>
+</div></blockquote>
+<p>This sample has the following nrfx dependencies:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="file docutils literal notranslate"><span class="pre">nrfx/drivers/include/nrfx_timer.h</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">nrfx/hal/nrf_nvmc.h</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">nrfx/hal/nrf_radio.h</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">nrfx/helpers/nrfx_gppi.h</span></code></p></li>
+</ul>
+</div></blockquote>
+<p>The sample also has the following nrfxlib dependency:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><span class="xref std std-ref">nrfxlib:mpsl_fem</span></p></li>
+</ul>
+</div></blockquote>
+<p>In addition, it has the following Zephyr dependencies:</p>
+<ul>
+<li><p><span class="xref std std-ref">zephyr:device_model_api</span>:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="file docutils literal notranslate"><span class="pre">drivers/clock_control.h</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">drivers/uart.h</span></code></p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../direction_finding_central/README.html" class="btn btn-neutral float-right" title="Bluetooth: Direction finding central" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../central_uart/README.html" class="btn btn-neutral" title="Bluetooth: Central UART" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

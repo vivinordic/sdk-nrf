@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Modem key management &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../_static/js/ncs.js"
+></script>
+<script src="../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Modem SLM" href="modem_slm.html" />
+    <link rel="prev" title="Modem JWT" href="modem_jwt.html" />
+<link
+  href="../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drivers.html">Drivers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Libraries</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../bin/index.html">Binary libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bluetooth_services/index.html">Bluetooth libraries and services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bootloader/index.html">Bootloader libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../caf/index.html">Common Application Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../debug/index.html">Debug libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dfu/index.html">DFU libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gazell/index.html">Gazell libraries</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Modem libraries</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="at_cmd_parser.html">AT command parser</a></li>
+<li class="toctree-l3"><a class="reference internal" href="at_custom_cmd.html">Custom AT commands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="at_host.html">AT Host</a></li>
+<li class="toctree-l3"><a class="reference internal" href="at_monitor.html">AT monitor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="at_params.html">AT parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="at_shell.html">AT shell</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gcf_sms_lib.html">GCF SMS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="location.html">Location</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lte_lc.html">LTE link controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modem_antenna.html">Modem antenna</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modem_attest_token.html">Modem attestation token</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modem_info.html">Modem information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modem_jwt.html">Modem JWT</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Modem key management</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#certificates">Certificates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#api-documentation">API documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="modem_slm.html">Modem SLM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nrf_modem_lib.html">Modem library integration layer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pdn.html">PDN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sms.html">SMS subscriber</a></li>
+<li class="toctree-l3"><a class="reference internal" href="zzhc.html">China Telecom ZZHC library</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../mpsl/index.html">Multiprotocol Service Layer libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../networking/index.html">Libraries for networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nfc/index.html">Libraries for NFC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nrf_rpc/index.html">nRF RPC libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../others/index.html">Other libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../shell/index.html">Shell libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tfm/index.html">TF-M libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../zigbee/index.html">Libraries for Zigbee</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Libraries</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Modem libraries</a></li>
+      <li class="breadcrumb-item active">Modem key management</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/libraries/modem/modem_key_mgmt.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="modem-key-management">
+<span id="modem-key-mgmt"></span><h1>Modem key management<a class="headerlink" href="#modem-key-management" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#certificates" id="id7">Certificates</a></p></li>
+<li><p><a class="reference internal" href="#api-documentation" id="id8">API documentation</a></p></li>
+</ul>
+</div>
+<p>The modem key management library provides functions to manage the credentials stored in the nRF9160 LTE modem.
+The library uses AT commands (<a class="reference external" href="https://infocenter.nordicsemi.com/topic/ref_at_commands/REF/at_commands/security/cmng.html">Credential storage management %CMNG</a>) to add, update, and delete credentials.</p>
+<p>Each set of keys and certificates that is stored in the modem is identified by a security tag (<code class="docutils literal notranslate"><span class="pre">sec_tag</span></code>).
+You specify this tag when adding the credentials and use it when you update or delete them.
+All related credentials share the same security tag.
+You can use the library to check if a specific security tag exists.</p>
+<p>To establish a connection, pass the security tag to the <span class="xref std std-ref">nrfxlib:nrf_modem</span> when creating a secure socket.</p>
+<p>See <span class="xref std std-ref">nrfxlib:security_tags</span> for more information about how security tags are used in the Modem library.</p>
+<section id="certificates">
+<span id="cert-dwload"></span><h2><a class="toc-backref" href="#id7">Certificates</a><a class="headerlink" href="#certificates" title="Permalink to this heading"></a></h2>
+<p>You can download a certificate for a given server using your web browser.
+Alternatively, you can obtain it from a dedicated website like <a class="reference external" href="https://www.ssllabs.com/ssltest/">SSL Labs</a>.</p>
+<p>Certificates come in different formats.
+To provision the certificate to the nRF9160 DK, it must be in PEM format.
+The PEM format looks like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;-----BEGIN CERTIFICATE-----</span><span class="se">\n</span><span class="s2">&quot;</span>
+<span class="s2">&quot;MIIDujCCAqKgAwIBAgILBAAAAAABD4Ym5g0wDQYJKoZIhvcNAQEFBQAwTDEgMB4G</span><span class="se">\n</span><span class="s2">&quot;</span>
+<span class="s2">&quot;A1UECxMXR2xvYmFsU2lnbiBSb290IENBIC0gUjIxEzARBgNVBAoTCkdsb2JhbFNp</span><span class="se">\n</span><span class="s2">&quot;</span>
+<span class="s2">&quot;Z24xEzARBgNVBAMTCkdsb2JhbFNpZ24wHhcNMDYxMjE1MDgwMDAwWhcNMjExMjE1</span><span class="se">\n</span><span class="s2">&quot;</span>
+<span class="s2">&quot;MDgwMDAwWjBMMSAwHgYDVQQLExdHbG9iYWxTaWduIFJvb3QgQ0EgLSBSMjETMBEG</span><span class="se">\n</span><span class="s2">&quot;</span>
+<span class="s2">&quot;A1UEChMKR2xvYmFsU2lnbjETMBEGA1UEAxMKR2xvYmFsU2lnbjCCASIwDQYJKoZI</span><span class="se">\n</span><span class="s2">&quot;</span>
+<span class="s2">&quot;hvcNAQEBBQADggEPADCCAQoCggEBAKbPJA6+Lm8omUVCxKs+IVSbC9N/hHD6ErPL</span><span class="se">\n</span><span class="s2">&quot;</span>
+<span class="s2">&quot;v4dfxn+G07IwXNb9rfF73OX4YJYJkhD10FPe+3t+c4isUoh7SqbKSaZeqKeMWhG8</span><span class="se">\n</span><span class="s2">&quot;</span>
+<span class="s2">&quot;eoLrvozps6yWJQeXSpkqBy+0Hne/ig+1AnwblrjFuTosvNYSuetZfeLQBoZfXklq</span><span class="se">\n</span><span class="s2">&quot;</span>
+<span class="s2">&quot;tTleiDTsvHgMCJiEbKjNS7SgfQx5TfC4LcshytVsW33hoCmEofnTlEnLJGKRILzd</span><span class="se">\n</span><span class="s2">&quot;</span>
+<span class="s2">&quot;C9XZzPnqJworc5HGnRusyMvo4KD0L5CLTfuwNhv2GXqF4G3yYROIXJ/gkwpRl4pa</span><span class="se">\n</span><span class="s2">&quot;</span>
+<span class="s2">&quot;zq+r1feqCapgvdzZX99yqWATXgAByUr6P6TqBwMhAo6CygPCm48CAwEAAaOBnDCB</span><span class="se">\n</span><span class="s2">&quot;</span>
+<span class="s2">&quot;mTAOBgNVHQ8BAf8EBAMCAQYwDwYDVR0TAQH/BAUwAwEB/zAdBgNVHQ4EFgQUm+IH</span><span class="se">\n</span><span class="s2">&quot;</span>
+<span class="s2">&quot;V2ccHsBqBt5ZtJot39wZhi4wNgYDVR0fBC8wLTAroCmgJ4YlaHR0cDovL2NybC5n</span><span class="se">\n</span><span class="s2">&quot;</span>
+<span class="s2">&quot;bG9iYWxzaWduLm5ldC9yb290LXIyLmNybDAfBgNVHSMEGDAWgBSb4gdXZxwewGoG</span><span class="se">\n</span><span class="s2">&quot;</span>
+<span class="s2">&quot;3lm0mi3f3BmGLjANBgkqhkiG9w0BAQUFAAOCAQEAmYFThxxol4aR7OBKuEQLq4Gs</span><span class="se">\n</span><span class="s2">&quot;</span>
+<span class="s2">&quot;J0/WwbgcQ3izDJr86iw8bmEbTUsp9Z8FHSbBuOmDAGJFtqkIk7mpM0sYmsL4h4hO</span><span class="se">\n</span><span class="s2">&quot;</span>
+<span class="s2">&quot;291xNBrBVNpGP+DTKqttVCL1OmLNIG+6KYnX3ZHu01yiPqFbQfXf5WRDLenVOavS</span><span class="se">\n</span><span class="s2">&quot;</span>
+<span class="s2">&quot;ot+3i9DAgBkcRcAtjOj4LaR0VknFBbVPFd5uRHg5h6h+u/N5GJG79G+dwfCMNYxd</span><span class="se">\n</span><span class="s2">&quot;</span>
+<span class="s2">&quot;AfvDbbnvRG15RjF+Cv6pgsH/76tuIMRQyV+dTZsXjAzlAcmgQWpzU/qlULRuJQ/7</span><span class="se">\n</span><span class="s2">&quot;</span>
+<span class="s2">&quot;TBj0/VLZjmmx6BEP3ojY+x1J96relc8geMJgEtslQIxq/H5COEBkEveegeGTLg==</span><span class="se">\n</span><span class="s2">&quot;</span>
+<span class="s2">&quot;-----END CERTIFICATE-----</span><span class="se">\n</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+<p>Note the <code class="docutils literal notranslate"><span class="pre">\n</span></code> at the end of each line.</p>
+<p>See the comprehensive <a class="reference external" href="https://www.ssl.com/guide/pem-der-crt-and-cer-x-509-encodings-and-conversions/">tutorial on SSL.com</a> for instructions on how to convert between different certificate formats and encodings.</p>
+</section>
+<section id="api-documentation">
+<h2><a class="toc-backref" href="#id8">API documentation</a><a class="headerlink" href="#api-documentation" title="Permalink to this heading"></a></h2>
+<div class="line-block">
+<div class="line">Header file: <code class="file docutils literal notranslate"><span class="pre">include/modem/modem_key_mgmt.h</span></code></div>
+<div class="line">Source files: <code class="file docutils literal notranslate"><span class="pre">lib/modem_key_mgmt/</span></code></div>
+</div>
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="group__modem__key__mgmt"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">modem_key_mgmt</span></span></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-enums">Enums</p>
+<dl class="c enum">
+<dt class="sig sig-object c" id="c.modem_key_mgmt_cred_type">
+<span class="target" id="group__modem__key__mgmt_1gaf6e72956fd99711667f2492b33ab526f"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">modem_key_mgmt_cred_type</span></span></span><a class="headerlink" href="#c.modem_key_mgmt_cred_type" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Credential types. </p>
+<p><em>Values:</em></p>
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.modem_key_mgmt_cred_type.MODEM_KEY_MGMT_CRED_TYPE_CA_CHAIN">
+<span class="target" id="group__modem__key__mgmt_1ggaf6e72956fd99711667f2492b33ab526fa5232c3f37f6c44e78f71fc690fe08efd"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">MODEM_KEY_MGMT_CRED_TYPE_CA_CHAIN</span></span></span><a class="headerlink" href="#c.modem_key_mgmt_cred_type.MODEM_KEY_MGMT_CRED_TYPE_CA_CHAIN" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.modem_key_mgmt_cred_type.MODEM_KEY_MGMT_CRED_TYPE_PUBLIC_CERT">
+<span class="target" id="group__modem__key__mgmt_1ggaf6e72956fd99711667f2492b33ab526fafc0b09c63c516de185a32b96dac81777"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">MODEM_KEY_MGMT_CRED_TYPE_PUBLIC_CERT</span></span></span><a class="headerlink" href="#c.modem_key_mgmt_cred_type.MODEM_KEY_MGMT_CRED_TYPE_PUBLIC_CERT" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.modem_key_mgmt_cred_type.MODEM_KEY_MGMT_CRED_TYPE_PRIVATE_CERT">
+<span class="target" id="group__modem__key__mgmt_1ggaf6e72956fd99711667f2492b33ab526fa32f4ba1007a51230d87c036c91069040"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">MODEM_KEY_MGMT_CRED_TYPE_PRIVATE_CERT</span></span></span><a class="headerlink" href="#c.modem_key_mgmt_cred_type.MODEM_KEY_MGMT_CRED_TYPE_PRIVATE_CERT" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.modem_key_mgmt_cred_type.MODEM_KEY_MGMT_CRED_TYPE_PSK">
+<span class="target" id="group__modem__key__mgmt_1ggaf6e72956fd99711667f2492b33ab526faf09cbe94d7d2141448faee917e9cfda6"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">MODEM_KEY_MGMT_CRED_TYPE_PSK</span></span></span><a class="headerlink" href="#c.modem_key_mgmt_cred_type.MODEM_KEY_MGMT_CRED_TYPE_PSK" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.modem_key_mgmt_cred_type.MODEM_KEY_MGMT_CRED_TYPE_IDENTITY">
+<span class="target" id="group__modem__key__mgmt_1ggaf6e72956fd99711667f2492b33ab526fa45d1c7eb2517277046e52b1f1e35eb4f"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">MODEM_KEY_MGMT_CRED_TYPE_IDENTITY</span></span></span><a class="headerlink" href="#c.modem_key_mgmt_cred_type.MODEM_KEY_MGMT_CRED_TYPE_IDENTITY" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.modem_key_mgmt_write">
+<span class="target" id="group__modem__key__mgmt_1ga0372fdc1948100f00bdf26593c2a1698"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">modem_key_mgmt_write</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">nrf_sec_tag_t</span></span><span class="w"> </span><span class="n"><span class="pre">sec_tag</span></span>, <span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#c.modem_key_mgmt_cred_type" title="modem_key_mgmt_cred_type"><span class="n"><span class="pre">modem_key_mgmt_cred_type</span></span></a><span class="w"> </span><span class="n"><span class="pre">cred_type</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">buf</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n"><span class="pre">len</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.modem_key_mgmt_write" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Write or update a credential in persistent storage. </p>
+<p>Store the credential and associate it with the given security tag, which can later be used to access it.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If used when the LTE link is active, the function will return an error and the key will not be written.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sec_tag</strong> – <strong>[in]</strong> Security tag to associate with this credential. </p></li>
+<li><p><strong>cred_type</strong> – <strong>[in]</strong> The credential type. </p></li>
+<li><p><strong>buf</strong> – <strong>[in]</strong> Buffer containing the credential data. </p></li>
+<li><p><strong>len</strong> – <strong>[in]</strong> Length of the buffer.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>0</strong> – On success. </p></li>
+<li><p><strong>-EINVAL</strong> – Invalid parameters. </p></li>
+<li><p><strong>-ENOMEM</strong> – Not enough memory to store the credential. </p></li>
+<li><p><strong>-ENOENT</strong> – The security tag <code class="docutils literal notranslate"><span class="pre">sec_tag</span></code> is invalid. </p></li>
+<li><p><strong>-EACCES</strong> – Access to credential not allowed. </p></li>
+<li><p><strong>-EALREADY</strong> – Credential already exists (and can’t be overwritten). </p></li>
+<li><p><strong>-EPERM</strong> – Not permitted when the LTE link is active. </p></li>
+<li><p><strong>-ECANCELED</strong> – Canceled because voltage is low (power off warning). </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.modem_key_mgmt_delete">
+<span class="target" id="group__modem__key__mgmt_1ga72d113685d117a2a83540412c7cd4dab"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">modem_key_mgmt_delete</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">nrf_sec_tag_t</span></span><span class="w"> </span><span class="n"><span class="pre">sec_tag</span></span>, <span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#c.modem_key_mgmt_cred_type" title="modem_key_mgmt_cred_type"><span class="n"><span class="pre">modem_key_mgmt_cred_type</span></span></a><span class="w"> </span><span class="n"><span class="pre">cred_type</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.modem_key_mgmt_delete" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Delete a credential from persistent storage. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If used when the LTE link is active, the function will return an error and the key will not be written.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sec_tag</strong> – <strong>[in]</strong> The security tag of the credential. </p></li>
+<li><p><strong>cred_type</strong> – <strong>[in]</strong> The credential type.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>0</strong> – On success. </p></li>
+<li><p><strong>-ENOBUFS</strong> – Internal buffer is too small. </p></li>
+<li><p><strong>-ENOENT</strong> – No credential associated with the given <code class="docutils literal notranslate"><span class="pre">sec_tag</span></code> and <code class="docutils literal notranslate"><span class="pre">cred_type</span></code>. </p></li>
+<li><p><strong>-EACCES</strong> – Access to credential not allowed. </p></li>
+<li><p><strong>-EPERM</strong> – Not permitted when the LTE link is active. </p></li>
+<li><p><strong>-ECANCELED</strong> – Canceled because voltage is low (power off warning). </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.modem_key_mgmt_read">
+<span class="target" id="group__modem__key__mgmt_1ga1df7971042abd9226ee5860e0e478df9"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">modem_key_mgmt_read</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">nrf_sec_tag_t</span></span><span class="w"> </span><span class="n"><span class="pre">sec_tag</span></span>, <span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#c.modem_key_mgmt_cred_type" title="modem_key_mgmt_cred_type"><span class="n"><span class="pre">modem_key_mgmt_cred_type</span></span></a><span class="w"> </span><span class="n"><span class="pre">cred_type</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">buf</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">len</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.modem_key_mgmt_read" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Read a credential from persistent storage. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sec_tag</strong> – <strong>[in]</strong> The security tag of the credential. </p></li>
+<li><p><strong>cred_type</strong> – <strong>[in]</strong> The credential type. </p></li>
+<li><p><strong>buf</strong> – <strong>[out]</strong> Buffer to read the credential into. </p></li>
+<li><p><strong>len</strong> – <strong>[inout]</strong> Length of the buffer, length of the credential.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>0</strong> – On success. </p></li>
+<li><p><strong>-ENOBUFS</strong> – Internal buffer is too small. </p></li>
+<li><p><strong>-ENOMEM</strong> – Credential does not fit in <code class="docutils literal notranslate"><span class="pre">buf</span></code>. </p></li>
+<li><p><strong>-ENOENT</strong> – No credential associated with the given <code class="docutils literal notranslate"><span class="pre">sec_tag</span></code> and <code class="docutils literal notranslate"><span class="pre">cred_type</span></code>. </p></li>
+<li><p><strong>-EACCES</strong> – Access to credential not allowed. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.modem_key_mgmt_cmp">
+<span class="target" id="group__modem__key__mgmt_1gaa9da12e30f10b3e0847cdaec5f631759"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">modem_key_mgmt_cmp</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">nrf_sec_tag_t</span></span><span class="w"> </span><span class="n"><span class="pre">sec_tag</span></span>, <span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#c.modem_key_mgmt_cred_type" title="modem_key_mgmt_cred_type"><span class="n"><span class="pre">modem_key_mgmt_cred_type</span></span></a><span class="w"> </span><span class="n"><span class="pre">cred_type</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">buf</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n"><span class="pre">len</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.modem_key_mgmt_cmp" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Compare a credential with a credential in persistent storage. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sec_tag</strong> – <strong>[in]</strong> The security tag of the credential. </p></li>
+<li><p><strong>cred_type</strong> – <strong>[in]</strong> The credential type. </p></li>
+<li><p><strong>buf</strong> – <strong>[in]</strong> Buffer to compare the credential to. </p></li>
+<li><p><strong>len</strong> – <strong>[in]</strong> Length of the buffer.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>0</strong> – If the credentials match. </p></li>
+<li><p><strong>1</strong> – If the credentials do not match. </p></li>
+<li><p><strong>-ENOBUFS</strong> – Internal buffer is too small. </p></li>
+<li><p><strong>-ENOENT</strong> – No credential associated with the given <code class="docutils literal notranslate"><span class="pre">sec_tag</span></code> and <code class="docutils literal notranslate"><span class="pre">cred_type</span></code>. </p></li>
+<li><p><strong>-EACCES</strong> – Access to credential not allowed. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.modem_key_mgmt_exists">
+<span class="target" id="group__modem__key__mgmt_1gaaf87a50b8a27306ae76ae42cef45b5fb"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">modem_key_mgmt_exists</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">nrf_sec_tag_t</span></span><span class="w"> </span><span class="n"><span class="pre">sec_tag</span></span>, <span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#c.modem_key_mgmt_cred_type" title="modem_key_mgmt_cred_type"><span class="n"><span class="pre">modem_key_mgmt_cred_type</span></span></a><span class="w"> </span><span class="n"><span class="pre">cred_type</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">exists</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.modem_key_mgmt_exists" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Check if a credential exists in persistent storage. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sec_tag</strong> – <strong>[in]</strong> The security tag to search for. </p></li>
+<li><p><strong>cred_type</strong> – <strong>[in]</strong> The credential type. </p></li>
+<li><p><strong>exists</strong> – <strong>[out]</strong> Whether the credential exists. Only valid if the operation is successful.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>0</strong> – On success. </p></li>
+<li><p><strong>-ENOBUFS</strong> – Internal buffer is too small. </p></li>
+<li><p><strong>-EACCES</strong> – Access to credential not allowed. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="modem_slm.html" class="btn btn-neutral float-right" title="Modem SLM" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="modem_jwt.html" class="btn btn-neutral" title="Modem JWT" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

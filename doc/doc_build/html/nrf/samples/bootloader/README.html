@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>nRF Secure Immutable Bootloader &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script src="../../_static/tabs.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../_static/js/ncs.js"
+></script>
+<script src="../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Common Application Framework preview" href="../caf/README.html" />
+    <link rel="prev" title="Application Event Manager profiling tracer" href="../app_event_manager_profiler_tracer/README.html" />
+<link
+  href="../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../samples.html">Samples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../bl.html">Bluetooth samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../crypto.html">Cryptography samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../edge.html">Edge Impulse samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gazell.html">Gazell samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../matter.html">Matter samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nfc.html">NFC samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nrf5340.html">nRF5340 samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nrf9160.html">nRF9160 samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tfm.html">Trusted Firmware-M (TF-M) samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../thread.html">Thread samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../zigbee.html">Zigbee samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../wifi.html">Wi-Fi samples</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../other.html">Other samples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../app_event_manager/README.html">Application Event Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../app_event_manager_profiler_tracer/README.html">Application Event Manager profiling tracer</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">nRF Secure Immutable Bootloader</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#requirements">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuration">Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#building-and-running">Building and running</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dependencies">Dependencies</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../caf/README.html">Common Application Framework preview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../caf_sensor_manager/README.html">CAF: Sensor manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../esb/README.html">Enhanced ShockBurst: Transmitter/Receiver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../event_manager_proxy/README.html">Event Manager Proxy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../hw_id/README.html">Hardware ID</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../nrf_profiler/README.html">Profiler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../debug/ppi_trace/README.html">PPI trace</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ipc/ipc_service/README.html">IPC service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../keys/hw_unique_key/README.html">Hardware unique key</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../keys/identity_key_generation/README.html">Identity key generation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../keys/identity_key_usage/README.html">Identity key usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../keys/random_hw_unique_key/README.html">Random hardware unique key</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mpsl/timeslot/README.html">MPSL timeslot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral/802154_phy_test/README.html">IEEE 802.15.4 PHY test tool</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral/lpuart/README.html">Low Power UART</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral/radio_test/README.html">Radio test (short-range)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../sensor/bh1749/README.html">BH1749: Ambient Light Sensor IC</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../drivers.html">Drivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../samples.html">Samples</a></li>
+          <li class="breadcrumb-item"><a href="../other.html">Other samples</a></li>
+      <li class="breadcrumb-item active">nRF Secure Immutable Bootloader</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/samples/bootloader/README.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="nsib">
+<span id="bootloader"></span><h1>nRF Secure Immutable Bootloader<a class="headerlink" href="#nsib" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#requirements" id="id8">Requirements</a></p></li>
+<li><p><a class="reference internal" href="#overview" id="id9">Overview</a></p>
+<ul>
+<li><p><a class="reference internal" href="#provisioning" id="id10">Provisioning</a></p></li>
+<li><p><a class="reference internal" href="#flash-memory-layout" id="id11">Flash memory layout</a></p></li>
+<li><p><a class="reference internal" href="#signature-keys" id="id12">Signature keys</a></p></li>
+<li><p><a class="reference internal" href="#monotonic-counter" id="id13">Monotonic counter</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#configuration" id="id14">Configuration</a></p>
+<ul>
+<li><p><a class="reference internal" href="#fem-support" id="id15">FEM support</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#building-and-running" id="id16">Building and running</a></p>
+<ul>
+<li><p><a class="reference internal" href="#building-and-running-using-vsc" id="id17">Building and running using Visual Studio Code</a></p></li>
+<li><p><a class="reference internal" href="#testing" id="id18">Testing</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#dependencies" id="id19">Dependencies</a></p></li>
+</ul>
+</div>
+<p>The nRF Secure Immutable Bootloader (NSIB), previously also known as <em>B0</em> or <code class="docutils literal notranslate"><span class="pre">b0</span></code>, is a secure bootloader built and maintained by Nordic Semiconductor.
+It is specifically tailored for the <a class="reference internal" href="../../app_dev/bootloaders_and_dfu/bootloader.html#immutable-bootloader"><span class="std std-ref">immutable bootloader architecture</span></a> of a secure boot chain.
+It can verify and boot a second-stage bootloader or application while providing a persistent and reliable <a class="reference internal" href="../../glossary.html#term-Root-of-Trust-RoT"><span class="xref std std-term">Root of Trust (RoT)</span></a>.</p>
+<p>See <a class="reference internal" href="../../app_dev/bootloaders_and_dfu/bootloader.html#ug-bootloader"><span class="std std-ref">Secure bootloader chain</span></a> for more information about the full bootloader chain.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Currently, the NSIB does not support performing firmware updates over the SMP transport.
+If the application using the NSIB requires SMP-based firmware updates, such as Bluetooth® LE DFU, <a class="reference internal" href="../../app_dev/bootloaders_and_dfu/bootloader_adding.html#ug-bootloader-adding-upgradable"><span class="std std-ref">include MCUboot as a second-stage bootloader</span></a>.</p>
+</div>
+<section id="requirements">
+<span id="bootloader-rot"></span><h2><a class="toc-backref" href="#id8">Requirements</a><a class="headerlink" href="#requirements" title="Permalink to this heading"></a></h2>
+<p>The NSIB supports the following development kits:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 28%" />
+<col style="width: 7%" />
+<col style="width: 41%" />
+<col style="width: 24%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Hardware platforms</p></th>
+<th class="head"><p>PCA</p></th>
+<th class="head"><p>Board name</p></th>
+<th class="head"><p>Build target</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="../../working_with_nrf/nrf91/nrf9160.html#ug-nrf9160"><span class="std std-ref">nRF9160 DK</span></a></p></td>
+<td><p>PCA10090</p></td>
+<td><p><span class="xref std std-ref">nrf9160dk_nrf9160</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nrf9160dk_nrf9160</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../working_with_nrf/nrf53/nrf5340.html#ug-nrf5340"><span class="std std-ref">nRF5340 DK</span></a></p></td>
+<td><p>PCA10095</p></td>
+<td><p><span class="xref std std-ref">nrf5340dk_nrf5340</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nrf5340dk_nrf5340_cpuapp</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../working_with_nrf/nrf52/developing.html#ug-nrf52"><span class="std std-ref">nRF52 DK</span></a></p></td>
+<td><p>PCA10040</p></td>
+<td><p><span class="xref std std-ref">nrf52dk_nrf52832</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nrf52dk_nrf52832</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../working_with_nrf/nrf52/developing.html#ug-nrf52"><span class="std std-ref">nRF52840 DK</span></a></p></td>
+<td><p>PCA10056</p></td>
+<td><p><span class="xref std std-ref">nrf52840dk_nrf52840</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nrf52840dk_nrf52840</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../working_with_nrf/nrf52/developing.html#ug-nrf52"><span class="std std-ref">nRF52833 DK</span></a></p></td>
+<td><p>PCA10100</p></td>
+<td><p><span class="xref std std-ref">nrf52833dk_nrf52833</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nrf52833dk_nrf52833</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../app_dev/working_with_fem/index.html#ug-radio-fem"><span class="std std-ref">nRF21540 DK</span></a></p></td>
+<td><p>PCA10112</p></td>
+<td><p><span class="xref std std-ref">nrf21540dk_nrf52840</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nrf21540dk_nrf52840</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>The NSIB can only boot images that enable the firmware information module, see the <a class="reference internal" href="../../libraries/others/fw_info.html#doc-fw-info"><span class="std std-ref">Firmware information</span></a> module.</p>
+</section>
+<section id="overview">
+<h2><a class="toc-backref" href="#id9">Overview</a><a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+<p>The NSIB implements a simple and reliable <a class="reference internal" href="../../glossary.html#term-Root-of-Trust-RoT"><span class="xref std std-term">Root of Trust (RoT)</span></a> for a secure boot chain:</p>
+<ol class="arabic">
+<li><p>Locks the flash memory.</p>
+<p>To enable the RoT, it locks the flash memory address range containing itself and its configuration using the hardware available on the given architecture.</p>
+<p>For additional details on locking, see the <a class="reference internal" href="../../libraries/others/fprotect.html#fprotect-readme"><span class="std std-ref">Hardware flash write protection</span></a> driver.</p>
+</li>
+<li><p>Selects the next slot in the boot chain.</p>
+<p>The next stage in the boot chain can either be an application or another bootloader:</p>
+<ul class="simple">
+<li><p>When the next stage is an application, you can allocate one or two slots for it.</p></li>
+<li><p>When the next stage is a second-stage bootloader, two slots are always used.</p></li>
+</ul>
+<p>Each slot has a version number, and the bootloader will select the slot with the latest version.</p>
+<p>For more information about creating a second stage bootloader, see <a class="reference internal" href="../../app_dev/bootloaders_and_dfu/bootloader_adding.html#ug-bootloader-adding-upgradable"><span class="std std-ref">Adding an upgradable bootloader</span></a>.</p>
+</li>
+<li><p>Verifies the next stage in the boot chain.</p>
+<p>The next image has metadata containing the full public key that corresponds to the private key used to sign the firmware.
+This public key is checked against the provisioned hashes of public keys to determine if the image is valid.</p>
+<p>All public key hashes at lower indices than the matching hash are permanently invalidated at this point.
+You can use this mechanism to decommission broken keys.</p>
+</li>
+<li><p>Boots the next stage in the boot chain.</p>
+<p>All peripherals that have been used are reset and the next stage is booted.</p>
+</li>
+<li><p>Shares the cryptographic library.</p>
+<p>The NSIB shares some of its functionality through an external API (<code class="docutils literal notranslate"><span class="pre">EXT_API</span></code>).</p>
+<p>For more information on the process, see <a class="reference internal" href="../../libraries/bootloader/bl_crypto.html#doc-bl-crypto"><span class="std std-ref">Bootloader crypto</span></a>.
+For more information on <code class="docutils literal notranslate"><span class="pre">EXT_API</span></code>, see <a class="reference internal" href="../../libraries/others/fw_info.html#doc-fw-info-ext-api"><span class="std std-ref">External APIs</span></a>.</p>
+</li>
+</ol>
+<section id="provisioning">
+<span id="bootloader-provisioning"></span><h3><a class="toc-backref" href="#id10">Provisioning</a><a class="headerlink" href="#provisioning" title="Permalink to this heading"></a></h3>
+<p>The public key hashes are not compiled with the source code of the NSIB.
+Instead, they must be written to the device in a process called <em>provisioning</em>.</p>
+<p>The hashes are automatically generated by the build system based on the specified private key and the additional public keys.</p>
+<p>By default, the hashes are placed directly into the NSIB HEX file and then automatically provisioned when the HEX file is programmed to the device.</p>
+<p>However, in a more realistic manufacturing process, you can program the NSIB HEX file and the HEX file containing the hashes separately, using the Python scripts located in the <code class="file docutils literal notranslate"><span class="pre">scripts/bootloader</span></code> folder.</p>
+<p>In either case, the NSIB accesses the provisioned data at run time using the <a class="reference internal" href="../../libraries/bootloader/bl_storage.html#doc-bl-storage"><span class="std std-ref">Bootloader storage</span></a> library.</p>
+<section id="otp-regions">
+<span id="bootloader-provisioning-otp"></span><h4>OTP regions<a class="headerlink" href="#otp-regions" title="Permalink to this heading"></a></h4>
+<p>The one-time programmable (OTP) region is a special region of the <em>User Information Configuration Registers</em> (UICR) that only allows flash memory writes in half-word lengths, and <em>only</em> when the target half-word has the value of <code class="docutils literal notranslate"><span class="pre">0xFFFF</span></code>.</p>
+<p>On the SoCs that support an OTP region, such as the nRF9160 and nRF5340, the provisioned data is held in the OTP region instead of the internal flash memory.</p>
+<p>Because of these design constraints, the following limitations apply:</p>
+<ul class="simple">
+<li><p>The public key hash must not contain half-words with the value <code class="docutils literal notranslate"><span class="pre">0xFFFF</span></code>, as such hashes cannot be guaranteed to be immutable when placed in the OTP region.
+If any such hashes are provisioned, the NSIB will refuse to boot.
+If your public key hash is found to contain this value, <a class="reference internal" href="../../app_dev/bootloaders_and_dfu/fw_update.html#ug-fw-update-keys"><span class="std std-ref">it must be regenerated</span></a>.</p></li>
+<li><p>Provisioned data cannot be written more than once to the target device.
+When programming images that contain flash memory content in the UICR region, such as the NSIB image, the UICR must first be erased.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>On the nRF9160 and nRF5340, the UICR can only be erased by erasing the entire flash memory.</p>
+</div>
+<p>To erase the entire flash memory, do the following:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">Command Line</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">Visual Studio Code</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><p>Using west:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">west flash --erase</span>
+</pre></div>
+</div>
+<p>Using nrfjprog:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">nrfjprog -f NRF91 --eraseall</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><p>Using the <span class="guilabel">Actions View</span> in nRF Connect for VS Code extension:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Go to the <span class="guilabel">Actions View</span>.</p></li>
+<li><p>Move the cursor over the <span class="guilabel">Flash</span> action.</p></li>
+<li><p>Click <span class="guilabel">Erase And Flash To Board</span> on the right side of the <span class="guilabel">Flash</span> action.</p></li>
+</ol>
+</div></blockquote>
+<p>Using the Visual Studio Code Command Palette:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Open the Visual Studio Code Command Palette.</p></li>
+<li><p>Type <code class="docutils literal notranslate"><span class="pre">Erase</span> <span class="pre">and</span> <span class="pre">Flash</span> <span class="pre">to</span> <span class="pre">Board</span></code> and select the highlighted option.</p></li>
+</ol>
+</div></blockquote>
+</div></div>
+</section>
+</section>
+<section id="flash-memory-layout">
+<span id="bootloader-flash-layout"></span><h3><a class="toc-backref" href="#id11">Flash memory layout</a><a class="headerlink" href="#flash-memory-layout" title="Permalink to this heading"></a></h3>
+<p>The flash memory layout is defined by the <code class="file docutils literal notranslate"><span class="pre">samples/bootloader/pm.yml</span></code> file, which establishes four main partitions:</p>
+<ul class="simple">
+<li><p><em>B0</em> - The NSIB image.</p></li>
+<li><p><em>Provision</em> - The provisioned data.</p></li>
+<li><p><em>S0</em> - Slot 0.</p></li>
+<li><p><em>S1</em> - Slot 1.</p></li>
+</ul>
+<p>The default location for placing the next image in the boot chain is <em>S0</em>.
+This would result, for example, in a flash memory layout like the following, when using the <code class="docutils literal notranslate"><span class="pre">nrf52840dk_nrf52840</span></code> board:</p>
+<figure class="align-default" id="id6">
+<img alt="B0 flash memory layout" src="../../_images/b0_flash_layout.svg" /><figcaption>
+<p><span class="caption-text">B0 flash memory layout</span><a class="headerlink" href="#id6" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When the <em>Provision</em> area is in the OTP region, it will not appear in the flash memory layout.
+See <a class="reference internal" href="#bootloader-provisioning-otp"><span class="std std-ref">OTP regions</span></a> for more information.</p>
+</div>
+<section id="pre-signed-variants">
+<span id="bootloader-pre-signed-variants"></span><h4>Pre-signed variants<a class="headerlink" href="#pre-signed-variants" title="Permalink to this heading"></a></h4>
+<p>When two slots are present, two images must be built.
+One that is executable from slot 0, and the other one from slot 1.
+Building the image for slot 1 is done by enabling the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BUILD_S1_VARIANT</span></code> option.</p>
+<p>When the image for the next stage in the boot chain is upgraded, the new image is written to the slot with the oldest image version.
+See <a class="reference internal" href="#bootloader-monotonic-counter"><span class="std std-ref">Monotonic counter</span></a> for more information about versioning.</p>
+<p>If this image is faulty and cannot be booted, the other partition will always hold a working image that is booted instead.</p>
+<p>When using the <code class="docutils literal notranslate"><span class="pre">nrf52840dk_nrf52840</span></code> board, this would produce a flash memory layout like the following:</p>
+<figure class="align-default" id="id7">
+<img alt="B0 flash memory layout with MCUboot" src="../../_images/b0_mcuboot_flash_layout.svg" /><figcaption>
+<p><span class="caption-text">B0 flash memory layout with MCUboot</span><a class="headerlink" href="#id7" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="signature-keys">
+<span id="bootloader-signature-keys"></span><h3><a class="toc-backref" href="#id12">Signature keys</a><a class="headerlink" href="#signature-keys" title="Permalink to this heading"></a></h3>
+<p>The ECDSA-p256 key type is supported for validating the next image in the boot chain.</p>
+<p>By default, when not explicitly defined, a private/public key pair is generated during the build.
+However, these key pairs should only be used during development.
+See <a class="reference internal" href="../../app_dev/bootloaders_and_dfu/fw_update.html#ug-fw-update-development-keys"><span class="std std-ref">Using development keys</span></a> for more details.</p>
+<p>For details on creating and using custom signature keys, refer to the <a class="reference internal" href="../../app_dev/bootloaders_and_dfu/bootloader_adding.html#ug-bootloader-adding-immutable-keys"><span class="std std-ref">Adding a custom signature key file</span></a> documentation.</p>
+</section>
+<section id="monotonic-counter">
+<span id="bootloader-monotonic-counter"></span><h3><a class="toc-backref" href="#id13">Monotonic counter</a><a class="headerlink" href="#monotonic-counter" title="Permalink to this heading"></a></h3>
+<p>A non-volatile <em>monotonic counter</em> can be stored in the <em>Provision</em> area and is used to implement anti-rollback protection.</p>
+<p>Counter updates are written to slots in the <em>Provision</em> area, with each new counter update occupying a new slot.
+For this reason, the number of counter updates, and therefore firmware version updates, is limited.</p>
+<p>Using a counter is optional and can be configured for the application using configuration options.
+You can also configure the supported number of updates, but the number is limited by the size of the <em>Provision</em> area and how much of that area is taken up by other features, like public key hashes.
+In addition, you can configure what firmware version of the image you want to boot.</p>
+<p>For NSIB, the configuration options are <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_SB_MONOTONIC_COUNTER</span></code>, <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_SB_NUM_VER_COUNTER_SLOTS</span></code>, and <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_FW_INFO_FIRMWARE_VERSION</span></code>.</p>
+<p>For MCUboot, the configuration options are <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MCUBOOT_HARDWARE_DOWNGRADE_PREVENTION</span></code>, <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MCUBOOT_HW_DOWNGRADE_PREVENTION_COUNTER_SLOTS</span></code>, and <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">MCUBOOT_HW_DOWNGRADE_PREVENTION_COUNTER_VALUE</span></code>.</p>
+<p>To set options for child images, such as NSIB and MCUboot, see the <a class="reference internal" href="../../app_dev/multi_image/index.html#ug-multi-image-variables"><span class="std std-ref">Image-specific variables</span></a> section.</p>
+</section>
+</section>
+<section id="configuration">
+<h2><a class="toc-backref" href="#id14">Configuration</a><a class="headerlink" href="#configuration" title="Permalink to this heading"></a></h2>
+<p>See <a class="reference internal" href="../../getting_started/modifying.html#configure-application"><span class="std std-ref">Configuring your application</span></a> for information about how to permanently or temporarily change the configuration.</p>
+<section id="fem-support">
+<h3><a class="toc-backref" href="#id15">FEM support</a><a class="headerlink" href="#fem-support" title="Permalink to this heading"></a></h3>
+<p>You can add support for the nRF21540 front-end module to this sample by using one of the following options, depending on your hardware:</p>
+<ul>
+<li><p>Build the sample for one board that contains the nRF21540 FEM, such as <span class="xref std std-ref">nrf21540dk_nrf52840</span>.</p></li>
+<li><p>Manually create a devicetree overlay file that describes how FEM is connected to the nRF5 SoC in your device.
+See <span class="xref std std-ref">zephyr:set-devicetree-overlays</span> for different ways of adding the overlay file.</p></li>
+<li><p>Provide nRF21540 FEM capabilities by using a <span class="xref std std-ref">shield</span>, for example the <a class="reference internal" href="../../app_dev/working_with_fem/index.html#ug-radio-fem-nrf21540-ek"><span class="std std-ref">nRF21540 EK</span></a> shield that is available in the nRF Connect SDK.
+In this case, build the project for a board connected to the shield you are using with an appropriate variable included in the build command, for example <code class="docutils literal notranslate"><span class="pre">SHIELD=nrf21540_ek</span></code>.
+This variable instructs the build system to append the appropriate devicetree overlay file.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-1-blJGIENvbm5lY3QgZm9yIFZTIENvZGU=" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-1-blJGIENvbm5lY3QgZm9yIFZTIENvZGU=" name="blJGIENvbm5lY3QgZm9yIFZTIENvZGU=" role="tab" tabindex="0">nRF Connect for VS Code</button><button aria-controls="panel-1-Q29tbWFuZCBsaW5l" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-1-Q29tbWFuZCBsaW5l" name="Q29tbWFuZCBsaW5l" role="tab" tabindex="-1">Command line</button></div><div aria-labelledby="tab-1-blJGIENvbm5lY3QgZm9yIFZTIENvZGU=" class="sphinx-tabs-panel group-tab" id="panel-1-blJGIENvbm5lY3QgZm9yIFZTIENvZGU=" name="blJGIENvbm5lY3QgZm9yIFZTIENvZGU=" role="tabpanel" tabindex="0"><p>To build the sample in the nRF Connect for VS Code IDE for an nRF52840 DK with the nRF21540 EK attached, add the shield variable in the build configuration’s <span class="guilabel">Extra CMake arguments</span> and rebuild the build configuration.
+For example: <code class="docutils literal notranslate"><span class="pre">-DSHIELD=nrf21540_ek</span></code>.</p>
+<p>See <a class="reference external" href="https://nrfconnect.github.io/vscode-nrf-connect/guides/build_config.html">nRF Connect for VS Code extension pack</a> documentation for more information.</p>
+</div><div aria-labelledby="tab-1-Q29tbWFuZCBsaW5l" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-1-Q29tbWFuZCBsaW5l" name="Q29tbWFuZCBsaW5l" role="tabpanel" tabindex="0"><p>To build the sample from the command line for an nRF52840 DK with the nRF21540 EK attached, use the following command within the sample directory:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">west build -b nrf52840dk_nrf52840 -- -DSHIELD=nrf21540_ek</span>
+</pre></div>
+</div>
+</div></div>
+<p>See <a class="reference internal" href="../../app_dev/working_with_fem/index.html#ug-radio-fem-nrf21540-ek-programming"><span class="std std-ref">Programming nRF21540 EK</span></a> for information about how to program when you are using a board with a network core, for example nRF5340 DK.</p>
+</li>
+</ul>
+<p>Each of these options adds the description of the nRF21540 FEM to the devicetree.
+See <a class="reference internal" href="../../app_dev/working_with_fem/index.html#ug-radio-fem"><span class="std std-ref">Working with RF front-end modules</span></a> for more information about FEM in the nRF Connect SDK.</p>
+<p>To add support for other front-end modules, add the respective devicetree file entries to the board devicetree file or the devicetree overlay file.</p>
+</section>
+</section>
+<section id="building-and-running">
+<span id="bootloader-build-and-run"></span><h2><a class="toc-backref" href="#id16">Building and running</a><a class="headerlink" href="#building-and-running" title="Permalink to this heading"></a></h2>
+<p>This sample can be found under <code class="file docutils literal notranslate"><span class="pre">samples/bootloader</span></code> in the nRF Connect SDK folder structure.</p>
+<p>To build the sample with Visual Studio Code, follow the steps listed on the <a class="reference external" href="https://nrfconnect.github.io/vscode-nrf-connect/get_started/build_app_ncs.html">How to build an application</a> page in the nRF Connect for VS Code extension documentation.
+See <a class="reference internal" href="../../getting_started/programming.html#gs-programming"><span class="std std-ref">Building and programming an application</span></a> for other building and programming scenarios and <a class="reference internal" href="../../getting_started/testing.html#gs-testing"><span class="std std-ref">Testing and debugging an application</span></a> for general information about testing and debugging in the nRF Connect SDK.</p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>The NSIB should be included as a child image in a multi-image build, rather than being built stand-alone.
+While it is technically possible to build the NSIB by itself and merge it into other application images, this process is not supported.
+To reduce the development time and potential issues with this route, let the existing nRF Connect SDK infrastructure for multi-image builds handle the integration.</p>
+</div>
+<p>For building and running the NSIB with an application, see <a class="reference internal" href="../../app_dev/bootloaders_and_dfu/bootloader_adding.html#ug-bootloader-adding-immutable"><span class="std std-ref">Adding an immutable bootloader</span></a>.</p>
+<section id="building-and-running-using-vsc">
+<h3><a class="toc-backref" href="#id17">Building and running using Visual Studio Code</a><a class="headerlink" href="#building-and-running-using-vsc" title="Permalink to this heading"></a></h3>
+<p>This sample can be found under <code class="file docutils literal notranslate"><span class="pre">samples/bootloader</span></code> in the nRF Connect SDK folder structure.</p>
+<p>To add the NSIB as a child image to your application, complete the following steps:</p>
+<ol class="arabic">
+<li><p><a class="reference internal" href="../../app_dev/bootloaders_and_dfu/fw_update.html#ug-fw-update-keys"><span class="std std-ref">Create a private key in PEM format</span></a>.</p></li>
+<li><p>Enable the nRF Secure Immutable Bootloader through Kconfig as follows:</p>
+<ol class="loweralpha">
+<li><p>Select <span class="guilabel">Kconfig</span> in the <span class="guilabel">Actions View</span> to open the nRF Kconfig tab.</p></li>
+<li><p>Expand <span class="guilabel">Modules</span> &gt; <span class="guilabel">nrf</span> &gt; <span class="guilabel">Nordic nRF Connect</span> &gt; <span class="guilabel">Bootloader</span> and set <span class="guilabel">Use Secure Bootloader</span> to enable <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_SECURE_BOOT</span></code>.</p></li>
+<li><p>Expand <span class="guilabel">Use Secure Bootloader</span>.
+Under <span class="guilabel">Private key PEM file</span> (<code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_SB_SIGNING_KEY_FILE</span></code>), enter the path to the private key that you created.</p>
+<p>You can also modify other additional configuration options, but that is not recommended.
+The default settings are suitable for most use cases.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you need more flexibility with signing, or if you do not want the build system to handle your private key, choose <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_SB_SIGNING_CUSTOM</span></code>, and also specify <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_SB_SIGNING_COMMAND</span></code> and <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_SB_SIGNING_PUBLIC_KEY</span></code>.
+You can use the <span class="guilabel">Search modules</span> bar in nRF Kconfig to find these options.
+These options allow you to define the signing command.</p>
+</div>
+</li>
+<li><p>Click <span class="guilabel">Save</span>.</p></li>
+</ol>
+</li>
+<li><p>Select <span class="guilabel">Build</span> in the <span class="guilabel">Actions View</span> to start the build process.
+The build process creates two images, one for the NSIB and one for the application, and merges them.</p></li>
+<li><p>Select <span class="guilabel">Flash</span> in the <span class="guilabel">Actions View</span> to program the resulting image to your device.</p></li>
+</ol>
+</section>
+<section id="testing">
+<h3><a class="toc-backref" href="#id18">Testing</a><a class="headerlink" href="#testing" title="Permalink to this heading"></a></h3>
+<p>See <a class="reference internal" href="../../app_dev/bootloaders_and_dfu/bootloader_testing.html#ug-bootloader-testing"><span class="std std-ref">Testing the bootloader chain</span></a> for testing of the expected runtime behavior of the NSIB when built with an application.</p>
+</section>
+</section>
+<section id="dependencies">
+<h2><a class="toc-backref" href="#id19">Dependencies</a><a class="headerlink" href="#dependencies" title="Permalink to this heading"></a></h2>
+<p>The following nRF Connect SDK libraries are used:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../scripts/partition_manager/partition_manager.html#partition-manager"><span class="std std-ref">Partition Manager</span></a></p></li>
+<li><p><a class="reference internal" href="../../libraries/others/fw_info.html#doc-fw-info"><span class="std std-ref">Firmware information</span></a></p></li>
+<li><p><a class="reference internal" href="../../libraries/others/fprotect.html#fprotect-readme"><span class="std std-ref">Hardware flash write protection</span></a></p></li>
+<li><p><a class="reference internal" href="../../libraries/bootloader/bl_crypto.html#doc-bl-crypto"><span class="std std-ref">Bootloader crypto</span></a></p></li>
+<li><p><a class="reference internal" href="../../libraries/bootloader/bl_validation.html#doc-bl-validation"><span class="std std-ref">Bootloader firmware validation</span></a></p></li>
+<li><p><a class="reference internal" href="../../libraries/bootloader/bl_storage.html#doc-bl-storage"><span class="std std-ref">Bootloader storage</span></a></p></li>
+</ul>
+<p>It uses the following <a class="reference external" href="https://github.com/nrfconnect/sdk-nrfxlib">sdk-nrfxlib</a> libraries:</p>
+<ul class="simple">
+<li><p><span class="xref std std-ref">nrfxlib:nrf_cc310_bl_readme</span></p></li>
+<li><p><span class="xref std std-ref">nrfxlib:nrf_oberon_readme</span></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../caf/README.html" class="btn btn-neutral float-right" title="Common Application Framework preview" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../app_event_manager_profiler_tracer/README.html" class="btn btn-neutral" title="Application Event Manager profiling tracer" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

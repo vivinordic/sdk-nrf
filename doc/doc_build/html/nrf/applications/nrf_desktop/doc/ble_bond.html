@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bluetooth LE bond module &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../../_static/js/ncs.js"
+></script>
+<script src="../../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Bluetooth LE connection parameters module" href="ble_conn_params.html" />
+    <link rel="prev" title="Bluetooth LE advertising module" href="ble_adv.html" />
+<link
+  href="../../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../protocols.html">Protocols</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../applications.html">Applications</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../connectivity_bridge/README.html">Connectivity bridge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../asset_tracker_v2/README.html">nRF9160: Asset Tracker v2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../serial_lte_modem/README.html">nRF9160: Serial LTE modem</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../README.html">nRF Desktop</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../README.html#overview-firmware-architecture">Overview: Firmware architecture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../README.html#requirements">Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../README.html#user-interface">User interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../README.html#configuration">Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../README.html#building-and-running">Building and running</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../README.html#integrating-your-own-hardware">Integrating your own hardware</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../README.html#dependencies">Dependencies</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../README.html#application-internal-modules">Application internal modules</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="main.html">Basic module (main)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="battery_charger.html">Battery charger module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="battery_meas.html">Battery measurement module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ble_adv.html">Bluetooth LE advertising module</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Bluetooth LE bond module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ble_conn_params.html">Bluetooth LE connection parameters module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ble_discovery.html">Bluetooth LE discovery module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ble_latency.html">Bluetooth LE latency module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ble_passkey.html">Bluetooth LE passkey module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ble_qos.html">Bluetooth LE Quality of Service module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ble_scan.html">Bluetooth LE scanning module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ble_state_pm.html">Bluetooth state power manager module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ble_state.html">Bluetooth LE state module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="board.html">Board module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="buttons.html">Buttons module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="buttons_sim.html">Button simulator module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="click_detector.html">Click detector module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="config_channel.html">Configuration channel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cpu_meas.html">CPU measurement module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dev_descr.html">Device description module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dfu.html">Device Firmware Upgrade module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="failsafe.html">Failsafe module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="fast_pair_app.html">Fast Pair module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="fn_keys.html">Function key module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="bas.html">GATT Battery Service module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="hid_forward.html">HID forward module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="hid_state.html">HID state module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="hid_state_pm.html">HID state power manager module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="hids.html">HID Service module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="info.html">Info module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="led_state.html">LED state module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="led_stream.html">LED stream module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="leds.html">LEDs module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="motion.html">Motion module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="passkey.html">Passkey module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="power_manager.html">Power manager module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="nrf_profiler_sync.html">nRF Profiler synchronization module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="qos.html">Quality of Service module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="selector.html">Selector module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="smp.html">Simple Management Protocol module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="settings_loader.html">Settings loader module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="usb_state_pm.html">USB state power manager module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="usb_state.html">USB state module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="watchdog.html">Watchdog module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="wheel.html">Wheel module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="constlat.html">Constant latency hotfix module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="hfclk_lock.html">High frequency clock lock hotfix module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="event_rel_modules.html">Source and sink module lists</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../README.html#application-configuration-options">Application configuration options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../README.html#api-documentation">API documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../nrf5340_audio/README.html">nRF5340 Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../machine_learning/README.html">nRF Machine Learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../matter_weather_station/README.html">Thingy:53: Matter weather station</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../zigbee_weather_station/README.html">Thingy:53: Zigbee weather station</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../drivers.html">Drivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../applications.html">Applications</a></li>
+          <li class="breadcrumb-item"><a href="../README.html">nRF Desktop</a></li>
+      <li class="breadcrumb-item active">Bluetooth LE bond module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/applications/nrf_desktop/doc/ble_bond.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="bluetooth-le-bond-module">
+<span id="nrf-desktop-ble-bond"></span><h1>Bluetooth LE bond module<a class="headerlink" href="#bluetooth-le-bond-module" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#module-events" id="id9">Module events</a></p></li>
+<li><p><a class="reference internal" href="#local-identities" id="id10">Local identities</a></p></li>
+<li><p><a class="reference internal" href="#module-states" id="id11">Module states</a></p>
+<ul>
+<li><p><a class="reference internal" href="#idle-state-idle" id="id12">Idle (<code class="xref c c-enumerator docutils literal notranslate"><span class="pre">STATE_IDLE</span></code>)</a></p></li>
+<li><p><a class="reference internal" href="#peer-erasing-state-erase-peer" id="id13">Peer erasing (<code class="xref c c-enumerator docutils literal notranslate"><span class="pre">STATE_ERASE_PEER</span></code>)</a></p></li>
+<li><p><a class="reference internal" href="#erase-advertising-state-erase-adv" id="id14">Erase advertising (<code class="xref c c-enumerator docutils literal notranslate"><span class="pre">STATE_ERASE_ADV</span></code>)</a></p></li>
+<li><p><a class="reference internal" href="#peer-selection-state-select-peer" id="id15">Peer selection (<code class="xref c c-enumerator docutils literal notranslate"><span class="pre">STATE_SELECT_PEER</span></code>)</a></p></li>
+<li><p><a class="reference internal" href="#dongle-states" id="id16">Dongle states</a></p></li>
+<li><p><a class="reference internal" href="#standby-states" id="id17">Standby states</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#configuration" id="id18">Configuration</a></p>
+<ul>
+<li><p><a class="reference internal" href="#peer-control-using-a-button" id="id19">Peer control using a button</a></p></li>
+<li><p><a class="reference internal" href="#peer-control-using-a-hardware-selector" id="id20">Peer control using a hardware selector</a></p></li>
+<li><p><a class="reference internal" href="#default-bluetooth-local-identity-on-peripheral" id="id21">Default Bluetooth local identity on peripheral</a></p></li>
+<li><p><a class="reference internal" href="#erasing-dongle-peers" id="id22">Erasing dongle peers</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#configuration-channel-options" id="id23">Configuration channel options</a></p></li>
+<li><p><a class="reference internal" href="#shell-integration" id="id24">Shell integration</a></p></li>
+<li><p><a class="reference internal" href="#implementation-details" id="id25">Implementation details</a></p></li>
+</ul>
+</div>
+<p>Use the Bluetooth® LE bond module to manage the Bluetooth peers and bonds.
+The module controls the following operations:</p>
+<ul class="simple">
+<li><p>Switching between peers (only for nRF Desktop peripheral).</p></li>
+<li><p>Triggering scanning for new peers (only for nRF Desktop central).</p></li>
+<li><p>Erasing the Bluetooth bonds.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The nRF Desktop uses the application-specific Bluetooth LE bond module implementation.
+The application does not rely on the <a class="reference internal" href="../../../libraries/caf/ble_bond.html#caf-ble-bond"><span class="std std-ref">CAF: Bluetooth LE bond module</span></a> implementation.</p>
+</div>
+<section id="module-events">
+<h2><a class="toc-backref" href="#id9">Module events</a><a class="headerlink" href="#module-events" title="Permalink to this heading"></a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 29%" />
+<col style="width: 15%" />
+<col style="width: 9%" />
+<col style="width: 19%" />
+<col style="width: 28%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Source Module</p></th>
+<th class="head"><p>Input Event</p></th>
+<th class="head"><p>This Module</p></th>
+<th class="head"><p>Output Event</p></th>
+<th class="head"><p>Sink Module</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="event_rel_modules.html#nrf-desktop-config-event-sources"><span class="std std-ref">Source modules for config_event</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">config_event</span></code></p></td>
+<td rowspan="21"><p><code class="docutils literal notranslate"><span class="pre">ble_bond</span></code></p></td>
+<td rowspan="13"></td>
+<td rowspan="13"></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ble_adv.html#nrf-desktop-ble-adv"><span class="std std-ref">Bluetooth LE advertising module</span></a></p></td>
+<td rowspan="2"><p><code class="docutils literal notranslate"><span class="pre">ble_peer_event</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ble_state.html#nrf-desktop-ble-state"><span class="std std-ref">Bluetooth LE state module</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="click_detector.html#nrf-desktop-click-detector"><span class="std std-ref">Click detector module</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">click_event</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="event_rel_modules.html#nrf-desktop-module-state-event-sources"><span class="std std-ref">Source modules for module_state_event</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">module_state_event</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="power_manager.html#nrf-desktop-power-manager"><span class="std std-ref">Power manager module</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">power_down_event</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="selector.html#nrf-desktop-selector"><span class="std std-ref">Selector module</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">selector_event</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ble_adv.html#nrf-desktop-ble-adv"><span class="std std-ref">Bluetooth LE advertising module</span></a></p></td>
+<td rowspan="6"><p><code class="docutils literal notranslate"><span class="pre">wake_up_event</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="buttons.html#nrf-desktop-buttons"><span class="std std-ref">Buttons module</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="hid_forward.html#nrf-desktop-hid-forward"><span class="std std-ref">HID forward module</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="motion.html#nrf-desktop-motion"><span class="std std-ref">Motion module</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="power_manager.html#nrf-desktop-power-manager"><span class="std std-ref">Power manager module</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="wheel.html#nrf-desktop-wheel"><span class="std std-ref">Wheel module</span></a></p></td>
+</tr>
+<tr class="row-odd"><td rowspan="8"></td>
+<td rowspan="8"></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ble_dongle_peer_event</span></code></p></td>
+<td><p><a class="reference internal" href="fast_pair_app.html#nrf-desktop-fast-pair-app"><span class="std std-ref">Fast Pair module</span></a></p></td>
+</tr>
+<tr class="row-even"><td rowspan="5"><p><code class="docutils literal notranslate"><span class="pre">ble_peer_operation_event</span></code></p></td>
+<td><p><a class="reference internal" href="fast_pair_app.html#nrf-desktop-fast-pair-app"><span class="std std-ref">Fast Pair module</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ble_adv.html#nrf-desktop-ble-adv"><span class="std std-ref">Bluetooth LE advertising module</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ble_scan.html#nrf-desktop-ble-scan"><span class="std std-ref">Bluetooth LE scanning module</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="hid_forward.html#nrf-desktop-hid-forward"><span class="std std-ref">HID forward module</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="led_state.html#nrf-desktop-led-state"><span class="std std-ref">LED state module</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">config_event</span></code></p></td>
+<td><p><a class="reference internal" href="event_rel_modules.html#nrf-desktop-config-event-sinks"><span class="std std-ref">Sink modules for config_event</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">module_state_event</span></code></p></td>
+<td><p><a class="reference internal" href="event_rel_modules.html#nrf-desktop-module-state-event-sinks"><span class="std std-ref">Sink modules for module_state_event</span></a></p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>See the <a class="reference internal" href="../README.html#nrf-desktop-architecture"><span class="std std-ref">Overview: Firmware architecture</span></a> for more information about the event-based communication in the nRF Desktop application and about how to read this table.</p>
+</div>
+</section>
+<section id="local-identities">
+<h2><a class="toc-backref" href="#id10">Local identities</a><a class="headerlink" href="#local-identities" title="Permalink to this heading"></a></h2>
+<p>The nRF Desktop device uses the following types of local identities:</p>
+<ul class="simple">
+<li><p>Application local identity - Used by the application modules.
+The currently selected application local identity and its state are presented to the user by the <a class="reference internal" href="led_state.html#nrf-desktop-led-state"><span class="std std-ref">LED state module</span></a>.</p></li>
+<li><p>Bluetooth local identity - Used by Zephyr’s <span class="xref std std-ref">zephyr:bluetooth</span> API.
+Every Bluetooth local identity uses its own Bluetooth address and Identity Resolving Key (IRK).
+From the remote device’s perspective, every Bluetooth local identity of a given peripheral is observed as a separate Bluetooth device.</p></li>
+</ul>
+<p>Both application local identities and Bluetooth local identities are identified using IDs.
+Both IDs related to the given Bluetooth peer operation are propagated in <code class="docutils literal notranslate"><span class="pre">ble_peer_operation_event</span></code>.</p>
+<p>The identity usage depends on the device type:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>nRF Desktop central uses only one application local identity and only one Bluetooth local identity (the default ones).</p></li>
+<li><p>nRF Desktop peripheral uses multiple local identities.</p></li>
+</ul>
+</div></blockquote>
+<p>Every application local identity is associated with exactly one Bluetooth local identity.
+The Bluetooth LE bond module stores the mapping from the application local identities to the Bluetooth local identities in the <code class="docutils literal notranslate"><span class="pre">bt_stack_id_lut</span></code> array.
+The mapping changes only after a successful erase advertising.</p>
+<p>Only one Bluetooth peer can be bonded with a given local identity.</p>
+<p>Also, only one of the application local identities is selected at a time.
+When the device changes the selected Bluetooth peer, it actually switches its own local identity.
+The old peer is disconnected by the application, Bluetooth advertising is started, and the new peer connects.</p>
+</section>
+<section id="module-states">
+<h2><a class="toc-backref" href="#id11">Module states</a><a class="headerlink" href="#module-states" title="Permalink to this heading"></a></h2>
+<p>The Bluetooth LE bond module is implemented as a state machine.
+Every transition is triggered by an <a class="reference internal" href="../../../libraries/others/app_event_manager.html#app-event-manager"><span class="std std-ref">Application Event Manager</span></a> event with a predefined value.
+Some transitions can be also triggered by internal timeout.
+For example, the transition from <code class="xref c c-enumerator docutils literal notranslate"><span class="pre">STATE_ERASE_PEER</span></code> to <code class="xref c c-enumerator docutils literal notranslate"><span class="pre">STATE_IDLE</span></code> can be triggered by <code class="docutils literal notranslate"><span class="pre">click_event</span></code>, <code class="docutils literal notranslate"><span class="pre">selector_event</span></code>, or an internal timeout.</p>
+<p>When the transition occurs:</p>
+<ol class="loweralpha simple">
+<li><p>The <a class="reference internal" href="../../../libraries/caf/caf_overview.html#c.ble_peer_operation_event" title="ble_peer_operation_event"><code class="xref c c-struct docutils literal notranslate"><span class="pre">ble_peer_operation_event</span></code></a> with the defined <a class="reference internal" href="../../../libraries/caf/caf_overview.html#c.ble_peer_operation_event.op" title="ble_peer_operation_event.op"><code class="xref c c-member docutils literal notranslate"><span class="pre">ble_peer_operation_event.op</span></code></a> is submitted.
+For example, when the user confirms the erase advertising, the <a class="reference internal" href="../../../libraries/caf/caf_overview.html#c.ble_peer_operation_event" title="ble_peer_operation_event"><code class="xref c c-struct docutils literal notranslate"><span class="pre">ble_peer_operation_event</span></code></a> is submitted with <a class="reference internal" href="../../../libraries/caf/caf_overview.html#c.ble_peer_operation_event.op" title="ble_peer_operation_event.op"><code class="xref c c-member docutils literal notranslate"><span class="pre">ble_peer_operation_event.op</span></code></a> set to <a class="reference internal" href="../../../libraries/caf/caf_overview.html#c.peer_operation.PEER_OPERATION_ERASE_ADV" title="PEER_OPERATION_ERASE_ADV"><code class="xref c c-enumerator docutils literal notranslate"><span class="pre">PEER_OPERATION_ERASE_ADV</span></code></a>.</p></li>
+<li><p>The currently selected application local identity is updated (if anything changed).</p></li>
+</ol>
+<p>The following diagram shows states and transitions between these states after the module is initialized:</p>
+<figure class="align-default" id="id6">
+<img alt="nRF Desktop Bluetooth LE bond module state diagram" src="../../../_images/nrf_desktop_ble_bond.svg" /><figcaption>
+<p><span class="caption-text">nRF Desktop Bluetooth LE bond module state diagram</span><a class="headerlink" href="#id6" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The diagram does not present the states related to module going into standby (<code class="xref c c-enum docutils literal notranslate"><span class="pre">STATE_STANDBY</span></code>, <code class="xref c c-enum docutils literal notranslate"><span class="pre">STATE_DISABLED_STANDBY</span></code>, <code class="xref c c-enum docutils literal notranslate"><span class="pre">STATE_DONGLE_STANDBY</span></code>).
+For more information about the standby states, see <a class="reference internal" href="#standby-states">Standby states</a>.</p>
+</div>
+<p>Receiving <code class="docutils literal notranslate"><span class="pre">click_event</span></code> with a click type that is not included in the schematic will result in cancelling the ongoing operation and returning to <code class="xref c c-enumerator docutils literal notranslate"><span class="pre">STATE_IDLE</span></code> or <code class="xref c c-enumerator docutils literal notranslate"><span class="pre">STATE_DONGLE</span></code>.
+This does not apply to <code class="xref c c-enumerator docutils literal notranslate"><span class="pre">STATE_DONGLE</span></code>.
+In this state, all the peer operations triggered by <code class="docutils literal notranslate"><span class="pre">click_event</span></code> are disabled.</p>
+<section id="idle-state-idle">
+<h3><a class="toc-backref" href="#id12">Idle (<code class="xref c c-enumerator docutils literal notranslate"><span class="pre">STATE_IDLE</span></code>)</a><a class="headerlink" href="#idle-state-idle" title="Permalink to this heading"></a></h3>
+<p>This is the default state of the module.</p>
+<p>When in this state, the following transitions are possible:</p>
+<ul class="simple">
+<li><p>Start peer erase with <a class="reference internal" href="../../../libraries/caf/caf_overview.html#c.peer_operation.PEER_OPERATION_ERASE" title="PEER_OPERATION_ERASE"><code class="xref c c-enumerator docutils literal notranslate"><span class="pre">PEER_OPERATION_ERASE</span></code></a> by triggering a <code class="docutils literal notranslate"><span class="pre">click_event</span></code> with the <code class="docutils literal notranslate"><span class="pre">CLICK_LONG</span></code> click type.</p></li>
+<li><p>Start erase advertising with <a class="reference internal" href="../../../libraries/caf/caf_overview.html#c.peer_operation.PEER_OPERATION_ERASE_ADV" title="PEER_OPERATION_ERASE_ADV"><code class="xref c c-enumerator docutils literal notranslate"><span class="pre">PEER_OPERATION_ERASE_ADV</span></code></a> by triggering a <code class="docutils literal notranslate"><span class="pre">click_event</span></code> with the <code class="docutils literal notranslate"><span class="pre">ON_START_CLICK(CLICK_LONG)</span></code> click type.</p></li>
+<li><p>Select next peer with <a class="reference internal" href="../../../libraries/caf/caf_overview.html#c.peer_operation.PEER_OPERATION_SELECT" title="PEER_OPERATION_SELECT"><code class="xref c c-enumerator docutils literal notranslate"><span class="pre">PEER_OPERATION_SELECT</span></code></a> by triggering a <code class="docutils literal notranslate"><span class="pre">click_event</span></code> with the <code class="docutils literal notranslate"><span class="pre">CLICK_SHORT</span></code> click type.</p></li>
+<li><p>Select the dongle peer with <a class="reference internal" href="../../../libraries/caf/caf_overview.html#c.peer_operation.PEER_OPERATION_SELECTED" title="PEER_OPERATION_SELECTED"><code class="xref c c-enumerator docutils literal notranslate"><span class="pre">PEER_OPERATION_SELECTED</span></code></a> by triggering a <code class="docutils literal notranslate"><span class="pre">selector_event</span></code> with the selector in the <a class="reference internal" href="../README.html#config-desktop-app-options"><span class="std std-ref">CONFIG_DESKTOP_BLE_DONGLE_PEER_SELECTOR_POS</span></a> position.</p></li>
+</ul>
+<p>It is also possible to trigger looking for a new peer with <a class="reference internal" href="../../../libraries/caf/caf_overview.html#c.peer_operation.PEER_OPERATION_SCAN_REQUEST" title="PEER_OPERATION_SCAN_REQUEST"><code class="xref c c-enumerator docutils literal notranslate"><span class="pre">PEER_OPERATION_SCAN_REQUEST</span></code></a> with a <code class="docutils literal notranslate"><span class="pre">click_event</span></code> of the <code class="docutils literal notranslate"><span class="pre">CLICK_SHORT</span></code> click type.</p>
+</section>
+<section id="peer-erasing-state-erase-peer">
+<span id="ble-bond-peer-erasing"></span><h3><a class="toc-backref" href="#id13">Peer erasing (<code class="xref c c-enumerator docutils literal notranslate"><span class="pre">STATE_ERASE_PEER</span></code>)</a><a class="headerlink" href="#peer-erasing-state-erase-peer" title="Permalink to this heading"></a></h3>
+<p>Peer erasing is triggered with the reception of a <code class="docutils literal notranslate"><span class="pre">click_event</span></code> of the <code class="docutils literal notranslate"><span class="pre">CLICK_LONG</span></code> type.</p>
+<p>Depending on the device type:</p>
+<ul class="simple">
+<li><p>The nRF Desktop central erases all bonded peers on the erase confirmation.</p></li>
+<li><p>The nRF Desktop peripheral starts erase advertising on the erase confirmation.</p></li>
+</ul>
+</section>
+<section id="erase-advertising-state-erase-adv">
+<span id="ble-bond-erase-adv"></span><h3><a class="toc-backref" href="#id14">Erase advertising (<code class="xref c c-enumerator docutils literal notranslate"><span class="pre">STATE_ERASE_ADV</span></code>)</a><a class="headerlink" href="#erase-advertising-state-erase-adv" title="Permalink to this heading"></a></h3>
+<p>The erase advertising is used to make sure that the user is able to switch back to the old peer if the new one fails to connect or bond.
+The peripheral uses an additional Bluetooth local identity that is not associated with any application local identity.
+The peripheral resets the identity and starts advertising using it.</p>
+<p>If a new peer successfully connects, establishes security, and bonds, the current application local identity switches to using the Bluetooth local identity that was used during the erase advertising.
+The new peer is associated with the currently used application local identity.</p>
+<p>After a timeout or on user request, the erase advertising is stopped.
+The application local identity still uses the Bluetooth local identity that was associated with it before the erase advertising.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The erase advertising timeout can be extended in case a new peer connects.
+This ensures that a new peer will have time to establish the Bluetooth security level.</p>
+<p>The timeout is increased to a bigger value when the passkey authentication is enabled (<a class="reference internal" href="../README.html#config-desktop-app-options"><span class="std std-ref">CONFIG_DESKTOP_BLE_ENABLE_PASSKEY</span></a>).
+This gives the end user enough time to enter the passkey.</p>
+</div>
+</section>
+<section id="peer-selection-state-select-peer">
+<h3><a class="toc-backref" href="#id15">Peer selection (<code class="xref c c-enumerator docutils literal notranslate"><span class="pre">STATE_SELECT_PEER</span></code>)</a><a class="headerlink" href="#peer-selection-state-select-peer" title="Permalink to this heading"></a></h3>
+<p>In this state, the module waits for confirmation before the peer is switched.
+The connected peer remains unchanged until the selection is confirmed.</p>
+</section>
+<section id="dongle-states">
+<h3><a class="toc-backref" href="#id16">Dongle states</a><a class="headerlink" href="#dongle-states" title="Permalink to this heading"></a></h3>
+<p>The module can go into one of the following dongle states:</p>
+<ul class="simple">
+<li><p><code class="xref c c-enumerator docutils literal notranslate"><span class="pre">STATE_DONGLE</span></code> - This is the default state of the module when the hardware selector used to select the dongle peer is placed in the <a class="reference internal" href="../README.html#config-desktop-app-options"><span class="std std-ref">CONFIG_DESKTOP_BLE_DONGLE_PEER_SELECTOR_POS</span></a> position.
+This state is used for connection with the nRF Desktop dongle.</p></li>
+<li><p><code class="xref c c-enumerator docutils literal notranslate"><span class="pre">STATE_DONGLE_STANDBY</span></code> - The Bluetooth LE bond module is suspended when the dongle peer is selected.
+See <a class="reference internal" href="#ble-bond-standby-states"><span class="std std-ref">Standby states</span></a>.</p></li>
+<li><p><code class="xref c c-enumerator docutils literal notranslate"><span class="pre">STATE_DONGLE_ERASE_PEER</span></code> - As <a class="reference internal" href="#ble-bond-peer-erasing"><span class="std std-ref">Peer erasing (STATE_ERASE_PEER)</span></a>, but for erasing dongle peer.</p></li>
+<li><p><code class="xref c c-enumerator docutils literal notranslate"><span class="pre">STATE_DONGLE_ERASE_ADV</span></code> - As <a class="reference internal" href="#ble-bond-erase-adv"><span class="std std-ref">Erase advertising (STATE_ERASE_ADV)</span></a>, but for erasing dongle peer.
+Similarly, the device waits with erasing the previous peer until it is connected and bonded with a new one.</p></li>
+</ul>
+<figure class="align-default" id="id7">
+<img alt="nRF Desktop Bluetooth LE bond module dongle state diagram" src="../../../_images/nrf_desktop_ble_bond_dongle.svg" /><figcaption>
+<p><span class="caption-text">nRF Desktop Bluetooth LE bond module dongle state diagram</span><a class="headerlink" href="#id7" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="standby-states">
+<span id="ble-bond-standby-states"></span><h3><a class="toc-backref" href="#id17">Standby states</a><a class="headerlink" href="#standby-states" title="Permalink to this heading"></a></h3>
+<p>The module can go into one of the following standby states to make sure that the peer operations are not triggered when the device is suspended by <a class="reference internal" href="power_manager.html#nrf-desktop-power-manager"><span class="std std-ref">Power manager module</span></a>:</p>
+<ul class="simple">
+<li><p><code class="xref c c-enumerator docutils literal notranslate"><span class="pre">STATE_DISABLED_STANDBY</span></code> - The module is suspended before initialization.</p></li>
+<li><p><code class="xref c c-enumerator docutils literal notranslate"><span class="pre">STATE_DONGLE_STANDBY</span></code> - The module is suspended when the dongle peer is selected.</p></li>
+<li><p><code class="xref c c-enumerator docutils literal notranslate"><span class="pre">STATE_STANDBY</span></code> - The module is suspended when other Bluetooth peers are selected.</p></li>
+</ul>
+<p>Going into the standby states and leaving these states happens in reaction to the following events:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">power_down_event</span></code> - On this event, the module goes into one of the standby states and the ongoing peer operation is cancelled.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">wake_up_event</span></code> - On this event, the module returns from the standby state.</p></li>
+</ul>
+<figure class="align-default" id="id8">
+<img alt="nRF Desktop Bluetooth LE bond module standby state diagram" src="../../../_images/nrf_desktop_ble_bond_standby.svg" /><figcaption>
+<p><span class="caption-text">nRF Desktop Bluetooth LE bond module standby state diagram</span><a class="headerlink" href="#id8" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="configuration">
+<h2><a class="toc-backref" href="#id18">Configuration</a><a class="headerlink" href="#configuration" title="Permalink to this heading"></a></h2>
+<p>The module requires the basic Bluetooth configuration, as described in <a class="reference internal" href="../README.html#nrf-desktop-bluetooth-guide"><span class="std std-ref">Bluetooth in nRF Desktop</span></a>.
+Set the <a class="reference internal" href="../README.html#config-desktop-app-options"><span class="std std-ref">CONFIG_DESKTOP_BLE_BOND_ENABLE</span></a> option to enable the module.</p>
+<p>You can control the connected peers using the following methods:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#peer-control-using-a-button">Peer control using a button</a></p></li>
+<li><p><a class="reference internal" href="#peer-control-using-a-hardware-selector">Peer control using a hardware selector</a></p></li>
+</ul>
+<p>You can use both methods, but the hardware selector has precedence.</p>
+<p>When configuring the module, you can also enable <a class="reference internal" href="#default-bluetooth-local-identity-on-peripheral">Default Bluetooth local identity on peripheral</a>.</p>
+<section id="peer-control-using-a-button">
+<h3><a class="toc-backref" href="#id19">Peer control using a button</a><a class="headerlink" href="#peer-control-using-a-button" title="Permalink to this heading"></a></h3>
+<p>Complete the following steps to let the user control Bluetooth peers using the dedicated button:</p>
+<ol class="arabic simple">
+<li><p>Set the <a class="reference internal" href="../README.html#config-desktop-app-options"><span class="std std-ref">CONFIG_DESKTOP_BLE_PEER_CONTROL</span></a> option to enable the feature.</p></li>
+<li><p>Configure the <a class="reference internal" href="../../../libraries/caf/buttons.html#caf-buttons"><span class="std std-ref">CAF: Buttons module</span></a>.</p></li>
+<li><p>Define the button’s key ID as <a class="reference internal" href="../README.html#config-desktop-app-options"><span class="std std-ref">CONFIG_DESKTOP_BLE_PEER_CONTROL_BUTTON</span></a>.</p></li>
+<li><p>Add the button to the <a class="reference internal" href="click_detector.html#nrf-desktop-click-detector"><span class="std std-ref">Click detector module</span></a> configuration, because the Bluetooth LE bond module reacts on <code class="docutils literal notranslate"><span class="pre">click_event</span></code>.</p></li>
+</ol>
+<p>The following peer operations can be enabled:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../README.html#config-desktop-app-options"><span class="std std-ref">CONFIG_DESKTOP_BLE_PEER_ERASE</span></a> - Bluetooth LE peer erase triggered at any time.</p></li>
+<li><p><a class="reference internal" href="../README.html#config-desktop-app-options"><span class="std std-ref">CONFIG_DESKTOP_BLE_PEER_ERASE_ON_START</span></a> - Erase advertising triggered by long press of the predefined button on system start.
+This option can be used only by nRF Desktop peripheral.</p></li>
+<li><p><a class="reference internal" href="../README.html#config-desktop-app-options"><span class="std std-ref">CONFIG_DESKTOP_BLE_PEER_SELECT</span></a> - Select Bluetooth LE peer.
+This option can be used only by nRF Desktop peripheral.</p></li>
+<li><p><a class="reference internal" href="../README.html#config-desktop-app-options"><span class="std std-ref">CONFIG_DESKTOP_BLE_NEW_PEER_SCAN_REQUEST</span></a> - Scan for new Bluetooth peers.
+This option can be used only by nRF Desktop central.</p></li>
+</ul>
+</section>
+<section id="peer-control-using-a-hardware-selector">
+<h3><a class="toc-backref" href="#id20">Peer control using a hardware selector</a><a class="headerlink" href="#peer-control-using-a-hardware-selector" title="Permalink to this heading"></a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This feature can be used only by nRF Desktop peripheral devices.</p>
+</div>
+<p>Set the <a class="reference internal" href="../README.html#config-desktop-app-options"><span class="std std-ref">CONFIG_DESKTOP_BLE_DONGLE_PEER_ENABLE</span></a> option to use the dedicated local identity to connect with the dongle.
+The last application local identity (the one with the highest ID) is used for this purpose.</p>
+<p>The dongle is the nRF Desktop central.
+If the dongle peer is enabled, the nRF Desktop peripheral uses one of the local identities for the Bluetooth connection with the dongle.
+This local identity is meant to be paired with the dongle during the production process.</p>
+<p>You can use the <a class="reference internal" href="../README.html#config-desktop-app-options"><span class="std std-ref">CONFIG_DESKTOP_BLE_DONGLE_PEER_ID_INFO</span></a> option to indicate the dongle peer identity with the <code class="xref c c-struct docutils literal notranslate"><span class="pre">ble_dongle_peer_event</span></code> event.</p>
+<p>The dongle peer is selected using the <a class="reference internal" href="selector.html#nrf-desktop-selector"><span class="std std-ref">Selector module</span></a>.
+You must also define the following parameters of the selector used to switch between dongle peer and other Bluetooth LE peers:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../README.html#config-desktop-app-options"><span class="std std-ref">CONFIG_DESKTOP_BLE_DONGLE_PEER_SELECTOR_ID</span></a> - Selector ID.</p></li>
+<li><p><a class="reference internal" href="../README.html#config-desktop-app-options"><span class="std std-ref">CONFIG_DESKTOP_BLE_DONGLE_PEER_SELECTOR_POS</span></a> - Selector position for the dongle peer (when selector is in other position, other Bluetooth peers are selected).</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The Bluetooth local identity used for the dongle peer does not provide any special capabilities.
+All the application modules and the Zephyr Bluetooth stack use it in the same way as any other local identity.
+The Low Latency Packet Mode can be used with any other local identity.</p>
+<p>The only difference is that selecting the dongle peer disables other peer operations.</p>
+</div>
+</section>
+<section id="default-bluetooth-local-identity-on-peripheral">
+<h3><a class="toc-backref" href="#id21">Default Bluetooth local identity on peripheral</a><a class="headerlink" href="#default-bluetooth-local-identity-on-peripheral" title="Permalink to this heading"></a></h3>
+<p>By default, the default Bluetooth local identity is unused, because it cannot be reset.
+You can set <a class="reference internal" href="../README.html#config-desktop-app-options"><span class="std std-ref">CONFIG_DESKTOP_BLE_USE_DEFAULT_ID</span></a> to make the nRF Desktop peripheral initially use the default Bluetooth local identity for the application local identity with ID <code class="docutils literal notranslate"><span class="pre">0</span></code>.
+After the successful erase advertising for application local identity with ID <code class="docutils literal notranslate"><span class="pre">0</span></code>, the default Bluetooth local identity is switched out and it is no longer used.
+The peer bonded with the default Bluetooth local identity is unpaired.</p>
+<p>The default identity on given device uses the same Bluetooth address after every programming.
+This feature can be useful for automatic tests.</p>
+</section>
+<section id="erasing-dongle-peers">
+<h3><a class="toc-backref" href="#id22">Erasing dongle peers</a><a class="headerlink" href="#erasing-dongle-peers" title="Permalink to this heading"></a></h3>
+<p>To enable erasing dongle peer you have to enable the following options:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../README.html#config-desktop-app-options"><span class="std std-ref">CONFIG_DESKTOP_BLE_DONGLE_PEER_ERASE_BOND_BUTTON</span></a> - If you want to enable erasing peers using buttons.</p></li>
+<li><p><a class="reference internal" href="../README.html#config-desktop-app-options"><span class="std std-ref">CONFIG_DESKTOP_BLE_DONGLE_PEER_ERASE_BOND_CONF_CHANNEL</span></a> - If you want to enable erasing peers using <a class="reference internal" href="#configuration-channel-options">Configuration channel options</a>.</p></li>
+</ul>
+</section>
+</section>
+<section id="configuration-channel-options">
+<h2><a class="toc-backref" href="#id23">Configuration channel options</a><a class="headerlink" href="#configuration-channel-options" title="Permalink to this heading"></a></h2>
+<p>The module provides the following <a class="reference internal" href="config_channel.html#nrf-desktop-config-channel"><span class="std std-ref">Configuration channel</span></a> options:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">peer_erase</span></code> - Erase peer for the current local identity.
+The nRF Desktop central erases all the peers.
+The nRF Desktop peripheral starts erase advertising.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">peer_search</span></code> - Request scanning for new peripherals.
+The option is available only for the nRF Desktop central.</p></li>
+</ul>
+<p>Perform a <a class="reference internal" href="config_channel.html#nrf-desktop-config-channel"><span class="std std-ref">Configuration channel</span></a> set operation on the selected option to trigger the operation.
+The options can be used only if the module is in <code class="xref c c-enumerator docutils literal notranslate"><span class="pre">STATE_IDLE</span></code>.
+Because of this, they cannot be used when the device is suspended by <a class="reference internal" href="power_manager.html#nrf-desktop-power-manager"><span class="std std-ref">Power manager module</span></a>.
+The device must be woken up from suspended state before the operation is started.</p>
+</section>
+<section id="shell-integration">
+<h2><a class="toc-backref" href="#id24">Shell integration</a><a class="headerlink" href="#shell-integration" title="Permalink to this heading"></a></h2>
+<p>The module is integrated with Zephyr’s <span class="xref std std-ref">zephyr:shell_api</span> module.
+When the shell is turned on, an additional subcommand set (<strong class="command">peers</strong>) is added.</p>
+<p>This subcommand set contains the following commands:</p>
+<ul class="simple">
+<li><p><strong class="command">show</strong> - Show bonded peers for every Bluetooth local identity.</p></li>
+<li><p><strong class="command">remove</strong> - Remove bonded peers for the currently selected Bluetooth local identity.
+The command instantly removes the peers for both nRF Desktop central and nRF Desktop peripheral.
+It does not start erase advertising.</p></li>
+</ul>
+</section>
+<section id="implementation-details">
+<h2><a class="toc-backref" href="#id25">Implementation details</a><a class="headerlink" href="#implementation-details" title="Permalink to this heading"></a></h2>
+<p>The module uses Zephyr’s <span class="xref std std-ref">zephyr:settings_api</span> subsystem to store the following data in the non-volatile memory:</p>
+<ul class="simple">
+<li><p>Currently selected peer (application local identity)</p></li>
+<li><p>Mapping between the application local identities and the Bluetooth local identities</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="ble_conn_params.html" class="btn btn-neutral float-right" title="Bluetooth LE connection parameters module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="ble_adv.html" class="btn btn-neutral" title="Bluetooth LE advertising module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

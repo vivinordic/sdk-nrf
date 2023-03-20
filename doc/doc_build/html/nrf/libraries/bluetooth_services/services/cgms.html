@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GATT Continuous Glucose Monitoring Service (CGMS) &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../../_static/js/ncs.js"
+></script>
+<script src="../../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="GATT Current Time Service (CTS) Client" href="cts_client.html" />
+    <link rel="prev" title="GATT Bond Management Service (BMS)" href="bms.html" />
+<link
+  href="../../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../drivers.html">Drivers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Libraries</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../bin/index.html">Binary libraries</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Bluetooth libraries and services</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../adv_prov.html">Bluetooth LE advertising providers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../conn_ctx.html">Bluetooth connection context</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../enocean.html">Bluetooth EnOcean</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gatt_dm.html">GATT Discovery Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gatt_pool.html">Bluetooth GATT attribute pools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mesh.html">Bluetooth mesh profile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../rpc.html">Bluetooth Low Energy Remote Procedure Call</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../scan.html">Scanning module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ams_client.html">Apple Media Service (AMS) Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ancs_client.html">Apple Notification Center Service (ANCS) Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bas_client.html">GATT Battery Service (BAS) Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bms.html">GATT Bond Management Service (BMS)</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">GATT Continuous Glucose Monitoring Service (CGMS)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuration">Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#usage">Usage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#api-documentation">API documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cts_client.html">GATT Current Time Service (CTS) Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ddfs.html">Direction and Distance Finding Service (DDFS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dfu_smp.html">GATT DFU SMP Service Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fast_pair.html">Google Fast Pair Service (GFPS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gattp.html">Generic Attribute (GATT) Profile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hids.html">GATT Human Interface Device (HID) Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hogp.html">GATT Human Interface Device Service (HIDS) Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hrs_client.html">GATT Heart Rate Service (HRS) Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="latency.html">GATT Latency Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="latency_client.html">GATT Latency Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lbs.html">LED Button Service (LBS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mds.html">Memfault Diagnostic Service (MDS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nsms.html">Nordic Status Message Service (NSMS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nus.html">Nordic UART Service (NUS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nus_client.html">Nordic UART Service (NUS) Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rscs.html">Running Speed and Cadence Service (RSCS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="throughput.html">GATT Throughput Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wifi_prov.html">Wi-Fi Provisioning Service</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../bootloader/index.html">Bootloader libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../caf/index.html">Common Application Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../debug/index.html">Debug libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../dfu/index.html">DFU libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gazell/index.html">Gazell libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../modem/index.html">Modem libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mpsl/index.html">Multiprotocol Service Layer libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../networking/index.html">Libraries for networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nfc/index.html">Libraries for NFC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nrf_rpc/index.html">nRF RPC libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../others/index.html">Other libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../shell/index.html">Shell libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tfm/index.html">TF-M libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../zigbee/index.html">Libraries for Zigbee</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Libraries</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Bluetooth libraries and services</a></li>
+      <li class="breadcrumb-item active">GATT Continuous Glucose Monitoring Service (CGMS)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/libraries/bluetooth_services/services/cgms.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="gatt-continuous-glucose-monitoring-service-cgms">
+<span id="cgms-readme"></span><h1>GATT Continuous Glucose Monitoring Service (CGMS)<a class="headerlink" href="#gatt-continuous-glucose-monitoring-service-cgms" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#overview" id="id7">Overview</a></p>
+<ul>
+<li><p><a class="reference internal" href="#supported-features" id="id8">Supported features</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#configuration" id="id9">Configuration</a></p></li>
+<li><p><a class="reference internal" href="#usage" id="id10">Usage</a></p></li>
+<li><p><a class="reference internal" href="#api-documentation" id="id11">API documentation</a></p></li>
+</ul>
+</div>
+<section id="overview">
+<h2><a class="toc-backref" href="#id7">Overview</a><a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+<p>This module implements the Continuous Glucose Monitoring Service with the corresponding set of characteristics defined in the <a class="reference external" href="https://www.bluetooth.org/DocMan/handlers/DownloadDoc.ashx?doc_id=531249">Continuous Glucose Monitoring Service Specification</a>.</p>
+<section id="supported-features">
+<h3><a class="toc-backref" href="#id8">Supported features</a><a class="headerlink" href="#supported-features" title="Permalink to this heading"></a></h3>
+<p>All the mandatory CGMS features are supported.</p>
+</section>
+</section>
+<section id="configuration">
+<h2><a class="toc-backref" href="#id9">Configuration</a><a class="headerlink" href="#configuration" title="Permalink to this heading"></a></h2>
+<p>Set the maximum number of glucose measurement records stored in the device using the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_CGMS_MAX_MEASUREMENT_RECORD</span></code> Kconfig option.
+The value of should be large enough to hold all records generated in a session.</p>
+<p>Set the logging level of the CGMS module using the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_CGMS_LOG_LEVEL</span></code> Kconfig option.</p>
+</section>
+<section id="usage">
+<h2><a class="toc-backref" href="#id10">Usage</a><a class="headerlink" href="#usage" title="Permalink to this heading"></a></h2>
+<p>To use CGMS in your application, call the <a class="reference internal" href="#c.bt_cgms_init" title="bt_cgms_init"><code class="xref c c-func docutils literal notranslate"><span class="pre">bt_cgms_init()</span></code></a> function.
+Then, call the <a class="reference internal" href="#c.bt_cgms_measurement_add" title="bt_cgms_measurement_add"><code class="xref c c-func docutils literal notranslate"><span class="pre">bt_cgms_measurement_add()</span></code></a> function to pass the measurement result of glucose concentration to CGMS.</p>
+</section>
+<section id="api-documentation">
+<h2><a class="toc-backref" href="#id11">API documentation</a><a class="headerlink" href="#api-documentation" title="Permalink to this heading"></a></h2>
+<div class="line-block">
+<div class="line">Header file: <code class="file docutils literal notranslate"><span class="pre">include/bluetooth/services/cgms.h</span></code></div>
+<div class="line">Source files: <code class="file docutils literal notranslate"><span class="pre">subsys/bluetooth/services/cgms</span></code></div>
+</div>
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="group__bt__cgms"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">bt_cgms</span></span></dt>
+<dd><p>API for the Continuous Glucose Monitoring Service (CGMS). </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-enums">Enums</p>
+<dl class="c enum">
+<dt class="sig sig-object c" id="c.bt_cgms_feat_type">
+<span class="target" id="group__bt__cgms_1gaeba26afe10cbfd4566f12d1ce23822a9"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_cgms_feat_type</span></span></span><a class="headerlink" href="#c.bt_cgms_feat_type" title="Permalink to this definition"></a><br /></dt>
+<dd><p>CGMS Feature characteristic Type field. </p>
+<p><em>Values:</em></p>
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_cgms_feat_type.BT_CGMS_FEAT_TYPE_CAP_BLOOD">
+<span class="target" id="group__bt__cgms_1ggaeba26afe10cbfd4566f12d1ce23822a9a33a791b4507514341923c095c24b4463"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_CGMS_FEAT_TYPE_CAP_BLOOD</span></span></span><a class="headerlink" href="#c.bt_cgms_feat_type.BT_CGMS_FEAT_TYPE_CAP_BLOOD" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Capillary Whole blood </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_cgms_feat_type.BT_CGMS_FEAT_TYPE_CAP_PLASMA">
+<span class="target" id="group__bt__cgms_1ggaeba26afe10cbfd4566f12d1ce23822a9a4a98304d94bfc6157f7a13ec3e764490"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_CGMS_FEAT_TYPE_CAP_PLASMA</span></span></span><a class="headerlink" href="#c.bt_cgms_feat_type.BT_CGMS_FEAT_TYPE_CAP_PLASMA" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Capillary Plasma </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_cgms_feat_type.BT_CGMS_FEAT_TYPE_VEN_BLOOD">
+<span class="target" id="group__bt__cgms_1ggaeba26afe10cbfd4566f12d1ce23822a9acc16d943a7502f1273636c1b0a608de0"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_CGMS_FEAT_TYPE_VEN_BLOOD</span></span></span><a class="headerlink" href="#c.bt_cgms_feat_type.BT_CGMS_FEAT_TYPE_VEN_BLOOD" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Venous Whole blood </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_cgms_feat_type.BT_CGMS_FEAT_TYPE_VEN_PLASMA">
+<span class="target" id="group__bt__cgms_1ggaeba26afe10cbfd4566f12d1ce23822a9a3276356875b3ddf24d2f2f9501b81802"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_CGMS_FEAT_TYPE_VEN_PLASMA</span></span></span><a class="headerlink" href="#c.bt_cgms_feat_type.BT_CGMS_FEAT_TYPE_VEN_PLASMA" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Venous Plasma </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_cgms_feat_type.BT_CGMS_FEAT_TYPE_ART_BLOOD">
+<span class="target" id="group__bt__cgms_1ggaeba26afe10cbfd4566f12d1ce23822a9a3c2466d6e560bba8e15176fc669dd20d"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_CGMS_FEAT_TYPE_ART_BLOOD</span></span></span><a class="headerlink" href="#c.bt_cgms_feat_type.BT_CGMS_FEAT_TYPE_ART_BLOOD" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Arterial Whole blood </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_cgms_feat_type.BT_CGMS_FEAT_TYPE_ART_PLASMA">
+<span class="target" id="group__bt__cgms_1ggaeba26afe10cbfd4566f12d1ce23822a9a3ad953e116445873db8ba3b750bf6e3f"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_CGMS_FEAT_TYPE_ART_PLASMA</span></span></span><a class="headerlink" href="#c.bt_cgms_feat_type.BT_CGMS_FEAT_TYPE_ART_PLASMA" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Arterial Plasma </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_cgms_feat_type.BT_CGMS_FEAT_TYPE_UNDET_BLOOD">
+<span class="target" id="group__bt__cgms_1ggaeba26afe10cbfd4566f12d1ce23822a9a0443303d9c80430aae0464ab72bea983"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_CGMS_FEAT_TYPE_UNDET_BLOOD</span></span></span><a class="headerlink" href="#c.bt_cgms_feat_type.BT_CGMS_FEAT_TYPE_UNDET_BLOOD" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Arterial Plasma </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_cgms_feat_type.BT_CGMS_FEAT_TYPE_UNDET_PLASMA">
+<span class="target" id="group__bt__cgms_1ggaeba26afe10cbfd4566f12d1ce23822a9ad67610b7cccee957e3f1bb1f7c46e081"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_CGMS_FEAT_TYPE_UNDET_PLASMA</span></span></span><a class="headerlink" href="#c.bt_cgms_feat_type.BT_CGMS_FEAT_TYPE_UNDET_PLASMA" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Arterial Plasma </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_cgms_feat_type.BT_CGMS_FEAT_TYPE_FLUID">
+<span class="target" id="group__bt__cgms_1ggaeba26afe10cbfd4566f12d1ce23822a9a07c949e19794bda6a6081ae7e89717c8"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_CGMS_FEAT_TYPE_FLUID</span></span></span><a class="headerlink" href="#c.bt_cgms_feat_type.BT_CGMS_FEAT_TYPE_FLUID" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Interstitial Fluid (ISF) </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_cgms_feat_type.BT_CGMS_FEAT_TYPE_CONTROL">
+<span class="target" id="group__bt__cgms_1ggaeba26afe10cbfd4566f12d1ce23822a9a0bb755e2e48c550b878fb2342c581bc4"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_CGMS_FEAT_TYPE_CONTROL</span></span></span><a class="headerlink" href="#c.bt_cgms_feat_type.BT_CGMS_FEAT_TYPE_CONTROL" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Control Solution </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="c enum">
+<dt class="sig sig-object c" id="c.bt_cgms_feat_loc">
+<span class="target" id="group__bt__cgms_1ga4d22a4f3c8203e2f7202c020334f2745"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_cgms_feat_loc</span></span></span><a class="headerlink" href="#c.bt_cgms_feat_loc" title="Permalink to this definition"></a><br /></dt>
+<dd><p>CGMS Feature characteristic Sample Location field. </p>
+<p><em>Values:</em></p>
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_cgms_feat_loc.BT_CGMS_FEAT_LOC_FINGER">
+<span class="target" id="group__bt__cgms_1gga4d22a4f3c8203e2f7202c020334f2745adb6c67393a3bbc22902ad212d81f42f6"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_CGMS_FEAT_LOC_FINGER</span></span></span><a class="headerlink" href="#c.bt_cgms_feat_loc.BT_CGMS_FEAT_LOC_FINGER" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Finger </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_cgms_feat_loc.BT_CGMS_FEAT_LOC_AST">
+<span class="target" id="group__bt__cgms_1gga4d22a4f3c8203e2f7202c020334f2745a81a6c2b5f6f5b9eb9fa1b296e76e34a4"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_CGMS_FEAT_LOC_AST</span></span></span><a class="headerlink" href="#c.bt_cgms_feat_loc.BT_CGMS_FEAT_LOC_AST" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Alternate Site Test (AST) </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_cgms_feat_loc.BT_CGMS_FEAT_LOC_EAR">
+<span class="target" id="group__bt__cgms_1gga4d22a4f3c8203e2f7202c020334f2745ad41f4d9482d2abc379fb3809ae918beb"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_CGMS_FEAT_LOC_EAR</span></span></span><a class="headerlink" href="#c.bt_cgms_feat_loc.BT_CGMS_FEAT_LOC_EAR" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Earlobe </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_cgms_feat_loc.BT_CGMS_FEAT_LOC_CONTROL">
+<span class="target" id="group__bt__cgms_1gga4d22a4f3c8203e2f7202c020334f2745a14be3b38518714ad8919488ef52869ac"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_CGMS_FEAT_LOC_CONTROL</span></span></span><a class="headerlink" href="#c.bt_cgms_feat_loc.BT_CGMS_FEAT_LOC_CONTROL" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Control solution </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_cgms_feat_loc.BT_CGMS_FEAT_LOC_SUB_TISSUE">
+<span class="target" id="group__bt__cgms_1gga4d22a4f3c8203e2f7202c020334f2745a01be14221cde122856ddb93b382ac3d9"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_CGMS_FEAT_LOC_SUB_TISSUE</span></span></span><a class="headerlink" href="#c.bt_cgms_feat_loc.BT_CGMS_FEAT_LOC_SUB_TISSUE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Subcutaneous tissue </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_cgms_feat_loc.BT_CGMS_FEAT_LOC_NOT_AVAIL">
+<span class="target" id="group__bt__cgms_1gga4d22a4f3c8203e2f7202c020334f2745a1ba4f0e347f5db4d4a0aace79ceace71"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_CGMS_FEAT_LOC_NOT_AVAIL</span></span></span><a class="headerlink" href="#c.bt_cgms_feat_loc.BT_CGMS_FEAT_LOC_NOT_AVAIL" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Sample Location value not available </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_cgms_measurement_add">
+<span class="target" id="group__bt__cgms_1gaae5e3971ca2701c7b35a14789ccf565e"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_cgms_measurement_add</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_cgms_measurement" title="bt_cgms_measurement"><span class="n"><span class="pre">bt_cgms_measurement</span></span></a><span class="w"> </span><span class="n"><span class="pre">measurement</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_cgms_measurement_add" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Submit glucose concentration measurement to CGM service. </p>
+<p>This will add the new glucose measurement into the database.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>measurement</strong> – <strong>[in]</strong> The measurement result.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Zero in case of success and error code in case of error. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_cgms_init">
+<span class="target" id="group__bt__cgms_1gaca0e5504f7ccae55f4907e7649c5cb7c"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_cgms_init</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_cgms_init_param" title="bt_cgms_init_param"><span class="n"><span class="pre">bt_cgms_init_param</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">init_params</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_cgms_init" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Initialize Continuous Glucose Monitoring service. </p>
+<p>This will initialize components used in CGMS.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>init_params</strong> – <strong>[in]</strong> The parameter used to initialize the corresponding values of CGMS module.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Zero in case of success and error code in case of error. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.bt_cgms_measurement">
+<span class="target" id="structbt__cgms__measurement"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_cgms_measurement</span></span></span><a class="headerlink" href="#c.bt_cgms_measurement" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;cgms.h&gt;</em></div>
+<p>Continuous Glucose Monitoring service measurement record structure. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_cgms_measurement.glucose">
+<span class="target" id="structbt__cgms__measurement_1af8f01ea8b80f4ef8104a6723ff233d8a"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="../../others/sfloat.html#c.sfloat" title="sfloat"><span class="n"><span class="pre">sfloat</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">glucose</span></span></span><a class="headerlink" href="#c.bt_cgms_measurement.glucose" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The glucose concentration measurement in milligram per deciliter (mg/dL). It is in SFLOAT type defined in the IEEE 11073-20601 specification. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.bt_cgms_cb">
+<span class="target" id="structbt__cgms__cb"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_cgms_cb</span></span></span><a class="headerlink" href="#c.bt_cgms_cb" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;cgms.h&gt;</em></div>
+<p>Continuous Glucose Monitoring service callback structure. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_cgms_cb.session_state_changed">
+<span class="target" id="structbt__cgms__cb_1aa1b72541303feff9e7fdc3e7c60301e1"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">session_state_changed</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n"><span class="pre">session_state</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#c.bt_cgms_cb.session_state_changed" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Callback when the state of session changes. </p>
+<p>The application may start or stop glucose measurement based on the latest state of a session.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Param session_state</dt>
+<dd class="field-odd"><p>The state of current session. True if session starts, False if session stops. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.bt_cgms_init_param">
+<span class="target" id="structbt__cgms__init__param"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_cgms_init_param</span></span></span><a class="headerlink" href="#c.bt_cgms_init_param" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;cgms.h&gt;</em></div>
+<p>Continuous Glucose Monitoring service initialization structure. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_cgms_init_param.type">
+<span class="target" id="structbt__cgms__init__param_1ad3be390a02d1e7501bcdee6a38e76295"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_cgms_feat_type" title="bt_cgms_feat_type"><span class="n"><span class="pre">bt_cgms_feat_type</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">type</span></span></span><a class="headerlink" href="#c.bt_cgms_init_param.type" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Continuous Glucose Monitoring type. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_cgms_init_param.sample_location">
+<span class="target" id="structbt__cgms__init__param_1a35a76a1f6fa717a4271946e8c7561fe3"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_cgms_feat_loc" title="bt_cgms_feat_loc"><span class="n"><span class="pre">bt_cgms_feat_loc</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">sample_location</span></span></span><a class="headerlink" href="#c.bt_cgms_init_param.sample_location" title="Permalink to this definition"></a><br /></dt>
+<dd><p>CGMS sample location. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_cgms_init_param.session_run_time">
+<span class="target" id="structbt__cgms__init__param_1a0d1bd69a5c189c2537b8a12da125143c"></span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">session_run_time</span></span></span><a class="headerlink" href="#c.bt_cgms_init_param.session_run_time" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The session run time in uint of hour. It shall be positive. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_cgms_init_param.initial_comm_interval">
+<span class="target" id="structbt__cgms__init__param_1aa0d46e96522276b4622bceab8d727285"></span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">initial_comm_interval</span></span></span><a class="headerlink" href="#c.bt_cgms_init_param.initial_comm_interval" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Initial communication interval of notification. It shall be positive. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_cgms_init_param.cb">
+<span class="target" id="structbt__cgms__init__param_1ae3acfc9dfe52bae3cf33e4acd9dbf213"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_cgms_cb" title="bt_cgms_cb"><span class="n"><span class="pre">bt_cgms_cb</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">cb</span></span></span><a class="headerlink" href="#c.bt_cgms_init_param.cb" title="Permalink to this definition"></a><br /></dt>
+<dd><p>CGMS callback structure. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="cts_client.html" class="btn btn-neutral float-right" title="GATT Current Time Service (CTS) Client" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="bms.html" class="btn btn-neutral" title="GATT Bond Management Service (BMS)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

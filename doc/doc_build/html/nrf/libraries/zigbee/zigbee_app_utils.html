@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zigbee application utilities &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../_static/js/ncs.js"
+></script>
+<script src="../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Zigbee error handler" href="zigbee_error_handler.html" />
+    <link rel="prev" title="Zigbee shell" href="shell.html" />
+<link
+  href="../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drivers.html">Drivers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Libraries</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../bin/index.html">Binary libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bluetooth_services/index.html">Bluetooth libraries and services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bootloader/index.html">Bootloader libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../caf/index.html">Common Application Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../debug/index.html">Debug libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dfu/index.html">DFU libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gazell/index.html">Gazell libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modem/index.html">Modem libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mpsl/index.html">Multiprotocol Service Layer libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../networking/index.html">Libraries for networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nfc/index.html">Libraries for NFC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nrf_rpc/index.html">nRF RPC libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../others/index.html">Other libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../shell/index.html">Shell libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tfm/index.html">TF-M libraries</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Libraries for Zigbee</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="osif.html">Zigbee ZBOSS OSIF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="shell.html">Zigbee shell</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Zigbee application utilities</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#zigbee-default-signal-handler">Zigbee default signal handler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuration">Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#api-documentation">API documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zigbee_error_handler.html">Zigbee error handler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="zigbee_fota.html">Zigbee FOTA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="zigbee_logger_eprxzcl.html">Zigbee endpoint logger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="zigbee_zcl_scenes.html">Zigbee ZCL scene helper</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Libraries</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Libraries for Zigbee</a></li>
+      <li class="breadcrumb-item active">Zigbee application utilities</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/libraries/zigbee/zigbee_app_utils.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="zigbee-application-utilities">
+<span id="lib-zigbee-application-utilities"></span><h1>Zigbee application utilities<a class="headerlink" href="#zigbee-application-utilities" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#zigbee-default-signal-handler" id="id20">Zigbee default signal handler</a></p>
+<ul>
+<li><p><a class="reference internal" href="#minimal-zboss-signal-handler-implementation" id="id21">Minimal zboss_signal_handler implementation</a></p></li>
+<li><p><a class="reference internal" href="#extending-zboss-signal-handler" id="id22">Extending zboss_signal_handler</a></p></li>
+<li><p><a class="reference internal" href="#complete-zigbee-default-signal-handler-implementation" id="id23">Complete zigbee_default_signal_handler implementation</a></p></li>
+<li><p><a class="reference internal" href="#custom-commissioning-behavior" id="id24">Custom commissioning behavior</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#configuration" id="id25">Configuration</a></p></li>
+<li><p><a class="reference internal" href="#api-documentation" id="id26">API documentation</a></p></li>
+</ul>
+</div>
+<p>Zigbee application utilities library provides a set of components that are ready for use in Zigbee applications:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#lib-zigbee-signal-handler"><span class="std std-ref">Zigbee default signal handler</span></a> for handling common ZBOSS stack signals.</p></li>
+<li><p>API for parsing and converting Zigbee data types.
+Available functions are listed in <code class="file docutils literal notranslate"><span class="pre">include/zigbee/zigbee_app_utils.h</span></code>.</p></li>
+<li><p><a class="reference internal" href="#c.zigbee_led_status_update" title="zigbee_led_status_update"><code class="xref c c-func docutils literal notranslate"><span class="pre">zigbee_led_status_update()</span></code></a> for indicating the status of the device in a network using LEDs.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Links to ZBOSS functions and signals on this page point to ZBOSS <a class="reference external" href="https://developer.nordicsemi.com/nRF_Connect_SDK/doc/zboss/3.11.2.1/zigbee_devguide.html">API documentation</a>.</p>
+</div>
+<section id="zigbee-default-signal-handler">
+<span id="lib-zigbee-signal-handler"></span><h2><a class="toc-backref" href="#id20">Zigbee default signal handler</a><a class="headerlink" href="#zigbee-default-signal-handler" title="Permalink to this heading"></a></h2>
+<p>The <span class="xref std std-ref">nrfxlib:zboss</span> interacts with the user application by invoking the <a class="reference external" href="https://developer.nordicsemi.com/nRF_Connect_SDK/doc/zboss/3.11.2.1/group__zb__comm__signals.html#gae05c0ff285cfd03e0997fe438e8047fc">zboss_signal_handler()</a> function whenever a stack event, such as network steering, occurs.
+It is mandatory to define <a class="reference external" href="https://developer.nordicsemi.com/nRF_Connect_SDK/doc/zboss/3.11.2.1/group__zb__comm__signals.html#gae05c0ff285cfd03e0997fe438e8047fc">zboss_signal_handler()</a> in the application.</p>
+<p>Because most of Zigbee devices behave in a similar way, <a class="reference internal" href="#c.zigbee_default_signal_handler" title="zigbee_default_signal_handler"><code class="xref c c-func docutils literal notranslate"><span class="pre">zigbee_default_signal_handler()</span></code></a> provides the default logic to handle stack signals.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is a Zigbee library.
+See <a class="reference internal" href="../../protocols/zigbee/configuring_libraries.html#ug-zigbee-configuring-libraries"><span class="std std-ref">Configuring Zigbee libraries in nRF Connect SDK</span></a> for information about how to configure it for you Zigbee application.</p>
+</div>
+<section id="minimal-zboss-signal-handler-implementation">
+<span id="zarco-signal-handler-minimal"></span><h3><a class="toc-backref" href="#id21">Minimal zboss_signal_handler implementation</a><a class="headerlink" href="#minimal-zboss-signal-handler-implementation" title="Permalink to this heading"></a></h3>
+<p>This function can be called in the application’s <a class="reference external" href="https://developer.nordicsemi.com/nRF_Connect_SDK/doc/zboss/3.11.2.1/group__zb__comm__signals.html#gae05c0ff285cfd03e0997fe438e8047fc">zboss_signal_handler()</a> to simplify the implementation.
+In such case, this minimal implementation includes only a call to the default signal handler:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">zboss_signal_handler</span><span class="p">(</span><span class="n">zb_uint8_t</span><span class="w"> </span><span class="n">param</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="cm">/* Call default signal handler. */</span>
+<span class="w">    </span><span class="n">zigbee_default_signal_handler</span><span class="p">(</span><span class="n">param</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/* Free the Zigbee stack buffer. */</span>
+<span class="w">    </span><span class="n">zb_buf_free</span><span class="p">(</span><span class="n">param</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>With this call, the device is able to join the Zigbee network or join a new network when it leaves the previous one.</p>
+<p>In general, using the default signal handler is worth considering because of the following reasons:</p>
+<ul class="simple">
+<li><p>It simplifies the application.</p></li>
+<li><p>It provides a default behavior for each signal, which reduces the risk that an application breaks due to an unimplemented signal handler.</p></li>
+<li><p>It provides Zigbee role specific behavior (for example, finite join/rejoin time)</p></li>
+<li><p>It makes the application less sensitive to changes in the Zigbee stack commissioning API.</p></li>
+</ul>
+<p>The default signal handler also serves as a good starting point for a custom signal handler implementation.</p>
+</section>
+<section id="extending-zboss-signal-handler">
+<span id="zarco-signal-handler-extending"></span><h3><a class="toc-backref" href="#id22">Extending zboss_signal_handler</a><a class="headerlink" href="#extending-zboss-signal-handler" title="Permalink to this heading"></a></h3>
+<p>There are cases in which the default handler is not sufficient and needs to be extended.
+For example, when the application wants to use the procedure of the initiator of Finding &amp; Binding or use the production configuration feature.</p>
+<p>If you want to extend <a class="reference external" href="https://developer.nordicsemi.com/nRF_Connect_SDK/doc/zboss/3.11.2.1/group__zb__comm__signals.html#gae05c0ff285cfd03e0997fe438e8047fc">zboss_signal_handler()</a> to cover additional functionalities, write signal handler implementation for the required ZBOSS signal.
+For example, for a device that initiates the F&amp;B procedure, extend <a class="reference external" href="https://developer.nordicsemi.com/nRF_Connect_SDK/doc/zboss/3.11.2.1/group__zb__comm__signals.html#gae05c0ff285cfd03e0997fe438e8047fc">zboss_signal_handler()</a> with a switch case statement for <a class="reference external" href="https://developer.nordicsemi.com/nRF_Connect_SDK/doc/zboss/3.11.2.1/group__zb__comm__signals.html#ga18f5e7ddfefb7d01ef98f696a9694d79">ZB_BDB_SIGNAL_FINDING_AND_BINDING_INITIATOR_FINISHED</a>:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">zboss_signal_handler</span><span class="p">(</span><span class="n">zb_bufid_t</span><span class="w"> </span><span class="n">bufid</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">zb_zdo_app_signal_hdr_t</span><span class="w">   </span><span class="o">*</span><span class="n">sg_p</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="w">    </span><span class="n">zb_zdo_app_signal_type_t</span><span class="w">  </span><span class="n">sig</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="n">zb_get_app_signal</span><span class="p">(</span><span class="n">bufid</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">sg_p</span><span class="p">);</span>
+<span class="w">    </span><span class="n">zb_ret_t</span><span class="w">                  </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ZB_GET_APP_SIGNAL_STATUS</span><span class="p">(</span><span class="n">bufid</span><span class="p">);</span>
+<span class="w">    </span><span class="n">zb_nwk_device_type_t</span><span class="w">      </span><span class="n">role</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="n">zb_get_network_role</span><span class="p">();</span>
+<span class="w">    </span><span class="n">zb_bool_t</span><span class="w">                 </span><span class="n">comm_status</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">sig</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="no">ZB_BDB_SIGNAL_FINDING_AND_BINDING_INITIATOR_FINISHED</span><span class="p">:</span>
+<span class="w">        </span><span class="cm">/* Check status of signal. */</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">status</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">RET_OK</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="cm">/* This signal is received with additional data. Read additional information to get status of F&amp;B procedure. */</span>
+<span class="w">            </span><span class="n">zb_zdo_signal_fb_initiator_finished_params_t</span><span class="w"> </span><span class="o">*</span><span class="n">fnb_params</span><span class="w"> </span><span class="o">=</span>
+<span class="w">                </span><span class="n">ZB_ZDO_SIGNAL_GET_PARAMS</span><span class="p">(</span><span class="n">sg_p</span><span class="p">,</span><span class="w"> </span><span class="n">zb_zdo_signal_fb_initiator_finished_params_t</span><span class="p">);</span>
+
+<span class="w">            </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">fnb_params</span><span class="o">-&gt;</span><span class="n">status</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="no">ZB_ZDO_FB_INITIATOR_STATUS_SUCCESS</span><span class="p">:</span>
+<span class="w">                </span><span class="cm">/* F&amp;B with a Target on the Initiator side is completed with a success. */</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="no">ZB_ZDO_FB_INITIATOR_STATUS_CANCEL</span><span class="p">:</span>
+<span class="w">                </span><span class="cm">/* F&amp;B on the Initiator side is canceled. */</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="no">ZB_ZDO_FB_INITIATOR_STATUS_ALARM</span><span class="p">:</span>
+<span class="w">                </span><span class="cm">/* F&amp;B on the Initiator side is finished by timeout. */</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="no">ZB_ZDO_FB_INITIATOR_STATUS_ERROR</span><span class="p">:</span>
+<span class="w">                </span><span class="cm">/* F&amp;B on the Initiator side finished with a failure. */</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+
+<span class="w">            </span><span class="k">default</span><span class="o">:</span>
+<span class="w">                </span><span class="cm">/* Unrecognised status of F&amp;B procedure. */</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="cm">/* F&amp;B procedure failed. */</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">break</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">default</span><span class="o">:</span>
+<span class="w">        </span><span class="cm">/* All other signals are forwarded to the zigbee default signal handler. */</span>
+<span class="w">        </span><span class="n">ZB_ERROR_CHECK</span><span class="p">(</span><span class="n">zigbee_default_signal_handler</span><span class="p">(</span><span class="n">bufid</span><span class="p">));</span>
+<span class="w">        </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">bufid</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">zb_buf_free</span><span class="p">(</span><span class="n">bufid</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="complete-zigbee-default-signal-handler-implementation">
+<span id="zarco-signal-handler-full"></span><h3><a class="toc-backref" href="#id23">Complete zigbee_default_signal_handler implementation</a><a class="headerlink" href="#complete-zigbee-default-signal-handler-implementation" title="Permalink to this heading"></a></h3>
+<p>In its complete implementation, the <a class="reference external" href="https://developer.nordicsemi.com/nRF_Connect_SDK/doc/zboss/3.11.2.1/group__zb__comm__signals.html#gae05c0ff285cfd03e0997fe438e8047fc">zboss_signal_handler()</a> allows the application to control a broader set of basic functionalities, including joining, commissioning, and network formation.</p>
+<figure class="align-default" id="id7">
+<img alt="Zigbee default signal handler logic (simplified)" src="../../_images/zigbee_signal_handler_overview.svg" /><figcaption>
+<p><span class="caption-text">Zigbee default signal handler logic (simplified)</span><a class="headerlink" href="#id7" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>The following sections describe the logic implemented inside <a class="reference internal" href="#c.zigbee_default_signal_handler" title="zigbee_default_signal_handler"><code class="xref c c-func docutils literal notranslate"><span class="pre">zigbee_default_signal_handler()</span></code></a> and correspond to the shapes in the figure.</p>
+<section id="behavior-on-stack-start">
+<span id="zarco-signal-handler-startup"></span><h4>Behavior on stack start<a class="headerlink" href="#behavior-on-stack-start" title="Permalink to this heading"></a></h4>
+<p>When the stack is started through <a class="reference internal" href="osif.html#c.zigbee_enable" title="zigbee_enable"><code class="xref c c-func docutils literal notranslate"><span class="pre">zigbee_enable()</span></code></a>, the stack generates the following signals:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://developer.nordicsemi.com/nRF_Connect_SDK/doc/zboss/3.11.2.1/group__zb__comm__signals.html#ga3eb4631c12c345991be2461566c150e9">ZB_ZDO_SIGNAL_PRODUCTION_CONFIG_READY</a> – indicating that the stack attempted to load application-specific production configuration from flash memory.</p></li>
+<li><p><a class="reference external" href="https://developer.nordicsemi.com/nRF_Connect_SDK/doc/zboss/3.11.2.1/group__zb__comm__signals.html#gab2b9e7a13fd471d7bb642655d825a04e">ZB_ZDO_SIGNAL_SKIP_STARTUP</a> – indicating that the stack has initialized all internal structures and the Zigbee scheduler has started.</p></li>
+</ul>
+<p>The reception of these signals determines the behavior of the default signal handler:</p>
+<ul class="simple">
+<li><p>Upon reception of <a class="reference external" href="https://developer.nordicsemi.com/nRF_Connect_SDK/doc/zboss/3.11.2.1/group__zb__comm__signals.html#ga3eb4631c12c345991be2461566c150e9">ZB_ZDO_SIGNAL_PRODUCTION_CONFIG_READY</a>, the default signal handler prints out a log with the signal status, and then exits.</p></li>
+</ul>
+<figure class="align-default" id="id8">
+<img alt="ZB_ZDO_SIGNAL_PRODUCTION_CONFIG_READY signal handler" src="../../_images/zigbee_signal_handler_01_production_config.svg" /><figcaption>
+<p><span class="caption-text">ZB_ZDO_SIGNAL_PRODUCTION_CONFIG_READY signal handler</span><a class="headerlink" href="#id8" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<ul class="simple">
+<li><p>Upon reception of <a class="reference external" href="https://developer.nordicsemi.com/nRF_Connect_SDK/doc/zboss/3.11.2.1/group__zb__comm__signals.html#gab2b9e7a13fd471d7bb642655d825a04e">ZB_ZDO_SIGNAL_SKIP_STARTUP</a> signal, the default signal handler performs the BDB initialization procedure, and then exits.</p></li>
+</ul>
+<figure class="align-default" id="id9">
+<img alt="ZB_ZDO_SIGNAL_SKIP_STARTUP signal handler" src="../../_images/zigbee_signal_handler_02_startup.svg" /><figcaption>
+<p><span class="caption-text">ZB_ZDO_SIGNAL_SKIP_STARTUP signal handler</span><a class="headerlink" href="#id9" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you want to perform some actions before the stack attempts to join or rejoin the Zigbee network, you can overwrite this behavior by providing a custom <a class="reference external" href="https://developer.nordicsemi.com/nRF_Connect_SDK/doc/zboss/3.11.2.1/group__zb__comm__signals.html#gab2b9e7a13fd471d7bb642655d825a04e">ZB_ZDO_SIGNAL_SKIP_STARTUP</a> signal handler implementation.</p>
+</div>
+</section>
+<section id="zigbee-base-device-behavior-initialization">
+<span id="zarco-signal-handler-bdb-initialization"></span><h4>Zigbee Base Device Behavior initialization<a class="headerlink" href="#zigbee-base-device-behavior-initialization" title="Permalink to this heading"></a></h4>
+<p>Once the BDB initialization procedure is finished, depending on the data stored inside the Zigbee persistent storage, the stack completes one of the following scenarios:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#new-device-scenario">New device scenario</a>: Generate the <a class="reference external" href="https://developer.nordicsemi.com/nRF_Connect_SDK/doc/zboss/3.11.2.1/group__zb__comm__signals.html#gab55565980ef0580712f8dc160b01ea06">ZB_BDB_SIGNAL_DEVICE_FIRST_START</a> signal for factory new devices.</p></li>
+<li><p><a class="reference internal" href="#commissioned-device-scenario">Commissioned device scenario</a>: Perform a single attempt to rejoin the Zigbee network based on NVRAM contents and then generate the <a class="reference external" href="https://developer.nordicsemi.com/nRF_Connect_SDK/doc/zboss/3.11.2.1/group__zb__comm__signals.html#ga3e9d86f42d2c6c27240f423a40fb152b">ZB_BDB_SIGNAL_DEVICE_REBOOT</a> signal.</p></li>
+</ul>
+<p>Both scenarios cause different behavior of the default signal handler.</p>
+<section id="new-device-scenario">
+<span id="zarco-signal-handler-bdb-initialization-new-devices"></span><h5>New device scenario<a class="headerlink" href="#new-device-scenario" title="Permalink to this heading"></a></h5>
+<p>For factory new devices, the default signal handler performs the following actions:</p>
+<ul class="simple">
+<li><p>Starts the BDB network formation on coordinator devices.
+Once finished, the stack generates <a class="reference external" href="https://developer.nordicsemi.com/nRF_Connect_SDK/doc/zboss/3.11.2.1/group__zb__comm__signals.html#ga342d4176c8932ff8ab0d8d6f997fa603">ZB_BDB_SIGNAL_FORMATION</a> signal, and continue to <a class="reference internal" href="#zarco-signal-handler-network"><span class="std std-ref">Zigbee network formation and commissioning</span></a>.</p></li>
+<li><p>Calls <code class="xref c c-func docutils literal notranslate"><span class="pre">start_network_rejoin()</span></code> to start the <a class="reference internal" href="#zarco-network-rejoin"><span class="std std-ref">Zigbee network rejoining</span></a> on routers and end devices.
+Once the procedure is started, the device tries to join the network until cancellation.
+Each try takes place after a longer period of waiting time, for a total maximum of 15 minutes.
+Devices may behave differently because the implementation of <code class="xref c c-func docutils literal notranslate"><span class="pre">start_network_rejoin()</span></code> is different for different Zigbee roles.
+See <a class="reference internal" href="#zarco-network-rejoin"><span class="std std-ref">Zigbee network rejoining</span></a> for more information.</p></li>
+</ul>
+<p>Once handling of the signal is finished, the stack generates the <a class="reference external" href="https://developer.nordicsemi.com/nRF_Connect_SDK/doc/zboss/3.11.2.1/group__zb__comm__signals.html#ga25a801841c95d6daddb9c60b39542b13">ZB_BDB_SIGNAL_STEERING</a> signal, and continues to <a class="reference internal" href="#zarco-signal-handler-network"><span class="std std-ref">Zigbee network formation and commissioning</span></a>.</p>
+<figure class="align-default" id="id10">
+<img alt="Scenario for factory new devices (ZB_BDB_SIGNAL_DEVICE_FIRST_START)" src="../../_images/zigbee_signal_handler_03_first_start.svg" /><figcaption>
+<p><span class="caption-text">Scenario for factory new devices (ZB_BDB_SIGNAL_DEVICE_FIRST_START)</span><a class="headerlink" href="#id10" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="commissioned-device-scenario">
+<span id="zarco-signal-handler-bdb-initialization-commissioned"></span><h5>Commissioned device scenario<a class="headerlink" href="#commissioned-device-scenario" title="Permalink to this heading"></a></h5>
+<p>For devices that have been already commissioned, the default handler performs the following actions:</p>
+<ul>
+<li><p>For devices that implement the coordinator role, the handler does not perform additional actions.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>This keeps the network closed for new Zigbee devices even if the coordinator is reset.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>For devices that successfully rejoin the Zigbee network, the handler does not perform additional actions.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>This does not open the network for new devices if one of existing devices is reset.</p></li>
+<li><p>If <a class="reference internal" href="#zarco-network-rejoin"><span class="std std-ref">Zigbee network rejoining</span></a> is running, it is cancelled.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>For routers and end devices, if they did not join the Zigbee network successfully, the handler starts <a class="reference internal" href="#zarco-network-rejoin"><span class="std std-ref">Zigbee network rejoining</span></a> by calling <code class="xref c c-func docutils literal notranslate"><span class="pre">start_network_rejoin()</span></code>.</p></li>
+</ul>
+<p>Once finished, the stack generates the <a class="reference external" href="https://developer.nordicsemi.com/nRF_Connect_SDK/doc/zboss/3.11.2.1/group__zb__comm__signals.html#ga25a801841c95d6daddb9c60b39542b13">ZB_BDB_SIGNAL_STEERING</a> signal, and continues to <a class="reference internal" href="#zarco-signal-handler-network"><span class="std std-ref">Zigbee network formation and commissioning</span></a>.</p>
+<figure class="align-default" id="id11">
+<img alt="Scenario for already commissioned devices (ZB_BDB_SIGNAL_DEVICE_REBOOT)" src="../../_images/zigbee_signal_handler_04_reboot.svg" /><figcaption>
+<p><span class="caption-text">Scenario for already commissioned devices (ZB_BDB_SIGNAL_DEVICE_REBOOT)</span><a class="headerlink" href="#id11" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="zigbee-network-formation-and-commissioning">
+<span id="zarco-signal-handler-network"></span><h4>Zigbee network formation and commissioning<a class="headerlink" href="#zigbee-network-formation-and-commissioning" title="Permalink to this heading"></a></h4>
+<p>According to the logic implemented inside the default signal handler, the devices can either form a network or join an existing network:</p>
+<ol class="arabic">
+<li><p>Coordinators first form a network.
+Attempts to form the network continue infinitely, with a one-second delay between each attempt.</p>
+<figure class="align-default" id="id12">
+<img alt="Forming a network following the generation of ZB_BDB_SIGNAL_FORMATION" src="../../_images/zigbee_signal_handler_05_formation.svg" /><figcaption>
+<p><span class="caption-text">Forming a network following the generation of ZB_BDB_SIGNAL_FORMATION</span><a class="headerlink" href="#id12" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>By default, after the successful network formation on the coordinator node, a single-permit join period of 180 seconds is started, which allows new Zigbee devices to join the network.</p>
+</li>
+<li><p>Other devices then join an existing network during this join period.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>When a device has joined and <a class="reference internal" href="#zarco-network-rejoin"><span class="std std-ref">Zigbee network rejoining</span></a> is running, the procedure is cancelled.</p></li>
+<li><p>If no device has joined and the procedure is not running, the procedure is started.</p></li>
+</ul>
+</div></blockquote>
+<figure class="align-default" id="id13">
+<img alt="Forming a network following the generation of ZB_BDB_SIGNAL_STEERING" src="../../_images/zigbee_signal_handler_06_steering.svg" /><figcaption>
+<p><span class="caption-text">Forming a network following the generation of ZB_BDB_SIGNAL_STEERING</span><a class="headerlink" href="#id13" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</li>
+</ol>
+</section>
+<section id="zigbee-network-leaving">
+<span id="zarco-signal-handler-leave"></span><h4>Zigbee network leaving<a class="headerlink" href="#zigbee-network-leaving" title="Permalink to this heading"></a></h4>
+<p>The default signal handler implements the same behavior for handling <a class="reference external" href="https://developer.nordicsemi.com/nRF_Connect_SDK/doc/zboss/3.11.2.1/group__zb__comm__signals.html#ga7942f336484c4fbb85626951480b2bba">ZB_ZDO_SIGNAL_LEAVE</a> for both routers and end devices.
+When leaving the network, the default handler calls <code class="xref c c-func docutils literal notranslate"><span class="pre">start_network_rejoin()</span></code> to start <a class="reference internal" href="#zarco-network-rejoin"><span class="std std-ref">Zigbee network rejoining</span></a> to join a new network.</p>
+<p>Once <code class="xref c c-func docutils literal notranslate"><span class="pre">start_network_rejoin()</span></code> is called, the stack generates the <a class="reference external" href="https://developer.nordicsemi.com/nRF_Connect_SDK/doc/zboss/3.11.2.1/group__zb__comm__signals.html#ga25a801841c95d6daddb9c60b39542b13">ZB_BDB_SIGNAL_STEERING</a> signal and continues to <a class="reference internal" href="#zarco-signal-handler-network"><span class="std std-ref">Zigbee network formation and commissioning</span></a>.</p>
+<figure class="align-default" id="id14">
+<img alt="Leaving the network following ZB_ZDO_SIGNAL_LEAVE" src="../../_images/zigbee_signal_handler_09_leave.svg" /><figcaption>
+<p><span class="caption-text">Leaving the network following ZB_ZDO_SIGNAL_LEAVE</span><a class="headerlink" href="#id14" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="zigbee-network-rejoining">
+<span id="zarco-network-rejoin"></span><h4>Zigbee network rejoining<a class="headerlink" href="#zigbee-network-rejoining" title="Permalink to this heading"></a></h4>
+<p>The Zigbee network rejoin procedure is a mechanism that is similar to the ZDO rejoin back-off procedure.
+It is implemented to work with both routers and end devices and simplify handling of cases such as device joining, rejoining, or leaving the network.
+It is used in <a class="reference internal" href="#c.zigbee_default_signal_handler" title="zigbee_default_signal_handler"><code class="xref c c-func docutils literal notranslate"><span class="pre">zigbee_default_signal_handler()</span></code></a> by default.</p>
+<p>If the network is left by a router or an end device, the device tries to join any open network.</p>
+<p>The Zigbee rejoin procedure retries to join a network with each try after <code class="docutils literal notranslate"><span class="pre">2^n</span></code> seconds, where <code class="docutils literal notranslate"><span class="pre">n</span></code> is the number of retries.
+The period is limited to the time specified in <code class="docutils literal notranslate"><span class="pre">REJOIN_INTERVAL_MAX_S</span></code>, which by default equals 15 minutes.</p>
+<p>When <code class="xref c c-func docutils literal notranslate"><span class="pre">start_network_rejoin()</span></code> is called, the rejoin procedure is started.</p>
+<figure class="align-default" id="id15">
+<img alt="Starting the rejoin procedure" src="../../_images/zigbee_signal_handler_10_rejoin.svg" /><figcaption>
+<p><span class="caption-text">Starting the rejoin procedure</span><a class="headerlink" href="#id15" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>When <code class="docutils literal notranslate"><span class="pre">stop_network_rejoin(was_scheduled)</span></code> is called, the network rejoin is canceled and the alarms scheduled by <code class="xref c c-func docutils literal notranslate"><span class="pre">start_network_rejoin()</span></code> are canceled.</p>
+<figure class="align-default" id="id16">
+<img alt="Stopping the rejoin procedure" src="../../_images/zigbee_signal_handler_10_rejoin_stop.svg" /><figcaption>
+<p><span class="caption-text">Stopping the rejoin procedure</span><a class="headerlink" href="#id16" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>The rejoin procedure is different for routers and end devices in the following aspects:</p>
+<ul>
+<li><p>The router uses the default signal handler to try to join or rejoin the network until it succeeds.</p></li>
+<li><p>The end device uses the default signal handler to try to join or rejoin the network for a finite period of time, because the end devices are often powered by batteries.</p>
+<ul class="simple">
+<li><p>The procedure to join or rejoin the network is restarted after the device resets or power cycles.</p></li>
+<li><p>The procedure to join or rejoin the network can be restarted by calling <a class="reference internal" href="#c.user_input_indicate" title="user_input_indicate"><code class="xref c c-func docutils literal notranslate"><span class="pre">user_input_indicate()</span></code></a>, but it needs to be implemented in the application (for example, by calling <a class="reference internal" href="#c.user_input_indicate" title="user_input_indicate"><code class="xref c c-func docutils literal notranslate"><span class="pre">user_input_indicate()</span></code></a> when a button is pressed).
+The procedure is restarted only if the device was unable to join and the procedure is not running.</p></li>
+</ul>
+<p>For the end device, the application alarm is scheduled with <code class="docutils literal notranslate"><span class="pre">stop_network_rejoin(ZB_TRUE)</span></code>, to be called after the amount of time specified in <code class="docutils literal notranslate"><span class="pre">ZB_DEV_REJOIN_TIMEOUT_MS</span></code>.</p>
+<p>If <code class="xref c c-func docutils literal notranslate"><span class="pre">stop_network_rejoin()</span></code> is called with <code class="docutils literal notranslate"><span class="pre">was_scheduled</span></code> set to <code class="docutils literal notranslate"><span class="pre">ZB_TRUE</span></code>, <a class="reference internal" href="#c.user_input_indicate" title="user_input_indicate"><code class="xref c c-func docutils literal notranslate"><span class="pre">user_input_indicate()</span></code></a> can restart the rejoin procedure.
+<a class="reference internal" href="#c.user_input_indicate" title="user_input_indicate"><code class="xref c c-func docutils literal notranslate"><span class="pre">user_input_indicate()</span></code></a> restarts the rejoin procedure if the device did not join the network and is not trying to join a network.
+It is safe to call this function from an interrupt and to call it multiple times.</p>
+<figure class="align-default" id="id17">
+<img alt="User input restarting the rejoin procedure" src="../../_images/zigbee_signal_handler_10_rejoin_user_input.svg" /><figcaption>
+<p><span class="caption-text">User input restarting the rejoin procedure</span><a class="headerlink" href="#id17" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The Zigbee network rejoin procedure is managed from multiple signals in <a class="reference internal" href="#c.zigbee_default_signal_handler" title="zigbee_default_signal_handler"><code class="xref c c-func docutils literal notranslate"><span class="pre">zigbee_default_signal_handler()</span></code></a>.
+If the application controls the network joining, rejoining, or leaving, each signal in which the Zigbee network rejoin procedure is managed should be handled in the application.
+In this case, <a class="reference internal" href="#c.user_input_indicate" title="user_input_indicate"><code class="xref c c-func docutils literal notranslate"><span class="pre">user_input_indicate()</span></code></a> must not be called.</p>
+</div>
+</section>
+<section id="zigbee-stack-sleep-routines">
+<span id="zarco-sleep"></span><h4>Zigbee stack sleep routines<a class="headerlink" href="#zigbee-stack-sleep-routines" title="Permalink to this heading"></a></h4>
+<p>For all device types, the Zigbee stack informs the application about periods of inactivity by generating a <code class="docutils literal notranslate"><span class="pre">ZB_COMMON_SIGNAL_CAN_SLEEP</span></code> signal.</p>
+<p>The minimal inactivity duration that causes the signal to be generated is defined by <code class="docutils literal notranslate"><span class="pre">sleep_threshold</span></code>.
+By default, the inactivity duration equals approximately 15 ms.
+The value can be modified by the <code class="docutils literal notranslate"><span class="pre">zb_sleep_set_threshold</span></code> API.</p>
+<figure class="align-default" id="id18">
+<img alt="Generation of the ZB_COMMON_SIGNAL_CAN_SLEEP signal" src="../../_images/zigbee_signal_handler_07_idle.svg" /><figcaption>
+<p><span class="caption-text">Generation of the ZB_COMMON_SIGNAL_CAN_SLEEP signal</span><a class="headerlink" href="#id18" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>The signal can be used to suspend the Zigbee task for the inactivity period.
+This allows the Zephyr kernel to switch to other tasks with lower priority.
+Additionally, it allows to implement a Zigbee Sleepy End Device.
+For more information about the power optimization of the Zigbee stack, see <a class="reference internal" href="../../protocols/zigbee/configuring.html#zigbee-ug-sed"><span class="std std-ref">Sleepy End Device behavior</span></a>.</p>
+<p>The inactivity signal can be handled using the Zigbee default signal handler.
+If so, it allows the Zigbee stack to enter the sleep state and suspend the Zigbee task by calling <code class="xref c c-func docutils literal notranslate"><span class="pre">zigbee_event_poll()</span></code> function.</p>
+<p>If the default behavior is not applicable for the application, you can customize the sleep functionality by overwriting the <code class="xref c c-func docutils literal notranslate"><span class="pre">zb_osif_sleep()</span></code> weak function and implementing a custom logic for handling the stack sleep state.</p>
+<figure class="align-default" id="id19">
+<img alt="Implementing a custom logic for putting the stack into the sleep mode" src="../../_images/zigbee_signal_handler_08_deep_sleep.svg" /><figcaption>
+<p><span class="caption-text">Implementing a custom logic for putting the stack into the sleep mode</span><a class="headerlink" href="#id19" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="custom-commissioning-behavior">
+<span id="zarco-signal-handler-custom-commissioning"></span><h3><a class="toc-backref" href="#id24">Custom commissioning behavior</a><a class="headerlink" href="#custom-commissioning-behavior" title="Permalink to this heading"></a></h3>
+<p>If the commissioning behavior described in the <a class="reference internal" href="#zarco-signal-handler-full"><span class="std std-ref">Complete zigbee_default_signal_handler implementation</span></a> is not applicable for your application, you can write a custom signal handler implementation.
+This implementation must handle the following signals that are used during the commissioning:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://developer.nordicsemi.com/nRF_Connect_SDK/doc/zboss/3.11.2.1/group__zb__comm__signals.html#gab55565980ef0580712f8dc160b01ea06">ZB_BDB_SIGNAL_DEVICE_FIRST_START</a></p></li>
+<li><p><a class="reference external" href="https://developer.nordicsemi.com/nRF_Connect_SDK/doc/zboss/3.11.2.1/group__zb__comm__signals.html#ga3e9d86f42d2c6c27240f423a40fb152b">ZB_BDB_SIGNAL_DEVICE_REBOOT</a></p></li>
+<li><p><a class="reference external" href="https://developer.nordicsemi.com/nRF_Connect_SDK/doc/zboss/3.11.2.1/group__zb__comm__signals.html#ga25a801841c95d6daddb9c60b39542b13">ZB_BDB_SIGNAL_STEERING</a></p></li>
+<li><p><a class="reference external" href="https://developer.nordicsemi.com/nRF_Connect_SDK/doc/zboss/3.11.2.1/group__zb__comm__signals.html#ga342d4176c8932ff8ab0d8d6f997fa603">ZB_BDB_SIGNAL_FORMATION</a></p></li>
+<li><p><a class="reference external" href="https://developer.nordicsemi.com/nRF_Connect_SDK/doc/zboss/3.11.2.1/group__zb__comm__signals.html#ga7942f336484c4fbb85626951480b2bba">ZB_ZDO_SIGNAL_LEAVE</a></p></li>
+</ul>
+<p>Use the following code as reference, with a call to <a class="reference internal" href="#c.zigbee_default_signal_handler" title="zigbee_default_signal_handler"><code class="xref c c-func docutils literal notranslate"><span class="pre">zigbee_default_signal_handler()</span></code></a> at the end for handling non-commissioning signals (for example, those related to <a class="reference internal" href="#zarco-sleep"><span class="std std-ref">Zigbee stack sleep routines</span></a>):</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">zboss_signal_handler</span><span class="p">(</span><span class="n">zb_bufid_t</span><span class="w"> </span><span class="n">bufid</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">zb_zdo_app_signal_hdr_t</span><span class="w">   </span><span class="o">*</span><span class="n">sg_p</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="w">    </span><span class="n">zb_zdo_app_signal_type_t</span><span class="w">  </span><span class="n">sig</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="n">zb_get_app_signal</span><span class="p">(</span><span class="n">bufid</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">sg_p</span><span class="p">);</span>
+<span class="w">    </span><span class="n">zb_ret_t</span><span class="w">                  </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ZB_GET_APP_SIGNAL_STATUS</span><span class="p">(</span><span class="n">bufid</span><span class="p">);</span>
+<span class="w">    </span><span class="n">zb_nwk_device_type_t</span><span class="w">      </span><span class="n">role</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="n">zb_get_network_role</span><span class="p">();</span>
+<span class="w">    </span><span class="n">zb_bool_t</span><span class="w">                 </span><span class="n">comm_status</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">sig</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="no">ZB_BDB_SIGNAL_DEVICE_FIRST_START</span><span class="p">:</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">status</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">RET_OK</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">role</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">ZB_NWK_DEVICE_TYPE_COORDINATOR</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="cm">/* If device is Router or End Device, start network steering. */</span>
+<span class="w">                </span><span class="n">comm_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bdb_start_top_level_commissioning</span><span class="p">(</span><span class="n">ZB_BDB_NETWORK_STEERING</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="cm">/* If device is Coordinator, start network formation. */</span>
+<span class="w">                </span><span class="n">comm_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bdb_start_top_level_commissioning</span><span class="p">(</span><span class="n">ZB_BDB_NETWORK_FORMATION</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="cm">/* Failed to initialize Zigbee stack. */</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">break</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="no">ZB_BDB_SIGNAL_DEVICE_REBOOT</span><span class="p">:</span>
+<span class="w">        </span><span class="cm">/* fall-through */</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="no">ZB_BDB_SIGNAL_STEERING</span><span class="p">:</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">status</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">RET_OK</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="cm">/* Joined network successfully. */</span>
+<span class="w">            </span><span class="cm">/* Start application-specific logic that requires the device to be connected to a Zigbee network. */</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="cm">/* Unable to join the network. Restart network steering. */</span>
+<span class="w">            </span><span class="n">comm_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bdb_start_top_level_commissioning</span><span class="p">(</span><span class="n">ZB_BDB_NETWORK_STEERING</span><span class="p">);</span>
+<span class="w">            </span><span class="n">ZB_COMM_STATUS_CHECK</span><span class="p">(</span><span class="n">comm_status</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">break</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="no">ZB_ZDO_SIGNAL_LEAVE</span><span class="p">:</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">status</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">RET_OK</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="cm">/* Device has left the network. */</span>
+<span class="w">            </span><span class="cm">/* Start application-specific logic or start network steering to join a new network. */</span>
+
+<span class="w">            </span><span class="cm">/* This signal comes with additional data in which type of leave is stored. */</span>
+<span class="w">            </span><span class="n">zb_zdo_signal_leave_params_t</span><span class="w"> </span><span class="o">*</span><span class="n">leave_params</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ZB_ZDO_SIGNAL_GET_PARAMS</span><span class="p">(</span><span class="n">sg_p</span><span class="p">,</span><span class="w"> </span><span class="n">zb_zdo_signal_leave_params_t</span><span class="p">);</span>
+
+<span class="w">            </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">leave_params</span><span class="o">-&gt;</span><span class="n">leave_type</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="no">ZB_NWK_LEAVE_TYPE_RESET</span><span class="p">:</span>
+<span class="w">                </span><span class="cm">/* Device left network without rejoining. */</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="no">ZB_NWK_LEAVE_TYPE_REJOIN</span><span class="p">:</span>
+<span class="w">                </span><span class="cm">/* Device left network with rejoin. */</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+
+<span class="w">            </span><span class="k">default</span><span class="o">:</span>
+<span class="w">                </span><span class="cm">/* Unrecognised leave type. */</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="cm">/* Device was unable to leave network. */</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">break</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="no">ZB_BDB_SIGNAL_FORMATION</span><span class="p">:</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">status</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">RET_OK</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="cm">/* Network formed successfully, start network steering. */</span>
+<span class="w">            </span><span class="n">comm_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bdb_start_top_level_commissioning</span><span class="p">(</span><span class="n">ZB_BDB_NETWORK_STEERING</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="cm">/* Network formation failed, restart. */</span>
+<span class="w">            </span><span class="n">ret_code</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ZB_SCHEDULE_APP_ALARM</span><span class="p">((</span><span class="n">zb_callback_t</span><span class="p">)</span><span class="n">bdb_start_top_level_commissioning</span><span class="p">,</span><span class="w"> </span><span class="n">ZB_BDB_NETWORK_FORMATION</span><span class="p">,</span><span class="w"> </span><span class="n">ZB_TIME_ONE_SECOND</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">break</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">default</span><span class="o">:</span>
+<span class="w">        </span><span class="cm">/* Call default signal handler for non-commissioning signals. */</span>
+<span class="w">        </span><span class="n">ZB_ERROR_CHECK</span><span class="p">(</span><span class="n">zigbee_default_signal_handler</span><span class="p">(</span><span class="n">bufid</span><span class="p">));</span>
+<span class="w">        </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">bufid</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">zb_buf_free</span><span class="p">(</span><span class="n">bufid</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="configuration">
+<span id="lib-zigbee-application-utilities-options"></span><h2><a class="toc-backref" href="#id25">Configuration</a><a class="headerlink" href="#configuration" title="Permalink to this heading"></a></h2>
+<p>To enable the Zigbee application utilities library, set the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZIGBEE_APP_UTILS</span></code> Kconfig option.</p>
+<dl>
+<dt>Logging</dt><dd><p>To configure the logging level of the library, use the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZIGBEE_APP_UTILS_LOG_LEVEL</span></code> Kconfig option.</p>
+</dd>
+<dt>Automatic PAN ID conflict resolution</dt><dd><p>To enable automatic PAN ID conflict resolution, use the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZIGBEE_PANID_CONFLICT_RESOLUTION</span></code> Kconfig option.
+This option is enabled by default.</p>
+</dd>
+<dt>Factory reset button</dt><dd><p>To configure the time of the button press that initiates the device factory reset, use the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_FACTORY_RESET_PRESS_TIME_SECONDS</span></code> Kconfig option.
+This option is set to 5 seconds by default.</p>
+<p>For more information about the factory reset, see the <a class="reference external" href="https://developer.nordicsemi.com/nRF_Connect_SDK/doc/zboss/3.11.2.1/using_zigbee__z_c_l.html#reset_factory_defaults">Resetting to factory defaults</a> section in the ZBOSS stack documentation.</p>
+</dd>
+<dt>Trust Center Rejoin</dt><dd><p>To enable the Trust Center Rejoin feature, use the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZIGBEE_TC_REJOIN_ENABLED</span></code> Kconfig option.
+This option is enabled by default.</p>
+</dd>
+</dl>
+<p>For detailed steps about configuring the library in a Zigbee sample or application, see <a class="reference internal" href="../../protocols/zigbee/configuring_libraries.html#ug-zigbee-configuring-components-application-utilities"><span class="std std-ref">Configuring Zigbee application utilities</span></a>.</p>
+</section>
+<section id="api-documentation">
+<h2><a class="toc-backref" href="#id26">API documentation</a><a class="headerlink" href="#api-documentation" title="Permalink to this heading"></a></h2>
+<div class="line-block">
+<div class="line">Header file: <code class="file docutils literal notranslate"><span class="pre">include/zigbee/zigbee_app_utils.h</span></code></div>
+<div class="line">Source file: <code class="file docutils literal notranslate"><span class="pre">subsys/zigbee/lib/zigbee_app_utils/zigbee_app_utils.c</span></code></div>
+</div>
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="group__zigbee__app__utils"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">zigbee_app_utils</span></span></dt>
+<dd><p>Library with helper functions and routines. </p>
+<p>Provides Zigbee default handler, helper functions for parsing and converting Zigbee data, indicating status of the device at a network using onboard LEDs. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-enums">Enums</p>
+<dl class="c enum">
+<dt class="sig sig-object c" id="c.addr_type_t">
+<span class="target" id="group__zigbee__app__utils_1ga55f6f814c532d979ba36d6eeb317cb33"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">addr_type_t</span></span></span><a class="headerlink" href="#c.addr_type_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Address type. </p>
+<p><a class="reference internal" href="#group__zigbee__app__utils_1gga55f6f814c532d979ba36d6eeb317cb33a9e7eac96bf8cd155a02f121db090534a"><span class="std std-ref">ADDR_SHORT</span></a> and <a class="reference internal" href="#group__zigbee__app__utils_1gga55f6f814c532d979ba36d6eeb317cb33ab43bad30a7bc12908f16176e14c5660b"><span class="std std-ref">ADDR_LONG</span></a> correspond to APS addressing mode constants and must not be changed. </p>
+<p><em>Values:</em></p>
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.addr_type_t.ADDR_INVALID">
+<span class="target" id="group__zigbee__app__utils_1gga55f6f814c532d979ba36d6eeb317cb33a156537bd0faf441a451c955e4691af70"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ADDR_INVALID</span></span></span><a class="headerlink" href="#c.addr_type_t.ADDR_INVALID" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.addr_type_t.ADDR_ANY">
+<span class="target" id="group__zigbee__app__utils_1gga55f6f814c532d979ba36d6eeb317cb33ac423e63d5d3b7dc9a51412d8be371c54"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ADDR_ANY</span></span></span><a class="headerlink" href="#c.addr_type_t.ADDR_ANY" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.addr_type_t.ADDR_SHORT">
+<span class="target" id="group__zigbee__app__utils_1gga55f6f814c532d979ba36d6eeb317cb33a9e7eac96bf8cd155a02f121db090534a"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ADDR_SHORT</span></span></span><a class="headerlink" href="#c.addr_type_t.ADDR_SHORT" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.addr_type_t.ADDR_LONG">
+<span class="target" id="group__zigbee__app__utils_1gga55f6f814c532d979ba36d6eeb317cb33ab43bad30a7bc12908f16176e14c5660b"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ADDR_LONG</span></span></span><a class="headerlink" href="#c.addr_type_t.ADDR_LONG" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.zigbee_erase_persistent_storage">
+<span class="target" id="group__zigbee__app__utils_1gaa0b3a11c2d445d872290cae3474318c7"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">zigbee_erase_persistent_storage</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">zb_bool_t</span></span><span class="w"> </span><span class="n"><span class="pre">erase</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.zigbee_erase_persistent_storage" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Function for setting the Erase persistent storage, depending on the erase pin. </p>
+<p>If the erase pin (1.39 by default, defined in zigbee_app_utils.c) is shortened to the ground, then the persistent storage is erased. Otherwise, whether the storage is erased is decided upon the input parameter ‘erase’. This behaviour is only valid if PCA10056 is used.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>erase</strong> – <strong>[in]</strong> Whether to erase the persistent storage in case the erase pin is not shortened to the ground. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.to_hex_str">
+<span class="target" id="group__zigbee__app__utils_1ga535284bd74bd75f63399efdb6ed70b58"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">to_hex_str</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">out</span></span>, <span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">out_size</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">in</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">in_size</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n"><span class="pre">reverse</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.to_hex_str" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Function for converting an input buffer to a hex string. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Null terminator is written if buf_len is large enough, but does not count for the return value. </p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>out</strong> – <strong>[out]</strong> Pointer to the output buffer. </p></li>
+<li><p><strong>out_size</strong> – <strong>[in]</strong> Size of the output buffer. </p></li>
+<li><p><strong>in</strong> – <strong>[in]</strong> Pointer to the input buffer. </p></li>
+<li><p><strong>in_size</strong> – <strong>[in]</strong> Size of the input buffer. </p></li>
+<li><p><strong>reverse</strong> – <strong>[in]</strong> If true, data output happens in the reverse order.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>snprintf-compatible value. Less than zero means encoding error. Non-negative value is the number of characters that would have been written if the supplied buffer had been large enough. Value greater than or equal to buf_len means that the supplied buffer was too small.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.parse_hex_str">
+<span class="target" id="group__zigbee__app__utils_1gacd92aca94f70fea1f58fd7a2f9d8593e"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">parse_hex_str</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">in_str</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">in_str_len</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">out_buff</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">out_buff_size</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n"><span class="pre">reverse</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.parse_hex_str" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Read array of uint8_t from hex string. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>in_str</strong> – Pointer to the input hex string. </p></li>
+<li><p><strong>in_str_len</strong> – Length, in characters, of the input string. </p></li>
+<li><p><strong>out_buff</strong> – Pointer to the output uint8_t array. </p></li>
+<li><p><strong>out_buff_size</strong> – Size, in bytes, of the output uint8_t array. </p></li>
+<li><p><strong>reverse</strong> – If true then parse from end to start.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>true</strong> – if the conversion succeed </p></li>
+<li><p><strong>false</strong> – if the conversion failed </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.parse_hex_u8">
+<span class="target" id="group__zigbee__app__utils_1ga934917ffccb750fdb95daa37fe92f4c2"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">parse_hex_u8</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">value</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.parse_hex_u8" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Parse a hex string to uint8_t. </p>
+<p>The function verifies if input is valid, i.e., if all input characters are valid hex digits. If an invalid character is found then function fails.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s</strong> – Pointer to input string. </p></li>
+<li><p><strong>value</strong> – Pointer to output value.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>true</strong> – if the conversion succeed </p></li>
+<li><p><strong>false</strong> – if the conversion failed </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.parse_hex_u16">
+<span class="target" id="group__zigbee__app__utils_1ga14995ab1967f630a5561e72e0035be54"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">parse_hex_u16</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span>, <span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">value</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.parse_hex_u16" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Parse a hex string to uint16_t. </p>
+<p>The function verifies if input is valid, i.e., if all input characters are valid hex digits. If an invalid character is found then function fails.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s</strong> – Pointer to input string. </p></li>
+<li><p><strong>value</strong> – Pointer to output value.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>true</strong> – if the conversion succeed </p></li>
+<li><p><strong>false</strong> – if the conversion failed </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.ieee_addr_to_str">
+<span class="target" id="group__zigbee__app__utils_1ga1f8c5a9cc9be9b181873c3d9b73d1bbf"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ieee_addr_to_str</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">str_buf</span></span>, <span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">buf_len</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">zb_ieee_addr_t</span></span><span class="w"> </span><span class="n"><span class="pre">in</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.ieee_addr_to_str" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Function for converting 64-bit address to hex string. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Null terminator is written if buf_len is large enough, but does not count for the return value. </p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>str_buf</strong> – <strong>[out]</strong> Pointer to output buffer. </p></li>
+<li><p><strong>buf_len</strong> – <strong>[in]</strong> Length of the buffer pointed by str_buf. </p></li>
+<li><p><strong>in</strong> – <strong>[in]</strong> Zigbee IEEE address to be converted to string.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>snprintf-compatible value. Less than zero means encoding error. Non-negative value is the number of characters that would have been written if the supplied buffer had been large enough. Value greater than or equal to buf_len means that the supplied buffer was too small.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.parse_address">
+<span class="target" id="group__zigbee__app__utils_1ga3a627ae5f69cd16fb7cbd5b5dc9be340"></span><a class="reference internal" href="#c.addr_type_t" title="addr_type_t"><span class="n"><span class="pre">addr_type_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">parse_address</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">input</span></span>, <span class="n"><span class="pre">zb_addr_u</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">output</span></span>, <a class="reference internal" href="#c.addr_type_t" title="addr_type_t"><span class="n"><span class="pre">addr_type_t</span></span></a><span class="w"> </span><span class="n"><span class="pre">addr_type</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.parse_address" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Function for parsing a null-terminated string of hex characters into 64-bit or 16-bit address. </p>
+<p>The function will skip 0x suffix from input if present.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input</strong> – Pointer to the input string string representing the address in big endian. </p></li>
+<li><p><strong>output</strong> – Pointer to the resulting zb_addr_u variable. </p></li>
+<li><p><strong>addr_type</strong> – Expected address type.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Conversion result. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.parse_long_address">
+<span class="target" id="group__zigbee__app__utils_1ga341730477e171d7a31da23608548204d"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">parse_long_address</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">input</span></span>, <span class="n"><span class="pre">zb_ieee_addr_t</span></span><span class="w"> </span><span class="n"><span class="pre">addr</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.parse_long_address" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Function for parsing a null-terminated string of hex characters into a 64-bit address. </p>
+<p>The function will skip 0x suffix from input if present.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input</strong> – Pointer to the input string representing the address in big endian. </p></li>
+<li><p><strong>addr</strong> – Variable where the address will be placed.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>true</strong> – if the conversion succeed </p></li>
+<li><p><strong>false</strong> – if the conversion failed </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.parse_short_address">
+<span class="target" id="group__zigbee__app__utils_1gac262ebd4749b548a2df14d5f03c7fbbb"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">parse_short_address</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">input</span></span>, <span class="n"><span class="pre">zb_uint16_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">addr</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.parse_short_address" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Function for parsing a null-terminated string of hex characters into 16-bit address. </p>
+<p>The function will skip 0x suffix from input if present.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input</strong> – Pointer to the input string representing the address in big endian. </p></li>
+<li><p><strong>addr</strong> – Pointer to the variable where address will be placed.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>true</strong> – if the conversion succeed </p></li>
+<li><p><strong>false</strong> – if the conversion failed </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.zigbee_default_signal_handler">
+<span class="target" id="group__zigbee__app__utils_1ga6b6634d6f953a82cfa481f79215e7932"></span><span class="n"><span class="pre">zb_ret_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">zigbee_default_signal_handler</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">zb_bufid_t</span></span><span class="w"> </span><span class="n"><span class="pre">bufid</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.zigbee_default_signal_handler" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Function for passing signals to the default Zigbee stack event handler. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This function does not free the Zigbee buffer.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bufid</strong> – <strong>[in]</strong> Reference to the Zigbee stack buffer used to pass signal.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>RET_OK on success or error code on failure. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.zigbee_led_status_update">
+<span class="target" id="group__zigbee__app__utils_1ga063837270adbbde280ae0de7397b8a7a"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">zigbee_led_status_update</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">zb_bufid_t</span></span><span class="w"> </span><span class="n"><span class="pre">bufid</span></span>, <span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n"><span class="pre">led_idx</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.zigbee_led_status_update" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Function for indicating the Zigbee network connection status on LED. </p>
+<p>If the device is successfully commissioned, the LED is turned on. If the device is not commissioned or has left the network, the LED is turned off.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This function does not free the Zigbee buffer.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bufid</strong> – <strong>[in]</strong> Reference to the Zigbee stack buffer used to pass signal. </p></li>
+<li><p><strong>led_idx</strong> – <strong>[in]</strong> LED index, as defined in the board-specific BSP header. The index starts from 0. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.user_input_indicate">
+<span class="target" id="group__zigbee__app__utils_1ga0d394d3393bba9820837b5221e6ea848"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">user_input_indicate</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.user_input_indicate" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Function for indicating the default signal handler about user input on the device. </p>
+<p>If the device is not commissioned, the rejoin procedure is started.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This function is to be used with End Devices only. </p>
+</div>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.zigbee_configure_sleepy_behavior">
+<span class="target" id="group__zigbee__app__utils_1gadb6a396cfbb9227506a89c137bd3f90b"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">zigbee_configure_sleepy_behavior</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n"><span class="pre">enable</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.zigbee_configure_sleepy_behavior" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Function for enabling sleepy behavior of End Device. Must be called before <a class="reference internal" href="osif.html#group__zigbee__zboss__osif_1gac932f42488c4ae48dd48a299ac589b30"><span class="std std-ref">zigbee_enable()</span></a> is called. Also must be called after ZB_INIT(), which is called when the system is initializing. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This function is to be used with End Devices only.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>enable</strong> – <strong>[in]</strong> Boolean value indicating if sleepy behavior should be enabled or disabled. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.register_factory_reset_button">
+<span class="target" id="group__zigbee__app__utils_1ga6c819665689140e59f1338f6a9528919"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">register_factory_reset_button</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n"><span class="pre">button</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.register_factory_reset_button" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Registers which button and for how long has to be pressed in order to do Factory Reset. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Must be called once before check_factory_reset_button function can be used.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>button</strong> – <strong>[in]</strong> Development Kit button to be used as Factory Reset button. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.check_factory_reset_button">
+<span class="target" id="group__zigbee__app__utils_1ga244e6253aa8631b27b2f95aa77666fca"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">check_factory_reset_button</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n"><span class="pre">button_state</span></span>, <span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n"><span class="pre">has_changed</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.check_factory_reset_button" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Checks if Factory Reset button was pressed. If so, it initiates the procedure of checking if it was pressed for specified time. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>register_factory_reset_button function has to be called before (once)</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>button_state</strong> – <strong>[in]</strong> state of Development Kit buttons; passed from button handler </p></li>
+<li><p><strong>has_changed</strong> – <strong>[in]</strong> determines which buttons changed; passed from button handler </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.was_factory_reset_done">
+<span class="target" id="group__zigbee__app__utils_1ga5a1f7ab8ddab352a961082418c90fd32"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">was_factory_reset_done</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.was_factory_reset_done" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Indicates whether Factory Reset was started as a result of a button press or not. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>true if Factory Reset was started; false if Factory Reset was not started </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="zigbee_error_handler.html" class="btn btn-neutral float-right" title="Zigbee error handler" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="shell.html" class="btn btn-neutral" title="Zigbee shell" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

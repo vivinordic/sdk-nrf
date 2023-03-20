@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Performing FOTA updates in Bluetooth mesh &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../_static/js/ncs.js"
+></script>
+<script src="../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Removing a node from a mesh network" href="node_removal.html" />
+    <link rel="prev" title="Configuring mesh models using the nRF Mesh mobile app" href="model_config_app.html" />
+<link
+  href="../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../protocols.html">Protocols</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../ble/index.html">Bluetooth LE Controller</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Bluetooth mesh</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="supported_features.html">Supported Bluetooth mesh features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Bluetooth mesh concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture.html">Bluetooth mesh stack architecture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configuring.html">Configuring Bluetooth mesh in nRF Connect SDK</a></li>
+<li class="toctree-l3"><a class="reference internal" href="model_config_app.html">Configuring mesh models using the nRF Mesh mobile app</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Performing FOTA updates in Bluetooth mesh</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#fota-in-bluetooth-mesh-samples">FOTA in Bluetooth mesh samples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#discovering-bluetooth-mesh-devices-in-nrf-connect-device-manager">Discovering Bluetooth mesh devices in nRF Connect Device Manager</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="node_removal.html">Removing a node from a mesh network</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vendor_model/index.html">Creating a new model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reserved_ids.html">Reserved vendor model IDs and opcodes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../esb/index.html">Enhanced ShockBurst (ESB)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gazell/index.html">Gazell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../matter/index.html">Matter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multiprotocol/index.html">Multiprotocol support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nfc/index.html">Near Field Communication (NFC)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../thread/index.html">Thread</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../wifi/index.html">Wi-Fi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../zigbee/index.html">Zigbee</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drivers.html">Drivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../protocols.html">Protocols</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Bluetooth mesh</a></li>
+      <li class="breadcrumb-item active">Performing FOTA updates in Bluetooth mesh</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/protocols/bt_mesh/fota.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="performing-fota-updates-in-bluetooth-mesh">
+<span id="ug-bt-mesh-fota"></span><h1>Performing FOTA updates in Bluetooth mesh<a class="headerlink" href="#performing-fota-updates-in-bluetooth-mesh" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#fota-in-bluetooth-mesh-samples" id="id6">FOTA in Bluetooth mesh samples</a></p></li>
+<li><p><a class="reference internal" href="#discovering-bluetooth-mesh-devices-in-nrf-connect-device-manager" id="id7">Discovering Bluetooth mesh devices in nRF Connect Device Manager</a></p>
+<ul>
+<li><p><a class="reference internal" href="#disabling-the-filter" id="id8">Disabling the filter</a></p></li>
+<li><p><a class="reference internal" href="#advertising-smp-uuid" id="id9">Advertising SMP UUID</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>In nRF Connect SDK, there is currently no support for Device Firmware Update (DFU) over Bluetooth® mesh when performing firmware over-the-air (FOTA) updates for your Bluetooth mesh devices and applications.
+However, support for FOTA updates with point-to-point DFU over Bluetooth Low Energy using the MCUmgr subsystem and the Simple Management Protocol (SMP) is available.</p>
+<p>Following the instructions described in <a class="reference internal" href="../../working_with_nrf/nrf52/developing.html#ug-nrf52-developing-ble-fota"><span class="std std-ref">FOTA over Bluetooth Low Energy</span></a>, you can enable the support for and perform FOTA updates using a mobile app.</p>
+<p>If the device’s composition data is going to change after the FOTA update on a Bluetooth mesh device is performed, unprovision the device before downloading the new image.</p>
+<p>If you are using the <a class="reference external" href="https://www.nordicsemi.com/Products/Development-tools/nrf-connect-device-manager">nRF Connect Device Manager</a> mobile app to perform FOTA updates, your Bluetooth mesh device might not be visible in the list of available devices.
+This happens if the device is not advertising the SMP service UUID and the filter that only shows devices advertising this service is enabled.
+The device can still be discovered through a service discovery, for example using the <a class="reference external" href="https://www.nordicsemi.com/Software-and-Tools/Development-Tools/nRF-Connect-for-mobile">nRF Connect for Mobile</a> app.
+See <a class="reference internal" href="#discovering-bluetooth-mesh-devices-in-nrf-connect-device-manager">Discovering Bluetooth mesh devices in nRF Connect Device Manager</a> for more details.</p>
+<section id="fota-in-bluetooth-mesh-samples">
+<h2><a class="toc-backref" href="#id6">FOTA in Bluetooth mesh samples</a><a class="headerlink" href="#fota-in-bluetooth-mesh-samples" title="Permalink to this heading"></a></h2>
+<p>The <a class="reference internal" href="../../samples/bluetooth/mesh/light/README.html#bluetooth-mesh-light"><span class="std std-ref">Bluetooth: Mesh light</span></a> sample enables support for point-to-point DFU over Bluetooth Low Energy for nRF52 Series development kits.
+See the sample documentation for more details.</p>
+<p>Point-to-point DFU over Bluetooth Low Energy is supported by default, out-of-the-box, for all samples and applications compatible with <span class="xref std std-ref">zephyr:thingy53_nrf5340</span>.
+See <a class="reference internal" href="../../working_with_nrf/nrf53/thingy53.html#thingy53-app-update"><span class="std std-ref">Updating firmware image</span></a> for more information about updating firmware image on <span class="xref std std-ref">zephyr:thingy53_nrf5340</span>.
+For full list of samples and applications supported on <span class="xref std std-ref">zephyr:thingy53_nrf5340</span>, see <a class="reference internal" href="../../working_with_nrf/nrf53/thingy53.html#thingy53-compatible-applications"><span class="std std-ref">Samples and applications for Thingy:53 with FOTA out of the box</span></a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you are using the <a class="reference external" href="https://www.nordicsemi.com/Products/Development-tools/nrf-connect-device-manager">nRF Connect Device Manager</a> mobile app to perform FOTA updates on <span class="xref std std-ref">zephyr:thingy53_nrf5340</span>, your Bluetooth mesh device might not be visible in the list of available devices.</p>
+</div>
+</section>
+<section id="discovering-bluetooth-mesh-devices-in-nrf-connect-device-manager">
+<h2><a class="toc-backref" href="#id7">Discovering Bluetooth mesh devices in nRF Connect Device Manager</a><a class="headerlink" href="#discovering-bluetooth-mesh-devices-in-nrf-connect-device-manager" title="Permalink to this heading"></a></h2>
+<p>To make sure your device is visible in the <a class="reference external" href="https://www.nordicsemi.com/Products/Development-tools/nrf-connect-device-manager">nRF Connect Device Manager</a> mobile app, do one of the following:</p>
+<ul class="simple">
+<li><p>Disable the filter that only shows devices advertising the SMP service UUID in the <a class="reference external" href="https://www.nordicsemi.com/Products/Development-tools/nrf-connect-device-manager">nRF Connect Device Manager</a> mobile app.</p></li>
+<li><p>Make the device advertise the SMP service UUID, and thus be discoverable by the <a class="reference external" href="https://www.nordicsemi.com/Products/Development-tools/nrf-connect-device-manager">nRF Connect Device Manager</a> mobile app with the filter enabled.</p></li>
+</ul>
+<section id="disabling-the-filter">
+<h3><a class="toc-backref" href="#id8">Disabling the filter</a><a class="headerlink" href="#disabling-the-filter" title="Permalink to this heading"></a></h3>
+<p>To disable the filter in the <a class="reference external" href="https://www.nordicsemi.com/Products/Development-tools/nrf-connect-device-manager">nRF Connect Device Manager</a> mobile app, do the following steps:</p>
+<ol class="arabic simple">
+<li><p>Tap the <span class="guilabel">Filter</span> button at the right top corner of your screen.</p></li>
+<li><p>Deselect <span class="guilabel">Only devices advertising SMP UUID</span>.</p></li>
+</ol>
+<p>You should see the device appear in the list of devices.</p>
+</section>
+<section id="advertising-smp-uuid">
+<h3><a class="toc-backref" href="#id9">Advertising SMP UUID</a><a class="headerlink" href="#advertising-smp-uuid" title="Permalink to this heading"></a></h3>
+<p>To make sure that your Bluetooth mesh device advertises the SMP service UUID, in addition to the instructions described in <a class="reference internal" href="../../working_with_nrf/nrf52/developing.html#ug-nrf52-developing-ble-fota"><span class="std std-ref">FOTA over Bluetooth Low Energy</span></a>, do the following:</p>
+<ol class="arabic">
+<li><p>Add the following code to your application:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;zephyr/bluetooth/bluetooth.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;zephyr/bluetooth/conn.h&gt;</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">pending_adv_start</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">k_work</span><span class="w"> </span><span class="o">*</span><span class="n">work</span><span class="p">);</span>
+
+<span class="k">static</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_le_ext_adv</span><span class="w"> </span><span class="o">*</span><span class="n">adv</span><span class="p">;</span>
+<span class="cm">/* This will result in the device advertising SMP service continuously. If this is undesirable,</span>
+<span class="cm"> * set timeout to a finite value, and then create a mechanism in the application (e.g. by pressing</span>
+<span class="cm"> * a button) to start SMP advertisements when needed by calling @ref bt_le_ext_adv_start.</span>
+<span class="cm"> */</span>
+<span class="k">static</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_le_ext_adv_start_param</span><span class="w"> </span><span class="n">ext_adv_param</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">.</span><span class="n">num_events</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="p">.</span><span class="n">timeout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">};</span>
+<span class="k">static</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">k_work_delayable</span><span class="w"> </span><span class="n">adv_work</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Z_WORK_DELAYABLE_INITIALIZER</span><span class="p">(</span><span class="n">pending_adv_start</span><span class="p">);</span>
+
+<span class="k">static</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_le_adv_param</span><span class="w"> </span><span class="n">adv_params</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">	</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BT_ID_DEFAULT</span><span class="p">,</span>
+<span class="w">	</span><span class="p">.</span><span class="n">sid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">	</span><span class="p">.</span><span class="n">secondary_max_skip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">	</span><span class="p">.</span><span class="n">options</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BT_LE_ADV_OPT_CONNECTABLE</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">BT_LE_ADV_OPT_USE_NAME</span><span class="p">,</span>
+<span class="w">	</span><span class="p">.</span><span class="n">interval_min</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BT_GAP_ADV_SLOW_INT_MIN</span><span class="p">,</span>
+<span class="w">	</span><span class="p">.</span><span class="n">interval_max</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BT_GAP_ADV_SLOW_INT_MAX</span><span class="p">,</span>
+<span class="w">	</span><span class="p">.</span><span class="n">peer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span>
+<span class="p">};</span>
+
+<span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_data</span><span class="w"> </span><span class="n">ad</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">	</span><span class="n">BT_DATA_BYTES</span><span class="p">(</span><span class="n">BT_DATA_FLAGS</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">BT_LE_AD_GENERAL</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">BT_LE_AD_NO_BREDR</span><span class="p">)),</span>
+<span class="w">	</span><span class="n">BT_DATA_BYTES</span><span class="p">(</span><span class="n">BT_DATA_UUID128_ALL</span><span class="p">,</span><span class="w"> </span><span class="mh">0x84</span><span class="p">,</span><span class="w"> </span><span class="mh">0xaa</span><span class="p">,</span><span class="w"> </span><span class="mh">0x60</span><span class="p">,</span><span class="w"> </span><span class="mh">0x74</span><span class="p">,</span><span class="w"> </span><span class="mh">0x52</span><span class="p">,</span><span class="w"> </span><span class="mh">0x8a</span><span class="p">,</span><span class="w"> </span><span class="mh">0x8b</span><span class="p">,</span><span class="w"> </span><span class="mh">0x86</span><span class="p">,</span><span class="w"> </span><span class="mh">0xd3</span><span class="p">,</span>
+<span class="w">		      </span><span class="mh">0x4c</span><span class="p">,</span><span class="w"> </span><span class="mh">0xb7</span><span class="p">,</span><span class="w"> </span><span class="mh">0x1d</span><span class="p">,</span><span class="w"> </span><span class="mh">0x1d</span><span class="p">,</span><span class="w"> </span><span class="mh">0xdc</span><span class="p">,</span><span class="w"> </span><span class="mh">0x53</span><span class="p">,</span><span class="w"> </span><span class="mh">0x8d</span><span class="p">),</span>
+<span class="p">};</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">pending_adv_start</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">k_work</span><span class="w"> </span><span class="o">*</span><span class="n">work</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">	</span><span class="kt">int</span><span class="w"> </span><span class="n">err</span><span class="p">;</span>
+
+<span class="w">	</span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bt_le_ext_adv_start</span><span class="p">(</span><span class="n">adv</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">ext_adv_param</span><span class="p">);</span>
+<span class="w">	</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">		</span><span class="n">printk</span><span class="p">(</span><span class="s">&quot;Unable to restart SMP service advertising (err %d)</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">err</span><span class="p">);</span>
+<span class="w">		</span><span class="k">return</span><span class="p">;</span>
+<span class="w">	</span><span class="p">}</span>
+
+<span class="w">	</span><span class="n">printk</span><span class="p">(</span><span class="s">&quot;SMP service advertising restarted</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">connected</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_conn</span><span class="w"> </span><span class="o">*</span><span class="n">conn</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">err</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">	</span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_conn_info</span><span class="w"> </span><span class="n">cinfo</span><span class="p">;</span>
+<span class="w">	</span><span class="kt">int</span><span class="w"> </span><span class="n">ec</span><span class="p">;</span>
+
+<span class="w">	</span><span class="n">ec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bt_conn_get_info</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">cinfo</span><span class="p">);</span>
+<span class="w">	</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ec</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">		</span><span class="n">printk</span><span class="p">(</span><span class="s">&quot;Unable to get connection info (err %d)</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ec</span><span class="p">);</span>
+<span class="w">		</span><span class="k">return</span><span class="p">;</span>
+<span class="w">	</span><span class="p">}</span>
+
+<span class="w">	</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cinfo</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">adv_params</span><span class="p">.</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">		</span><span class="k">return</span><span class="p">;</span>
+<span class="w">	</span><span class="p">}</span>
+
+<span class="w">	</span><span class="n">printk</span><span class="p">(</span><span class="s">&quot;Connected to SMP service: err %d id %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">err</span><span class="p">,</span><span class="w"> </span><span class="n">cinfo</span><span class="p">.</span><span class="n">id</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">disconnected</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_conn</span><span class="w"> </span><span class="o">*</span><span class="n">conn</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">reason</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">	</span><span class="kt">int</span><span class="w"> </span><span class="n">err</span><span class="p">;</span>
+<span class="w">	</span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_conn_info</span><span class="w"> </span><span class="n">cinfo</span><span class="p">;</span>
+
+<span class="w">	</span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bt_conn_get_info</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">cinfo</span><span class="p">);</span>
+<span class="w">	</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">		</span><span class="n">printk</span><span class="p">(</span><span class="s">&quot;Unable to get connection info (err %d)</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">err</span><span class="p">);</span>
+<span class="w">		</span><span class="k">return</span><span class="p">;</span>
+<span class="w">	</span><span class="p">}</span>
+
+<span class="w">	</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cinfo</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">adv_params</span><span class="p">.</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">		</span><span class="k">return</span><span class="p">;</span>
+<span class="w">	</span><span class="p">}</span>
+
+<span class="w">	</span><span class="n">printk</span><span class="p">(</span><span class="s">&quot;Disconnected from SMP service: reason %d id %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">reason</span><span class="p">,</span><span class="w"> </span><span class="n">cinfo</span><span class="p">.</span><span class="n">id</span><span class="p">);</span>
+
+<span class="w">	</span><span class="n">k_work_schedule</span><span class="p">(</span><span class="o">&amp;</span><span class="n">adv_work</span><span class="p">,</span><span class="w"> </span><span class="n">K_NO_WAIT</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">static</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_conn_cb</span><span class="w"> </span><span class="n">conn_callbacks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">	</span><span class="p">.</span><span class="n">connected</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">connected</span><span class="p">,</span>
+<span class="w">	</span><span class="p">.</span><span class="n">disconnected</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">disconnected</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">smp_service_adv_init</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">	</span><span class="kt">int</span><span class="w"> </span><span class="n">err</span><span class="p">;</span>
+<span class="w">	</span><span class="kt">size_t</span><span class="w"> </span><span class="n">id_count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0xFF</span><span class="p">;</span>
+<span class="w">	</span><span class="kt">int</span><span class="w"> </span><span class="n">id</span><span class="p">;</span>
+
+<span class="w">	</span><span class="cm">/* Use different identity from Bluetooth mesh to avoid conflicts with Mesh Provisioning</span>
+<span class="cm">	 * Service and Mesh Proxy Service advertisements.</span>
+<span class="cm">	 */</span>
+<span class="w">	</span><span class="n">bt_id_get</span><span class="p">(</span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">id_count</span><span class="p">);</span>
+
+<span class="w">	</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">id_count</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">CONFIG_BT_ID_MAX</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">		</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bt_id_create</span><span class="p">(</span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+<span class="w">		</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">			</span><span class="n">printk</span><span class="p">(</span><span class="s">&quot;Unable to create a new identity for SMP (err %d).&quot;</span>
+<span class="w">			       </span><span class="s">&quot; Using the default one.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">id</span><span class="p">);</span>
+<span class="w">			</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BT_ID_DEFAULT</span><span class="p">;</span>
+<span class="w">		</span><span class="p">}</span>
+
+<span class="w">		</span><span class="n">printk</span><span class="p">(</span><span class="s">&quot;Created a new identity for SMP: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">id</span><span class="p">);</span>
+<span class="w">	</span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">		</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BT_ID_DEFAULT</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">		</span><span class="n">printk</span><span class="p">(</span><span class="s">&quot;Recovered identity for SMP: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">id</span><span class="p">);</span>
+<span class="w">	</span><span class="p">}</span>
+
+<span class="w">	</span><span class="n">adv_params</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">id</span><span class="p">;</span>
+
+<span class="w">	</span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bt_le_ext_adv_create</span><span class="p">(</span><span class="o">&amp;</span><span class="n">adv_params</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">adv</span><span class="p">);</span>
+<span class="w">	</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">		</span><span class="n">printk</span><span class="p">(</span><span class="s">&quot;Creating SMP service adv instance failed (err %d)</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">err</span><span class="p">);</span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="n">err</span><span class="p">;</span>
+<span class="w">	</span><span class="p">}</span>
+
+<span class="w">	</span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bt_le_ext_adv_set_data</span><span class="p">(</span><span class="n">adv</span><span class="p">,</span><span class="w"> </span><span class="n">ad</span><span class="p">,</span><span class="w"> </span><span class="n">ARRAY_SIZE</span><span class="p">(</span><span class="n">ad</span><span class="p">),</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">	</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">		</span><span class="n">printk</span><span class="p">(</span><span class="s">&quot;Setting SMP service adv data failed (err %d)</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">err</span><span class="p">);</span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="n">err</span><span class="p">;</span>
+<span class="w">	</span><span class="p">}</span>
+
+<span class="w">	</span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bt_le_ext_adv_start</span><span class="p">(</span><span class="n">adv</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">ext_adv_param</span><span class="p">);</span>
+<span class="w">	</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">		</span><span class="n">printk</span><span class="p">(</span><span class="s">&quot;Starting advertising of SMP service failed (err %d)</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">err</span><span class="p">);</span>
+<span class="w">	</span><span class="p">}</span>
+
+<span class="w">	</span><span class="k">return</span><span class="w"> </span><span class="n">err</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p>Register Bluetooth connection callbacks and call <code class="docutils literal notranslate"><span class="pre">smp_service_adv_init</span></code> after Bluetooth is initialized:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="w">	</span><span class="n">bt_conn_cb_register</span><span class="p">(</span><span class="o">&amp;</span><span class="n">conn_callbacks</span><span class="p">);</span>
+
+<span class="w">	</span><span class="cm">/**</span>
+<span class="cm">	 * Since Bluetooth mesh utilizes the advertiser as the main channel of</span>
+<span class="cm">	 * communication, a secondary advertising set is necessary to broadcast</span>
+<span class="cm">	 * the SMP service.</span>
+<span class="cm">	 */</span>
+<span class="w">	</span><span class="k">return</span><span class="w"> </span><span class="n">smp_service_adv_init</span><span class="p">();</span>
+</pre></div>
+</div>
+</li>
+<li><p>Increase the following configuration option values by one in the <code class="file docutils literal notranslate"><span class="pre">prj.conf</span></code> file of your application:</p>
+<ul class="simple">
+<li><p>Number of advertising sets (see <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_EXT_ADV_MAX_ADV_SET</span></code>).</p></li>
+<li><p>The maximum number of allowed connections (see <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_MAX_CONN</span></code>).</p></li>
+<li><p>The maximum number of local identities (see <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_ID_MAX</span></code>).</p></li>
+</ul>
+</li>
+</ol>
+<p>This will make the device discoverable by the <a class="reference external" href="https://www.nordicsemi.com/Products/Development-tools/nrf-connect-device-manager">nRF Connect Device Manager</a> mobile app with the <span class="guilabel">Only devices advertising SMP UUID</span> filter enabled.
+Observe that the device appears in the list of devices in the mobile app.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="node_removal.html" class="btn btn-neutral float-right" title="Removing a node from a mesh network" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="model_config_app.html" class="btn btn-neutral" title="Configuring mesh models using the nRF Mesh mobile app" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

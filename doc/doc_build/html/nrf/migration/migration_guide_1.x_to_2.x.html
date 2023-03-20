@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Migration notes for nRF Connect SDK v2.0.0 &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../_static/js/ncs.js"
+></script>
+<script src="../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="nRF Connect SDK v1.9.2 Release Notes" href="../releases/release-notes-1.9.2.html" />
+    <link rel="prev" title="nRF Connect SDK v2.0.0 Release Notes" href="../releases/release-notes-2.0.0.html" />
+<link
+  href="../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../drivers.html">Drivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scripts.html">Scripts</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../release_notes.html">Release notes</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../releases/release-notes-changelog.html">Changelog for nRF Connect SDK v2.3.99</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../releases/release-notes-2.3.0.html">nRF Connect SDK v2.3.0 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../releases/release-notes-2.2.0.html">nRF Connect SDK v2.2.0 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../releases/release-notes-2.1.3.html">nRF Connect SDK v2.1.3 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../releases/release-notes-2.1.2.html">nRF Connect SDK v2.1.2 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../releases/release-notes-2.1.1.html">nRF Connect SDK v2.1.1 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../releases/release-notes-2.1.0.html">nRF Connect SDK v2.1.0 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../releases/release-notes-2.0.2.html">nRF Connect SDK v2.0.2 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../releases/release-notes-2.0.1.html">nRF Connect SDK v2.0.1 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../releases/release-notes-2.0.0.html">nRF Connect SDK v2.0.0 Release Notes</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Migration notes for nRF Connect SDK v2.0.0</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#toolchain-change">Toolchain change</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#default-ide-change">Default IDE change</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pin-control-transition">Pin control transition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#default-secure-firmware-solution-change">Default secure firmware solution change</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#switch-from-tinycbor-to-zcbor">Switch from TinyCBOR to zcbor</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#general-migration">General migration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mcumgr-commands-and-groups-migration">MCUmgr commands and groups migration</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#new-zephyr-logging-service-logging-v2">New Zephyr logging service - logging v2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#zephyr-v3-x-x-namespace-change">Zephyr v3.x.x namespace change</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#changes-in-pwm-api">Changes in PWM API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../releases/release-notes-1.9.2.html">nRF Connect SDK v1.9.2 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../releases/release-notes-1.9.1.html">nRF Connect SDK v1.9.1 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../releases/release-notes-1.9.0.html">nRF Connect SDK v1.9.0 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../releases/release-notes-1.8.0.html">nRF Connect SDK v1.8.0 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../releases/release-notes-1.7.1.html">nRF Connect SDK v1.7.1 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../releases/release-notes-1.7.0.html">nRF Connect SDK v1.7.0 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../releases/release-notes-1.6.1.html">nRF Connect SDK v1.6.1 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../releases/release-notes-1.6.0.html">nRF Connect SDK v1.6.0 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../releases/release-notes-1.5.2.html">nRF Connect SDK v1.5.2 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../releases/release-notes-1.5.1.html">nRF Connect SDK v1.5.1 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../releases/release-notes-1.5.0.html">nRF Connect SDK v1.5.0 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../releases/release-notes-1.4.2.html">nRF Connect SDK v1.4.2 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../releases/release-notes-1.4.1.html">nRF Connect SDK v1.4.1 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../releases/release-notes-1.4.0.html">nRF Connect SDK v1.4.0 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../releases/release-notes-1.3.2.html">nRF Connect SDK v1.3.2 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../releases/release-notes-1.3.1.html">nRF Connect SDK v1.3.1 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../releases/release-notes-1.3.0.html">nRF Connect SDK v1.3.0 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../releases/release-notes-1.2.1.html">nRF Connect SDK v1.2.1 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../releases/release-notes-1.2.0.html">nRF Connect SDK v1.2.0 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../releases/release-notes-1.1.0.html">nRF Connect SDK v1.1.0 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../releases/release-notes-1.0.0.html">nRF Connect SDK v1.0.0 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../releases/release-notes-0.4.0.html">nRF Connect SDK v0.4.0 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../releases/release-notes-0.3.0.html">nRF Connect SDK v0.3.0 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../releases/release-notes-0.1.0.html">nRF Connect SDK v0.1.0 Release Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../release_notes.html">Release notes</a></li>
+      <li class="breadcrumb-item active">Migration notes for nRF Connect SDK v2.0.0</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/migration/migration_guide_1.x_to_2.x.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="migration-notes-for-ncs-v2-0-0">
+<span id="ncs-2-0-0-migration"></span><h1>Migration notes for nRF Connect SDK v2.0.0<a class="headerlink" href="#migration-notes-for-ncs-v2-0-0" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#toolchain-change" id="id6">Toolchain change</a></p></li>
+<li><p><a class="reference internal" href="#default-ide-change" id="id7">Default IDE change</a></p></li>
+<li><p><a class="reference internal" href="#pin-control-transition" id="id8">Pin control transition</a></p></li>
+<li><p><a class="reference internal" href="#default-secure-firmware-solution-change" id="id9">Default secure firmware solution change</a></p></li>
+<li><p><a class="reference internal" href="#switch-from-tinycbor-to-zcbor" id="id10">Switch from TinyCBOR to zcbor</a></p>
+<ul>
+<li><p><a class="reference internal" href="#general-migration" id="id11">General migration</a></p></li>
+<li><p><a class="reference internal" href="#mcumgr-commands-and-groups-migration" id="id12">MCUmgr commands and groups migration</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#new-zephyr-logging-service-logging-v2" id="id13">New Zephyr logging service - logging v2</a></p></li>
+<li><p><a class="reference internal" href="#zephyr-v3-x-x-namespace-change" id="id14">Zephyr v3.x.x namespace change</a></p></li>
+<li><p><a class="reference internal" href="#changes-in-pwm-api" id="id15">Changes in PWM API</a></p></li>
+</ul>
+</div>
+<p>In version 2.0.0, the nRF Connect SDK introduced a number of major changes into its codebase.
+If your application was built using nRF Connect SDK v1.x.x, make sure to complete the actions listed in the following sections to migrate your application to nRF Connect SDK v2.x.x.</p>
+<section id="toolchain-change">
+<h2><a class="toc-backref" href="#id6">Toolchain change</a><a class="headerlink" href="#toolchain-change" title="Permalink to this heading"></a></h2>
+<p>nRF Connect SDK no longer uses the GNU Arm Embedded Toolchain by default.
+The current default toolchain is the <a class="reference external" href="https://github.com/zephyrproject-rtos/sdk-ng/releases">Zephyr SDK</a> instead, which now supports all three main operating systems (Microsoft Windows, macOS, and GNU/Linux).</p>
+<dl class="simple">
+<dt>Required action:</dt><dd><p>If you do not use the Toolchain Manager, install the Zephyr SDK by following the steps in <a class="reference internal" href="../getting_started/installing.html#gs-installing-toolchain"><span class="std std-ref">Install a Toolchain</span></a> section.
+The updated Toolchain Manager already contains it.</p>
+</dd>
+</dl>
+<p>Note that if you use the Toolchain Manager, it will now install the toolchain in a separate directory (for example <code class="file docutils literal notranslate"><span class="pre">toolchains/v2.0.0/</span></code>), next to the main nRF Connect SDK directory.</p>
+</section>
+<section id="default-ide-change">
+<h2><a class="toc-backref" href="#id7">Default IDE change</a><a class="headerlink" href="#default-ide-change" title="Permalink to this heading"></a></h2>
+<p>Visual Studio Code extension IDE has replaced SEGGER Embedded Studio as the default supported IDE for working with the nRF Connect SDK.</p>
+<dl class="simple">
+<dt>Required action:</dt><dd><p>If you are building the application or sample using SEGGER Embedded Studio or on the command line and want to migrate to Visual Studio Code extension IDE, use the <a class="reference external" href="https://nrfconnect.github.io/vscode-nrf-connect/reference/ui_sidebar_welcome.html#open-an-existing-application">Open an existing application</a> option in the nRF Connect for VS Code extension to migrate your application.</p>
+</dd>
+</dl>
+</section>
+<section id="pin-control-transition">
+<h2><a class="toc-backref" href="#id8">Pin control transition</a><a class="headerlink" href="#pin-control-transition" title="Permalink to this heading"></a></h2>
+<p>Zephyr v3.x.x introduces new state-based pin control API (<em>pinctrl</em>).
+For more details, see <span class="xref std std-ref">zephyr:pinctrl-guide</span> in Zephyr documentation.</p>
+<dl class="simple">
+<dt>Required action:</dt><dd><p>The <a class="reference internal" href="../app_dev/pin_control/index.html#ug-pinctrl"><span class="std std-ref">Pin control</span></a> user guide provides information on how to migrate your application to use the new pin control mechanism.</p>
+</dd>
+</dl>
+</section>
+<section id="default-secure-firmware-solution-change">
+<h2><a class="toc-backref" href="#id9">Default secure firmware solution change</a><a class="headerlink" href="#default-secure-firmware-solution-change" title="Permalink to this heading"></a></h2>
+<p>Trusted Firmware M (TF-M) replaces the Secure Partition Manager (SPM) for secure image firmware.
+TF-M is now enabled by default for most nRF9160 and nRF5340 applications and samples.</p>
+<dl class="simple">
+<dt>Required action:</dt><dd><p>To start using TF-M instead of SPM in your application, see the information in <a class="reference internal" href="../app_dev/tfm/index.html#ug-tfm-migrate"><span class="std std-ref">Migrating from Secure Partition Manager to Trusted Firmware-M</span></a>.</p>
+</dd>
+</dl>
+</section>
+<section id="switch-from-tinycbor-to-zcbor">
+<h2><a class="toc-backref" href="#id10">Switch from TinyCBOR to zcbor</a><a class="headerlink" href="#switch-from-tinycbor-to-zcbor" title="Permalink to this heading"></a></h2>
+<p>With Zephyr v3.x.x, TinyCBOR becomes deprecated and is replaced by zcbor.
+If you are using TinyCBOR to encode data into CBOR format in your application, follow this guide to migrate your code.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you have extended MCUmgr with additional custom commands, then your code will not compile anymore as the commands will receive pointers to variables that no longer exist or that have changed their types during TinyCBOR to zcbor transition.</p>
+</div>
+<section id="general-migration">
+<span id="migration-tinycbor-to-zcbor-general"></span><h3><a class="toc-backref" href="#id11">General migration</a><a class="headerlink" href="#general-migration" title="Permalink to this heading"></a></h3>
+<p>The TinyCBOR to zcbor migration consists of two tasks:</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#migration-tinycbor-to-zcbor-general-init"><span class="std std-ref">zcbor state initialization</span></a></p></li>
+<li><p><a class="reference internal" href="#migration-tinycbor-to-zcbor-general-api"><span class="std std-ref">TinyCBOR to zcbor decoding/encoding API replacement</span></a></p></li>
+</ol>
+<p>The first task involves context initialization, while the second task is almost a function-to-function conversion, with a few exceptions in how parameters are passed and what return values are returned from API calls.</p>
+<section id="zcbor-state-initialization">
+<span id="migration-tinycbor-to-zcbor-general-init"></span><h4>zcbor state initialization<a class="headerlink" href="#zcbor-state-initialization" title="Permalink to this heading"></a></h4>
+<p>You must first initialize the decoding and encoding state of zcbor.</p>
+<section id="decoding-state-initialization">
+<h5>Decoding state initialization<a class="headerlink" href="#decoding-state-initialization" title="Permalink to this heading"></a></h5>
+<p>Decoding with TinyCBOR requires setting up a reader with a buffer by calling <code class="docutils literal notranslate"><span class="pre">cbor_buf_reader_init()</span></code>, and attaching it to a parser state with <code class="docutils literal notranslate"><span class="pre">cbor_parser_init()</span></code>.
+zcbor decoding is initialized with a call to <code class="docutils literal notranslate"><span class="pre">zcbor_new_decode_state()</span></code> that directly ties the provided buffer to decoding state.
+For better understanding of how zcbor states work, refer to the <a class="reference external" href="https://github.com/NordicSemiconductor/zcbor#readme">zcbor documentation</a>.</p>
+<p>The following is an example of simple zcbor state initialization for decoding:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#define N   20              </span><span class="cm">/* Max expected encoded elements */</span>
+<span class="n">zcbor_state_t</span><span class="w"> </span><span class="n">zs</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+<span class="kt">uint8_t</span><span class="w"> </span><span class="n">buffer</span><span class="p">[</span><span class="n">SOME_SIZE</span><span class="p">];</span>
+<span class="cm">/* Read some data to the buffer */</span>
+<span class="p">...</span>
+<span class="n">zcbor_new_decode_state</span><span class="p">(</span><span class="n">zs</span><span class="p">,</span><span class="w"> </span><span class="n">ARRAY_SIZE</span><span class="p">(</span><span class="n">zs</span><span class="p">),</span><span class="w"> </span><span class="n">buffer</span><span class="p">,</span><span class="w"> </span><span class="n">ARRAY_SIZE</span><span class="p">(</span><span class="n">buffer</span><span class="p">),</span><span class="w"> </span><span class="n">N</span><span class="p">);</span>
+<span class="cm">/* Decode data from the buffer with zs state */</span>
+<span class="p">...</span>
+</pre></div>
+</div>
+<p>In this example:</p>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">N</span></code> parameter represents a possible number of encoded fields.
+It does not have to be accurate, but it must at least have a value corresponding to the number of expected fields.
+In case the top element is a list or a map, then this will be <code class="docutils literal notranslate"><span class="pre">1</span></code>.
+MCUmgr is an example of such a case, as there is always a top-level, single map required.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">zs</span></code> is the zcbor state that consists of two states, which is a minimal practical state count.
+These states will allow to work on flat CBOR encoding where no list or map is used to envelope variables at the top level of CBOR stream encoding.
+Two states are used because one will be the current state and the other can be used as a constant state where an encoding error is stored with some other internal variables.
+In case you plan to have embedded lists or maps, the number of states for decoding must be increased by adding a number of levels to the base 2.
+For example, in case of three levels of map or list encoding, the number of states must be set to <code class="docutils literal notranslate"><span class="pre">5</span></code>.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">buffer</span></code> parameter can be any plain buffer and decoding requires the buffer size.</p></li>
+</ul>
+<p>At this point, the zcbor state is initialized.
+After initializing the zcbor state, the zcbor decoding API calls must be given a pointer to the first zcbor state.
+This can be <code class="docutils literal notranslate"><span class="pre">zs</span></code> or <code class="docutils literal notranslate"><span class="pre">&amp;zs[0]</span></code>, as in the example.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Currently, there is no API provided for zcbor to get information on how much of an input buffer has been consumed by decoding.
+The only way to find this out is to substitute the buffer pointer, given at the zcbor state initialization, from the state object element <code class="docutils literal notranslate"><span class="pre">payload_mut</span></code>, for example <code class="docutils literal notranslate"><span class="pre">zs-&gt;payload_mut</span> <span class="pre">-</span> <span class="pre">buffer</span></code>.</p>
+</div>
+</section>
+<section id="encoding-state-initialization">
+<h5>Encoding state initialization<a class="headerlink" href="#encoding-state-initialization" title="Permalink to this heading"></a></h5>
+<p>Encoding with TinyCBOR is similar to decoding and requires two API calls: one to set up a buffer writer (<code class="docutils literal notranslate"><span class="pre">cbor_buf_writer_init()</span></code>) and one to attach the writer to the encoding state (<code class="docutils literal notranslate"><span class="pre">cbor_encoder_init()</span></code>).
+zcbor encoding is initialized with a single call to <code class="docutils literal notranslate"><span class="pre">zcbor_new_encode_state()</span></code> that directly ties the provided buffer to an encoding state.
+See the following example of simple zcbor state initialization for encoding:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">zcbor_state_t</span><span class="w"> </span><span class="n">zs</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+<span class="kt">uint8_t</span><span class="w"> </span><span class="n">buffer</span><span class="p">[</span><span class="n">SOME_SIZE</span><span class="p">];</span>
+<span class="n">zcbor_new_encode_state</span><span class="p">(</span><span class="n">zs</span><span class="p">,</span><span class="w"> </span><span class="n">ARRAY_SIZE</span><span class="p">(</span><span class="n">zs</span><span class="p">),</span><span class="w"> </span><span class="n">buffer</span><span class="p">,</span><span class="w"> </span><span class="n">ARRAY_SIZE</span><span class="p">(</span><span class="n">buffer</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="cm">/* Encode data to the buffer with zs state */</span>
+<span class="p">...</span>
+</pre></div>
+</div>
+<p>In this example:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">zs</span></code> is the zcbor state that consists of two states, which is enough when zcbor is in non-canonical configuration (see <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZCBOR_CANONICAL</span></code>).
+In the non-canonical configuration, the number of states would need to be increased by a maximum level of expected lists or arrays enveloping each other (or both).</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">buffer</span></code> parameter where encoded data will be placed, with size that limits it.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">0</span></code> is the final parameter that represents the number of items encoded into the buffer.</p></li>
+</ul>
+<p>At this point, the zcbor state is initialized and zcbor decoding API calls that follow it must be given a pointer to the first zcbor state.
+This can be <code class="docutils literal notranslate"><span class="pre">zs</span></code> or <code class="docutils literal notranslate"><span class="pre">&amp;zs[0]</span></code>, as in the example.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Currently, there is no API provided for zcbor to get information on how much of an output buffer has been used by encoded data.
+The only way to find this out is to substitute the buffer pointer, given at a zcbor state initialization, from the state object element <code class="docutils literal notranslate"><span class="pre">payload_mut</span></code>, for example <code class="docutils literal notranslate"><span class="pre">zs-&gt;payload_mut</span> <span class="pre">-</span> <span class="pre">buffer</span></code>.</p>
+</div>
+</section>
+</section>
+<section id="tinycbor-to-zcbor-decoding-encoding-api-replacement">
+<span id="migration-tinycbor-to-zcbor-general-api"></span><h4>TinyCBOR to zcbor decoding/encoding API replacement<a class="headerlink" href="#tinycbor-to-zcbor-decoding-encoding-api-replacement" title="Permalink to this heading"></a></h4>
+<p>There are three major differences between TinyCBOR and zcbor APIs:</p>
+<ul class="simple">
+<li><p>TinyCBOR calls return error codes while zcbor returns a boolean value (<code class="docutils literal notranslate"><span class="pre">true</span></code> is success).</p></li>
+<li><p>zcbor does not provide type or value peek functions.</p></li>
+<li><p>All of zcbor functions advance buffer on success.</p></li>
+</ul>
+<p>zbcor stores error codes with <code class="docutils literal notranslate"><span class="pre">zs</span></code> and, when configured, can automatically fail consecutive calls when decoding or encoding fails.
+Otherwise, the calls are quite similar: functions from both APIs take context or state as one parameter and value or pointer for value and optional buffer size, when required, as the other parameters.</p>
+<p>The following list maps TinyCBOR functions to their zcbor equivalents:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 47%" />
+<col style="width: 53%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>TinyCBOR</p></th>
+<th class="head"><p>zcbor</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cbor_value_enter_container()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">zcbor_map_start_decode()</span></code>
+<code class="docutils literal notranslate"><span class="pre">zcbor_list_start_decode()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cbor_value_leave_container()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">zcbor_map_end_decode()</span></code>
+<code class="docutils literal notranslate"><span class="pre">zcbor_list_end_decode()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cbor_value_get_int()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">zcbor_int32_decode()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cbor_value_get_int64()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">zcbor_int64_decode()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cbor_value_get_uint64()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">zcbor_uint6_decode()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cbor_value_get_boolean()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">zcbor_bool_decode()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cbor_value_get_float()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">zcbor_float32_decode()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cbor_value_get_double()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">zcbor_float64_decode()</span></code>
+<code class="docutils literal notranslate"><span class="pre">zcbor_double_decode()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cbor_value_get_string_length()</span></code></p></td>
+<td><p>No direct replacement, the
+<code class="docutils literal notranslate"><span class="pre">zcbor_bstr_decode()</span></code> or
+<code class="docutils literal notranslate"><span class="pre">zcbor_tstr_decode()</span></code> functions
+will retrieve both the value
+pointer and length in a single call.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cbor_value_copy_text_string()</span></code></p></td>
+<td><p>No direct replacement, the
+<code class="docutils literal notranslate"><span class="pre">zcbor_tstr_decode()</span></code> function
+will retrieve both the value
+pointer and length in a single call.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">zcbor_value_copy_byte_string()</span></code></p></td>
+<td><p>No direct replacement, the
+<code class="docutils literal notranslate"><span class="pre">zcbor_bstr_decode()</span></code> function
+will retrieve both the value
+pointer and length in a single call.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cbor_encode_create_array()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">zcbor_list_start_encode()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cbor_encode_create_map()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">zcbor_map_start_encode()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cbor_encoder_close_container()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">zcbor_map_end_encode()</span></code>
+<code class="docutils literal notranslate"><span class="pre">zcbor_list_end_encode()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cbor_encode_int()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">zcbor_int32_put()</span></code>
+<code class="docutils literal notranslate"><span class="pre">zcbor_int64_put()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cbor_encode_uint()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">zcbor_uint32_put()</span></code>
+<code class="docutils literal notranslate"><span class="pre">zcbor_uint64_put()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cbor_enocode_boolean()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">zcbor_bool_put()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cbor_encode_half_float()</span></code></p></td>
+<td><p>No equivalent</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cbor_encode_float()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">zcbor_float32_put()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cbor_encode_double()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">zcbor_float64_put()</span></code>
+<code class="docutils literal notranslate"><span class="pre">zcbor_double_put()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cbor_encode_text_string()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">zcbor_tstr_encode()</span></code>
+<code class="docutils literal notranslate"><span class="pre">zcbor_tstr_encode_ptr()</span></code>
+<code class="docutils literal notranslate"><span class="pre">zcbor_tstr_put_lit()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cbor_encode_text_stringz()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">zcbor_tstr_put_term()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cbor_encode_byte_string()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">zcbor_bstr_encode()</span></code>
+<code class="docutils literal notranslate"><span class="pre">zcbor_bstr_encode_ptr()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cbor_encode_null()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">zcbor_nil_put()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cbor_encode_undefined()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">zcbor_undefined_put()</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>There is no direct replacement for the <code class="docutils literal notranslate"><span class="pre">cbor_value_is_null()</span></code> and <code class="docutils literal notranslate"><span class="pre">cbor_value_is_undefined()</span></code> functions in zcbor.
+To check whether such value is expected and where it is expected, use the following code:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">ok</span><span class="p">;</span>
+<span class="p">...</span>
+<span class="cm">/* Make sure that not in error state first */</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">zs</span><span class="o">-&gt;</span><span class="n">constant_state</span><span class="o">-&gt;</span><span class="n">error</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/* Already in error */</span>
+<span class="w">    </span><span class="p">...</span>
+<span class="p">}</span>
+<span class="n">ok</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zcbor_nil_decode</span><span class="p">(</span><span class="n">zs</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">ok</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">zs</span><span class="o">-&gt;</span><span class="n">constant_state</span><span class="o">-&gt;</span><span class="n">error</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">ZCBOR_ERR_WRONG_TYPE</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/* Process non-NULL element */</span>
+<span class="w">    </span><span class="n">zcbor_pop_error</span><span class="p">(</span><span class="n">zs</span><span class="p">);</span>
+<span class="w">    </span><span class="p">...</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">ok</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/* Other error */</span>
+<span class="w">    </span><span class="p">...</span>
+<span class="p">}</span>
+<span class="cm">/* Successfully decoded NULL element in CBOR stream */</span>
+<span class="p">...</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="mcumgr-commands-and-groups-migration">
+<span id="migration-tinycbor-to-zcbor-mcumgr"></span><h3><a class="toc-backref" href="#id12">MCUmgr commands and groups migration</a><a class="headerlink" href="#mcumgr-commands-and-groups-migration" title="Permalink to this heading"></a></h3>
+<p>In contrast to <a class="reference internal" href="#migration-tinycbor-to-zcbor-general"><span class="std std-ref">General migration</span></a>, except for tuning some Kconfig configuration constants, zcbor setup is not needed for the MCUmgr commands and groups, because the MCUmgr library takes care of the task.
+The only exception is tuning some Kconfig configuration constants.</p>
+<p>Most of the function replacement task is covered by the <a class="reference internal" href="#migration-tinycbor-to-zcbor-general"><span class="std std-ref">General migration</span></a>, with exception to usage of <code class="docutils literal notranslate"><span class="pre">cborattr</span></code>, which is covered in <a class="reference internal" href="#migration-tinycbor-to-zcbor-mcumgr-cborattr"><span class="std std-ref">Replacing cbor_read_object() with zcbor_map_decode_bulk()</span></a>.</p>
+<p>The other important issue is decoding or encoding context access, which is described in <a class="reference internal" href="#migration-tinycbor-to-zcbor-mcumgr-ctxt"><span class="std std-ref">Decoding and encoding context</span></a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The encoding context provided by the command processing handler function as a parameter has the top level map already created.
+The map will be closed on a successful return from the handler, so handlers need not create the top level map or close it.
+The decoding context, in contrary to the encoding, is set before the top map and handlers are responsible for opening of the top-level map as a part of command decoding or processing code.</p>
+</div>
+<section id="decoding-and-encoding-context">
+<span id="migration-tinycbor-to-zcbor-mcumgr-ctxt"></span><h4>Decoding and encoding context<a class="headerlink" href="#decoding-and-encoding-context" title="Permalink to this heading"></a></h4>
+<p>Whenever TinyCBOR or zcbor is used, command processing functions are given a pointer to an object of type <code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">mgmt_ctxt</span></code>.
+TinyCBOR uses the <code class="docutils literal notranslate"><span class="pre">encoder</span></code> element of this object for encoding functions and <code class="docutils literal notranslate"><span class="pre">it</span></code>, a TinyCBOR <code class="docutils literal notranslate"><span class="pre">CborValue</span></code> type iterator, for decoding functions.</p>
+<p>zcbor uses <code class="docutils literal notranslate"><span class="pre">zcbor_state_t</span></code> type objects for decoding and encoding states.
+These state objects have indirectly replaced TinyCBOR’s <code class="docutils literal notranslate"><span class="pre">it</span></code> iterator and <code class="docutils literal notranslate"><span class="pre">encoder</span></code>, respectively, within <code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">mgmt_ctxt</span></code>.
+They are embedded within the <code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">cbor_nb_reader</span></code> type object for decoding context, and in the <code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">cbor_nb_writer</span></code> type object for encoding context.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">cbor_nb_reader</span></code> and <code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">cbor_nb_writer</span></code> objects tie <code class="docutils literal notranslate"><span class="pre">zcbor_state_t</span></code> with <code class="docutils literal notranslate"><span class="pre">net_buf</span></code> type buffers that hold data for decoding or will hold encoded data.</p>
+<p>The substitution, in code, of references to decoder and encoder objects, as accessed through <code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">mgmt_ctxt</span></code>, is shown by the following table:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>TinyCBOR</p></th>
+<th class="head"><p>zcbor</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td rowspan="2"><p><code class="docutils literal notranslate"><span class="pre">encoder</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">cnbe.ts</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cnbe-&gt;ts</span></code></p></td>
+</tr>
+<tr class="row-even"><td rowspan="2"><p><code class="docutils literal notranslate"><span class="pre">it</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">cnde.ts</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cnde-&gt;ts</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="replacing-cbor-read-object-with-zcbor-map-decode-bulk">
+<span id="migration-tinycbor-to-zcbor-mcumgr-cborattr"></span><h4>Replacing <code class="docutils literal notranslate"><span class="pre">cbor_read_object()</span></code> with <code class="docutils literal notranslate"><span class="pre">zcbor_map_decode_bulk()</span></code><a class="headerlink" href="#replacing-cbor-read-object-with-zcbor-map-decode-bulk" title="Permalink to this heading"></a></h4>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In scenarios where decoding of keys is not required or it is required for only a single key, the procedure described in this section can be greatly simplified as a single key can be obtained by using <code class="docutils literal notranslate"><span class="pre">zcbor_tst_decode()</span></code> that is looped until the key is found.</p>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">cborattr</span></code> was a private MCUmgr utility that was used within the command processing code to process CBOR list contents in bulk and is now replaced with <code class="docutils literal notranslate"><span class="pre">zcbor_bulk()</span></code>.
+These utility APIs are represented by a single function: <code class="docutils literal notranslate"><span class="pre">cbor_read_object()</span></code> in case of TinyCBOR, and <code class="docutils literal notranslate"><span class="pre">zcbor_map_decode_bulk()</span></code> in case of zcbor.</p>
+<p>The advantage of <code class="docutils literal notranslate"><span class="pre">zcbor_map_decode_bulk()</span></code> over <code class="docutils literal notranslate"><span class="pre">cbor_read_object()</span></code> is the simplification of structures that define the mapping of decoding functions to keys in a CBOR map.</p>
+<p>The following example demonstrates the transition from <code class="docutils literal notranslate"><span class="pre">cbor_read_object()</span></code> to <code class="docutils literal notranslate"><span class="pre">zcbor_map_decode_bulk()</span></code>:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">image</span><span class="p">;</span>
+<span class="kt">uint8_t</span><span class="w"> </span><span class="n">img_data</span><span class="p">[</span><span class="n">SOME_DATA_LEN</span><span class="p">];</span>
+<span class="kt">size_t</span><span class="w"> </span><span class="n">data_len</span><span class="p">;</span>
+<span class="k">const</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">cbor_attr_t</span><span class="w"> </span><span class="n">off_attr</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">.</span><span class="n">attribute</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;image&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CborAttrUnsignedIntegerType</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">addr</span><span class="p">.</span><span class="n">uinteger</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">req</span><span class="p">.</span><span class="n">image</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">nodefault</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">.</span><span class="n">attribute</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;data&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CborAttrByteStringType</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">addr</span><span class="p">.</span><span class="n">bytestring</span><span class="p">.</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">img_data</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">addr</span><span class="p">.</span><span class="n">bytestring</span><span class="p">.</span><span class="n">len</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">data_len</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">len</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">img_data</span><span class="p">)</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">...</span>
+<span class="p">}</span>
+<span class="n">rc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cbor_read_object</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ctxt</span><span class="o">-&gt;</span><span class="n">it</span><span class="p">,</span><span class="w"> </span><span class="n">off_attr</span><span class="p">);</span>
+<span class="p">...</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">off_attr</span></code> provides specification of data encoded in CBOR format that is decoded by the call to <code class="docutils literal notranslate"><span class="pre">cbor_read_object()</span></code>.
+The specification is a list of structures that specify the following elements:</p>
+<ul class="simple">
+<li><p>An expected list key (<code class="docutils literal notranslate"><span class="pre">.attribute</span></code> element)</p></li>
+<li><p>A type of key (<code class="docutils literal notranslate"><span class="pre">.type</span></code>)</p></li>
+<li><p>A pointer to the buffer for the key (usually subelement of the <code class="docutils literal notranslate"><span class="pre">.addr</span></code> element)</p></li>
+<li><p>A few other attributes</p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">cbor_read_object()</span></code> function takes the specification and attempts to get all the described fields into the specified designated variables, using the TinyCBOR decoding context.
+After a successful call to <code class="docutils literal notranslate"><span class="pre">cbor_read_object()</span></code>, the variables are set and ready for further processing, and the buffer is shifted beyond the list.
+This also includes copying binary and string buffers to the specified locations.</p>
+<p>The context is accessed by <code class="docutils literal notranslate"><span class="pre">ctxt-&gt;it</span></code> in the given example.
+It is provided by the MCUmgr library, so it is already initialized and has the buffer attached.</p>
+<p>The following code sample is the zcbor conversion of the given code example:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">image</span><span class="p">;</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">zcbor_string</span><span class="w"> </span><span class="n">zst</span><span class="p">;</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">zcbor_map_decode_key_val</span><span class="w"> </span><span class="n">image_upload_decode</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">ZCBOR_MAP_DECODE_KEY_VAL</span><span class="p">(</span><span class="n">image</span><span class="p">,</span><span class="w"> </span><span class="n">zcbor_int32_decode</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">image</span><span class="p">),</span>
+<span class="w">        </span><span class="n">ZCBOR_MAP_DECODE_KEY_VAL</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="n">zcbor_bstr_decode</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">zst</span><span class="p">),</span>
+<span class="p">};</span>
+<span class="n">ok</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zcbor_map_decode_bulk</span><span class="p">(</span><span class="n">zsd</span><span class="p">,</span><span class="w"> </span><span class="n">image_upload_decode</span><span class="p">,</span>
+<span class="w">                           </span><span class="n">ARRAY_SIZE</span><span class="p">(</span><span class="n">image_upload_decode</span><span class="p">),</span><span class="w"> </span><span class="o">&amp;</span><span class="n">decoded</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">...</span>
+</pre></div>
+</div>
+<p>The list specification is significantly simplified as it consists of an array of <code class="docutils literal notranslate"><span class="pre">ZCBOR_MAP_DECODE_KEY_VAL</span></code> defined mappings, each of which is provided with the following parameters:</p>
+<ul class="simple">
+<li><p>Name of a key (without quotation marks)</p></li>
+<li><p>zcbor decoding function directly from API (or user-provided type equivalent)</p></li>
+<li><p>Pointer to a variable where the extracted value will be stored</p></li>
+</ul>
+<p>The difference here is that the decoding of binary and string data does not involve copying of the data to a specified buffer.
+Instead, as described in <a class="reference internal" href="#migration-tinycbor-to-zcbor-general"><span class="std std-ref">General migration</span></a>, the decoding function is paired with a <code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">zcbor_string</span></code> type variable where decoding will store position and length of the data, within the provided CBOR buffer.
+It is then up to the user to copy the values to a specified location.
+This mechanism improves the RAM and CPU usage because the need for an intermediate buffer is often reduced.</p>
+<p>To process a CBOR buffer and decode it according to the defined mapping, <code class="docutils literal notranslate"><span class="pre">zcbor_map_decode_bulk()</span></code> takes the following parameters:</p>
+<ul class="simple">
+<li><p>zcbor decoding context (<code class="docutils literal notranslate"><span class="pre">zsd</span></code> in the above example)</p></li>
+<li><p>Mapping specification and size of the mapping</p></li>
+<li><p>Pointer to a variable for number of successfully decoded map elements</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Currently, there is no method provided to determine which keys have not been found in a decoded map.
+It is up to the user to verify whether keys that are optional have appeared in the decoded string.
+This can be done, for example, by checking if a destination variable value has changed from the initial value.</p>
+</div>
+</section>
+</section>
+</section>
+<section id="new-zephyr-logging-service-logging-v2">
+<h2><a class="toc-backref" href="#id13">New Zephyr logging service - logging v2</a><a class="headerlink" href="#new-zephyr-logging-service-logging-v2" title="Permalink to this heading"></a></h2>
+<p>Zephyr v3.x.x uses a new logging service (logging v2) by default.
+The legacy version of logging is still supported but it is deprecated and will be removed after Zephyr v3.1.0.
+For details about the Zephyr logging service, see <span class="xref std std-ref">zephyr:logging_api</span>.
+Version 2 supports the same set of features with a number of extensions, however, the logging backend API is different.
+All backends in the tree support version 2 API but if you are using an out-of-tree backend, it must be adapted to use the new logging system.</p>
+<dl class="simple">
+<dt>Required action:</dt><dd><p>Logging v1 uses the following three functions that must be replaced:</p>
+</dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>/* DEPRECATED! Functions used for logging v1. */
+void (*put)(const struct log_backend *const backend,
+         struct log_msg *msg);
+void (*put_sync_string)(const struct log_backend *const backend,
+         struct log_msg_ids src_level, uint32_t timestamp,
+         const char *fmt, va_list ap);
+void (*put_sync_hexdump)(const struct log_backend *const backend,
+         struct log_msg_ids src_level, uint32_t timestamp,
+         const char *metadata, const uint8_t *data, uint32_t len);
+</pre></div>
+</div>
+<p>Replace these functions with the following function used by logging v2:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/*</span> <span class="n">Logging</span> <span class="n">v2</span> <span class="n">function</span><span class="o">.</span> <span class="o">*/</span>
+<span class="n">void</span> <span class="p">(</span><span class="o">*</span><span class="n">process</span><span class="p">)(</span><span class="n">const</span> <span class="n">struct</span> <span class="n">log_backend</span> <span class="o">*</span><span class="n">const</span> <span class="n">backend</span><span class="p">,</span>
+        <span class="n">union</span> <span class="n">log_msg2_generic</span> <span class="o">*</span><span class="n">msg</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="zephyr-v3-x-x-namespace-change">
+<h2><a class="toc-backref" href="#id14">Zephyr v3.x.x namespace change</a><a class="headerlink" href="#zephyr-v3-x-x-namespace-change" title="Permalink to this heading"></a></h2>
+<p>All Zephyr public headers have been moved to <code class="file docutils literal notranslate"><span class="pre">include/zephyr</span></code>, meaning they must be prefixed with <code class="docutils literal notranslate"><span class="pre">&lt;zephyr/...&gt;</span></code> when included.
+Because this change can potentially break many applications or libraries, <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LEGACY_INCLUDE_PATH</span></code> is provided to allow using the old include path.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LEGACY_INCLUDE_PATH</span></code> Kconfig option is disabled by default and will be removed soon.</p>
+</div>
+<p>In order to facilitate the migration to the new include prefix, a script to automate the process is also provided in <code class="file docutils literal notranslate"><span class="pre">scripts/utils/migrate_includes.py</span></code> (in Zephyr).</p>
+</section>
+<section id="changes-in-pwm-api">
+<h2><a class="toc-backref" href="#id15">Changes in PWM API</a><a class="headerlink" href="#changes-in-pwm-api" title="Permalink to this heading"></a></h2>
+<p>Zephyr v3.x.x introduces changes in the PWM API that require modifying the board definitions.
+Old board definitions will cause a compilation error, and calling the old API functions will result in warnings stating that these functions are deprecated.</p>
+<dl class="simple">
+<dt>Required action:</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">pwms</span></code> properties in devicetree nodes must be extended with two more cells (with period and flags) and now they need to specify PWM channels, not pin numbers.</p></li>
+<li><p>Calls to the deprecated <code class="docutils literal notranslate"><span class="pre">pwm_pin_set_cycles</span></code> function must be replaced with calls to the <code class="xref c c-func docutils literal notranslate"><span class="pre">pwm_set_cycles()</span></code> function.</p></li>
+<li><p>Calls to the deprecated <code class="docutils literal notranslate"><span class="pre">pwm_pin_set_usec</span></code> and <code class="docutils literal notranslate"><span class="pre">pwm_pin_set_nsec</span></code> functions must be replaced with calls to the <code class="xref c c-func docutils literal notranslate"><span class="pre">pwm_set()</span></code> function with the period and pulse values wrapped in the <code class="xref c c-macro docutils literal notranslate"><span class="pre">PWM_USEC</span></code> macro or the <code class="xref c c-macro docutils literal notranslate"><span class="pre">PWM_NSEC</span></code> macro, respectively.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Note that the <code class="xref c c-func docutils literal notranslate"><span class="pre">pwm_set()</span></code> and <code class="xref c c-func docutils literal notranslate"><span class="pre">pwm_set_cycles()</span></code> functions take a PWM channel as a parameter, not a pin number as the deprecated functions did.
+Also, the <code class="docutils literal notranslate"><span class="pre">flags</span></code> parameter is now supported, so either the <code class="xref c c-macro docutils literal notranslate"><span class="pre">PWM_POLARITY_INVERTED</span></code> or <code class="xref c c-macro docutils literal notranslate"><span class="pre">PWM_POLARITY_NORMAL</span></code> flag must be provided in each call.</p>
+<p>Wherever possible, it is recommended to use the newly introduced <code class="xref c c-macro docutils literal notranslate"><span class="pre">PWM_DT_SPEC_GET</span></code> macro (or another suitable one from its family) to obtain PWM information from devicetree, and then use the <code class="xref c c-func docutils literal notranslate"><span class="pre">pwm_set_dt()</span></code> or <code class="xref c c-func docutils literal notranslate"><span class="pre">pwm_set_pulse_dt()</span></code> function instead of <code class="xref c c-func docutils literal notranslate"><span class="pre">pwm_set()</span></code>.</p>
+<p>For example, for PWM channels defined as follows:</p>
+<div class="highlight-devicetree notranslate"><div class="highlight"><pre><span></span><span class="nl">pwm0_default</span><span class="p">:</span><span class="w"> </span><span class="nf">pwm0_default</span><span class="cm"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nf">group1</span><span class="cm"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">psels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="na">NRF_PSEL</span><span class="p">(</span><span class="na">PWM_OUT0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">11</span><span class="p">)</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">nordic</span><span class="p">,</span><span class="n">invert</span><span class="p">;</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="nf">group2</span><span class="cm"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">psels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="na">NRF_PSEL</span><span class="p">(</span><span class="na">PWM_OUT3</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="p">};</span>
+
+<span class="nl">pwm0_sleep</span><span class="p">:</span><span class="w"> </span><span class="nf">pwm0_sleep</span><span class="cm"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nf">group1</span><span class="cm"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">psels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="na">NRF_PSEL</span><span class="p">(</span><span class="na">PWM_OUT0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">11</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span>
+<span class="w">                </span><span class="o">&lt;</span><span class="na">NRF_PSEL</span><span class="p">(</span><span class="na">PWM_OUT3</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">low-power-enable</span><span class="p">;</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="p">};</span>
+
+<span class="o">&amp;</span><span class="nf">pwm0</span><span class="cm"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;okay&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">pinctrl-0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;&amp;</span><span class="na">pwm0_default</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">pinctrl-1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;&amp;</span><span class="na">pwm0_sleep</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">pinctrl-names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;default&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;sleep&quot;</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>You must update the PWM LED definitions that use those channels:</p>
+<div class="highlight-devicetree notranslate"><div class="highlight"><pre><span></span><span class="cm">/* old definitions that will no longer work */</span>
+<span class="nl">pwm_led0</span><span class="p">:</span><span class="w"> </span><span class="nf">pwm_led_0</span><span class="cm"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">pwms</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;&amp;</span><span class="na">pwm0</span><span class="w"> </span><span class="mi">11</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="nl">pwm_led1</span><span class="p">:</span><span class="w"> </span><span class="nf">pwm_led_1</span><span class="cm"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">pwms</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;&amp;</span><span class="na">pwm0</span><span class="w"> </span><span class="mi">37</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>The above PWM LED definitions must be updated in the following way:</p>
+<div class="highlight-devicetree notranslate"><div class="highlight"><pre><span></span><span class="cm">/* updated definitions */</span>
+<span class="nl">pwm_led0</span><span class="p">:</span><span class="w"> </span><span class="nf">pwm_led_0</span><span class="cm"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">pwms</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;&amp;</span><span class="na">pwm0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="na">PWM_MSEC</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="w"> </span><span class="na">PWM_POLARITY_INVERTED</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="nl">pwm_led1</span><span class="p">:</span><span class="w"> </span><span class="nf">pwm_led_1</span><span class="cm"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">pwms</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;&amp;</span><span class="na">pwm0</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="na">PWM_MSEC</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="w"> </span><span class="na">PWM_POLARITY_NORMAL</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The period lengths, set here arbitrarily to commonly used value of 20 ms, are provided as default ones.
+They can be overridden in the actual PWM API calls if needed.</p>
+</div>
+<p>Then, you can use the definitions in PWM API calls in the following way:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#define PWM_LED0_NODE DT_NODELABEL(pwm_led0)</span>
+<span class="cp">#define PWM_LED1_NODE DT_NODELABEL(pwm_led1)</span>
+<span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">pwm_dt_spec</span><span class="w"> </span><span class="n">led0_spec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PWM_DT_SPEC_GET</span><span class="p">(</span><span class="n">PWM_LED0_NODE</span><span class="p">);</span>
+<span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">pwm_dt_spec</span><span class="w"> </span><span class="n">led1_spec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PWM_DT_SPEC_GET</span><span class="p">(</span><span class="n">PWM_LED1_NODE</span><span class="p">);</span>
+<span class="cm">/* ... */</span>
+<span class="cm">/* Use 10 ms period for LED0 to override the default 20 ms from devicetree. */</span>
+<span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pwm_set_dt</span><span class="p">(</span><span class="o">&amp;</span><span class="n">led0_spec</span><span class="p">,</span><span class="w"> </span><span class="n">PWM_MSEC</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span><span class="w"> </span><span class="n">PWM_USEC</span><span class="p">(</span><span class="n">pulse_us</span><span class="p">));</span>
+<span class="cm">/* ... */</span>
+<span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pwm_set_pulse_dt</span><span class="p">(</span><span class="o">&amp;</span><span class="n">led1_spec</span><span class="p">,</span><span class="w"> </span><span class="n">PWM_USEC</span><span class="p">(</span><span class="n">pulse_us</span><span class="p">));</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../releases/release-notes-1.9.2.html" class="btn btn-neutral float-right" title="nRF Connect SDK v1.9.2 Release Notes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../releases/release-notes-2.0.0.html" class="btn btn-neutral" title="nRF Connect SDK v2.0.0 Release Notes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

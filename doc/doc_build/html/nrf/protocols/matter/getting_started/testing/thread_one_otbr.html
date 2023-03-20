@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Matter over Thread: Configuring Border Router and controller on one device &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../../../_static/js/ncs.js"
+></script>
+<script src="../../../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Matter over Wi-Fi: Configuring CHIP Tool for Linux or macOS" href="wifi_pc.html" />
+    <link rel="prev" title="Matter over Thread: Configuring Border Router and Linux/macOS controller on separate devices" href="thread_separate_otbr_linux_macos.html" />
+<link
+  href="../../../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../../protocols.html">Protocols</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../ble/index.html">Bluetooth LE Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../bt_mesh/index.html">Bluetooth mesh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../esb/index.html">Enhanced ShockBurst (ESB)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../gazell/index.html">Gazell</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html">Matter</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../overview/index.html">Matter overview</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html">Getting started with Matter</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../hw_requirements.html">Matter hardware and memory requirements</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="index.html">Testing Matter in the nRF Connect SDK</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tools.html">Matter tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../kconfig.html">Enabling Matter in Kconfig</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../advanced_kconfigs.html">Advanced Matter Kconfig options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../low_power_configuration.html">Reducing power consumption in Matter applications</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../transmission_power.html">Configuring transmission power</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../adding_clusters.html">Adding clusters to Matter application</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../ecosystem_compatibility_testing.html">Testing with commercial Matter ecosystems</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../end_product/index.html">How to create Matter end product</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../multiprotocol/index.html">Multiprotocol support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../nfc/index.html">Near Field Communication (NFC)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../thread/index.html">Thread</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../wifi/index.html">Wi-Fi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../zigbee/index.html">Zigbee</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../drivers.html">Drivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../../protocols.html">Protocols</a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Matter</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Getting started with Matter</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Testing Matter in the nRF Connect SDK</a></li>
+      <li class="breadcrumb-item active">Matter over Thread: Configuring Border Router and controller on one device</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/protocols/matter/getting_started/testing/thread_one_otbr.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="matter-over-thread-configuring-border-router-and-controller-on-one-device">
+<span id="ug-matter-gs-testing-thread-one-otbr"></span><h1>Matter over Thread: Configuring Border Router and controller on one device<a class="headerlink" href="#matter-over-thread-configuring-border-router-and-controller-on-one-device" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#requirements" id="id7">Requirements</a></p></li>
+<li><p><a class="reference internal" href="#configuring-the-environment" id="id8">Configuring the environment</a></p>
+<ul>
+<li><p><a class="reference internal" href="#program-the-sample" id="id9">Program the sample</a></p></li>
+<li><p><a class="reference internal" href="#configure-the-thread-border-router" id="id10">Configure the Thread Border Router</a></p></li>
+<li><p><a class="reference internal" href="#configure-the-chip-tool" id="id11">Configure the CHIP Tool</a></p></li>
+<li><p><a class="reference internal" href="#continue-to-testing-the-sample" id="id12">Continue to testing the sample</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>If you only have one device, be it a PC with Linux or a Raspberry Pi, you can set up and test the Matter over Thread development environment with both the Thread Border Router and the Matter controller running on this one device.</p>
+<p>In this setup, a PC or a Raspberry Pi runs the Thread Border Router and the CHIP Tool for Linux or macOS simultaneously.
+To simplify enabling the Thread communication with the Matter accessory device, use a Docker container with the OpenThread Border Router image instead of installing the OpenThread Border Router natively.</p>
+<figure class="align-default" id="id6">
+<a class="reference internal image-reference" href="../../../../_images/matter_otbr_controller_same_device.svg"><img alt="Setup with OpenThread Border Router and Matter controller on the same device" src="../../../../_images/matter_otbr_controller_same_device.svg" width="600" /></a>
+<figcaption>
+<p><span class="caption-text">Setup with OpenThread Border Router and Matter controller on the same device</span><a class="headerlink" href="#id6" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>You can use this setup with the CHIP Tool controller.</p>
+<section id="requirements">
+<h2><a class="toc-backref" href="#id7">Requirements</a><a class="headerlink" href="#requirements" title="Permalink to this heading"></a></h2>
+<p>To use this setup, you need the following hardware:</p>
+<ul class="simple">
+<li><p>One of the following:</p>
+<ul>
+<li><p>1x PC with Ubuntu (20.04 or newer)</p></li>
+<li><p>1x Raspberry Pi Model 3B+ or newer with Ubuntu (20.04 or newer) instead of Raspbian OS</p></li>
+</ul>
+</li>
+<li><p>1x Bluetooth LE dongle (can be embedded inside the PC, like it is on Raspberry Pi)</p></li>
+<li><p>1x nRF52840 DK or nRF52840 Dongle - for the Radio Co-Processor (RCP) device</p></li>
+<li><p>1x nRF52840 DK or nRF5340 DK - for the Matter accessory device (programmed with one of <a class="reference internal" href="../../../../samples/matter.html#matter-samples"><span class="std std-ref">Matter samples</span></a>)</p></li>
+</ul>
+</section>
+<section id="configuring-the-environment">
+<h2><a class="toc-backref" href="#id8">Configuring the environment</a><a class="headerlink" href="#configuring-the-environment" title="Permalink to this heading"></a></h2>
+<p>To configure and use Thread Border Router and Matter controller on the same device, complete the following steps.</p>
+<section class="numbered-step" id="program-the-sample">
+<h3><a class="toc-backref" href="#id9">Program the sample</a><a class="headerlink" href="#program-the-sample" title="Permalink to this heading"></a></h3>
+<p>Program the development kit for the Matter accessory device with one of available <a class="reference internal" href="../../../../samples/matter.html#matter-samples"><span class="std std-ref">Matter samples</span></a>.
+We recommend using <a class="reference internal" href="../../../../samples/matter/light_bulb/README.html#matter-light-bulb-sample"><span class="std std-ref">Matter light bulb</span></a>.</p>
+</section>
+<section class="numbered-step" id="configure-the-thread-border-router">
+<h3><a class="toc-backref" href="#id10">Configure the Thread Border Router</a><a class="headerlink" href="#configure-the-thread-border-router" title="Permalink to this heading"></a></h3>
+<p>Configure the Thread Border Router on a PC or on a Raspberry Pi, depending on what hardware you are using.
+For detailed steps, see the Running OTBR using Docker section on the <a class="reference internal" href="../../../thread/tools.html#ug-thread-tools-tbr"><span class="std std-ref">Thread Border Router</span></a> page in the nRF Connect SDK documentation.</p>
+</section>
+<section class="numbered-step" id="configure-the-chip-tool">
+<h3><a class="toc-backref" href="#id11">Configure the CHIP Tool</a><a class="headerlink" href="#configure-the-chip-tool" title="Permalink to this heading"></a></h3>
+<p>CHIP Tool for Linux or macOS is the default implementation of the <a class="reference internal" href="../../overview/network_topologies.html#ug-matter-configuring-controller"><span class="std std-ref">Matter controller</span></a> role, recommended for the nRF Connect platform.
+For this Matter over Thread, you will configure the controller on the same device as Thread Border Router.</p>
+<p>Complete the following steps:</p>
+<ol class="arabic simple">
+<li><p>Choose one of the following options:</p>
+<ul class="simple">
+<li><p>For Linux only - Use the prebuilt tool package from the <a class="reference external" href="https://github.com/nrfconnect/sdk-connectedhomeip/releases">Matter nRF Connect releases</a> GitHub page.
+Make sure that the package is compatible with your nRF Connect SDK version.</p></li>
+<li><p>For both Linux and macOS - Build it manually from the source files available in the <code class="file docutils literal notranslate"><span class="pre">modules/lib/matter/examples/chip-tool</span></code> directory and using the building instructions from the <span class="xref std std-doc">matter:chip_tool_guide</span> page in the Matter documentation.</p></li>
+</ul>
+</li>
+<li><p>Configure the CHIP Tool controller.
+Complete the following actions by following the steps in the <span class="xref std std-doc">matter:chip_tool_guide</span> user guide in the Matter documentation:</p>
+<ul class="simple">
+<li><p>Build and run the CHIP Tool by completing the steps listed in “Building and running CHIP Tool”.</p></li>
+<li><p>Prepare the environment for testing by completing the steps listed in “Using CHIP Tool for Matter device testing”.</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section class="numbered-step" id="continue-to-testing-the-sample">
+<h3><a class="toc-backref" href="#id12">Continue to testing the sample</a><a class="headerlink" href="#continue-to-testing-the-sample" title="Permalink to this heading"></a></h3>
+<p>Depending on which Matter sample you programmed onto the development kit, go to this sample’s documentation page and complete the steps from the Testing section.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="wifi_pc.html" class="btn btn-neutral float-right" title="Matter over Wi-Fi: Configuring CHIP Tool for Linux or macOS" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="thread_separate_otbr_linux_macos.html" class="btn btn-neutral" title="Matter over Thread: Configuring Border Router and Linux/macOS controller on separate devices" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

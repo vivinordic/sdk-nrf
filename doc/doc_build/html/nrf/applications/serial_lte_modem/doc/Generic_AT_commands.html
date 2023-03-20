@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Generic AT commands &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../../_static/js/ncs.js"
+></script>
+<script src="../../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Socket AT commands" href="SOCKET_AT_commands.html" />
+    <link rel="prev" title="SLM-specific AT commands" href="AT_commands_intro.html" />
+<link
+  href="../../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../protocols.html">Protocols</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../applications.html">Applications</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../connectivity_bridge/README.html">Connectivity bridge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../asset_tracker_v2/README.html">nRF9160: Asset Tracker v2</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../README.html">nRF9160: Serial LTE modem</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="slm_description.html">Application description</a></li>
+<li class="toctree-l3"><a class="reference internal" href="slm_testing.html">Testing scenarios</a></li>
+<li class="toctree-l3"><a class="reference internal" href="slm_extending.html">Extending the application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="slm_data_mode.html">Running in data mode</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="AT_commands_intro.html">SLM-specific AT commands</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Generic AT commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SOCKET_AT_commands.html">Socket AT commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="TCPIP_AT_commands.html">TCP and UDP AT commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ICMP_AT_commands.html">ICMP AT commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="FOTA_AT_commands.html">FOTA AT commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DFU_AT_commands.html">DFU AT commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SMS_AT_commands.html">SMS AT commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="FTP_AT_commands.html">FTP AT commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="GNSS_AT_commands.html">GNSS AT commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="MQTT_AT_commands.html">MQTT client AT commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="HTTPC_AT_commands.html">HTTP client AT commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="TWI_AT_commands.html">TWI AT commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="GPIO_AT_commands.html">GPIO AT commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="CARRIER_AT_commands.html">LwM2M carrier library AT commands</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../nrf_desktop/README.html">nRF Desktop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nrf5340_audio/README.html">nRF5340 Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../machine_learning/README.html">nRF Machine Learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../matter_weather_station/README.html">Thingy:53: Matter weather station</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../zigbee_weather_station/README.html">Thingy:53: Zigbee weather station</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../drivers.html">Drivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../applications.html">Applications</a></li>
+          <li class="breadcrumb-item"><a href="../README.html">nRF9160: Serial LTE modem</a></li>
+          <li class="breadcrumb-item"><a href="AT_commands_intro.html">SLM-specific AT commands</a></li>
+      <li class="breadcrumb-item active">Generic AT commands</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/applications/serial_lte_modem/doc/Generic_AT_commands.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="generic-at-commands">
+<span id="slm-at-gen"></span><h1>Generic AT commands<a class="headerlink" href="#generic-at-commands" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#slm-version-xslmver" id="id53">SLM version #XSLMVER</a></p>
+<ul>
+<li><p><a class="reference internal" href="#set-command" id="id54">Set command</a></p></li>
+<li><p><a class="reference internal" href="#read-command" id="id55">Read command</a></p></li>
+<li><p><a class="reference internal" href="#test-command" id="id56">Test command</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#slm-proprietary-command-list-xclac" id="id57">SLM proprietary command list #XCLAC</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id1" id="id58">Set command</a></p></li>
+<li><p><a class="reference internal" href="#id5" id="id59">Read command</a></p></li>
+<li><p><a class="reference internal" href="#id6" id="id60">Test command</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#power-saving-xsleep" id="id61">Power saving #XSLEEP</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id7" id="id62">Set command</a></p></li>
+<li><p><a class="reference internal" href="#id9" id="id63">Read command</a></p></li>
+<li><p><a class="reference internal" href="#id10" id="id64">Test command</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#power-off-xshutdown" id="id65">Power off #XSHUTDOWN</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id14" id="id66">Set command</a></p></li>
+<li><p><a class="reference internal" href="#id17" id="id67">Read command</a></p></li>
+<li><p><a class="reference internal" href="#id18" id="id68">Test command</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#reset-xreset" id="id69">Reset #XRESET</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id19" id="id70">Set command</a></p></li>
+<li><p><a class="reference internal" href="#id22" id="id71">Read command</a></p></li>
+<li><p><a class="reference internal" href="#id23" id="id72">Test command</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#slm-uart-xslmuart" id="id73">SLM UART #XSLMUART</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id24" id="id74">Set command</a></p></li>
+<li><p><a class="reference internal" href="#id28" id="id75">Read command</a></p></li>
+<li><p><a class="reference internal" href="#id32" id="id76">Test command</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#device-uuid-xuuid" id="id77">Device UUID #XUUID</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id36" id="id78">Set command</a></p></li>
+<li><p><a class="reference internal" href="#id40" id="id79">Read command</a></p></li>
+<li><p><a class="reference internal" href="#id41" id="id80">Test command</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#native-tls-cmng-xcmng" id="id81">Native TLS CMNG #XCMNG</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id42" id="id82">Set command</a></p></li>
+<li><p><a class="reference internal" href="#id46" id="id83">Read command</a></p></li>
+<li><p><a class="reference internal" href="#id47" id="id84">Test command</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#modem-fault-xmodem" id="id85">Modem fault #XMODEM</a></p>
+<ul>
+<li><p><a class="reference internal" href="#unsolicited-notification" id="id86">Unsolicited notification</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>The following commands list contains generic AT commands.</p>
+<section id="slm-version-xslmver">
+<h2><a class="toc-backref" href="#id53">SLM version #XSLMVER</a><a class="headerlink" href="#slm-version-xslmver" title="Permalink to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">#XSLMVER</span></code> command return the versions of the nRF Connect SDK in which the SLM application is built.
+It also returns the version of the modem library that SLM uses to communicate with the modem.</p>
+<section id="set-command">
+<h3><a class="toc-backref" href="#id54">Set command</a><a class="headerlink" href="#set-command" title="Permalink to this heading"></a></h3>
+<p>The set command returns the versions of the nRF Connect SDK and the modem library.</p>
+<section id="syntax">
+<h4>Syntax<a class="headerlink" href="#syntax" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#XSLMVER</span>
+</pre></div>
+</div>
+</section>
+<section id="response-syntax">
+<h4>Response syntax<a class="headerlink" href="#response-syntax" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#XSLMVER: &lt;ncs_version&gt;,&lt;libmodem_version&gt;</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">&lt;ncs_version&gt;</span></code> value returns a string containing the version of the nRF Connect SDK.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">&lt;libmodem_version&gt;</span></code> value returns a string containing the version of the modem library.</p>
+</section>
+<section id="example">
+<h4>Example<a class="headerlink" href="#example" title="Permalink to this heading"></a></h4>
+<p>The following command example reads the versions:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AT</span><span class="c1">#XSLMVER</span>
+<span class="c1">#XSLMVER: &quot;2.3.0&quot;,&quot;2.3.0&quot;</span>
+<span class="n">OK</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="read-command">
+<h3><a class="toc-backref" href="#id55">Read command</a><a class="headerlink" href="#read-command" title="Permalink to this heading"></a></h3>
+<p>The read command is not supported.</p>
+</section>
+<section id="test-command">
+<h3><a class="toc-backref" href="#id56">Test command</a><a class="headerlink" href="#test-command" title="Permalink to this heading"></a></h3>
+<p>The test command is not supported.</p>
+</section>
+</section>
+<section id="slm-proprietary-command-list-xclac">
+<h2><a class="toc-backref" href="#id57">SLM proprietary command list #XCLAC</a><a class="headerlink" href="#slm-proprietary-command-list-xclac" title="Permalink to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">#XCLAC</span></code> command requests the list of the proprietary SLM commands.</p>
+<section id="id1">
+<h3><a class="toc-backref" href="#id58">Set command</a><a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
+<p>The set command requests the list of the proprietary SLM commands.
+It is an add-on for <code class="docutils literal notranslate"><span class="pre">AT+CLAC</span></code>, which lists all modem AT commands.</p>
+<section id="id2">
+<h4>Syntax<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#XCLAC</span>
+</pre></div>
+</div>
+</section>
+<section id="id3">
+<h4>Response syntax<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">command</span> <span class="nb">list</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">&lt;command</span> <span class="pre">list&gt;</span></code> value returns a list of values representing all the <code class="docutils literal notranslate"><span class="pre">#X*</span></code> commands followed by &lt;CR&gt;&lt;LF&gt;.</p>
+</section>
+<section id="id4">
+<h4>Example<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">at</span><span class="c1">#xclac</span>
+<span class="n">AT</span><span class="c1">#XSLMVER</span>
+<span class="n">AT</span><span class="c1">#XSLEEP</span>
+<span class="n">AT</span><span class="c1">#XCLAC</span>
+<span class="n">AT</span><span class="c1">#XSOCKET</span>
+<span class="n">AT</span><span class="c1">#XBIND</span>
+<span class="n">AT</span><span class="c1">#XCONNECT</span>
+<span class="n">AT</span><span class="c1">#XSEND</span>
+<span class="n">AT</span><span class="c1">#XRECV</span>
+<span class="n">AT</span><span class="c1">#XSENDTO</span>
+<span class="n">AT</span><span class="c1">#XRECVFROM</span>
+<span class="n">AT</span><span class="c1">#XPING</span>
+<span class="n">AT</span><span class="c1">#XGPS</span>
+<span class="n">OK</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id5">
+<h3><a class="toc-backref" href="#id59">Read command</a><a class="headerlink" href="#id5" title="Permalink to this heading"></a></h3>
+<p>The read command is not supported.</p>
+</section>
+<section id="id6">
+<h3><a class="toc-backref" href="#id60">Test command</a><a class="headerlink" href="#id6" title="Permalink to this heading"></a></h3>
+<p>The test command is not supported.</p>
+</section>
+</section>
+<section id="power-saving-xsleep">
+<h2><a class="toc-backref" href="#id61">Power saving #XSLEEP</a><a class="headerlink" href="#power-saving-xsleep" title="Permalink to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">#XSLEEP</span></code> command makes the nRF9160 System in Package (SiP) enter idle or sleep mode.</p>
+<p>If you want to do power measurements on the nRF9160 development kit while running the SLM application, disable unused peripherals.</p>
+<section id="id7">
+<h3><a class="toc-backref" href="#id62">Set command</a><a class="headerlink" href="#id7" title="Permalink to this heading"></a></h3>
+<p>The set command makes the nRF9160 SiP enter either Idle or Sleep mode.</p>
+<section id="id8">
+<h4>Syntax<a class="headerlink" href="#id8" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#XSLEEP=&lt;sleep_mode&gt;</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">&lt;sleep_mode&gt;</span></code> parameter accepts only the following integer values:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">0</span></code> - Deprecated.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">1</span></code> - Enter Sleep.
+In this mode, both the SLM service and the LTE connection are terminated.</p>
+<p>The nRF9160 SiP can be woken up using the <a class="reference internal" href="slm_description.html#config-slm-wakeup-pin"><span class="std std-ref">CONFIG_SLM_WAKEUP_PIN</span></a>.</p>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">2</span></code> - Enter Idle.</p>
+<p>In this mode, both the SLM service and the LTE connection are maintained.
+The nRF9160 SiP can be made to exit idle using the <a class="reference internal" href="slm_description.html#config-slm-wakeup-pin"><span class="std std-ref">CONFIG_SLM_WAKEUP_PIN</span></a>.
+If the <a class="reference internal" href="slm_description.html#config-slm-indicate-pin"><span class="std std-ref">CONFIG_SLM_INDICATE_PIN</span></a> is defined, SLM toggle this GPIO when there is data for MCU.
+MCU could in turn make SLM to exit idle by <a class="reference internal" href="slm_description.html#config-slm-wakeup-pin"><span class="std std-ref">CONFIG_SLM_WAKEUP_PIN</span></a>.
+The data is buffered during the idle status and sent to MCU after exiting the idle status.</p>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>This parameter does not accept <code class="docutils literal notranslate"><span class="pre">0</span></code> anymore.</p></li>
+<li><p>If the modem is on, entering Sleep mode sends a <code class="docutils literal notranslate"><span class="pre">+CFUN=0</span></code> command to the modem, which causes a non-volatile memory (NVM) write.
+Take the NVM wear into account, or put the modem in flight mode by issuing a <code class="docutils literal notranslate"><span class="pre">AT+CFUN=4</span></code> before Sleep mode.</p></li>
+</ul>
+</div>
+</section>
+<section id="examples">
+<h4>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AT</span><span class="c1">#XSLEEP=0</span>
+<span class="n">ERROR</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AT</span><span class="c1">#XSLEEP=1</span>
+<span class="n">OK</span>
+</pre></div>
+</div>
+<p>See the following for an example of when the modem is on:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AT</span><span class="o">+</span><span class="n">CFUN</span><span class="o">=</span><span class="mi">4</span>
+<span class="n">OK</span>
+
+<span class="n">AT</span><span class="c1">#XSLEEP=1</span>
+<span class="n">OK</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AT</span><span class="c1">#XSLEEP=2</span>
+<span class="n">OK</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id9">
+<h3><a class="toc-backref" href="#id63">Read command</a><a class="headerlink" href="#id9" title="Permalink to this heading"></a></h3>
+<p>The read command is not supported.</p>
+</section>
+<section id="id10">
+<h3><a class="toc-backref" href="#id64">Test command</a><a class="headerlink" href="#id10" title="Permalink to this heading"></a></h3>
+<p>The test command tests the existence of the AT command and provides information about the type of its subparameters.</p>
+<section id="id11">
+<h4>Syntax<a class="headerlink" href="#id11" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#XSLEEP=?</span>
+</pre></div>
+</div>
+</section>
+<section id="id12">
+<h4>Response syntax<a class="headerlink" href="#id12" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#XSLEEP: &lt;list of shutdown_mode&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="id13">
+<h4>Example<a class="headerlink" href="#id13" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#XSLEEP: (1,2)</span>
+<span class="n">OK</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="power-off-xshutdown">
+<h2><a class="toc-backref" href="#id65">Power off #XSHUTDOWN</a><a class="headerlink" href="#power-off-xshutdown" title="Permalink to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">#XSHUTDOWN</span></code> command makes the nRF9160 SiP enter System OFF mode, which is the deepest power saving mode.</p>
+<section id="id14">
+<h3><a class="toc-backref" href="#id66">Set command</a><a class="headerlink" href="#id14" title="Permalink to this heading"></a></h3>
+<p>The set command makes the nRF9160 SiP enter System OFF mode.</p>
+<section id="id15">
+<h4>Syntax<a class="headerlink" href="#id15" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#XSHUTDOWN</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In this case the nRF9160 SiP cannot be woken up using the <a class="reference internal" href="slm_description.html#config-slm-wakeup-pin"><span class="std std-ref">CONFIG_SLM_WAKEUP_PIN</span></a>..</p>
+</div>
+</section>
+<section id="id16">
+<h4>Examples<a class="headerlink" href="#id16" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AT</span><span class="c1">#XSHUTDOWN</span>
+<span class="n">OK</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id17">
+<h3><a class="toc-backref" href="#id67">Read command</a><a class="headerlink" href="#id17" title="Permalink to this heading"></a></h3>
+<p>The read command is not supported.</p>
+</section>
+<section id="id18">
+<h3><a class="toc-backref" href="#id68">Test command</a><a class="headerlink" href="#id18" title="Permalink to this heading"></a></h3>
+<p>The test command is not supported.</p>
+</section>
+</section>
+<section id="reset-xreset">
+<h2><a class="toc-backref" href="#id69">Reset #XRESET</a><a class="headerlink" href="#reset-xreset" title="Permalink to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">#XRESET</span></code> command performs a soft reset to the nRF9160 SiP.</p>
+<section id="id19">
+<h3><a class="toc-backref" href="#id70">Set command</a><a class="headerlink" href="#id19" title="Permalink to this heading"></a></h3>
+<p>The set command resets the nRF9160 SiP.</p>
+<section id="id20">
+<h4>Syntax<a class="headerlink" href="#id20" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#XRESET</span>
+</pre></div>
+</div>
+</section>
+<section id="id21">
+<h4>Examples<a class="headerlink" href="#id21" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AT</span><span class="c1">#XRESET</span>
+<span class="n">OK</span>
+<span class="n">Ready</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id22">
+<h3><a class="toc-backref" href="#id71">Read command</a><a class="headerlink" href="#id22" title="Permalink to this heading"></a></h3>
+<p>The read command is not supported.</p>
+</section>
+<section id="id23">
+<h3><a class="toc-backref" href="#id72">Test command</a><a class="headerlink" href="#id23" title="Permalink to this heading"></a></h3>
+<p>The test command is not supported.</p>
+</section>
+</section>
+<section id="slm-uart-xslmuart">
+<h2><a class="toc-backref" href="#id73">SLM UART #XSLMUART</a><a class="headerlink" href="#slm-uart-xslmuart" title="Permalink to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">#XSLMUART</span></code> command manages the UART settings.</p>
+<section id="id24">
+<h3><a class="toc-backref" href="#id74">Set command</a><a class="headerlink" href="#id24" title="Permalink to this heading"></a></h3>
+<p>The set command changes the UART baud rate and hardware flow control settings.
+Hardware flow control settings can be changed only if <code class="docutils literal notranslate"><span class="pre">hw-flow-control</span></code> is enabled in device tree.
+These settings are stored in the flash memory and applied during the application startup.</p>
+<section id="id25">
+<h4>Syntax<a class="headerlink" href="#id25" title="Permalink to this heading"></a></h4>
+<p>The following is the syntax when <code class="docutils literal notranslate"><span class="pre">hw-flow-control</span></code> is enabled in device tree.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#XSLMUART[=&lt;baud_rate&gt;,&lt;hwfc&gt;]</span>
+</pre></div>
+</div>
+<p>The following is the syntax when <code class="docutils literal notranslate"><span class="pre">hw-flow-control</span></code> is disabled in device tree.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#XSLMUART[=&lt;baud_rate&gt;]</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">&lt;baud_rate&gt;</span></code> parameter is an integer.
+It accepts the following values:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">1200</span></code> - 1200 bps</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">2400</span></code> - 2400 bps</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">4800</span></code> - 4800 bps</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">9600</span></code> - 9600 bps</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">14400</span></code> - 14400 bps</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">19200</span></code> - 19200 bps</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">38400</span></code> - 38400 bps</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">57600</span></code> - 57600 bps</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">115200</span></code> - 115200 bps</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">230400</span></code> - 230400 bps</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">460800</span></code> - 460800 bps</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">921600</span></code> - 921600 bps</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">1000000</span></code> - 1000000 bps</p></li>
+</ul>
+<p>Its default value is <code class="docutils literal notranslate"><span class="pre">115200</span></code>.
+When not specified, it is set to the last value set for the variable and stored in the flash memory.
+If there is no value stored for the variable, it is set to its default value.
+If not specified, the previous value is used.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">&lt;hwfc&gt;</span></code> parameter accepts the following integer values:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">0</span></code> - Disable UART hardware flow control.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">1</span></code> - Enable UART hardware flow control.
+In this mode, SLM configures both the RTS and the CTS pins according to the device-tree file.</p></li>
+</ul>
+<p>Its default value is <code class="docutils literal notranslate"><span class="pre">1</span></code>.
+When not specified, it is set to the last value set for the variable and stored in the flash memory.
+If there is no value stored for the variable, it is set to its default value.</p>
+</section>
+<section id="id26">
+<h4>Response syntax<a class="headerlink" href="#id26" title="Permalink to this heading"></a></h4>
+<p>There is no response.</p>
+</section>
+<section id="id27">
+<h4>Example<a class="headerlink" href="#id27" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AT</span><span class="c1">#XSLMUART=1000000,1</span>
+<span class="n">OK</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id28">
+<h3><a class="toc-backref" href="#id75">Read command</a><a class="headerlink" href="#id28" title="Permalink to this heading"></a></h3>
+<p>The read command shows the current UART settings.</p>
+<section id="id29">
+<h4>Syntax<a class="headerlink" href="#id29" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AT</span><span class="c1">#XSLMUART?</span>
+</pre></div>
+</div>
+</section>
+<section id="id30">
+<h4>Response syntax<a class="headerlink" href="#id30" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#XSLMUART: &lt;baud_rate&gt;,&lt;hwfc&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="id31">
+<h4>Example<a class="headerlink" href="#id31" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AT</span><span class="c1">#XSLMUART?</span>
+<span class="c1">#XSLMUART: 115200,1</span>
+<span class="n">OK</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id32">
+<h3><a class="toc-backref" href="#id76">Test command</a><a class="headerlink" href="#id32" title="Permalink to this heading"></a></h3>
+<p>The test command tests the existence of the AT command and provides information about the type of its subparameters.</p>
+<section id="id33">
+<h4>Syntax<a class="headerlink" href="#id33" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#XSLMUART=?</span>
+</pre></div>
+</div>
+</section>
+<section id="id34">
+<h4>Response syntax<a class="headerlink" href="#id34" title="Permalink to this heading"></a></h4>
+<p>The following is the syntax when <code class="docutils literal notranslate"><span class="pre">hw-flow-control</span></code> is enabled in device tree:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#XSLMUART: (list of the available baud rate options),(disable or enable hwfc)</span>
+</pre></div>
+</div>
+<p>The following is the syntax when <code class="docutils literal notranslate"><span class="pre">hw-flow-control</span></code> is disabled in device tree:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#XSLMUART: (list of the available baud rate options)</span>
+</pre></div>
+</div>
+</section>
+<section id="id35">
+<h4>Example<a class="headerlink" href="#id35" title="Permalink to this heading"></a></h4>
+<p>The following is an example when <code class="docutils literal notranslate"><span class="pre">hw-flow-control</span></code> is enabled in device tree:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AT</span><span class="c1">#XSLMUART=?</span>
+<span class="c1">#XSLMUART: (1200,2400,4800,9600,14400,19200,38400,57600,115200,230400,460800,921600,1000000),(0,1)</span>
+</pre></div>
+</div>
+<p>The following is an example when <code class="docutils literal notranslate"><span class="pre">hw-flow-control</span></code> is disabled in device tree.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AT</span><span class="c1">#XSLMUART=?</span>
+<span class="c1">#XSLMUART: (1200,2400,4800,9600,14400,19200,38400,57600,115200,230400,460800,921600,1000000)</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="device-uuid-xuuid">
+<h2><a class="toc-backref" href="#id77">Device UUID #XUUID</a><a class="headerlink" href="#device-uuid-xuuid" title="Permalink to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">#XUUID</span></code> command requests the device UUID.</p>
+<section id="id36">
+<h3><a class="toc-backref" href="#id78">Set command</a><a class="headerlink" href="#id36" title="Permalink to this heading"></a></h3>
+<p>The set command returns the device UUID.</p>
+<section id="id37">
+<h4>Syntax<a class="headerlink" href="#id37" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#XUUID</span>
+</pre></div>
+</div>
+</section>
+<section id="id38">
+<h4>Response syntax<a class="headerlink" href="#id38" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#XUUID: &lt;device-uuid&gt;</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">&lt;device-uuid&gt;</span></code> value returns a string indicating the UUID of the device.</p>
+</section>
+<section id="id39">
+<h4>Example<a class="headerlink" href="#id39" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AT</span><span class="c1">#XUUID</span>
+
+<span class="c1">#XUUID: 50503041-3633-4261-803d-1e2b8f70111a</span>
+
+<span class="n">OK</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id40">
+<h3><a class="toc-backref" href="#id79">Read command</a><a class="headerlink" href="#id40" title="Permalink to this heading"></a></h3>
+<p>The read command is not supported.</p>
+</section>
+<section id="id41">
+<h3><a class="toc-backref" href="#id80">Test command</a><a class="headerlink" href="#id41" title="Permalink to this heading"></a></h3>
+<p>The test command is not supported.</p>
+</section>
+</section>
+<section id="native-tls-cmng-xcmng">
+<h2><a class="toc-backref" href="#id81">Native TLS CMNG #XCMNG</a><a class="headerlink" href="#native-tls-cmng-xcmng" title="Permalink to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">#XCMNG</span></code> command manages the credentials to support <a class="reference internal" href="slm_description.html#config-slm-native-tls"><span class="std std-ref">CONFIG_SLM_NATIVE_TLS</span></a>.
+This command is similar to the modem <code class="docutils literal notranslate"><span class="pre">%CMNG</span></code> command.</p>
+<section id="id42">
+<h3><a class="toc-backref" href="#id82">Set command</a><a class="headerlink" href="#id42" title="Permalink to this heading"></a></h3>
+<p>The set command is used for credential storage management.
+The command writes, reads, deletes, and checks the existence of keys and certificates.</p>
+<section id="id43">
+<h4>Syntax<a class="headerlink" href="#id43" title="Permalink to this heading"></a></h4>
+<p>The following is the syntax when <a class="reference internal" href="slm_description.html#config-slm-native-tls"><span class="std std-ref">CONFIG_SLM_NATIVE_TLS</span></a> is selected:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#XCMNG=&lt;opcode&gt;[,&lt;sec_tag&gt;[,&lt;type&gt;[,&lt;content&gt;]]]</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">&lt;opcode&gt;</span></code> parameter is an integer.
+It accepts the following values:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">0</span></code> - Write a credential.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">1</span></code> - List credentials (currently not supported).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">2</span></code> - Read a credential (currently not supported).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">3</span></code> - Delete a credential.</p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">&lt;sec_tag&gt;</span></code> parameter is an integer ranging between <code class="docutils literal notranslate"><span class="pre">0</span></code> and <code class="docutils literal notranslate"><span class="pre">2147483647</span></code>.
+It is mandatory for <em>write</em>, <em>read</em>, and <em>delete</em> operations.
+It is optional for <em>list</em> operations.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">&lt;type&gt;</span></code> parameter is an integer.
+It accepts the following values:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">0</span></code> - Root CA certificate (ASCII text)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">1</span></code> - Certificate (ASCII text)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">2</span></code> - Private key (ASCII text)</p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">&lt;content&gt;</span></code> parameter is a string.
+It is mandatory if <code class="docutils literal notranslate"><span class="pre">&lt;opcode&gt;</span></code> is <code class="docutils literal notranslate"><span class="pre">0</span></code> (write a credential).
+It is the content of a Privacy Enhanced Mail (PEM) file enclosed in double quotes (X.509 PEM entities).
+An empty string is not allowed.</p>
+</section>
+<section id="id44">
+<h4>Response syntax<a class="headerlink" href="#id44" title="Permalink to this heading"></a></h4>
+<p>There is no response.</p>
+</section>
+<section id="id45">
+<h4>Example<a class="headerlink" href="#id45" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AT</span><span class="c1">#XCMNG=0,10,0,&quot;-----BEGIN CERTIFICATE-----</span>
+<span class="n">MIICpTCCAkugAwIBAgIUS</span><span class="o">+</span><span class="n">wVM0VsVmpDIV8NTW8N2KEdRdowCgYIKoZIzj0EAwIw</span>
+<span class="n">gacxCzAJBgNVBAYTAlRXMQ8wDQYDVQQIDAZUYWl3YW4xDzANBgNVBAcMBlRhaXBl</span>
+<span class="n">aTEWMBQGA1UECgwNTm9yZGljIFRhaXBlaTEOMAwGA1UECwwFU2FsZXMxETAPBgNV</span>
+<span class="n">BAMMCExhcnJ5IENBMTswOQYJKoZIhvcNAQkBFixsYXJyeS52ZXJ5bG9uZ2xvbmds</span>
+<span class="n">b25nbG9uZ2xvbmdAbm9yZGljc2VtaS5ubzAeFw0yMDExMTcxMTE3MDlaFw0zMDEx</span>
+<span class="n">MTUxMTE3MDlaMIGnMQswCQYDVQQGEwJUVzEPMA0GA1UECAwGVGFpd2FuMQ8wDQYD</span>
+<span class="n">VQQHDAZUYWlwZWkxFjAUBgNVBAoMDU5vcmRpYyBUYWlwZWkxDjAMBgNVBAsMBVNh</span>
+<span class="n">bGVzMREwDwYDVQQDDAhMYXJyeSBDQTE7MDkGCSqGSIb3DQEJARYsbGFycnkudmVy</span>
+<span class="n">eWxvbmdsb25nbG9uZ2xvbmdsb25nQG5vcmRpY3NlbWkubm8wWTATBgcqhkjOPQIB</span>
+<span class="n">BggqhkjOPQMBBwNCAASvk</span><span class="o">+</span><span class="n">LcLXwteWokU1In</span><span class="o">+</span><span class="n">FQUWkkbQhkpW61u7d0jV1y</span><span class="o">/</span><span class="n">eF3Q</span>
+<span class="n">PTDAoEz</span><span class="o">//</span><span class="n">SnU1kIZccAqV64fFrrd2nkXknLCrhtxo1MwUTAdBgNVHQ4EFgQUMYSO</span>
+<span class="n">cWPI</span><span class="o">+</span><span class="n">SQUs1oVatNQvN</span><span class="o">/</span><span class="n">F0UowHwYDVR0jBBgwFoAUMYSOcWPI</span><span class="o">+</span><span class="n">SQUs1oVatNQvN</span><span class="o">/</span><span class="n">F</span>
+<span class="mi">0</span><span class="n">UowDwYDVR0TAQH</span><span class="o">/</span><span class="n">BAUwAwEB</span><span class="o">/</span><span class="n">zAKBggqhkjOPQQDAgNIADBFAiB2IrzpUmQqcUIw</span>
+<span class="n">OVqOMNAlzR6v4YHlI9InxU01quIRtQIhAOTITnLNuA0r0571SSBKZyrNGzxJxcPO</span>
+<span class="n">FDkGjew9OVov</span>
+<span class="o">-----</span><span class="n">END</span> <span class="n">CERTIFICATE</span><span class="o">-----</span><span class="s2">&quot;</span>
+
+<span class="n">OK</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id46">
+<h3><a class="toc-backref" href="#id83">Read command</a><a class="headerlink" href="#id46" title="Permalink to this heading"></a></h3>
+<p>The read command is not supported.</p>
+</section>
+<section id="id47">
+<h3><a class="toc-backref" href="#id84">Test command</a><a class="headerlink" href="#id47" title="Permalink to this heading"></a></h3>
+<p>The test command is not supported.</p>
+</section>
+</section>
+<section id="modem-fault-xmodem">
+<h2><a class="toc-backref" href="#id85">Modem fault #XMODEM</a><a class="headerlink" href="#modem-fault-xmodem" title="Permalink to this heading"></a></h2>
+<p>The application monitors the modem status.
+When the application detects a <em>modem fault</em>, it sends the <code class="docutils literal notranslate"><span class="pre">#XMODEM</span></code> unsolicited notification.</p>
+<section id="unsolicited-notification">
+<h3><a class="toc-backref" href="#id86">Unsolicited notification</a><a class="headerlink" href="#unsolicited-notification" title="Permalink to this heading"></a></h3>
+<p>The application sends the following unsolicited notification when it detects a modem fault:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#XMODEM: FAULT,&lt;reason&gt;,&lt;program_count&gt;</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">&lt;reason&gt;</span></code> value returns a hexadecimal integer indicating the reason of the modem fault.
+The <code class="docutils literal notranslate"><span class="pre">&lt;program_count&gt;</span></code> value returns a hexadecimal integer indicating the address of the modem fault.</p>
+<p>The application sends the following unsolicited notification when it shuts down libmodem:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#XMODEM: SHUTDOWN,&lt;result&gt;</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">&lt;result&gt;</span></code> value returns an integer indicating the result of the shutdown of libmodem.</p>
+<p>The application sends the following unsolicited notification when it re-initializes libmodem:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#XMODEM: INIT,&lt;result&gt;</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">&lt;result&gt;</span></code> value returns an integer indicating the result of the re-initialization of libmodem.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>After libmodem is re-initialized, the MCU side must restart the current active service as follows:</p>
+<ol class="arabic simple">
+<li><p>Stopping the service.
+For example, disconnecting the TCP connection and closing the socket.</p></li>
+<li><p>Connecting again using LTE.</p></li>
+<li><p>Restarting the service.
+For example, opening the socket and re-establishing the TCP connection.</p></li>
+</ol>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="SOCKET_AT_commands.html" class="btn btn-neutral float-right" title="Socket AT commands" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="AT_commands_intro.html" class="btn btn-neutral" title="SLM-specific AT commands" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

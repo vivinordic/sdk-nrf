@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Adding clusters to Matter application &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script src="../../../_static/tabs.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../../_static/js/ncs.js"
+></script>
+<script src="../../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Testing with commercial Matter ecosystems" href="ecosystem_compatibility_testing.html" />
+    <link rel="prev" title="Configuring transmission power" href="transmission_power.html" />
+<link
+  href="../../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../protocols.html">Protocols</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../ble/index.html">Bluetooth LE Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../bt_mesh/index.html">Bluetooth mesh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../esb/index.html">Enhanced ShockBurst (ESB)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gazell/index.html">Gazell</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Matter</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../overview/index.html">Matter overview</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Getting started with Matter</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="hw_requirements.html">Matter hardware and memory requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="testing/index.html">Testing Matter in the nRF Connect SDK</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tools.html">Matter tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="kconfig.html">Enabling Matter in Kconfig</a></li>
+<li class="toctree-l4"><a class="reference internal" href="advanced_kconfigs.html">Advanced Matter Kconfig options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="low_power_configuration.html">Reducing power consumption in Matter applications</a></li>
+<li class="toctree-l4"><a class="reference internal" href="transmission_power.html">Configuring transmission power</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Adding clusters to Matter application</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ecosystem_compatibility_testing.html">Testing with commercial Matter ecosystems</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../end_product/index.html">How to create Matter end product</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../multiprotocol/index.html">Multiprotocol support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nfc/index.html">Near Field Communication (NFC)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../thread/index.html">Thread</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../wifi/index.html">Wi-Fi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../zigbee/index.html">Zigbee</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../drivers.html">Drivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../protocols.html">Protocols</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Matter</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Getting started with Matter</a></li>
+      <li class="breadcrumb-item active">Adding clusters to Matter application</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/protocols/matter/getting_started/adding_clusters.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="adding-clusters-to-matter-application">
+<span id="ug-matter-gs-adding-cluster"></span><span id="ug-matter-creating-accessory"></span><h1>Adding clusters to Matter application<a class="headerlink" href="#adding-clusters-to-matter-application" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#overview" id="id12">Overview</a></p></li>
+<li><p><a class="reference internal" href="#requirements" id="id13">Requirements</a></p></li>
+<li><p><a class="reference internal" href="#copy-matter-template-sample" id="id14">Copy Matter template sample</a></p></li>
+<li><p><a class="reference internal" href="#edit-clusters-using-the-zap-tool" id="id15">Edit clusters using the ZAP tool</a></p></li>
+<li><p><a class="reference internal" href="#edit-the-main-loop-of-the-application" id="id16">Edit the main loop of the application</a></p>
+<ul>
+<li><p><a class="reference internal" href="#edit-the-event-queue" id="id17">Edit the event queue</a></p></li>
+<li><p><a class="reference internal" href="#include-header-for-cluster-attribute-helpers" id="id18">Include header for cluster attribute helpers</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#create-a-callback-for-sensor-activation-and-deactivation" id="id19">Create a callback for sensor activation and deactivation</a></p></li>
+<li><p><a class="reference internal" href="#add-new-source-file-to-cmakelists" id="id20">Add new source file to CMakeLists</a></p></li>
+<li><p><a class="reference internal" href="#testing-the-new-sensor-application" id="id21">Testing the new sensor application</a></p></li>
+</ul>
+</div>
+<p>As part of this guide, you will modify the <a class="reference internal" href="../../../samples/matter/template/README.html#matter-template-sample"><span class="std std-ref">Matter template</span></a> sample by adding new application clusters in order to create a Matter sensor device that measures temperature and can be turned on and off.
+The sensor will periodically generate the simulated temperature sensor value and update the corresponding cluster attributes.
+This application will form a Matter device within a Matter network.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Make sure you are familiar with Matter in the nRF Connect SDK and you have tested some of the available <a class="reference internal" href="../../../samples/matter.html#matter-samples"><span class="std std-ref">Matter samples</span></a> before you work with this user guide.</p>
+</div>
+<section id="overview">
+<span id="ug-matter-creating-accessory-overview"></span><h2><a class="toc-backref" href="#id12">Overview</a><a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+<p>The Matter device is a basic node of the <a class="reference external" href="https://buildwithmatter.com/">Matter</a> network.
+The device is formed by the development kit and the application that is running the Matter stack, which is programmed on the development kit.</p>
+<p>Each Matter application consists of the following layers:</p>
+<ul class="simple">
+<li><p>Matter stack that provides the Matter core components.</p></li>
+<li><p>Data Model layer in the form of clusters, which contains commands and attributes that are to be accessible over the Matter network.
+This layer can be further broken down into the following groups:</p>
+<ul>
+<li><p>Utility clusters - These clusters represent management and diagnostic features of a Matter node.
+They are common for all Matter nodes.</p></li>
+<li><p>Application clusters - These clusters represent functionalities specific to a given application.</p></li>
+</ul>
+</li>
+<li><p>Application logic, such as turning on and off a light bulb in response to certain commands.</p></li>
+</ul>
+<p>Creating a Matter device consists of adding new application clusters to the Matter template sample.
+By default, the template sample includes only mandatory Matter clusters, necessary to commission the device into a Matter network.</p>
+<figure class="align-default" id="id6">
+<img alt="Creating Matter device" src="../../../_images/matter_template_sample.svg" /><figcaption>
+<p><span class="caption-text">Creating Matter device</span><a class="headerlink" href="#id6" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Cluster is a Data Model building block in Matter.
+It is a representation of a single functionality within a Matter device, such as turning a device on and off.
+Each cluster contains attributes, commands, and events, which can be mandatory or optional.
+Attributes are stored in the device’s memory, while commands can be used to modify or read the state of the device, including the cluster attributes.</p>
+<p>Clusters appropriate for a single device type such as a sensor or a light bulb are organized into an addressable container that is called an <em>endpoint</em>.
+Most utility clusters are required to be on the endpoint with ID <code class="docutils literal notranslate"><span class="pre">0</span></code>.
+Application clusters are usually assigned to endpoints with IDs <code class="docutils literal notranslate"><span class="pre">1</span></code> and higher.</p>
+<p>An application can implement appropriate callback functions to be informed about specific cluster state changes.
+These functions can be used to alter the device’s behavior when the state of a cluster is changing as a result of some external event.</p>
+<p>For more information about the Data Model layer, see <a class="reference internal" href="../overview/architecture.html#ug-matter-architecture-overview-dm"><span class="std std-ref">Data Model</span></a> section on the Matter architecture documentation page.</p>
+</section>
+<section id="requirements">
+<h2><a class="toc-backref" href="#id13">Requirements</a><a class="headerlink" href="#requirements" title="Permalink to this heading"></a></h2>
+<p>To take advantage of this guide, you need to be familiar with <a class="reference internal" href="../overview/architecture.html#ug-matter-architecture"><span class="std std-ref">Matter architecture</span></a> and <a class="reference internal" href="testing/index.html#ug-matter-configuring"><span class="std std-ref">Testing Matter in the nRF Connect SDK</span></a>, and have built and tested at least one of the available <a class="reference internal" href="../../../samples/matter.html#matter-samples"><span class="std std-ref">Matter samples</span></a>.</p>
+</section>
+<section class="numbered-step" id="copy-matter-template-sample">
+<span id="ug-matter-creating-accessory-copy"></span><h2><a class="toc-backref" href="#id14">Copy Matter template sample</a><a class="headerlink" href="#copy-matter-template-sample" title="Permalink to this heading"></a></h2>
+<p>Use the <a class="reference internal" href="../../../samples/matter/template/README.html#matter-template-sample"><span class="std std-ref">Matter Template</span></a> sample as the base for building a sensor device:</p>
+<ol class="arabic simple">
+<li><p>Make sure that you meet the requirements for building the sample.</p></li>
+<li><p>Build and test the sample as described on its documentation page.</p></li>
+<li><p>Copy the contents of the <code class="file docutils literal notranslate"><span class="pre">samples/matter/template</span></code> directory to a new directory meant for your custom application.
+For example, <code class="file docutils literal notranslate"><span class="pre">samples/matter/sensor</span></code>.</p></li>
+</ol>
+</section>
+<section class="numbered-step" id="edit-clusters-using-the-zap-tool">
+<span id="ug-matter-creating-accessory-edit-zap"></span><h2><a class="toc-backref" href="#id15">Edit clusters using the ZAP tool</a><a class="headerlink" href="#edit-clusters-using-the-zap-tool" title="Permalink to this heading"></a></h2>
+<p>Adding the functionalities for an on/off switch and a sensor requires adding new clusters.</p>
+<p>Adding new application clusters can be achieved by modifying ZAP file, which can be found as <code class="file docutils literal notranslate"><span class="pre">src/template.zap</span></code>.
+This is a JSON file that contains the data model configuration of clusters, commands, and attributes that are enabled for a given application.
+It is not used directly by Matter applications, but it is used to generate the source files for handling given clusters.</p>
+<p>The ZAP file can be edited using <a class="reference external" href="https://github.com/project-chip/zap">ZCL Advanced Platform</a> (ZAP tool), a third-party tool that is a generic templating engine for applications and libraries based on Zigbee Cluster Library.
+This tool is provided with the Matter repository in the nRF Connect SDK.</p>
+<p>To edit clusters using the ZAP tool, complete the following steps:</p>
+<ol class="arabic">
+<li><p>Download the ZAP package containing pre-compiled executables and libraries and extract it:</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can download the package in a compatible version manually from the <a class="reference external" href="https://github.com/project-chip/zap/releases">ZCL Advanced Platform releases</a>, but we recommend using a dedicated helper script that will do it for you.</p>
+</div>
+<ol class="loweralpha">
+<li><p>Open your installation directory for the nRF Connect SDK in a command line.</p></li>
+<li><p>Navigate to <code class="file docutils literal notranslate"><span class="pre">modules/lib/matter</span></code>.</p></li>
+<li><p>Run the helper script to download and extract the ZAP package in the directory that corresponds to the <em>location_path</em> argument:</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <cite>-o</cite> argument in the command is used to allow overwriting files, if they already exist in the given location.
+Otherwise the script will display prompt during download and ask for user consent to overwrite the files directly.</p>
+</div>
+<pre class="highlight literal-block">python scripts/setup/nrfconnect/get_zap.py -l <em>location_path</em> -o</pre>
+</li>
+</ol>
+</li>
+<li><p>Verify the ZAP tool version by comparing the script output with the following possible cases:</p>
+<ul>
+<li><p>Case 1: If your currently installed ZAP version matches the recommended one, you will see a message similar to the following one:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Your</span> <span class="n">currenly</span> <span class="n">installed</span> <span class="n">ZAP</span> <span class="n">tool</span> <span class="n">version</span><span class="p">:</span> <span class="mf">2022.12.20</span> <span class="n">matches</span> <span class="n">the</span> <span class="n">recommended</span> <span class="n">one</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>This means that your ZAP version is correct and the tool executable can be accessed from the operating system environment, so you can skip the following step about adding the ZAP tool to the system <span class="target" id="index-0"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PATH</span></code> environment variable.</p>
+</li>
+<li><p>Case 2: If your currently installed ZAP version does not match the recommended one or no ZAP version is installed on your device, you will see a message similar to the following one:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Your</span> <span class="n">currenly</span> <span class="n">installed</span> <span class="n">ZAP</span> <span class="n">tool</span> <span class="n">version</span> <span class="mf">2022.12.19</span> <span class="n">does</span> <span class="ow">not</span> <span class="n">match</span> <span class="n">the</span> <span class="n">recommended</span> <span class="n">one</span><span class="p">:</span> <span class="mf">2022.12.20</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>Alternatively, this message can look like the following one:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">No</span> <span class="n">ZAP</span> <span class="n">tool</span> <span class="n">version</span> <span class="n">was</span> <span class="n">found</span> <span class="n">installed</span> <span class="n">on</span> <span class="n">this</span> <span class="n">device</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>In this case, the package download process will start automatically:</p>
+<pre class="highlight literal-block">Trying to download ZAP tool package matching your system and recommended version.
+100% [......................................................................] 150136551 / 150136551
+ZAP tool package was downloaded and extracted in the given location.
+
+#######################################################################################
+# Please add the following location to the system PATH: <em>package_extraction_location</em> #
+#######################################################################################</pre>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <em>package_extraction_location</em> in the example output will be replaced by the <em>location_path</em> from the previous step, where you extracted the package.</p>
+</div>
+</li>
+</ul>
+</li>
+<li><p>Add the <em>package_extraction_location</em> ZAP package location printed in the script output to the system <span class="target" id="index-1"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PATH</span></code> environment variables.
+This is not needed if your currently installed ZAP version matches the recommended one (case 1 from the previous step).</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-TGludXg=" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-0-TGludXg=" name="TGludXg=" role="tab" tabindex="0">Linux</button><button aria-controls="panel-0-V2luZG93cw==" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-0-V2luZG93cw==" name="V2luZG93cw==" role="tab" tabindex="-1">Windows</button><button aria-controls="panel-0-bWFjT1M=" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-0-bWFjT1M=" name="bWFjT1M=" role="tab" tabindex="-1">macOS</button></div><div aria-labelledby="tab-0-TGludXg=" class="sphinx-tabs-panel group-tab" id="panel-0-TGludXg=" name="TGludXg=" role="tabpanel" tabindex="0"><p>For example, if you are using bash, run the following commands:</p>
+<div class="highlight highlight-default notranslate"><div class="highlight"><pre><span></span>echo &#39;export PATH=package_extraction_location:&quot;$PATH&quot;&#39; &gt;&gt; ${HOME}/.bashrc
+source ${HOME}/.bashrc
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-V2luZG93cw==" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-0-V2luZG93cw==" name="V2luZG93cw==" role="tabpanel" tabindex="0"><p>For the detailed instructions for adding <span class="target" id="index-2"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PATH</span></code> environment variables on Windows, see <span class="xref std std-ref">zephyr:env_vars</span>.</p>
+</div><div aria-labelledby="tab-0-bWFjT1M=" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-0-bWFjT1M=" name="bWFjT1M=" role="tabpanel" tabindex="0"><p>For example, if you are using bash, run the following commands:</p>
+<div class="highlight highlight-default notranslate"><div class="highlight"><pre><span></span>echo &#39;export PATH=package_extraction_location:&quot;$PATH&quot;&#39; &gt;&gt; ${HOME}/.bash_profile
+source ${HOME}/.bash_profile
+</pre></div>
+</div>
+</div></div>
+</li>
+<li><p>Open the <code class="file docutils literal notranslate"><span class="pre">src/template.zap</span></code> for editing by running the following command, where <code class="docutils literal notranslate"><span class="pre">samples/matter/sensor</span></code> stands for the path where you copied the template sample in the first step of this guide.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">zap</span> <span class="o">../../../</span><span class="n">nrf</span><span class="o">/</span><span class="n">samples</span><span class="o">/</span><span class="n">matter</span><span class="o">/</span><span class="n">sensor</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">template</span><span class="o">.</span><span class="n">zap</span>
+</pre></div>
+</div>
+<p>The ZAP tool’s Zigbee Cluster Configurator window appears.</p>
+<figure class="align-default" id="id7">
+<img alt="Zigbee Cluster Configurator window in ZAP tool" src="../../../_images/matter_create_accessory_zcl_configurator.png" />
+<figcaption>
+<p><span class="caption-text">Zigbee Cluster Configurator window in ZAP tool</span><a class="headerlink" href="#id7" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>By default, the window displays all available clusters.
+These can be filtered to show <span class="guilabel">Only Enabled</span> clusters.
+At this stage, only one endpoint is available (Endpoint 0).</p>
+</li>
+<li><p>In the ZAP tool, click <span class="guilabel">ADD NEW ENDPOINT</span>.</p></li>
+<li><p>In the <span class="guilabel">Create New Endpoint</span> menu, create a new endpoint that represents the temperature sensor device type:</p>
+<figure class="align-default" id="id8">
+<img alt="Create New Endpoint menu in ZAP tool" src="../../../_images/matter_create_accessory_create_new_endpoint.png" />
+<figcaption>
+<p><span class="caption-text">Create New Endpoint menu in ZAP tool</span><a class="headerlink" href="#id8" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>The new cluster is created with both the Basic and Identify clusters enabled.</p>
+</li>
+<li><p>Configure the On/Off cluster required for this endpoint:</p>
+<ol class="loweralpha">
+<li><p>In the <span class="guilabel">Search Clusters</span> menu, find the On/Off cluster.</p></li>
+<li><p>Set the <span class="guilabel">Server</span> option for the On/Off cluster.</p>
+<figure class="align-default" id="id9">
+<img alt="Configuring the On/off server cluster" src="../../../_images/matter_create_accessory_add_onoff_cluster.png" />
+<figcaption>
+<p><span class="caption-text">Configuring the On/off server cluster</span><a class="headerlink" href="#id9" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</li>
+<li><p>In the <span class="guilabel">Configure</span> column, click the gear icon to open the cluster’s configuration.</p></li>
+<li><p>In the <span class="guilabel">ATTRIBUTES</span> tab, make sure that you have the <code class="docutils literal notranslate"><span class="pre">OnOff</span></code> attribute enabled.</p></li>
+<li><p>In the <span class="guilabel">COMMANDS</span> tab, make sure that you have both On and Off commands enabled:</p></li>
+</ol>
+<figure class="align-default" id="id10">
+<img alt="On/off cluster configuration" src="../../../_images/matter_create_accessory_enable_onoff_commands.png" />
+<figcaption>
+<p><span class="caption-text">On/off cluster configuration</span><a class="headerlink" href="#id10" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</li>
+<li><p>Configure the Temperature Measurement cluster required for this endpoint:</p>
+<ol class="loweralpha">
+<li><p>Expand the <span class="guilabel">Measurement &amp; Sensing</span> menu and configure the Temperature Measurement cluster by setting the <span class="guilabel">Server</span> option from the drop-down menu.</p>
+<figure class="align-default" id="id11">
+<img alt="Configuring the Temperature Measurement server cluster" src="../../../_images/matter_create_accessory_add_temperature_measurement.png" />
+<figcaption>
+<p><span class="caption-text">Configuring the Temperature Measurement server cluster</span><a class="headerlink" href="#id11" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</li>
+<li><p>Go to the Temperature Measurement cluster configuration and make sure that you have the <code class="docutils literal notranslate"><span class="pre">MeasuredValue</span></code> attribute enabled.</p></li>
+</ol>
+</li>
+<li><p>Save the file and exit.</p></li>
+<li><p>Use the modified ZAP file to generate the C++ code that contains the selected clusters by running the following command, where <code class="docutils literal notranslate"><span class="pre">samples/matter/sensor</span></code> stands for the path where you copied the template sample in the first step of this guide:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="o">./</span><span class="n">scripts</span><span class="o">/</span><span class="n">tools</span><span class="o">/</span><span class="n">zap</span><span class="o">/</span><span class="n">generate</span><span class="o">.</span><span class="n">py</span> <span class="o">../../../</span><span class="n">nrf</span><span class="o">/</span><span class="n">samples</span><span class="o">/</span><span class="n">matter</span><span class="o">/</span><span class="n">sensor</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">template</span><span class="o">.</span><span class="n">zap</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<p>At this point, new clusters have been added to the Matter device.</p>
+</section>
+<section class="numbered-step" id="edit-the-main-loop-of-the-application">
+<span id="ug-matter-creating-accessory-edit-loop"></span><h2><a class="toc-backref" href="#id16">Edit the main loop of the application</a><a class="headerlink" href="#edit-the-main-loop-of-the-application" title="Permalink to this heading"></a></h2>
+<p>After adding clusters, you must modify the way in which the application interacts with the newly added clusters.
+This is needed to properly model the sensor’s behavior.</p>
+<p>The <code class="file docutils literal notranslate"><span class="pre">src/app_task.cpp</span></code> file contains the main loop of the application.
+Complete the steps in the following subsections to modify the main loop.</p>
+<section id="edit-the-event-queue">
+<h3><a class="toc-backref" href="#id17">Edit the event queue</a><a class="headerlink" href="#edit-the-event-queue" title="Permalink to this heading"></a></h3>
+<p>The main application loop is based on an <code class="docutils literal notranslate"><span class="pre">AppEventQueue</span></code>, on which events are posted by ZCL callbacks and by other application components, such as Zephyr timers.
+In each iteration, an event is dequeued and a corresponding event handler is called.</p>
+<section id="add-new-events">
+<h4>Add new events<a class="headerlink" href="#add-new-events" title="Permalink to this heading"></a></h4>
+<p>After you copied the template sample application, the following events are used in the application (<code class="file docutils literal notranslate"><span class="pre">src/app_event.h</span></code>):</p>
+<ul class="simple">
+<li><p><code class="xref c c-enum docutils literal notranslate"><span class="pre">Button</span></code> - For general operation of <strong>Button 1</strong>.</p></li>
+<li><p><code class="xref c c-enum docutils literal notranslate"><span class="pre">ButtonPushed</span></code> - For pressing <strong>Button 1</strong>.</p></li>
+<li><p><code class="xref c c-enum docutils literal notranslate"><span class="pre">ButtonReleased</span></code> - For releasing <strong>Button 1</strong>.</p></li>
+<li><p><code class="xref c c-enum docutils literal notranslate"><span class="pre">Timer</span></code> - For factory reset timeout.</p></li>
+<li><p><code class="xref c c-enum docutils literal notranslate"><span class="pre">UpdateLedState</span></code> - For updating of the <strong>LED 1</strong> state.</p></li>
+</ul>
+<p>To model the behavior of the sensor, add the following new <code class="xref c c-enum docutils literal notranslate"><span class="pre">AppEventType</span></code> events:</p>
+<ul class="simple">
+<li><p><code class="xref c c-enum docutils literal notranslate"><span class="pre">SensorActivate</span></code> - For sensor activation.</p></li>
+<li><p><code class="xref c c-enum docutils literal notranslate"><span class="pre">SensorDeactivate</span></code> - For sensor deactivation.</p></li>
+<li><p><code class="xref c c-enum docutils literal notranslate"><span class="pre">SensorMeasure</span></code> - For sensor measurement update.</p></li>
+</ul>
+<p>For example, the edited <code class="xref c c-enum docutils literal notranslate"><span class="pre">AppEventType</span></code> can look as follows:</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="k">enum</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">AppEventType</span><span class="w"> </span><span class="p">{</span>
+<span class="w">     </span><span class="n">None</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">     </span><span class="n">Button</span><span class="p">,</span>
+<span class="w">     </span><span class="n">ButtonPushed</span><span class="p">,</span>
+<span class="w">     </span><span class="n">ButtonReleased</span><span class="p">,</span>
+<span class="w">     </span><span class="n">Timer</span><span class="p">,</span>
+<span class="w">     </span><span class="n">UpdateLedState</span><span class="p">,</span>
+<span class="w">     </span><span class="n">SensorActivate</span><span class="p">,</span>
+<span class="w">     </span><span class="n">SensorDeactivate</span><span class="p">,</span>
+<span class="w">     </span><span class="n">SensorMeasure</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</section>
+<section id="add-sensor-timer">
+<h4>Add sensor timer<a class="headerlink" href="#add-sensor-timer" title="Permalink to this heading"></a></h4>
+<p>You need to make sure that the sensor is making measurements at the required time points.
+For this purpose, use a Zephyr timer to periodically post <code class="xref c c-enum docutils literal notranslate"><span class="pre">SensorMeasure</span></code> events.
+In the template sample, such a timer is being used to count down 6 seconds when <strong>Button 1</strong> is being pressed to initiate the factory reset.</p>
+<p>To add a new timer for the measurement event, edit the <code class="file docutils literal notranslate"><span class="pre">src/app_task.cpp</span></code> file as follows:</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">k_timer</span><span class="w"> </span><span class="n">sSensorTimer</span><span class="p">;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">SensorTimerHandler</span><span class="p">(</span><span class="n">k_timer</span><span class="w"> </span><span class="o">*</span><span class="n">timer</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">        </span><span class="n">AppEvent</span><span class="w"> </span><span class="n">event</span><span class="p">;</span>
+<span class="w">        </span><span class="n">event</span><span class="p">.</span><span class="n">Type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AppEventType</span><span class="o">::</span><span class="n">SensorMeasure</span><span class="p">;</span>
+<span class="w">        </span><span class="n">event</span><span class="p">.</span><span class="n">Handler</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AppTask</span><span class="o">::</span><span class="n">SensorMeasureHandler</span><span class="p">;</span>
+<span class="w">        </span><span class="n">AppTask</span><span class="o">::</span><span class="n">Instance</span><span class="p">().</span><span class="n">PostEvent</span><span class="p">(</span><span class="n">event</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">StartSensorTimer</span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">aTimeoutMs</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">        </span><span class="n">k_timer_start</span><span class="p">(</span><span class="o">&amp;</span><span class="n">sSensorTimer</span><span class="p">,</span><span class="w"> </span><span class="n">K_MSEC</span><span class="p">(</span><span class="n">aTimeoutMs</span><span class="p">),</span><span class="w"> </span><span class="n">K_MSEC</span><span class="p">(</span><span class="n">aTimeoutMs</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">StopSensorTimer</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">        </span><span class="n">k_timer_stop</span><span class="p">(</span><span class="o">&amp;</span><span class="n">sSensorTimer</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">AppTask::Init</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">        </span><span class="cm">/*</span>
+<span class="cm">        ... Original content</span>
+<span class="cm">        */</span>
+
+<span class="w">        </span><span class="n">k_timer_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">sSensorTimer</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">SensorTimerHandler</span><span class="p">,</span><span class="w"> </span><span class="k">nullptr</span><span class="p">);</span>
+<span class="w">        </span><span class="n">k_timer_user_data_set</span><span class="p">(</span><span class="o">&amp;</span><span class="n">sSensorTimer</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The timer must be initialized in the <code class="docutils literal notranslate"><span class="pre">Init()</span></code> method of the <code class="docutils literal notranslate"><span class="pre">AppTask</span></code> class.
+If <code class="xref c c-func docutils literal notranslate"><span class="pre">StartSensorTimer()</span></code> is called, the <code class="xref c c-struct docutils literal notranslate"><span class="pre">SensorMeasure</span></code> event is added to the event queue every <em>aTimeoutMs</em> milliseconds, until <code class="xref c c-func docutils literal notranslate"><span class="pre">StopSensorTimer()</span></code> is called.</p>
+</section>
+<section id="implement-event-handlers">
+<h4>Implement event handlers<a class="headerlink" href="#implement-event-handlers" title="Permalink to this heading"></a></h4>
+<p>When an event is dequeued, the application calls the event handler in the <code class="xref c c-func docutils literal notranslate"><span class="pre">DispatchEvent()</span></code> function.
+Because you have added new events, you must implement the corresponding handlers.</p>
+<p>To add new event handlers, complete the following steps:</p>
+<ol class="arabic">
+<li><p>Edit the <code class="file docutils literal notranslate"><span class="pre">src/app_task.cpp</span></code> file as follows:</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">AppTask::SensorActivateHandler</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">AppEvent</span><span class="w"> </span><span class="o">&amp;</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">        </span><span class="n">StartSensorTimer</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">AppTask::SensorDeactivateHandler</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">AppEvent</span><span class="w"> </span><span class="o">&amp;</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">        </span><span class="n">StopSensorTimer</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">AppTask::SensorMeasureHandler</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">AppEvent</span><span class="w"> </span><span class="o">&amp;</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">        </span><span class="n">chip</span><span class="o">::</span><span class="n">app</span><span class="o">::</span><span class="n">Clusters</span><span class="o">::</span><span class="n">TemperatureMeasurement</span><span class="o">::</span><span class="n">Attributes</span><span class="o">::</span><span class="n">MeasuredValue</span><span class="o">::</span><span class="n">Set</span><span class="p">(</span>
+<span class="w">                </span><span class="cm">/* endpoint ID */</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="cm">/* temperature in 0.01*C */</span><span class="w"> </span><span class="kt">int16_t</span><span class="p">(</span><span class="n">rand</span><span class="p">()</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">5000</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>With this addition, when the sensor is active, the timer expiration event happens every half a second.
+This causes an invocation of <code class="xref c c-func docutils literal notranslate"><span class="pre">SensorMeasureHandler()</span></code> and triggers an update of the <code class="docutils literal notranslate"><span class="pre">MeasuredValue</span></code> attribute of the Temperature Measurement cluster.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In the code fragment, the example value is updated randomly, but in a real sensor application it would be updated with the value obtained from external measurement.</p>
+</div>
+</li>
+<li><p>Declare these handler functions as <code class="docutils literal notranslate"><span class="pre">static</span></code> in the <code class="docutils literal notranslate"><span class="pre">public</span></code> scope of <code class="docutils literal notranslate"><span class="pre">AppTask</span></code> class in <code class="file docutils literal notranslate"><span class="pre">src/app_task.h</span></code> to make sure the application builds properly.</p></li>
+</ol>
+</section>
+</section>
+<section id="include-header-for-cluster-attribute-helpers">
+<h3><a class="toc-backref" href="#id18">Include header for cluster attribute helpers</a><a class="headerlink" href="#include-header-for-cluster-attribute-helpers" title="Permalink to this heading"></a></h3>
+<p>To import helper functions for accessing cluster attributes, make sure to include the following file in the <code class="file docutils literal notranslate"><span class="pre">src/app_task.cpp</span></code> file:</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;app-common/zap-generated/attributes/Accessors.h&gt;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section class="numbered-step" id="create-a-callback-for-sensor-activation-and-deactivation">
+<span id="ug-matter-creating-accessory-callback"></span><h2><a class="toc-backref" href="#id19">Create a callback for sensor activation and deactivation</a><a class="headerlink" href="#create-a-callback-for-sensor-activation-and-deactivation" title="Permalink to this heading"></a></h2>
+<p>Handlers for the <code class="xref c c-struct docutils literal notranslate"><span class="pre">SensorActivate</span></code> and <code class="xref c c-struct docutils literal notranslate"><span class="pre">SensorDeactivate</span></code> events are now ready, but the events are not posted to the event queue.
+The sensor is supposed to be turned on and off remotely by changing the <code class="docutils literal notranslate"><span class="pre">OnOff</span></code> attribute of the On/off cluster, for example using the Matter controller.
+This means that we need to implement a callback function to post one of these events every time the <code class="docutils literal notranslate"><span class="pre">OnOff</span></code> attribute changes.</p>
+<p>To implement the callback function, complete the following steps:</p>
+<ol class="arabic simple">
+<li><p>Create a new file, for example <code class="file docutils literal notranslate"><span class="pre">src/zcl_callbacks.cpp</span></code>.</p></li>
+<li><p>Implement the callback in this file:</p>
+<ol class="loweralpha simple">
+<li><p>Open <code class="file docutils literal notranslate"><span class="pre">src/zap-generated/callback-stub.cpp</span></code> to check the list of customizable callback functions, marked with <code class="docutils literal notranslate"><span class="pre">__attribute__((weak))</span></code>.</p></li>
+<li><p>Read the description of <code class="xref c c-func docutils literal notranslate"><span class="pre">MatterPostAttributeChangeCallback()</span></code>.</p></li>
+<li><p>Implement <code class="xref c c-func docutils literal notranslate"><span class="pre">MatterPostAttributeChangeCallback()</span></code> in the <code class="file docutils literal notranslate"><span class="pre">src/zcl_callbacks.cpp</span></code> file.</p></li>
+</ol>
+</li>
+</ol>
+<p>For example, the implementation can look as follows:</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;app_task.h&quot;</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;app-common/zap-generated/ids/Attributes.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;app-common/zap-generated/ids/Clusters.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;app/ConcreteAttributePath.h&gt;</span>
+
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="o">::</span><span class="nn">chip</span><span class="p">;</span>
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="o">::</span><span class="nn">chip</span><span class="o">::</span><span class="nn">app</span><span class="o">::</span><span class="nn">Clusters</span><span class="p">;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">MatterPostAttributeChangeCallback</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">chip</span><span class="o">::</span><span class="n">app</span><span class="o">::</span><span class="n">ConcreteAttributePath</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">attributePath</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">type</span><span class="p">,</span>
+<span class="w">                                       </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">value</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">attributePath</span><span class="p">.</span><span class="n">mClusterId</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">OnOff</span><span class="o">::</span><span class="n">Id</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">attributePath</span><span class="p">.</span><span class="n">mAttributeId</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">OnOff</span><span class="o">::</span><span class="n">Attributes</span><span class="o">::</span><span class="n">OnOff</span><span class="o">::</span><span class="n">Id</span><span class="p">)</span>
+<span class="w">                </span><span class="k">return</span><span class="p">;</span>
+
+<span class="w">        </span><span class="n">AppEvent</span><span class="w"> </span><span class="n">event</span><span class="p">;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">event</span><span class="p">.</span><span class="n">Type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AppEventType</span><span class="o">::</span><span class="n">SensorActivate</span><span class="p">;</span>
+<span class="w">            </span><span class="n">event</span><span class="p">.</span><span class="n">Handler</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AppTask</span><span class="o">::</span><span class="n">SensorActivateHandler</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">event</span><span class="p">.</span><span class="n">Type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AppEventType</span><span class="o">::</span><span class="n">SensorDeactivate</span><span class="p">;</span>
+<span class="w">            </span><span class="n">event</span><span class="p">.</span><span class="n">Handler</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AppTask</span><span class="o">::</span><span class="n">SensorDeactivateHandler</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">AppTask</span><span class="o">::</span><span class="n">Instance</span><span class="p">().</span><span class="n">PostEvent</span><span class="p">(</span><span class="n">event</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In this implementation, the <code class="docutils literal notranslate"><span class="pre">if</span></code> part filters out events other than those that belong to the On/Off cluster.
+Then, the callback posts the event for the sensor, namely <code class="docutils literal notranslate"><span class="pre">SensorActivate</span></code> if the current value of the attribute is not zero.</p>
+</section>
+<section class="numbered-step" id="add-new-source-file-to-cmakelists">
+<span id="ug-matter-creating-accessory-add-source"></span><h2><a class="toc-backref" href="#id20">Add new source file to CMakeLists</a><a class="headerlink" href="#add-new-source-file-to-cmakelists" title="Permalink to this heading"></a></h2>
+<p>To ensure that everything builds without errors, update the <code class="file docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> file by adding <code class="file docutils literal notranslate"><span class="pre">src/zcl_callbacks.cpp</span></code> source file to the <code class="docutils literal notranslate"><span class="pre">app</span></code> target.</p>
+</section>
+<section id="testing-the-new-sensor-application">
+<span id="ug-matter-creating-accessory-test"></span><h2><a class="toc-backref" href="#id21">Testing the new sensor application</a><a class="headerlink" href="#testing-the-new-sensor-application" title="Permalink to this heading"></a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Use CHIP Tool for Linux or macOS when <a class="reference internal" href="testing/thread_separate_otbr_linux_macos.html#ug-matter-gs-testing-thread-separate-otbr-linux-macos"><span class="std std-ref">setting up Matter development environment</span></a>.</p>
+</div>
+<p>To check if the sensor device is working, complete the following steps:</p>
+<ol class="arabic">
+<li><p>Connect the kit to the computer using a USB cable.
+The kit is assigned a COM port (Windows) or ttyACM device (Linux), which is visible in the Device Manager.</p></li>
+<li><p>Connect to the kit with a terminal emulator that supports VT100/ANSI escape characters (for example, PuTTY).
+See <a class="reference internal" href="../../../getting_started/testing.html#putty"><span class="std std-ref">How to connect with PuTTY</span></a> for the required settings.</p></li>
+<li><p>Commission the device into a Matter network by following the guides linked on the <a class="reference internal" href="testing/index.html#ug-matter-configuring"><span class="std std-ref">Testing Matter in the nRF Connect SDK</span></a> page for the Matter controller you want to use.
+The guides walk you through the following steps:</p>
+<ul class="simple">
+<li><p>Only if you are configuring Matter over Thread: Configure the Thread Border Router.</p></li>
+<li><p>Build and install the Matter controller.</p></li>
+<li><p>Commission the device.
+You can use the <a class="reference internal" href="../../../samples/matter/template/README.html#matter-template-network-mode-onboarding"><span class="std std-ref">Onboarding information</span></a> listed earlier on this page.</p></li>
+<li><p>Send Matter commands.</p></li>
+</ul>
+<p>At the end of this procedure, <strong>LED 1</strong> of the Matter device programmed with the sample starts flashing in the Short Flash Off state.
+This indicates that the device is fully provisioned, but does not yet have full IPv6 network connectivity.</p>
+</li>
+<li><p>Activate the sensor by running the following command on the On/off cluster with the correct <em>node_ID</em> assigned during commissioning:</p>
+<pre class="highlight literal-block">./chip-tool onoff on <em>node_ID</em> 1</pre>
+</li>
+<li><p>Read the measurement several times by checking value of <code class="docutils literal notranslate"><span class="pre">MeasuredValue</span></code> in the Temperature Measurement cluster:</p>
+<pre class="highlight literal-block">./chip-tool temperaturemeasurement read measured-value <em>node_ID</em> 1</pre>
+</li>
+<li><p>Deactivate the sensor by running the following command on the On/off cluster with the correct <em>node_ID</em> assigned during commissioning:</p>
+<pre class="highlight literal-block">./chip-tool onoff off <em>node_ID</em> 1</pre>
+</li>
+<li><p>Read the measurement again.
+The measurement should not change.</p></li>
+</ol>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="ecosystem_compatibility_testing.html" class="btn btn-neutral float-right" title="Testing with commercial Matter ecosystems" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="transmission_power.html" class="btn btn-neutral" title="Configuring transmission power" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

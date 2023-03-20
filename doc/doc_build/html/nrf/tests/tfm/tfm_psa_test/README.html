@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TF-M: Platform security architecture test &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../../_static/js/ncs.js"
+></script>
+<script src="../../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="TF-M: Regression tests" href="../tfm_regression_test/README.html" />
+    <link rel="prev" title="TF-M secure peripheral partition" href="../../../samples/tfm/tfm_secure_peripheral/README.html" />
+<link
+  href="../../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../applications.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../samples.html">Samples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../samples/bl.html">Bluetooth samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../samples/crypto.html">Cryptography samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../samples/edge.html">Edge Impulse samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../samples/gazell.html">Gazell samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../samples/matter.html">Matter samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../samples/nfc.html">NFC samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../samples/nrf5340.html">nRF5340 samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../samples/nrf9160.html">nRF9160 samples</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../../samples/tfm.html">Trusted Firmware-M (TF-M) samples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../../samples/tfm/provisioning_image/README.html">Provisioning image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../samples/tfm/tfm_hello_world/README.html">TF-M Hello World</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../samples/tfm/tfm_psa_template/README.html">TF-M: PSA template</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../samples/tfm/tfm_secure_peripheral/README.html">TF-M secure peripheral partition</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">TF-M: Platform security architecture test</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#requirements">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuration">Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#building-and-running">Building and running</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../tfm_regression_test/README.html">TF-M: Regression tests</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../samples/thread.html">Thread samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../samples/zigbee.html">Zigbee samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../samples/wifi.html">Wi-Fi samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../samples/other.html">Other samples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../drivers.html">Drivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../samples.html">Samples</a></li>
+          <li class="breadcrumb-item"><a href="../../../samples/tfm.html">Trusted Firmware-M (TF-M) samples</a></li>
+      <li class="breadcrumb-item active">TF-M: Platform security architecture test</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/tests/tfm/tfm_psa_test/README.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="tf-m-platform-security-architecture-test">
+<span id="tfm-psa-test"></span><h1>TF-M: Platform security architecture test<a class="headerlink" href="#tf-m-platform-security-architecture-test" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#requirements" id="id6">Requirements</a></p></li>
+<li><p><a class="reference internal" href="#overview" id="id7">Overview</a></p></li>
+<li><p><a class="reference internal" href="#configuration" id="id8">Configuration</a></p></li>
+<li><p><a class="reference internal" href="#building-and-running" id="id9">Building and running</a></p>
+<ul>
+<li><p><a class="reference internal" href="#output" id="id10">Output</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>The TF-M platform security architecture test sample provides a basis for validating compliance with PSA Certified requirements using the Arm® Platform Security Architecture (PSA) test suites.</p>
+<section id="requirements">
+<h2><a class="toc-backref" href="#id6">Requirements</a><a class="headerlink" href="#requirements" title="Permalink to this heading"></a></h2>
+<p>The test supports the following development kits:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 27%" />
+<col style="width: 7%" />
+<col style="width: 39%" />
+<col style="width: 27%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Hardware platforms</p></th>
+<th class="head"><p>PCA</p></th>
+<th class="head"><p>Board name</p></th>
+<th class="head"><p>Build target</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../working_with_nrf/nrf53/nrf5340.html#ug-nrf5340"><span class="std std-ref">nRF5340 DK</span></a></p></td>
+<td><p>PCA10095</p></td>
+<td><p><span class="xref std std-ref">nrf5340dk_nrf5340</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nrf5340dk_nrf5340_cpuapp_ns</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../working_with_nrf/nrf91/nrf9160.html#ug-nrf9160"><span class="std std-ref">nRF9160 DK</span></a></p></td>
+<td><p>PCA10090</p></td>
+<td><p><span class="xref std std-ref">nrf9160dk_nrf9160</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nrf9160dk_nrf9160_ns</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="overview">
+<h2><a class="toc-backref" href="#id7">Overview</a><a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+<p>The PSA tests are implemented in the psa-arch-tests repo: <a class="reference external" href="https://github.com/ARM-software/psa-arch-tests">https://github.com/ARM-software/psa-arch-tests</a>.
+Run PSA test suites tests with Zephyr and TFM.</p>
+<p>To choose a test suite, use the <code class="docutils literal notranslate"><span class="pre">CONFIG_TFM_PSA_TEST_*</span></code> Kconfig options.
+Only one of these suites can be run at a time.</p>
+</section>
+<section id="configuration">
+<h2><a class="toc-backref" href="#id8">Configuration</a><a class="headerlink" href="#configuration" title="Permalink to this heading"></a></h2>
+<p>The following Kconfig options can be used to choose a test suite:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_TFM_PSA_TEST_CRYPTO</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_TFM_PSA_TEST_PROTECTED_STORAGE</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_TFM_PSA_TEST_INTERNAL_TRUSTED_STORAGE</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_TFM_PSA_TEST_STORAGE</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_TFM_PSA_TEST_INITIAL_ATTESTATION</span></code></p></li>
+</ul>
+<p>See <a class="reference internal" href="../../../getting_started/modifying.html#configure-application"><span class="std std-ref">Configuring your application</span></a> for information about how to permanently or temporarily change the configuration.</p>
+</section>
+<section id="building-and-running">
+<h2><a class="toc-backref" href="#id9">Building and running</a><a class="headerlink" href="#building-and-running" title="Permalink to this heading"></a></h2>
+<p>This test can be found under <code class="file docutils literal notranslate"><span class="pre">tests/tfm/tfm_psa_test/</span></code> in the nRF Connect SDK folder structure.</p>
+<p>See <a class="reference internal" href="../../../getting_started/programming.html#gs-programming-cmd"><span class="std std-ref">Building on the command line</span></a> for information about how to build and program the tests.</p>
+<p>You can indicate the desired test suite by using a configuration flag when building (replace <code class="docutils literal notranslate"><span class="pre">&lt;build_target&gt;</span></code> with your board name, for example <code class="docutils literal notranslate"><span class="pre">nrf5340dk_nrf5340_cpuapp_ns</span></code>):</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">west build -b &lt;build_target&gt; nrf/tests/tfm/tfm_psa_test -- -DCONFIG_TFM_PSA_TEST_STORAGE=y</span>
+</pre></div>
+</div>
+<p>Note that not all test suites are valid on all boards.</p>
+<section id="output">
+<h3><a class="toc-backref" href="#id10">Output</a><a class="headerlink" href="#output" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">*** Booting Zephyr OS build zephyr-v2.5.0-456-g06f4da459a99  ***</span>
+
+<span class="go">***** PSA Architecture Test Suite - Version 1.0 *****</span>
+
+<span class="go">Running.. Storage Suite</span>
+<span class="go">******************************************</span>
+
+<span class="go">TEST: 401 | DESCRIPTION: UID not found check</span>
+<span class="go">[Info] Executing tests from non-secure</span>
+
+<span class="go">[Info] Executing ITS tests</span>
+<span class="go">[Check 1] Call get API for UID 6 which is not set</span>
+<span class="go">[Check 2] Call get_info API for UID 6 which is not set</span>
+<span class="go">[Check 3] Call remove API for UID 6 which is not set</span>
+<span class="go">[Check 4] Call get API for UID 6 which is removed</span>
+<span class="go">[Check 5] Call get_info API for UID 6 which is removed</span>
+<span class="go">[Check 6] Call remove API for UID 6 which is removed</span>
+<span class="go">Set storage for UID 6</span>
+<span class="go">[Check 7] Call get API for different UID 5</span>
+<span class="go">[Check 8] Call get_info API for different UID 5</span>
+<span class="go">[Check 9] Call remove API for different UID 5</span>
+
+<span class="go">[Info] Executing PS tests</span>
+<span class="go">[Check 1] Call get API for UID 6 which is not set</span>
+<span class="go">[Check 2] Call get_info API for UID 6 which is not set</span>
+<span class="go">[Check 3] Call remove API for UID 6 which is not set</span>
+<span class="go">[Check 4] Call get API for UID 6 which is removed</span>
+<span class="go">[Check 5] Call get_info API for UID 6 which is removed</span>
+<span class="go">[Check 6] Call remove API for UID 6 which is removed</span>
+<span class="go">Set storage for UID 6</span>
+<span class="go">[Check 7] Call get API for different UID 5</span>
+<span class="go">[Check 8] Call get_info API for different UID 5</span>
+<span class="go">[Check 9] Call remove API for different UID 5</span>
+
+<span class="go">TEST RESULT: PASSED</span>
+
+<span class="go">******************************************</span>
+
+<span class="go">[...]</span>
+
+<span class="go">TEST: 417 | DESCRIPTION: Storage assest capacity modification check</span>
+<span class="go">[Info] Executing tests from non-secure</span>
+
+<span class="go">[Info] Executing PS tests</span>
+<span class="go">Test Case skipped as Optional PS APIs not are supported.</span>
+
+<span class="go">TEST RESULT: SKIPPED (Skip Code=0x0000002B)</span>
+
+<span class="go">******************************************</span>
+
+<span class="go">************ Storage Suite Report **********</span>
+<span class="go">TOTAL TESTS     : 17</span>
+<span class="go">TOTAL PASSED    : 11</span>
+<span class="go">TOTAL SIM ERROR : 0</span>
+<span class="go">TOTAL FAILED    : 0</span>
+<span class="go">TOTAL SKIPPED   : 6</span>
+<span class="go">******************************************</span>
+
+<span class="go">Entering standby..</span>
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../tfm_regression_test/README.html" class="btn btn-neutral float-right" title="TF-M: Regression tests" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../../../samples/tfm/tfm_secure_peripheral/README.html" class="btn btn-neutral" title="TF-M secure peripheral partition" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

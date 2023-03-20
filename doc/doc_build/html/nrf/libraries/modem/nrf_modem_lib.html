@@ -1,0 +1,1170 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Modem library integration layer &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../_static/js/ncs.js"
+></script>
+<script src="../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="PDN" href="pdn.html" />
+    <link rel="prev" title="Modem SLM" href="modem_slm.html" />
+<link
+  href="../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drivers.html">Drivers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Libraries</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../bin/index.html">Binary libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bluetooth_services/index.html">Bluetooth libraries and services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bootloader/index.html">Bootloader libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../caf/index.html">Common Application Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../debug/index.html">Debug libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dfu/index.html">DFU libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gazell/index.html">Gazell libraries</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Modem libraries</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="at_cmd_parser.html">AT command parser</a></li>
+<li class="toctree-l3"><a class="reference internal" href="at_custom_cmd.html">Custom AT commands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="at_host.html">AT Host</a></li>
+<li class="toctree-l3"><a class="reference internal" href="at_monitor.html">AT monitor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="at_params.html">AT parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="at_shell.html">AT shell</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gcf_sms_lib.html">GCF SMS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="location.html">Location</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lte_lc.html">LTE link controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modem_antenna.html">Modem antenna</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modem_attest_token.html">Modem attestation token</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modem_info.html">Modem information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modem_jwt.html">Modem JWT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modem_key_mgmt.html">Modem key management</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modem_slm.html">Modem SLM</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Modem library integration layer</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#library-wrapper">Library wrapper</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#socket-offloading">Socket offloading</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#os-abstraction-layer">OS abstraction layer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modem-trace-module">Modem trace module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modem-fault-handling">Modem fault handling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#partition-manager-integration">Partition manager integration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diagnostic-functionality">Diagnostic functionality</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#api-documentation">API documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pdn.html">PDN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sms.html">SMS subscriber</a></li>
+<li class="toctree-l3"><a class="reference internal" href="zzhc.html">China Telecom ZZHC library</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../mpsl/index.html">Multiprotocol Service Layer libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../networking/index.html">Libraries for networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nfc/index.html">Libraries for NFC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nrf_rpc/index.html">nRF RPC libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../others/index.html">Other libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../shell/index.html">Shell libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tfm/index.html">TF-M libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../zigbee/index.html">Libraries for Zigbee</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Libraries</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Modem libraries</a></li>
+      <li class="breadcrumb-item active">Modem library integration layer</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/libraries/modem/nrf_modem_lib.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="modem-library-integration-layer">
+<span id="nrf-modem-lib-readme"></span><h1>Modem library integration layer<a class="headerlink" href="#modem-library-integration-layer" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#library-wrapper" id="id8">Library wrapper</a></p>
+<ul>
+<li><p><a class="reference internal" href="#callbacks" id="id9">Callbacks</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#socket-offloading" id="id10">Socket offloading</a></p></li>
+<li><p><a class="reference internal" href="#os-abstraction-layer" id="id11">OS abstraction layer</a></p></li>
+<li><p><a class="reference internal" href="#modem-trace-module" id="id12">Modem trace module</a></p>
+<ul>
+<li><p><a class="reference internal" href="#adding-custom-trace-backends" id="id13">Adding custom trace backends</a></p></li>
+<li><p><a class="reference internal" href="#sending-traces-over-uart1-on-a-custom-board" id="id14">Sending traces over UART1 on a custom board</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#modem-fault-handling" id="id15">Modem fault handling</a></p>
+<ul>
+<li><p><a class="reference internal" href="#implementing-a-custom-fault-handler" id="id16">Implementing a custom fault handler</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#partition-manager-integration" id="id17">Partition manager integration</a></p></li>
+<li><p><a class="reference internal" href="#diagnostic-functionality" id="id18">Diagnostic functionality</a></p></li>
+<li><p><a class="reference internal" href="#api-documentation" id="id19">API documentation</a></p></li>
+</ul>
+</div>
+<p>The Modem library integration layer handles the integration of the Modem library into nRF Connect SDK.
+The integration layer is constituted by the library wrapper and functionalities like socket offloading, OS abstraction, memory reservation by the Partition manager, handling modem traces, and diagnostics.</p>
+<section id="library-wrapper">
+<h2><a class="toc-backref" href="#id8">Library wrapper</a><a class="headerlink" href="#library-wrapper" title="Permalink to this heading"></a></h2>
+<p>The library wrapper provides an encapsulation over the core Modem library functions such as initialization and shutdown.
+The library wrapper is implemented in <code class="file docutils literal notranslate"><span class="pre">nrf/lib/nrf_modem_lib/nrf_modem_lib.c</span></code>.</p>
+<p>The library wrapper encapsulates the <code class="xref c c-func docutils literal notranslate"><span class="pre">nrf_modem_init()</span></code> and <code class="xref c c-func docutils literal notranslate"><span class="pre">nrf_modem_shutdown()</span></code> calls of the Modem library with <a class="reference internal" href="#c.nrf_modem_lib_init" title="nrf_modem_lib_init"><code class="xref c c-func docutils literal notranslate"><span class="pre">nrf_modem_lib_init()</span></code></a> and <a class="reference internal" href="#c.nrf_modem_lib_shutdown" title="nrf_modem_lib_shutdown"><code class="xref c c-func docutils literal notranslate"><span class="pre">nrf_modem_lib_shutdown()</span></code></a> calls, respectively.
+The library wrapper eases the task of initializing the Modem library by automatically passing the size and address of all the shared memory regions of the Modem library to the <code class="xref c c-func docutils literal notranslate"><span class="pre">nrf_modem_init()</span></code> call.</p>
+<p><a class="reference internal" href="../../scripts/partition_manager/partition_manager.html#partition-manager"><span class="std std-ref">Partition Manager</span></a> is the component that reserves the RAM memory for the shared memory regions used by the Modem library.
+For more information, see <a class="reference internal" href="#partition-mgr-integration"><span class="std std-ref">Partition manager integration</span></a>.</p>
+<p>The library wrapper can initialize the Modem library during system initialization using <code class="xref c c-macro docutils literal notranslate"><span class="pre">SYS_INIT</span></code>.
+The <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF_MODEM_LIB_SYS_INIT</span></code> Kconfig option can be used to control this setting.
+Some libraries in nRF Connect SDK, such as the <a class="reference internal" href="lte_lc.html#lte-lc-readme"><span class="std std-ref">LTE link controller</span></a> have similar configuration options to initialize during system initialization and these options depend on the configuration option of the integration layer.
+If your application performs an update of the nRF9160 modem firmware, you can disable this functionality to have full control on the initialization of the library.</p>
+<p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF_MODEM_LIB_LOG_FW_VERSION_UUID</span></code> can be enabled for printing logs of both FW version and UUID at the end of the library initialization step.</p>
+<p>When using the Modem library in nRF Connect SDK, the library must be initialized and shutdown using the <a class="reference internal" href="#c.nrf_modem_lib_init" title="nrf_modem_lib_init"><code class="xref c c-func docutils literal notranslate"><span class="pre">nrf_modem_lib_init()</span></code></a> and <a class="reference internal" href="#c.nrf_modem_lib_shutdown" title="nrf_modem_lib_shutdown"><code class="xref c c-func docutils literal notranslate"><span class="pre">nrf_modem_lib_shutdown()</span></code></a> function calls, respectively.</p>
+<section id="callbacks">
+<h3><a class="toc-backref" href="#id9">Callbacks</a><a class="headerlink" href="#callbacks" title="Permalink to this heading"></a></h3>
+<p>The library wrapper also provides callbacks for the initialization and shutdown operations.
+The application can set up a callback for <a class="reference internal" href="#c.nrf_modem_lib_init" title="nrf_modem_lib_init"><code class="xref c c-func docutils literal notranslate"><span class="pre">nrf_modem_lib_init()</span></code></a> function using the <a class="reference internal" href="#c.NRF_MODEM_LIB_ON_INIT" title="NRF_MODEM_LIB_ON_INIT"><code class="xref c c-macro docutils literal notranslate"><span class="pre">NRF_MODEM_LIB_ON_INIT</span></code></a> macro, and a callback for <a class="reference internal" href="#c.nrf_modem_lib_shutdown" title="nrf_modem_lib_shutdown"><code class="xref c c-func docutils literal notranslate"><span class="pre">nrf_modem_lib_shutdown()</span></code></a> function using the <a class="reference internal" href="#c.NRF_MODEM_LIB_ON_SHUTDOWN" title="NRF_MODEM_LIB_ON_SHUTDOWN"><code class="xref c c-macro docutils literal notranslate"><span class="pre">NRF_MODEM_LIB_ON_SHUTDOWN</span></code></a> macro.
+These compile-time callbacks allow any part of the application to perform any setup steps that require the modem to be in a certain state.
+Furthermore, the callbacks ensure that the setup steps are repeated whenever another part of the application turns the modem on or off.
+The callbacks registered using <a class="reference internal" href="#c.NRF_MODEM_LIB_ON_INIT" title="NRF_MODEM_LIB_ON_INIT"><code class="xref c c-macro docutils literal notranslate"><span class="pre">NRF_MODEM_LIB_ON_INIT</span></code></a> are executed after the library is initialized.
+The result of the initialization and the callback context are provided to these callbacks.
+Callbacks for the macro <a class="reference internal" href="#c.NRF_MODEM_LIB_ON_INIT" title="NRF_MODEM_LIB_ON_INIT"><code class="xref c c-macro docutils literal notranslate"><span class="pre">NRF_MODEM_LIB_ON_INIT</span></code></a> must have the signature <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">callback_name(int</span> <span class="pre">ret,</span> <span class="pre">void</span> <span class="pre">*ctx)</span></code>, where <code class="docutils literal notranslate"><span class="pre">ret</span></code> is the result of the initialization and <code class="docutils literal notranslate"><span class="pre">ctx</span></code> is the context passed to the macro.
+The callbacks registered using <a class="reference internal" href="#c.NRF_MODEM_LIB_ON_SHUTDOWN" title="NRF_MODEM_LIB_ON_SHUTDOWN"><code class="xref c c-macro docutils literal notranslate"><span class="pre">NRF_MODEM_LIB_ON_SHUTDOWN</span></code></a> are executed before the library is shut down.
+The callback context is provided to these callbacks.
+Callbacks for the macro <a class="reference internal" href="#c.NRF_MODEM_LIB_ON_SHUTDOWN" title="NRF_MODEM_LIB_ON_SHUTDOWN"><code class="xref c c-macro docutils literal notranslate"><span class="pre">NRF_MODEM_LIB_ON_SHUTDOWN</span></code></a> must have the signature <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">callback_name(void</span> <span class="pre">*ctx)</span></code>, where <code class="docutils literal notranslate"><span class="pre">ctx</span></code> is the context passed to the macro.
+See the <a class="reference internal" href="../../samples/nrf9160/modem_callbacks/README.html#modem-callbacks-sample"><span class="std std-ref">nRF9160: Modem callbacks</span></a> sample for more information.</p>
+</section>
+</section>
+<section id="socket-offloading">
+<h2><a class="toc-backref" href="#id10">Socket offloading</a><a class="headerlink" href="#socket-offloading" title="Permalink to this heading"></a></h2>
+<p>Zephyr Socket API offers the <span class="xref std std-ref">socket offloading functionality</span> to redirect or <em>offload</em> function calls to BSD socket APIs such as <code class="docutils literal notranslate"><span class="pre">socket()</span></code> and <code class="docutils literal notranslate"><span class="pre">send()</span></code>.
+The integration layer utilizes this functionality to offload the socket API calls to the Modem library and thus eases the task of porting the networking code to the nRF9160 by providing a wrapper for Modem library’s native socket API such as <code class="xref c c-func docutils literal notranslate"><span class="pre">nrf_socket()</span></code> and <code class="xref c c-func docutils literal notranslate"><span class="pre">nrf_send()</span></code>.</p>
+<p>The socket offloading functionality in the integration layer is implemented in <code class="file docutils literal notranslate"><span class="pre">nrf/lib/nrf_modem_lib/nrf91_sockets.c</span></code>.</p>
+<p>Modem library socket API sets errnos as defined in <code class="file docutils literal notranslate"><span class="pre">nrf_errno.h</span></code>.
+The socket offloading support in the integration layer in nRF Connect SDK converts those errnos to the errnos that adhere to the selected C library implementation.</p>
+<p>The socket offloading functionality is enabled by default.
+To disable the functionality, disable the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NET_SOCKETS_OFFLOAD</span></code> Kconfig option in your project configuration.
+If you disable the socket offloading functionality, the socket calls will no longer be offloaded to the nRF9160 modem firmware.
+Instead, the calls will be relayed to the native Zephyr TCP/IP implementation.
+This can be useful to switch between an emulator and a real device while running networking code on these devices.
+Note that the even if the socket offloading is disabled, Modem library’s own socket APIs such as <code class="xref c c-func docutils literal notranslate"><span class="pre">nrf_socket()</span></code> and <code class="xref c c-func docutils literal notranslate"><span class="pre">nrf_send()</span></code> remain available.</p>
+</section>
+<section id="os-abstraction-layer">
+<h2><a class="toc-backref" href="#id11">OS abstraction layer</a><a class="headerlink" href="#os-abstraction-layer" title="Permalink to this heading"></a></h2>
+<p>The Modem library requires the implementation of an OS abstraction layer, which is an interface over the operating system functionalities such as interrupt setup, threads, and heap.
+The integration layer provides an implementation of the OS abstraction layer using nRF Connect SDK components.
+The OS abstraction layer is implemented in the <code class="file docutils literal notranslate"><span class="pre">nrfxlib/nrf_modem/include/nrf_modem_os.c</span></code>.</p>
+<p>The behavior of the functions in the OS abstraction layer is dependent on the nRF Connect SDK components that are used in their implementation.
+This is relevant for functions such as <code class="xref c c-func docutils literal notranslate"><span class="pre">nrf_modem_os_shm_tx_alloc()</span></code>, which uses <span class="xref std std-ref">Zephyr’s Heap implementation</span> to dynamically allocate memory.
+In this case, the characteristics of the allocations made by these functions depend on the heap implementation by Zephyr.</p>
+</section>
+<section id="modem-trace-module">
+<span id="id1"></span><h2><a class="toc-backref" href="#id12">Modem trace module</a><a class="headerlink" href="#modem-trace-module" title="Permalink to this heading"></a></h2>
+<p>To enable the tracing functionality, enable the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF_MODEM_LIB_TRACE</span></code> Kconfig in your project configuration.
+The module is implemented in <code class="file docutils literal notranslate"><span class="pre">nrf/lib/nrf_modem_lib/nrf_modem_lib_trace.c</span></code> and consists of a thread that initializes, deinitializes, and forwards modem traces to a backend that can be selected by enabling any one of the following Kconfig options:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF_MODEM_LIB_TRACE_BACKEND_UART</span></code> to send modem traces over UARTE1</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF_MODEM_LIB_TRACE_BACKEND_RTT</span></code> to send modem traces over SEGGER RTT</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF_MODEM_LIB_TRACE_BACKEND_FLASH</span></code> to write modem traces to external flash</p></li>
+</ul>
+<p>To reduce the amount of trace data sent from the modem, a different trace level can be selected.
+Complete the following steps to configure the modem trace level at compile time:</p>
+<ol class="arabic simple">
+<li><p>Enable the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF_MODEM_LIB_TRACE_LEVEL_OVERRIDE</span></code> option in your project configuration.</p></li>
+<li><p>Enable any one of the following Kconfig options by setting it to <code class="docutils literal notranslate"><span class="pre">y</span></code> in your project configuration:</p></li>
+</ol>
+<blockquote id="trace-level-options">
+<div><ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF_MODEM_LIB_TRACE_LEVEL_OFF</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF_MODEM_LIB_TRACE_LEVEL_FULL</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF_MODEM_LIB_TRACE_LEVEL_LTE_AND_IP</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF_MODEM_LIB_TRACE_LEVEL_IP_ONLY</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF_MODEM_LIB_TRACE_LEVEL_COREDUMP_ONLY</span></code></p></li>
+</ul>
+</div></blockquote>
+<p>The application can use the <a class="reference internal" href="#c.nrf_modem_lib_trace_level_set" title="nrf_modem_lib_trace_level_set"><code class="xref c c-func docutils literal notranslate"><span class="pre">nrf_modem_lib_trace_level_set()</span></code></a> function to set the desired trace level.
+Passing <code class="docutils literal notranslate"><span class="pre">NRF_MODEM_LIB_TRACE_LEVEL_OFF</span></code> to the <a class="reference internal" href="#c.nrf_modem_lib_trace_level_set" title="nrf_modem_lib_trace_level_set"><code class="xref c c-func docutils literal notranslate"><span class="pre">nrf_modem_lib_trace_level_set()</span></code></a> function disables trace output.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The modem stores the current trace level on passing the <code class="docutils literal notranslate"><span class="pre">AT+CFUN=0</span></code> command.
+If the trace level stored in the modem is <code class="docutils literal notranslate"><span class="pre">NRF_MODEM_LIB_TRACE_LEVEL_OFF</span></code>, the application must enable traces in the modem using the <a class="reference internal" href="#c.nrf_modem_lib_trace_level_set" title="nrf_modem_lib_trace_level_set"><code class="xref c c-func docutils literal notranslate"><span class="pre">nrf_modem_lib_trace_level_set()</span></code></a> function or by enabling any of the <a class="reference internal" href="#trace-level-options"><span class="std std-ref">aforementioned Kconfig options</span></a>.</p>
+</div>
+<p>During tracing, the integration layer ensures that modem traces are always flushed before the Modem library is re-initialized (including when the modem has crashed).
+The application can synchronize with the flushing of modem traces by calling the <a class="reference internal" href="#c.nrf_modem_lib_trace_processing_done_wait" title="nrf_modem_lib_trace_processing_done_wait"><code class="xref c c-func docutils literal notranslate"><span class="pre">nrf_modem_lib_trace_processing_done_wait()</span></code></a> function.</p>
+<p>For trace backends that support storing of trace data, the application can be notified using the <a class="reference internal" href="#c.nrf_modem_lib_trace_callback" title="nrf_modem_lib_trace_callback"><code class="xref c c-func docutils literal notranslate"><span class="pre">nrf_modem_lib_trace_callback()</span></code></a> function if the trace storage becomes full.
+The <a class="reference internal" href="#c.nrf_modem_lib_trace_callback" title="nrf_modem_lib_trace_callback"><code class="xref c c-func docutils literal notranslate"><span class="pre">nrf_modem_lib_trace_callback()</span></code></a> must be defined in the application if the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF_MODEM_TRACE_FLASH_NOSPACE_SIGNAL</span></code> Kconfig option is enabled.
+In this case, the application is responsible for reading the trace data with the <a class="reference internal" href="#c.nrf_modem_lib_trace_read" title="nrf_modem_lib_trace_read"><code class="xref c c-func docutils literal notranslate"><span class="pre">nrf_modem_lib_trace_read()</span></code></a> function if required, before clearing the trace backend storage by calling the <a class="reference internal" href="#c.nrf_modem_lib_trace_clear" title="nrf_modem_lib_trace_clear"><code class="xref c c-func docutils literal notranslate"><span class="pre">nrf_modem_lib_trace_clear()</span></code></a> function.
+It is not necessary to turn off modem tracing.
+However, it is expected that the modem will drop traces when the backend becomes full.</p>
+<p>To enable the measurement of the modem trace backend bitrate, enable the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF_MODEM_LIB_TRACE_BACKEND_BITRATE</span></code> Kconfig in your project configuration.
+After enabling this Kconfig option, the application can use the <a class="reference internal" href="#c.nrf_modem_lib_trace_backend_bitrate_get" title="nrf_modem_lib_trace_backend_bitrate_get"><code class="xref c c-func docutils literal notranslate"><span class="pre">nrf_modem_lib_trace_backend_bitrate_get()</span></code></a> function to retrieve the rolling average bitrate of the modem trace backend, measured over the period defined by the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF_MODEM_LIB_TRACE_BACKEND_BITRATE_PERIOD_MS</span></code> Kconfig option.
+To enable logging of the modem trace backend bitrate, enable the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF_MODEM_LIB_TRACE_BACKEND_BITRATE_LOG</span></code> Kconfig.
+The logging happens at an interval set by the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF_MODEM_LIB_TRACE_BACKEND_BITRATE_LOG_PERIOD_MS</span></code> Kconfig option.
+If the difference in the values of the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF_MODEM_LIB_TRACE_BACKEND_BITRATE_PERIOD_MS</span></code> Kconfig option and the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF_MODEM_LIB_TRACE_BACKEND_BITRATE_LOG_PERIOD_MS</span></code> Kconfig option is very high, you can sometimes observe high variation in measurements due to the short period over which the rolling average is calculated.</p>
+<p>To enable logging of the modem trace bitrate, enable the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF_MODEM_LIB_TRACE_BITRATE_LOG</span></code> Kconfig.</p>
+<section id="adding-custom-trace-backends">
+<span id="adding-custom-modem-trace-backends"></span><h3><a class="toc-backref" href="#id13">Adding custom trace backends</a><a class="headerlink" href="#adding-custom-trace-backends" title="Permalink to this heading"></a></h3>
+<p>You can add custom trace backends if the existing trace backends are not sufficient.
+At any time, only one trace backend can be compiled with the application.
+The value of the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF_MODEM_LIB_TRACE_BACKEND</span></code> Kconfig option determines which trace backend is compiled.
+The <a class="reference internal" href="../../samples/nrf9160/modem_trace_backend/README.html#modem-trace-backend-sample"><span class="std std-ref">nRF9160: Modem trace backend</span></a> sample demonstrates how a custom trace backend can be added to an application.</p>
+<p>Complete the following steps to add a custom trace backend:</p>
+<ol class="arabic">
+<li><p>Place the files that have the custom trace backend implementation in a library or an application you create.
+For example, the implementation of the UART trace backend (default) can be found in the <code class="file docutils literal notranslate"><span class="pre">nrf/lib/nrf_modem_lib/trace_backends/uart/uart.c</span></code> file.</p></li>
+<li><p>Add a C file implementing the interface in <code class="file docutils literal notranslate"><span class="pre">nrf/include/modem/trace_backend.h</span></code> header file.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/* my_trace_backend.c */</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;modem/trace_backend.h&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">trace_backend_init</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">     </span><span class="cm">/* initialize transport backend here */</span>
+<span class="w">     </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">trace_backend_deinit</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">     </span><span class="cm">/* optional deinitialization code here */</span>
+<span class="w">     </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">trace_backend_write</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">len</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">     </span><span class="cm">/* forward or store trace data here */</span>
+<span class="w">     </span><span class="cm">/* return the number of bytes written or stored, or a negative error code on failure */</span>
+<span class="w">     </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">size_t</span><span class="w"> </span><span class="nf">trace_backend_data_size</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">   </span><span class="cm">/* If trace data is stored when calling trace_backend_write</span>
+<span class="cm">    * this function returns the size of the stored trace data.</span>
+<span class="cm">    *</span>
+<span class="cm">    * If not applicable for the trace backend, set to NULL in the trace_backend struct.</span>
+<span class="cm">    */</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">trace_backend_read</span><span class="p">(</span><span class="kt">uint8_t</span><span class="w"> </span><span class="o">*</span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">len</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">   </span><span class="cm">/* If trace data is stored when calling trace_backend_write</span>
+<span class="cm">    * this function allows the application to read back the trace data.</span>
+<span class="cm">    *</span>
+<span class="cm">    * If not applicable for the trace backend, set to NULL in the trace_backend struct.</span>
+<span class="cm">    */</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">trace_backend_clear</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">   </span><span class="cm">/* This function allows the backend to clear all stored traces in the backend. For instance</span>
+<span class="cm">    * this can be erasing a flash partition to prepare for writing new data.</span>
+<span class="cm">    *</span>
+<span class="cm">    * If not applicable for the trace backend, set to NULL in the trace_backend struct.</span>
+<span class="cm">    */</span>
+<span class="p">}</span>
+
+<span class="k">struct</span><span class="w"> </span><span class="nc">nrf_modem_lib_trace_backend</span><span class="w"> </span><span class="n">trace_backend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="p">.</span><span class="n">init</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">trace_backend_init</span><span class="p">,</span>
+<span class="w">   </span><span class="p">.</span><span class="n">deinit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">trace_backend_deinit</span><span class="p">,</span>
+<span class="w">   </span><span class="p">.</span><span class="n">write</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">trace_backend_write</span><span class="p">,</span>
+<span class="w">   </span><span class="p">.</span><span class="n">data_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">trace_backend_data_size</span><span class="p">,</span><span class="w"> </span><span class="cm">/* Set to NULL if not applicable. */</span>
+<span class="w">   </span><span class="p">.</span><span class="n">read</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">trace_backend_read</span><span class="p">,</span><span class="w"> </span><span class="cm">/* Set to NULL if not applicable. */</span>
+<span class="w">   </span><span class="p">.</span><span class="n">clear</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">trace_backend_clear</span><span class="p">,</span><span class="w"> </span><span class="cm">/* Set to NULL if not applicable. */</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</li>
+<li><p>Create or modify a <code class="file docutils literal notranslate"><span class="pre">Kconfig</span></code> file to extend the choice <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">NRF_MODEM_LIB_TRACE_BACKEND</span></code> with another option.</p>
+<div class="highlight-Kconfig notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="w"> </span>NRF_MODEM_LIB_TRACE
+
+<span class="c1"># Extends the choice with another backend</span>
+<span class="k">choice</span><span class="w"> </span>NRF_MODEM_LIB_TRACE_BACKEND
+
+<span class="k">config</span><span class="w"> </span>NRF_MODEM_LIB_TRACE_BACKEND_MY_TRACE_BACKEND
+<span class="w">        </span><span class="nb">bool</span><span class="w"> </span><span class="s2">&quot;My trace backend&quot;</span>
+<span class="w">        </span><span class="k">help</span>
+<span class="sd">          Optional description of my</span>
+<span class="sd">          trace backend.</span>
+
+<span class="k">endchoice</span>
+
+<span class="k">endif</span>
+</pre></div>
+</div>
+</li>
+<li><p>Create or modify a <code class="file docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> file, adding the custom trace backend sources only if the custom trace backend option has been chosen.</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">if</span><span class="p">(</span><span class="s">CONFIG_NRF_MODEM_LIB_TRACE</span><span class="p">)</span>
+
+<span class="nb">zephyr_library</span><span class="p">()</span>
+
+<span class="c"># Only add &#39;custom&#39; backend to compilation when selected.</span>
+<span class="nb">zephyr_library_sources_ifdef</span><span class="p">(</span>
+<span class="w">  </span><span class="s">CONFIG_NRF_MODEM_LIB_TRACE_BACKEND_MY_TRACE_BACKEND</span>
+<span class="w">  </span><span class="s">path/to/my_trace_backend.c</span>
+<span class="p">)</span>
+
+<span class="nb">endif</span><span class="p">()</span>
+</pre></div>
+</div>
+</li>
+<li><p>Include the <code class="file docutils literal notranslate"><span class="pre">Kconfig</span></code> file and the <code class="file docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> file to the build.</p></li>
+<li><p>Add the following Kconfig options to your application’s <code class="file docutils literal notranslate"><span class="pre">prj.conf</span></code> file to use the custom modem trace backend:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>CONFIG_NRF_MODEM_LIB_TRACE=y
+CONFIG_NRF_MODEM_LIB_TRACE_BACKEND_MY_TRACE_BACKEND=y
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="sending-traces-over-uart1-on-a-custom-board">
+<span id="modem-trace-backend-uart-custom-board"></span><h3><a class="toc-backref" href="#id14">Sending traces over UART1 on a custom board</a><a class="headerlink" href="#sending-traces-over-uart1-on-a-custom-board" title="Permalink to this heading"></a></h3>
+<p>When sending modem traces over UART1 on a custom board, configuration must be added for the UART1 device in the devicetree.
+This is done by adding the following code snippet to the board devicetree or overlay file, where the pin numbers (<code class="docutils literal notranslate"><span class="pre">0</span></code>, <code class="docutils literal notranslate"><span class="pre">1</span></code>, <code class="docutils literal notranslate"><span class="pre">14</span></code>, and <code class="docutils literal notranslate"><span class="pre">15</span></code>) must be updated to match your board.</p>
+<div class="highlight-dts notranslate"><div class="highlight"><pre><span></span><span class="o">&amp;</span><span class="na">pinctrl</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="nl">uart1_default</span><span class="p">:</span><span class="w"> </span><span class="nf">uart1_default</span><span class="cm"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nf">group1</span><span class="cm"> </span><span class="p">{</span>
+<span class="w">         </span><span class="n">psels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="na">NRF_PSEL</span><span class="p">(</span><span class="na">UART_TX</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span>
+<span class="w">            </span><span class="o">&lt;</span><span class="na">NRF_PSEL</span><span class="p">(</span><span class="na">UART_RTS</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">14</span><span class="p">)</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">      </span><span class="p">};</span>
+<span class="w">      </span><span class="nf">group2</span><span class="cm"> </span><span class="p">{</span>
+<span class="w">         </span><span class="n">psels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="na">NRF_PSEL</span><span class="p">(</span><span class="na">UART_RX</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span>
+<span class="w">            </span><span class="o">&lt;</span><span class="na">NRF_PSEL</span><span class="p">(</span><span class="na">UART_CTS</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">)</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">         </span><span class="n">bias-pull-up</span><span class="p">;</span>
+<span class="w">      </span><span class="p">};</span>
+<span class="w">   </span><span class="p">};</span>
+
+<span class="w">   </span><span class="nl">uart1_sleep</span><span class="p">:</span><span class="w"> </span><span class="nf">uart1_sleep</span><span class="cm"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nf">group1</span><span class="cm"> </span><span class="p">{</span>
+<span class="w">         </span><span class="n">psels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="na">NRF_PSEL</span><span class="p">(</span><span class="na">UART_TX</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span>
+<span class="w">            </span><span class="o">&lt;</span><span class="na">NRF_PSEL</span><span class="p">(</span><span class="na">UART_RX</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span>
+<span class="w">            </span><span class="o">&lt;</span><span class="na">NRF_PSEL</span><span class="p">(</span><span class="na">UART_RTS</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">14</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span>
+<span class="w">            </span><span class="o">&lt;</span><span class="na">NRF_PSEL</span><span class="p">(</span><span class="na">UART_CTS</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">)</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">         </span><span class="n">low-power-enable</span><span class="p">;</span>
+<span class="w">      </span><span class="p">};</span>
+<span class="w">   </span><span class="p">};</span>
+<span class="p">};</span>
+
+<span class="o">&amp;</span><span class="nf">uart1</span><span class="cm"> </span><span class="p">{</span>
+<span class="w">   </span><span class="p">...</span>
+<span class="w">   </span><span class="n">pinctrl-0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;&amp;</span><span class="na">uart1_default</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">   </span><span class="n">pinctrl-1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;&amp;</span><span class="na">uart1_sleep</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">   </span><span class="n">pinctrl-names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;default&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;sleep&quot;</span><span class="p">;</span>
+<span class="w">   </span><span class="p">...</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>The UART trace backends allow the pins and UART1 interrupt priority to be set using the devicetree.
+Other configurations set in the devicetree, such as the current speed, are overwritten by the UART trace backends.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When one of the UART trace backends is enabled by either the Kconfig option <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF_MODEM_LIB_TRACE_BACKEND_UART</span></code> or <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF_MODEM_LIB_TRACE_BACKEND_UART_SYNC</span></code>, it initializes the UART1 driver, regardless of its status in the devicetree.</p>
+</div>
+</section>
+</section>
+<section id="modem-fault-handling">
+<h2><a class="toc-backref" href="#id15">Modem fault handling</a><a class="headerlink" href="#modem-fault-handling" title="Permalink to this heading"></a></h2>
+<p>If a fault occurs in the modem, the application is notified through the fault handler function that is registered with the Modem library during initialization.
+This lets the application read the fault reason (in some cases the modem’s program counter) and take the appropriate action.</p>
+<p>On initialization (using <a class="reference internal" href="#c.nrf_modem_lib_init" title="nrf_modem_lib_init"><code class="xref c c-func docutils literal notranslate"><span class="pre">nrf_modem_lib_init()</span></code></a>), the Modem library integration layer registers the <a class="reference internal" href="#c.nrf_modem_fault_handler" title="nrf_modem_fault_handler"><code class="xref c c-func docutils literal notranslate"><span class="pre">nrf_modem_fault_handler()</span></code></a> function through the Modem library initialization parameters.
+The behavior of the <a class="reference internal" href="#c.nrf_modem_fault_handler" title="nrf_modem_fault_handler"><code class="xref c c-func docutils literal notranslate"><span class="pre">nrf_modem_fault_handler()</span></code></a> function is controlled with the three following Kconfig options:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF_MODEM_LIB_ON_FAULT_DO_NOTHING</span></code> - This option lets the fault handler log the Modem fault and return (default).</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF_MODEM_LIB_ON_FAULT_RESET_MODEM</span></code> - This option lets the fault handler schedule a workqueue task to reinitialize the modem and Modem library.</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF_MODEM_LIB_ON_FAULT_APPLICATION_SPECIFIC</span></code> - This option lets the fault handler function <a class="reference internal" href="#c.nrf_modem_fault_handler" title="nrf_modem_fault_handler"><code class="xref c c-func docutils literal notranslate"><span class="pre">nrf_modem_fault_handler()</span></code></a> be defined by the application, outside of the Modem library integration layer.</p></li>
+</ul>
+<section id="implementing-a-custom-fault-handler">
+<h3><a class="toc-backref" href="#id16">Implementing a custom fault handler</a><a class="headerlink" href="#implementing-a-custom-fault-handler" title="Permalink to this heading"></a></h3>
+<p>If you want to implement a custom fault handler, enable the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF_MODEM_LIB_ON_FAULT_APPLICATION_SPECIFIC</span></code> Kconfig option and provide an implementation of the <a class="reference internal" href="#c.nrf_modem_fault_handler" title="nrf_modem_fault_handler"><code class="xref c c-func docutils literal notranslate"><span class="pre">nrf_modem_fault_handler()</span></code></a> function, considering the following points:</p>
+<ul class="simple">
+<li><p>The fault handler is called in an interrupt context.</p></li>
+<li><p>Re-initialization of the Modem library must be done outside of the fault handler.</p></li>
+</ul>
+</section>
+</section>
+<section id="partition-manager-integration">
+<span id="partition-mgr-integration"></span><h2><a class="toc-backref" href="#id17">Partition manager integration</a><a class="headerlink" href="#partition-manager-integration" title="Permalink to this heading"></a></h2>
+<p>The Modem library, which runs on the application core, shares an area of RAM memory with the nRF9160 modem core.
+During the initialization, the Modem library accepts the boundaries of this area of RAM and configures the communication with the modem core accordingly.</p>
+<p>However, it is the responsibility of the application to reserve that RAM during linking, so that this memory area is not used for other purposes and remain dedicated for use by the Modem library.</p>
+<p>In nRF Connect SDK, the application can configure the size of the memory area dedicated to the Modem library through the integration layer.
+The integration layer provides a set of Kconfig options that help the application reserve the required amount of memory for the Modem library by integrating with another nRF Connect SDK component, the <a class="reference internal" href="../../scripts/partition_manager/partition_manager.html#partition-manager"><span class="std std-ref">Partition Manager</span></a>.</p>
+<p>The RAM area that the Modem library shares with the nRF9160 modem core is divided into the following four regions:</p>
+<ul class="simple">
+<li><p>Control</p></li>
+<li><p>RX</p></li>
+<li><p>TX</p></li>
+<li><p>Trace</p></li>
+</ul>
+<p>The size of the RX, TX and the Trace regions can be configured by the following Kconfig options of the integration layer:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF_MODEM_LIB_SHMEM_RX_SIZE</span></code> for the RX region</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF_MODEM_LIB_SHMEM_TX_SIZE</span></code> for the TX region</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF_MODEM_LIB_SHMEM_TRACE_SIZE</span></code> for the Trace region</p></li>
+</ul>
+<p>The size of the Control region is fixed.
+The Modem library exports the size value through <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF_MODEM_SHMEM_CTRL_SIZE</span></code>.
+This value is automatically passed by the integration layer to the library during the initialization through <a class="reference internal" href="#c.nrf_modem_lib_init" title="nrf_modem_lib_init"><code class="xref c c-func docutils literal notranslate"><span class="pre">nrf_modem_lib_init()</span></code></a>.</p>
+<p>When the application is built using CMake, the <a class="reference internal" href="../../scripts/partition_manager/partition_manager.html#partition-manager"><span class="std std-ref">Partition Manager</span></a> automatically reads the Kconfig options of the integration layer.
+Partition manager decides about the placement of the regions in RAM and reserves memory according to the given size.
+As a result, the Partition manager generates the following definitions:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">PM_NRF_MODEM_LIB_CTRL_ADDRESS</span></code> - Address of the Control region</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PM_NRF_MODEM_LIB_TX_ADDRESS</span></code> - Address of the TX region</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PM_NRF_MODEM_LIB_RX_ADDRESS</span></code> - Address of the RX region</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PM_NRF_MODEM_LIB_TRACE_ADDRESS</span></code> - Address of the Trace region</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PM_NRF_MODEM_LIB_CTRL_SIZE</span></code> - Size of the Control region</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PM_NRF_MODEM_LIB_TX_SIZE</span></code> - Size of the TX region</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PM_NRF_MODEM_LIB_RX_SIZE</span></code> - Size of the RX region</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PM_NRF_MODEM_LIB_TRACE_SIZE</span></code> - Size of the Trace region</p></li>
+</ul>
+<p>These definitions will have identical values as the <code class="docutils literal notranslate"><span class="pre">CONFIG_NRF_MODEM_LIB_SHMEM_*_SIZE</span></code> configuration options.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The heap implementation used for allocations on the TX region has an overhead of up to 128 bytes.
+Adjust the size of the TX region accordingly, so that its size is 128 bytes larger than the largest allocation you expect to happen (longest AT command, largest payload passed to <code class="xref c c-func docutils literal notranslate"><span class="pre">nrf_send()</span></code>) in your application.</p>
+</div>
+<p>When the Modem library is initialized by the integration layer in nRF Connect SDK, the integration layer automatically passes the boundaries of each shared memory region to the Modem library during the <a class="reference internal" href="#c.nrf_modem_lib_init" title="nrf_modem_lib_init"><code class="xref c c-func docutils literal notranslate"><span class="pre">nrf_modem_lib_init()</span></code></a> call.</p>
+</section>
+<section id="diagnostic-functionality">
+<h2><a class="toc-backref" href="#id18">Diagnostic functionality</a><a class="headerlink" href="#diagnostic-functionality" title="Permalink to this heading"></a></h2>
+<p>The Modem library integration layer in nRF Connect SDK provides some memory diagnostic functionality that is enabled by the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF_MODEM_LIB_MEM_DIAG</span></code> option.</p>
+<p>The application can retrieve runtime statistics for the library and TX memory region heaps by enabling the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF_MODEM_LIB_MEM_DIAG</span></code> option and calling the <a class="reference internal" href="#c.nrf_modem_lib_diag_stats_get" title="nrf_modem_lib_diag_stats_get"><code class="xref c c-func docutils literal notranslate"><span class="pre">nrf_modem_lib_diag_stats_get()</span></code></a> function.
+The application can schedule a periodic report of the runtime statistics of the library and TX memory region heaps, by enabling the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF_MODEM_LIB_MEM_DIAG_DUMP</span></code> option.
+The application can log the allocations on the Modem library heap and the TX memory region by enabling the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF_MODEM_LIB_MEM_DIAG_ALLOC</span></code> option.</p>
+</section>
+<section id="api-documentation">
+<h2><a class="toc-backref" href="#id19">API documentation</a><a class="headerlink" href="#api-documentation" title="Permalink to this heading"></a></h2>
+<div class="line-block">
+<div class="line">Header file: <code class="file docutils literal notranslate"><span class="pre">include/modem/nrf_modem_lib.h</span></code>, <code class="file docutils literal notranslate"><span class="pre">include/modem/nrf_modem_lib_trace.h</span></code></div>
+<div class="line">Source file: <code class="file docutils literal notranslate"><span class="pre">lib/nrf_modem_lib.c</span></code></div>
+</div>
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="group__nrf__modem__lib"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">nrf_modem_lib</span></span></dt>
+<dd><p>Modem library wrapper. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-defines">Defines</p>
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.NRF_MODEM_LIB_ON_INIT">
+<span class="target" id="group__nrf__modem__lib_1ga4cf47c947de4b76a1de76a2ac85f7f15"></span><span class="sig-name descname"><span class="n"><span class="pre">NRF_MODEM_LIB_ON_INIT</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">name</span></span>, <span class="n"><span class="pre">_callback</span></span>, <span class="n"><span class="pre">_context</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.NRF_MODEM_LIB_ON_INIT" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Define a callback for <a class="reference internal" href="#group__nrf__modem__lib_1gacf2b1e6b30a67ecbdb4b4cd179f1ead5"><span class="std std-ref">nrf_modem_lib_init</span></a> calls. </p>
+<p>The callback function <code class="docutils literal notranslate"><span class="pre">_callback</span></code> is invoked after the library has been initialized.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – Callback name </p></li>
+<li><p><strong>_callback</strong> – Callback function name </p></li>
+<li><p><strong>_context</strong> – User-defined context for the callback </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.NRF_MODEM_LIB_ON_SHUTDOWN">
+<span class="target" id="group__nrf__modem__lib_1gaf3d0a73b4423baf11cc9f9326c218669"></span><span class="sig-name descname"><span class="n"><span class="pre">NRF_MODEM_LIB_ON_SHUTDOWN</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">name</span></span>, <span class="n"><span class="pre">_callback</span></span>, <span class="n"><span class="pre">_context</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.NRF_MODEM_LIB_ON_SHUTDOWN" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Define a callback for <a class="reference internal" href="#group__nrf__modem__lib_1ga253305b94dd05d8d9e659ce310a5a097"><span class="std std-ref">nrf_modem_lib_shutdown</span></a> calls. </p>
+<p>The callback function <code class="docutils literal notranslate"><span class="pre">_callback</span></code> is invoked before the library is shutdown.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – Callback name </p></li>
+<li><p><strong>_callback</strong> – Callback function name </p></li>
+<li><p><strong>_context</strong> – User-defined context for the callback </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-enums">Enums</p>
+<dl class="c enum">
+<dt class="sig sig-object c" id="c.nrf_modem_mode">
+<span class="target" id="group__nrf__modem__lib_1ga6a19283326ca6f8e487b071f3a0bbaa3"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nrf_modem_mode</span></span></span><a class="headerlink" href="#c.nrf_modem_mode" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Modem library mode. </p>
+<p><em>Values:</em></p>
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.nrf_modem_mode.NORMAL_MODE">
+<span class="target" id="group__nrf__modem__lib_1gga6a19283326ca6f8e487b071f3a0bbaa3a83feb61d42f8db9f494019fcea2c0148"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">NORMAL_MODE</span></span></span><a class="headerlink" href="#c.nrf_modem_mode.NORMAL_MODE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Normal operation mode </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.nrf_modem_mode.BOOTLOADER_MODE">
+<span class="target" id="group__nrf__modem__lib_1gga6a19283326ca6f8e487b071f3a0bbaa3aa71eabb1e0f2bccf3e1668bbeee4a56d"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BOOTLOADER_MODE</span></span></span><a class="headerlink" href="#c.nrf_modem_mode.BOOTLOADER_MODE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Bootloader (full DFU) mode </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.nrf_modem_lib_init">
+<span class="target" id="group__nrf__modem__lib_1gacf2b1e6b30a67ecbdb4b4cd179f1ead5"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nrf_modem_lib_init</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#c.nrf_modem_mode" title="nrf_modem_mode"><span class="n"><span class="pre">nrf_modem_mode</span></span></a><span class="w"> </span><span class="n"><span class="pre">mode</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.nrf_modem_lib_init" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Initialize the Modem library and turn on the modem. </p>
+<p>This function initializes all integration components of the nrf_modem library and turns on the modem. The operation can take a few minutes when a firmware update is scheduled. If your application supports modem firmware updates, consider initializing the library manually to have control of what the application should do in the meantime.</p>
+<p>The library can initialize the modem in normal mode or bootloader mode.</p>
+<p>The bootloader mode is used to update the whole modem firmware. When modem is initialized in bootloader mode, no other functionality is available. In particular, networking sockets and AT commands won’t be available.</p>
+<p>To switch between the bootloader mode and normal mode, shutdown the modem with <a class="reference internal" href="#group__nrf__modem__lib_1ga253305b94dd05d8d9e659ce310a5a097"><span class="std std-ref">nrf_modem_lib_shutdown()</span></a> and re-initialize it in the desired mode.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mode</strong> – <strong>[in]</strong> Initialization mode.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>int Zero on success, non-zero otherwise. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.nrf_modem_lib_shutdown">
+<span class="target" id="group__nrf__modem__lib_1ga253305b94dd05d8d9e659ce310a5a097"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nrf_modem_lib_shutdown</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.nrf_modem_lib_shutdown" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Shutdown the Modem library and turn off the modem. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>int Zero on success, non-zero otherwise. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.nrf_modem_fault_handler">
+<span class="target" id="group__nrf__modem__lib_1gaf01ec0e5f89a170b576e067d8613c2e0"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nrf_modem_fault_handler</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">nrf_modem_fault_info</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">fault_info</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.nrf_modem_fault_handler" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Modem fault handler. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fault_info</strong> – <strong>[in]</strong> Modem fault information. Contains the fault reason and, in some cases, the modem program counter. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.nrf_modem_lib_fault_strerror">
+<span class="target" id="group__nrf__modem__lib_1ga3d636b05cc1114b1ddc1e5664b8f69d7"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">nrf_modem_lib_fault_strerror</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">fault</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.nrf_modem_lib_fault_strerror" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Retrieve a statically allocated textual description of a given fault. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fault</strong> – The fault. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>const char* Textual description of the given fault. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.nrf_modem_lib_diag_stats_get">
+<span class="target" id="group__nrf__modem__lib_1ga4bfb05301619a4239a1fef62d114198d"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nrf_modem_lib_diag_stats_get</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.nrf_modem_lib_diag_stats" title="nrf_modem_lib_diag_stats"><span class="n"><span class="pre">nrf_modem_lib_diag_stats</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">stats</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.nrf_modem_lib_diag_stats_get" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Retrieve heap runtime statistics. </p>
+<p>Retrieve runtime statistics for the shared memory and library heaps.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>int Zero on success, non-zero otherwise. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.nrf_modem_lib_init_cb">
+<span class="target" id="structnrf__modem__lib__init__cb"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nrf_modem_lib_init_cb</span></span></span><a class="headerlink" href="#c.nrf_modem_lib_init_cb" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;nrf_modem_lib.h&gt;</em></div>
+<p>Modem library initialization callback struct. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.nrf_modem_lib_init_cb.callback">
+<span class="target" id="structnrf__modem__lib__init__cb_1a4d7d7b16d405f21edfe5d4c8b74ad2c4"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">callback</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">ret</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#c.nrf_modem_lib_init_cb.callback" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Callback function. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Param ret</dt>
+<dd class="field-odd"><p>The return value of nrf_modem_init() </p>
+</dd>
+<dt class="field-even">Param ctx</dt>
+<dd class="field-even"><p>User-defined context </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.nrf_modem_lib_init_cb.context">
+<span class="target" id="structnrf__modem__lib__init__cb_1acbd63d24b2882d835fecf4ea0cb36230"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">context</span></span></span><a class="headerlink" href="#c.nrf_modem_lib_init_cb.context" title="Permalink to this definition"></a><br /></dt>
+<dd><p>User defined context </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.nrf_modem_lib_shutdown_cb">
+<span class="target" id="structnrf__modem__lib__shutdown__cb"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nrf_modem_lib_shutdown_cb</span></span></span><a class="headerlink" href="#c.nrf_modem_lib_shutdown_cb" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;nrf_modem_lib.h&gt;</em></div>
+<p>Modem library shutdown callback struct. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.nrf_modem_lib_shutdown_cb.callback">
+<span class="target" id="structnrf__modem__lib__shutdown__cb_1a43200615be2e84ed84cc1e12f66208e1"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">callback</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#c.nrf_modem_lib_shutdown_cb.callback" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Callback function. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Param ctx</dt>
+<dd class="field-odd"><p>User-defined context </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.nrf_modem_lib_shutdown_cb.context">
+<span class="target" id="structnrf__modem__lib__shutdown__cb_1a43cfa491f9d55e243c5f6913cc3f83b0"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">context</span></span></span><a class="headerlink" href="#c.nrf_modem_lib_shutdown_cb.context" title="Permalink to this definition"></a><br /></dt>
+<dd><p>User defined context </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.nrf_modem_lib_diag_stats">
+<span class="target" id="structnrf__modem__lib__diag__stats"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nrf_modem_lib_diag_stats</span></span></span><a class="headerlink" href="#c.nrf_modem_lib_diag_stats" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;nrf_modem_lib.h&gt;</em></div>
+</dd></dl>
+
+</dd></dl>
+
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="group__nrf__modem__lib__trace"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">nrf_modem_lib_trace</span></span></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-enums">Enums</p>
+<dl class="c enum">
+<dt class="sig sig-object c" id="c.nrf_modem_lib_trace_level">
+<span class="target" id="group__nrf__modem__lib__trace_1ga1b25e3140e9b304fa8a96822e043288f"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nrf_modem_lib_trace_level</span></span></span><a class="headerlink" href="#c.nrf_modem_lib_trace_level" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Trace level. </p>
+<p>The trace level can be used to filter the traces. </p>
+<p><em>Values:</em></p>
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.nrf_modem_lib_trace_level.NRF_MODEM_LIB_TRACE_LEVEL_OFF">
+<span class="target" id="group__nrf__modem__lib__trace_1gga1b25e3140e9b304fa8a96822e043288fa4b873712f133553d7a4ea7d406c0c59a"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">NRF_MODEM_LIB_TRACE_LEVEL_OFF</span></span></span><a class="headerlink" href="#c.nrf_modem_lib_trace_level.NRF_MODEM_LIB_TRACE_LEVEL_OFF" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Disable output. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.nrf_modem_lib_trace_level.NRF_MODEM_LIB_TRACE_LEVEL_COREDUMP_ONLY">
+<span class="target" id="group__nrf__modem__lib__trace_1gga1b25e3140e9b304fa8a96822e043288fa2e45fa16ee7e4e36226f1cbb140a2ce2"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">NRF_MODEM_LIB_TRACE_LEVEL_COREDUMP_ONLY</span></span></span><a class="headerlink" href="#c.nrf_modem_lib_trace_level.NRF_MODEM_LIB_TRACE_LEVEL_COREDUMP_ONLY" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Coredump only. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.nrf_modem_lib_trace_level.NRF_MODEM_LIB_TRACE_LEVEL_FULL">
+<span class="target" id="group__nrf__modem__lib__trace_1gga1b25e3140e9b304fa8a96822e043288facd8cf6f4085ade492dea775ee6f22696"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">NRF_MODEM_LIB_TRACE_LEVEL_FULL</span></span></span><a class="headerlink" href="#c.nrf_modem_lib_trace_level.NRF_MODEM_LIB_TRACE_LEVEL_FULL" title="Permalink to this definition"></a><br /></dt>
+<dd><p>LTE, IP, GNSS, and coredump. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.nrf_modem_lib_trace_level.NRF_MODEM_LIB_TRACE_LEVEL_IP_ONLY">
+<span class="target" id="group__nrf__modem__lib__trace_1gga1b25e3140e9b304fa8a96822e043288fabbb4647c208899510a635e0ce54f4dfb"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">NRF_MODEM_LIB_TRACE_LEVEL_IP_ONLY</span></span></span><a class="headerlink" href="#c.nrf_modem_lib_trace_level.NRF_MODEM_LIB_TRACE_LEVEL_IP_ONLY" title="Permalink to this definition"></a><br /></dt>
+<dd><p>IP. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.nrf_modem_lib_trace_level.NRF_MODEM_LIB_TRACE_LEVEL_LTE_AND_IP">
+<span class="target" id="group__nrf__modem__lib__trace_1gga1b25e3140e9b304fa8a96822e043288fa73191896ffa32a9ba814e9b1cc77c66c"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">NRF_MODEM_LIB_TRACE_LEVEL_LTE_AND_IP</span></span></span><a class="headerlink" href="#c.nrf_modem_lib_trace_level.NRF_MODEM_LIB_TRACE_LEVEL_LTE_AND_IP" title="Permalink to this definition"></a><br /></dt>
+<dd><p>LTE and IP. </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="c enum">
+<dt class="sig sig-object c" id="c.nrf_modem_lib_trace_event">
+<span class="target" id="group__nrf__modem__lib__trace_1gac10eee0832369a403388599132ce81ff"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nrf_modem_lib_trace_event</span></span></span><a class="headerlink" href="#c.nrf_modem_lib_trace_event" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Trace event. </p>
+<p><em>Values:</em></p>
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.nrf_modem_lib_trace_event.NRF_MODEM_LIB_TRACE_EVT_FULL">
+<span class="target" id="group__nrf__modem__lib__trace_1ggac10eee0832369a403388599132ce81ffa43b168dc5e699c8658037665b25e1b61"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">NRF_MODEM_LIB_TRACE_EVT_FULL</span></span></span><a class="headerlink" href="#c.nrf_modem_lib_trace_event.NRF_MODEM_LIB_TRACE_EVT_FULL" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Trace storage is full. </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.nrf_modem_lib_trace_callback">
+<span class="target" id="group__nrf__modem__lib__trace_1gaa70a8cdf9248fb898ec5dbc44f9d0a36"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nrf_modem_lib_trace_callback</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#c.nrf_modem_lib_trace_event" title="nrf_modem_lib_trace_event"><span class="n"><span class="pre">nrf_modem_lib_trace_event</span></span></a><span class="w"> </span><span class="n"><span class="pre">evt</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.nrf_modem_lib_trace_callback" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Trace callback that is called by the trace library when an event occour. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This callback must be defined by the application with some trace backends.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>evt</strong> – Occurring event</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Zero on success, non-zero otherwise. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.nrf_modem_lib_trace_processing_done_wait">
+<span class="target" id="group__nrf__modem__lib__trace_1ga1efc1e060d5ae08a133cab61fba625ab"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nrf_modem_lib_trace_processing_done_wait</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">k_timeout_t</span></span><span class="w"> </span><span class="n"><span class="pre">timeout</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.nrf_modem_lib_trace_processing_done_wait" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Wait for trace to have finished processing after coredump or shutdown. </p>
+<p>This function blocks until the trace module has finished processing data after a modem fault (coredump) or modem shutdown.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>timeout</strong> – Time to wait for trace processing to be done.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Zero on success, non-zero otherwise. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.nrf_modem_lib_trace_level_set">
+<span class="target" id="group__nrf__modem__lib__trace_1ga1fe927bdde1f8e5e6b4d63e7440593e0"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nrf_modem_lib_trace_level_set</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#c.nrf_modem_lib_trace_level" title="nrf_modem_lib_trace_level"><span class="n"><span class="pre">nrf_modem_lib_trace_level</span></span></a><span class="w"> </span><span class="n"><span class="pre">trace_level</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.nrf_modem_lib_trace_level_set" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Set trace level. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>trace_level</strong> – Trace level</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Zero on success, non-zero otherwise. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.nrf_modem_lib_trace_data_size">
+<span class="target" id="group__nrf__modem__lib__trace_1ga4e0fb7b60eaec1b1e2afb1a8a5f6cb8a"></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nrf_modem_lib_trace_data_size</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.nrf_modem_lib_trace_data_size" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the number of bytes stored in the compile-time selected trace backend. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To ensure the retrieved number of bytes is correct, this function should only be called when the backend is done processing traces. This operation is only supported with some trace backends. If not supported, the function returns -ENOTSUP.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Number of bytes stored in the trace backend. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.nrf_modem_lib_trace_read">
+<span class="target" id="group__nrf__modem__lib__trace_1ga80438e40e8e75df1f1933d22969763ef"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nrf_modem_lib_trace_read</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">buf</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n"><span class="pre">len</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.nrf_modem_lib_trace_read" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Read trace data. </p>
+<p>Read out the trace data. After read, the backend can choose to free the space and prepare it for further write operations.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This operation is only supported with some trace backends. If not supported, the function returns -ENOTSUP.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>buf</strong> – Output buffer </p></li>
+<li><p><strong>len</strong> – Size of output buffer</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>read number of bytes, negative errno on failure. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.nrf_modem_lib_trace_clear">
+<span class="target" id="group__nrf__modem__lib__trace_1ga403c4aa999be5d11929810eb68338bbb"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nrf_modem_lib_trace_clear</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.nrf_modem_lib_trace_clear" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Clear captured trace data. </p>
+<p>Clear all captured trace data and prepare for capturing new traces.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This operation is only supported with some trace backends. If not supported, the function returns -ENOTSUP.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>0 on success, negative errno on failure. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.nrf_modem_lib_trace_backend_bitrate_get">
+<span class="target" id="group__nrf__modem__lib__trace_1ga11b0e70f602964425f61efed23f35866"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nrf_modem_lib_trace_backend_bitrate_get</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.nrf_modem_lib_trace_backend_bitrate_get" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the last measured rolling average bitrate of the trace backend. </p>
+<p>This function returns the last measured rolling average bitrate of the trace backend calculated over the last<span> <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF_MODEM_LIB_TRACE_BACKEND_BITRATE_PERIOD_MS</span></code> </span> period.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Rolling average bitrate of the trace backend </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="pdn.html" class="btn btn-neutral float-right" title="PDN" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="modem_slm.html" class="btn btn-neutral" title="Modem SLM" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

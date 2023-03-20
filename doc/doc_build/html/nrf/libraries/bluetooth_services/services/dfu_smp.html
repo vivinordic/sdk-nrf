@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GATT DFU SMP Service Client &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../../_static/js/ncs.js"
+></script>
+<script src="../../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Google Fast Pair Service (GFPS)" href="fast_pair.html" />
+    <link rel="prev" title="Direction and Distance Finding Service (DDFS)" href="ddfs.html" />
+<link
+  href="../../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../drivers.html">Drivers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Libraries</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../bin/index.html">Binary libraries</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Bluetooth libraries and services</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../adv_prov.html">Bluetooth LE advertising providers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../conn_ctx.html">Bluetooth connection context</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../enocean.html">Bluetooth EnOcean</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gatt_dm.html">GATT Discovery Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gatt_pool.html">Bluetooth GATT attribute pools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mesh.html">Bluetooth mesh profile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../rpc.html">Bluetooth Low Energy Remote Procedure Call</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../scan.html">Scanning module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ams_client.html">Apple Media Service (AMS) Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ancs_client.html">Apple Notification Center Service (ANCS) Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bas_client.html">GATT Battery Service (BAS) Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bms.html">GATT Bond Management Service (BMS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cgms.html">GATT Continuous Glucose Monitoring Service (CGMS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cts_client.html">GATT Current Time Service (CTS) Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ddfs.html">Direction and Distance Finding Service (DDFS)</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">GATT DFU SMP Service Client</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#service-uuid">Service UUID</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#characteristics">Characteristics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#usage">Usage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#api-documentation">API documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="fast_pair.html">Google Fast Pair Service (GFPS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gattp.html">Generic Attribute (GATT) Profile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hids.html">GATT Human Interface Device (HID) Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hogp.html">GATT Human Interface Device Service (HIDS) Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hrs_client.html">GATT Heart Rate Service (HRS) Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="latency.html">GATT Latency Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="latency_client.html">GATT Latency Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lbs.html">LED Button Service (LBS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mds.html">Memfault Diagnostic Service (MDS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nsms.html">Nordic Status Message Service (NSMS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nus.html">Nordic UART Service (NUS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nus_client.html">Nordic UART Service (NUS) Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rscs.html">Running Speed and Cadence Service (RSCS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="throughput.html">GATT Throughput Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wifi_prov.html">Wi-Fi Provisioning Service</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../bootloader/index.html">Bootloader libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../caf/index.html">Common Application Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../debug/index.html">Debug libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../dfu/index.html">DFU libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gazell/index.html">Gazell libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../modem/index.html">Modem libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mpsl/index.html">Multiprotocol Service Layer libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../networking/index.html">Libraries for networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nfc/index.html">Libraries for NFC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nrf_rpc/index.html">nRF RPC libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../others/index.html">Other libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../shell/index.html">Shell libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tfm/index.html">TF-M libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../zigbee/index.html">Libraries for Zigbee</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Libraries</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Bluetooth libraries and services</a></li>
+      <li class="breadcrumb-item active">GATT DFU SMP Service Client</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/libraries/bluetooth_services/services/dfu_smp.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="gatt-dfu-smp-service-client">
+<span id="dfu-smp-readme"></span><h1>GATT DFU SMP Service Client<a class="headerlink" href="#gatt-dfu-smp-service-client" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#service-uuid" id="id7">Service UUID</a></p></li>
+<li><p><a class="reference internal" href="#characteristics" id="id8">Characteristics</a></p>
+<ul>
+<li><p><a class="reference internal" href="#smp-characteristic-da2e7828-fbce-4e01-ae9e-261174997c48" id="id9">SMP Characteristic (DA2E7828-FBCE-4E01-AE9E-261174997C48)</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#usage" id="id10">Usage</a></p>
+<ul>
+<li><p><a class="reference internal" href="#mtu-negotiation" id="id11">MTU negotiation</a></p></li>
+<li><p><a class="reference internal" href="#sending-a-command" id="id12">Sending a command</a></p></li>
+<li><p><a class="reference internal" href="#processing-the-response" id="id13">Processing the response</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#api-documentation" id="id14">API documentation</a></p></li>
+</ul>
+</div>
+<p>This module implements a Simple Management Protocol (SMP) Service Client that can be used in the context of Device Firmware Updates (DFU).
+SMP is a basic transfer encoding for use with the <a class="reference external" href="https://github.com/apache/mynewt-mcumgr">mcumgr</a> management protocol.
+See <a class="reference external" href="https://github.com/apache/mynewt-mcumgr/blob/master/transport/smp-bluetooth.md">SMP over Bluetooth</a> for the service specification.</p>
+<p>The SMP Client module can be used to interact with Zephyr’s <span class="xref std std-ref">zephyr:smp_svr_sample</span>.</p>
+<p>The SMP Client implements only the service.
+It does not provide any functionality to process or interpret SMP commands and responses.</p>
+<p>The SMP Service Client is used in the <a class="reference internal" href="../../../samples/bluetooth/central_smp_client/README.html#bluetooth-central-dfu-smp"><span class="std std-ref">Bluetooth: Central SMP Client</span></a> sample.</p>
+<section id="service-uuid">
+<h2><a class="toc-backref" href="#id7">Service UUID</a><a class="headerlink" href="#service-uuid" title="Permalink to this heading"></a></h2>
+<p>The 128-bit service UUID is 8D53DC1D-1DB7-4CD3-868B-8A527460AA84 (16-bit offset: 0x0001).</p>
+</section>
+<section id="characteristics">
+<h2><a class="toc-backref" href="#id8">Characteristics</a><a class="headerlink" href="#characteristics" title="Permalink to this heading"></a></h2>
+<p>This service has one characteristic that is used for both requests and responses.</p>
+<section id="smp-characteristic-da2e7828-fbce-4e01-ae9e-261174997c48">
+<h3><a class="toc-backref" href="#id9">SMP Characteristic (DA2E7828-FBCE-4E01-AE9E-261174997C48)</a><a class="headerlink" href="#smp-characteristic-da2e7828-fbce-4e01-ae9e-261174997c48" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>Write Without Response</dt><dd><ul class="simple">
+<li><p>Write an SMP command with data.</p></li>
+</ul>
+</dd>
+<dt>Notify</dt><dd><ul class="simple">
+<li><p>Response to the SMP command is sent using notification.</p></li>
+<li><p>Multiple notifications may be generated if the response does not fit in a single MTU.</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+</section>
+<section id="usage">
+<h2><a class="toc-backref" href="#id10">Usage</a><a class="headerlink" href="#usage" title="Permalink to this heading"></a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Do not access any of the values in the <a class="reference internal" href="#c.bt_dfu_smp" title="bt_dfu_smp"><code class="xref c c-struct docutils literal notranslate"><span class="pre">bt_dfu_smp</span></code></a> object structure directly.
+All values that should be accessed have accessor functions.
+The reason that the structure is fully defined is to allow the application to allocate the memory for it.</p>
+</div>
+<section id="mtu-negotiation">
+<h3><a class="toc-backref" href="#id11">MTU negotiation</a><a class="headerlink" href="#mtu-negotiation" title="Permalink to this heading"></a></h3>
+<p>The current DFU SMP Server implementation in the <span class="xref std std-ref">zephyr:smp_svr_sample</span> requires the whole command to be sent in one transfer.
+For most operations, this requires a bigger MTU size than the default one.
+This requires MTU negotiation in the MTU exchange process (see <code class="xref c c-func docutils literal notranslate"><span class="pre">bt_gatt_exchange_mtu()</span></code>).
+Writing long characteristic values is not supported.</p>
+<p>Note that this is a limitation of the <span class="xref std std-ref">zephyr:smp_svr_sample</span>, not of the SMP Client.</p>
+</section>
+<section id="sending-a-command">
+<h3><a class="toc-backref" href="#id12">Sending a command</a><a class="headerlink" href="#sending-a-command" title="Permalink to this heading"></a></h3>
+<p>To send a command, use <a class="reference internal" href="#c.bt_dfu_smp_command" title="bt_dfu_smp_command"><code class="xref c c-func docutils literal notranslate"><span class="pre">bt_dfu_smp_command()</span></code></a>.
+The command is provided as a raw binary buffer consisting of a <code class="xref c c-struct docutils literal notranslate"><span class="pre">dfu_smp_header</span></code> and the payload.</p>
+</section>
+<section id="processing-the-response">
+<h3><a class="toc-backref" href="#id13">Processing the response</a><a class="headerlink" href="#processing-the-response" title="Permalink to this heading"></a></h3>
+<p>The response to a command is sent as notification.
+It is passed to the callback function that was provided when issuing the command with <a class="reference internal" href="#c.bt_dfu_smp_command" title="bt_dfu_smp_command"><code class="xref c c-func docutils literal notranslate"><span class="pre">bt_dfu_smp_command()</span></code></a>.</p>
+<p>Use <a class="reference internal" href="#c.bt_dfu_smp_rsp_state" title="bt_dfu_smp_rsp_state"><code class="xref c c-func docutils literal notranslate"><span class="pre">bt_dfu_smp_rsp_state()</span></code></a> to access the data of the current part of the response.
+As the response might be received in multiple notifications, use <a class="reference internal" href="#c.bt_dfu_smp_rsp_total_check" title="bt_dfu_smp_rsp_total_check"><code class="xref c c-func docutils literal notranslate"><span class="pre">bt_dfu_smp_rsp_total_check()</span></code></a> to verify if this is the last part of the response.
+The offset size of the current part and the total size are available in fields of the <a class="reference internal" href="#c.bt_dfu_smp_rsp_state" title="bt_dfu_smp_rsp_state"><code class="xref c c-struct docutils literal notranslate"><span class="pre">bt_dfu_smp_rsp_state</span></code></a> structure.</p>
+</section>
+</section>
+<section id="api-documentation">
+<h2><a class="toc-backref" href="#id14">API documentation</a><a class="headerlink" href="#api-documentation" title="Permalink to this heading"></a></h2>
+<div class="line-block">
+<div class="line">Header file: <code class="file docutils literal notranslate"><span class="pre">include/bluetooth/services/dfu_smp.h</span></code></div>
+<div class="line">Source file: <code class="file docutils literal notranslate"><span class="pre">subsys/bluetooth/services/dfu_smp.c</span></code></div>
+</div>
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="group__bt__dfu__smp"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">bt_dfu_smp</span></span></dt>
+<dd><p>API for the Bluetooth LE GATT DFU SMP (DFU_SMP) Client. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-defines">Defines</p>
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.BT_UUID_DFU_SMP_SERVICE_VAL">
+<span class="target" id="group__bt__dfu__smp_1ga420abb2aa80e0d17921a30f694658222"></span><span class="sig-name descname"><span class="n"><span class="pre">BT_UUID_DFU_SMP_SERVICE_VAL</span></span></span><a class="headerlink" href="#c.BT_UUID_DFU_SMP_SERVICE_VAL" title="Permalink to this definition"></a><br /></dt>
+<dd><p>SMP Service. </p>
+<p>The 128-bit service UUID is 8D53DC1D-1DB7-4CD3-868B-8A527460AA84. </p>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.BT_UUID_DFU_SMP_SERVICE">
+<span class="target" id="group__bt__dfu__smp_1gab392d9da380a59778b06a4397aa3684b"></span><span class="sig-name descname"><span class="n"><span class="pre">BT_UUID_DFU_SMP_SERVICE</span></span></span><a class="headerlink" href="#c.BT_UUID_DFU_SMP_SERVICE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.BT_UUID_DFU_SMP_CHAR_VAL">
+<span class="target" id="group__bt__dfu__smp_1ga9e7d149da0fb3c32c83ea074ab84649a"></span><span class="sig-name descname"><span class="n"><span class="pre">BT_UUID_DFU_SMP_CHAR_VAL</span></span></span><a class="headerlink" href="#c.BT_UUID_DFU_SMP_CHAR_VAL" title="Permalink to this definition"></a><br /></dt>
+<dd><p>SMP Characteristic. </p>
+<p>The characteristic is used for both requests and responses. The UUID is DA2E7828-FBCE-4E01-AE9E-261174997C48. </p>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.BT_UUID_DFU_SMP_CHAR">
+<span class="target" id="group__bt__dfu__smp_1gac28f5e542bd238054d171a3c056c37ed"></span><span class="sig-name descname"><span class="n"><span class="pre">BT_UUID_DFU_SMP_CHAR</span></span></span><a class="headerlink" href="#c.BT_UUID_DFU_SMP_CHAR" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-typedefs">Typedefs</p>
+<dl class="c type">
+<dt class="sig sig-object c" id="c.bt_dfu_smp_rsp_part_cb">
+<span class="target" id="group__bt__dfu__smp_1gaebfee109791f03135019a8af056543f3"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">bt_dfu_smp_rsp_part_cb</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_dfu_smp" title="bt_dfu_smp"><span class="n"><span class="pre">bt_dfu_smp</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">dfu_smp</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#c.bt_dfu_smp_rsp_part_cb" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Handle part of the response. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Param dfu_smp</dt>
+<dd class="field-odd"><p>DFU SMP Client instance. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c type">
+<dt class="sig sig-object c" id="c.bt_dfu_smp_error_cb">
+<span class="target" id="group__bt__dfu__smp_1ga0cb485283d5d22cedb8b968b2c36a059"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">bt_dfu_smp_error_cb</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_dfu_smp" title="bt_dfu_smp"><span class="n"><span class="pre">bt_dfu_smp</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">dfu_smp</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">err</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#c.bt_dfu_smp_error_cb" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Global function that is called when an error occurs. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Param dfu_smp</dt>
+<dd class="field-odd"><p>DFU SMP Client instance. </p>
+</dd>
+<dt class="field-even">Param err</dt>
+<dd class="field-even"><p>Negative internal error code or positive GATT error code. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_dfu_smp_init">
+<span class="target" id="group__bt__dfu__smp_1ga5dcc9695fc6904a1336b0865fe1fc1a1"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_dfu_smp_init</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_dfu_smp" title="bt_dfu_smp"><span class="n"><span class="pre">bt_dfu_smp</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">dfu_smp</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_dfu_smp_init_params" title="bt_dfu_smp_init_params"><span class="n"><span class="pre">bt_dfu_smp_init_params</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">params</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_dfu_smp_init" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Initialize the DFU SMP Client module. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dfu_smp</strong> – <strong>[out]</strong> DFU SMP Client instance. </p></li>
+<li><p><strong>params</strong> – <strong>[in]</strong> Initialization parameter.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><p><strong>0</strong> – If the operation was successful. Otherwise, a (negative) error code is returned. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_dfu_smp_handles_assign">
+<span class="target" id="group__bt__dfu__smp_1gaed5cb0d405302c6c0c9e2a10e9abd8e8"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_dfu_smp_handles_assign</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">bt_gatt_dm</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">dm</span></span>, <span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_dfu_smp" title="bt_dfu_smp"><span class="n"><span class="pre">bt_dfu_smp</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">dfu_smp</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_dfu_smp_handles_assign" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Assign handles to the DFU SMP Client instance. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dm</strong> – <strong>[inout]</strong> Discovery object. </p></li>
+<li><p><strong>dfu_smp</strong> – <strong>[inout]</strong> DFU SMP Client instance.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>0</strong> – If the operation was successful. Otherwise, a (negative) error code is returned. </p></li>
+<li><p><strong>(-ENOTSUP)</strong> – Special error code used when the UUID of the service does not match the expected UUID. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_dfu_smp_command">
+<span class="target" id="group__bt__dfu__smp_1ga8307223846219139dc605c9cb398b1a5"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_dfu_smp_command</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_dfu_smp" title="bt_dfu_smp"><span class="n"><span class="pre">bt_dfu_smp</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">dfu_smp</span></span>, <a class="reference internal" href="#c.bt_dfu_smp_rsp_part_cb" title="bt_dfu_smp_rsp_part_cb"><span class="n"><span class="pre">bt_dfu_smp_rsp_part_cb</span></span></a><span class="w"> </span><span class="n"><span class="pre">rsp_cb</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n"><span class="pre">cmd_size</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">cmd_data</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_dfu_smp_command" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Execute a command. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dfu_smp</strong> – <strong>[inout]</strong> DFU SMP Client instance. </p></li>
+<li><p><strong>rsp_cb</strong> – <strong>[in]</strong> Callback function to process the response. </p></li>
+<li><p><strong>cmd_size</strong> – <strong>[in]</strong> Size of the command data buffer. </p></li>
+<li><p><strong>cmd_data</strong> – <strong>[in]</strong> Data buffer.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><p><strong>0</strong> – If the operation was successful. Otherwise, a (negative) error code is returned. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_dfu_smp_conn">
+<span class="target" id="group__bt__dfu__smp_1ga553044c14dbbf98427c9fe992629c58a"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">bt_conn</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">bt_dfu_smp_conn</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_dfu_smp" title="bt_dfu_smp"><span class="n"><span class="pre">bt_dfu_smp</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">dfu_smp</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_dfu_smp_conn" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the connection object that is used with the DFU SMP Client. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dfu_smp</strong> – <strong>[in]</strong> DFU SMP Client instance.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Connection object. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_dfu_smp_rsp_state">
+<span class="target" id="group__bt__dfu__smp_1ga0884d47ae40c873dc5452780186205f4"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_dfu_smp_rsp_state" title="bt_dfu_smp_rsp_state"><span class="n"><span class="pre">bt_dfu_smp_rsp_state</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">bt_dfu_smp_rsp_state</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_dfu_smp" title="bt_dfu_smp"><span class="n"><span class="pre">bt_dfu_smp</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">dfu_smp</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_dfu_smp_rsp_state" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the current response state. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This function should be used inside a response callback function that is provided to <a class="reference internal" href="#group__bt__dfu__smp_1ga8307223846219139dc605c9cb398b1a5"><span class="std std-ref">bt_dfu_smp_command</span></a>.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dfu_smp</strong> – DFU SMP Client instance.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The pointer to the response state structure. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_dfu_smp_rsp_total_check">
+<span class="target" id="group__bt__dfu__smp_1ga587bb5b1446eda02e434a51500799975"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_dfu_smp_rsp_total_check</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_dfu_smp" title="bt_dfu_smp"><span class="n"><span class="pre">bt_dfu_smp</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">dfu_smp</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_dfu_smp_rsp_total_check" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Check if all response parts have been received. </p>
+<p>This auxiliary function checks if the current response part is the final one.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This function should be used inside a response callback function that is provided to <a class="reference internal" href="#group__bt__dfu__smp_1ga8307223846219139dc605c9cb398b1a5"><span class="std std-ref">bt_dfu_smp_command</span></a>.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dfu_smp</strong> – DFU SMP Client instance.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>true</strong> – If the current part is the final one. </p></li>
+<li><p><strong>false</strong> – If the current part is not the final one. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.bt_dfu_smp_header">
+<span class="target" id="structbt__dfu__smp__header"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_dfu_smp_header</span></span></span><a class="headerlink" href="#c.bt_dfu_smp_header" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;dfu_smp.h&gt;</em></div>
+<p>Header used internally by dfu_smp. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_dfu_smp_header.op">
+<span class="target" id="structbt__dfu__smp__header_1a8a1c00b7051e1e952e17557f12e469fa"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">op</span></span></span><a class="headerlink" href="#c.bt_dfu_smp_header.op" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Operation. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_dfu_smp_header.flags">
+<span class="target" id="structbt__dfu__smp__header_1a8e87d57e7aec8ee11a1f57e8494aeaa5"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">flags</span></span></span><a class="headerlink" href="#c.bt_dfu_smp_header.flags" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Operational flags. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_dfu_smp_header.len_h8">
+<span class="target" id="structbt__dfu__smp__header_1a06e3e1284c4982ac1d552a2498b9f691"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">len_h8</span></span></span><a class="headerlink" href="#c.bt_dfu_smp_header.len_h8" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Payload length high byte. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_dfu_smp_header.len_l8">
+<span class="target" id="structbt__dfu__smp__header_1aa1c55ea86ce0835f8b4a924bec8979b4"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">len_l8</span></span></span><a class="headerlink" href="#c.bt_dfu_smp_header.len_l8" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Payload length low byte. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_dfu_smp_header.group_h8">
+<span class="target" id="structbt__dfu__smp__header_1a08c2afadc8e75dc6f061ba087589bbbf"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">group_h8</span></span></span><a class="headerlink" href="#c.bt_dfu_smp_header.group_h8" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Group ID high byte. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_dfu_smp_header.group_l8">
+<span class="target" id="structbt__dfu__smp__header_1ada55ccf734817f0f642142d2bb721c79"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">group_l8</span></span></span><a class="headerlink" href="#c.bt_dfu_smp_header.group_l8" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Group ID low byte. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_dfu_smp_header.seq">
+<span class="target" id="structbt__dfu__smp__header_1ac7d2d60516b4db0d2334a12bf01b860a"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">seq</span></span></span><a class="headerlink" href="#c.bt_dfu_smp_header.seq" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Sequence number. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_dfu_smp_header.id">
+<span class="target" id="structbt__dfu__smp__header_1aa51f531c02a36ebab9418b47aad5337d"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">id</span></span></span><a class="headerlink" href="#c.bt_dfu_smp_header.id" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Command ID. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c">
+<span class="target" id="structbt__dfu__smp__rsp__state"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_dfu_smp_rsp_state</span></span></span><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;dfu_smp.h&gt;</em></div>
+<p>Current response state. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_dfu_smp_rsp_state.total_size">
+<span class="target" id="structbt__dfu__smp__rsp__state_1a9e9d3254f0f03c61dedccc3120e42b36"></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">total_size</span></span></span><a class="headerlink" href="#c.bt_dfu_smp_rsp_state.total_size" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Total size of the response. </p>
+<p>Total expected size of the response. This value is retrieved from the first part of the response, where the SMP header is located. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_dfu_smp_rsp_state.offset">
+<span class="target" id="structbt__dfu__smp__rsp__state_1ab664dd366c38b72903624a47a75cb8df"></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">offset</span></span></span><a class="headerlink" href="#c.bt_dfu_smp_rsp_state.offset" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Current data chunk offset. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_dfu_smp_rsp_state.chunk_size">
+<span class="target" id="structbt__dfu__smp__rsp__state_1ac183ff5aed7a43a2aa36aa1688b1f31d"></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">chunk_size</span></span></span><a class="headerlink" href="#c.bt_dfu_smp_rsp_state.chunk_size" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The size of the data chunk. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_dfu_smp_rsp_state.data">
+<span class="target" id="structbt__dfu__smp__rsp__state_1aea9b468e08d717f9dca22d9c8820167e"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">data</span></span></span><a class="headerlink" href="#c.bt_dfu_smp_rsp_state.data" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Pointer to the data. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.bt_dfu_smp_init_params">
+<span class="target" id="structbt__dfu__smp__init__params"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_dfu_smp_init_params</span></span></span><a class="headerlink" href="#c.bt_dfu_smp_init_params" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;dfu_smp.h&gt;</em></div>
+<p>DFU SMP Client parameters for the initialization function. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_dfu_smp_init_params.error_cb">
+<span class="target" id="structbt__dfu__smp__init__params_1ab3725457f7a123c557fdbd6d1bbdd5df"></span><a class="reference internal" href="#c.bt_dfu_smp_error_cb" title="bt_dfu_smp_error_cb"><span class="n"><span class="pre">bt_dfu_smp_error_cb</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">error_cb</span></span></span><a class="headerlink" href="#c.bt_dfu_smp_init_params.error_cb" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Callback pointer for error handler. </p>
+<p>This function is called when an error occurs. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.bt_dfu_smp">
+<span class="target" id="structbt__dfu__smp"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_dfu_smp</span></span></span><a class="headerlink" href="#c.bt_dfu_smp" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;dfu_smp.h&gt;</em></div>
+<p>DFU SMP Client structure. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_dfu_smp.conn">
+<span class="target" id="structbt__dfu__smp_1aefd40c290d903fdf132fac279f2c8696"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">bt_conn</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">conn</span></span></span><a class="headerlink" href="#c.bt_dfu_smp.conn" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Connection object. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_dfu_smp.rsp_state">
+<span class="target" id="structbt__dfu__smp_1a82ce2b68ed56d49403f8503d03711aee"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_dfu_smp_rsp_state" title="bt_dfu_smp_rsp_state"><span class="n"><span class="pre">bt_dfu_smp_rsp_state</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">rsp_state</span></span></span><a class="headerlink" href="#c.bt_dfu_smp.rsp_state" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Current response state. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_dfu_smp.notification_params">
+<span class="target" id="structbt__dfu__smp_1a930d11f5bf0aaf3cac9618f93d30594d"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">bt_gatt_subscribe_params</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">notification_params</span></span></span><a class="headerlink" href="#c.bt_dfu_smp.notification_params" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Response notification parameters. </p>
+<p>These parameters are set for the SMP response notification.</p>
+<p>The status of the notification is reflected by the <code class="docutils literal notranslate"><span class="pre">notify</span></code> field. Notifications must be enabled before the command is sent. This is handled automatically by the library. </p>
+</dd></dl>
+
+</div>
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.bt_dfu_smp.bt_dfu_smp_cbs">
+<span class="target" id="structbt__dfu__smp_1_1bt__dfu__smp__cbs"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_dfu_smp_cbs</span></span></span><a class="headerlink" href="#c.bt_dfu_smp.bt_dfu_smp_cbs" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;dfu_smp.h&gt;</em></div>
+<p>Callbacks. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_dfu_smp.bt_dfu_smp_cbs.error_cb">
+<span class="target" id="structbt__dfu__smp_1_1bt__dfu__smp__cbs_1a5583df12846ee390446311391bfdddbb"></span><a class="reference internal" href="#c.bt_dfu_smp_error_cb" title="bt_dfu_smp_error_cb"><span class="n"><span class="pre">bt_dfu_smp_error_cb</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">error_cb</span></span></span><a class="headerlink" href="#c.bt_dfu_smp.bt_dfu_smp_cbs.error_cb" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Callback pointer for global error. </p>
+<p>This function is called when a global error occurs. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_dfu_smp.bt_dfu_smp_cbs.rsp_part">
+<span class="target" id="structbt__dfu__smp_1_1bt__dfu__smp__cbs_1a473e9cf813d0be89cc550d6c9b67ad75"></span><a class="reference internal" href="#c.bt_dfu_smp_rsp_part_cb" title="bt_dfu_smp_rsp_part_cb"><span class="n"><span class="pre">bt_dfu_smp_rsp_part_cb</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">rsp_part</span></span></span><a class="headerlink" href="#c.bt_dfu_smp.bt_dfu_smp_cbs.rsp_part" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Callback pointer for receiving the response. </p>
+<p>The pointer is set to NULL when the response is finished. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.bt_dfu_smp.bt_dfu_smp_handles">
+<span class="target" id="structbt__dfu__smp_1_1bt__dfu__smp__handles"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_dfu_smp_handles</span></span></span><a class="headerlink" href="#c.bt_dfu_smp.bt_dfu_smp_handles" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;dfu_smp.h&gt;</em></div>
+<p>Handles. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_dfu_smp.bt_dfu_smp_handles.smp">
+<span class="target" id="structbt__dfu__smp_1_1bt__dfu__smp__handles_1a063af8077b80ff1635552062b9c8539b"></span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">smp</span></span></span><a class="headerlink" href="#c.bt_dfu_smp.bt_dfu_smp_handles.smp" title="Permalink to this definition"></a><br /></dt>
+<dd><p>SMP characteristic value handle. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_dfu_smp.bt_dfu_smp_handles.smp_ccc">
+<span class="target" id="structbt__dfu__smp_1_1bt__dfu__smp__handles_1ae9da22de9a84fef4b9c4943c19e464e5"></span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">smp_ccc</span></span></span><a class="headerlink" href="#c.bt_dfu_smp.bt_dfu_smp_handles.smp_ccc" title="Permalink to this definition"></a><br /></dt>
+<dd><p>SMP characteristic CCC handle. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="fast_pair.html" class="btn btn-neutral float-right" title="Google Fast Pair Service (GFPS)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="ddfs.html" class="btn btn-neutral" title="Direction and Distance Finding Service (DDFS)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

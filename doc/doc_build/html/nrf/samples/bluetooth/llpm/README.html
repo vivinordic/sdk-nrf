@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bluetooth: LLPM &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../../_static/js/ncs.js"
+></script>
+<script src="../../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Bluetooth: Multiple advertising sets" href="../multiple_adv_sets/README.html" />
+    <link rel="prev" title="Bluetooth: HCI low power UART" href="../hci_lpuart/README.html" />
+<link
+  href="../../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../applications.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../samples.html">Samples</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../bl.html">Bluetooth samples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../central_and_peripheral_hr/README.html">Bluetooth: Central and Peripheral HRS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../central_bas/README.html">Bluetooth: Central BAS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../central_hids/README.html">Bluetooth: Central HIDS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../central_hr_coded/README.html">Bluetooth: Central Heart Rate Monitor with Coded PHY</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../central_nfc_pairing/README.html">Bluetooth: Central NFC pairing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../central_smp_client/README.html">Bluetooth: Central SMP Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../central_uart/README.html">Bluetooth: Central UART</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../direct_test_mode/README.html">Bluetooth: Direct Test Mode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../direction_finding_central/README.html">Bluetooth: Direction finding central</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../direction_finding_connectionless_rx/README.html">Bluetooth: Direction finding connectionless locator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../direction_finding_connectionless_tx/README.html">Bluetooth: Direction finding connectionless beacon</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../direction_finding_peripheral/README.html">Bluetooth: Direction finding peripheral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../enocean/README.html">Bluetooth: EnOcean</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../hci_lpuart/README.html">Bluetooth: HCI low power UART</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Bluetooth: LLPM</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#requirements">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#building-and-running">Building and running</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../multiple_adv_sets/README.html">Bluetooth: Multiple advertising sets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../nrf_dm/README.html">Bluetooth: nRF Distance Measurement with Bluetooth LE discovery</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_ams_client/README.html">Bluetooth: Peripheral AMS client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_ancs_client/README.html">Bluetooth: Peripheral ANCS client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_bms/README.html">Bluetooth: Peripheral Bond Management Service (BMS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_cgms/README.html">Bluetooth: Continuous Glucose Monitoring Service (CGMS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_cts_client/README.html">Bluetooth: Peripheral CTS client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_fast_pair/README.html">Bluetooth: Fast Pair</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_gatt_dm/README.html">Bluetooth: Peripheral GATT Discovery Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_hids_keyboard/README.html">Bluetooth: Peripheral HIDS keyboard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_hids_mouse/README.html">Bluetooth: Peripheral HIDS mouse</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_hr_coded/README.html">Bluetooth: Peripheral Heart Rate Monitor with Coded PHY</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_lbs/README.html">Bluetooth: Peripheral LBS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_mds/README.html">Bluetooth: Peripheral Memfault Diagnostic Service (MDS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_nfc_pairing/README.html">Bluetooth: NFC pairing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_power_profiling/README.html">Bluetooth: Peripheral power profiling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_rscs/README.html">Bluetooth: Peripheral Running Speed and Cadence Service (RSCS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_status/README.html">Bluetooth: Peripheral Status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_uart/README.html">Bluetooth: Peripheral UART</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../radio_coex_1wire/README.html">Bluetooth: External radio coexistence using 1-wire interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../rpc_host/README.html">Bluetooth: Host for nRF RPC Bluetooth Low Energy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../shell_bt_nus/README.html">Bluetooth: NUS shell transport</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../throughput/README.html">Bluetooth: Throughput</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mesh/ble_peripheral_lbs_coex/README.html">Bluetooth: Mesh and peripheral coexistence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mesh/chat/README.html">Bluetooth: Mesh chat</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mesh/light/README.html">Bluetooth: Mesh light</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mesh/light_ctrl/README.html">Bluetooth: Mesh light fixture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mesh/light_switch/README.html">Bluetooth: Mesh light switch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mesh/sensor_client/README.html">Bluetooth: Mesh sensor observer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mesh/sensor_server/README.html">Bluetooth: Mesh sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mesh/silvair_enocean/README.html">Bluetooth: Mesh Silvair EnOcean</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../crypto.html">Cryptography samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../edge.html">Edge Impulse samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gazell.html">Gazell samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../matter.html">Matter samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nfc.html">NFC samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nrf5340.html">nRF5340 samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nrf9160.html">nRF9160 samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tfm.html">Trusted Firmware-M (TF-M) samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../thread.html">Thread samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../zigbee.html">Zigbee samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../wifi.html">Wi-Fi samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../other.html">Other samples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../drivers.html">Drivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../samples.html">Samples</a></li>
+          <li class="breadcrumb-item"><a href="../../bl.html">Bluetooth samples</a></li>
+      <li class="breadcrumb-item active">Bluetooth: LLPM</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/samples/bluetooth/llpm/README.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="bluetooth-llpm">
+<span id="ble-llpm"></span><h1>Bluetooth: LLPM<a class="headerlink" href="#bluetooth-llpm" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#requirements" id="id8">Requirements</a></p></li>
+<li><p><a class="reference internal" href="#overview" id="id9">Overview</a></p></li>
+<li><p><a class="reference internal" href="#building-and-running" id="id10">Building and running</a></p>
+<ul>
+<li><p><a class="reference internal" href="#testing" id="id11">Testing</a></p></li>
+<li><p><a class="reference internal" href="#sample-output" id="id12">Sample output</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#dependencies" id="id13">Dependencies</a></p></li>
+<li><p><a class="reference internal" href="#references" id="id14">References</a></p></li>
+</ul>
+</div>
+<p>The Bluetooth® Low Latency Packet Mode (LLPM) sample uses the <a class="reference internal" href="../../../libraries/bluetooth_services/services/latency.html#latency-readme"><span class="std std-ref">GATT Latency Service</span></a> and the <a class="reference internal" href="../../../libraries/bluetooth_services/services/latency_client.html#latency-client-readme"><span class="std std-ref">GATT Latency Client</span></a> to showcase the LLPM proprietary Bluetooth extension from Nordic Semiconductor.
+You can use it to determine the transmission latency of LLPM-enabled connections, or to compare with different connection parameters and check their influence on the results.</p>
+<section id="requirements">
+<h2><a class="toc-backref" href="#id8">Requirements</a><a class="headerlink" href="#requirements" title="Permalink to this heading"></a></h2>
+<p>The sample supports the following development kits:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 27%" />
+<col style="width: 6%" />
+<col style="width: 45%" />
+<col style="width: 22%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Hardware platforms</p></th>
+<th class="head"><p>PCA</p></th>
+<th class="head"><p>Board name</p></th>
+<th class="head"><p>Build target</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../working_with_nrf/nrf52/developing.html#ug-nrf52"><span class="std std-ref">nRF52 DK</span></a></p></td>
+<td><p>PCA10040</p></td>
+<td><p><span class="xref std std-ref">nrf52dk_nrf52832</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nrf52dk_nrf52832</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../working_with_nrf/nrf52/developing.html#ug-nrf52"><span class="std std-ref">nRF52840 Dongle</span></a></p></td>
+<td><p>PCA10059</p></td>
+<td><p><span class="xref std std-ref">nrf52840dongle_nrf52840</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nrf52840dongle_nrf52840</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../working_with_nrf/nrf52/developing.html#ug-nrf52"><span class="std std-ref">nRF52840 DK</span></a></p></td>
+<td><p>PCA10056</p></td>
+<td><p><span class="xref std std-ref">nrf52840dk_nrf52840</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nrf52840dk_nrf52840</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>The sample also supports other development kits running SoftDevice Controller variants that support LLPM (see <span class="xref std std-ref">SoftDevice Controller proprietary feature support</span>.
+You can use any two of the development kits mentioned above and mix different development kits.</p>
+<p>Additionally, the sample requires a connection to a computer with a serial terminal for each of the development kits.</p>
+</section>
+<section id="overview">
+<h2><a class="toc-backref" href="#id9">Overview</a><a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+<p>The LLPM is designed for applications in which the interface response time is critical for the user.
+For example, for virtual reality headsets or gaming mouse and keyboard.</p>
+<p>See the following subsections for a description of the key LLPM elements.</p>
+<dl class="simple">
+<dt>LLPM connection interval (1 ms)</dt><dd><p>The connection interval defines how often the devices must listen on the radio.
+The LLPM introduces the possibility to reduce the connection interval below what is supported in Bluetooth LE.
+The lowest supported connection interval is 1 ms for one link.</p>
+</dd>
+<dt>Physical layer (PHY)</dt><dd><p>Starting with Bluetooth® 5, the over-the-air data rate in Bluetooth Low Energy supports 2 Ms/s (mega symbol per second), which allows for faster transmission.
+The LLPM connection interval is only supported on <em>LE 2M PHY</em>.
+Otherwise, the SoftDevice Controller will deny the request command.</p>
+</dd>
+<dt>QoS connection event reports</dt><dd><p>When reports are enabled, one report will be generated on every connection event.
+The report gives information about the quality of service of the connection event.
+The values in the report are used to describe the quality of links.
+For parameter descriptions, see <code class="xref c c-type docutils literal notranslate"><span class="pre">sdc_hci_vs_subevent_qos_conn_event_report_t</span></code> (in <code class="file docutils literal notranslate"><span class="pre">sdc_hci_vs.h</span></code>).</p>
+</dd>
+<dt>Transmission latency</dt><dd><p>The definition of the latency used in this example counts the time interval from the sender’s application to the GATT service of the receiver.
+It demonstrates the performance of an LLPM-enabled connection that the receiver will receive the data approximately every 1 ms.</p>
+</dd>
+<dt>GATT Latency Service</dt><dd><p>To measure the transmission latency from application layers, a GATT Latency service <cite>BT_UUID_LATENCY</cite> is included to compute the time spent.
+When the sender writes its timestamp to the <cite>BT_UUID_LATENC_CHAR</cite> characteristic of the receiver, the Latency service of the receiver will automatically reply back.
+Whenever the sender receives a response, it will use its current time and the corresponding timestamp written before to estimate the round-trip time (RTT) of a writing characteristic procedure (see <a class="reference external" href="https://www.bluetooth.com/specifications/specs/">Bluetooth Core Specification</a>: Vol 3, Part F, 3.4.5 Writing attributes).</p>
+</dd>
+</dl>
+<table class="docutils align-default" id="id6">
+<caption><span class="caption-text">GATT Attributes</span><a class="headerlink" href="#id6" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Type</p></th>
+<th class="head"><p>UUID</p></th>
+<th class="head"><p>Property</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Primary service</p></td>
+<td><p>BT_UUID_LATENCY</p></td>
+<td><p>Read only</p></td>
+</tr>
+<tr class="row-odd"><td><p>Characteristic</p></td>
+<td><p>BT_UUID_LATENCY_CHAR</p></td>
+<td><p>BT_GATT_CHRC_WRITE, BT_GATT_PERM_WRITE</p></td>
+</tr>
+</tbody>
+</table>
+<p>This sample transmits data between two development kits to measure the transmission latency in between.
+One of the devices is connected as a <em>central</em> and another is connected as a <em>peripheral</em>.
+The performance is evaluated with the transmission latency dividing the estimated round-trip time in half (RTT / 2).</p>
+<p>By default, the following values are used to demonstrates the interaction of the connection parameters:</p>
+<table class="docutils align-default" id="id7">
+<caption><span class="caption-text">Default parameter values</span><a class="headerlink" href="#id7" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Connection interval</p></td>
+<td><p>80 units (100 ms)</p></td>
+</tr>
+<tr class="row-odd"><td><p>LLPM connection interval</p></td>
+<td><p>Lowest interval (1 ms)</p></td>
+</tr>
+<tr class="row-even"><td><p>Physical layer (PHY)</p></td>
+<td><p>LE 2M PHY</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="building-and-running">
+<h2><a class="toc-backref" href="#id10">Building and running</a><a class="headerlink" href="#building-and-running" title="Permalink to this heading"></a></h2>
+<p>This sample can be found under <code class="file docutils literal notranslate"><span class="pre">samples/bluetooth/llpm</span></code> in the nRF Connect SDK folder structure.</p>
+<p>To build the sample with Visual Studio Code, follow the steps listed on the <a class="reference external" href="https://nrfconnect.github.io/vscode-nrf-connect/get_started/build_app_ncs.html">How to build an application</a> page in the nRF Connect for VS Code extension documentation.
+See <a class="reference internal" href="../../../getting_started/programming.html#gs-programming"><span class="std std-ref">Building and programming an application</span></a> for other building and programming scenarios and <a class="reference internal" href="../../../getting_started/testing.html#gs-testing"><span class="std std-ref">Testing and debugging an application</span></a> for general information about testing and debugging in the nRF Connect SDK.</p>
+<section id="testing">
+<h3><a class="toc-backref" href="#id11">Testing</a><a class="headerlink" href="#testing" title="Permalink to this heading"></a></h3>
+<p>After programming the sample to both development kits, test it by performing the following steps:</p>
+<ol class="arabic">
+<li><p>Connect to both kits with a terminal emulator (for example, PuTTY).
+See <a class="reference internal" href="../../../getting_started/testing.html#putty"><span class="std std-ref">How to connect with PuTTY</span></a> for the required settings.</p></li>
+<li><p>Reset both kits.</p></li>
+<li><p>In one of the terminal emulators, type “c” to start the application on the connected board in the central (tester) role.</p></li>
+<li><p>In the other terminal emulator, type “p” to start the application in the peripheral (peer) role.</p></li>
+<li><p>Observe that the kits establish a connection.</p>
+<ul>
+<li><p>The central outputs the following information:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Press</span> <span class="nb">any</span> <span class="n">key</span> <span class="n">to</span> <span class="nb">set</span> <span class="n">LLPM</span> <span class="n">short</span> <span class="n">connection</span> <span class="n">connection</span> <span class="n">interval</span> <span class="p">(</span><span class="mi">1</span> <span class="n">ms</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>The peripheral outputs the following information:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Press</span> <span class="nb">any</span> <span class="n">key</span> <span class="n">to</span> <span class="n">start</span> <span class="n">measuring</span> <span class="n">transmission</span> <span class="n">latency</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p>Press a key in the terminal that is connected to the peripheral.</p></li>
+<li><p>Observe the terminal connected to the peripheral. The latency measurements are printed in the terminal.
+The latency is expected to be shorter than the default connection interval:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Transmission</span> <span class="n">Latency</span><span class="p">:</span> <span class="mi">80917</span> <span class="p">(</span><span class="n">us</span><span class="p">),</span> <span class="n">CRC</span> <span class="n">mismatches</span><span class="p">:</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</li>
+<li><p>Press a key in the terminal that is connected to the central.</p></li>
+<li><p>Observe the connection gets updated to LLPM connection interval (1 ms) on both sides:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Connection</span> <span class="n">interval</span> <span class="n">updated</span><span class="p">:</span> <span class="n">LLPM</span> <span class="p">(</span><span class="mi">1</span> <span class="n">ms</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>Observe the terminal connected to the peripheral.
+The measured latency on the peripheral becomes approximate 1 ms:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Transmission</span> <span class="n">Latency</span><span class="p">:</span> <span class="mi">1098</span> <span class="p">(</span><span class="n">us</span><span class="p">),</span> <span class="n">CRC</span> <span class="n">mismatches</span><span class="p">:</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</li>
+<li><p>Press a key in the terminal that is connected to the central.</p></li>
+<li><p>Observe the terminal connected to the central.
+The measured latency on the central remains approximate 1 ms:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Transmission</span> <span class="n">Latency</span><span class="p">:</span> <span class="mi">1235</span> <span class="p">(</span><span class="n">us</span><span class="p">),</span> <span class="n">CRC</span> <span class="n">mismatches</span><span class="p">:</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<p class="mscgen">
+msc {
+hscale = &quot;1.3&quot;;
+Central,Peripheral;
+Central&lt;&lt;=&gt;&gt;Peripheral      [label=&quot;Connected&quot;];
+Central&lt;&lt;=&gt;&gt;Peripheral      [label=&quot;Discovered GATT Latency Service&quot;];
+Peripheral note Peripheral  [label=&quot;Press any key to start measuring transmission latency&quot;];
+Peripheral note Peripheral  [label=&quot;Read current timestamp: s1&quot;];
+Peripheral=&gt;Central         [label=&quot;Write Request (timestamp: s1)&quot;];
+Central&gt;&gt;Peripheral         [label=&quot;Write Response&quot;];
+Peripheral note Peripheral  [label=&quot;Read current timestamp: s2&quot;];
+Peripheral note Peripheral  [label=&quot;Latency = (s2 - s1) / 2&quot;];
+Central note Central        [label=&quot;Press any key to set LLPM short connection connection interval (1 ms)&quot;];
+Central&lt;&lt;=&gt;&gt;Peripheral      [label=&quot;Switched to LLPM connection interval&quot;];
+Central note Central        [label=&quot;Press any key to start measuring transmission latency&quot;];
+Central note Central        [label=&quot;Read current timestamp: m1&quot;];
+Central=&gt;Peripheral         [label=&quot;Write Request (timestamp: m1)&quot;];
+Peripheral&gt;&gt;Central         [label=&quot;Write Response&quot;];
+Central note Central        [label=&quot;Read current timestamp: m2&quot;];
+Central note Central        [label=&quot;Latency = (m2 - m1) / 2&quot;];
+}
+</p>
+</section>
+<section id="sample-output">
+<h3><a class="toc-backref" href="#id12">Sample output</a><a class="headerlink" href="#sample-output" title="Permalink to this heading"></a></h3>
+<p>The result should look similar to the following output.</p>
+<ul>
+<li><p>For the central:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*****</span> <span class="n">Booting</span> <span class="n">Zephyr</span> <span class="n">OS</span> <span class="n">build</span> <span class="n">v1</span><span class="mf">.14.99</span><span class="o">-</span><span class="n">ncs3</span><span class="o">-</span><span class="n">snapshot2</span><span class="o">-</span><span class="mi">2647</span><span class="o">-</span><span class="n">gd6e67554cfeb</span> <span class="o">*****</span>
+<span class="n">Bluetooth</span> <span class="n">initialized</span>
+<span class="n">LLPM</span> <span class="n">mode</span> <span class="n">enabled</span>
+<span class="n">Choose</span> <span class="n">device</span> <span class="n">role</span> <span class="o">-</span> <span class="nb">type</span> <span class="n">c</span> <span class="p">(</span><span class="n">central</span><span class="p">)</span> <span class="ow">or</span> <span class="n">p</span> <span class="p">(</span><span class="n">peripheral</span><span class="p">):</span> <span class="n">c</span>
+<span class="n">Central</span><span class="o">.</span> <span class="n">Starting</span> <span class="n">scanning</span>
+<span class="n">Scanning</span> <span class="n">successfully</span> <span class="n">started</span>
+<span class="n">Connection</span> <span class="n">event</span> <span class="n">reports</span> <span class="n">enabled</span>
+<span class="n">Filter</span> <span class="ow">not</span> <span class="n">match</span><span class="o">.</span> <span class="n">Address</span><span class="p">:</span> <span class="mi">08</span><span class="p">:</span><span class="n">c6</span><span class="p">:</span><span class="n">a4</span><span class="p">:</span><span class="n">e0</span><span class="p">:</span><span class="mi">72</span><span class="p">:</span><span class="n">e9</span> <span class="p">(</span><span class="n">random</span><span class="p">)</span> <span class="n">connectable</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">Filter</span> <span class="ow">not</span> <span class="n">match</span><span class="o">.</span> <span class="n">Address</span><span class="p">:</span> <span class="mi">13</span><span class="p">:</span><span class="mi">04</span><span class="p">:</span><span class="n">eb</span><span class="p">:</span><span class="n">f1</span><span class="p">:</span><span class="mi">0</span><span class="n">b</span><span class="p">:</span><span class="mi">46</span> <span class="p">(</span><span class="n">random</span><span class="p">)</span> <span class="n">connectable</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">Filter</span> <span class="ow">not</span> <span class="n">match</span><span class="o">.</span> <span class="n">Address</span><span class="p">:</span> <span class="mi">2</span><span class="n">b</span><span class="p">:</span><span class="mi">74</span><span class="p">:</span><span class="mi">72</span><span class="p">:</span><span class="n">c3</span><span class="p">:</span><span class="mi">8</span><span class="n">f</span><span class="p">:</span><span class="n">a8</span> <span class="p">(</span><span class="n">random</span><span class="p">)</span> <span class="n">connectable</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">Filter</span> <span class="ow">not</span> <span class="n">match</span><span class="o">.</span> <span class="n">Address</span><span class="p">:</span> <span class="mi">02</span><span class="p">:</span><span class="n">ec</span><span class="p">:</span><span class="n">f9</span><span class="p">:</span><span class="n">bb</span><span class="p">:</span><span class="n">ec</span><span class="p">:</span><span class="mi">27</span> <span class="p">(</span><span class="n">random</span><span class="p">)</span> <span class="n">connectable</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">Filter</span> <span class="ow">not</span> <span class="n">match</span><span class="o">.</span> <span class="n">Address</span><span class="p">:</span> <span class="mi">01</span><span class="p">:</span><span class="mi">54</span><span class="p">:</span><span class="n">cf</span><span class="p">:</span><span class="n">d4</span><span class="p">:</span><span class="mi">31</span><span class="p">:</span><span class="n">cd</span> <span class="p">(</span><span class="n">random</span><span class="p">)</span> <span class="n">connectable</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">Filter</span> <span class="ow">not</span> <span class="n">match</span><span class="o">.</span> <span class="n">Address</span><span class="p">:</span> <span class="mi">3</span><span class="n">e</span><span class="p">:</span><span class="mi">21</span><span class="p">:</span><span class="mi">91</span><span class="p">:</span><span class="mi">91</span><span class="p">:</span><span class="mi">52</span><span class="p">:</span><span class="mi">82</span> <span class="p">(</span><span class="n">random</span><span class="p">)</span> <span class="n">connectable</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">Filter</span> <span class="ow">not</span> <span class="n">match</span><span class="o">.</span> <span class="n">Address</span><span class="p">:</span> <span class="mi">08</span><span class="p">:</span><span class="n">c6</span><span class="p">:</span><span class="n">a4</span><span class="p">:</span><span class="n">e0</span><span class="p">:</span><span class="mi">72</span><span class="p">:</span><span class="n">e9</span> <span class="p">(</span><span class="n">random</span><span class="p">)</span> <span class="n">connectable</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">Filter</span> <span class="ow">not</span> <span class="n">match</span><span class="o">.</span> <span class="n">Address</span><span class="p">:</span> <span class="mi">37</span><span class="p">:</span><span class="mi">63</span><span class="p">:</span><span class="mi">6</span><span class="n">a</span><span class="p">:</span><span class="n">ed</span><span class="p">:</span><span class="mi">38</span><span class="p">:</span><span class="n">e2</span> <span class="p">(</span><span class="n">random</span><span class="p">)</span> <span class="n">connectable</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">Filter</span> <span class="ow">not</span> <span class="n">match</span><span class="o">.</span> <span class="n">Address</span><span class="p">:</span> <span class="mi">56</span><span class="p">:</span><span class="n">c6</span><span class="p">:</span><span class="mi">75</span><span class="p">:</span><span class="mi">17</span><span class="p">:</span><span class="mi">80</span><span class="p">:</span><span class="n">d8</span> <span class="p">(</span><span class="n">random</span><span class="p">)</span> <span class="n">connectable</span><span class="p">:</span> <span class="mi">1</span>
+<span class="n">Filters</span> <span class="n">matched</span><span class="o">.</span> <span class="n">Address</span><span class="p">:</span> <span class="n">f9</span><span class="p">:</span><span class="mi">3</span><span class="n">c</span><span class="p">:</span><span class="mi">9</span><span class="n">c</span><span class="p">:</span><span class="n">d1</span><span class="p">:</span><span class="n">f6</span><span class="p">:</span><span class="mi">07</span> <span class="p">(</span><span class="n">random</span><span class="p">)</span> <span class="n">connectable</span><span class="p">:</span> <span class="mi">1</span>
+<span class="n">Connected</span> <span class="k">as</span> <span class="n">central</span>
+<span class="n">Conn</span><span class="o">.</span> <span class="n">interval</span> <span class="ow">is</span> <span class="mi">80</span> <span class="n">units</span> <span class="p">(</span><span class="mf">1.25</span> <span class="n">ms</span><span class="o">/</span><span class="n">unit</span><span class="p">)</span>
+<span class="n">Service</span> <span class="n">discovery</span> <span class="n">completed</span>
+<span class="n">Press</span> <span class="nb">any</span> <span class="n">key</span> <span class="n">to</span> <span class="nb">set</span> <span class="n">LLPM</span> <span class="n">short</span> <span class="n">connection</span> <span class="n">interval</span> <span class="p">(</span><span class="mi">1</span> <span class="n">ms</span><span class="p">)</span>
+<span class="n">Press</span> <span class="nb">any</span> <span class="n">key</span> <span class="n">to</span> <span class="n">start</span> <span class="n">measuring</span> <span class="n">transmission</span> <span class="n">latency</span>
+<span class="n">Connection</span> <span class="n">interval</span> <span class="n">updated</span><span class="p">:</span> <span class="n">LLPM</span> <span class="p">(</span><span class="mi">1</span> <span class="n">ms</span><span class="p">)</span>
+<span class="n">Transmission</span> <span class="n">Latency</span><span class="p">:</span> <span class="mi">1235</span> <span class="p">(</span><span class="n">us</span><span class="p">),</span> <span class="n">CRC</span> <span class="n">mismatches</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">Transmission</span> <span class="n">Latency</span><span class="p">:</span> <span class="mi">1007</span> <span class="p">(</span><span class="n">us</span><span class="p">),</span> <span class="n">CRC</span> <span class="n">mismatches</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">Transmission</span> <span class="n">Latency</span><span class="p">:</span> <span class="mi">1434</span> <span class="p">(</span><span class="n">us</span><span class="p">),</span> <span class="n">CRC</span> <span class="n">mismatches</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">Transmission</span> <span class="n">Latency</span><span class="p">:</span> <span class="mi">1312</span> <span class="p">(</span><span class="n">us</span><span class="p">),</span> <span class="n">CRC</span> <span class="n">mismatches</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">Transmission</span> <span class="n">Latency</span><span class="p">:</span> <span class="mi">1220</span> <span class="p">(</span><span class="n">us</span><span class="p">),</span> <span class="n">CRC</span> <span class="n">mismatches</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">Transmission</span> <span class="n">Latency</span><span class="p">:</span> <span class="mi">991</span> <span class="p">(</span><span class="n">us</span><span class="p">),</span> <span class="n">CRC</span> <span class="n">mismatches</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">Transmission</span> <span class="n">Latency</span><span class="p">:</span> <span class="mi">1419</span> <span class="p">(</span><span class="n">us</span><span class="p">),</span> <span class="n">CRC</span> <span class="n">mismatches</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">Transmission</span> <span class="n">Latency</span><span class="p">:</span> <span class="mi">1281</span> <span class="p">(</span><span class="n">us</span><span class="p">),</span> <span class="n">CRC</span> <span class="n">mismatches</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">Transmission</span> <span class="n">Latency</span><span class="p">:</span> <span class="mi">1052</span> <span class="p">(</span><span class="n">us</span><span class="p">),</span> <span class="n">CRC</span> <span class="n">mismatches</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">Transmission</span> <span class="n">Latency</span><span class="p">:</span> <span class="mi">991</span> <span class="p">(</span><span class="n">us</span><span class="p">),</span> <span class="n">CRC</span> <span class="n">mismatches</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">Transmission</span> <span class="n">Latency</span><span class="p">:</span> <span class="mi">1403</span> <span class="p">(</span><span class="n">us</span><span class="p">),</span> <span class="n">CRC</span> <span class="n">mismatches</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">Transmission</span> <span class="n">Latency</span><span class="p">:</span> <span class="mi">1296</span> <span class="p">(</span><span class="n">us</span><span class="p">),</span> <span class="n">CRC</span> <span class="n">mismatches</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">Transmission</span> <span class="n">Latency</span><span class="p">:</span> <span class="mi">1052</span> <span class="p">(</span><span class="n">us</span><span class="p">),</span> <span class="n">CRC</span> <span class="n">mismatches</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">Transmission</span> <span class="n">Latency</span><span class="p">:</span> <span class="mi">976</span> <span class="p">(</span><span class="n">us</span><span class="p">),</span> <span class="n">CRC</span> <span class="n">mismatches</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">Transmission</span> <span class="n">Latency</span><span class="p">:</span> <span class="mi">1358</span> <span class="p">(</span><span class="n">us</span><span class="p">),</span> <span class="n">CRC</span> <span class="n">mismatches</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">Transmission</span> <span class="n">Latency</span><span class="p">:</span> <span class="mi">1281</span> <span class="p">(</span><span class="n">us</span><span class="p">),</span> <span class="n">CRC</span> <span class="n">mismatches</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">Transmission</span> <span class="n">Latency</span><span class="p">:</span> <span class="mi">1052</span> <span class="p">(</span><span class="n">us</span><span class="p">),</span> <span class="n">CRC</span> <span class="n">mismatches</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">Transmission</span> <span class="n">Latency</span><span class="p">:</span> <span class="mi">976</span> <span class="p">(</span><span class="n">us</span><span class="p">),</span> <span class="n">CRC</span> <span class="n">mismatches</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">Transmission</span> <span class="n">Latency</span><span class="p">:</span> <span class="mi">1358</span> <span class="p">(</span><span class="n">us</span><span class="p">),</span> <span class="n">CRC</span> <span class="n">mismatches</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">Transmission</span> <span class="n">Latency</span><span class="p">:</span> <span class="mi">1281</span> <span class="p">(</span><span class="n">us</span><span class="p">),</span> <span class="n">CRC</span> <span class="n">mismatches</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">Transmission</span> <span class="n">Latency</span><span class="p">:</span> <span class="mi">1052</span> <span class="p">(</span><span class="n">us</span><span class="p">),</span> <span class="n">CRC</span> <span class="n">mismatches</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">Transmission</span> <span class="n">Latency</span><span class="p">:</span> <span class="mi">976</span> <span class="p">(</span><span class="n">us</span><span class="p">),</span> <span class="n">CRC</span> <span class="n">mismatches</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">Transmission</span> <span class="n">Latency</span><span class="p">:</span> <span class="mi">1358</span> <span class="p">(</span><span class="n">us</span><span class="p">),</span> <span class="n">CRC</span> <span class="n">mismatches</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">Transmission</span> <span class="n">Latency</span><span class="p">:</span> <span class="mi">1281</span> <span class="p">(</span><span class="n">us</span><span class="p">),</span> <span class="n">CRC</span> <span class="n">mismatches</span><span class="p">:</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</li>
+<li><p>For the peripheral:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*****</span> <span class="n">Booting</span> <span class="n">Zephyr</span> <span class="n">OS</span> <span class="n">build</span> <span class="n">v1</span><span class="mf">.14.99</span><span class="o">-</span><span class="n">ncs3</span><span class="o">-</span><span class="n">snapshot2</span><span class="o">-</span><span class="mi">2647</span><span class="o">-</span><span class="n">gd6e67554cfeb</span> <span class="o">*****</span>
+<span class="n">Bluetooth</span> <span class="n">initialized</span>
+<span class="n">LLPM</span> <span class="n">mode</span> <span class="n">enabled</span>
+<span class="n">Choose</span> <span class="n">device</span> <span class="n">role</span> <span class="o">-</span> <span class="nb">type</span> <span class="n">c</span> <span class="p">(</span><span class="n">central</span><span class="p">)</span> <span class="ow">or</span> <span class="n">p</span> <span class="p">(</span><span class="n">peripheral</span><span class="p">):</span> <span class="n">p</span>
+<span class="n">Slave</span> <span class="n">role</span><span class="o">.</span> <span class="n">Starting</span> <span class="n">advertising</span>
+<span class="n">Advertising</span> <span class="n">successfully</span> <span class="n">started</span>
+<span class="n">Connection</span> <span class="n">event</span> <span class="n">reports</span> <span class="n">enabled</span>
+<span class="n">Filter</span> <span class="ow">not</span> <span class="n">match</span><span class="o">.</span> <span class="n">Address</span><span class="p">:</span> <span class="mi">1</span><span class="n">d</span><span class="p">:</span><span class="mi">18</span><span class="p">:</span><span class="n">b1</span><span class="p">:</span><span class="mi">84</span><span class="p">:</span><span class="n">fd</span><span class="p">:</span><span class="mi">05</span> <span class="p">(</span><span class="n">random</span><span class="p">)</span> <span class="n">connectable</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">Filter</span> <span class="ow">not</span> <span class="n">match</span><span class="o">.</span> <span class="n">Address</span><span class="p">:</span> <span class="mi">00</span><span class="p">:</span><span class="mi">92</span><span class="p">:</span><span class="mi">3</span><span class="n">f</span><span class="p">:</span><span class="n">a6</span><span class="p">:</span><span class="mi">3</span><span class="n">f</span><span class="p">:</span><span class="mi">48</span> <span class="p">(</span><span class="n">random</span><span class="p">)</span> <span class="n">connectable</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">Filter</span> <span class="ow">not</span> <span class="n">match</span><span class="o">.</span> <span class="n">Address</span><span class="p">:</span> <span class="mi">02</span><span class="p">:</span><span class="n">ec</span><span class="p">:</span><span class="n">f9</span><span class="p">:</span><span class="n">bb</span><span class="p">:</span><span class="n">ec</span><span class="p">:</span><span class="mi">27</span> <span class="p">(</span><span class="n">random</span><span class="p">)</span> <span class="n">connectable</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">Filter</span> <span class="ow">not</span> <span class="n">match</span><span class="o">.</span> <span class="n">Address</span><span class="p">:</span> <span class="mi">3</span><span class="n">e</span><span class="p">:</span><span class="mi">21</span><span class="p">:</span><span class="mi">91</span><span class="p">:</span><span class="mi">91</span><span class="p">:</span><span class="mi">52</span><span class="p">:</span><span class="mi">82</span> <span class="p">(</span><span class="n">random</span><span class="p">)</span> <span class="n">connectable</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">Filter</span> <span class="ow">not</span> <span class="n">match</span><span class="o">.</span> <span class="n">Address</span><span class="p">:</span> <span class="mi">08</span><span class="p">:</span><span class="n">c6</span><span class="p">:</span><span class="n">a4</span><span class="p">:</span><span class="n">e0</span><span class="p">:</span><span class="mi">72</span><span class="p">:</span><span class="n">e9</span> <span class="p">(</span><span class="n">random</span><span class="p">)</span> <span class="n">connectable</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">Filter</span> <span class="ow">not</span> <span class="n">match</span><span class="o">.</span> <span class="n">Address</span><span class="p">:</span> <span class="mi">13</span><span class="p">:</span><span class="mi">04</span><span class="p">:</span><span class="n">eb</span><span class="p">:</span><span class="n">f1</span><span class="p">:</span><span class="mi">0</span><span class="n">b</span><span class="p">:</span><span class="mi">46</span> <span class="p">(</span><span class="n">random</span><span class="p">)</span> <span class="n">connectable</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">Filter</span> <span class="ow">not</span> <span class="n">match</span><span class="o">.</span> <span class="n">Address</span><span class="p">:</span> <span class="n">cb</span><span class="p">:</span><span class="mi">01</span><span class="p">:</span><span class="mi">1</span><span class="n">a</span><span class="p">:</span><span class="mi">2</span><span class="n">d</span><span class="p">:</span><span class="mi">6</span><span class="n">e</span><span class="p">:</span><span class="n">ae</span> <span class="p">(</span><span class="n">random</span><span class="p">)</span> <span class="n">connectable</span><span class="p">:</span> <span class="mi">1</span>
+<span class="n">Filter</span> <span class="ow">not</span> <span class="n">match</span><span class="o">.</span> <span class="n">Address</span><span class="p">:</span> <span class="mi">5</span><span class="n">c</span><span class="p">:</span><span class="n">f2</span><span class="p">:</span><span class="mi">70</span><span class="p">:</span><span class="n">c2</span><span class="p">:</span><span class="mi">3</span><span class="n">f</span><span class="p">:</span><span class="mi">9</span><span class="n">f</span> <span class="p">(</span><span class="n">random</span><span class="p">)</span> <span class="n">connectable</span><span class="p">:</span> <span class="mi">1</span>
+<span class="n">Connected</span> <span class="k">as</span> <span class="n">peripheral</span>
+<span class="n">Conn</span><span class="o">.</span> <span class="n">interval</span> <span class="ow">is</span> <span class="mi">80</span> <span class="n">units</span> <span class="p">(</span><span class="mf">1.25</span> <span class="n">ms</span><span class="o">/</span><span class="n">unit</span><span class="p">)</span>
+<span class="n">Service</span> <span class="n">discovery</span> <span class="n">completed</span>
+<span class="n">Press</span> <span class="nb">any</span> <span class="n">key</span> <span class="n">to</span> <span class="n">start</span> <span class="n">measuring</span> <span class="n">transmission</span> <span class="n">latency</span>
+<span class="n">Transmission</span> <span class="n">Latency</span><span class="p">:</span> <span class="mi">80917</span> <span class="p">(</span><span class="n">us</span><span class="p">),</span> <span class="n">CRC</span> <span class="n">mismatches</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">Transmission</span> <span class="n">Latency</span><span class="p">:</span> <span class="mi">80841</span> <span class="p">(</span><span class="n">us</span><span class="p">),</span> <span class="n">CRC</span> <span class="n">mismatches</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">Transmission</span> <span class="n">Latency</span><span class="p">:</span> <span class="mi">80749</span> <span class="p">(</span><span class="n">us</span><span class="p">),</span> <span class="n">CRC</span> <span class="n">mismatches</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">Transmission</span> <span class="n">Latency</span><span class="p">:</span> <span class="mi">80673</span> <span class="p">(</span><span class="n">us</span><span class="p">),</span> <span class="n">CRC</span> <span class="n">mismatches</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">Transmission</span> <span class="n">Latency</span><span class="p">:</span> <span class="mi">80596</span> <span class="p">(</span><span class="n">us</span><span class="p">),</span> <span class="n">CRC</span> <span class="n">mismatches</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">Transmission</span> <span class="n">Latency</span><span class="p">:</span> <span class="mi">80505</span> <span class="p">(</span><span class="n">us</span><span class="p">),</span> <span class="n">CRC</span> <span class="n">mismatches</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">Transmission</span> <span class="n">Latency</span><span class="p">:</span> <span class="mi">80429</span> <span class="p">(</span><span class="n">us</span><span class="p">),</span> <span class="n">CRC</span> <span class="n">mismatches</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">Transmission</span> <span class="n">Latency</span><span class="p">:</span> <span class="mi">80337</span> <span class="p">(</span><span class="n">us</span><span class="p">),</span> <span class="n">CRC</span> <span class="n">mismatches</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">Transmission</span> <span class="n">Latency</span><span class="p">:</span> <span class="mi">80261</span> <span class="p">(</span><span class="n">us</span><span class="p">),</span> <span class="n">CRC</span> <span class="n">mismatches</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">Transmission</span> <span class="n">Latency</span><span class="p">:</span> <span class="mi">80184</span> <span class="p">(</span><span class="n">us</span><span class="p">),</span> <span class="n">CRC</span> <span class="n">mismatches</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">Transmission</span> <span class="n">Latency</span><span class="p">:</span> <span class="mi">80093</span> <span class="p">(</span><span class="n">us</span><span class="p">),</span> <span class="n">CRC</span> <span class="n">mismatches</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">Transmission</span> <span class="n">Latency</span><span class="p">:</span> <span class="mi">80017</span> <span class="p">(</span><span class="n">us</span><span class="p">),</span> <span class="n">CRC</span> <span class="n">mismatches</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">Transmission</span> <span class="n">Latency</span><span class="p">:</span> <span class="mi">79940</span> <span class="p">(</span><span class="n">us</span><span class="p">),</span> <span class="n">CRC</span> <span class="n">mismatches</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">Transmission</span> <span class="n">Latency</span><span class="p">:</span> <span class="mi">79849</span> <span class="p">(</span><span class="n">us</span><span class="p">),</span> <span class="n">CRC</span> <span class="n">mismatches</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">Connection</span> <span class="n">interval</span> <span class="n">updated</span><span class="p">:</span> <span class="n">LLPM</span> <span class="p">(</span><span class="mi">1</span> <span class="n">ms</span><span class="p">)</span>
+<span class="n">Transmission</span> <span class="n">Latency</span><span class="p">:</span> <span class="mi">81604</span> <span class="p">(</span><span class="n">us</span><span class="p">),</span> <span class="n">CRC</span> <span class="n">mismatches</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">Transmission</span> <span class="n">Latency</span><span class="p">:</span> <span class="mi">30181</span> <span class="p">(</span><span class="n">us</span><span class="p">),</span> <span class="n">CRC</span> <span class="n">mismatches</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">Transmission</span> <span class="n">Latency</span><span class="p">:</span> <span class="mi">1098</span> <span class="p">(</span><span class="n">us</span><span class="p">),</span> <span class="n">CRC</span> <span class="n">mismatches</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">Transmission</span> <span class="n">Latency</span><span class="p">:</span> <span class="mi">1129</span> <span class="p">(</span><span class="n">us</span><span class="p">),</span> <span class="n">CRC</span> <span class="n">mismatches</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">Transmission</span> <span class="n">Latency</span><span class="p">:</span> <span class="mi">1037</span> <span class="p">(</span><span class="n">us</span><span class="p">),</span> <span class="n">CRC</span> <span class="n">mismatches</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">Transmission</span> <span class="n">Latency</span><span class="p">:</span> <span class="mi">930</span> <span class="p">(</span><span class="n">us</span><span class="p">),</span> <span class="n">CRC</span> <span class="n">mismatches</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">Transmission</span> <span class="n">Latency</span><span class="p">:</span> <span class="mi">1312</span> <span class="p">(</span><span class="n">us</span><span class="p">),</span> <span class="n">CRC</span> <span class="n">mismatches</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">Transmission</span> <span class="n">Latency</span><span class="p">:</span> <span class="mi">1083</span> <span class="p">(</span><span class="n">us</span><span class="p">),</span> <span class="n">CRC</span> <span class="n">mismatches</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">Transmission</span> <span class="n">Latency</span><span class="p">:</span> <span class="mi">1007</span> <span class="p">(</span><span class="n">us</span><span class="p">),</span> <span class="n">CRC</span> <span class="n">mismatches</span><span class="p">:</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+</section>
+<section id="dependencies">
+<h2><a class="toc-backref" href="#id13">Dependencies</a><a class="headerlink" href="#dependencies" title="Permalink to this heading"></a></h2>
+<p>This sample uses the following nRF Connect SDK libraries:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../../libraries/bluetooth_services/services/latency.html#latency-readme"><span class="std std-ref">GATT Latency Service</span></a></p></li>
+<li><p><a class="reference internal" href="../../../libraries/bluetooth_services/services/latency_client.html#latency-client-readme"><span class="std std-ref">GATT Latency Client</span></a></p></li>
+</ul>
+<p>This sample uses the following <a class="reference external" href="https://github.com/nrfconnect/sdk-nrfxlib">sdk-nrfxlib</a> libraries:</p>
+<ul class="simple">
+<li><p><span class="xref std std-ref">nrfxlib:softdevice_controller</span></p></li>
+</ul>
+<p>In addition, it uses the following Zephyr libraries:</p>
+<ul class="simple">
+<li><p><code class="file docutils literal notranslate"><span class="pre">include/console.h</span></code></p></li>
+<li><p><span class="xref std std-ref">zephyr:kernel_api</span>:</p>
+<ul>
+<li><p><code class="file docutils literal notranslate"><span class="pre">include/kernel.h</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">include/sys/printk.h</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">include/zephyr/types.h</span></code></p></li>
+<li><p><span class="xref std std-ref">zephyr:bluetooth_api</span>:</p>
+<ul>
+<li><p><code class="file docutils literal notranslate"><span class="pre">include/bluetooth/bluetooth.h</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">include/bluetooth/conn.h</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">include/bluetooth/gatt.h</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">include/bluetooth/hci.h</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">include/bluetooth/uuid.h</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">include/bluetooth/scan.h</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">include/bluetooth/gatt_dm.h</span></code></p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="references">
+<h2><a class="toc-backref" href="#id14">References</a><a class="headerlink" href="#references" title="Permalink to this heading"></a></h2>
+<p>For more information about the connection parameters that are used in this sample, see the following chapters of the <a class="reference external" href="https://www.bluetooth.com/specifications/specs/">Bluetooth Core Specification</a>:</p>
+<ul class="simple">
+<li><p>Vol 3, Part F, 3.4.5 Writing attributes</p></li>
+<li><p>Vol 3, Part G, 4.9.3 Write Characteristic Value</p></li>
+<li><p>Vol 6, Part B, 5.1.1 Connection Update Procedure</p></li>
+<li><p>Vol 6, Part B, 5.1.10 PHY Update Procedure</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../multiple_adv_sets/README.html" class="btn btn-neutral float-right" title="Bluetooth: Multiple advertising sets" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../hci_lpuart/README.html" class="btn btn-neutral" title="Bluetooth: HCI low power UART" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

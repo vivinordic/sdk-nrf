@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Near Field Communication (NFC) &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../_static/js/ncs.js"
+></script>
+<script src="../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Thread" href="../thread/index.html" />
+    <link rel="prev" title="Multiprotocol support" href="../multiprotocol/index.html" />
+<link
+  href="../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../protocols.html">Protocols</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../ble/index.html">Bluetooth LE Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bt_mesh/index.html">Bluetooth mesh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../esb/index.html">Enhanced ShockBurst (ESB)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gazell/index.html">Gazell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../matter/index.html">Matter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multiprotocol/index.html">Multiprotocol support</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Near Field Communication (NFC)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#programming-and-reading-tags">Programming and reading tags</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#programming-a-tag">Programming a tag</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#reading-a-tag">Reading a tag</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#nfc-data-exchange-format-ndef">NFC Data Exchange Format (NDEF)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ndef-message-and-record-format">NDEF message and record format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#record-payload">Record payload</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#tag-ndef-exchange-protocol-tnep">Tag NDEF Exchange Protocol (TNEP)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../thread/index.html">Thread</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../wifi/index.html">Wi-Fi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../zigbee/index.html">Zigbee</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drivers.html">Drivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../protocols.html">Protocols</a></li>
+      <li class="breadcrumb-item active">Near Field Communication (NFC)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/protocols/nfc/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="near-field-communication-nfc">
+<span id="ug-nfc"></span><h1>Near Field Communication (NFC)<a class="headerlink" href="#near-field-communication-nfc" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#programming-and-reading-tags" id="id9">Programming and reading tags</a></p>
+<ul>
+<li><p><a class="reference internal" href="#programming-a-tag" id="id10">Programming a tag</a></p></li>
+<li><p><a class="reference internal" href="#reading-a-tag" id="id11">Reading a tag</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#nfc-data-exchange-format-ndef" id="id12">NFC Data Exchange Format (NDEF)</a></p>
+<ul>
+<li><p><a class="reference internal" href="#ndef-message-and-record-format" id="id13">NDEF message and record format</a></p></li>
+<li><p><a class="reference internal" href="#record-payload" id="id14">Record payload</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#tag-ndef-exchange-protocol-tnep" id="id15">Tag NDEF Exchange Protocol (TNEP)</a></p></li>
+</ul>
+</div>
+<p>Near Field Communication (NFC) is a technology for wireless transfer of small amounts of data between two devices.
+It uses very simple communication protocols and, therefore, allows quicker connection than Bluetooth® Low Energy.
+However, because NFC uses magnetic induction to enable communication, the devices must be very close (&lt; 10 cm) to connect.</p>
+<p>The following image gives a simplified overview of how NFC works.
+See the following sections for more information about the depicted components.</p>
+<figure class="align-default" id="id6">
+<img alt="Simplified overview of how NFC can be used" src="../../_images/nfc_overview.svg" /><figcaption>
+<p><span class="caption-text">Simplified overview of how NFC can be used</span><a class="headerlink" href="#id6" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Technical specifications for NFC are available from the <a class="reference external" href="https://nfc-forum.org/build/specifications">NFC Forum specification overview</a>.</p>
+<section id="programming-and-reading-tags">
+<span id="ug-nfc-programming"></span><h2><a class="toc-backref" href="#id9">Programming and reading tags</a><a class="headerlink" href="#programming-and-reading-tags" title="Permalink to this heading"></a></h2>
+<p>NFC supports different modes of operation.
+In reader/writer mode, one of the NFC devices (the <em>polling device</em>) is active and requests and reads data from the other device (the <em>tag</em>).
+The NFC tag is passive.
+It does not generate an electromagnetic field, but it modulates the field that is generated by the polling device.
+The tag contains data, such as a URL, which can be read and written by the polling device.</p>
+<p>Most of Nordic Semiconductor’s nRF5 Series devices contain a peripheral called NFC tag.
+This peripheral works in NFC-A technology and supports the “listen” communication mode.
+Listen mode means that the tag “listens to” (or waits for) polling devices, but it does not actively start a connection.</p>
+<section id="programming-a-tag">
+<h3><a class="toc-backref" href="#id10">Programming a tag</a><a class="headerlink" href="#programming-a-tag" title="Permalink to this heading"></a></h3>
+<p>The nRF Connect SDK provides libraries and modules to emulate two types of tag protocol stacks:</p>
+<ul class="simple">
+<li><p><span class="xref std std-ref">nrfxlib:type_2_tag</span> - based on the <a class="reference external" href="https://nfc-forum.org/build/specifications">NFC Forum Type 2 Tag specification</a></p></li>
+<li><p><span class="xref std std-ref">nrfxlib:type_4_tag</span> - based on the <a class="reference external" href="https://nfc-forum.org/build/specifications">NFC Forum Type 4 Tag specification</a></p></li>
+</ul>
+<p>These stacks are available as precompiled linkable libraries in the <span class="xref std std-ref">nrfxlib repository</span>.
+They provide functions to enable the NFC tag and configure the tag data.
+See <span class="xref std std-ref">nrfxlib:type_2_tag</span> and <span class="xref std std-ref">nrfxlib:type_4_tag</span> for more information.
+The API of the libraries is described in <span class="xref std std-ref">API documentation (Type 2 Tag)</span> and <span class="xref std std-ref">API documentation (Type 4 Tag)</span>.</p>
+<p>Both libraries use the NFCT driver module from <a class="reference external" href="https://github.com/NordicSemiconductor/nrfx/">nrfx</a> to access the NFCT hardware.
+See <span class="xref std std-ref">nrfxlib:nfc_integration_notes</span> for information on how to use the libraries in nRF Connect SDK.</p>
+</section>
+<section id="reading-a-tag">
+<h3><a class="toc-backref" href="#id11">Reading a tag</a><a class="headerlink" href="#reading-a-tag" title="Permalink to this heading"></a></h3>
+<p>To read data from an NFC tag, a polling device (also called NFC Reader Device) is needed.
+In most cases, this will be a mobile device with an NFC interface, such as a smartphone or a tablet.</p>
+<p>However, if you want to work in a fully embedded environment, you can use an Arduino-compatible NFC shield together with an nRF5 Development Kit to create your own polling device.
+With the NFC shield connected, you can use libraries like the <a class="reference internal" href="../../libraries/others/st25r3911b_nfc.html#st25r3911b-nfc-readme"><span class="std std-ref">NFC Reader ST25R3911B</span></a> library to read the raw data of a Type 2 Tag and the <a class="reference internal" href="../../libraries/nfc/t2t/t2t_parser.html#nfc-t2t-parser-readme"><span class="std std-ref">Type 2 Tag parser</span></a> to process the raw data.
+To interact with Type 4 Tag data, use the <a class="reference internal" href="../../libraries/nfc/t4t/hl_procedure.html#nfc-t4t-hl-procedure-readme"><span class="std std-ref">Type 4 Tag procedures</span></a> library.</p>
+<p>See <a class="reference internal" href="../../libraries/nfc/t2t/index.html#lib-nfc-t2t"><span class="std std-ref">Type 2 Tag</span></a> for all provided libraries for Type 2 Tag, and <a class="reference internal" href="../../libraries/nfc/t4t/index.html#lib-nfc-t4t"><span class="std std-ref">Type 4 Tag</span></a> for all provided libraries for Type 4 Tag.</p>
+</section>
+</section>
+<section id="nfc-data-exchange-format-ndef">
+<span id="ug-nfc-ndef"></span><h2><a class="toc-backref" href="#id12">NFC Data Exchange Format (NDEF)</a><a class="headerlink" href="#nfc-data-exchange-format-ndef" title="Permalink to this heading"></a></h2>
+<p>NFC communication uses NFC Data Exchange Format (NDEF) messages to exchange data.
+NDEF is a binary format that is commonly used in NFC devices (like smartphones) and NFC tags.</p>
+<p>The main data container defined by NDEF is called an <em>NDEF message</em>.
+NDEF messages consist of one or more NDEF records of different types.
+The type indicates the kind of data that the record contains, and the series of record types in a message defines the message type.
+For example, a URI message contains one record that encodes a URL string.</p>
+<p>See <a class="reference internal" href="#ug-nfc-ndef-format"><span class="std std-ref">NDEF message and record format</span></a> for detailed information on how NDEF messages are built up.</p>
+<p>The nRF Connect SDK provides libraries for generating and encoding NDEF messages and records, and for parsing them.
+There are libraries for specific message and record types as well as a generic generator that you can use to easily implement other standardized records and messages or even create your own records.</p>
+<p>See <a class="reference internal" href="../../libraries/nfc/ndef/index.html#lib-nfc-ndef"><span class="std std-ref">NFC Data Exchange Format (NDEF)</span></a> for all provided libraries.</p>
+<p>If you use the provided libraries, you do not need deep knowledge of the NDEF specification to start using NFC.</p>
+<section id="ndef-message-and-record-format">
+<span id="ug-nfc-ndef-format"></span><h3><a class="toc-backref" href="#id13">NDEF message and record format</a><a class="headerlink" href="#ndef-message-and-record-format" title="Permalink to this heading"></a></h3>
+<p>NDEF data is structured in messages.
+Each message consists of one or more records, which are made up of a header and the record payload.
+The <a class="reference internal" href="#ug-nfc-ndef-format-header"><span class="std std-ref">Record header</span></a> contains metadata about, amongst others, the payload type and length.
+The <a class="reference internal" href="#ug-nfc-ndef-format-payload"><span class="std std-ref">Record payload</span></a> constitutes the actual content of the record.</p>
+<figure class="align-default" id="id7">
+<img alt="Structure of an NDEF message and record" src="../../_images/ndef_msg.svg" /><figcaption>
+<p><span class="caption-text">Structure of an NDEF message and record</span><a class="headerlink" href="#id7" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<section id="record-header">
+<span id="ug-nfc-ndef-format-header"></span><h4>Record header<a class="headerlink" href="#record-header" title="Permalink to this heading"></a></h4>
+<p>The NDEF record header consists of the following fields:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Length</p></th>
+<th class="head"><p>Required</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Flags and TNF</p></td>
+<td><p>1 byte</p></td>
+<td><p>yes</p></td>
+<td><p>See <a class="reference internal" href="#ug-nfc-ndef-format-flags"><span class="std std-ref">Flags and TNF</span></a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Type Length</p></td>
+<td><p>1 byte</p></td>
+<td><p>yes</p></td>
+<td><p>Specifies the length of the payload type field.
+Required, but may be zero.</p></td>
+</tr>
+<tr class="row-even"><td><p>Payload Length</p></td>
+<td><p>1 or 4 bytes</p></td>
+<td><p>yes</p></td>
+<td><p>Specifies the length of the payload.
+Either 1 byte or 4 byte long, depending on the SR flag. Required, but may be zero.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ID Length</p></td>
+<td><p>1 byte</p></td>
+<td><p>no</p></td>
+<td><p>Required if the IL flag is set.
+Specifies the size of the Payload ID field.</p></td>
+</tr>
+<tr class="row-even"><td><p>Payload Type</p></td>
+<td><p>variable</p></td>
+<td><p>no</p></td>
+<td><p>Required if the Type Length is &gt; 0.
+Specifies the type of the NDEF record payload.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Payload ID</p></td>
+<td><p>variable</p></td>
+<td><p>no</p></td>
+<td><p>Required if the IL flag is set and the ID Length is &gt; 0.
+Specifies the ID of the NDEF record payload.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="flags-and-tnf">
+<span id="ug-nfc-ndef-format-flags"></span><h4>Flags and TNF<a class="headerlink" href="#flags-and-tnf" title="Permalink to this heading"></a></h4>
+<figure class="align-default" id="id8">
+<img alt="Flags and TNF byte" src="../../_images/ndef_header_flags.svg" /><figcaption>
+<p><span class="caption-text">Flags and TNF byte</span><a class="headerlink" href="#id8" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>The Flags and TNF byte contains the following flags:</p>
+<dl>
+<dt>MB (Message Begin) and ME (Message End):</dt><dd><p>Specify the position of the NDEF record within the message.
+The MB flag is set for the first record in the message.
+Similarly, the ME flag is set for the last record in the message.
+If a record is the only record in a message, both flags are set.</p>
+</dd>
+<dt>CF (Chunk Flag):</dt><dd><p>Used for chunked payloads (a payload that is partitioned into multiple records).
+Set in all chunks of the record except for the last one.
+Note, however, that chunking is not supported by this library.</p>
+</dd>
+<dt>SR (Short Record):</dt><dd><p>Used to determine the size of the payload length field.
+If the flag is set, the Payload Length occupies 1 byte; otherwise it is 4 bytes long.
+Note that the NDEF generator supports a Payload Length of 4 bytes only at the moment.</p>
+</dd>
+<dt>IL (ID Length present):</dt><dd><p>Indicates whether an ID Length field is present in the header.
+If the flag is set, the ID Length field is present.</p>
+</dd>
+<dt>TNF (Type Name Format):</dt><dd><p>Specifies the structure of the Payload Type field and how to interpret it.
+The following values are allowed (square brackets contain documentation reference related to the specific type):</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 84%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Type Name Format</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x00</p></td>
+<td><p>Empty</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x01</p></td>
+<td><p>NFC Forum well-known type [NFC RTD]</p></td>
+</tr>
+<tr class="row-even"><td><p>0x02</p></td>
+<td><p>Media-type [RFC 2046]</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x03</p></td>
+<td><p>Absolute URI [RFC 3986]</p></td>
+</tr>
+<tr class="row-even"><td><p>0x04</p></td>
+<td><p>NFC Forum external type [NFC RTD]</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x05</p></td>
+<td><p>Unknown</p></td>
+</tr>
+<tr class="row-even"><td><p>0x06</p></td>
+<td><p>Unchanged</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x07</p></td>
+<td><p>Reserved</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</section>
+</section>
+<section id="record-payload">
+<span id="ug-nfc-ndef-format-payload"></span><h3><a class="toc-backref" href="#id14">Record payload</a><a class="headerlink" href="#record-payload" title="Permalink to this heading"></a></h3>
+<p>The content of the payload is application-specific and related to the type of the record.
+For example, in URI records, the payload contains a web address of the page that the polling device should open.</p>
+<p>Note that the payload of an NDEF record can contain a nested NDEF message.
+This nested message must be a full NDEF message, consisting of one or multiple NDEF records with the appropriate setting of MB and ME flags.</p>
+</section>
+</section>
+<section id="tag-ndef-exchange-protocol-tnep">
+<span id="ug-nfc-tnep"></span><h2><a class="toc-backref" href="#id15">Tag NDEF Exchange Protocol (TNEP)</a><a class="headerlink" href="#tag-ndef-exchange-protocol-tnep" title="Permalink to this heading"></a></h2>
+<p>The Tag NDEF Exchange Protocol (TNEP) is an application-level protocol for sending or retrieving application data units between a polling (reader) device and an NFC tag.
+The data units are NFC Data Exchange Format (NDEF) messages.</p>
+<p>The protocol operates between the NDEF application layer and the tag.
+The tag must use a protocol that supports the NDEF Read and Write procedure (thus one of the NFC Forum tag types except for Type 1 Tag).
+The polling device must support this protocol to be able to perform reading and writing of NDEF messages on the tag.</p>
+<p>TNEP supports NFC tags of all NFC Forum tag types from Type 2 Tag to Type 5 Tag.
+The polling device communicates with the tag using a protocol that works with the specific tag type.</p>
+<p>The nRF Connect SDK provides libraries to implement TNEP for both the polling device and the tag.
+See <a class="reference internal" href="../../libraries/nfc/tnep/index.html#lib-nfc-tnep"><span class="std std-ref">Tag NDEF Exchange Protocol (TNEP)</span></a> for all provided libraries.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../thread/index.html" class="btn btn-neutral float-right" title="Thread" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../multiprotocol/index.html" class="btn btn-neutral" title="Multiprotocol support" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

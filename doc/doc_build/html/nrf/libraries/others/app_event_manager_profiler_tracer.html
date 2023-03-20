@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Application Event Manager profiler tracer &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../_static/js/ncs.js"
+></script>
+<script src="../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Continuous array" href="contin_array.html" />
+    <link rel="prev" title="Application Event Manager" href="app_event_manager.html" />
+<link
+  href="../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drivers.html">Drivers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Libraries</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../bin/index.html">Binary libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bluetooth_services/index.html">Bluetooth libraries and services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bootloader/index.html">Bootloader libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../caf/index.html">Common Application Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../debug/index.html">Debug libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dfu/index.html">DFU libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gazell/index.html">Gazell libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modem/index.html">Modem libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mpsl/index.html">Multiprotocol Service Layer libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../networking/index.html">Libraries for networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nfc/index.html">Libraries for NFC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nrf_rpc/index.html">nRF RPC libraries</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Other libraries</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="adp536x.html">adp536x</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_event_manager.html">Application Event Manager</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Application Event Manager profiler tracer</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#configuration">Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#implementing-profiling-for-application-event-manager-events">Implementing profiling for Application Event Manager events</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#implementation-details">Implementation details</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#api-documentation">API documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="contin_array.html">Continuous array</a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_fifo.html">Data FIFO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="date_time.html">Date-Time</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dk_buttons_and_leds.html">DK Buttons and LEDs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dm.html">Distance Measurement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ei_wrapper.html">Edge Impulse wrapper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="emds.html">Emergency data storage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="esb.html">Enhanced ShockBurst</a></li>
+<li class="toctree-l3"><a class="reference internal" href="event_manager_proxy.html">Event Manager Proxy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fatal_error.html">Fatal error handler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="flash_map_pm.html">Partition Manager flash map</a></li>
+<li class="toctree-l3"><a class="reference internal" href="flash_patch.html">Flash patch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fprotect.html">Hardware flash write protection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fw_info.html">Firmware information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hw_id.html">Hardware ID</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hw_unique_key.html">Hardware unique key</a></li>
+<li class="toctree-l3"><a class="reference internal" href="identity_key.html">Identity key</a></li>
+<li class="toctree-l3"><a class="reference internal" href="memfault_ncs.html">Memfault</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nrf_profiler.html">nRF Profiler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pcm_mix.html">Pulse Code Modulation audio mixer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pcm_stream_channel_modifier.html">PCM Stream Channel Modifier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qos.html">Quality of Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ram_pwrdn.html">RAM power-down</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sfloat.html">Short float (SFLOAT)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="st25r3911b_nfc.html">NFC Reader ST25R3911B</a></li>
+<li class="toctree-l3"><a class="reference internal" href="supl_os_client.html">SUPL client and SUPL client OS integration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tone.html">Tone generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wave_gen.html">Wave generator</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../shell/index.html">Shell libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tfm/index.html">TF-M libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../zigbee/index.html">Libraries for Zigbee</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Libraries</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Other libraries</a></li>
+      <li class="breadcrumb-item active">Application Event Manager profiler tracer</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/libraries/others/app_event_manager_profiler_tracer.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="application-event-manager-profiler-tracer">
+<span id="app-event-manager-profiler-tracer"></span><h1>Application Event Manager profiler tracer<a class="headerlink" href="#application-event-manager-profiler-tracer" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#configuration" id="id7">Configuration</a></p>
+<ul>
+<li><p><a class="reference internal" href="#additional-configuration" id="id8">Additional configuration</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#implementing-profiling-for-application-event-manager-events" id="id9">Implementing profiling for Application Event Manager events</a></p></li>
+<li><p><a class="reference internal" href="#implementation-details" id="id10">Implementation details</a></p>
+<ul>
+<li><p><a class="reference internal" href="#initialization-hook-usage" id="id11">Initialization hook usage</a></p></li>
+<li><p><a class="reference internal" href="#tracing-hook-usage" id="id12">Tracing hook usage</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#api-documentation" id="id13">API documentation</a></p></li>
+</ul>
+</div>
+<p>The Application Event Manager profiler tracer is a library that enables profiling Application Event Manager events.
+It serves as a linking layer between <a class="reference internal" href="app_event_manager.html#app-event-manager"><span class="std std-ref">Application Event Manager</span></a> and the <a class="reference internal" href="nrf_profiler.html#nrf-profiler"><span class="std std-ref">nRF Profiler</span></a> and allows to profile Application Event Manager event submissions and processings as the Profiler events.
+The Profiler allows you to observe the propagation of an nrf_profiler event in the system, view the data connected with the event, or create statistics.</p>
+<p>The events managed by the Application Event Manager are structured data types that are defined by the application and can contain additional data.
+The Application Event Manager profiler tracer registers <a class="reference internal" href="#c.nrf_profiler_info" title="nrf_profiler_info"><code class="xref c c-struct docutils literal notranslate"><span class="pre">nrf_profiler_info</span></code></a> as trace_data of event types.
+The tracer uses this additional information to track the usage of events within the application.</p>
+<p>See the <a class="reference internal" href="../../samples/app_event_manager_profiler_tracer/README.html#app-event-manager-profiling-tracer-sample"><span class="std std-ref">Application Event Manager profiling tracer</span></a> sample for an example of how to use the library with the <a class="reference internal" href="nrf_profiler.html#nrf-profiler"><span class="std std-ref">nRF Profiler</span></a>.</p>
+<section id="configuration">
+<span id="app-event-manager-profiler-tracer-config"></span><h2><a class="toc-backref" href="#id7">Configuration</a><a class="headerlink" href="#configuration" title="Permalink to this heading"></a></h2>
+<p>To use the Application Event Manager profiler tracer, enable the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_APP_EVENT_MANAGER_PROFILER_TRACER</span></code> Kconfig option.
+This Kconfig option also automatically initializes the Profiler.</p>
+<section id="additional-configuration">
+<h3><a class="toc-backref" href="#id8">Additional configuration</a><a class="headerlink" href="#additional-configuration" title="Permalink to this heading"></a></h3>
+<p>You can also set the following Kconfig options when working with the Application Event Manager profiler tracer:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_APP_EVENT_MANAGER_PROFILER_TRACER_TRACE_EVENT_EXECUTION</span></code> - With this Kconfig option set, the Application Event Manager profiler tracer will track two additional events that mark the start and the end of each event execution, respectively.</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_APP_EVENT_MANAGER_PROFILER_TRACER_PROFILE_EVENT_DATA</span></code> - With this Kconfig option set, the Application Event Manager profiler tracer will trigger logging of event data during profiling, allowing you to see what event data values were sent.</p></li>
+</ul>
+</section>
+</section>
+<section id="implementing-profiling-for-application-event-manager-events">
+<span id="app-event-manager-profiler-tracer-em-implementation"></span><h2><a class="toc-backref" href="#id9">Implementing profiling for Application Event Manager events</a><a class="headerlink" href="#implementing-profiling-for-application-event-manager-events" title="Permalink to this heading"></a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Before you complete the following steps, make sure to <a class="reference internal" href="app_event_manager.html#app-event-manager-implementing-events"><span class="std std-ref">implement Application Event Manager events and modules</span></a>.</p>
+</div>
+<p>To profile an Application Event Manager event, you must complete the following steps:</p>
+<ol class="arabic">
+<li><p>Enable profiling Application Event Manager events using the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_APP_EVENT_MANAGER_PROFILER_TRACER</span></code> Kconfig option.</p></li>
+<li><p>Edit the source file for the event type:</p>
+<ol class="loweralpha">
+<li><p>Define a profiling function that logs the event data to a given buffer by calling one of the following functions for every registered data type:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="nrf_profiler.html#c.nrf_profiler_log_encode_uint32" title="nrf_profiler_log_encode_uint32"><code class="xref c c-func docutils literal notranslate"><span class="pre">nrf_profiler_log_encode_uint32()</span></code></a></p></li>
+<li><p><a class="reference internal" href="nrf_profiler.html#c.nrf_profiler_log_encode_int32" title="nrf_profiler_log_encode_int32"><code class="xref c c-func docutils literal notranslate"><span class="pre">nrf_profiler_log_encode_int32()</span></code></a></p></li>
+<li><p><a class="reference internal" href="nrf_profiler.html#c.nrf_profiler_log_encode_uint16" title="nrf_profiler_log_encode_uint16"><code class="xref c c-func docutils literal notranslate"><span class="pre">nrf_profiler_log_encode_uint16()</span></code></a></p></li>
+<li><p><a class="reference internal" href="nrf_profiler.html#c.nrf_profiler_log_encode_int16" title="nrf_profiler_log_encode_int16"><code class="xref c c-func docutils literal notranslate"><span class="pre">nrf_profiler_log_encode_int16()</span></code></a></p></li>
+<li><p><a class="reference internal" href="nrf_profiler.html#c.nrf_profiler_log_encode_uint8" title="nrf_profiler_log_encode_uint8"><code class="xref c c-func docutils literal notranslate"><span class="pre">nrf_profiler_log_encode_uint8()</span></code></a></p></li>
+<li><p><a class="reference internal" href="nrf_profiler.html#c.nrf_profiler_log_encode_int8" title="nrf_profiler_log_encode_int8"><code class="xref c c-func docutils literal notranslate"><span class="pre">nrf_profiler_log_encode_int8()</span></code></a></p></li>
+<li><p><a class="reference internal" href="nrf_profiler.html#c.nrf_profiler_log_encode_string" title="nrf_profiler_log_encode_string"><code class="xref c c-func docutils literal notranslate"><span class="pre">nrf_profiler_log_encode_string()</span></code></a></p></li>
+</ul>
+<p>The <a class="reference internal" href="nrf_profiler.html#c.nrf_profiler_log_start" title="nrf_profiler_log_start"><code class="xref c c-func docutils literal notranslate"><span class="pre">nrf_profiler_log_start()</span></code></a> and <a class="reference internal" href="nrf_profiler.html#c.nrf_profiler_log_send" title="nrf_profiler_log_send"><code class="xref c c-func docutils literal notranslate"><span class="pre">nrf_profiler_log_send()</span></code></a> are called automatically by the Application Event Manager profiler tracer.
+You do not need to call these functions for Application Event Manager events.
+Mapping the nRF Profiler event ID to an Application Event Manager event is also handled by the Application Event Manager profiler tracer.</p>
+</li>
+<li><p>Define an <a class="reference internal" href="#c.nrf_profiler_info" title="nrf_profiler_info"><code class="xref c c-struct docutils literal notranslate"><span class="pre">nrf_profiler_info</span></code></a> structure using <a class="reference internal" href="#c.APP_EVENT_INFO_DEFINE" title="APP_EVENT_INFO_DEFINE"><code class="xref c c-macro docutils literal notranslate"><span class="pre">APP_EVENT_INFO_DEFINE</span></code></a> in your event source file and provide it as an argument when defining the event type with <a class="reference internal" href="app_event_manager.html#c.APP_EVENT_TYPE_DEFINE" title="APP_EVENT_TYPE_DEFINE"><code class="xref c c-macro docutils literal notranslate"><span class="pre">APP_EVENT_TYPE_DEFINE</span></code></a> macro.
+This structure contains a profiling function and information about the data fields that are logged.
+The following code example shows a profiling function for the event type <code class="docutils literal notranslate"><span class="pre">sample_event</span></code>:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">profile_sample_event</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">log_event_buf</span><span class="w"> </span><span class="o">*</span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">app_event_header</span><span class="w"> </span><span class="o">*</span><span class="n">aeh</span><span class="p">)</span>
+<span class="w">       </span><span class="p">{</span>
+<span class="w">               </span><span class="k">struct</span><span class="w"> </span><span class="nc">sample_event</span><span class="w"> </span><span class="o">*</span><span class="n">event</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cast_sample_event</span><span class="p">(</span><span class="n">aeh</span><span class="p">);</span>
+
+<span class="w">               </span><span class="n">nrf_profiler_log_encode_int8</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="n">event</span><span class="o">-&gt;</span><span class="n">value1</span><span class="p">);</span>
+<span class="w">               </span><span class="n">nrf_profiler_log_encode_int16</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="n">event</span><span class="o">-&gt;</span><span class="n">value2</span><span class="p">);</span>
+<span class="w">               </span><span class="n">nrf_profiler_log_encode_int32</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="n">event</span><span class="o">-&gt;</span><span class="n">value3</span><span class="p">);</span>
+<span class="w">       </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>The following code example shows how to define the event profiling information structure and add it to event type definition:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">APP_EVENT_INFO_DEFINE</span><span class="p">(</span><span class="n">sample_event</span><span class="p">,</span>
+<span class="w">                       </span><span class="cm">/* Profiled datafield types. */</span>
+<span class="w">                       </span><span class="n">ENCODE</span><span class="p">(</span><span class="n">NRF_PROFILER_ARG_S8</span><span class="p">,</span><span class="w"> </span><span class="n">NRF_PROFILER_ARG_S16</span><span class="p">,</span><span class="w"> </span><span class="n">NRF_PROFILER_ARG_S32</span><span class="p">),</span>
+<span class="w">                       </span><span class="cm">/* Profiled data field names - displayed by nRF Profiler. */</span>
+<span class="w">                       </span><span class="n">ENCODE</span><span class="p">(</span><span class="s">&quot;value1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;value2&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;value3&quot;</span><span class="p">),</span>
+<span class="w">                       </span><span class="cm">/* Function used to profile event data. */</span>
+<span class="w">                       </span><span class="n">profile_sample_event</span><span class="p">);</span>
+
+<span class="n">APP_EVENT_TYPE_DEFINE</span><span class="p">(</span><span class="n">sample_event</span><span class="p">,</span>
+<span class="w">                       </span><span class="n">log_sample_event</span><span class="p">,</span><span class="w">       </span><span class="cm">/* Function for logging event data. */</span>
+<span class="w">                       </span><span class="o">&amp;</span><span class="n">sample_event_info</span><span class="p">,</span><span class="w">     </span><span class="cm">/* Structure with data for profiling. */</span>
+<span class="w">                       </span><span class="n">APP_EVENT_FLAGS_CREATE</span><span class="p">(</span><span class="n">APP_EVENT_TYPE_FLAGS_INIT_LOG_ENABLE</span><span class="p">));</span><span class="w">  </span><span class="cm">/* Flags managing event type. */</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>By default, all Application Event Manager events that are defined with an <code class="xref c c-struct docutils literal notranslate"><span class="pre">event_info</span></code> argument are profiled.</p></li>
+<li><p><code class="xref c c-struct docutils literal notranslate"><span class="pre">sample_event_info</span></code> is defined within the <a class="reference internal" href="#c.APP_EVENT_INFO_DEFINE" title="APP_EVENT_INFO_DEFINE"><code class="xref c c-macro docutils literal notranslate"><span class="pre">APP_EVENT_INFO_DEFINE</span></code></a> macro.</p></li>
+</ul>
+</div>
+</li>
+</ol>
+</li>
+<li><p>Use the Profiler Python scripts to profile the application.
+See <a class="reference internal" href="nrf_profiler.html#nrf-profiler-backends"><span class="std std-ref">Enabling supported backend</span></a> in the Profiler documentation for details.</p></li>
+</ol>
+</section>
+<section id="implementation-details">
+<h2><a class="toc-backref" href="#id10">Implementation details</a><a class="headerlink" href="#implementation-details" title="Permalink to this heading"></a></h2>
+<p>The profiler tracer uses some of the Application Event Manager hooks to connect with the manager.</p>
+<section id="initialization-hook-usage">
+<h3><a class="toc-backref" href="#id11">Initialization hook usage</a><a class="headerlink" href="#initialization-hook-usage" title="Permalink to this heading"></a></h3>
+<p>The Application Event Manager provides an initialization hook for any module that relies on the Application Event Manager initialization before the first event is processed.
+The hook function should be declared in the <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">hook(void)</span></code> format.
+If the hook function returns a non-zero value, the initialization process is interrupted and a related error is returned.</p>
+<p>To register the initialization hook, use the macro <a class="reference internal" href="app_event_manager.html#c.APP_EVENT_MANAGER_HOOK_POSTINIT_REGISTER" title="APP_EVENT_MANAGER_HOOK_POSTINIT_REGISTER"><code class="xref c c-macro docutils literal notranslate"><span class="pre">APP_EVENT_MANAGER_HOOK_POSTINIT_REGISTER</span></code></a>.
+For details, refer to <a class="reference internal" href="app_event_manager.html#app-event-manager-api"><span class="std std-ref">API documentation</span></a>.</p>
+<p>The Application Event Manager profiled tracer uses the hook to append itself to the initialization procedure.</p>
+</section>
+<section id="tracing-hook-usage">
+<h3><a class="toc-backref" href="#id12">Tracing hook usage</a><a class="headerlink" href="#tracing-hook-usage" title="Permalink to this heading"></a></h3>
+<p>The Application Event Manager provides an initialization hook for any module that relies on the Application Event Manager initialization before the first event is processed.
+The hook function should be declared in the <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">hook(void)</span></code> format.
+If the hook function returns a non-zero value, the initialization process is interrupted and a related error is returned.</p>
+<p>To register the initialization hook, use the macro <a class="reference internal" href="app_event_manager.html#c.APP_EVENT_MANAGER_HOOK_POSTINIT_REGISTER" title="APP_EVENT_MANAGER_HOOK_POSTINIT_REGISTER"><code class="xref c c-macro docutils literal notranslate"><span class="pre">APP_EVENT_MANAGER_HOOK_POSTINIT_REGISTER</span></code></a>.
+For details, refer to <a class="reference internal" href="app_event_manager.html#app-event-manager-api"><span class="std std-ref">API documentation</span></a>.</p>
+<p>The Application Event Manager profiled tracer uses the hook to append itself to the initialization procedure.</p>
+<p>The Application Event Manager uses flexible mechanism to implement hooks when an event is submitted, before it is processed, and after its processing.
+The tracing hooks are originally designed to implement event tracing, but you can use them for other purposes as well.
+The registered hook function should be declared in the <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">hook(const</span> <span class="pre">struct</span> <span class="pre">app_event_header</span> <span class="pre">*aeh)</span></code> format.</p>
+<p>The following macros are implemented to register event tracing hooks:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="app_event_manager.html#c.APP_EVENT_HOOK_ON_SUBMIT_REGISTER_FIRST" title="APP_EVENT_HOOK_ON_SUBMIT_REGISTER_FIRST"><code class="xref c c-macro docutils literal notranslate"><span class="pre">APP_EVENT_HOOK_ON_SUBMIT_REGISTER_FIRST</span></code></a>, <a class="reference internal" href="app_event_manager.html#c.APP_EVENT_HOOK_ON_SUBMIT_REGISTER" title="APP_EVENT_HOOK_ON_SUBMIT_REGISTER"><code class="xref c c-macro docutils literal notranslate"><span class="pre">APP_EVENT_HOOK_ON_SUBMIT_REGISTER</span></code></a>, <a class="reference internal" href="app_event_manager.html#c.APP_EVENT_HOOK_ON_SUBMIT_REGISTER_LAST" title="APP_EVENT_HOOK_ON_SUBMIT_REGISTER_LAST"><code class="xref c c-macro docutils literal notranslate"><span class="pre">APP_EVENT_HOOK_ON_SUBMIT_REGISTER_LAST</span></code></a></p></li>
+<li><p><a class="reference internal" href="app_event_manager.html#c.APP_EVENT_HOOK_PREPROCESS_REGISTER_FIRST" title="APP_EVENT_HOOK_PREPROCESS_REGISTER_FIRST"><code class="xref c c-macro docutils literal notranslate"><span class="pre">APP_EVENT_HOOK_PREPROCESS_REGISTER_FIRST</span></code></a>, <a class="reference internal" href="app_event_manager.html#c.APP_EVENT_HOOK_PREPROCESS_REGISTER" title="APP_EVENT_HOOK_PREPROCESS_REGISTER"><code class="xref c c-macro docutils literal notranslate"><span class="pre">APP_EVENT_HOOK_PREPROCESS_REGISTER</span></code></a>, <a class="reference internal" href="app_event_manager.html#c.APP_EVENT_HOOK_PREPROCESS_REGISTER_LAST" title="APP_EVENT_HOOK_PREPROCESS_REGISTER_LAST"><code class="xref c c-macro docutils literal notranslate"><span class="pre">APP_EVENT_HOOK_PREPROCESS_REGISTER_LAST</span></code></a></p></li>
+<li><p><a class="reference internal" href="app_event_manager.html#c.APP_EVENT_HOOK_POSTPROCESS_REGISTER_FIRST" title="APP_EVENT_HOOK_POSTPROCESS_REGISTER_FIRST"><code class="xref c c-macro docutils literal notranslate"><span class="pre">APP_EVENT_HOOK_POSTPROCESS_REGISTER_FIRST</span></code></a>, <a class="reference internal" href="app_event_manager.html#c.APP_EVENT_HOOK_POSTPROCESS_REGISTER" title="APP_EVENT_HOOK_POSTPROCESS_REGISTER"><code class="xref c c-macro docutils literal notranslate"><span class="pre">APP_EVENT_HOOK_POSTPROCESS_REGISTER</span></code></a>, <a class="reference internal" href="app_event_manager.html#c.APP_EVENT_HOOK_POSTPROCESS_REGISTER_LAST" title="APP_EVENT_HOOK_POSTPROCESS_REGISTER_LAST"><code class="xref c c-macro docutils literal notranslate"><span class="pre">APP_EVENT_HOOK_POSTPROCESS_REGISTER_LAST</span></code></a></p></li>
+</ul>
+<p>For details, refer to <a class="reference internal" href="app_event_manager.html#app-event-manager-api"><span class="std std-ref">API documentation</span></a>.</p>
+<p>The Application Event Manager profiler tracer uses the tracing hooks to register nRF Profiler events and log their occurrence when application is running.</p>
+</section>
+</section>
+<section id="api-documentation">
+<h2><a class="toc-backref" href="#id13">API documentation</a><a class="headerlink" href="#api-documentation" title="Permalink to this heading"></a></h2>
+<div class="line-block">
+<div class="line">Header file: <code class="file docutils literal notranslate"><span class="pre">include/app_event_manager_profiler_tracer.h</span></code></div>
+<div class="line">Source files: <code class="file docutils literal notranslate"><span class="pre">subsys/app_event_manager_profiler_tracer/</span></code></div>
+</div>
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="group__app__event__manager__profiler__tracer"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">app_event_manager_profiler_tracer</span></span></dt>
+<dd><p>Application Event Manager profiler tracer. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-defines">Defines</p>
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.ENCODE">
+<span class="target" id="group__app__event__manager__profiler__tracer_1ga0def2aec07d929152fdef44cf21d0078"></span><span class="sig-name descname"><span class="n"><span class="pre">ENCODE</span></span></span><span class="sig-paren">(</span><span class="p"><span class="pre">...</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.ENCODE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Encode event data types or labels.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>...</strong> – Data types or labels to be encoded. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.APP_EVENT_INFO_DEFINE">
+<span class="target" id="group__app__event__manager__profiler__tracer_1ga89bb07e15cde1fb6da27a58442a27e27"></span><span class="sig-name descname"><span class="n"><span class="pre">APP_EVENT_INFO_DEFINE</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">ename</span></span>, <span class="n"><span class="pre">types</span></span>, <span class="n"><span class="pre">labels</span></span>, <span class="n"><span class="pre">profile_func</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.APP_EVENT_INFO_DEFINE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Define event profiling information.</p>
+<p>This macro provides definitions required for an event to be profiled.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Types and labels of the profiled values should be wrapped with the <a class="reference internal" href="#group__app__event__manager__profiler__tracer_1ga0def2aec07d929152fdef44cf21d0078"><span class="std std-ref">ENCODE</span></a> macro.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ename</strong> – Name of the event. </p></li>
+<li><p><strong>types</strong> – Types of values to profile (represented as <a class="reference internal" href="nrf_profiler.html#group__nrf__profiler_1ga2d2c506d48e3db92fe5d45ae6eeeed63"><span class="std std-ref">nrf_profiler_arg</span></a>). </p></li>
+<li><p><strong>labels</strong> – Labels of values to profile. </p></li>
+<li><p><strong>profile_func</strong> – Function used to profile event data. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.nrf_profiler_info">
+<span class="target" id="structnrf__profiler__info"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nrf_profiler_info</span></span></span><a class="headerlink" href="#c.nrf_profiler_info" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;app_event_manager_profiler_tracer.h&gt;</em></div>
+<p>Event description for profiling. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.nrf_profiler_info.profile_fn">
+<span class="target" id="structnrf__profiler__info_1a27aaf31bc24cb30017f4b518fd8cec25"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">profile_fn</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="nrf_profiler.html#c.log_event_buf" title="log_event_buf"><span class="n"><span class="pre">log_event_buf</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">buf</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">app_event_header</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">aeh</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#c.nrf_profiler_info.profile_fn" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Function for profiling data related with this event </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.nrf_profiler_info.nrf_profiler_arg_cnt">
+<span class="target" id="structnrf__profiler__info_1ade3f116c8d972ec34786deb3e40a6b9d"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nrf_profiler_arg_cnt</span></span></span><a class="headerlink" href="#c.nrf_profiler_info.nrf_profiler_arg_cnt" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Number of profiled data fields. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.nrf_profiler_info.nrf_profiler_arg_labels">
+<span class="target" id="structnrf__profiler__info_1a599e7c31383614ff4f5c38cdb5618bee"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">nrf_profiler_arg_labels</span></span></span><a class="headerlink" href="#c.nrf_profiler_info.nrf_profiler_arg_labels" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Labels of profiled data fields. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.nrf_profiler_info.nrf_profiler_arg_types">
+<span class="target" id="structnrf__profiler__info_1a52bfb2a41f62094277fba600e7a13f31"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="nrf_profiler.html#c.nrf_profiler_arg" title="nrf_profiler_arg"><span class="n"><span class="pre">nrf_profiler_arg</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">nrf_profiler_arg_types</span></span></span><a class="headerlink" href="#c.nrf_profiler_info.nrf_profiler_arg_types" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Types of profiled data fields. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.nrf_profiler_info.name">
+<span class="target" id="structnrf__profiler__info_1af965d5538696c9b611529a875b1aeb5f"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">name</span></span></span><a class="headerlink" href="#c.nrf_profiler_info.name" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Profiled event name. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="contin_array.html" class="btn btn-neutral float-right" title="Continuous array" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="app_event_manager.html" class="btn btn-neutral" title="Application Event Manager" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

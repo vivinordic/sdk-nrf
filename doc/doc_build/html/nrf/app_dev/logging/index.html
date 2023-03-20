@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Logging in nRF Connect SDK &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../_static/js/ncs.js"
+></script>
+<script src="../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Multi-image builds" href="../multi_image/index.html" />
+    <link rel="prev" title="Firmware updates" href="../bootloaders_and_dfu/fw_update.html" />
+<link
+  href="../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev_model.html">Development model</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../app_dev.html">Application development</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../board_support/index.html">Board support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pin_control/index.html">Pin control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../build_and_config_system/index.html">Build and configuration system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../optimizing/index.html">Optimizing application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ap_protect/index.html">Enabling access port protection mechanism</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bootloaders_and_dfu/index.html">Bootloaders and Device Firmware Updates</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Logging in nRF Connect SDK</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#zephyr-system-logger">Zephyr system logger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#network-protocol-application-logging">Network protocol application logging</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#thread">Thread</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#zigbee">Zigbee</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#logging-backends">Logging backends</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#uart">UART</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rtt">RTT</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#spinel">Spinel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#shell">Shell</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#logging-output-examples">Logging output examples</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../multi_image/index.html">Multi-image builds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../testing_unity_cmock/index.html">Testing with Unity and CMock</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tfm/index.html">Running applications with Trusted Firmware-M</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_fem/index.html">Working with RF front-end modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../wifi_coex/index.html">Adding Wi-Fi Coexistence support to short-range radio applications</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drivers.html">Drivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../app_dev.html">Application development</a></li>
+      <li class="breadcrumb-item active">Logging in nRF Connect SDK</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/app_dev/logging/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="logging-in-ncs">
+<span id="ug-logging"></span><h1>Logging in nRF Connect SDK<a class="headerlink" href="#logging-in-ncs" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#zephyr-system-logger" id="id6">Zephyr system logger</a></p></li>
+<li><p><a class="reference internal" href="#network-protocol-application-logging" id="id7">Network protocol application logging</a></p>
+<ul>
+<li><p><a class="reference internal" href="#thread" id="id8">Thread</a></p></li>
+<li><p><a class="reference internal" href="#zigbee" id="id9">Zigbee</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#logging-backends" id="id10">Logging backends</a></p>
+<ul>
+<li><p><a class="reference internal" href="#uart" id="id11">UART</a></p></li>
+<li><p><a class="reference internal" href="#rtt" id="id12">RTT</a></p></li>
+<li><p><a class="reference internal" href="#spinel" id="id13">Spinel</a></p></li>
+<li><p><a class="reference internal" href="#shell" id="id14">Shell</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#logging-output-examples" id="id15">Logging output examples</a></p></li>
+</ul>
+</div>
+<p>nRF Connect SDK provides a logging system that offers different logging possibilities for testing and debugging.
+The system is multilevel, meaning that it can be enabled and configured independently for different modules.
+This allows you to choose the logging information you want to receive and how it should be gathered.
+Several logging backends allow for defining the interface and protocol used for gathering logging messages.</p>
+<p>You can obtain logging information from the following sources:</p>
+<ul class="simple">
+<li><p>Custom applications</p></li>
+<li><p>Network protocol applications</p></li>
+<li><p>Samples, drivers, and libraries</p></li>
+<li><p>Zephyr system kernel</p></li>
+</ul>
+<p>For example, you can gather logging information about network events from network protocol applications and logging information about threads from Zephyr system kernel at the same time.</p>
+<p>This flexibility comes at a cost: the system’s complexity requires different approach to configuration for single components and backends.
+See the following sections for more information.</p>
+<section id="zephyr-system-logger">
+<span id="ug-logging-zephyr"></span><h2><a class="toc-backref" href="#id6">Zephyr system logger</a><a class="headerlink" href="#zephyr-system-logger" title="Permalink to this heading"></a></h2>
+<p>Zephyr allows you to configure log levels independently for each module and also offers many general logger engine options, for example default levels, discarding messages, overflow behavior, and more.
+You can use the Zephyr system logger in nRF Connect SDK for the following use cases:</p>
+<ul class="simple">
+<li><p>Internal system logs - Useful for analyzing detailed system performance, for example issues with threads stack sizes.</p></li>
+<li><p>Logs from external components - Useful for gathering messages from sample applications and custom modules.</p></li>
+</ul>
+<p>The logger can be enabled with the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LOG</span></code> Kconfig option.
+This option is automatically set alongside the minimal logging implementation (<code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LOG_MODE_MINIMAL</span></code>) with the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NCS_SAMPLES_DEFAULTS</span></code> Kconfig option, which is enabled by default for all samples in nRF Connect SDK.
+For more information about configuring Zephyr’s logger, see <span class="xref std std-ref">zephyr:logging_api</span>.</p>
+</section>
+<section id="network-protocol-application-logging">
+<span id="ug-logging-net-application"></span><h2><a class="toc-backref" href="#id7">Network protocol application logging</a><a class="headerlink" href="#network-protocol-application-logging" title="Permalink to this heading"></a></h2>
+<p>In nRF Connect SDK, network protocol applications are using separate threads of the Zephyr system.
+Each one of these threads can use its own logging module.
+For this reason, each must be configured individually.</p>
+<section id="thread">
+<h3><a class="toc-backref" href="#id8">Thread</a><a class="headerlink" href="#thread" title="Permalink to this heading"></a></h3>
+<p>As a result of being able to work as a bare metal application, OpenThread uses its own internal logging module for printing messages.
+The OpenThread logger offers several configuration options that can be used to select log levels, regions, output methods, and more.
+For detailed information about available options and API, visit <a class="reference external" href="https://openthread.io/guides/build/logs">OpenThread logging</a>.</p>
+<p>In nRF Connect SDK, OpenThread runs as a Zephyr system application, meaning that it can be configured by setting options in the system configuration file, without modifying the source code.
+For details about how to configure OpenThread logger in nRF Connect SDK, see <a class="reference internal" href="../../protocols/thread/configuring.html#thread-ug-logging-options"><span class="std std-ref">OpenThread stack logging options</span></a>.</p>
+</section>
+<section id="zigbee">
+<h3><a class="toc-backref" href="#id9">Zigbee</a><a class="headerlink" href="#zigbee" title="Permalink to this heading"></a></h3>
+<p>Zigbee stack logs are independent from Zephyr system logger and must be configured by setting dedicated options in the system configuration file.
+For detailed information, see <a class="reference internal" href="../../protocols/zigbee/configuring.html#zigbee-ug-logging"><span class="std std-ref">Custom logging per module</span></a>.</p>
+</section>
+</section>
+<section id="logging-backends">
+<span id="ug-logging-backends"></span><h2><a class="toc-backref" href="#id10">Logging backends</a><a class="headerlink" href="#logging-backends" title="Permalink to this heading"></a></h2>
+<p>Logging backends are low-level drivers that can be configured to work with hardware interface for sending log messages.
+You can enable many backends at once and make them work simultaneously, if you want to gather the same kind of information from different sources.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>As a recommendation, avoid selecting many backends using the same physical interface instance to avoid mutual interference.
+For example, instead of <code class="docutils literal notranslate"><span class="pre">UART0</span></code> for both, choose <code class="docutils literal notranslate"><span class="pre">UART0</span></code> for one backend and <code class="docutils literal notranslate"><span class="pre">UART1</span></code> for another.</p>
+</div>
+<section id="uart">
+<span id="ug-logging-backends-uart"></span><h3><a class="toc-backref" href="#id11">UART</a><a class="headerlink" href="#uart" title="Permalink to this heading"></a></h3>
+<p>The UART interface can be configured as a logging backend using the following Kconfig options:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LOG_BACKEND_UART</span></code> - This option enables the UART logging backend.</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LOG_BACKEND_UART_SYST_ENABLE</span></code> - This option is used to output logs in system format.</p></li>
+</ul>
+<p>For information about how to see UART output, see <a class="reference internal" href="../../getting_started/testing.html#putty"><span class="std std-ref">How to connect with PuTTY</span></a>.</p>
+</section>
+<section id="rtt">
+<span id="ug-logging-backends-rtt"></span><h3><a class="toc-backref" href="#id12">RTT</a><a class="headerlink" href="#rtt" title="Permalink to this heading"></a></h3>
+<p>SEGGER’s J-Link RTT backend logging can be handled with the following Kconfig options:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LOG_BACKEND_RTT</span></code> - This option enables RTT logging backend.</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LOG_BACKEND_RTT_MODE_DROP</span></code> - This option enables the mode in which messages that do not fit the buffer are dropped.</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LOG_BACKEND_RTT_MODE_BLOCK</span></code> - This option enables the mode in which the device is blocked until a message is transferred.</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LOG_BACKEND_RTT_OUTPUT_BUFFER_SIZE</span></code> - This option defines the size of the buffer used for storing data prepared for sending.</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LOG_BACKEND_RTT_RETRY_CNT</span></code> - This option defines the number of retries before a message is dropped.</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LOG_BACKEND_RTT_RETRY_DELAY_MS</span></code> - This option defines the time interval between transmission retries.</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LOG_BACKEND_RTT_SYST_ENABLE</span></code> - This option is used to output logs in the system format.</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LOG_BACKEND_RTT_MESSAGE_SIZE</span></code> - This option defines the maximum message size.</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LOG_BACKEND_RTT_BUFFER</span></code> - This option selects the index of the buffer used for logger output.</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LOG_BACKEND_RTT_BUFFER_SIZE</span></code> - This option defines the size of the buffer used for logger output.</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LOG_BACKEND_RTT_FORCE_PRINTK</span></code> - This option enables processing of <code class="docutils literal notranslate"><span class="pre">printk</span></code> calls in the logger buffers instead of the RTT buffer.</p></li>
+</ul>
+<p>For information about how to run SEGGER’s J-Link RTT on your PC and see the logs, see <a class="reference internal" href="../../getting_started/testing.html#testing-rtt"><span class="std std-ref">How to use RTT</span></a>.</p>
+</section>
+<section id="spinel">
+<span id="ug-logging-backends-spinel"></span><h3><a class="toc-backref" href="#id13">Spinel</a><a class="headerlink" href="#spinel" title="Permalink to this heading"></a></h3>
+<p>Using <a class="reference external" href="https://github.com/openthread/spinel-spec">Spinel protocol</a> as a logging backend is specific to OpenThread’s <a class="reference internal" href="../../protocols/thread/overview/architectures.html#thread-architectures-designs-cp-ncp"><span class="std std-ref">Network co-processor (NCP)</span></a> and <a class="reference internal" href="../../protocols/thread/overview/architectures.html#thread-architectures-designs-cp-rcp"><span class="std std-ref">Radio co-processor (RCP)</span></a> architectures.
+The Spinel protocol can be configured as a logging backend using the following Kconfig options:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LOG_BACKEND_SPINEL</span></code> - This option enables the Spinel logging backend.</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LOG_BACKEND_SPINEL_BUFFER_SIZE</span></code> - This option defines the size of buffer used for logger output.</p></li>
+</ul>
+<p>To communicate with the RCP using the Spinel protocol and gather logs, you can use the <a class="reference internal" href="../../protocols/thread/tools.html#ug-thread-tools-ot-apps"><span class="std std-ref">OpenThread POSIX applications</span></a>.</p>
+<p>This tools accept the <code class="docutils literal notranslate"><span class="pre">-d&lt;DEBUG_LEVEL&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">--debug=&lt;DEBUG_LEVEL&gt;</span></code> arguments, which can be used to display logging messages.</p>
+</section>
+<section id="shell">
+<span id="ug-logging-backends-shell"></span><h3><a class="toc-backref" href="#id14">Shell</a><a class="headerlink" href="#shell" title="Permalink to this heading"></a></h3>
+<p>When you enable Zephyr’s <span class="xref std std-ref">zephyr:shell_api</span>, it by default becomes a logging backend.
+You can disable this backend by using the following Kconfig option:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_SHELL_LOG_BACKEND</span></code> - This option enables and disables the shell logging backend.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The UART and RTT logging backends can also be configured as shell backends.
+For example, if the UART backend is disabled, but UART is selected as the shell backend and Zephyr’s shell is enabled as the logging backend, the logging output will end up in UART.</p>
+</div>
+</section>
+</section>
+<section id="logging-output-examples">
+<h2><a class="toc-backref" href="#id15">Logging output examples</a><a class="headerlink" href="#logging-output-examples" title="Permalink to this heading"></a></h2>
+<p>See the following examples of different sample logs available in nRF Connect SDK:</p>
+<ul>
+<li><p>Minimal Zephyr logs</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">D: Debug message</span>
+<span class="go">I: Info message</span>
+<span class="go">W: Warning message</span>
+<span class="go">E: Error message</span>
+</pre></div>
+</div>
+</li>
+<li><p>Full Zephyr logs</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">[00013022] &lt;dbg&gt; sample_app: Debug message&#39;</span>
+<span class="go">[00013023] &lt;inf&gt; sample_app: Info message&#39;</span>
+<span class="go">[00013023] &lt;wrn&gt; sample_app: Warning message&#39;</span>
+<span class="go">[00013023] &lt;err&gt; sample_app: Error message&#39;</span>
+</pre></div>
+</div>
+</li>
+<li><p>OpenThread logs</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">-CORE----: Notifier: StateChanged (0x00000040) [Rloc-]</span>
+<span class="go">-MLE-----: Send Parent Request to routers (ff02:0:0:0:0:0:0:2)</span>
+<span class="go">-MAC-----: Sent IPv6 UDP msg, len:84, chksum:1e84, to:0xffff, sec:no, prio:net</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../multi_image/index.html" class="btn btn-neutral float-right" title="Multi-image builds" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../bootloaders_and_dfu/fw_update.html" class="btn btn-neutral" title="Firmware updates" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

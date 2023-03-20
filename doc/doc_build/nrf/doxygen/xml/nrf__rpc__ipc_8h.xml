@@ -1,0 +1,220 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="nrf__rpc__ipc_8h" kind="file" language="C++">
+    <compoundname>nrf_rpc_ipc.h</compoundname>
+    <includes local="no">zephyr/device.h</includes>
+    <includes local="no">zephyr/ipc/ipc_service.h</includes>
+    <includes local="no">nrf_rpc.h</includes>
+    <includes local="no">nrf_rpc_tr.h</includes>
+    <includes local="no">stdbool.h</includes>
+    <incdepgraph>
+      <node id="6">
+        <label>stdbool.h</label>
+      </node>
+      <node id="1">
+        <label>include/nrf_rpc/nrf_rpc_ipc.h</label>
+        <link refid="nrf__rpc__ipc_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>nrf_rpc.h</label>
+      </node>
+      <node id="2">
+        <label>zephyr/device.h</label>
+      </node>
+      <node id="5">
+        <label>nrf_rpc_tr.h</label>
+      </node>
+      <node id="3">
+        <label>zephyr/ipc/ipc_service.h</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="structnrf__rpc__ipc__endpoint" prot="public">nrf_rpc_ipc_endpoint</innerclass>
+    <innerclass refid="structnrf__rpc__ipc" prot="public">nrf_rpc_ipc</innerclass>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="group__nrf__rpc__ipc_ga493b5459e2a2d39c996996401ce04a65_1ga493b5459e2a2d39c996996401ce04a65" prot="public" static="no">
+        <name>NRF_RPC_IPC_TRANSPORT_DECLARE</name>
+        <param><defname>_name</defname></param>
+        <initializer>	extern const struct nrf_rpc_tr _name</initializer>
+        <briefdescription>
+<para>Extern nRF RPC IPC Service transport declaration. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Can be used in header files. It is useful when several nRF RPC group are defined amongst different source files but they can share the same transport instance.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">_name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Name of the nRF RPC transport. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/nrf_rpc/nrf_rpc_ipc.h" line="71" column="9" bodyfile="include/nrf_rpc/nrf_rpc_ipc.h" bodystart="71" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__nrf__rpc__ipc_ga2302fc4263e07193dd06c886c05c36f1_1ga2302fc4263e07193dd06c886c05c36f1" prot="public" static="no">
+        <name>NRF_RPC_IPC_TRANSPORT</name>
+        <param><defname>_name</defname></param>
+        <param><defname>_ipc</defname></param>
+        <param><defname>_ept_name</defname></param>
+        <initializer>	static struct <ref refid="structnrf__rpc__ipc" kindref="compound">nrf_rpc_ipc</ref> _name##_instance = {                       \
+	       .ipc = _ipc,                                                  \
+	       .endpoint.ept_cfg.name = _ept_name,                           \
+	};                                                                   \
+									     \
+	const struct nrf_rpc_tr _name = {                                    \
+		.api = &amp;<ref refid="group__nrf__rpc__ipc_ga0219e7b354e765895e177d043b6d08e4_1ga0219e7b354e765895e177d043b6d08e4" kindref="member">nrf_rpc_ipc_service_api</ref>,                             \
+		.ctx = &amp;_name##_instance                                     \
+	}</initializer>
+        <briefdescription>
+<para>Defines the nRF IPC Transport instance. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>It creates the nRF RPC IPC Service transport instance. The <computeroutput>_ipc</computeroutput> parameter defines the destination remote CPU. A single instance of this transport can be shared between several nRF RPC groups. Thus, a single endpoint is shared by multiple nRF RPC groups. It is also allowed to share a single IPC instance with a different endpoint name between groups.</para>
+<para>Example:</para>
+<para><itemizedlist>
+<listitem><para>Two groups share the same IPC instance and the same endpoint:</para>
+<para>NRF_RPC_IPC_TRANSPORT(nrf_rpc_1, DEVICE_DT_GET(DT_NODELABEL(ipc0)), &quot;nrf_rpc_ept_1&quot;);</para>
+<para>NRF_RPC_GROUP_DEFINE(group_1, &quot;Group_1&quot;, &amp;nrf_rpc_1, NULL, NULL, NULL); NRF_RPC_GROUP_DEFINE(group_2, &quot;Group_2&quot;, &amp;nrf_rpc_1, NULL, NULL, NULL);</para>
+</listitem><listitem><para>Two groups share the same IPC instance but endpoint is different for each group:</para>
+<para>NRF_RPC_IPC_TRANSPORT(nrf_rpc_1, DEVICE_DT_GET(DT_NODELABEL(ipc0)), &quot;nrf_rpc_ept_1&quot;); NRF_RPC_IPC_TRANSPORT(nrf_rpc_2, DEVICE_DT_GET(DT_NODELABEL(ipc0)), &quot;nrf_rpc_ept_2&quot;);</para>
+<para>NRF_RPC_GROUP_DEFINE(group_1, &quot;Group_1&quot;, &amp;nrf_rpc_1, NULL, NULL, NULL); NRF_RPC_GROUP_DEFINE(group_2, &quot;Group_2&quot;, &amp;nrf_rpc_2, NULL, NULL, NULL);</para>
+</listitem><listitem><para>Each group use different IPC instance, for example each IPC instance defined communication with different remote CPUs:</para>
+<para>NRF_RPC_IPC_TRANSPORT(nrf_rpc_1, DEVICE_DT_GET(DT_NODELABEL(ipc0)), &quot;nrf_rpc_ept&quot;); NRF_RPC_IPC_TRANSPORT(nrf_rpc_2, DEVICE_DT_GET(DT_NODELABEL(ipc1)), &quot;nrf_rpc_ept&quot;);</para>
+<para>NRF_RPC_GROUP_DEFINE(group_1, &quot;Group_1&quot;, &amp;nrf_rpc_1, NULL, NULL, NULL); NRF_RPC_GROUP_DEFINE(group_2, &quot;Group_2&quot;, &amp;nrf_rpc_2, NULL, NULL, NULL);</para>
+</listitem></itemizedlist>
+</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">_name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>nRF RPC IPC Service transport instance name. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">_ipc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The instance used for the IPC Service to transfer data between CPUs. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">_ept_name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>IPC Service endpoint name. The endpoint must have the same name on the corresponding remote CPU. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/nrf_rpc/nrf_rpc_ipc.h" line="113" column="9" bodyfile="include/nrf_rpc/nrf_rpc_ipc.h" bodystart="113" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="group__nrf__rpc__ipc_ga0219e7b354e765895e177d043b6d08e4_1ga0219e7b354e765895e177d043b6d08e4" prot="public" static="no" mutable="no">
+        <type>const struct nrf_rpc_tr_api</type>
+        <definition>const struct nrf_rpc_tr_api nrf_rpc_ipc_service_api</definition>
+        <argsstring></argsstring>
+        <name>nrf_rpc_ipc_service_api</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/nrf_rpc/nrf_rpc_ipc.h" line="1" column="0" declfile="include/nrf_rpc/nrf_rpc_ipc.h" declline="1" declcolumn="0"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1" refid="structnrf__rpc__ipc__endpoint_a298ce4cfd54708ab88bee3078e7fa7a0_1a298ce4cfd54708ab88bee3078e7fa7a0" refkind="member"><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="2"><highlight class="comment"><sp/>*<sp/>Copyright<sp/>(c)<sp/>2022<sp/>Nordic<sp/>Semiconductor<sp/>ASA</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/>*<sp/>SPDX-License-Identifier:<sp/>LicenseRef-Nordic-5-Clause</highlight></codeline>
+<codeline lineno="5"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>NRF_RPC_IPC_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NRF_RPC_IPC_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;zephyr/device.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;zephyr/ipc/ipc_service.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;nrf_rpc.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;nrf_rpc_tr.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdbool.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;C&quot;</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="comment">/*<sp/><sp/>nRF<sp/>IPC<sp/>Service<sp/>transport<sp/>API<sp/>strucure.<sp/>It<sp/>contains<sp/>all</highlight></codeline>
+<codeline lineno="30"><highlight class="comment"><sp/>*<sp/><sp/>necessary<sp/>functions<sp/>required<sp/>by<sp/>the<sp/>nRF<sp/>RPC<sp/>library.</highlight></codeline>
+<codeline lineno="31"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">nrf_rpc_tr_api<sp/><ref refid="group__nrf__rpc__ipc_ga0219e7b354e765895e177d043b6d08e4_1ga0219e7b354e765895e177d043b6d08e4" kindref="member">nrf_rpc_ipc_service_api</ref>;</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight></codeline>
+<codeline lineno="35" refid="structnrf__rpc__ipc__endpoint" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structnrf__rpc__ipc__endpoint" kindref="compound">nrf_rpc_ipc_endpoint</ref><sp/>{</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">ipc_ept_cfg<sp/><ref refid="structnrf__rpc__ipc__endpoint_a4bbb743a7f9851e4e11146e04a344ca6_1a4bbb743a7f9851e4e11146e04a344ca6" kindref="member">ept_cfg</ref>;</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">ipc_ept<sp/><ref refid="structnrf__rpc__ipc__endpoint_a298ce4cfd54708ab88bee3078e7fa7a0_1a298ce4cfd54708ab88bee3078e7fa7a0" kindref="member">ept</ref>;</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">k_event<sp/><ref refid="structnrf__rpc__ipc__endpoint_a9a851e77fe25cb42ba187020f47b8805_1a9a851e77fe25cb42ba187020f47b8805" kindref="member">ept_bond</ref>;</highlight></codeline>
+<codeline lineno="44"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="47" refid="structnrf__rpc__ipc" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structnrf__rpc__ipc" kindref="compound">nrf_rpc_ipc</ref><sp/>{</highlight></codeline>
+<codeline lineno="48" refid="structnrf__rpc__ipc_ad2892032013541ebc631b7766e0d9a8d_1ad2892032013541ebc631b7766e0d9a8d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">device<sp/>*<ref refid="structnrf__rpc__ipc_acef565a00f339e786a4a30d7e4b388c5_1acef565a00f339e786a4a30d7e4b388c5" kindref="member">ipc</ref>;</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structnrf__rpc__ipc__endpoint" kindref="compound">nrf_rpc_ipc_endpoint</ref><sp/><ref refid="structnrf__rpc__ipc_ad2892032013541ebc631b7766e0d9a8d_1ad2892032013541ebc631b7766e0d9a8d" kindref="member">endpoint</ref>;</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight></codeline>
+<codeline lineno="54" refid="structnrf__rpc__ipc_a51e1a47125420e5fecbf127fb525ac91_1a51e1a47125420e5fecbf127fb525ac91" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>nrf_rpc_tr_receive_handler_t<sp/><ref refid="structnrf__rpc__ipc_a51e1a47125420e5fecbf127fb525ac91_1a51e1a47125420e5fecbf127fb525ac91" kindref="member">receive_cb</ref>;</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight></codeline>
+<codeline lineno="57" refid="structnrf__rpc__ipc_a2e1cfdd7fb6cfe9f2fd3f4f227ddabf9_1a2e1cfdd7fb6cfe9f2fd3f4f227ddabf9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*<ref refid="structnrf__rpc__ipc_a2e1cfdd7fb6cfe9f2fd3f4f227ddabf9_1a2e1cfdd7fb6cfe9f2fd3f4f227ddabf9" kindref="member">context</ref>;</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight></codeline>
+<codeline lineno="60" refid="structnrf__rpc__ipc_a1dc731aba87d4113f7af6ea3287b2185_1a1dc731aba87d4113f7af6ea3287b2185" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structnrf__rpc__ipc_a1dc731aba87d4113f7af6ea3287b2185_1a1dc731aba87d4113f7af6ea3287b2185" kindref="member">used</ref>;</highlight></codeline>
+<codeline lineno="61"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight></codeline>
+<codeline lineno="71" refid="group__nrf__rpc__ipc_ga493b5459e2a2d39c996996401ce04a65_1ga493b5459e2a2d39c996996401ce04a65" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NRF_RPC_IPC_TRANSPORT_DECLARE(_name)<sp/>\</highlight></codeline>
+<codeline lineno="72"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>extern<sp/>const<sp/>struct<sp/>nrf_rpc_tr<sp/>_name</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight></codeline>
+<codeline lineno="113" refid="group__nrf__rpc__ipc_ga2302fc4263e07193dd06c886c05c36f1_1ga2302fc4263e07193dd06c886c05c36f1" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NRF_RPC_IPC_TRANSPORT(_name,<sp/>_ipc,<sp/>_ept_name)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="114"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>static<sp/>struct<sp/>nrf_rpc_ipc<sp/>_name##_instance<sp/>=<sp/>{<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="115"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.ipc<sp/>=<sp/>_ipc,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="116"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.endpoint.ept_cfg.name<sp/>=<sp/>_ept_name,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="117"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="118"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="119"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>const<sp/>struct<sp/>nrf_rpc_tr<sp/>_name<sp/>=<sp/>{<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="120"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.api<sp/>=<sp/>&amp;nrf_rpc_ipc_service_api,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="121"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.ctx<sp/>=<sp/>&amp;_name##_instance<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="122"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="123"><highlight class="normal"></highlight></codeline>
+<codeline lineno="128"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="129"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="131"><highlight class="normal"></highlight></codeline>
+<codeline lineno="132"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>NRF_RPC_IPC_H_<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="include/nrf_rpc/nrf_rpc_ipc.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,392 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="group__emds" kind="group">
+    <compoundname>emds</compoundname>
+    <title>Emergency Data Storage Library</title>
+    <innerclass refid="structemds__entry" prot="public">emds_entry</innerclass>
+    <innerclass refid="structemds__dynamic__entry" prot="public">emds_dynamic_entry</innerclass>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="group__emds_1ga2cf402a68c5f16357c621ae4af29f4d2" prot="public" static="no">
+        <type>void(*</type>
+        <definition>emds_store_cb_t</definition>
+        <argsstring>)(void)</argsstring>
+        <name>emds_store_cb_t</name>
+        <briefdescription>
+<para>Callback for application commands when storing has been executed. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This can be used to perform other actions or execute busy-waiting until the power supply is discharged. It will be run by <ref refid="group__emds_ga52e903e695c2ac21e1462735b0e454b7_1ga52e903e695c2ac21e1462735b0e454b7" kindref="member">emds_store</ref>, and called from the same context the <ref refid="group__emds_ga52e903e695c2ac21e1462735b0e454b7_1ga52e903e695c2ac21e1462735b0e454b7" kindref="member">emds_store</ref> is called from. Interrupts are unlocked before triggering this callback. Therefore, this callback may not be reached before available backup power runs out. If the application needs interrupts to be locked during this callback, application can do so by calling irq_lock before calling <ref refid="group__emds_ga52e903e695c2ac21e1462735b0e454b7_1ga52e903e695c2ac21e1462735b0e454b7" kindref="member">emds_store</ref>. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/emds/emds.h" line="81" column="9" bodyfile="include/emds/emds.h" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__emds_1gadfa430119b49c6fc3d20291c887f49ae" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int emds_init</definition>
+        <argsstring>(emds_store_cb_t cb)</argsstring>
+        <name>emds_init</name>
+        <param>
+          <type><ref refid="group__emds_ga2cf402a68c5f16357c621ae4af29f4d2_1ga2cf402a68c5f16357c621ae4af29f4d2" kindref="member">emds_store_cb_t</ref></type>
+          <declname>cb</declname>
+        </param>
+        <briefdescription>
+<para>Initialize the emergency data storage. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Initializes the emergency data storage. This needs to be called before adding entries to the <ref refid="structemds__dynamic__entry" kindref="compound">emds_dynamic_entry</ref> and loading data.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>cb</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Callback to notify application that the store operation has been executed or NULL if no notification is needed.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>0</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Success </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>-ERRNO</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>errno code if error </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/emds/emds.h" line="95" column="5" declfile="include/emds/emds.h" declline="95" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="group__emds_1ga5269cee2362b66fff2702abb0a666c14" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int emds_entry_add</definition>
+        <argsstring>(struct emds_dynamic_entry *entry)</argsstring>
+        <name>emds_entry_add</name>
+        <param>
+          <type>struct <ref refid="structemds__dynamic__entry" kindref="compound">emds_dynamic_entry</ref> *</type>
+          <declname>entry</declname>
+        </param>
+        <briefdescription>
+<para>Add entry to be saved/restored when emergency data storage is called. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Adds the entry to the dynamic entry list. When the <ref refid="group__emds_ga52e903e695c2ac21e1462735b0e454b7_1ga52e903e695c2ac21e1462735b0e454b7" kindref="member">emds_store</ref> function is called, takes the given data pointer and stores the data to the emergency data storage.</para>
+<para><simplesect kind="note"><para>EMDS does not make a local copy of the dynamic entry structure.</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>entry</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Entry to add to list and load data into.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>0</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Success </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>-ERRNO</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>errno code if error </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/emds/emds.h" line="111" column="5" declfile="include/emds/emds.h" declline="111" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="group__emds_1ga52e903e695c2ac21e1462735b0e454b7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int emds_store</definition>
+        <argsstring>(void)</argsstring>
+        <name>emds_store</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Start the emergency data storage process. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Triggers the process of storing all data registered to be stored. All data registered either through <ref refid="group__emds_ga5269cee2362b66fff2702abb0a666c14_1ga5269cee2362b66fff2702abb0a666c14" kindref="member">emds_entry_add</ref> function or the <ref refid="group__emds_gaa978c89ab41063eb1dfe28cfe26bba84_1gaa978c89ab41063eb1dfe28cfe26bba84" kindref="member">EMDS_STATIC_ENTRY_DEFINE</ref> macro is stored. It locks all interrupts until the write is finished. Once the data storage is completed, the data should not be changed, and the device should be halted. The device must not be allowed to reboot when operating on a backup supply, since reboot will trigger data load from the EMDS storage and clear the storage area. The reboot should only be allowed when the main power supply is available.</para>
+<para>This is a time-critical operation and will be processed as fast as possible. To achieve better time predictability, this function must be called from an interrupt context with the highest priority.</para>
+<para>When writing to flash, it bypasses the flash driver. Therefore, when running with MPSL, make sure to uninitialize the MPSL before this function is called. Otherwise, an assertion may be triggered by the exit of the function.</para>
+<para><parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>0</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Success </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>-ERRNO</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>errno code if error </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/emds/emds.h" line="136" column="5" declfile="include/emds/emds.h" declline="136" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="group__emds_1ga7b21b0c052ff5ee474da09c8ab2013e8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int emds_load</definition>
+        <argsstring>(void)</argsstring>
+        <name>emds_load</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Load all static data from the emergency data storage. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function needs to be called after the static entries are added, as they are used to select the data to be loaded. The function also needs to be called before the <ref refid="group__emds_gaf7ebd33692643439aee8170939962d8f_1gaf7ebd33692643439aee8170939962d8f" kindref="member">emds_prepare</ref> function which will delete all the previously stored data.</para>
+<para><parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>0</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Success </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>-ERRNO</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>errno code if error </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/emds/emds.h" line="149" column="5" declfile="include/emds/emds.h" declline="149" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="group__emds_1ga646dba081271f18f46e7eb0a29c08de7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int emds_clear</definition>
+        <argsstring>(void)</argsstring>
+        <name>emds_clear</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Clear flash area from the emergency data storage. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function clears the flash area for all previously stored data.</para>
+<para><parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>0</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Success </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>-ERRNO</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>errno code if error </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/emds/emds.h" line="159" column="5" declfile="include/emds/emds.h" declline="159" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="group__emds_1gaf7ebd33692643439aee8170939962d8f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int emds_prepare</definition>
+        <argsstring>(void)</argsstring>
+        <name>emds_prepare</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Prepare flash area for the next emergency data storage. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function prepares the flash area for the next emergency data storage. It deletes the current entries if there is enough space for the next emergency data storage, and clears the flash storage if there is not enough space for the next storage. This has to be done after all the dynamic entries are added. After this has been called emergency data storage should be ready to store.</para>
+<para><parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>0</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Success </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>-ERRNO</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>errno code if error </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/emds/emds.h" line="174" column="5" declfile="include/emds/emds.h" declline="174" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="group__emds_1ga2cae16b06c07c0a403f2d7b3e808b6aa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t emds_store_time_get</definition>
+        <argsstring>(void)</argsstring>
+        <name>emds_store_time_get</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Estimate the time needed to store the registered data. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Estimate how much time it takes to store all dynamic and static data registered in the entries. This value is dependent on the chip used, and should be checked against the chip datasheet.</para>
+<para><simplesect kind="return"><para>Time needed to store all data (in microseconds). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/emds/emds.h" line="185" column="10" declfile="include/emds/emds.h" declline="185" declcolumn="10"/>
+      </memberdef>
+      <memberdef kind="function" id="group__emds_1gaed3b8a270b1147a2be08c2ad3769c643" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t emds_store_size_get</definition>
+        <argsstring>(void)</argsstring>
+        <name>emds_store_size_get</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Calculate the size needed to store the registered data. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Calculates the size it takes to store all dynamic and static data registered in the entries.</para>
+<para><simplesect kind="return"><para>Byte size that is needed to store all data. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/emds/emds.h" line="195" column="10" declfile="include/emds/emds.h" declline="195" declcolumn="10"/>
+      </memberdef>
+      <memberdef kind="function" id="group__emds_1ga2f086c220105274cdff113894c747e3e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool emds_is_ready</definition>
+        <argsstring>(void)</argsstring>
+        <name>emds_is_ready</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Check if the store operation can be run. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>When the data store operation has completed, the store operation is no longer ready and this function will then return false.</para>
+<para><simplesect kind="return"><para>True if the store operation can be started, otherwise false. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/emds/emds.h" line="205" column="6" declfile="include/emds/emds.h" declline="205" declcolumn="6"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="group__emds_1gaa978c89ab41063eb1dfe28cfe26bba84" prot="public" static="no">
+        <name>EMDS_STATIC_ENTRY_DEFINE</name>
+        <param><defname>_name</defname></param>
+        <param><defname>_id</defname></param>
+        <param><defname>_data</defname></param>
+        <param><defname>_len</defname></param>
+        <initializer>	static const STRUCT_SECTION_ITERABLE(<ref refid="structemds__entry" kindref="compound">emds_entry</ref>, emds_##_name) = {     \
+		.id = _id,                                                     \
+		.data = (uint8_t *)_data,                                      \
+		.len = _len,                                                   \
+	}</initializer>
+        <briefdescription>
+<para>Define a static entry for emergency data storage items. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>_name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The entry name. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>_id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Unique ID for the entry. This value and not an overlap with any other value. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>_data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Data pointer to be stored at emergency data store. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>_len</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of data to be stored at emergency data store.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+This creates a variable <emphasis>name prepended by emds</emphasis>. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/emds/emds.h" line="62" column="9" bodyfile="include/emds/emds.h" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Emergency Data Storage API. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

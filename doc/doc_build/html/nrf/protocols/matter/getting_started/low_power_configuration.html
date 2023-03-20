@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reducing power consumption in Matter applications &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../../_static/js/ncs.js"
+></script>
+<script src="../../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Configuring transmission power" href="transmission_power.html" />
+    <link rel="prev" title="Advanced Matter Kconfig options" href="advanced_kconfigs.html" />
+<link
+  href="../../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../protocols.html">Protocols</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../ble/index.html">Bluetooth LE Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../bt_mesh/index.html">Bluetooth mesh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../esb/index.html">Enhanced ShockBurst (ESB)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gazell/index.html">Gazell</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Matter</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../overview/index.html">Matter overview</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Getting started with Matter</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="hw_requirements.html">Matter hardware and memory requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="testing/index.html">Testing Matter in the nRF Connect SDK</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tools.html">Matter tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="kconfig.html">Enabling Matter in Kconfig</a></li>
+<li class="toctree-l4"><a class="reference internal" href="advanced_kconfigs.html">Advanced Matter Kconfig options</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Reducing power consumption in Matter applications</a></li>
+<li class="toctree-l4"><a class="reference internal" href="transmission_power.html">Configuring transmission power</a></li>
+<li class="toctree-l4"><a class="reference internal" href="adding_clusters.html">Adding clusters to Matter application</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ecosystem_compatibility_testing.html">Testing with commercial Matter ecosystems</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../end_product/index.html">How to create Matter end product</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../multiprotocol/index.html">Multiprotocol support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nfc/index.html">Near Field Communication (NFC)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../thread/index.html">Thread</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../wifi/index.html">Wi-Fi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../zigbee/index.html">Zigbee</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../drivers.html">Drivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../protocols.html">Protocols</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Matter</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Getting started with Matter</a></li>
+      <li class="breadcrumb-item active">Reducing power consumption in Matter applications</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/protocols/matter/getting_started/low_power_configuration.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="reducing-power-consumption-in-matter-applications">
+<span id="ug-matter-device-low-power-configuration"></span><h1>Reducing power consumption in Matter applications<a class="headerlink" href="#reducing-power-consumption-in-matter-applications" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#enable-low-power-mode-for-the-selected-networking-technology" id="id6">Enable low power mode for the selected networking technology</a></p>
+<ul>
+<li><p><a class="reference internal" href="#matter-over-thread" id="id7">Matter over Thread</a></p></li>
+<li><p><a class="reference internal" href="#matter-over-wi-fi" id="id8">Matter over Wi-Fi</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#disable-serial-logging" id="id9">Disable serial logging</a></p></li>
+<li><p><a class="reference internal" href="#disable-unused-pins-and-peripherals" id="id10">Disable unused pins and peripherals</a></p></li>
+<li><p><a class="reference internal" href="#enable-device-power-management-module" id="id11">Enable Device Power Management module</a></p></li>
+<li><p><a class="reference internal" href="#put-the-external-flash-into-sleep-mode-in-inactivity-periods" id="id12">Put the external flash into sleep mode in inactivity periods</a></p></li>
+<li><p><a class="reference internal" href="#configure-radio-transmitter-power" id="id13">Configure radio transmitter power</a></p></li>
+</ul>
+</div>
+<p>The Matter protocol can be used in various device types that are designed to be battery supplied, where a low power consumption is of critical importance.</p>
+<p>There are many ways to reduce the power consumption in your application, including methods related to the adopted network technology, disabling specific modules, or configuring features meant for optimizing power consumption.
+See the following sections for more information.</p>
+<p>The following Matter samples and applications use the low power configuration by default and you can use them as reference designs:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../../samples/matter/lock/README.html#matter-lock-sample"><span class="std std-ref">Matter door lock sample</span></a></p></li>
+<li><p><a class="reference internal" href="../../../samples/matter/light_switch/README.html#matter-light-switch-sample"><span class="std std-ref">Matter light switch sample</span></a></p></li>
+<li><p><a class="reference internal" href="../../../samples/matter/window_covering/README.html#matter-window-covering-sample"><span class="std std-ref">Matter window covering sample</span></a></p></li>
+<li><p><a class="reference internal" href="../../../applications/matter_weather_station/README.html#matter-weather-station-app"><span class="std std-ref">Matter weather station application</span></a></p></li>
+</ul>
+<section id="enable-low-power-mode-for-the-selected-networking-technology">
+<h2><a class="toc-backref" href="#id6">Enable low power mode for the selected networking technology</a><a class="headerlink" href="#enable-low-power-mode-for-the-selected-networking-technology" title="Permalink to this heading"></a></h2>
+<p>The Matter supports using Thread and Wi-Fi as the IPv6-based networking technologies.
+Both of the technologies come with their own solutions for optimizing the protocol behavior in terms of power consumption.
+However, the general goal of the optimization for both is to reduce the time spent in the active state and put the device in the inactive (sleep) state whenever possible.
+Reducing the device activity time usually comes with a higher response time and a lower performance.
+When optimizing the power consumption, you must be aware of the trade-off between the power consumption and the device performance, and choose the optimal configuration for your use case.</p>
+<section id="matter-over-thread">
+<h3><a class="toc-backref" href="#id7">Matter over Thread</a><a class="headerlink" href="#matter-over-thread" title="Permalink to this heading"></a></h3>
+<p>The Thread protocol defines two types of devices working in a low power mode: Sleepy End Devices (SEDs) and Synchronized Sleepy End Devices (SSEDs).
+Both types are variants of Minimal Thread Device (MTD) type.
+For more information about MTD and SEDs, see <a class="reference internal" href="../../thread/overview/commissioning.html#thread-ot-device-types"><span class="std std-ref">Thread device types</span></a>.</p>
+<section id="sleepy-end-device-sed-configuration-in-matter">
+<h4>Sleepy End Device (SED) configuration in Matter<a class="headerlink" href="#sleepy-end-device-sed-configuration-in-matter" title="Permalink to this heading"></a></h4>
+<p>To enable Thread SED support in Matter, set the following configuration options:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_CHIP_ENABLE_SLEEPY_END_DEVICE_SUPPORT</span></code> to <code class="docutils literal notranslate"><span class="pre">y</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_OPENTHREAD_MTD</span></code> to <code class="docutils literal notranslate"><span class="pre">y</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_OPENTHREAD_NORDIC_LIBRARY_MTD</span></code> to <code class="docutils literal notranslate"><span class="pre">y</span></code></p></li>
+</ul>
+<p>Additionally, you can configure the SED wake-up intervals according to your needs, but keep in mind that the bigger sleep periods, the smaller power consumption and bigger device response time.
+To configure the SED wake-up intervals, set both of the following Kconfig options:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_CHIP_SED_IDLE_INTERVAL</span></code> to a value in milliseconds that determines how often the device wakes up to poll for data in the idle state (for example, <code class="docutils literal notranslate"><span class="pre">1000</span></code>).</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_CHIP_SED_ACTIVE_INTERVAL</span></code> to a value in milliseconds that determines how often the device wakes up to poll for data in the active state (for example, <code class="docutils literal notranslate"><span class="pre">200</span></code>).</p></li>
+</ul>
+</section>
+<section id="synchronized-sleepy-end-device-ssed-configuration-in-matter">
+<h4>Synchronized Sleepy End Device (SSED) configuration in Matter<a class="headerlink" href="#synchronized-sleepy-end-device-ssed-configuration-in-matter" title="Permalink to this heading"></a></h4>
+<p>To enable the Thread SSED support in Matter, set the following Kconfig options:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_CHIP_ENABLE_SLEEPY_END_DEVICE_SUPPORT</span></code> to <code class="docutils literal notranslate"><span class="pre">y</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_OPENTHREAD_MTD</span></code> to <code class="docutils literal notranslate"><span class="pre">y</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_OPENTHREAD_NORDIC_LIBRARY_MTD</span></code> to <code class="docutils literal notranslate"><span class="pre">y</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_CHIP_THREAD_SSED</span></code> to <code class="docutils literal notranslate"><span class="pre">y</span></code></p></li>
+</ul>
+<p>Additionally, you can configure the SSED wake-up intervals according to your needs, but keep in mind that the bigger sleep periods, the smaller power consumption and bigger device response time.
+To configure the SSED wake-up intervals, set both of the following Kconfig options:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_CHIP_SED_IDLE_INTERVAL</span></code> to a value in milliseconds that determines how often the device wakes up to listen for data in the idle state (for example, <code class="docutils literal notranslate"><span class="pre">500</span></code>).</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_CHIP_SED_ACTIVE_INTERVAL</span></code> to a value in milliseconds that determines how often the device wakes up to listen for data in the active state (for example, <code class="docutils literal notranslate"><span class="pre">500</span></code>).</p></li>
+</ul>
+</section>
+</section>
+<section id="matter-over-wi-fi">
+<h3><a class="toc-backref" href="#id8">Matter over Wi-Fi</a><a class="headerlink" href="#matter-over-wi-fi" title="Permalink to this heading"></a></h3>
+<p>The Wi-Fi protocol introduces the power save mechanism that allows the Station device (STA) to spend the majority of time in a sleep state and wake-up periodically to check for pending traffic.
+This is coordinated by the Access Point device (AP) using a mechanism called Delivery Traffic Indication Message (DTIM).
+The message is sent in a predefined subset of the beacons, so the STA device needs to wake up only to receive this message and not every beacon (as it would happen for the not-optimized case).
+For more information about the Wi-Fi power save mechanism, see the <a class="reference internal" href="../../wifi/index.html#wifi-mac-layer"><span class="std std-ref">Wi-Fi MAC layer</span></a> documentation.</p>
+<p>To enable the Wi-Fi power save mode, set the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF_WIFI_LOW_POWER</span></code> Kconfig option to <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p>
+</section>
+</section>
+<section id="disable-serial-logging">
+<h2><a class="toc-backref" href="#id9">Disable serial logging</a><a class="headerlink" href="#disable-serial-logging" title="Permalink to this heading"></a></h2>
+<p>The majority of samples and applications that run in the debug mode are configured to log the information over serial port (usually UART).
+The peripherals for serial communication use HFCLK, which significantly increases the device power consumption.</p>
+<p>To disable the serial logging and the UART peripheral, complete the following steps:</p>
+<ol class="arabic">
+<li><p>Set the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LOG</span></code> to <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p></li>
+<li><p>Set the UART peripheral state in the board’s <code class="file docutils literal notranslate"><span class="pre">dts</span></code> overlay to <code class="docutils literal notranslate"><span class="pre">disabled</span></code>.
+For example, for <strong>UART1</strong>:</p>
+<div class="highlight-devicetree notranslate"><div class="highlight"><pre><span></span><span class="o">&amp;</span><span class="na">uart1</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;disabled&quot;</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="disable-unused-pins-and-peripherals">
+<h2><a class="toc-backref" href="#id10">Disable unused pins and peripherals</a><a class="headerlink" href="#disable-unused-pins-and-peripherals" title="Permalink to this heading"></a></h2>
+<p>Some of the pins and peripherals are enabled by default for some boards.
+Depending on the peripheral or the pin type, they can increase the device power consumption to a different extent.
+If the application does not use them, make sure they are disabled.</p>
+<p>To disable a particular peripheral, set its state in the board’s <code class="file docutils literal notranslate"><span class="pre">dts</span></code> overlay to <code class="docutils literal notranslate"><span class="pre">disabled</span></code>.
+For example, for <strong>ADC</strong>:</p>
+<div class="highlight-devicetree notranslate"><div class="highlight"><pre><span></span><span class="o">&amp;</span><span class="na">adc</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;disabled&quot;</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</section>
+<section id="enable-device-power-management-module">
+<span id="ug-matter-enable-pm-module"></span><h2><a class="toc-backref" href="#id11">Enable Device Power Management module</a><a class="headerlink" href="#enable-device-power-management-module" title="Permalink to this heading"></a></h2>
+<p>The Device Power Management module provides an interface that the device drivers use to be informed about entering the suspend state or resuming from the suspend state.
+This allows the device drivers to do any necessary power management operations, such as turning off device clocks and peripherals, which lowers the power consumption.</p>
+<p>To enable suspending peripherals when CPU goes to sleep, set the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_PM_DEVICE</span></code> Kconfig option to <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p>
+</section>
+<section id="put-the-external-flash-into-sleep-mode-in-inactivity-periods">
+<h2><a class="toc-backref" href="#id12">Put the external flash into sleep mode in inactivity periods</a><a class="headerlink" href="#put-the-external-flash-into-sleep-mode-in-inactivity-periods" title="Permalink to this heading"></a></h2>
+<p>When the CPU goes to sleep, some of the peripherals are suspended by their drivers, as described in the <a class="reference internal" href="#ug-matter-enable-pm-module"><span class="std std-ref">Enable Device Power Management module</span></a>.
+However, the driver is not always able to know the application behavior and optimally handle the peripheral state.</p>
+<p>One of such cases is the external flash usage by the Matter applications.
+It is typically used very rarely and only for the Device Firmware Upgrade purposes.
+For this reason, you might want to suspend the external flash for majority of time and have it resumed to the active state only if needed.
+The Device Firmware Upgrade case is properly handled in the nRF Connect platform, but for other proprietary use cases, you should handle state changes in your own implementation.</p>
+<p>For example, to control the QSPI NOR external flash, you can use the following implementation:</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;zephyr/pm/device.h&gt;</span>
+
+<span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">qspi_dev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DEVICE_DT_GET</span><span class="p">(</span><span class="n">DT_INST</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">nordic_qspi_nor</span><span class="p">));</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">device_is_ready</span><span class="p">(</span><span class="n">qspi_dev</span><span class="p">))</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// Put the peripheral into suspended state.</span>
+<span class="w">    </span><span class="n">pm_device_action_run</span><span class="p">(</span><span class="n">qspi_dev</span><span class="p">,</span><span class="w"> </span><span class="n">PM_DEVICE_ACTION_SUSPEND</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Resume the peripheral from the suspended state.</span>
+<span class="w">    </span><span class="n">pm_device_action_run</span><span class="p">(</span><span class="n">qspi_dev</span><span class="p">,</span><span class="w"> </span><span class="n">PM_DEVICE_ACTION_RESUME</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="configure-radio-transmitter-power">
+<h2><a class="toc-backref" href="#id13">Configure radio transmitter power</a><a class="headerlink" href="#configure-radio-transmitter-power" title="Permalink to this heading"></a></h2>
+<p>The radio transmitter power (radio TX power) has a significant impact on the device power consumption.
+The higher the transmitting power, the greater the wireless communication range, which leads to higher power consumption.
+Make sure to choose the optimal configuration for your specific use case.</p>
+<p>See <a class="reference internal" href="transmission_power.html#ug-matter-gs-transmission-power"><span class="std std-ref">Configuring transmission power</span></a> for more information.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="transmission_power.html" class="btn btn-neutral float-right" title="Configuring transmission power" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="advanced_kconfigs.html" class="btn btn-neutral" title="Advanced Matter Kconfig options" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

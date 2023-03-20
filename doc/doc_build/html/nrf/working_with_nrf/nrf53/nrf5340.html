@@ -1,0 +1,1335 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Developing with nRF5340 DK &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script src="../../_static/tabs.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../_static/js/ncs.js"
+></script>
+<script src="../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Getting started with Thingy:53" href="thingy53_gs.html" />
+    <link rel="prev" title="Getting started with nRF5340 DK" href="nrf5340_gs.html" />
+<link
+  href="../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../nrf53.html">Working with nRF53 Series</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="nrf5340_gs.html">Getting started with nRF5340 DK</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Developing with nRF5340 DK</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#introduction">Introduction</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#network-core">Network core</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#application-core">Application core</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#inter-core-communication">Inter-core communication</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#execute-in-place-xip-configuration">Execute in place (XIP) configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#protocols-and-use-cases">Protocols and use cases</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#bluetooth-low-energy">Bluetooth Low Energy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ieee-802-15-4-thread-and-zigbee">IEEE 802.15.4 (Thread and Zigbee)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#multiprotocol-thread-or-zigbee-in-combination-with-bluetooth-le">Multiprotocol (Thread or Zigbee in combination with Bluetooth LE)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#direct-use-of-the-radio-peripheral">Direct use of the radio peripheral</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#no-radio-communication">No radio communication</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#multi-image-builds">Multi-image builds</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#default-build-configuration">Default build configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuration-of-the-child-image">Configuration of the child image</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#building-and-programming-a-sample">Building and programming a sample</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#using-vsc">Using Visual Studio Code</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#using-the-command-line">Using the command line</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#fota-updates">FOTA updates</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#fota-over-bluetooth-low-energy">FOTA over Bluetooth Low Energy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fota-update-sample">FOTA update sample</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fota-in-bluetooth-mesh">FOTA in Bluetooth mesh</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fota-in-matter">FOTA in Matter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fota-over-thread">FOTA over Thread</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fota-over-zigbee">FOTA over Zigbee</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#simultaneous-multi-image-dfu">Simultaneous multi-image DFU</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mcuboot-s-serial-recovery-of-the-networking-core-image">MCUboot’s serial recovery of the networking core image</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#container-for-firmware-update-binaries">Container for firmware update binaries</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#debugging">Debugging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#getting-logging-output">Getting logging output</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#nrf5340-dk-v2-0-0-com-ports">nRF5340 DK v2.0.0 COM ports</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nrf5340-dk-v1-0-0-com-ports">nRF5340 DK v1.0.0 COM ports</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="thingy53_gs.html">Getting started with Thingy:53</a></li>
+<li class="toctree-l2"><a class="reference internal" href="thingy53.html">Developing with Thingy:53</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drivers.html">Drivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../nrf53.html">Working with nRF53 Series</a></li>
+      <li class="breadcrumb-item active">Developing with nRF5340 DK</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/working_with_nrf/nrf53/nrf5340.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="developing-with-nrf5340-dk">
+<span id="ug-nrf5340"></span><h1>Developing with nRF5340 DK<a class="headerlink" href="#developing-with-nrf5340-dk" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#introduction" id="id11">Introduction</a></p>
+<ul>
+<li><p><a class="reference internal" href="#network-core" id="id12">Network core</a></p></li>
+<li><p><a class="reference internal" href="#application-core" id="id13">Application core</a></p></li>
+<li><p><a class="reference internal" href="#inter-core-communication" id="id14">Inter-core communication</a></p></li>
+<li><p><a class="reference internal" href="#execute-in-place-xip-configuration" id="id15">Execute in place (XIP) configuration</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#protocols-and-use-cases" id="id16">Protocols and use cases</a></p>
+<ul>
+<li><p><a class="reference internal" href="#bluetooth-low-energy" id="id17">Bluetooth Low Energy</a></p></li>
+<li><p><a class="reference internal" href="#ieee-802-15-4-thread-and-zigbee" id="id18">IEEE 802.15.4 (Thread and Zigbee)</a></p></li>
+<li><p><a class="reference internal" href="#multiprotocol-thread-or-zigbee-in-combination-with-bluetooth-le" id="id19">Multiprotocol (Thread or Zigbee in combination with Bluetooth LE)</a></p></li>
+<li><p><a class="reference internal" href="#direct-use-of-the-radio-peripheral" id="id20">Direct use of the radio peripheral</a></p></li>
+<li><p><a class="reference internal" href="#no-radio-communication" id="id21">No radio communication</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#multi-image-builds" id="id22">Multi-image builds</a></p>
+<ul>
+<li><p><a class="reference internal" href="#default-build-configuration" id="id23">Default build configuration</a></p></li>
+<li><p><a class="reference internal" href="#configuration-of-the-child-image" id="id24">Configuration of the child image</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#building-and-programming-a-sample" id="id25">Building and programming a sample</a></p>
+<ul>
+<li><p><a class="reference internal" href="#using-vsc" id="id26">Using Visual Studio Code</a></p></li>
+<li><p><a class="reference internal" href="#using-the-command-line" id="id27">Using the command line</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#fota-updates" id="id28">FOTA updates</a></p>
+<ul>
+<li><p><a class="reference internal" href="#fota-over-bluetooth-low-energy" id="id29">FOTA over Bluetooth Low Energy</a></p></li>
+<li><p><a class="reference internal" href="#fota-update-sample" id="id30">FOTA update sample</a></p></li>
+<li><p><a class="reference internal" href="#fota-in-bluetooth-mesh" id="id31">FOTA in Bluetooth mesh</a></p></li>
+<li><p><a class="reference internal" href="#fota-in-matter" id="id32">FOTA in Matter</a></p></li>
+<li><p><a class="reference internal" href="#fota-over-thread" id="id33">FOTA over Thread</a></p></li>
+<li><p><a class="reference internal" href="#fota-over-zigbee" id="id34">FOTA over Zigbee</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#simultaneous-multi-image-dfu" id="id35">Simultaneous multi-image DFU</a></p></li>
+<li><p><a class="reference internal" href="#mcuboot-s-serial-recovery-of-the-networking-core-image" id="id36">MCUboot’s serial recovery of the networking core image</a></p>
+<ul>
+<li><p><a class="reference internal" href="#container-for-firmware-update-binaries" id="id37">Container for firmware update binaries</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#debugging" id="id38">Debugging</a></p></li>
+<li><p><a class="reference internal" href="#getting-logging-output" id="id39">Getting logging output</a></p>
+<ul>
+<li><p><a class="reference internal" href="#nrf5340-dk-v2-0-0-com-ports" id="id40">nRF5340 DK v2.0.0 COM ports</a></p></li>
+<li><p><a class="reference internal" href="#nrf5340-dk-v1-0-0-com-ports" id="id41">nRF5340 DK v1.0.0 COM ports</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>The nRF Connect SDK provides support for developing on the nRF5340 System on Chip (SoC) using the nRF5340 DK (PCA10095).</p>
+<p>See the <a class="reference external" href="https://infocenter.nordicsemi.com/topic/ug_nrf5340_dk/UG/dk/intro.html">nRF5340 DK User Guide</a> for detailed information about the nRF5340 DK hardware.
+To get started with the nRF5340 DK, follow the steps in <a class="reference internal" href="nrf5340_gs.html#ug-nrf5340-gs"><span class="std std-ref">Getting started with nRF5340 DK</span></a>.
+If you are not familiar with the nRF Connect SDK and the development environment, see the <a class="reference internal" href="../../getting_started.html#getting-started"><span class="std std-ref">introductory documentation</span></a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The nRF5340 PDK has been deprecated with the introduction of the production-level nRF5340 DK.
+To determine if you have a PDK or DK, check the version number on the sticker on your kit.
+If the version is 0.11.0 or higher, the kit is an nRF5340 DK.</p>
+<p>See the <a class="reference external" href="https://developer.nordicsemi.com/nRF_Connect_SDK/doc/1.4.0/nrf/index.html">nRF Connect SDK v1.4.0 documentation</a> for the last release supporting the nRF5340 PDK.</p>
+</div>
+<p>The nRF Connect SDK includes the <a class="reference internal" href="../../applications/nrf5340_audio/README.html#nrf53-audio-app"><span class="std std-ref">nRF5340 Audio</span></a> application, a complete project that integrates the LE Audio standard with custom reference hardware based on the nRF5340 DK.
+Given its complexity, the application uses custom building and programming procedures.
+Refer to its documentation for more information.</p>
+<section id="introduction">
+<span id="ug-nrf5340-intro"></span><h2><a class="toc-backref" href="#id11">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this heading"></a></h2>
+<p>nRF5340 is a wireless ultra-low-power multicore System on Chip (SoC) with two fully programmable Arm Cortex-M33 processors: a network core and an application core.</p>
+<p>See the <a class="reference external" href="https://infocenter.nordicsemi.com/topic/ps_nrf5340/keyfeatures_html5.html">nRF5340 Product Specification</a> for more information about the nRF5340 SoC.
+<span class="xref std std-ref">zephyr:nrf5340dk_nrf5340</span> gives an overview of the nRF5340 DK support in Zephyr.</p>
+<section id="network-core">
+<span id="ug-nrf5340-intro-net-core"></span><h3><a class="toc-backref" href="#id12">Network core</a><a class="headerlink" href="#network-core" title="Permalink to this heading"></a></h3>
+<p>The network core is an Arm Cortex-M33 processor with a reduced feature set, designed for ultra-low-power operation.
+Use this core for radio communication and for real-time processing tasks involving low-level radio protocol layers.</p>
+<p>The build target for the network core in Zephyr is <code class="docutils literal notranslate"><span class="pre">nrf5340dk_nrf5340_cpunet</span></code>.</p>
+</section>
+<section id="application-core">
+<span id="ug-nrf5340-intro-app-core"></span><h3><a class="toc-backref" href="#id13">Application core</a><a class="headerlink" href="#application-core" title="Permalink to this heading"></a></h3>
+<p>The application core is a full-featured Arm Cortex-M33 processor including DSP instructions and FPU.
+Use this core for tasks that require high performance and for application-level logic.</p>
+<p>The M33 TrustZone, one of Cortex-M Security Extensions (CMSE), divides the application MCU into Secure Processing Environment (SPE) and Non-Secure Processing Environment (NSPE).
+When the MCU boots, it always starts executing from the secure area.</p>
+<p>In Zephyr, the firmware of the application core is built using one of the following build targets:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">nrf5340dk_nrf5340_cpuapp</span></code> for build targets with CMSE disabled.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nrf5340dk_nrf5340_cpuapp_ns</span></code> for build targets that have CMSE enabled and have the SPE firmware alongside the NSPE firmware.</p></li>
+</ul>
+<p>For information about CMSE and the difference between the two environments, see <a class="reference internal" href="../../app_dev/board_support/index.html#app-boards-spe-nspe"><span class="std std-ref">Processing environments</span></a>.</p>
+<section id="trusted-firmware-m-tf-m">
+<h4>Trusted Firmware-M (TF-M)<a class="headerlink" href="#trusted-firmware-m-tf-m" title="Permalink to this heading"></a></h4>
+<p>Trusted Firmware-M provides a configurable set of software components to create a Trusted Execution Environment.
+It has replaced Secure Partition Manager as the solution used by nRF Connect SDK applications and samples.
+This means that when you build your application with CMSE enabled, the <a class="reference internal" href="../../app_dev/tfm/index.html#ug-tfm"><span class="std std-ref">TF-M</span></a> is automatically included in the build.
+It is a framework for functions and use cases beyond the scope of Secure Partition Manager.</p>
+<p>For more information about the TF-M, see <a class="reference internal" href="../../app_dev/tfm/index.html#ug-tfm"><span class="std std-ref">Running applications with Trusted Firmware-M</span></a>.
+See also <a class="reference internal" href="../../samples/tfm/tfm_hello_world/README.html#tfm-hello-world"><span class="std std-ref">TF-M Hello World</span></a> for a sample that demonstrates how to add TF-M to an application.</p>
+</section>
+</section>
+<section id="inter-core-communication">
+<span id="ug-nrf5340-intro-inter-core"></span><h3><a class="toc-backref" href="#id14">Inter-core communication</a><a class="headerlink" href="#inter-core-communication" title="Permalink to this heading"></a></h3>
+<p>Communication between the application core and the network core happens through a shared memory area.
+The application core memory is mapped to the network core memory map.
+This means that the network core can access and use the application core memory for shared memory communication.</p>
+<p>Interprocessor Communication (IPC) is used to indicate to the other core that there is new data available to pick up.
+The actual data exchange is handled by Open Asymmetric Multi-Processing (OpenAMP).</p>
+<p>Zephyr includes the <a class="reference external" href="https://github.com/OpenAMP/open-amp/">OpenAMP</a> library, which provides a complete solution for exchanging messages between the cores.
+The IPC peripheral is presented to Zephyr as an Interprocessor Mailbox (IPM) device.
+The OpenAMP library uses the IPM SHIM layer, which in turn uses the IPC driver in <a class="reference external" href="https://github.com/NordicSemiconductor/nrfx/">nrfx</a>.</p>
+</section>
+<section id="execute-in-place-xip-configuration">
+<span id="ug-nrf5340-intro-xip"></span><h3><a class="toc-backref" href="#id15">Execute in place (XIP) configuration</a><a class="headerlink" href="#execute-in-place-xip-configuration" title="Permalink to this heading"></a></h3>
+<p>Execute in place (XIP) allows the application core to execute program code directly from the external flash memory device using the Quad Serial Peripheral Interface (QSPI).
+The external flash memory supports on-the-fly encryption and decryption.
+For more information, read the <a class="reference external" href="https://infocenter.nordicsemi.com/topic/ps_nrf5340/qspi.html#execute_in_place">Execute in place page in the nRF5340 Product Specification</a>.</p>
+<p>For placing individual source code files into defined memory regions, check the <span class="xref std std-ref">zephyr:code_relocation_nocopy</span> sample in Zephyr.</p>
+<section id="indication-of-xip-performance">
+<span id="ug-nrf5340-intro-xip-measurements"></span><h4>Indication of XIP performance<a class="headerlink" href="#indication-of-xip-performance" title="Permalink to this heading"></a></h4>
+<p>The XIP code execution performance measurement was conducted to evaluate the expected performance in different operating conditions.</p>
+<p>The <a class="reference internal" href="../../applications/machine_learning/README.html#nrf-machine-learning-app"><span class="std std-ref">nRF Machine Learning</span></a> application running on the nRF5340 DK was used for the testing.
+This particular application was used because its application design allows to move the Edge Impulse library to external memory.
+There is only one call to the library from the wrapper module, and therefore this call is used to measure the time of execution.
+Additional measurements of the current allowed to compare total energy used.</p>
+<p>The following table lists performance numbers that were measured under different operating conditions.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The numbers in the table refer to current consumed only by the nRF5340 SoC.
+For complete numbers, you must add the current used by external flash, which varies between manufacturers.</p>
+</div>
+<table class="docutils align-default" id="ug-nrf5340-intro-xip-measurements-table">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 5%" />
+<col style="width: 8%" />
+<col style="width: 5%" />
+<col style="width: 7%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>CPU frequency</p></th>
+<th class="head"><p>Memory</p></th>
+<th class="head"><p>Cache</p></th>
+<th class="head"><p>QSPI speed</p></th>
+<th class="head"><p>Mode</p></th>
+<th class="head"><p>Time [ms]</p></th>
+<th class="head"><p>Current &#64;3.0V [mA]</p></th>
+<th class="head"><p>Current &#64;1.8V [mA]</p></th>
+<th class="head"><p>Total energy &#64;3.0V [µJ]</p></th>
+<th class="head"><p>Total energy &#64;1.8V [µJ]</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>64 MHz</p></td>
+<td><p>Internal flash</p></td>
+<td><p>Yes</p></td>
+<td><p>n/a</p></td>
+<td><p>n/a</p></td>
+<td><p>63</p></td>
+<td><p>3.2</p></td>
+<td><p>5.1</p></td>
+<td><p>605</p></td>
+<td><p>578</p></td>
+</tr>
+<tr class="row-odd"><td><p>64 MHz</p></td>
+<td><p>External flash</p></td>
+<td><p>Yes</p></td>
+<td><p>48 MHz</p></td>
+<td><p>Quad</p></td>
+<td><p>68.9</p></td>
+<td><p>5.63</p></td>
+<td><p>8.51</p></td>
+<td><p>1164</p></td>
+<td><p>1055</p></td>
+</tr>
+<tr class="row-even"><td><p>64 MHz</p></td>
+<td><p>External flash</p></td>
+<td><p>Yes</p></td>
+<td><p>24 MHz</p></td>
+<td><p>Quad</p></td>
+<td><p>73.7</p></td>
+<td><p>5.58</p></td>
+<td><p>8.44</p></td>
+<td><p>1234</p></td>
+<td><p>1120</p></td>
+</tr>
+<tr class="row-odd"><td><p>128 MHz</p></td>
+<td><p>Internal flash</p></td>
+<td><p>Yes</p></td>
+<td><p>n/a</p></td>
+<td><p>n/a</p></td>
+<td><p>31</p></td>
+<td><p>7.65</p></td>
+<td><p>12.24</p></td>
+<td><p>711</p></td>
+<td><p>683</p></td>
+</tr>
+<tr class="row-even"><td><p>128 MHz</p></td>
+<td><p>External flash</p></td>
+<td><p>Yes</p></td>
+<td><p>96 MHz</p></td>
+<td><p>Quad</p></td>
+<td><p>34.1</p></td>
+<td><p>8.99</p></td>
+<td><p>14.1</p></td>
+<td><p>920</p></td>
+<td><p>865</p></td>
+</tr>
+<tr class="row-odd"><td><p>128 MHz</p></td>
+<td><p>External flash</p></td>
+<td><p>No</p></td>
+<td><p>96 MHz</p></td>
+<td><p>Quad</p></td>
+<td><p>88.5</p></td>
+<td><p>9.15</p></td>
+<td><p>12.95</p></td>
+<td><p>2429</p></td>
+<td><p>2063</p></td>
+</tr>
+<tr class="row-even"><td><p>128 MHz</p></td>
+<td><p>External flash</p></td>
+<td><p>Yes</p></td>
+<td><p>48 MHz</p></td>
+<td><p>Quad</p></td>
+<td><p>36.4</p></td>
+<td><p>8.85</p></td>
+<td><p>13.9</p></td>
+<td><p>966</p></td>
+<td><p>911</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+<section id="protocols-and-use-cases">
+<h2><a class="toc-backref" href="#id16">Protocols and use cases</a><a class="headerlink" href="#protocols-and-use-cases" title="Permalink to this heading"></a></h2>
+<p>nRF5340 samples usually consist of two separate images: one that runs on the network core and one that runs on the application core.
+For specific use cases, you can use only one of the cores.</p>
+<p>The following sections describe the recommended architecture for using different protocols on the nRF5340 and list the provided samples.</p>
+<section id="bluetooth-low-energy">
+<h3><a class="toc-backref" href="#id17">Bluetooth Low Energy</a><a class="headerlink" href="#bluetooth-low-energy" title="Permalink to this heading"></a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Network core</p></th>
+<th class="head"><p>Application core</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="xref std std-ref">zephyr:bluetooth-hci-rpmsg-sample</span></p></td>
+<td><div class="line-block">
+<div class="line"><a class="reference internal" href="../../samples/bl.html#ble-samples"><span class="std std-ref">Bluetooth Low Energy samples</span></a></div>
+<div class="line"><span class="xref std std-ref">Bluetooth samples in Zephyr</span></div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../samples/bluetooth/rpc_host/README.html#ble-rpc-host"><span class="std std-ref">Bluetooth: Host for nRF RPC Bluetooth Low Energy</span></a> (supported for development)</p></td>
+<td><p>Some Bluetooth Low Energy samples, for example, <span class="xref std std-ref">zephyr:bluetooth-beacon-sample</span></p></td>
+</tr>
+</tbody>
+</table>
+<p>When using Bluetooth® Low Energy on the nRF5340, you have two options:</p>
+<ul class="simple">
+<li><p>Split the Bluetooth LE Controller and the host part of the Bluetooth LE stack and run them on different cores.</p></li>
+<li><p>Run the full Bluetooth LE stack on the network core (currently supported for development only).</p></li>
+</ul>
+<section id="split-controller-and-host">
+<h4>Split Controller and Host<a class="headerlink" href="#split-controller-and-host" title="Permalink to this heading"></a></h4>
+<p>When splitting the Bluetooth LE Controller and the Host, run the Bluetooth LE Controller on the network core and the host part of the Bluetooth LE stack and the application logic on the application core.</p>
+<p>For the network core, the nRF Connect SDK provides the <span class="xref std std-ref">zephyr:bluetooth-hci-rpmsg-sample</span> sample.
+This Zephyr sample is designed specifically to enable the Bluetooth LE Controller functionality on a remote MCU using the <a class="reference external" href="https://github.com/OpenAMP/open-amp/wiki/RPMsg-Messaging-Protocol">RPMsg Messaging Protocol</a> as a transport for Bluetooth HCI.
+The sample implements the RPMsg transport using the <a class="reference external" href="https://github.com/OpenAMP/open-amp/">OpenAMP</a> library to communicate with a Bluetooth Host stack that runs on a separate core (in this case, the nRF5340 application core).</p>
+<p>You can use either the SoftDevice Controller or the Zephyr Bluetooth LE Controller for this sample.
+See <a class="reference internal" href="../../protocols/ble/index.html#ug-ble-controller"><span class="std std-ref">Bluetooth LE Controller</span></a> for more information.</p>
+<p>For the application core, the nRF Connect SDK provides a series of <a class="reference internal" href="../../samples/bl.html#ble-samples"><span class="std std-ref">Bluetooth Low Energy samples</span></a>, in addition to the <span class="xref std std-ref">Bluetooth samples in Zephyr</span>.
+These samples are built for the application core and, by default, include the network core application as child image in a multi-image build (see <a class="reference internal" href="#ug-nrf5340-multi-image"><span class="std std-ref">Multi-image builds</span></a>).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Most of the provided Bluetooth LE samples should run on the nRF5340 DK, but not all have been thoroughly tested.</p>
+</div>
+</section>
+<section id="full-bluetooth-le-stack">
+<h4>Full Bluetooth LE stack<a class="headerlink" href="#full-bluetooth-le-stack" title="Permalink to this heading"></a></h4>
+<p>To run the full Bluetooth LE stack on the network core, the nRF Connect SDK provides the <a class="reference internal" href="../../samples/bluetooth/rpc_host/README.html#ble-rpc-host"><span class="std std-ref">Bluetooth: Host for nRF RPC Bluetooth Low Energy</span></a> sample.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <a class="reference internal" href="../../samples/bluetooth/rpc_host/README.html#ble-rpc-host"><span class="std std-ref">Bluetooth: Host for nRF RPC Bluetooth Low Energy</span></a> sample is currently supported for development only.
+It does not support all Bluetooth Host APIs yet.</p>
+</div>
+<p>For the application core, use a compatible Bluetooth LE sample, for example, the <span class="xref std std-ref">zephyr:bluetooth-beacon-sample</span> sample.</p>
+</section>
+<section id="bluetooth-mesh">
+<h4>Bluetooth mesh<a class="headerlink" href="#bluetooth-mesh" title="Permalink to this heading"></a></h4>
+<p>Bluetooth mesh operates on Bluetooth Low Energy (LE), and is implemented according to Bluetooth Mesh Profile Specification v1.0.1 and Bluetooth Mesh Model Specification v1.0.1.
+For the application core, the nRF Connect SDK provides several Bluetooth mesh samples along with the <a class="reference internal" href="../../samples/bl.html#ble-samples"><span class="std std-ref">Bluetooth Low Energy samples</span></a>.
+In addition, you can find Bluetooth mesh samples with <span class="xref std std-ref">Bluetooth samples in Zephyr</span>.</p>
+</section>
+</section>
+<section id="ieee-802-15-4-thread-and-zigbee">
+<h3><a class="toc-backref" href="#id18">IEEE 802.15.4 (Thread and Zigbee)</a><a class="headerlink" href="#ieee-802-15-4-thread-and-zigbee" title="Permalink to this heading"></a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Network core</p></th>
+<th class="head"><p>Application core</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="xref std std-ref">zephyr:nrf-ieee802154-rpmsg-sample</span></p></td>
+<td><div class="line-block">
+<div class="line"><a class="reference internal" href="../../samples/thread.html#openthread-samples"><span class="std std-ref">Thread samples</span></a></div>
+<div class="line"><a class="reference internal" href="../../samples/zigbee.html#zigbee-samples"><span class="std std-ref">Zigbee samples</span></a></div>
+<div class="line"><a class="reference internal" href="../../samples/matter.html#matter-samples"><span class="std std-ref">Matter samples</span></a></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<p>When using IEEE 802.15.4 on the nRF5340, run the IEEE 802.15.4 radio driver on the network core and the high-level radio stack (the host part of the Thread and Zigbee stacks) and the application logic on the application core.</p>
+<figure class="align-default" id="id9">
+<img alt="IEEE 802.15.4 Protocol architecture in multicore SoC" src="../../_images/ieee802154_nrf53_singleprot_design.svg" /><figcaption>
+<p><span class="caption-text">IEEE 802.15.4 Protocol architecture in multicore SoC</span><a class="headerlink" href="#id9" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>For the network core, the nRF Connect SDK provides the <span class="xref std std-ref">zephyr:nrf-ieee802154-rpmsg-sample</span> sample.
+This Zephyr sample is designed specifically to enable the nRF IEEE 802.15.4 radio driver and its serialization library on a remote MCU using the <a class="reference external" href="https://github.com/OpenAMP/open-amp/wiki/RPMsg-Messaging-Protocol">RPMsg Messaging Protocol</a> as a transport for the nRF 802.15.4 radio driver serialization.
+The sample implements the RPMsg transport using the <a class="reference external" href="https://github.com/OpenAMP/open-amp/">OpenAMP</a> library to communicate with the nRF IEEE 802.15.4 radio driver serialization host that runs on a separate core (in this case, the nRF5340 application core).</p>
+<p>For the application core, the nRF Connect SDK provides a series of samples for the <a class="reference internal" href="../../protocols/thread/index.html#ug-thread"><span class="std std-ref">Thread</span></a>, <a class="reference internal" href="../../protocols/zigbee/index.html#ug-zigbee"><span class="std std-ref">Zigbee</span></a>, and <a class="reference internal" href="../../protocols/matter/index.html#ug-matter"><span class="std std-ref">Matter</span></a> protocols.
+These samples are built for the application core and, by default, include the network core application as child image in a multi-image build (see <a class="reference internal" href="#ug-nrf5340-multi-image"><span class="std std-ref">Multi-image builds</span></a>).</p>
+</section>
+<section id="multiprotocol-thread-or-zigbee-in-combination-with-bluetooth-le">
+<h3><a class="toc-backref" href="#id19">Multiprotocol (Thread or Zigbee in combination with Bluetooth LE)</a><a class="headerlink" href="#multiprotocol-thread-or-zigbee-in-combination-with-bluetooth-le" title="Permalink to this heading"></a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Network core</p></th>
+<th class="head"><p>Application core</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="../../samples/nrf5340/multiprotocol_rpmsg/README.html#multiprotocol-rpmsg-sample"><span class="std std-ref">nRF5340: Multiprotocol RPMsg</span></a></p></td>
+<td><div class="line-block">
+<div class="line"><a class="reference internal" href="../../samples/thread.html#openthread-samples"><span class="std std-ref">Thread samples</span></a></div>
+<div class="line"><a class="reference internal" href="../../samples/zigbee.html#zigbee-samples"><span class="std std-ref">Zigbee samples</span></a></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<p>nRF5340 supports running another protocol in parallel with the <span class="xref std std-ref">nrfxlib:softdevice_controller</span>.
+When using Thread or Zigbee in parallel with Bluetooth LE, run the low-level radio protocol layers (thus the IEEE 802.15.4 radio driver and the Bluetooth LE Controller) on the network core and the high-level radio stack (the host part of the Bluetooth LE, Thread, and Zigbee stacks) and the application logic on the application core.</p>
+<figure class="align-default" id="id10">
+<img alt="Bluetooth LE and IEEE 802.15.4 multiprotocol architecture in multicore SoC" src="../../_images/ieee802154_nrf53_multiprot_design.svg" /><figcaption>
+<p><span class="caption-text">Bluetooth LE and IEEE 802.15.4 multiprotocol architecture in multicore SoC</span><a class="headerlink" href="#id10" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>For the network core, the nRF Connect SDK provides the <a class="reference internal" href="../../samples/nrf5340/multiprotocol_rpmsg/README.html#multiprotocol-rpmsg-sample"><span class="std std-ref">nRF5340: Multiprotocol RPMsg</span></a> sample.
+It is a combination of the <span class="xref std std-ref">zephyr:bluetooth-hci-rpmsg-sample</span> sample (for Bluetooth LE) and the <span class="xref std std-ref">zephyr:nrf-ieee802154-rpmsg-sample</span> sample (for IEEE 802.15.4).
+This means that it enables both the Bluetooth LE Controller and the nRF IEEE 802.15.4 radio driver and simultaneously exposes the functionality of both stacks to the application core using the <a class="reference external" href="https://github.com/OpenAMP/open-amp/wiki/RPMsg-Messaging-Protocol">RPMsg Messaging Protocol</a>.
+Separate RPMsg endpoints are used to obtain independent inter-core connections for each stack.</p>
+<p>For the application core, the nRF Connect SDK provides a series of samples for the <a class="reference internal" href="../../protocols/thread/index.html#ug-thread"><span class="std std-ref">Thread</span></a> and <a class="reference internal" href="../../protocols/zigbee/index.html#ug-zigbee"><span class="std std-ref">Zigbee</span></a> protocols.
+These samples are built for the application core and, by default, include the network core application as child image in a multi-image build (see <a class="reference internal" href="#ug-nrf5340-multi-image"><span class="std std-ref">Multi-image builds</span></a>).
+See the <a class="reference internal" href="../../protocols/multiprotocol/index.html#ug-multiprotocol-support"><span class="std std-ref">Multiprotocol support</span></a> user guide for instructions on how to enable multiprotocol support for Thread or Zigbee in combination with Bluetooth.</p>
+</section>
+<section id="direct-use-of-the-radio-peripheral">
+<h3><a class="toc-backref" href="#id20">Direct use of the radio peripheral</a><a class="headerlink" href="#direct-use-of-the-radio-peripheral" title="Permalink to this heading"></a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Network core</p></th>
+<th class="head"><p>Application core</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><div class="line-block">
+<div class="line"><a class="reference internal" href="../../samples/bluetooth/direct_test_mode/README.html#direct-test-mode"><span class="std std-ref">Bluetooth: Direct Test Mode</span></a></div>
+<div class="line"><a class="reference internal" href="../../samples/peripheral/radio_test/README.html#radio-test"><span class="std std-ref">Radio test (short-range)</span></a></div>
+<div class="line"><a class="reference internal" href="../../samples/mpsl/timeslot/README.html#timeslot-sample"><span class="std std-ref">MPSL timeslot</span></a></div>
+</div>
+</td>
+<td><p><a class="reference internal" href="../../samples/nrf5340/empty_app_core/README.html#nrf5340-empty-app-core"><span class="std std-ref">nRF5340: Empty firmware for application core</span></a></p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The above list might not be exhaustive.</p>
+</div>
+<p>Samples that directly use the radio peripheral can run on the network core of the nRF5340.
+They do not require any functionality from the application core.</p>
+<p>However, on nRF5340, the application core is responsible for starting the network core and connecting its GPIO pins (see <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BOARD_ENABLE_CPUNET</span></code> and the code in <code class="file docutils literal notranslate"><span class="pre">zephyr/boards/arm/nrf5340dk_nrf5340/nrf5340_cpunet_reset.c</span></code>).
+Therefore, you must always program the application core, even if the firmware is supposed to run only on the network core.</p>
+<p>You can use the <a class="reference internal" href="../../samples/nrf5340/empty_app_core/README.html#nrf5340-empty-app-core"><span class="std std-ref">nRF5340: Empty firmware for application core</span></a> sample for this purpose.
+Configure the network core application to automatically include this sample as a child image.
+This is the default configuration for the listed network core samples.
+For more information, see <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NCS_SAMPLE_EMPTY_APP_CORE_CHILD_IMAGE</span></code> and <a class="reference internal" href="#ug-nrf5340-multi-image"><span class="std std-ref">Multi-image builds</span></a>.</p>
+</section>
+<section id="no-radio-communication">
+<h3><a class="toc-backref" href="#id21">No radio communication</a><a class="headerlink" href="#no-radio-communication" title="Permalink to this heading"></a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Network core</p></th>
+<th class="head"><p>Application core</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>—</p></td>
+<td><div class="line-block">
+<div class="line"><a class="reference internal" href="../../samples/nfc.html#nfc-samples"><span class="std std-ref">NFC samples</span></a></div>
+<div class="line"><a class="reference internal" href="../../samples/crypto.html#crypto-samples"><span class="std std-ref">Crypto samples</span></a></div>
+<div class="line"><a class="reference internal" href="../../samples/tfm/tfm_hello_world/README.html#tfm-hello-world"><span class="std std-ref">TF-M Hello World</span></a></div>
+<div class="line"><a class="reference internal" href="../../samples/peripheral/lpuart/README.html#lpuart-sample"><span class="std std-ref">Low Power UART</span></a></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The above list might not be exhaustive.</p>
+</div>
+<p>Samples that do not need radio communication can run on the application core of the nRF5340.
+They do not require any firmware on the network core.
+Therefore, the network core can remain empty.</p>
+<p>If you want to enable the network core anyway, set the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BOARD_ENABLE_CPUNET</span></code> option in the image for the application core.</p>
+</section>
+</section>
+<section id="multi-image-builds">
+<span id="ug-nrf5340-multi-image"></span><h2><a class="toc-backref" href="#id22">Multi-image builds</a><a class="headerlink" href="#multi-image-builds" title="Permalink to this heading"></a></h2>
+<p>If a sample consists of several images (in this case, different images for the application core and for the network core), you can build these images separately or combined as a <a class="reference internal" href="../../app_dev/multi_image/index.html#ug-multi-image"><span class="std std-ref">multi-image build</span></a>, depending on the sample configuration.</p>
+<p>In a multi-image build, the image for the application core is usually the parent image, and the image for the network core is treated as a child image in a separate domain.
+For this to work, the network core image must be explicitly added as a child image to one of the application core images.
+See <a class="reference internal" href="../../app_dev/multi_image/index.html#ug-multi-image-defining"><span class="std std-ref">Defining and enabling a child image</span></a> for details.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When using the <a class="reference internal" href="../../samples/nrf5340/empty_app_core/README.html#nrf5340-empty-app-core"><span class="std std-ref">nRF5340: Empty firmware for application core</span></a> sample, the image hierarchy is inverted.
+In this case, the network core image is the parent image and the application core image is the child image.</p>
+</div>
+<section id="default-build-configuration">
+<h3><a class="toc-backref" href="#id23">Default build configuration</a><a class="headerlink" href="#default-build-configuration" title="Permalink to this heading"></a></h3>
+<p>By default, the two images are built together for all Bluetooth LE, Thread, Zigbee, and Matter samples in the nRF Connect SDK.
+Samples that are designed to run only on the network core include the <a class="reference internal" href="../../samples/nrf5340/empty_app_core/README.html#nrf5340-empty-app-core"><span class="std std-ref">nRF5340: Empty firmware for application core</span></a> sample as a child image.
+For other samples, the images are built separately.</p>
+<p>The build configuration depends on the following Kconfig options that must be set in the configuration of the parent image:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_RPMSG</span></code> - set to <code class="docutils literal notranslate"><span class="pre">y</span></code> in all Bluetooth LE samples for the application core</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF_802154_SER_HOST</span></code> - set to <code class="docutils literal notranslate"><span class="pre">y</span></code> in all Thread, Zigbee, and Matter samples for the application core</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NCS_SAMPLE_EMPTY_APP_CORE_CHILD_IMAGE</span></code> - set to <code class="docutils literal notranslate"><span class="pre">y</span></code> in all network core samples that require the <a class="reference internal" href="../../samples/nrf5340/empty_app_core/README.html#nrf5340-empty-app-core"><span class="std std-ref">nRF5340: Empty firmware for application core</span></a> sample</p></li>
+</ul>
+<p>The combination of these options determines which (if any) sample is included in the build of the parent image:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Enabled options</p></th>
+<th class="head"><p>Child image sample for the network core</p></th>
+<th class="head"><p>Child image sample for the application core</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_RPMSG</span></code></p></td>
+<td><p><span class="xref std std-ref">zephyr:bluetooth-hci-rpmsg-sample</span></p></td>
+<td><p>—</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF_802154_SER_HOST</span></code></p></td>
+<td><p><span class="xref std std-ref">zephyr:nrf-ieee802154-rpmsg-sample</span></p></td>
+<td><p>—</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_RPMSG</span></code> and <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF_802154_SER_HOST</span></code></p></td>
+<td><p><a class="reference internal" href="../../samples/nrf5340/multiprotocol_rpmsg/README.html#multiprotocol-rpmsg-sample"><span class="std std-ref">nRF5340: Multiprotocol RPMsg</span></a></p></td>
+<td><p>—</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NCS_SAMPLE_EMPTY_APP_CORE_CHILD_IMAGE</span></code></p></td>
+<td><p>—</p></td>
+<td><p><a class="reference internal" href="../../samples/nrf5340/empty_app_core/README.html#nrf5340-empty-app-core"><span class="std std-ref">nRF5340: Empty firmware for application core</span></a></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="configuration-of-the-child-image">
+<h3><a class="toc-backref" href="#id24">Configuration of the child image</a><a class="headerlink" href="#configuration-of-the-child-image" title="Permalink to this heading"></a></h3>
+<p>When a network sample is built automatically as a child image in a multi-image build, you can define the relevant Kconfig options (if required) in a <code class="file docutils literal notranslate"><span class="pre">.conf</span></code> file.
+Name the file <code class="file docutils literal notranslate"><span class="pre">network_sample*.conf</span></code>, where <em>network_sample</em> is the name of the child image (for example, <code class="file docutils literal notranslate"><span class="pre">hci_rpmsg.conf</span></code>).
+Place the file in a <code class="file docutils literal notranslate"><span class="pre">child_image</span></code> subfolder of the application sample directory.
+See <a class="reference internal" href="../../app_dev/multi_image/index.html#ug-multi-image-variables"><span class="std std-ref">Image-specific variables</span></a> for more information.</p>
+<p>This way of defining the Kconfig options allows to align the configurations of both images.</p>
+<p>For example, see the <a class="reference internal" href="../../samples/bluetooth/throughput/README.html#ble-throughput"><span class="std std-ref">Bluetooth: Throughput</span></a> child image configuration in <code class="file docutils literal notranslate"><span class="pre">nrf/samples/bluetooth/throughput/child_image/hci_rpmsg.conf</span></code>.</p>
+</section>
+</section>
+<section id="building-and-programming-a-sample">
+<span id="ug-nrf5340-building"></span><h2><a class="toc-backref" href="#id25">Building and programming a sample</a><a class="headerlink" href="#building-and-programming-a-sample" title="Permalink to this heading"></a></h2>
+<p>Depending on the sample, you must program only the application core (for example, when using NFC samples) or both the network and the application core.</p>
+<p>The steps differ depending on whether you work with Visual Studio Code or on the command line and whether you are doing a single or multi-image build.</p>
+<section id="using-vsc">
+<h3><a class="toc-backref" href="#id26">Using Visual Studio Code</a><a class="headerlink" href="#using-vsc" title="Permalink to this heading"></a></h3>
+<p>The nRF Connect for VS Code extension is a complete IDE for developing applications compatible with the nRF Connect SDK.
+This includes an interface to the compiler and linker, an RTOS-aware debugger, a seamless interface to the nRF Connect SDK, and a serial terminal.
+For installation instructions, see <a class="reference external" href="https://nrfconnect.github.io/vscode-nrf-connect/get_started/install.html">Installing using Visual Studio Code</a>.
+For other instructions related to nRF Connect for VS Code extension, see the <a class="reference external" href="https://nrfconnect.github.io/vscode-nrf-connect">nRF Connect for Visual Studio Code</a> documentation site.</p>
+<p>You can build and program separate images or combined images using the nRF Connect for VS Code extension.</p>
+<section id="separate-images">
+<h4>Separate images<a class="headerlink" href="#separate-images" title="Permalink to this heading"></a></h4>
+<p>To build and program the application core, follow the instructions in <a class="reference external" href="https://nrfconnect.github.io/vscode-nrf-connect/get_started/build_app_ncs.html">How to build an application</a> and use <code class="docutils literal notranslate"><span class="pre">nrf5340dk_nrf5340_cpuapp</span></code> or <code class="docutils literal notranslate"><span class="pre">nrf5340dk_nrf5340_cpuapp_ns</span></code> as the build target.</p>
+<p>To build and program the network core, follow the instructions in <a class="reference external" href="https://nrfconnect.github.io/vscode-nrf-connect/get_started/build_app_ncs.html">How to build an application</a> and use <code class="docutils literal notranslate"><span class="pre">nrf5340dk_nrf5340_cpunet</span></code> as the build target.</p>
+</section>
+<section id="multi-image-build">
+<span id="ug-nrf5340-vsc-multi-image"></span><h4>Multi-image build<a class="headerlink" href="#multi-image-build" title="Permalink to this heading"></a></h4>
+<p>If you are working with Bluetooth LE, Thread, Zigbee, or Matter samples, the network core sample is built as a child image when you build the application core image (see <a class="reference internal" href="#ug-nrf5340-multi-image"><span class="std std-ref">Multi-image builds</span></a> above).</p>
+<p>Complete the following steps to build and program a multi-image build to the nRF5340 application core and network core:</p>
+<ol class="arabic">
+<li><p>Open Visual Studio Code.</p>
+<p>If you installed the nRF Connect SDK using the <a class="reference internal" href="../../getting_started/assistant.html#gs-app-tcm"><span class="std std-ref">Installing automatically</span></a>, you can click the <span class="guilabel">Open VS Code</span> button next to the version you installed.</p>
+</li>
+<li><p>Complete the steps listed on the <a class="reference external" href="https://nrfconnect.github.io/vscode-nrf-connect/get_started/build_app_ncs.html">How to build an application</a> page in the nRF Connect for VS Code extension documentation.</p></li>
+<li><p>Program the sample or application:</p>
+<ol class="loweralpha simple">
+<li><p>Connect the nRF5340 development kit to your PC using a USB cable.</p></li>
+<li><p>Make sure that the nRF5340 DK and the external debug probe are powered on.</p></li>
+<li><p>Click <span class="guilabel">Build</span> in the <span class="guilabel">Actions View</span> to start the build process.</p></li>
+<li><p>Click <span class="guilabel">Flash</span> in the <span class="guilabel">Actions View</span> to program the resulting image to your device.</p></li>
+</ol>
+</li>
+</ol>
+</section>
+</section>
+<section id="using-the-command-line">
+<h3><a class="toc-backref" href="#id27">Using the command line</a><a class="headerlink" href="#using-the-command-line" title="Permalink to this heading"></a></h3>
+<p>To build nRF5340 samples from the command line, use <span class="xref std std-ref">west</span>.
+To program the nRF5340 DK from the command line, use either west or nrfjprog (which is part of the <a class="reference external" href="https://www.nordicsemi.com/Software-and-Tools/Development-Tools/nRF-Command-Line-Tools">nRF Command Line Tools</a>).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Programming the nRF5340 DK from the command line (with west or nrfjprog) requires the <a class="reference external" href="https://www.nordicsemi.com/Software-and-Tools/Development-Tools/nRF-Command-Line-Tools">nRF Command Line Tools</a> v10.12.0 or later.</p>
+</div>
+<section id="id1">
+<h4>Separate images<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h4>
+<p>To build and program the application sample and the network sample as separate images, follow the instructions in <a class="reference internal" href="../../getting_started/programming.html#gs-programming-cmd"><span class="std std-ref">Building on the command line</span></a> for each of the samples.</p>
+<p>See the following instructions for programming the images separately:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-d2VzdA==" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-0-d2VzdA==" name="d2VzdA==" role="tab" tabindex="0">west</button><button aria-controls="panel-0-bnJmanByb2c=" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-0-bnJmanByb2c=" name="bnJmanByb2c=" role="tab" tabindex="-1">nrfjprog</button></div><div aria-labelledby="tab-0-d2VzdA==" class="sphinx-tabs-panel group-tab" id="panel-0-d2VzdA==" name="d2VzdA==" role="tabpanel" tabindex="0"><ol class="arabic">
+<li><p>Open a command prompt in the build folder of the network sample and enter the following command to erase the flash memory of the network core and program the network sample:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">west</span> <span class="n">flash</span> <span class="o">--</span><span class="n">erase</span>
+</pre></div>
+</div>
+</li>
+<li><p>Navigate to the build folder of the application sample and enter the same command to erase the flash memory of the application core and program the application sample:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">west</span> <span class="n">flash</span> <span class="o">--</span><span class="n">erase</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div><div aria-labelledby="tab-0-bnJmanByb2c=" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-0-bnJmanByb2c=" name="bnJmanByb2c=" role="tabpanel" tabindex="0"><ol class="arabic">
+<li><p>Open a command prompt in the build folder of the network sample and enter the following command to erase the flash memory of the network core and program the network sample:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nrfjprog</span> <span class="o">-</span><span class="n">f</span> <span class="n">NRF53</span> <span class="o">--</span><span class="n">coprocessor</span> <span class="n">CP_NETWORK</span> <span class="o">--</span><span class="n">program</span> <span class="n">zephyr</span><span class="o">/</span><span class="n">zephyr</span><span class="o">.</span><span class="n">hex</span> <span class="o">--</span><span class="n">chiperase</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you cannot locate the build folder of the network sample, look for a folder with one of these names inside the build folder of the application sample:</p>
+<ul class="simple">
+<li><p><code class="file docutils literal notranslate"><span class="pre">rpc_host</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">hci_rpsmg</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">802154_rpmsg</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">multiprotocol_rpmsg</span></code></p></li>
+</ul>
+</div>
+</li>
+<li><p>Navigate to the build folder of the application sample and enter the following command to erase the flash memory of the application core and program the application sample:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nrfjprog</span> <span class="o">-</span><span class="n">f</span> <span class="n">NRF53</span> <span class="o">--</span><span class="n">program</span> <span class="n">zephyr</span><span class="o">/</span><span class="n">zephyr</span><span class="o">.</span><span class="n">hex</span> <span class="o">--</span><span class="n">chiperase</span>
+</pre></div>
+</div>
+</li>
+<li><p>Reset the development kit:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nrfjprog</span> <span class="o">--</span><span class="n">pinreset</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div></div>
+<p>See <a class="reference internal" href="#readback-protection-error"><span class="std std-ref">Readback protection</span></a> if you encounter an error.</p>
+</section>
+<section id="id2">
+<h4>Multi-image build<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h4>
+<p>To build and program a multi-image HEX file, follow the instructions in <a class="reference internal" href="../../getting_started/programming.html#gs-programming-cmd"><span class="std std-ref">Building on the command line</span></a> for the application core sample.</p>
+<p>To program the multi-image HEX file, you must use west.
+Programming multi-image builds for different cores is not yet supported in nrfjprog.</p>
+</section>
+<section id="readback-protection">
+<span id="readback-protection-error"></span><h4>Readback protection<a class="headerlink" href="#readback-protection" title="Permalink to this heading"></a></h4>
+<p>When programming the device, you might get an error similar to the following message:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ERROR</span><span class="p">:</span> <span class="n">The</span> <span class="n">operation</span> <span class="n">attempted</span> <span class="ow">is</span> <span class="n">unavailable</span> <span class="n">due</span> <span class="n">to</span> <span class="n">readback</span> <span class="n">protection</span> <span class="ow">in</span>
+<span class="n">ERROR</span><span class="p">:</span> <span class="n">your</span> <span class="n">device</span><span class="o">.</span> <span class="n">Please</span> <span class="n">use</span> <span class="o">--</span><span class="n">recover</span> <span class="n">to</span> <span class="n">unlock</span> <span class="n">the</span> <span class="n">device</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>This error occurs when readback protection is enabled.
+To disable the readback protection, you must <em>recover</em> your device.
+See the following instructions.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-1-d2VzdA==" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-1-d2VzdA==" name="d2VzdA==" role="tab" tabindex="0">west</button><button aria-controls="panel-1-bnJmanByb2c=" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-1-bnJmanByb2c=" name="bnJmanByb2c=" role="tab" tabindex="-1">nrfjprog</button></div><div aria-labelledby="tab-1-d2VzdA==" class="sphinx-tabs-panel group-tab" id="panel-1-d2VzdA==" name="d2VzdA==" role="tabpanel" tabindex="0"><p>Enter the following command to recover both cores:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">west</span> <span class="n">flash</span> <span class="o">--</span><span class="n">recover</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-1-bnJmanByb2c=" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-1-bnJmanByb2c=" name="bnJmanByb2c=" role="tabpanel" tabindex="0"><p>Enter the following commands to recover first the network core and then the application core:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nrfjprog</span> <span class="o">--</span><span class="n">recover</span> <span class="o">--</span><span class="n">coprocessor</span> <span class="n">CP_NETWORK</span>
+<span class="n">nrfjprog</span> <span class="o">--</span><span class="n">recover</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Make sure to recover the network core before you recover the application core.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">--recover</span></code> command erases the flash memory and then writes a small binary into the recovered flash memory.
+This binary prevents the readback protection from enabling itself again after a pin reset or power cycle.</p>
+<p>Recovering the network core erases the flash memory of both cores.
+Recovering the application core erases only the flash memory of the application core.
+Therefore, you must recover the network core first.
+Otherwise, if you recover the application core first and the network core last, the binary written to the application core is deleted and readback protection is enabled again after a reset.</p>
+</div>
+</div></div>
+</section>
+</section>
+</section>
+<section id="fota-updates">
+<h2><a class="toc-backref" href="#id28">FOTA updates</a><a class="headerlink" href="#fota-updates" title="Permalink to this heading"></a></h2>
+<p>You can update the firmware of the device over the air, thus without a wired connection.
+Such an update is called a FOTA (firmware over-the-air) update.
+You can also use FOTA updates to replace the application.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For the possibility of introducing an upgradable bootloader, refer to <a class="reference internal" href="../../app_dev/bootloaders_and_dfu/bootloader_adding.html#ug-bootloader-adding"><span class="std std-ref">Adding a bootloader chain</span></a>.</p>
+</div>
+<section id="fota-over-bluetooth-low-energy">
+<h3><a class="toc-backref" href="#id29">FOTA over Bluetooth Low Energy</a><a class="headerlink" href="#fota-over-bluetooth-low-energy" title="Permalink to this heading"></a></h3>
+<p>FOTA updates are supported using MCUmgr’s Simple Management Protocol (SMP) over Bluetooth.
+The application acts as a GATT server and allows the connected Bluetooth Central device to perform a firmware update.
+To use FOTA over Bluetooth LE, samples must support Bluetooth peripheral role (<code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_PERIPHERAL</span></code>).</p>
+<p>The application supports SMP handlers related to:</p>
+<ul class="simple">
+<li><p>Image management.</p></li>
+<li><p>Operating System (OS) management used to reboot the device after the firmware upload is complete.</p></li>
+<li><p>Erasing settings partition used to ensure that a new application is not booted with incompatible content in the settings partition written by the previous application.</p></li>
+</ul>
+<p>To enable support for FOTA updates, do the following:</p>
+<ul>
+<li><p>Enable the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NCS_SAMPLE_MCUMGR_BT_OTA_DFU</span></code> Kconfig option, which implies configuration of the following:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>All of the SMP command handlers mentioned in the previous paragraph.</p></li>
+<li><p>SMP BT reassembly feature.</p></li>
+<li><p>The <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NCS_SAMPLE_MCUMGR_BT_OTA_DFU_SPEEDUP</span></code> Kconfig option automatically extends the Bluetooth buffers, which allows to speed up the FOTA transfer over Bluetooth, but also increases RAM usage.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<ul class="simple">
+<li><p>Use MCUboot as the upgradable bootloader (<code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BOOTLOADER_MCUBOOT</span></code> must be enabled).
+For more information, go to the <span class="xref std std-doc">mcuboot:index-ncs</span> page.</p></li>
+</ul>
+<p>Bluetooth buffers configuration introduced by the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NCS_SAMPLE_MCUMGR_BT_OTA_DFU_SPEEDUP</span></code> Kconfig option is also automatically applied to the network core child image by the dedicated overlay file.</p>
+<p>If necessary, you can modify any of the implied options or defaulted values introduced by the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NCS_SAMPLE_MCUMGR_BT_OTA_DFU</span></code> Kconfig option.</p>
+<p>You can either add these Kconfig options to the configuration files of your application or have them inline in a project build command.
+Here is an example of how you can build for the <a class="reference internal" href="../../samples/bluetooth/peripheral_lbs/README.html#peripheral-lbs"><span class="std std-ref">Bluetooth: Peripheral LBS</span></a> sample:</p>
+<pre class="highlight literal-block"> west build -b <em>build_target</em> -- -DCONFIG_BOOTLOADER_MCUBOOT=y -DCONFIG_NCS_SAMPLE_MCUMGR_BT_OTA_DFU=y</pre>
+<p>When you connect to the device after the build has completed and the firmware has been programmed to it, the SMP Service is enabled with the <code class="docutils literal notranslate"><span class="pre">UUID</span> <span class="pre">8D53DC1D-1DB7-4CD3-868B-8A527460AA84</span></code>.
+If you want to add SMP Service to advertising data, refer to the <span class="xref std std-ref">zephyr:smp_svr_sample</span>.</p>
+<p>To perform a FOTA update, complete the following steps:</p>
+<ol class="arabic">
+<li><p>Create a binary file that contains the new image.</p>
+<p>To create a binary file for an application update, build the application with the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BOOTLOADER_MCUBOOT</span></code> option enabled.</p>
+</li>
+<li><p>Download the <code class="file docutils literal notranslate"><span class="pre">app_update.bin</span></code> image file to your device.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>nRF Connect for Desktop does not currently support the FOTA process.</p>
+</div>
+<p>Use <a class="reference external" href="https://www.nordicsemi.com/Products/Development-tools/nrf-connect-device-manager">nRF Connect Device Manager</a>, <a class="reference external" href="https://www.nordicsemi.com/Software-and-Tools/Development-Tools/nRF-Connect-for-mobile">nRF Connect for Mobile</a>, or <a class="reference external" href="https://www.nordicsemi.com/Software-and-Tools/Development-Tools/nRF-Toolbox">nRF Toolbox</a> to update your device with the new firmware.</p>
+<ol class="loweralpha simple">
+<li><p>Ensure that you can access the <code class="file docutils literal notranslate"><span class="pre">app_update.bin</span></code> image file from your phone or tablet.</p></li>
+<li><p>Connect to the device with the mobile app.</p></li>
+<li><p>Initiate the DFU process to transfer the image to the device.</p></li>
+</ol>
+</li>
+</ol>
+</section>
+<section id="fota-update-sample">
+<h3><a class="toc-backref" href="#id30">FOTA update sample</a><a class="headerlink" href="#fota-update-sample" title="Permalink to this heading"></a></h3>
+<p>The <span class="xref std std-ref">zephyr:smp_svr_sample</span> demonstrates how to set up your project to support FOTA updates.</p>
+<p>The sample documentation is from the Zephyr project and is incompatible with the <a class="reference internal" href="../../app_dev/multi_image/index.html#ug-multi-image"><span class="std std-ref">Multi-image builds</span></a>.
+When working in the nRF Connect SDK environment, ignore the part of the sample documentation that describes the building and programming steps.
+In nRF Connect SDK, you can build and program the <span class="xref std std-ref">zephyr:smp_svr_sample</span> as any other sample using the following commands:</p>
+<pre class="highlight literal-block"> west build -b <em>build_target</em> -- -DOVERLAY_CONFIG=overlay-bt.conf
+ west flash</pre>
+<p>Make sure to indicate the <code class="file docutils literal notranslate"><span class="pre">overlay-bt.conf</span></code> overlay configuration for the Bluetooth transport like in the command example.
+This configuration was carefully selected to achieve the maximum possible throughput of the FOTA update transport over Bluetooth with the help of the following features:</p>
+<ul class="simple">
+<li><p>Bluetooth MTU - To increase the packet size of a single Bluetooth packet transmitted over the air (<code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_BUF_ACL_RX_SIZE</span></code> and others).</p></li>
+<li><p>Bluetooth connection parameters - To adaptively change the connection interval and latency on the detection of the SMP service activity (<code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MCUMGR_SMP_BT_CONN_PARAM_CONTROL</span></code>).</p></li>
+<li><p>MCUmgr packet reassembly - To allow exchange of large SMP packets (<code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MCUMGR_SMP_REASSEMBLY_BT</span></code>, <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MCUMGR_BUF_SIZE</span></code> and others).</p></li>
+</ul>
+<p>Consider using these features in your project to speed up the FOTA update process.</p>
+</section>
+<section id="fota-in-bluetooth-mesh">
+<h3><a class="toc-backref" href="#id31">FOTA in Bluetooth mesh</a><a class="headerlink" href="#fota-in-bluetooth-mesh" title="Permalink to this heading"></a></h3>
+<p>To perform FOTA update when working with the Bluetooth mesh protocol, use point-to-point Device Firmware Update (DFU) over Bluetooth Low Energy as described in <a class="reference internal" href="#fota-over-bluetooth-low-energy">FOTA over Bluetooth Low Energy</a> above.
+See also <a class="reference internal" href="../../protocols/bt_mesh/fota.html#ug-bt-mesh-fota"><span class="std std-ref">Performing FOTA updates in Bluetooth mesh</span></a> for more details about FOTA in Bluetooth mesh.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Point-to-point DFU over Bluetooth Low Energy is supported by default, out-of-the-box, for all samples and applications compatible with <span class="xref std std-ref">zephyr:thingy53_nrf5340</span>.
+See <a class="reference internal" href="thingy53.html#thingy53-app-update"><span class="std std-ref">Updating firmware image</span></a> for more information about updating firmware image on <span class="xref std std-ref">zephyr:thingy53_nrf5340</span>.</p>
+</div>
+</section>
+<section id="fota-in-matter">
+<h3><a class="toc-backref" href="#id32">FOTA in Matter</a><a class="headerlink" href="#fota-in-matter" title="Permalink to this heading"></a></h3>
+<p>To perform a FOTA upgrade when working with the Matter protocol, use one of the following methods:</p>
+<ul>
+<li><p>DFU over Bluetooth LE using either smartphone or PC command-line tool.
+Both options are similar to <a class="reference internal" href="#fota-over-bluetooth-low-energy">FOTA over Bluetooth Low Energy</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This protocol is not part of the Matter specification.</p>
+</div>
+</li>
+<li><p>DFU over Matter using Matter-compliant BDX protocol and Matter OTA Provider device.
+This option requires an OpenThread Border Router (OTBR) set up either in Docker or on a Raspberry Pi.</p></li>
+</ul>
+<p>For more information about both methods, read the <span class="xref std std-doc">matter:nrfconnect_examples_software_update</span> page in the Matter documentation.</p>
+</section>
+<section id="fota-over-thread">
+<h3><a class="toc-backref" href="#id33">FOTA over Thread</a><a class="headerlink" href="#fota-over-thread" title="Permalink to this heading"></a></h3>
+<p><a class="reference internal" href="../../protocols/thread/index.html#ug-thread"><span class="std std-ref">Thread</span></a> does not offer a proprietary FOTA method.</p>
+</section>
+<section id="fota-over-zigbee">
+<h3><a class="toc-backref" href="#id34">FOTA over Zigbee</a><a class="headerlink" href="#fota-over-zigbee" title="Permalink to this heading"></a></h3>
+<p>You can enable support for FOTA over the Zigbee network using the <a class="reference internal" href="../../libraries/zigbee/zigbee_fota.html#lib-zigbee-fota"><span class="std std-ref">Zigbee FOTA</span></a> library.
+For detailed information about how to configure the Zigbee FOTA library for your application, see <a class="reference internal" href="../../protocols/zigbee/configuring_libraries.html#ug-zigbee-configuring-components-ota"><span class="std std-ref">Configuring Zigbee FOTA</span></a>.</p>
+</section>
+</section>
+<section id="simultaneous-multi-image-dfu">
+<span id="ug-nrf5340-multi-image-dfu"></span><h2><a class="toc-backref" href="#id35">Simultaneous multi-image DFU</a><a class="headerlink" href="#simultaneous-multi-image-dfu" title="Permalink to this heading"></a></h2>
+<p>The simultaneous update of multiple images is available for testing since nRF Connect SDK v1.7.0.
+It allows the updating of both the application core and the network core in one go.</p>
+<p>To enable the simultaneous update of multiple images in the MCUboot, set the following options:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BOOT_UPGRADE_ONLY</span></code> - The simultaneous update of multiple images does not support network core image reversion, so you need to disable application image reversion.</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_PCD_APP</span></code> - Enable commands exchange with the network core.</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_UPDATEABLE_IMAGE_NUMBER</span></code> - Enable support for multiple update partitions by setting this option to <code class="docutils literal notranslate"><span class="pre">2</span></code>.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The application core can be reverted, but doing so bricks the network core upon revertion, as the reversion process fills the network core with the content currently in the RAM that pcd uses.
+To enable this, define the <code class="docutils literal notranslate"><span class="pre">USE_NRF53_MULTI_IMAGE_WITHOUT_UPGRADE_ONLY</span></code> Kconfig option in the project-level Kconfig file.
+When this is option is defined, you can enable it by setting :kconfig:option`CONFIG_USE_NRF53_MULTI_IMAGE_WITHOUT_UPGRADE_ONLY`.</p>
+</div>
+<p>The <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF53_MULTI_IMAGE_UPDATE</span></code> option selects this feature by default if these options and all its other dependencies are asserted.</p>
+<p>To enable the simultaneous update of multiple images in the application, in addition to enabling the MCUboot support, set the following options:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_UPDATEABLE_IMAGE_NUMBER</span></code> - Enable support for multiple update partitions by setting this option to <code class="docutils literal notranslate"><span class="pre">2</span></code>.</p></li>
+</ul>
+<p>Additionally, the memory partitions must be defined and include:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">mcuboot_primary</span></code> and <code class="docutils literal notranslate"><span class="pre">mcuboot_secondary</span></code> partitions for the application core image slots.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mcuboot_primary_1</span></code> and <code class="docutils literal notranslate"><span class="pre">mcuboot_secondary_1</span></code> partitions for the network core image slots.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pcd_sram</span></code> partition used for command exchange between the application core and the network core (see <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_PCD_APP</span></code>).</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The application core does not have direct access to the network core flash memory.
+The update image is passed indirectly using RAM.
+Because of this, the <code class="docutils literal notranslate"><span class="pre">mcuboot_primary_1</span></code> must be stored in <code class="docutils literal notranslate"><span class="pre">ram_flash</span></code> region.
+To enable providing such region on the device, see <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_FLASH_SIMULATOR</span></code>.</p>
+</div>
+<p>Samples and applications built for Thingy:53 enable simultaneous update of multiple images by default.
+To learn more about Thingy:53, see <a class="reference internal" href="thingy53.html#ug-thingy53"><span class="std std-ref">Developing with Thingy:53</span></a>.</p>
+</section>
+<section id="mcuboot-s-serial-recovery-of-the-networking-core-image">
+<h2><a class="toc-backref" href="#id36">MCUboot’s serial recovery of the networking core image</a><a class="headerlink" href="#mcuboot-s-serial-recovery-of-the-networking-core-image" title="Permalink to this heading"></a></h2>
+<p>In addition to the recovery of the application core image, also the networking core image can be recovered.
+When you build MCUboot for the nRF5340 DK or the Thingy:53, you can use this feature with one of the following options:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF53_MULTI_IMAGE_UPDATE</span></code> - Simultaneous multi-image DFU.</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF53_RECOVERY_NETWORK_CORE</span></code> - Serial recovery for the network core in the one image pair mode, where <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_UPDATEABLE_IMAGE_NUMBER</span></code> is set to <code class="docutils literal notranslate"><span class="pre">==</span> <span class="pre">1</span></code>.</p></li>
+</ul>
+<p>To upload the networking image, use the following command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">mcumgr</span> <span class="n">image</span> <span class="n">upload</span> <span class="o">&lt;</span><span class="n">build_dir_path</span><span class="o">&gt;/</span><span class="n">zephyr</span><span class="o">/</span><span class="n">net_core_app_update</span><span class="o">.</span><span class="n">bin</span> <span class="o">-</span><span class="n">e</span> <span class="o">-</span><span class="n">n</span> <span class="mi">3</span> <span class="o">-</span><span class="n">c</span> <span class="n">serial_conn</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">serial_conn</span></code> is the serial connection configuration.
+For more information on MCUmgr image management, see <span class="xref std std-ref">zephyr:image_mgmt</span></p>
+<p>To enable the serial recovery of the network core while the multi-image update is not enabled in the MCUboot, set the following options:</p>
+<ul class="simple">
+<li><p>select <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BOOT_IMAGE_ACCESS_HOOK</span></code></p></li>
+<li><p>select <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_FLASH_SIMULATOR</span></code></p></li>
+<li><p>select <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_FLASH_SIMULATOR_DOUBLE_WRITES</span></code></p></li>
+<li><p>disable <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_FLASH_SIMULATOR_STATS</span></code></p></li>
+<li><p>select <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MCUBOOT_SERIAL_DIRECT_IMAGE_UPLOAD</span></code></p></li>
+<li><p>select <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF53_RECOVERY_NETWORK_CORE</span></code></p></li>
+</ul>
+<p>Additionally, define and include the following memory partitions:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">mcuboot_primary</span></code> and <code class="docutils literal notranslate"><span class="pre">mcuboot_secondary</span></code> - Partitions for the application core image slots.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mcuboot_primary_1</span></code> - Partition for the network core image slot.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pcd_sram</span></code> - Partition used for command exchange between the application core and the network core (see <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_PCD_APP</span></code>).</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When using MCUboot with the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF53_RECOVERY_NETWORK_CORE</span></code> option enabled, the application core does not have direct access to the network core flash memory.
+Due to this, <code class="docutils literal notranslate"><span class="pre">mcuboot_primary_1</span></code> must be used as the RAM partition mediator.</p>
+</div>
+<section id="container-for-firmware-update-binaries">
+<h3><a class="toc-backref" href="#id37">Container for firmware update binaries</a><a class="headerlink" href="#container-for-firmware-update-binaries" title="Permalink to this heading"></a></h3>
+<p>The build system will automatically place both the application core and the network core update binaries (<code class="file docutils literal notranslate"><span class="pre">app_update.bin</span></code> and <code class="file docutils literal notranslate"><span class="pre">net_core_app_update.bin</span></code>) into a container package named <code class="file docutils literal notranslate"><span class="pre">dfu_application.zip</span></code>.
+This container package can be used by update tools to pass both images during the simultaneous update of multiple images.</p>
+</section>
+</section>
+<section id="debugging">
+<span id="id3"></span><h2><a class="toc-backref" href="#id38">Debugging</a><a class="headerlink" href="#debugging" title="Permalink to this heading"></a></h2>
+<p>See <a class="reference internal" href="../../getting_started/testing.html#gs-debugging"><span class="std std-ref">Debugging an application</span></a> for information about how to debug your application.</p>
+</section>
+<section id="getting-logging-output">
+<span id="logging-cpunet"></span><h2><a class="toc-backref" href="#id39">Getting logging output</a><a class="headerlink" href="#getting-logging-output" title="Permalink to this heading"></a></h2>
+<p>When connected to a computer, the nRF5340 DK emulates virtual COM ports.
+The number of COM ports depends on the DK version you are using.</p>
+<section id="nrf5340-dk-v2-0-0-com-ports">
+<h3><a class="toc-backref" href="#id40">nRF5340 DK v2.0.0 COM ports</a><a class="headerlink" href="#nrf5340-dk-v2-0-0-com-ports" title="Permalink to this heading"></a></h3>
+<p>When connected to a computer, the nRF5340 DK v2.0.0 emulates two virtual COM ports.
+In the default configuration, they are set up as follows:</p>
+<ul class="simple">
+<li><p>The first COM port outputs the log from the network core (if available).</p></li>
+<li><p>The second COM port outputs the log from the application core.</p></li>
+</ul>
+</section>
+<section id="nrf5340-dk-v1-0-0-com-ports">
+<h3><a class="toc-backref" href="#id41">nRF5340 DK v1.0.0 COM ports</a><a class="headerlink" href="#nrf5340-dk-v1-0-0-com-ports" title="Permalink to this heading"></a></h3>
+<p>When connected to a computer, the nRF5340 DK v1.0.0 emulates three virtual COM ports.
+In the default configuration, they are set up as follows:</p>
+<ul class="simple">
+<li><p>The first COM port outputs the log from the network core (if available).</p></li>
+<li><p>The second (middle) COM port is routed to the <strong>P24</strong> connector of the nRF5340 DK.</p></li>
+<li><p>The third (last) COM port outputs the log from the application core.</p></li>
+</ul>
+<p>To use the middle COM port in the nRF5340 DK v1.0.0, complete the following steps:</p>
+<ol class="arabic">
+<li><p>Map RX, TX, CTS and RTS pins to four different pins on the development kit, using, for example, <span class="xref std std-ref">devicetree overlays</span>.
+See the following example, using the <span class="xref std std-ref">zephyr:dtbinding_nordic_nrf_uarte</span> bindings.</p>
+<div class="highlight-devicetree notranslate"><div class="highlight"><pre><span></span><span class="o">&amp;</span><span class="na">pinctrl</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="nl">uart0_default_alt</span><span class="p">:</span><span class="w"> </span><span class="nf">uart0_default_alt</span><span class="cm"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nf">group1</span><span class="cm"> </span><span class="p">{</span>
+<span class="w">         </span><span class="n">psels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="na">NRF_PSEL</span><span class="p">(</span><span class="na">UART_TX</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span>
+<span class="w">                 </span><span class="o">&lt;</span><span class="na">NRF_PSEL</span><span class="p">(</span><span class="na">UART_RX</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">21</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span>
+<span class="w">                 </span><span class="o">&lt;</span><span class="na">NRF_PSEL</span><span class="p">(</span><span class="na">UART_RTS</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">18</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span>
+<span class="w">                 </span><span class="o">&lt;</span><span class="na">NRF_PSEL</span><span class="p">(</span><span class="na">UART_CTS</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p">)</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">      </span><span class="p">};</span>
+<span class="w">   </span><span class="p">};</span>
+
+<span class="w">   </span><span class="nl">uart0_sleep_alt</span><span class="p">:</span><span class="w"> </span><span class="nf">uart0_sleep_alt</span><span class="cm"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nf">group1</span><span class="cm"> </span><span class="p">{</span>
+<span class="w">         </span><span class="n">psels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="na">NRF_PSEL</span><span class="p">(</span><span class="na">UART_TX</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span>
+<span class="w">                 </span><span class="o">&lt;</span><span class="na">NRF_PSEL</span><span class="p">(</span><span class="na">UART_RX</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">21</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span>
+<span class="w">                 </span><span class="o">&lt;</span><span class="na">NRF_PSEL</span><span class="p">(</span><span class="na">UART_RTS</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">18</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span>
+<span class="w">                 </span><span class="o">&lt;</span><span class="na">NRF_PSEL</span><span class="p">(</span><span class="na">UART_CTS</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p">)</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">         </span><span class="n">low-power-enable</span><span class="p">;</span>
+<span class="w">      </span><span class="p">};</span>
+<span class="w">   </span><span class="p">};</span>
+<span class="p">};</span>
+
+<span class="o">&amp;</span><span class="nf">uart0</span><span class="cm"> </span><span class="p">{</span>
+<span class="w">   </span><span class="kr">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;okay&quot;</span><span class="p">;</span>
+<span class="w">   </span><span class="kr">compatible</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;nordic,nrf-uarte&quot;</span><span class="p">;</span>
+<span class="w">   </span><span class="n">current-speed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="mi">115200</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">   </span><span class="n">pinctrl-0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;&amp;</span><span class="na">uart0_default_alt</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">   </span><span class="n">pinctrl-1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;&amp;</span><span class="na">uart0_sleep_alt</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">   </span><span class="n">pinctrl-names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;default&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;sleep&quot;</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</li>
+<li><p>Wire the previously mapped pins to <strong>TxD</strong>, <strong>RxD</strong>, <strong>CTS</strong>, and <strong>RTS</strong> on the <strong>P24</strong> connector.</p></li>
+</ol>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="thingy53_gs.html" class="btn btn-neutral float-right" title="Getting started with Thingy:53" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="nrf5340_gs.html" class="btn btn-neutral" title="Getting started with nRF5340 DK" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bluetooth: nRF Distance Measurement with Bluetooth LE discovery &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../../_static/js/ncs.js"
+></script>
+<script src="../../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Bluetooth: Peripheral AMS client" href="../peripheral_ams_client/README.html" />
+    <link rel="prev" title="Bluetooth: Multiple advertising sets" href="../multiple_adv_sets/README.html" />
+<link
+  href="../../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../applications.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../samples.html">Samples</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../bl.html">Bluetooth samples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../central_and_peripheral_hr/README.html">Bluetooth: Central and Peripheral HRS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../central_bas/README.html">Bluetooth: Central BAS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../central_hids/README.html">Bluetooth: Central HIDS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../central_hr_coded/README.html">Bluetooth: Central Heart Rate Monitor with Coded PHY</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../central_nfc_pairing/README.html">Bluetooth: Central NFC pairing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../central_smp_client/README.html">Bluetooth: Central SMP Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../central_uart/README.html">Bluetooth: Central UART</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../direct_test_mode/README.html">Bluetooth: Direct Test Mode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../direction_finding_central/README.html">Bluetooth: Direction finding central</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../direction_finding_connectionless_rx/README.html">Bluetooth: Direction finding connectionless locator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../direction_finding_connectionless_tx/README.html">Bluetooth: Direction finding connectionless beacon</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../direction_finding_peripheral/README.html">Bluetooth: Direction finding peripheral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../enocean/README.html">Bluetooth: EnOcean</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../hci_lpuart/README.html">Bluetooth: HCI low power UART</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../llpm/README.html">Bluetooth: LLPM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../multiple_adv_sets/README.html">Bluetooth: Multiple advertising sets</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Bluetooth: nRF Distance Measurement with Bluetooth LE discovery</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#requirements">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#power-consumption">Power consumption</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#high-precision-calculation">High-precision calculation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#zero-distance-calibration">Zero-distance calibration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#user-interface">User interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#building-and-running">Building and running</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dependencies">Dependencies</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_ams_client/README.html">Bluetooth: Peripheral AMS client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_ancs_client/README.html">Bluetooth: Peripheral ANCS client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_bms/README.html">Bluetooth: Peripheral Bond Management Service (BMS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_cgms/README.html">Bluetooth: Continuous Glucose Monitoring Service (CGMS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_cts_client/README.html">Bluetooth: Peripheral CTS client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_fast_pair/README.html">Bluetooth: Fast Pair</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_gatt_dm/README.html">Bluetooth: Peripheral GATT Discovery Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_hids_keyboard/README.html">Bluetooth: Peripheral HIDS keyboard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_hids_mouse/README.html">Bluetooth: Peripheral HIDS mouse</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_hr_coded/README.html">Bluetooth: Peripheral Heart Rate Monitor with Coded PHY</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_lbs/README.html">Bluetooth: Peripheral LBS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_mds/README.html">Bluetooth: Peripheral Memfault Diagnostic Service (MDS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_nfc_pairing/README.html">Bluetooth: NFC pairing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_power_profiling/README.html">Bluetooth: Peripheral power profiling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_rscs/README.html">Bluetooth: Peripheral Running Speed and Cadence Service (RSCS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_status/README.html">Bluetooth: Peripheral Status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_uart/README.html">Bluetooth: Peripheral UART</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../radio_coex_1wire/README.html">Bluetooth: External radio coexistence using 1-wire interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../rpc_host/README.html">Bluetooth: Host for nRF RPC Bluetooth Low Energy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../shell_bt_nus/README.html">Bluetooth: NUS shell transport</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../throughput/README.html">Bluetooth: Throughput</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mesh/ble_peripheral_lbs_coex/README.html">Bluetooth: Mesh and peripheral coexistence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mesh/chat/README.html">Bluetooth: Mesh chat</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mesh/light/README.html">Bluetooth: Mesh light</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mesh/light_ctrl/README.html">Bluetooth: Mesh light fixture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mesh/light_switch/README.html">Bluetooth: Mesh light switch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mesh/sensor_client/README.html">Bluetooth: Mesh sensor observer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mesh/sensor_server/README.html">Bluetooth: Mesh sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mesh/silvair_enocean/README.html">Bluetooth: Mesh Silvair EnOcean</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../crypto.html">Cryptography samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../edge.html">Edge Impulse samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gazell.html">Gazell samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../matter.html">Matter samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nfc.html">NFC samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nrf5340.html">nRF5340 samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nrf9160.html">nRF9160 samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tfm.html">Trusted Firmware-M (TF-M) samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../thread.html">Thread samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../zigbee.html">Zigbee samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../wifi.html">Wi-Fi samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../other.html">Other samples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../drivers.html">Drivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../samples.html">Samples</a></li>
+          <li class="breadcrumb-item"><a href="../../bl.html">Bluetooth samples</a></li>
+      <li class="breadcrumb-item active">Bluetooth: nRF Distance Measurement with Bluetooth LE discovery</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/samples/bluetooth/nrf_dm/README.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="bluetooth-nrf-distance-measurement-with-bluetooth-le-discovery">
+<span id="ble-nrf-dm"></span><h1>Bluetooth: nRF Distance Measurement with Bluetooth LE discovery<a class="headerlink" href="#bluetooth-nrf-distance-measurement-with-bluetooth-le-discovery" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#requirements" id="id6">Requirements</a></p></li>
+<li><p><a class="reference internal" href="#overview" id="id7">Overview</a></p></li>
+<li><p><a class="reference internal" href="#power-consumption" id="id8">Power consumption</a></p></li>
+<li><p><a class="reference internal" href="#high-precision-calculation" id="id9">High-precision calculation</a></p></li>
+<li><p><a class="reference internal" href="#zero-distance-calibration" id="id10">Zero-distance calibration</a></p></li>
+<li><p><a class="reference internal" href="#user-interface" id="id11">User interface</a></p></li>
+<li><p><a class="reference internal" href="#building-and-running" id="id12">Building and running</a></p>
+<ul>
+<li><p><a class="reference internal" href="#testing" id="id13">Testing</a></p></li>
+<li><p><a class="reference internal" href="#sample-output" id="id14">Sample output</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#dependencies" id="id15">Dependencies</a></p></li>
+</ul>
+</div>
+<p>The nRF Distance Measurement sample demonstrates the functionality of the <a class="reference internal" href="../../../libraries/others/dm.html#mod-dm"><span class="std std-ref">Distance Measurement</span></a> subsystem.
+It shows how to use DM to measure the distance between devices.
+The Bluetooth® <a class="reference internal" href="../../../libraries/bluetooth_services/services/ddfs.html#ddfs-readme"><span class="std std-ref">Direction and Distance Finding Service (DDFS)</span></a> is running simultaneously.</p>
+<p>Sample is configured to use Nordic’s SoftDevice link layer.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The Distance Measurement support in the nRF Connect SDK is <a class="reference internal" href="../../../software_maturity.html#software-maturity"><span class="std std-ref">experimental</span></a>.
+See <a class="reference internal" href="../../../libraries/others/dm.html#mod-dm"><span class="std std-ref">Distance Measurement</span></a> for details.</p>
+</div>
+<section id="requirements">
+<h2><a class="toc-backref" href="#id6">Requirements</a><a class="headerlink" href="#requirements" title="Permalink to this heading"></a></h2>
+<p>The sample supports the following development kits:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 26%" />
+<col style="width: 7%" />
+<col style="width: 42%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Hardware platforms</p></th>
+<th class="head"><p>PCA</p></th>
+<th class="head"><p>Board name</p></th>
+<th class="head"><p>Build target</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../working_with_nrf/nrf53/nrf5340.html#ug-nrf5340"><span class="std std-ref">nRF5340 DK</span></a></p></td>
+<td><p>PCA10095</p></td>
+<td><p><span class="xref std std-ref">nrf5340dk_nrf5340</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nrf5340dk_nrf5340_cpuapp</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../working_with_nrf/nrf52/developing.html#ug-nrf52"><span class="std std-ref">nRF52 DK</span></a></p></td>
+<td><p>PCA10040</p></td>
+<td><p><span class="xref std std-ref">nrf52dk_nrf52832</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nrf52dk_nrf52832</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../working_with_nrf/nrf52/developing.html#ug-nrf52"><span class="std std-ref">nRF52840 DK</span></a></p></td>
+<td><p>PCA10056</p></td>
+<td><p><span class="xref std std-ref">nrf52840dk_nrf52840</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nrf52840dk_nrf52840</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../working_with_nrf/nrf52/developing.html#ug-nrf52"><span class="std std-ref">nRF52833 DK</span></a></p></td>
+<td><p>PCA10100</p></td>
+<td><p><span class="xref std std-ref">nrf52833dk_nrf52833</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nrf52833dk_nrf52833</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="overview">
+<h2><a class="toc-backref" href="#id7">Overview</a><a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+<p>The sample initializes and performs distance measurements between devices.
+The procedure for distance measurement on both devices must be synchronized.</p>
+<p>The synchronization step has two goals:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Detect peers that support the ranging procedure.</p></li>
+<li><p>Provide synchronization for the ranging step.</p></li>
+</ul>
+</div></blockquote>
+<p>This sample synchronizes devices using the scan and advertising facilities of the Bluetooth LE.
+Anchoring occurs after the exchange of <code class="docutils literal notranslate"><span class="pre">SCAN_REQ</span></code> and <code class="docutils literal notranslate"><span class="pre">SCAN_RSP</span></code> packets.</p>
+<p class="mscgen">
+msc {
+hscale = &quot;1.3&quot;;
+DevA [label=&quot;Device A&quot;],DevB [label=&quot;Device B&quot;];
+|||;
+DevA rbox DevB [label=&quot;Synchronization starts&quot;];
+|||;
+DevA=&gt;DevB [label=&quot;ADV_IND&quot;];
+DevA&lt;=DevB [label=&quot;SCAN_REQ&quot;];
+DevA=&gt;DevB [label=&quot;SCAN_RSP, Manufacturer-specific data&quot;];
+|||;
+DevA rbox DevB [label=&quot;Synchronization ends&quot;];
+|||;
+DevA box DevA [label=&quot;Reflector&quot;],DevB box DevB [label=&quot;Initiator&quot;];
+|||;
+DevA&lt;=&gt;DevB [label=&quot;Ranging&quot;];
+}
+</p>
+<p>The chart shows the sequence of the synchronization process.</p>
+<p>Both devices act as an advertiser and a scanner.
+Device B receives advertising from Device A and scans it.
+Device A sends a scan response that contains <code class="docutils literal notranslate"><span class="pre">Manufacturer</span> <span class="pre">Specific</span> <span class="pre">Data</span></code>.
+This message contains the following fields:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Company Identifier Code.</p></li>
+<li><p>Identifier indicating that the device supports distance measurement.</p></li>
+<li><p>The access address used for measurement.</p></li>
+</ul>
+</div></blockquote>
+<p>This scanner/advertiser interaction is used as a synchronization point.
+After a configurable delay, Device A and Device B try to range each other.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>If a Device acts as an advertiser in synchronization, it will act as the reflector in the ranging procedure.</p></li>
+<li><p>If a Device acts as a scanner in synchronization, it will act as the initiator in the ranging procedure.</p></li>
+</ul>
+</div></blockquote>
+<p>The synchronization will be performed cyclically.</p>
+<p>Based on the <code class="docutils literal notranslate"><span class="pre">SCAN_RSP</span></code> response, the device recognizes peers that support the distance measurement functionality within its coverage.
+The addresses of these devices are stored in a list.
+When a device does not respond within a certain period of time, it is removed from the list.
+Also, the last measurement results with the peers are stored in this list.</p>
+<p>For the nRF5340, the ranging procedure is performed on the network core, while the calculation takes place on the application core.
+The distance calculation uses a floating-point unit (FPU).</p>
+</section>
+<section id="power-consumption">
+<span id="ble-nrf-dm-power"></span><h2><a class="toc-backref" href="#id8">Power consumption</a><a class="headerlink" href="#power-consumption" title="Permalink to this heading"></a></h2>
+<p>Power consumption and the number of measurements performed in a given time depend on the following factors:</p>
+<ul class="simple">
+<li><p>Advertiser settings.</p></li>
+<li><p>Scanner settings.</p></li>
+<li><p>Extended size of measurement window by <code class="docutils literal notranslate"><span class="pre">extra_window_time_us</span></code> in the <a class="reference internal" href="../../../libraries/others/dm.html#c.dm_request" title="dm_request"><code class="xref c c-struct docutils literal notranslate"><span class="pre">dm_request</span></code></a> structure.</p></li>
+</ul>
+<p>The shorter the advertising interval, the higher the frequency at which the broadcaster sends out advertising packages.
+This leads to a higher probability of synchronization and to a higher number of measurements taken at a given time.
+It also decreases the latency for the first measurement when the device is turned on or comes in reach.
+However, the higher number of packets transmitted also results in higher power consumption.</p>
+<p>The scan interval and scan window parameters determine how often and how long the scanning device will listen for packets.
+Like the short advertising interval, these values also have an impact on power consumption and the ranging frequency of devices.</p>
+<p>After the first measurement, the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_DM_MIN_TIME_BETWEEN_TIMESLOTS_US</span></code> and the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_DM_TIMESLOT_QUEUE_COUNT_SAME_PEER</span></code> Kconfig options define how often the same device is measured again.
+The Kconfig options <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_DM_TIMESLOT_QUEUE_COUNT_SAME_PEER</span></code> and <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_DM_TIMESLOT_QUEUE_LENGTH</span></code> define how many measurements are scheduled.
+The more measurements are scheduled, the more of them take place, which increases power consumption but gives more frequent rangings.
+If the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_DM_TIMESLOT_RESCHEDULE</span></code> Kconfig option is disabled, the next timeslot for measurement execution will be allocated after the measurement request is added using the <a class="reference internal" href="../../../libraries/others/dm.html#c.dm_request_add" title="dm_request_add"><code class="xref c c-func docutils literal notranslate"><span class="pre">dm_request_add()</span></code></a> function.</p>
+<p>Extending the measurement window increases the probability of measurement success for coarse synchronization.
+However, it affects the turn-on time of the radio and thus, power consumption.</p>
+<p>At the application runtime, the additional delay of measurement execution is configured using the <code class="docutils literal notranslate"><span class="pre">start_delay_us</span></code> parameter of the <a class="reference internal" href="../../../libraries/others/dm.html#c.dm_request" title="dm_request"><code class="xref c c-struct docutils literal notranslate"><span class="pre">dm_request</span></code></a> structure.
+This option helps in adjusting the synchronization.
+The <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_DM_INITIATOR_DELAY_US</span></code> Kconfig option defines the initiator delay.
+Increasing the values of these parameters increases the latency and power consumption.</p>
+</section>
+<section id="high-precision-calculation">
+<h2><a class="toc-backref" href="#id9">High-precision calculation</a><a class="headerlink" href="#high-precision-calculation" title="Permalink to this heading"></a></h2>
+<p>The sample supports distance estimation using a more compute-intensive high-precision algorithm.
+The <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_DM_HIGH_PRECISION_CALC</span></code> Kconfig option enables high-precision calculations.
+High-precision calculation has an impact on MCPD ranging mode only.
+Due to its limited memory, the nRF52 Development Kit (nrf52dk_nrf52832) does not support high-precision calculations.</p>
+</section>
+<section id="zero-distance-calibration">
+<span id="ble-nrf-dm-calibr"></span><h2><a class="toc-backref" href="#id10">Zero-distance calibration</a><a class="headerlink" href="#zero-distance-calibration" title="Permalink to this heading"></a></h2>
+<p>The measured values of distance measurement include an offset.
+The offset value may depend on the design of the radio circuit, the antenna used, or the PCB layout.
+When using a library and a sample, you need to compensate the zero-distance offset and perform the calibration manually.
+To determine the offset value, place the devices at a reference distance of 60 cm from each other and collect a batch of measurement data.
+The difference between the average measurement value and the actual distance can be used as an estimate of the offset.</p>
+</section>
+<section id="user-interface">
+<h2><a class="toc-backref" href="#id11">User interface</a><a class="headerlink" href="#user-interface" title="Permalink to this heading"></a></h2>
+<dl class="simple">
+<dt>LED 1:</dt><dd><p>Indicates the measured distance for MCPD (Multi-carrier phase difference) method. The shorter the distance, the brighter the light.</p>
+</dd>
+<dt>LED 2:</dt><dd><p>Blinks every two seconds with the duty cycle set to 50% when the main loop is running and the device is advertising.</p>
+</dd>
+<dt>LED 3:</dt><dd><p>On when connected.</p>
+</dd>
+</dl>
+</section>
+<section id="building-and-running">
+<h2><a class="toc-backref" href="#id12">Building and running</a><a class="headerlink" href="#building-and-running" title="Permalink to this heading"></a></h2>
+<p>This sample can be found under <code class="file docutils literal notranslate"><span class="pre">samples/bluetooth/nrf_dm</span></code> in the nRF Connect SDK folder structure.</p>
+<p>To build the sample with Visual Studio Code, follow the steps listed on the <a class="reference external" href="https://nrfconnect.github.io/vscode-nrf-connect/get_started/build_app_ncs.html">How to build an application</a> page in the nRF Connect for VS Code extension documentation.
+See <a class="reference internal" href="../../../getting_started/programming.html#gs-programming"><span class="std std-ref">Building and programming an application</span></a> for other building and programming scenarios and <a class="reference internal" href="../../../getting_started/testing.html#gs-testing"><span class="std std-ref">Testing and debugging an application</span></a> for general information about testing and debugging in the nRF Connect SDK.</p>
+<section id="testing">
+<h3><a class="toc-backref" href="#id13">Testing</a><a class="headerlink" href="#testing" title="Permalink to this heading"></a></h3>
+<p>After programming the sample to development kits, test it by performing the following steps:</p>
+<ol class="arabic simple">
+<li><p>Connect to the kit that runs this sample with a terminal emulator (for example, PuTTY).
+See <a class="reference internal" href="../../../getting_started/testing.html#putty"><span class="std std-ref">How to connect with PuTTY</span></a> for the required settings.</p></li>
+<li><p>Reset the kit.</p></li>
+<li><p>Program the other development kit with the same sample and reset it.</p></li>
+<li><p>Wait until the devices identify themselves and synchronize.</p></li>
+<li><p>Observe that the received measurement results are output in the terminal window.</p></li>
+</ol>
+</section>
+<section id="sample-output">
+<h3><a class="toc-backref" href="#id14">Sample output</a><a class="headerlink" href="#sample-output" title="Permalink to this heading"></a></h3>
+<p>The result should look similar to the following output:</p>
+<ul>
+<li><p>The MCPD method:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>*** Booting Zephyr OS build v2.6.99-ncs1  ***
+Starting Distance Measurement example
+I: SoftDevice Controller build revision:
+I: 3f 47 70 8e 81 95 4e 86 |?Gp...N.
+I: 9d d3 a2 95 88 f6 30 0a |......0.
+I: 7f 53 49 fd             |.SI.
+I: HW Platform: Nordic Semiconductor (0x0002)
+I: HW Variant: nRF52x (0x0002)
+I: Firmware: Standard Bluetooth controller (0x00) Version 63.28743 Build 1318420878
+I: Identity: C4:90:D5:4E:C2:20 (random)
+I: HCI: version 5.2 (0x0b) revision 0x125b, manufacturer 0x0059
+I: LMP: version 5.2 (0x0b) subver 0x125b
+DM Bluetooth LE Synchronization initialization
+
+Measurement result:
+      Addr DB:49:E9:62:DF:6D (random)
+      Quality ok
+      Distance estimates: mcpd: ifft=0.29 phase_slope=0.28 rssi_openspace=0.28 best=0.29
+
+Measurement result:
+      Addr CF:4E:38:D5:C0:ED (random)
+      Quality ok
+      Distance estimates: mcpd: ifft=0.94 phase_slope=1.10 rssi_openspace=0.22 best=0.94
+
+Measurement result:
+      Addr CF:4E:38:D5:C0:ED (random)
+      Quality ok
+      Distance estimates: mcpd: ifft=0.79 phase_slope=1.08 rssi_openspace=0.25 best=0.79
+</pre></div>
+</div>
+</li>
+<li><p>The RTT method:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>*** Booting Zephyr OS build v2.6.99-ncs1  ***
+Starting Distance Measurement example
+I: SoftDevice Controller build revision:
+I: 3f 47 70 8e 81 95 4e 86 |?Gp...N.
+I: 9d d3 a2 95 88 f6 30 0a |......0.
+I: 7f 53 49 fd             |.SI.
+I: HW Platform: Nordic Semiconductor (0x0002)
+I: HW Variant: nRF52x (0x0002)
+I: Firmware: Standard Bluetooth controller (0x00) Version 63.28743 Build 1318420878
+I: Identity: C4:90:D5:4E:C2:20 (random)
+I: HCI: version 5.2 (0x0b) revision 0x125b, manufacturer 0x0059
+I: LMP: version 5.2 (0x0b) subver 0x125b
+DM Bluetooth LE Synchronization initialization
+
+Measurement result:
+      Addr CF:4E:38:D5:C0:ED (random)
+      Quality ok
+      Distance estimates: rtt: rtt=1.75
+
+Measurement result:
+      Addr CF:4E:38:D5:C0:ED (random)
+      Quality ok
+      Distance estimates: rtt: rtt=1.70
+
+Measurement result:
+      Addr DB:49:E9:62:DF:6D (random)
+      Quality ok
+      Distance estimates: rtt: rtt=2.75
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+</section>
+<section id="dependencies">
+<h2><a class="toc-backref" href="#id15">Dependencies</a><a class="headerlink" href="#dependencies" title="Permalink to this heading"></a></h2>
+<p>This sample uses the following nRF Connect SDK subsystems:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../../libraries/bluetooth_services/services/ddfs.html#ddfs-readme"><span class="std std-ref">Direction and Distance Finding Service (DDFS)</span></a></p></li>
+<li><p><a class="reference internal" href="../../../libraries/others/dk_buttons_and_leds.html#dk-buttons-and-leds-readme"><span class="std std-ref">DK Buttons and LEDs</span></a></p></li>
+</ul>
+<p>This sample uses the following <a class="reference external" href="https://github.com/nrfconnect/sdk-nrfxlib">sdk-nrfxlib</a> library:</p>
+<ul class="simple">
+<li><p><span class="xref std std-ref">nrfxlib:nrf_dm</span></p></li>
+</ul>
+<p>In addition, it uses the following Zephyr libraries:</p>
+<ul class="simple">
+<li><p><span class="xref std std-ref">zephyr:kernel_api</span>:</p>
+<ul>
+<li><p><code class="file docutils literal notranslate"><span class="pre">include/kernel.h</span></code></p></li>
+</ul>
+</li>
+<li><p><span class="xref std std-ref">zephyr:pwm_api</span>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">drivers/pwm.h</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">include/sys/printk.h</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">include/sys/byteorder.h</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">include/random/rand32.h</span></code></p></li>
+<li><p><span class="xref std std-ref">zephyr:bluetooth_api</span>:</p>
+<ul>
+<li><p><code class="file docutils literal notranslate"><span class="pre">include/bluetooth/bluetooth.h</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">include/bluetooth/scan.h</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ext/hal/nordic/nrfx/hal/nrf_radio.h</span></code></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../peripheral_ams_client/README.html" class="btn btn-neutral float-right" title="Bluetooth: Peripheral AMS client" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../multiple_adv_sets/README.html" class="btn btn-neutral" title="Bluetooth: Multiple advertising sets" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

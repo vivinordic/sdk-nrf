@@ -1,0 +1,1364 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LwM2M client utils &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../_static/js/ncs.js"
+></script>
+<script src="../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="LwM2M location assistance" href="lwm2m_location_assistance.html" />
+    <link rel="prev" title="iCalendar parser" href="icalendar_parser.html" />
+<link
+  href="../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drivers.html">Drivers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Libraries</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../bin/index.html">Binary libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bluetooth_services/index.html">Bluetooth libraries and services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bootloader/index.html">Bootloader libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../caf/index.html">Common Application Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../debug/index.html">Debug libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dfu/index.html">DFU libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gazell/index.html">Gazell libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modem/index.html">Modem libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mpsl/index.html">Multiprotocol Service Layer libraries</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Libraries for networking</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="aws_fota.html">AWS FOTA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="aws_iot.html">AWS IoT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="aws_jobs.html">AWS jobs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="azure_fota.html">Azure FOTA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="azure_iot_hub.html">Azure IoT Hub</a></li>
+<li class="toctree-l3"><a class="reference internal" href="coap_utils.html">CoAP utils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="download_client.html">Download client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fota_download.html">FOTA download</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ftp_client.html">FTP client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="icalendar_parser.html">iCalendar parser</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">LwM2M client utils</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuration">Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#api-documentation">API documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="lwm2m_location_assistance.html">LwM2M location assistance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mqtt_helper.html">MQTT helper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="multicell_location.html">Multicell location</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nrf_cloud.html">nRF Cloud</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nrf_cloud_agps.html">nRF Cloud A-GPS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nrf_cloud_alerts.html">nRF Cloud Alerts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nrf_cloud_location.html">nRF Cloud location</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nrf_cloud_pgps.html">nRF Cloud P-GPS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nrf_cloud_rest.html">nRF Cloud REST</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rest_client.html">REST client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wifi_credentials.html">Wi-Fi credentials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wifi_mgmt_ext.html">Wi-Fi management extension</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../nfc/index.html">Libraries for NFC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nrf_rpc/index.html">nRF RPC libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../others/index.html">Other libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../shell/index.html">Shell libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tfm/index.html">TF-M libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../zigbee/index.html">Libraries for Zigbee</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Libraries</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Libraries for networking</a></li>
+      <li class="breadcrumb-item active">LwM2M client utils</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/libraries/networking/lwm2m_client_utils.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="lwm2m-client-utils">
+<span id="lib-lwm2m-client-utils"></span><h1>LwM2M client utils<a class="headerlink" href="#lwm2m-client-utils" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#overview" id="id7">Overview</a></p></li>
+<li><p><a class="reference internal" href="#configuration" id="id8">Configuration</a></p>
+<ul>
+<li><p><a class="reference internal" href="#additional-configuration" id="id9">Additional configuration</a></p></li>
+<li><p><a class="reference internal" href="#defining-custom-objects" id="id10">Defining custom objects</a></p></li>
+<li><p><a class="reference internal" href="#extending-the-library-with-new-object-types" id="id11">Extending the library with new object types</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#api-documentation" id="id12">API documentation</a></p></li>
+</ul>
+</div>
+<p>The LwM2M client utils library enables an nRF9160-based device to connect to an LwM2M server such as <a class="reference external" href="https://github.com/eclipse/leshan/blob/master/README.md">Leshan Demo Server</a> using the Lightweight Machine to Machine (<a class="reference external" href="https://omaspecworks.org/what-is-oma-specworks/iot/lightweight-m2m-lwm2m/">LwM2M</a>) protocol over LTE.
+Once the device is connected, the library supports the querying the device to retrieve location data or information about the modem.
+This library builds on top of Zephyr’s <span class="xref std std-ref">lwm2m_interface</span> client.</p>
+<section id="overview">
+<h2><a class="toc-backref" href="#id7">Overview</a><a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+<p>The purpose of the library is to provide a basic combination of LwM2M objects, which forms a common communication framework for applications that communicate with an LwM2M server.
+Following are the fixed set of readily initialized objects that are available to the users:</p>
+<ul class="simple">
+<li><p>Firmware Update object</p></li>
+<li><p>Connectivity Monitoring object</p></li>
+<li><p>Device object</p></li>
+<li><p>Location object</p></li>
+<li><p>LwM2M Security object</p></li>
+<li><p>Signal Measurement Information object</p></li>
+<li><p>Proprietary Location Assistance object</p></li>
+</ul>
+<p>These objects do not indicate a complete set of resources that a device is expected to support.
+Based on the use case, a user application can, and is expected to, define additional set of resources based on the capabilities of the device.</p>
+<figure class="align-default">
+<img alt="LwM2M client utils software stack" src="../../_images/lib_lwm2m_client_utils.svg" /></figure>
+<p>By default, the library uses LTE-M for connecting and it does not utilize a bootstrap server.
+The library does not use the LwM2M Queue mode either.
+To use NB-IoT, a bootstrap server, or the queue mode, follow the implementation details described in the <a class="reference internal" href="../../samples/nrf9160/lwm2m_client/README.html#lwm2m-client"><span class="std std-ref">nRF9160: LwM2M Client</span></a> sample.</p>
+</section>
+<section id="configuration">
+<h2><a class="toc-backref" href="#id8">Configuration</a><a class="headerlink" href="#configuration" title="Permalink to this heading"></a></h2>
+<p>Enable the following parameters to use this library:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LWM2M_CLIENT_UTILS</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LWM2M_CLIENT_UTILS_DEVICE_OBJ_SUPPORT</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LWM2M_CLIENT_UTILS_SECURITY_OBJ_SUPPORT</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LWM2M_CLIENT_UTILS_CONN_MON_OBJ_SUPPORT</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LWM2M_CLIENT_UTILS_LOCATION_OBJ_SUPPORT</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LWM2M_CLIENT_UTILS_FIRMWARE_UPDATE_OBJ_SUPPORT</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LWM2M_CLIENT_UTILS_SIGNAL_MEAS_INFO_OBJ_SUPPORT</span></code></p></li>
+</ul>
+<p>Support for the objects is enabled by default, but they can be set individually.
+Disable the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LWM2M_CLIENT_UTILS_DEVICE_OBJ_SUPPORT</span></code> Kconfig option only if you are implementing a <code class="docutils literal notranslate"><span class="pre">Reboot</span></code> resource on your application because of a mandatory requirement.</p>
+<p>If you are using the Firmware Update object and require downloading of firmware images from TLS enabled services like HTTPS, configure <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LWM2M_CLIENT_UTILS_DOWNLOADER_SEC_TAG</span></code> to specify the security tag that has root certificate for the target server.</p>
+<section id="additional-configuration">
+<span id="lwm2m-client-utils-additional-confg"></span><h3><a class="toc-backref" href="#id9">Additional configuration</a><a class="headerlink" href="#additional-configuration" title="Permalink to this heading"></a></h3>
+<p>The <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LWM2M_CLIENT_UTILS_RAI</span></code> Kconfig option enables <a class="reference internal" href="../../glossary.html#term-Release-Assistance-Indication-RAI"><span class="xref std std-term">Release Assistance Indication (RAI)</span></a> for access stratum (AS).
+When AS RAI is configured, the device might indicate that no further data is expected in the near future and the connection can be released.
+AS RAI was introduced in the 3GPP Release 14 and needs to be supported by the network.</p>
+</section>
+<section id="defining-custom-objects">
+<h3><a class="toc-backref" href="#id10">Defining custom objects</a><a class="headerlink" href="#defining-custom-objects" title="Permalink to this heading"></a></h3>
+<p>In addition to the basic objects, you can also create custom LwM2M objects.
+For most of the applications, the business logic might be implemented inside custom objects, which are either proprietary to the application or following an external specification like <a class="reference external" href="https://omaspecworks.org/develop-with-oma-specworks/ipso-smart-objects/">IPSO objects</a>.
+In any case, the application can extend the resource tree by defining specific objects in addition to the objects that are already defined by LwM2M.</p>
+<p>Before defining proprietary objects, check if a similar functionality is already defined in <a class="reference external" href="http://openmobilealliance.org/wp/OMNA/LwM2M/LwM2MRegistry.html">LwM2M Object and Resource Registry</a> and use it instead of defining custom objects.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Zephyr’s <span class="xref std std-ref">lwm2m_interface</span> library has only a limited support for some IPSO objects.
+To extend the functionality beyond the supported objects, you must make changes to the internal engine as well.</p>
+</div>
+<p>To define custom objects, complete the following steps:</p>
+<ol class="arabic simple">
+<li><p>Determine the object ID of the object.</p></li>
+<li><p>Identify the resources corresponding to the object.</p></li>
+<li><p>Determine the resource ID for a resource that must be customized.</p></li>
+<li><p>Form the resource path for the resource in the <code class="docutils literal notranslate"><span class="pre">object</span> <span class="pre">ID/instance/resource</span> <span class="pre">ID</span></code> format.</p></li>
+<li><p>Create a structure for storing the resource value.</p></li>
+<li><p>Define a read function that responds to the read requests for the resource value from the server.</p></li>
+<li><p>Pass the resource information to the LwM2M client utils library to register callbacks for the resource and to publish the sensor data.</p></li>
+</ol>
+<p>The following example describes how you can define an object that follows the Generic Sensor definition from IPSO.
+To enable the support for Generic Sensor, set the Kconfig option <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LWM2M_IPSO_GENERIC_SENSOR</span></code> to <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p>
+<p>To define an object that follows the Generic Sensor definition, complete the following steps:</p>
+<ol class="arabic">
+<li><p>Determine the object ID of the object:</p>
+<p>Refer <a class="reference external" href="http://openmobilealliance.org/wp/OMNA/LwM2M/LwM2MRegistry.html">LwM2M Object and Resource Registry</a> list and observe that the object ID of the Generic Sensor object is <code class="docutils literal notranslate"><span class="pre">3300</span></code>.</p>
+</li>
+<li><p>Identify the resources corresponding to the object:</p>
+<p>Click on the entry for the object ID(<code class="docutils literal notranslate"><span class="pre">3300</span></code> in this example) in the LwM2M Object and Resource Registry list to open a <a class="reference external" href="https://raw.githubusercontent.com/OpenMobileAlliance/lwm2m-registry/prod/version_history/3300-1_0.xml">raw XML</a> file or open the user friendly <a class="reference external" href="http://devtoolkit.openmobilealliance.org/OEditor/LWMOView?url=https%3A%2F%2Fraw.githubusercontent.com%2FOpenMobileAlliance%2Flwm2m-registry%2Fprod%2Fversion_history%2F3300-1_0.xml">LwM2M editor</a> to determine the resources that are defined for the specific the object ID.
+The following table shows the resource list corresponding to the Generic Sensor object:</p>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>ID</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Operations</p></th>
+<th class="head"><p>Instances</p></th>
+<th class="head"><p>Mandatory</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>5700</p></td>
+<td><p>Sensor Value</p></td>
+<td><p>R</p></td>
+<td><p>Single</p></td>
+<td><p>Mandatory</p></td>
+<td><p>Float</p></td>
+<td><p>Last or Current Measured Value from the Sensor.</p></td>
+</tr>
+<tr class="row-odd"><td><p>5701</p></td>
+<td><p>Sensor Units</p></td>
+<td><p>R</p></td>
+<td><p>Single</p></td>
+<td><p>Optional</p></td>
+<td><p>String</p></td>
+<td><p>Measurement Units Definition.</p></td>
+</tr>
+<tr class="row-even"><td><p>5601</p></td>
+<td><p>Min Measured Value</p></td>
+<td><p>R</p></td>
+<td><p>Single</p></td>
+<td><p>Optional</p></td>
+<td><p>Float</p></td>
+<td><p>The minimum value measured by the sensor since power ON or reset.</p></td>
+</tr>
+<tr class="row-odd"><td><p>5602</p></td>
+<td><p>Max Measured Value</p></td>
+<td><p>R</p></td>
+<td><p>Single</p></td>
+<td><p>Optional</p></td>
+<td><p>Float</p></td>
+<td><p>The maximum value measured by the sensor since power ON or reset.</p></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><p>Determine the resource ID for a resource that must be customized:</p>
+<p>This example changes only the single resource that is marked <code class="docutils literal notranslate"><span class="pre">Mandatory</span></code> in the above table, which is Sensor Value.
+You can see that the resource ID for the Sensor Value resource is <code class="docutils literal notranslate"><span class="pre">5700</span></code>.</p>
+</li>
+<li><p>Form the resource path for the resource in the <code class="docutils literal notranslate"><span class="pre">object</span> <span class="pre">ID/instance/resource</span> <span class="pre">ID</span></code> format:</p>
+<p>LwM2M uses resource paths in the <code class="docutils literal notranslate"><span class="pre">object</span> <span class="pre">ID/instance/resource</span> <span class="pre">ID</span></code> format.
+The object ID in the example is <code class="docutils literal notranslate"><span class="pre">3300</span></code> and since it is the first instance of the object, the instance value is <code class="docutils literal notranslate"><span class="pre">0</span></code>.
+Therefore, the full path for the sensor value will be <code class="docutils literal notranslate"><span class="pre">3300/0/5700</span></code>.
+You must use this path in the LwM2M client utils library API.</p>
+</li>
+<li><p>Define a read function that responds to the read requests for the resource value from the server:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">sensor_value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span><span class="p">;</span>
+
+<span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="nf">read_cb</span><span class="p">(</span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">obj_inst_id</span><span class="p">,</span><span class="w"> </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">res_id</span><span class="p">,</span><span class="w"> </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">res_inst_id</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="o">*</span><span class="n">data_len</span><span class="p">)</span>
+<span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/* Only object instance 0 is currently used */</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">obj_inst_id</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">       </span><span class="o">*</span><span class="n">data_len</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/* Demo: change the sensor value */</span>
+<span class="w">    </span><span class="n">sensor_value</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mf">0.1</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/* Return sensor value for the LwM2M library */</span>
+<span class="w">    </span><span class="n">lwm2m_set_f64</span><span class="p">(</span><span class="o">&amp;</span><span class="n">LWM2M_OBJ</span><span class="p">(</span><span class="mi">3300</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">5700</span><span class="p">),</span><span class="w"> </span><span class="n">sensor_value</span><span class="p">);</span>
+<span class="w">    </span><span class="o">*</span><span class="n">data_len</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">sensor_value</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="n">sensor_value</span><span class="p">;</span>
+<span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p>Pass the resource information to the LwM2M client utils library to register callbacks for the resource and to publish the sensor data:</p>
+<div class="highlight-c notranslate" id="example-callback"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">init_resource</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">   </span><span class="n">lwm2m_create_obj_inst</span><span class="p">(</span><span class="o">&amp;</span><span class="n">LWM2M_OBJ</span><span class="p">(</span><span class="mi">3300</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">   </span><span class="n">lwm2m_register_read_callback</span><span class="p">(</span><span class="o">&amp;</span><span class="n">LWM2M_OBJ</span><span class="p">(</span><span class="mi">3300</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">5700</span><span class="p">),</span><span class="w"> </span><span class="n">read_cb</span><span class="p">);</span>
+<span class="w">   </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The above code registers the object instance and passes the resource information to the library to register the read callback.</p>
+</li>
+</ol>
+<p>At this stage, the generic sensor is fully functional.
+For defining outputs, the process is very much similar but instead of read callback, write callback is defined.</p>
+<p>Registering a read callback is optional and is recommended if you want to read the data directly from a sensor on each read operation.
+If the value of a readable resource is modified on an event, a read callback need not be registered.
+An example is the Push Button object.
+On receipt of an event that is triggered by button press or release, the value is updated through the lwm2m_engine with <code class="xref c c-func docutils literal notranslate"><span class="pre">lwm2m_set_bool()</span></code>.
+When a read operation is issued by the server, the engine obtains the button value directly from the object’s internal data instead of the read callback.
+This causes the internal engine to allocate memory and store all the resources that are defined for the IPSO object ID.</p>
+</section>
+<section id="extending-the-library-with-new-object-types">
+<h3><a class="toc-backref" href="#id11">Extending the library with new object types</a><a class="headerlink" href="#extending-the-library-with-new-object-types" title="Permalink to this heading"></a></h3>
+<p>If the library is not supporting the object type that you need, it is possible to extend the support by introducing completely new object types.
+This is currently possible only by using an internal API from the LwM2M engine.</p>
+<p>Before creating new object types, see the existing implementation of IPSO objects from <code class="file docutils literal notranslate"><span class="pre">zephyr/subsys/net/lib/lwm2m</span></code> directory.
+Select one of the existing object types, for example Push Button, and refactor it according to your need.</p>
+<p>The following example shows how to create a new object type that follows the IPSO Digital Output definition:</p>
+<ol class="arabic">
+<li><p>Define the following IDs:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#define IPSO_DIGITAL_OUTPUT_ID        3201</span>
+<span class="cp">#define OUTPUT_DIGITAL_STATE_ID        5550</span>
+<span class="cp">#define RESOURCE_PATH &amp;LWM2M_OBJ(IPSO_DIGITAL_OUTPUT_ID, 0, OUTPUT_DIGITAL_STATE_ID)</span>
+</pre></div>
+</div>
+</li>
+<li><p>Define the storage for the output type:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/* resource state */</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">output_data</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="kt">bool</span><span class="w"> </span><span class="n">state</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="k">static</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">output_data</span><span class="w"> </span><span class="n">output_data</span><span class="p">[</span><span class="n">MAX_INSTANCE_COUNT</span><span class="p">];</span>
+</pre></div>
+</div>
+</li>
+<li><p>Define the resources for the object type:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="w"> </span><span class="cp">#define N_RESOURCES        1</span>
+<span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">lwm2m_engine_obj_field</span><span class="w"> </span><span class="n">fields</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">OBJ_FIELD</span><span class="p">(</span><span class="n">OUTPUT_DIGITAL_STATE_ID</span><span class="p">,</span><span class="w"> </span><span class="n">RW</span><span class="p">,</span><span class="w"> </span><span class="n">BOOL</span><span class="p">),</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>The above code defines only a single resource.</p>
+</li>
+<li><p>Define the structures that are required by the engine:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">lwm2m_engine_obj</span><span class="w"> </span><span class="n">output_obj</span><span class="p">;</span>
+<span class="k">static</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">lwm2m_engine_obj_inst</span><span class="w"> </span><span class="n">inst</span><span class="p">[</span><span class="n">MAX_INSTANCE_COUNT</span><span class="p">];</span>
+<span class="k">static</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">lwm2m_engine_res</span><span class="w"> </span><span class="n">res</span><span class="p">[</span><span class="n">MAX_INSTANCE_COUNT</span><span class="p">][</span><span class="n">N_RESOURCES</span><span class="p">];</span>
+<span class="k">static</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">lwm2m_engine_res_inst</span><span class="w"> </span><span class="n">res_inst</span><span class="p">[</span><span class="n">MAX_INSTANCE_COUNT</span><span class="p">][</span><span class="n">N_RESOURCES</span><span class="p">];</span>
+</pre></div>
+</div>
+</li>
+<li><p>Pass the information about how you want to create the object to the LwM2M engine:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">lwm2m_engine_obj_inst</span><span class="w"> </span><span class="o">*</span><span class="n">output_create</span><span class="p">(</span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">id</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">   </span><span class="cm">/* Check that there is no other instance with this ID */</span>
+<span class="w">   </span><span class="cm">/* It is assumed that the instance ID is same as the index in the array */</span>
+<span class="w">   </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">inst</span><span class="p">[</span><span class="n">id</span><span class="p">].</span><span class="n">obj</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">LOG_ERR</span><span class="p">(</span><span class="s">&quot;Cannot create instance - already existing: %u&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">id</span><span class="p">);</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="w">   </span><span class="p">}</span>
+
+<span class="w">   </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">MAX_INSTANCE_COUNT</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">LOG_ERR</span><span class="p">(</span><span class="s">&quot;Cannot create instance - no more room: %u&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">id</span><span class="p">);</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="w">   </span><span class="p">}</span>
+
+<span class="w">   </span><span class="cm">/* Set default values */</span>
+<span class="w">   </span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">memset</span><span class="p">(</span><span class="o">&amp;</span><span class="n">output_data</span><span class="p">[</span><span class="n">id</span><span class="p">],</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">output_data</span><span class="p">[</span><span class="n">id</span><span class="p">]));</span>
+
+<span class="w">   </span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">memset</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="n">id</span><span class="p">],</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="n">id</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">ARRAY_SIZE</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="n">id</span><span class="p">]));</span>
+<span class="w">   </span><span class="n">init_res_instance</span><span class="p">(</span><span class="n">res_inst</span><span class="p">[</span><span class="n">id</span><span class="p">],</span><span class="w"> </span><span class="n">ARRAY_SIZE</span><span class="p">(</span><span class="n">res_inst</span><span class="p">[</span><span class="n">id</span><span class="p">]));</span>
+
+<span class="w">   </span><span class="cm">/* initialize instance resource data */</span>
+<span class="w">   </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">   </span><span class="n">INIT_OBJ_RES</span><span class="p">(</span><span class="n">OUTPUT_DIGITAL_STATE_ID</span><span class="p">,</span><span class="w"> </span><span class="n">res</span><span class="p">[</span><span class="n">id</span><span class="p">],</span><span class="w"> </span><span class="n">i</span><span class="p">,</span>
+<span class="w">         </span><span class="n">res_inst</span><span class="p">[</span><span class="n">id</span><span class="p">],</span><span class="w"> </span><span class="n">j</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">,</span>
+<span class="w">         </span><span class="o">&amp;</span><span class="n">output_data</span><span class="p">[</span><span class="n">id</span><span class="p">].</span><span class="n">state</span><span class="p">,</span>
+<span class="w">         </span><span class="k">sizeof</span><span class="p">(</span><span class="n">output_data</span><span class="p">[</span><span class="n">id</span><span class="p">].</span><span class="n">state</span><span class="p">),</span>
+<span class="w">         </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+
+<span class="w">   </span><span class="n">inst</span><span class="p">[</span><span class="n">id</span><span class="p">].</span><span class="n">resources</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">res</span><span class="p">[</span><span class="n">id</span><span class="p">];</span>
+<span class="w">   </span><span class="n">inst</span><span class="p">[</span><span class="n">id</span><span class="p">].</span><span class="n">resource_count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+
+<span class="w">   </span><span class="n">LOG_DBG</span><span class="p">(</span><span class="s">&quot;Created IPSO Output instance: %d&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">id</span><span class="p">);</span>
+
+<span class="w">   </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="n">inst</span><span class="p">[</span><span class="n">id</span><span class="p">];</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p>Register the new object type with the engine:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">ipso_output_init</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">   </span><span class="n">output_obj</span><span class="p">.</span><span class="n">obj_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">IPSO_DIGITAL_OUTPUT_ID</span><span class="p">;</span>
+<span class="w">   </span><span class="n">output_obj</span><span class="p">.</span><span class="n">fields</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fields</span><span class="p">;</span>
+<span class="w">   </span><span class="n">output_obj</span><span class="p">.</span><span class="n">field_count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ARRAY_SIZE</span><span class="p">(</span><span class="n">fields</span><span class="p">);</span>
+<span class="w">   </span><span class="n">output_obj</span><span class="p">.</span><span class="n">max_instance_count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ARRAY_SIZE</span><span class="p">(</span><span class="n">inst</span><span class="p">);</span>
+<span class="w">   </span><span class="n">output_obj</span><span class="p">.</span><span class="n">create_cb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">output_create</span><span class="p">;</span>
+<span class="w">   </span><span class="n">lwm2m_register_obj</span><span class="p">(</span><span class="o">&amp;</span><span class="n">output_obj</span><span class="p">);</span>
+<span class="w">   </span><span class="n">lwm2m_create_obj_inst</span><span class="p">(</span><span class="o">&amp;</span><span class="n">LWM2M_OBJ</span><span class="p">(</span><span class="mi">3201</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">));</span>
+<span class="w">   </span><span class="n">lwm2m_register_post_write_callback</span><span class="p">(</span><span class="n">RESOURCE_PATH</span><span class="p">,</span><span class="w"> </span><span class="n">on_off_cb</span><span class="p">);</span>
+<span class="w">   </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>As shown in the above code, the instance is created, and a callback is attached to it.
+The content of the callback is similar as in the <a class="reference internal" href="#example-callback"><span class="std std-ref">Generic Sensor example</span></a>. Some details are left out in these examples and for more information, see the existing IPSO objects from the LwM2M engine.</p>
+</li>
+</ol>
+</section>
+</section>
+<section id="api-documentation">
+<h2><a class="toc-backref" href="#id12">API documentation</a><a class="headerlink" href="#api-documentation" title="Permalink to this heading"></a></h2>
+<div class="line-block">
+<div class="line">Header files: <code class="file docutils literal notranslate"><span class="pre">include/net/lwm2m_client_utils.h</span></code></div>
+<div class="line">Source files: <code class="file docutils literal notranslate"><span class="pre">subsys/net/lib/lwm2m_client_utils/lwm2m</span></code></div>
+</div>
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="group__lwm2m__client__utils"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">lwm2m_client_utils</span></span></dt>
+<dd><p>LwM2M Client utilities to build an application. </p>
+<p>The client provides APIs for:<ul class="simple">
+<li><p>connecting to a remote server</p></li>
+<li><p>setting up default resources<ul>
+<li><p>Firmware</p></li>
+<li><p>Connection monitoring</p></li>
+<li><p>Device</p></li>
+<li><p>Location</p></li>
+<li><p>Security </p></li>
+</ul>
+</p></li>
+</ul>
+</p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-defines">Defines</p>
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.LWM2M_OBJECT_ADV_FIRMWARE_ID">
+<span class="target" id="group__lwm2m__client__utils_1ga924bdfb106289565a0d96eabcd3246da"></span><span class="sig-name descname"><span class="n"><span class="pre">LWM2M_OBJECT_ADV_FIRMWARE_ID</span></span></span><a class="headerlink" href="#c.LWM2M_OBJECT_ADV_FIRMWARE_ID" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.RESULT_ADV_FOTA_CANCELLED">
+<span class="target" id="group__lwm2m__client__utils_1ga3ea368a3663d8c615c09ede0e1749f53"></span><span class="sig-name descname"><span class="n"><span class="pre">RESULT_ADV_FOTA_CANCELLED</span></span></span><a class="headerlink" href="#c.RESULT_ADV_FOTA_CANCELLED" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.RESULT_ADV_FOTA_DEFERRED">
+<span class="target" id="group__lwm2m__client__utils_1ga2e9a02c39b2bf2770e0f89e28aea858f"></span><span class="sig-name descname"><span class="n"><span class="pre">RESULT_ADV_FOTA_DEFERRED</span></span></span><a class="headerlink" href="#c.RESULT_ADV_FOTA_DEFERRED" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.RESULT_ADV_CONFLICT_STATE">
+<span class="target" id="group__lwm2m__client__utils_1ga4db70ae5d2733c2331fce63059a7ed4c"></span><span class="sig-name descname"><span class="n"><span class="pre">RESULT_ADV_CONFLICT_STATE</span></span></span><a class="headerlink" href="#c.RESULT_ADV_CONFLICT_STATE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.RESULT_ADV_DEPENDENCY_ERR">
+<span class="target" id="group__lwm2m__client__utils_1gaf851822f55e0807a0373500315d2da16"></span><span class="sig-name descname"><span class="n"><span class="pre">RESULT_ADV_DEPENDENCY_ERR</span></span></span><a class="headerlink" href="#c.RESULT_ADV_DEPENDENCY_ERR" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.REBOOT_SOURCE_DEVICE_OBJ">
+<span class="target" id="group__lwm2m__client__utils_1ga7614a594192405a51d43d727135e326f"></span><span class="sig-name descname"><span class="n"><span class="pre">REBOOT_SOURCE_DEVICE_OBJ</span></span></span><a class="headerlink" href="#c.REBOOT_SOURCE_DEVICE_OBJ" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.REBOOT_SOURCE_FOTA_OBJ">
+<span class="target" id="group__lwm2m__client__utils_1ga4788b857f15769d0b9670b9140cc4b71"></span><span class="sig-name descname"><span class="n"><span class="pre">REBOOT_SOURCE_FOTA_OBJ</span></span></span><a class="headerlink" href="#c.REBOOT_SOURCE_FOTA_OBJ" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.LWM2M_FOTA_PACKAGE_ID">
+<span class="target" id="group__lwm2m__client__utils_1gaebcb6e6a6de4c1636e72ab3ac3610934"></span><span class="sig-name descname"><span class="n"><span class="pre">LWM2M_FOTA_PACKAGE_ID</span></span></span><a class="headerlink" href="#c.LWM2M_FOTA_PACKAGE_ID" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.LWM2M_FOTA_PACKAGE_URI_ID">
+<span class="target" id="group__lwm2m__client__utils_1gaee66320a9dfa84c251c7315c1c645015"></span><span class="sig-name descname"><span class="n"><span class="pre">LWM2M_FOTA_PACKAGE_URI_ID</span></span></span><a class="headerlink" href="#c.LWM2M_FOTA_PACKAGE_URI_ID" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.LWM2M_FOTA_UPDATE_ID">
+<span class="target" id="group__lwm2m__client__utils_1ga69d539d5ed5838d973f0eed19cf2ff77"></span><span class="sig-name descname"><span class="n"><span class="pre">LWM2M_FOTA_UPDATE_ID</span></span></span><a class="headerlink" href="#c.LWM2M_FOTA_UPDATE_ID" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.LWM2M_FOTA_STATE_ID">
+<span class="target" id="group__lwm2m__client__utils_1ga402e6f99688b98347b9256595ef590d9"></span><span class="sig-name descname"><span class="n"><span class="pre">LWM2M_FOTA_STATE_ID</span></span></span><a class="headerlink" href="#c.LWM2M_FOTA_STATE_ID" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.LWM2M_FOTA_UPDATE_RESULT_ID">
+<span class="target" id="group__lwm2m__client__utils_1gac3aa77b2a03ee17452304ee8610d5fdb"></span><span class="sig-name descname"><span class="n"><span class="pre">LWM2M_FOTA_UPDATE_RESULT_ID</span></span></span><a class="headerlink" href="#c.LWM2M_FOTA_UPDATE_RESULT_ID" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.LWM2M_FOTA_PACKAGE_NAME_ID">
+<span class="target" id="group__lwm2m__client__utils_1gad7d0dc1acd69c0b1b2e3a5ef9c12562a"></span><span class="sig-name descname"><span class="n"><span class="pre">LWM2M_FOTA_PACKAGE_NAME_ID</span></span></span><a class="headerlink" href="#c.LWM2M_FOTA_PACKAGE_NAME_ID" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.LWM2M_FOTA_PACKAGE_VERSION_ID">
+<span class="target" id="group__lwm2m__client__utils_1gaa74b18ea238d809acadba63830d0b045"></span><span class="sig-name descname"><span class="n"><span class="pre">LWM2M_FOTA_PACKAGE_VERSION_ID</span></span></span><a class="headerlink" href="#c.LWM2M_FOTA_PACKAGE_VERSION_ID" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.LWM2M_FOTA_UPDATE_PROTO_SUPPORT_ID">
+<span class="target" id="group__lwm2m__client__utils_1ga507b511e4f2eed15851ba41c7eaaa37c"></span><span class="sig-name descname"><span class="n"><span class="pre">LWM2M_FOTA_UPDATE_PROTO_SUPPORT_ID</span></span></span><a class="headerlink" href="#c.LWM2M_FOTA_UPDATE_PROTO_SUPPORT_ID" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.LWM2M_FOTA_UPDATE_DELIV_METHOD_ID">
+<span class="target" id="group__lwm2m__client__utils_1ga02d56ac1dbb03654553d9b5cbb21faf1"></span><span class="sig-name descname"><span class="n"><span class="pre">LWM2M_FOTA_UPDATE_DELIV_METHOD_ID</span></span></span><a class="headerlink" href="#c.LWM2M_FOTA_UPDATE_DELIV_METHOD_ID" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.LWM2M_FOTA_CANCEL_ID">
+<span class="target" id="group__lwm2m__client__utils_1gab5c3c5609971287203bb844e3591f71f"></span><span class="sig-name descname"><span class="n"><span class="pre">LWM2M_FOTA_CANCEL_ID</span></span></span><a class="headerlink" href="#c.LWM2M_FOTA_CANCEL_ID" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.LWM2M_FOTA_SEVERITY_ID">
+<span class="target" id="group__lwm2m__client__utils_1gadfaee9b5c87c99a7c13ecfaf89afe0cc"></span><span class="sig-name descname"><span class="n"><span class="pre">LWM2M_FOTA_SEVERITY_ID</span></span></span><a class="headerlink" href="#c.LWM2M_FOTA_SEVERITY_ID" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.LWM2M_FOTA_LAST_STATE_CHANGE_TIME_ID">
+<span class="target" id="group__lwm2m__client__utils_1ga8f67ff254cd24412ac3e82c6e354b7da"></span><span class="sig-name descname"><span class="n"><span class="pre">LWM2M_FOTA_LAST_STATE_CHANGE_TIME_ID</span></span></span><a class="headerlink" href="#c.LWM2M_FOTA_LAST_STATE_CHANGE_TIME_ID" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.LWM2M_FOTA_MAXIMUM_DEFERRED_PERIOD_ID">
+<span class="target" id="group__lwm2m__client__utils_1ga853e759330cbb20262ca522012c40093"></span><span class="sig-name descname"><span class="n"><span class="pre">LWM2M_FOTA_MAXIMUM_DEFERRED_PERIOD_ID</span></span></span><a class="headerlink" href="#c.LWM2M_FOTA_MAXIMUM_DEFERRED_PERIOD_ID" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.LWM2M_ADV_FOTA_COMPONENT_NAME_ID">
+<span class="target" id="group__lwm2m__client__utils_1ga26f79efb45229318c0bc4bd9be71aba1"></span><span class="sig-name descname"><span class="n"><span class="pre">LWM2M_ADV_FOTA_COMPONENT_NAME_ID</span></span></span><a class="headerlink" href="#c.LWM2M_ADV_FOTA_COMPONENT_NAME_ID" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.LWM2M_ADV_FOTA_CURRENT_VERSION_ID">
+<span class="target" id="group__lwm2m__client__utils_1gae1738f0cde0ad879b1bcb4eab5f17efc"></span><span class="sig-name descname"><span class="n"><span class="pre">LWM2M_ADV_FOTA_CURRENT_VERSION_ID</span></span></span><a class="headerlink" href="#c.LWM2M_ADV_FOTA_CURRENT_VERSION_ID" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.LWM2M_ADV_FOTA_LINKED_INSTANCES_ID">
+<span class="target" id="group__lwm2m__client__utils_1ga9ab7f6accd2b2de4dabd8877dc8b3e9b"></span><span class="sig-name descname"><span class="n"><span class="pre">LWM2M_ADV_FOTA_LINKED_INSTANCES_ID</span></span></span><a class="headerlink" href="#c.LWM2M_ADV_FOTA_LINKED_INSTANCES_ID" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.LWM2M_ADV_FOTA_CONFLICTING_INSTANCES_ID">
+<span class="target" id="group__lwm2m__client__utils_1ga1fdb8c8b6e3975e311eb49b5d01e6035"></span><span class="sig-name descname"><span class="n"><span class="pre">LWM2M_ADV_FOTA_CONFLICTING_INSTANCES_ID</span></span></span><a class="headerlink" href="#c.LWM2M_ADV_FOTA_CONFLICTING_INSTANCES_ID" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-typedefs">Typedefs</p>
+<dl class="c type">
+<dt class="sig sig-object c" id="c.modem_mode_cb_t">
+<span class="target" id="group__lwm2m__client__utils_1ga789d9c4308f5640d31273efeb8676e8e"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">modem_mode_cb_t</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="../modem/lte_lc.html#c.lte_lc_func_mode" title="lte_lc_func_mode"><span class="n"><span class="pre">lte_lc_func_mode</span></span></a><span class="w"> </span><span class="n"><span class="pre">new_mode</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">user_data</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#c.modem_mode_cb_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Callback to request a modem state change, being it powering off, flight mode etc. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Return</dt>
+<dd class="field-odd"><p>0 if mode was set successfully </p>
+</dd>
+<dt class="field-even">Return</dt>
+<dd class="field-even"><p>positive value to indicate seconds before retry </p>
+</dd>
+<dt class="field-odd">Return</dt>
+<dd class="field-odd"><p>negative error code in case of a failure </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c type">
+<dt class="sig sig-object c" id="c.lwm2m_firmware_event_cb_t">
+<span class="target" id="group__lwm2m__client__utils_1ga5ade69dd1673ef428da52382ebcd9d8e"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">lwm2m_firmware_event_cb_t</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.lwm2m_fota_event" title="lwm2m_fota_event"><span class="n"><span class="pre">lwm2m_fota_event</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">event</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#c.lwm2m_firmware_event_cb_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Firmware update event callback. </p>
+<p>
+Callback is used for indicating firmware update states and to prepare application ready for update.</p>
+<p>Event handler is getting event callback when Firmware update utils library change states.</p>
+<p>LWM2M_FOTA_DOWNLOAD_START: Indicate that download or upload of a new image is started.</p>
+<p>LWM2M_FOTA_DOWNLOAD_FINISHED: Indicate that Image is delivered.</p>
+<p>LWM2M_FOTA_UPDATE_IMAGE_REQ: Request a permission to update an image. Callback handler may return zero to grant permission for update. Otherwise it may return negative error code to cancel the update or positive value to indicate that update should be postponed that amount of seconds.</p>
+<p>LWM2M_FOTA_UPDATE_ERROR: Indicate that FOTA process have failed or cancelled.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Param event</dt>
+<dd class="field-odd"><p><strong>[in]</strong> LwM2M Firmware Update object event structure</p>
+</dd>
+<dt class="field-even">Return</dt>
+<dd class="field-even"><p>zero indicating OK or negative error code indicating an failure and will mark the whole FOTA process to failed. Positive return code will postpone the request, but can only be used in LWM2M_FOTA_UPDATE_IMAGE_REQ event. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-enums">Enums</p>
+<dl class="c enum">
+<dt class="sig sig-object c" id="c.lwm2m_fota_event_id">
+<span class="target" id="group__lwm2m__client__utils_1ga53a1ec8105b450578e2d8fb79c2ed166"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lwm2m_fota_event_id</span></span></span><a class="headerlink" href="#c.lwm2m_fota_event_id" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Firmware update callback events. </p>
+<p><em>Values:</em></p>
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.lwm2m_fota_event_id.LWM2M_FOTA_DOWNLOAD_START">
+<span class="target" id="group__lwm2m__client__utils_1gga53a1ec8105b450578e2d8fb79c2ed166ab0ea2bde02e83fbec6adf197fbc7ffde"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">LWM2M_FOTA_DOWNLOAD_START</span></span></span><a class="headerlink" href="#c.lwm2m_fota_event_id.LWM2M_FOTA_DOWNLOAD_START" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Download process started </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.lwm2m_fota_event_id.LWM2M_FOTA_DOWNLOAD_FINISHED">
+<span class="target" id="group__lwm2m__client__utils_1gga53a1ec8105b450578e2d8fb79c2ed166a65b84c14458e7159b79db7c2f27fd16f"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">LWM2M_FOTA_DOWNLOAD_FINISHED</span></span></span><a class="headerlink" href="#c.lwm2m_fota_event_id.LWM2M_FOTA_DOWNLOAD_FINISHED" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Download process finished </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.lwm2m_fota_event_id.LWM2M_FOTA_UPDATE_IMAGE_REQ">
+<span class="target" id="group__lwm2m__client__utils_1gga53a1ec8105b450578e2d8fb79c2ed166a480ae60a8449a3a4a28026a8f56fd786"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">LWM2M_FOTA_UPDATE_IMAGE_REQ</span></span></span><a class="headerlink" href="#c.lwm2m_fota_event_id.LWM2M_FOTA_UPDATE_IMAGE_REQ" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Request for update new image </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.lwm2m_fota_event_id.LWM2M_FOTA_UPDATE_ERROR">
+<span class="target" id="group__lwm2m__client__utils_1gga53a1ec8105b450578e2d8fb79c2ed166a568dfcaaf3bd603bdd2baef888c53491"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">LWM2M_FOTA_UPDATE_ERROR</span></span></span><a class="headerlink" href="#c.lwm2m_fota_event_id.LWM2M_FOTA_UPDATE_ERROR" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Fota process fail or cancelled </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="c enum">
+<dt class="sig sig-object c" id="c.lwm2m_rai_mode">
+<span class="target" id="group__lwm2m__client__utils_1ga3d5414acbcec0c2e367dc03daf4f4ab5"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lwm2m_rai_mode</span></span></span><a class="headerlink" href="#c.lwm2m_rai_mode" title="Permalink to this definition"></a><br /></dt>
+<dd><p><em>Values:</em></p>
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.lwm2m_rai_mode.LWM2M_RAI_MODE_DISABLED">
+<span class="target" id="group__lwm2m__client__utils_1gga3d5414acbcec0c2e367dc03daf4f4ab5a25342c6b76eb569cd29061ebb4fda2b2"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">LWM2M_RAI_MODE_DISABLED</span></span></span><a class="headerlink" href="#c.lwm2m_rai_mode.LWM2M_RAI_MODE_DISABLED" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.lwm2m_rai_mode.LWM2M_RAI_MODE_ENABLED">
+<span class="target" id="group__lwm2m__client__utils_1gga3d5414acbcec0c2e367dc03daf4f4ab5ada11c563ad2de1caefa16cbe663cfc7e"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">LWM2M_RAI_MODE_ENABLED</span></span></span><a class="headerlink" href="#c.lwm2m_rai_mode.LWM2M_RAI_MODE_ENABLED" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.lwm2m_init_security">
+<span class="target" id="group__lwm2m__client__utils_1ga8722760bc7bad06e3ea412374f89c3d6"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lwm2m_init_security</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">lwm2m_ctx</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span>, <span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">endpoint</span></span>, <span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.modem_mode_change" title="modem_mode_change"><span class="n"><span class="pre">modem_mode_change</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">mmode</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.lwm2m_init_security" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Initialize Security object support for nrf91. </p>
+<p>This wrapper will install hooks that allows device to do a proper bootstrap and store received server settings to permanent storage using Zephyr settings API. Credential are stored to modem and no keys would enter the flash.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This API calls settings_subsys_init() and should only be called after the settings backend (Flash or FS) is ready. </p>
+</div>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.lwm2m_security_set_psk">
+<span class="target" id="group__lwm2m__client__utils_1ga3b26b3041ba01b35c0c168b67bc0ffd7"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lwm2m_security_set_psk</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">sec_obj_inst</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">psk</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">psk_len</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n"><span class="pre">psk_is_hex</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">psk_id</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.lwm2m_security_set_psk" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Set security object to PSK mode. </p>
+<p>Any pointer can be given as a NULL, which means that data related to this field is set to zero length in the engine. Effectively, it causes that relative data is not written into the modem. This can be used if the given data is already provisioned to the modem.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sec_obj_inst</strong> – Security object ID to modify. </p></li>
+<li><p><strong>psk</strong> – Pointer to PSK key, either in HEX or binary format. </p></li>
+<li><p><strong>psk_len</strong> – Length of data in PSK pointer. If PSK is HEX string, should include string terminator. </p></li>
+<li><p><strong>psk_is_hex</strong> – True if PSK points to data in HEX format. False if the data is binary. </p></li>
+<li><p><strong>psk_id</strong> – PSK key ID in string format. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Zero if success, negative error code otherwise. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.lwm2m_security_set_certificate">
+<span class="target" id="group__lwm2m__client__utils_1ga793f0df6a71d5a3a80e7ce2fbe0134b7"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lwm2m_security_set_certificate</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">sec_obj_inst</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">cert</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">cert_len</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">private_key</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">key_len</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ca_chain</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">ca_len</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.lwm2m_security_set_certificate" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Set security object to certificate mode. </p>
+<p>Any pointer can be given as a NULL, which means that data related to this field is set to zero length in the engine. Effectively, it causes that relative data is not written into the modem. This can be used if the given data is already provisioned to the modem.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sec_obj_inst</strong> – Security object ID to modify. </p></li>
+<li><p><strong>cert</strong> – Pointer to certificate. </p></li>
+<li><p><strong>cert_len</strong> – Certificate length. </p></li>
+<li><p><strong>private_key</strong> – Pointer to private key. </p></li>
+<li><p><strong>key_len</strong> – Private key length. </p></li>
+<li><p><strong>ca_chain</strong> – Pointer to CA certificate or server certificate. </p></li>
+<li><p><strong>ca_len</strong> – CA chain length. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Zero if success, negative error code otherwise. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.lwm2m_security_needs_bootstrap">
+<span class="target" id="group__lwm2m__client__utils_1ga37f6f5c05a266f65f3aa79c0f674537a"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lwm2m_security_needs_bootstrap</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.lwm2m_security_needs_bootstrap" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Check if the client credentials are already stored. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>true If bootstrap is needed. </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>false If client credentials are already available. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.lwm2m_init_device">
+<span class="target" id="group__lwm2m__client__utils_1gacb6ce473dfbd63ddc60c156d9d1cfd27"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lwm2m_init_device</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.lwm2m_init_device" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Initialize Device object. </p>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.lwm2m_device_reboot_cb">
+<span class="target" id="group__lwm2m__client__utils_1ga6d4cfe58d41df871aa0bd0127b4c0ea7"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lwm2m_device_reboot_cb</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">obj_inst_id</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span>, <span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">args_len</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.lwm2m_device_reboot_cb" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Reboot handler for a device object. </p>
+<p>All arguments are ignored.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>obj_inst_id</strong> – Device object instance. </p></li>
+<li><p><strong>args</strong> – Argument pointer’s </p></li>
+<li><p><strong>args_len</strong> – Length of argument’s</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Zero if success, negative error code otherwise. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.lwm2m_init_location">
+<span class="target" id="group__lwm2m__client__utils_1ga08f5415bca44f63bf9d251106be2da16"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lwm2m_init_location</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.lwm2m_init_location" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Initialize Location object. </p>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.firmware_read_cb">
+<span class="target" id="group__lwm2m__client__utils_1gac7caa3c636270a3f31e7e2abbb338525"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">firmware_read_cb</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">obj_inst_id</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">data_len</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.firmware_read_cb" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Firmware read callback. </p>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.lwm2m_init_firmware">
+<span class="target" id="group__lwm2m__client__utils_1ga58fe38f3eb0d30fa83eacc741d60b5c0"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lwm2m_init_firmware</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.lwm2m_init_firmware" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Initialize Firmware update utils library. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Zero if success, negative error code otherwise. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.lwm2m_init_firmware_cb">
+<span class="target" id="group__lwm2m__client__utils_1ga652b0157f8c645ac0f442a83ae3794f0"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lwm2m_init_firmware_cb</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#c.lwm2m_firmware_event_cb_t" title="lwm2m_firmware_event_cb_t"><span class="n"><span class="pre">lwm2m_firmware_event_cb_t</span></span></a><span class="w"> </span><span class="n"><span class="pre">cb</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.lwm2m_init_firmware_cb" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Initialize Firmware update utils library with callback. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cb</strong> – <strong>[in]</strong> A callback function to receive firmware update state changes.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Zero if success, negative error code otherwise. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.lwm2m_init_image">
+<span class="target" id="group__lwm2m__client__utils_1gaeb623e112d5fc6a15ed8d805fb35d96d"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lwm2m_init_image</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.lwm2m_init_image" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Initialize Image Update object. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Zero if success, negative error code otherwise. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.lwm2m_init_connmon">
+<span class="target" id="group__lwm2m__client__utils_1ga45ae11d7c364a6d09bb264f421167138"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lwm2m_init_connmon</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">device</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">dev</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.lwm2m_init_connmon" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Initialize Connectivity Monitoring object. Called in SYS_INIT. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Zero if success, negative error code otherwise. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.lwm2m_init_rai">
+<span class="target" id="group__lwm2m__client__utils_1ga34e4da95ea99a83fc13371b95613cce6"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lwm2m_init_rai</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.lwm2m_init_rai" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Initialize release assistance indication (RAI) module. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Zero if success, negative error code otherwise. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.lwm2m_rai_no_data">
+<span class="target" id="group__lwm2m__client__utils_1gae81bd1bacb68d0e9e0eafdfdee542f8c"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lwm2m_rai_no_data</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.lwm2m_rai_no_data" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Set socket option SO_RAI_NO_DATA to bypass RRC Inactivity period and immediately switch to Idle mode. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Zero if success, negative error code otherwise. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.lwm2m_rai_last">
+<span class="target" id="group__lwm2m__client__utils_1ga7112b669e686a8e541fac308db7a9117"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lwm2m_rai_last</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.lwm2m_rai_last" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Set socket option SO_RAI_LAST and send dummy packet to bypass RRC Inactivity period and immediately switch to Idle mode. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Zero if success, negative error code otherwise. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.lwm2m_rai_get">
+<span class="target" id="group__lwm2m__client__utils_1ga2992849dbd3e3726f410b16bc193130c"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lwm2m_rai_get</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#c.lwm2m_rai_mode" title="lwm2m_rai_mode"><span class="n"><span class="pre">lwm2m_rai_mode</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">mode</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.lwm2m_rai_get" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the RAI mode. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mode</strong> – Pointer to RAI mode variable.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Zero if success, negative error code otherwise. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.lwm2m_rai_req">
+<span class="target" id="group__lwm2m__client__utils_1ga1d29e41d1c632132962f8fc92e357ad7"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lwm2m_rai_req</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#c.lwm2m_rai_mode" title="lwm2m_rai_mode"><span class="n"><span class="pre">lwm2m_rai_mode</span></span></a><span class="w"> </span><span class="n"><span class="pre">mode</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.lwm2m_rai_req" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Function for requesting modem to enable or disable use of AS RAI. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mode</strong> – Requested RAI mode.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Zero if success, negative error code otherwise. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.lwm2m_adv_firmware_get_update_state">
+<span class="target" id="group__lwm2m__client__utils_1ga2238c72c320a1e3cbde4fb4c1691acd8"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lwm2m_adv_firmware_get_update_state</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">obj_inst_id</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.lwm2m_adv_firmware_get_update_state" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.lwm2m_adv_firmware_set_update_state">
+<span class="target" id="group__lwm2m__client__utils_1ga28dca2cbdab1bbd4bc1242fdd8ce05a3"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lwm2m_adv_firmware_set_update_state</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">obj_inst_id</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">state</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.lwm2m_adv_firmware_set_update_state" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.lwm2m_adv_firmware_get_update_result">
+<span class="target" id="group__lwm2m__client__utils_1ga11d0773715aa1867ffc907c48be07b56"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lwm2m_adv_firmware_get_update_result</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">obj_inst_id</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.lwm2m_adv_firmware_get_update_result" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.lwm2m_adv_firmware_set_update_result">
+<span class="target" id="group__lwm2m__client__utils_1ga8bb51df2b99b9812d9028a9d60e3f2e1"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lwm2m_adv_firmware_set_update_result</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">obj_inst_id</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">result</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.lwm2m_adv_firmware_set_update_result" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.lwm2m_adv_firmware_set_write_cb">
+<span class="target" id="group__lwm2m__client__utils_1ga6f7903092d154b3f4cfc142b80fc8570"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lwm2m_adv_firmware_set_write_cb</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">obj_inst_id</span></span>, <span class="n"><span class="pre">lwm2m_engine_set_data_cb_t</span></span><span class="w"> </span><span class="n"><span class="pre">cb</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.lwm2m_adv_firmware_set_write_cb" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.lwm2m_adv_firmware_get_write_cb">
+<span class="target" id="group__lwm2m__client__utils_1ga47aa6cc3b47cc60de79d1bfd31018fe5"></span><span class="n"><span class="pre">lwm2m_engine_set_data_cb_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lwm2m_adv_firmware_get_write_cb</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">obj_inst_id</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.lwm2m_adv_firmware_get_write_cb" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.lwm2m_adv_firmware_set_update_cb">
+<span class="target" id="group__lwm2m__client__utils_1ga9a40089d754e611e4b22460742bfe22e"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lwm2m_adv_firmware_set_update_cb</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">obj_inst_id</span></span>, <span class="n"><span class="pre">lwm2m_engine_execute_cb_t</span></span><span class="w"> </span><span class="n"><span class="pre">cb</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.lwm2m_adv_firmware_set_update_cb" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.lwm2m_adv_firmware_get_update_cb">
+<span class="target" id="group__lwm2m__client__utils_1gafd0f1855ce1f718c4db02a07cb3c3b24"></span><span class="n"><span class="pre">lwm2m_engine_execute_cb_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lwm2m_adv_firmware_get_update_cb</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">obj_inst_id</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.lwm2m_adv_firmware_get_update_cb" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.lwm2m_adv_firmware_create_inst">
+<span class="target" id="group__lwm2m__client__utils_1gaee6ec7158498b665ed2450f22596e617"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lwm2m_adv_firmware_create_inst</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">component</span></span>, <span class="n"><span class="pre">lwm2m_engine_set_data_cb_t</span></span><span class="w"> </span><span class="n"><span class="pre">write_callback</span></span>, <span class="n"><span class="pre">lwm2m_engine_execute_cb_t</span></span><span class="w"> </span><span class="n"><span class="pre">update_callback</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.lwm2m_adv_firmware_create_inst" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.modem_mode_change">
+<span class="target" id="structmodem__mode__change"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">modem_mode_change</span></span></span><a class="headerlink" href="#c.modem_mode_change" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;lwm2m_client_utils.h&gt;</em></div>
+<p>Callback used for querying permission from the app to proceed when modem’s state changes. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Param cb</dt>
+<dd class="field-odd"><p>The callback function </p>
+</dd>
+<dt class="field-even">Param user_data</dt>
+<dd class="field-even"><p>App specific data to be fed to the callback once it’s called </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.lwm2m_fota_download_start">
+<span class="target" id="structlwm2m__fota__download__start"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lwm2m_fota_download_start</span></span></span><a class="headerlink" href="#c.lwm2m_fota_download_start" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;lwm2m_client_utils.h&gt;</em></div>
+<p>Event data for id LWM2M_FOTA_DOWNLOAD_START. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.lwm2m_fota_download_start.obj_inst_id">
+<span class="target" id="structlwm2m__fota__download__start_1a58205ead98ef44143b5c831e17fd3a3c"></span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">obj_inst_id</span></span></span><a class="headerlink" href="#c.lwm2m_fota_download_start.obj_inst_id" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Object Instance id for event </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.lwm2m_fota_download_finished">
+<span class="target" id="structlwm2m__fota__download__finished"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lwm2m_fota_download_finished</span></span></span><a class="headerlink" href="#c.lwm2m_fota_download_finished" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;lwm2m_client_utils.h&gt;</em></div>
+<p>Event data for id LWM2M_FOTA_DOWNLOAD_FINISHED. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.lwm2m_fota_download_finished.obj_inst_id">
+<span class="target" id="structlwm2m__fota__download__finished_1a577398e317a82b786b19744eff4b9a90"></span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">obj_inst_id</span></span></span><a class="headerlink" href="#c.lwm2m_fota_download_finished.obj_inst_id" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Object Instance id for event </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.lwm2m_fota_download_finished.dfu_type">
+<span class="target" id="structlwm2m__fota__download__finished_1a171c369dbfb3b922310bf7015c150b14"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dfu_type</span></span></span><a class="headerlink" href="#c.lwm2m_fota_download_finished.dfu_type" title="Permalink to this definition"></a><br /></dt>
+<dd><p>DFU type </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.lwm2m_fota_update_request">
+<span class="target" id="structlwm2m__fota__update__request"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lwm2m_fota_update_request</span></span></span><a class="headerlink" href="#c.lwm2m_fota_update_request" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;lwm2m_client_utils.h&gt;</em></div>
+<p>Event data for id LWM2M_FOTA_UPDATE_IMAGE_REQ. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.lwm2m_fota_update_request.obj_inst_id">
+<span class="target" id="structlwm2m__fota__update__request_1af65d67bf2ddecdd39a300b77d0754917"></span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">obj_inst_id</span></span></span><a class="headerlink" href="#c.lwm2m_fota_update_request.obj_inst_id" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Object Instance id for event </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.lwm2m_fota_update_request.dfu_type">
+<span class="target" id="structlwm2m__fota__update__request_1a6aee44c9f41750c21d01f5fa7996a607"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dfu_type</span></span></span><a class="headerlink" href="#c.lwm2m_fota_update_request.dfu_type" title="Permalink to this definition"></a><br /></dt>
+<dd><p>DFU type </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.lwm2m_fota_update_failure">
+<span class="target" id="structlwm2m__fota__update__failure"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lwm2m_fota_update_failure</span></span></span><a class="headerlink" href="#c.lwm2m_fota_update_failure" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;lwm2m_client_utils.h&gt;</em></div>
+<p>Event data for id LWM2M_FOTA_UPDATE_ERROR. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.lwm2m_fota_update_failure.obj_inst_id">
+<span class="target" id="structlwm2m__fota__update__failure_1a40f59afc175c54c9250599cb2e5b4ada"></span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">obj_inst_id</span></span></span><a class="headerlink" href="#c.lwm2m_fota_update_failure.obj_inst_id" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Object Instance id for event </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.lwm2m_fota_update_failure.update_failure">
+<span class="target" id="structlwm2m__fota__update__failure_1a5c5703a9cea4186f20f45dc2640dec18"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">update_failure</span></span></span><a class="headerlink" href="#c.lwm2m_fota_update_failure.update_failure" title="Permalink to this definition"></a><br /></dt>
+<dd><p>FOTA failure result </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.lwm2m_fota_event">
+<span class="target" id="structlwm2m__fota__event"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lwm2m_fota_event</span></span></span><a class="headerlink" href="#c.lwm2m_fota_event" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;lwm2m_client_utils.h&gt;</em></div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.lwm2m_fota_event.id">
+<span class="target" id="structlwm2m__fota__event_1a2faa033fa9daf4bbb5ebc4cc7af333c3"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#c.lwm2m_fota_event_id" title="lwm2m_fota_event_id"><span class="n"><span class="pre">lwm2m_fota_event_id</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">id</span></span></span><a class="headerlink" href="#c.lwm2m_fota_event.id" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Fota event id and indicate used Data structure </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.lwm2m_fota_event.download_start">
+<span class="target" id="structlwm2m__fota__event_1a930a802e4ed97b68a6dcd205d9d3d1cc"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.lwm2m_fota_download_start" title="lwm2m_fota_download_start"><span class="n"><span class="pre">lwm2m_fota_download_start</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">download_start</span></span></span><a class="headerlink" href="#c.lwm2m_fota_event.download_start" title="Permalink to this definition"></a><br /></dt>
+<dd><p>LWM2M_FOTA_DOWNLOAD_START </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.lwm2m_fota_event.download_ready">
+<span class="target" id="structlwm2m__fota__event_1a712ef8d6080555c0993d1b3a0bca5c2c"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.lwm2m_fota_download_finished" title="lwm2m_fota_download_finished"><span class="n"><span class="pre">lwm2m_fota_download_finished</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">download_ready</span></span></span><a class="headerlink" href="#c.lwm2m_fota_event.download_ready" title="Permalink to this definition"></a><br /></dt>
+<dd><p>LWM2M_FOTA_DOWNLOAD_FINISHED </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.lwm2m_fota_event.update_req">
+<span class="target" id="structlwm2m__fota__event_1ac72db853c688db25f2386f95394c4563"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.lwm2m_fota_update_request" title="lwm2m_fota_update_request"><span class="n"><span class="pre">lwm2m_fota_update_request</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">update_req</span></span></span><a class="headerlink" href="#c.lwm2m_fota_event.update_req" title="Permalink to this definition"></a><br /></dt>
+<dd><p>LWM2M_FOTA_UPDATE_IMAGE_REQ </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.lwm2m_fota_event.failure">
+<span class="target" id="structlwm2m__fota__event_1a3e9eb9169a8bb8782eee62d34e28cb88"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.lwm2m_fota_update_failure" title="lwm2m_fota_update_failure"><span class="n"><span class="pre">lwm2m_fota_update_failure</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">failure</span></span></span><a class="headerlink" href="#c.lwm2m_fota_event.failure" title="Permalink to this definition"></a><br /></dt>
+<dd><p>LWM2M_FOTA_UPDATE_ERROR </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="lwm2m_location_assistance.html" class="btn btn-neutral float-right" title="LwM2M location assistance" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="icalendar_parser.html" class="btn btn-neutral" title="iCalendar parser" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

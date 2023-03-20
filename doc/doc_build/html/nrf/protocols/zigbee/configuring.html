@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Configuring Zigbee in nRF Connect SDK &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../_static/js/ncs.js"
+></script>
+<script src="../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Configuring Zigbee libraries in nRF Connect SDK" href="configuring_libraries.html" />
+    <link rel="prev" title="Zigbee memory requirements" href="memory.html" />
+<link
+  href="../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../protocols.html">Protocols</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../ble/index.html">Bluetooth LE Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bt_mesh/index.html">Bluetooth mesh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../esb/index.html">Enhanced ShockBurst (ESB)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gazell/index.html">Gazell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../matter/index.html">Matter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multiprotocol/index.html">Multiprotocol support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nfc/index.html">Near Field Communication (NFC)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../thread/index.html">Thread</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../wifi/index.html">Wi-Fi</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Zigbee</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="qsg.html">Zigbee quick start guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="supported_features.html">Supported Zigbee features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architectures.html">Zigbee architectures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="commissioning.html">Zigbee commissioning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="memory.html">Zigbee memory requirements</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Configuring Zigbee in nRF Connect SDK</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#required-libraries-and-drivers">Required libraries and drivers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mandatory-configuration">Mandatory configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#optional-configuration">Optional configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#upgrading-zigbee-application">Upgrading Zigbee application</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="configuring_libraries.html">Configuring Zigbee libraries in nRF Connect SDK</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configuring_zboss_traces.html">Configuring ZBOSS traces in nRF Connect SDK</a></li>
+<li class="toctree-l3"><a class="reference internal" href="adding_clusters.html">Adding ZCL clusters to application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="other_ecosystems.html">Configuring Zigbee samples for other ecosystems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tools.html">Zigbee tools</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drivers.html">Drivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../protocols.html">Protocols</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Zigbee</a></li>
+      <li class="breadcrumb-item active">Configuring Zigbee in nRF Connect SDK</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/protocols/zigbee/configuring.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="configuring-zigbee-in-ncs">
+<span id="ug-zigbee-configuring"></span><h1>Configuring Zigbee in nRF Connect SDK<a class="headerlink" href="#configuring-zigbee-in-ncs" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#required-libraries-and-drivers" id="id6">Required libraries and drivers</a></p></li>
+<li><p><a class="reference internal" href="#mandatory-configuration" id="id7">Mandatory configuration</a></p>
+<ul>
+<li><p><a class="reference internal" href="#sleepy-end-device-behavior" id="id8">Sleepy End Device behavior</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#optional-configuration" id="id9">Optional configuration</a></p>
+<ul>
+<li><p><a class="reference internal" href="#device-operational-channel" id="id10">Device operational channel</a></p></li>
+<li><p><a class="reference internal" href="#ieee-802-15-4-eui-64-configuration" id="id11">IEEE 802.15.4 EUI-64 configuration</a></p></li>
+<li><p><a class="reference internal" href="#zboss-stack-start-options" id="id12">ZBOSS stack start options</a></p></li>
+<li><p><a class="reference internal" href="#custom-logging-per-module" id="id13">Custom logging per module</a></p></li>
+<li><p><a class="reference internal" href="#reduced-power-consumption" id="id14">Reduced power consumption</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#upgrading-zigbee-application" id="id15">Upgrading Zigbee application</a></p></li>
+</ul>
+</div>
+<p>This page describes what is needed to start working with Zigbee in the nRF Connect SDK.</p>
+<section id="required-libraries-and-drivers">
+<span id="zigbee-ug-libs"></span><h2><a class="toc-backref" href="#id6">Required libraries and drivers</a><a class="headerlink" href="#required-libraries-and-drivers" title="Permalink to this heading"></a></h2>
+<p>Zigbee requires the following modules to properly operate in the nRF Connect SDK:</p>
+<ul class="simple">
+<li><p><span class="xref std std-ref">nrfxlib:zboss</span> available in nrfxlib, with the <a class="reference internal" href="../../libraries/zigbee/osif.html#lib-zigbee-osif"><span class="std std-ref">Zigbee ZBOSS OSIF</span></a> subsystem acting as the linking layer between the ZBOSS stack and the nRF Connect SDK.
+The ZBOSS library is enabled by the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZIGBEE</span></code> Kconfig option.
+For more information about the ZBOSS stack, see also the <a class="reference external" href="https://developer.nordicsemi.com/nRF_Connect_SDK/doc/zboss/3.11.2.1/zigbee_devguide.html">external ZBOSS development guide and API documentation</a>.</p></li>
+<li><p><span class="xref std std-ref">zephyr:ieee802154_interface</span> radio driver - This library is automatically enabled when working with Zigbee on Nordic Semiconductor’s development kits.</p></li>
+</ul>
+</section>
+<section id="mandatory-configuration">
+<span id="zigbee-ug-configuration"></span><h2><a class="toc-backref" href="#id7">Mandatory configuration</a><a class="headerlink" href="#mandatory-configuration" title="Permalink to this heading"></a></h2>
+<p>To use the Zigbee protocol, set the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZIGBEE</span></code> Kconfig option.
+Setting this option enables all the peripherals required for the correct operation of the Zigbee protocol and allows you to use them.</p>
+<p>After that, you have to define the Zigbee device role for the Zigbee application or sample by setting one of the following Kconfig options:</p>
+<ul class="simple">
+<li><p>Router role: <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZIGBEE_ROLE_ROUTER</span></code></p></li>
+<li><p>End Device role: <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZIGBEE_ROLE_END_DEVICE</span></code></p></li>
+<li><p>Coordinator role: <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZIGBEE_ROLE_COORDINATOR</span></code></p></li>
+</ul>
+<p>Setting any of these options enables the respective ZBOSS role library.
+This is needed because End Devices use different libraries than Routers and Coordinators.</p>
+<p>For instructions about how to set Kconfig options, see <a class="reference internal" href="../../getting_started/modifying.html#configure-application"><span class="std std-ref">Configuring your application</span></a>.</p>
+<section id="sleepy-end-device-behavior">
+<span id="zigbee-ug-sed"></span><h3><a class="toc-backref" href="#id8">Sleepy End Device behavior</a><a class="headerlink" href="#sleepy-end-device-behavior" title="Permalink to this heading"></a></h3>
+<p>The Sleepy End Device (SED) behavior is a Zigbee stack feature that enables the sleepy behavior for the end device.</p>
+<p>By default, the end device regularly polls its parent for data.
+When the SED behavior is enabled and no frames are available for reception after the last poll, the SED disables its radio until the next scheduled poll.
+The Zigbee stack’s own scheduler informs the application about periods of time when nothing is scheduled for any of the device roles.
+This allows the stack to enter the sleep state during these periods, which also powers off some peripherals for the SED.</p>
+<p>When the Zigbee stack thread goes to sleep, the Zigbee thread can enter the suspend state for the same amount of time as the stack’s sleep.
+The thread will be automatically resumed after the sleep period is over or on an event.</p>
+<p>For this feature to work, make sure to call the <code class="xref c c-func docutils literal notranslate"><span class="pre">zb_set_rx_on_when_idle()</span></code> ZBOSS API, as described in <a class="reference external" href="https://developer.nordicsemi.com/nRF_Connect_SDK/doc/zboss/3.11.2.1/zigbee_prog_principles.html#zigbee_power_optimization_sleepy">Configuring sleepy behavior for end devices</a> in the ZBOSS documentation.
+This feature does not require enabling any additional options in Kconfig.</p>
+<p>In the <a class="reference internal" href="../../samples/zigbee/light_switch/README.html#zigbee-light-switch-sample"><span class="std std-ref">Zigbee light switch sample</span></a> in the nRF Connect SDK, after you enable the SED behavior extension, the sleepy behavior can be triggered by pressing a predefined button when the device is booting.
+This action results in calling the ZBOSS API that activates this feature.</p>
+<section id="power-saving-during-sleep">
+<h4>Power saving during sleep<a class="headerlink" href="#power-saving-during-sleep" title="Permalink to this heading"></a></h4>
+<p>With the sleepy behavior enabled, the unused part of RAM memory is powered off, which allows to lower the power consumption even more.
+The sleep current of MCU can be lowered to about 1.8 uA by completing the following steps:</p>
+<ol class="arabic simple">
+<li><p>Turn off UART by setting <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_SERIAL</span></code> to <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p></li>
+<li><p>For current measurements for the <a class="reference internal" href="../../working_with_nrf/nrf52/developing.html#ug-nrf52"><span class="std std-ref">nRF52840 DK</span></a> (PCA10056), the <a class="reference internal" href="../../working_with_nrf/nrf52/developing.html#ug-nrf52"><span class="std std-ref">nRF52833 DK</span></a> (PCA10100), or the <a class="reference internal" href="../../working_with_nrf/nrf53/nrf5340.html#ug-nrf5340"><span class="std std-ref">nRF5340</span></a> (PCA10095), set <strong>SW6</strong> to <code class="docutils literal notranslate"><span class="pre">nRF</span> <span class="pre">ONLY</span></code> position to get the desired results.</p></li>
+<li><p>Enable the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_RAM_POWER_DOWN_LIBRARY</span></code> Kconfig option.</p></li>
+</ol>
+</section>
+</section>
+</section>
+<section id="optional-configuration">
+<h2><a class="toc-backref" href="#id9">Optional configuration</a><a class="headerlink" href="#optional-configuration" title="Permalink to this heading"></a></h2>
+<p>After enabling the Zigbee protocol and defining the Zigbee device role, you can enable additional options in Kconfig and modify <a class="reference internal" href="#zboss-stack-start-options">ZBOSS stack start options</a>.</p>
+<section id="device-operational-channel">
+<h3><a class="toc-backref" href="#id10">Device operational channel</a><a class="headerlink" href="#device-operational-channel" title="Permalink to this heading"></a></h3>
+<p>You can enable one of the following alternative options to select the channel on which the Zigbee device can operate:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZIGBEE_CHANNEL_SELECTION_MODE_SINGLE</span></code> - Single mode is enabled by default.
+The default channel is set to 16.
+To set a different channel, edit the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZIGBEE_CHANNEL</span></code> option to the desired value.</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZIGBEE_CHANNEL_SELECTION_MODE_MULTI</span></code> - In this mode, you get all the channels enabled by default.
+To configure a custom set of channels in the range from 11 to 26, edit the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZIGBEE_CHANNEL_MASK</span></code> option.
+For example, you can set channels 13, 16, and 21.
+You must have at least one channel enabled with this option.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="ieee-802-15-4-eui-64-configuration">
+<span id="ug-zigbee-configuring-eui64"></span><h3><a class="toc-backref" href="#id11">IEEE 802.15.4 EUI-64 configuration</a><a class="headerlink" href="#ieee-802-15-4-eui-64-configuration" title="Permalink to this heading"></a></h3>
+<p>The Zigbee stack uses the EUI-64 address that is configured in the IEEE 802.15.4 shim layer.
+By default, it uses an address from Nordic Semiconductor’s pool.</p>
+<p>If your devices should use a different address, you can change the address according to your company’s addressing scheme.</p>
+<p>An IEEE EUI-64 address consists of two parts:</p>
+<ul class="simple">
+<li><p>Company ID - a 24-bit MA-L (MAC Address Block Large), formerly called OUI (Organizationally Unique Identifier)</p></li>
+<li><p>Extension identifier - a 40-bit device unique identifier</p></li>
+</ul>
+<p>You can configure the EUI-64 for a device in the following ways:</p>
+<dl>
+<dt>Use the default</dt><dd><p>By default, the company ID is set to Nordic Semiconductor’s MA-L (<code class="docutils literal notranslate"><span class="pre">f4-ce-36</span></code>).
+The extension identifier is set to the DEVICEID from the factory information configuration registers (FICR).</p>
+</dd>
+<dt>Replace the company ID</dt><dd><p>You can enable <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_IEEE802154_VENDOR_OUI_ENABLE</span></code> to replace Nordic Semiconductor’s company ID with your own company ID.
+Specify your company ID in <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_IEEE802154_VENDOR_OUI</span></code>.</p>
+<p>The extension identifier is set to the default, namely the DEVICEID from FICR.</p>
+</dd>
+<dt>Replace the full EUI-64</dt><dd><p>You can provide the full EUI-64 value by programming certain user information configuration registers (UICR).
+For nRF52 Series devices, the CUSTOMER registers block is used.
+For nRF53 Series devices, the OTP registers block is used.</p>
+<p>To use the EUI-64 value from the UICR, enable <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_IEEE802154_NRF5_UICR_EUI64_ENABLE</span></code> and set <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_IEEE802154_NRF5_UICR_EUI64_REG</span></code> to the base of the two consecutive registers that contain your EUI-64 value.</p>
+<p>The following example shows how to replace the full EUI-64 on an nRF52840 device:</p>
+<ol class="arabic">
+<li><p>Enable <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_IEEE802154_NRF5_UICR_EUI64_ENABLE</span></code>.</p></li>
+<li><p>Specify the offset for the UICR registers in <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_IEEE802154_NRF5_UICR_EUI64_REG</span></code>.
+This example uses UICR-&gt;CUSTOMER[0] and UICR-&gt;CUSTOMER[1], which means that you can keep the default value <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p></li>
+<li><p>Build and program your application erasing the whole memory (replace <em>serial_number</em> with the serial number of your debugger):</p>
+<pre class="highlight literal-block"> west build -b nrf52840dk_nrf52840 -p always
+ west flash --snr <em>serial_number</em> --erase</pre>
+</li>
+<li><p>Program the registers UICR-&gt;CUSTOMER[0] and UICR-&gt;CUSTOMER[1] with your EUI-64 value (replace <em>serial_number</em> with the serial number of your debugger):</p>
+<pre class="highlight literal-block"> nrfjprog --snr <em>serial_number</em> --memwr 0x10001080 --val 0x11223344
+ nrfjprog --snr <em>serial_number</em> --memwr 0x10001084 --val 0x55667788
+ nrfjprog --snr <em>serial_number</em> --reset</pre>
+<p>If you used a different value for <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_IEEE802154_NRF5_UICR_EUI64_REG</span></code>, you must use different register addresses.</p>
+</li>
+</ol>
+</dd>
+</dl>
+<p>At the end of the configuration process, you can check the EUI-64 value using <a class="reference internal" href="../../libraries/zigbee/shell.html#lib-zigbee-shell"><span class="std std-ref">Zigbee shell</span></a>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt; zdo eui64</span>
+<span class="go">8877665544332211</span>
+<span class="go">Done</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Alternatively, you may use the Production Configuration feature to change the address.
+The Production Configuration takes precedence over the shim’s configuration.</p>
+</div>
+</section>
+<section id="zboss-stack-start-options">
+<h3><a class="toc-backref" href="#id12">ZBOSS stack start options</a><a class="headerlink" href="#zboss-stack-start-options" title="Permalink to this heading"></a></h3>
+<p>Zigbee is initialized after Zephyr’s kernel start.
+The ZBOSS stack can be started using one of the following options:</p>
+<ul class="simple">
+<li><p>Started and executed from the main thread, as <a class="reference external" href="https://developer.nordicsemi.com/nRF_Connect_SDK/doc/zboss/3.11.2.1/using_zigbee__z_c_l.html#stack_start_initiation">described in the ZBOSS development guide</a>.</p></li>
+<li><p>Started from a dedicated Zephyr thread, which in turn can be created and started by calling <a class="reference internal" href="../../libraries/zigbee/osif.html#c.zigbee_enable" title="zigbee_enable"><code class="xref c c-func docutils literal notranslate"><span class="pre">zigbee_enable()</span></code></a>.</p></li>
+</ul>
+<p>The dedicated thread can be configured using the following options:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZBOSS_DEFAULT_THREAD_PRIORITY</span></code> - Defines thread priority; set to 3 by default.</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZBOSS_DEFAULT_THREAD_STACK_SIZE</span></code> - Defines the size of the thread stack; set to 2048 by default.</p></li>
+</ul>
+</section>
+<section id="custom-logging-per-module">
+<span id="zigbee-ug-logging"></span><h3><a class="toc-backref" href="#id13">Custom logging per module</a><a class="headerlink" href="#custom-logging-per-module" title="Permalink to this heading"></a></h3>
+<p>Logging is handled with the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LOG</span></code> option.
+This option enables logging for both the stack and Zephyr’s <span class="xref std std-ref">zephyr:logging_api</span> API.</p>
+<section id="default-zigbee-application-logging">
+<span id="zigbee-ug-logging-application-logs"></span><h4>Default Zigbee application logging<a class="headerlink" href="#default-zigbee-application-logging" title="Permalink to this heading"></a></h4>
+<p>The Zigbee application uses the <code class="docutils literal notranslate"><span class="pre">INF</span></code> logging level by default.
+This level can be changed only by modifying the sample code.</p>
+</section>
+<section id="stack-logs">
+<span id="zigbee-ug-logging-stack-logs"></span><h4>Stack logs<a class="headerlink" href="#stack-logs" title="Permalink to this heading"></a></h4>
+<p>The stack logs are independent from Zephyr’s <span class="xref std std-ref">zephyr:logging_api</span> API.
+To customize them, use the following options:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZBOSS_ERROR_PRINT_TO_LOG</span></code> - Allows the application to log ZBOSS error names; enabled by default.</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZBOSS_TRACE_MASK</span></code> - Sets the modules from which ZBOSS will log the debug messages with <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZBOSS_TRACE_LOG_LEVEL</span></code>; no module is set by default.</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZBOSS_TRAF_DUMP</span></code> - Enables logging of the received 802.15.4 frames over ZBOSS trace log if <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZBOSS_TRACE_LOG_LEVEL</span></code> is set; disabled by default.</p></li>
+</ul>
+<p>The stack logs are provided in a binary format and you can configure how they are printed:</p>
+<ul>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZBOSS_TRACE_HEXDUMP_LOGGING</span></code> - Stack logs are printed as hexdump using Zephyr’s <span class="xref std std-ref">zephyr:logging_api</span>.
+This option is enabled by default.</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZBOSS_TRACE_BINARY_LOGGING</span></code> - Stack logs are printed in the binary format using one of the following independent serial backends of your choice:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZBOSS_TRACE_UART_LOGGING</span></code> - UART serial.
+This backend is enabled by default.</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZBOSS_TRACE_USB_CDC_LOGGING</span></code> - USB CDC serial.</p></li>
+</ul>
+<p>To specify the serial device, you will need to set the <code class="docutils literal notranslate"><span class="pre">ncs,zboss-trace-uart</span></code> choice in Devicetree like this:</p>
+<div class="highlight-devicetree notranslate"><div class="highlight"><pre><span></span><span class="nf">chosen</span><span class="cm"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">ncs</span><span class="p">,</span><span class="n">zboss-trace-uart</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">uart1</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When you select <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZBOSS_TRACE_USB_CDC_LOGGING</span></code>, the USB peripheral is enabled and the USB CDC serial is configured as a part of the <code class="xref c c-func docutils literal notranslate"><span class="pre">zb_osif_serial_logger_init()</span></code> function.
+The application does not wait for the connection to be established and unreceived data is lost.
+For this reason, start collecting the data as soon as you need to.</p>
+<p>See <span class="xref std std-ref">zephyr:usb_device_cdc_acm</span> for more information about how to configure USB CDC ACM instance for logging ZBOSS trace messages.</p>
+</div>
+</li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZBOSS_TRACE_BINARY_NCP_TRANSPORT_LOGGING</span></code> - Stack logs are printed in the binary format using the NCP transport channel.</p></li>
+</ul>
+<p>Stack logs are stored in the internal buffer if they are printed using Zephyr’s <span class="xref std std-ref">zephyr:logging_api</span> or the independent serial backend.
+You can customize the buffer size with the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZBOSS_TRACE_LOGGER_BUFFER_SIZE</span></code>.
+The buffer size must be larger than <code class="docutils literal notranslate"><span class="pre">256</span></code> and smaller than <code class="docutils literal notranslate"><span class="pre">2147483648</span></code>.
+If NCP transport channel is used, stack logs are stored in the buffer used for NCP transport, which size can be configured with <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZIGBEE_UART_TX_BUF_LEN</span></code>.</p>
+</section>
+<section id="zephyr-s-logger-options">
+<span id="zigbee-ug-logging-logger-options"></span><h4>Zephyr’s logger options<a class="headerlink" href="#zephyr-s-logger-options" title="Permalink to this heading"></a></h4>
+<p>You can configure custom logger options for each Zigbee and ZBOSS module.
+To do this, configure the related Kconfig option for one or more modules:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZBOSS_TRACE_LOG_LEVEL</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZBOSS_OSIF_LOG_LEVEL</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZIGBEE_SHELL_LOG_LEVEL</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZIGBEE_APP_UTILS_LOG_LEVEL</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZIGBEE_LOGGER_EP_LOG_LEVEL</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZIGBEE_SCENES_LOG_LEVEL</span></code></p></li>
+</ul>
+<p>For each of the modules, you can set the following logging options:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">LOG_LEVEL_OFF</span></code> - Turns off logging for this module.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LOG_LEVEL_ERR</span></code> - Enables logging only for errors.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LOG_LEVEL_WRN</span></code> - Enables logging for errors and warnings.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LOG_LEVEL_INF</span></code> - Enables logging for informational messages, errors, and warnings.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LOG_LEVEL_DBG</span></code> - Enables logging for debug messages, informational messages, errors, and warnings.</p></li>
+</ul>
+<p>For example, setting <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZBOSS_TRACE_LOG_LEVEL_INF</span></code> will enable logging of informational messages, errors, and warnings for the ZBOSS Trace module.</p>
+</section>
+</section>
+<section id="reduced-power-consumption">
+<h3><a class="toc-backref" href="#id14">Reduced power consumption</a><a class="headerlink" href="#reduced-power-consumption" title="Permalink to this heading"></a></h3>
+<p>You can reduce the amount of power used by your device by enabling the <a class="reference internal" href="../../libraries/others/ram_pwrdn.html#lib-ram-pwrdn"><span class="std std-ref">RAM power-down</span></a> library.
+This library is also used for <a class="reference internal" href="#power-saving-during-sleep">Power saving during sleep</a>.</p>
+</section>
+</section>
+<section id="upgrading-zigbee-application">
+<span id="zigbee-ug-static-partition"></span><h2><a class="toc-backref" href="#id15">Upgrading Zigbee application</a><a class="headerlink" href="#upgrading-zigbee-application" title="Permalink to this heading"></a></h2>
+<p>When upgrading the Zigbee application, use the <a class="reference internal" href="../../scripts/partition_manager/partition_manager.html#ug-pm-static"><span class="std std-ref">Static configuration</span></a> of the Partition Manager to ensure that ZBOSS’ NVRAM is placed in the same area of flash.
+This is because enabling additional features (for example, Zephyr’s <span class="xref std std-ref">zephyr:nvs_api</span>) can change the placement of the partition in the flash and the ZBOSS settings can be lost, as the application is not able to find the partition.</p>
+<p>The static configuration is required regardless of the application version and the upgrading method (<a class="reference internal" href="../../libraries/zigbee/zigbee_fota.html#lib-zigbee-fota"><span class="std std-ref">Zigbee FOTA</span></a> or <a class="reference internal" href="../../app_dev/bootloaders_and_dfu/bootloader.html#ug-bootloader"><span class="std std-ref">Secure bootloader chain</span></a>).</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="configuring_libraries.html" class="btn btn-neutral float-right" title="Configuring Zigbee libraries in nRF Connect SDK" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="memory.html" class="btn btn-neutral" title="Zigbee memory requirements" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

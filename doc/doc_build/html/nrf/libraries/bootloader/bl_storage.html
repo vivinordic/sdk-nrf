@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bootloader storage &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../_static/js/ncs.js"
+></script>
+<script src="../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Bootloader firmware validation" href="bl_validation.html" />
+    <link rel="prev" title="Bootloader crypto" href="bl_crypto.html" />
+<link
+  href="../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drivers.html">Drivers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Libraries</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../bin/index.html">Binary libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bluetooth_services/index.html">Bluetooth libraries and services</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Bootloader libraries</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="bl_crypto.html">Bootloader crypto</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Bootloader storage</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#api-documentation">API documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="bl_validation.html">Bootloader firmware validation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../caf/index.html">Common Application Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../debug/index.html">Debug libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dfu/index.html">DFU libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gazell/index.html">Gazell libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modem/index.html">Modem libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mpsl/index.html">Multiprotocol Service Layer libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../networking/index.html">Libraries for networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nfc/index.html">Libraries for NFC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nrf_rpc/index.html">nRF RPC libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../others/index.html">Other libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../shell/index.html">Shell libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tfm/index.html">TF-M libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../zigbee/index.html">Libraries for Zigbee</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Libraries</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Bootloader libraries</a></li>
+      <li class="breadcrumb-item active">Bootloader storage</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/libraries/bootloader/bl_storage.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="bootloader-storage">
+<span id="doc-bl-storage"></span><h1>Bootloader storage<a class="headerlink" href="#bootloader-storage" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#api-documentation" id="id7">API documentation</a></p></li>
+</ul>
+</div>
+<p>The bootloader storage library is used to read and write both one-time programmable (OTP) data and a non-volatile counter.</p>
+<p>If the nRF Secure Immutable Bootloader (NSIB) is enabled, it should be the only user of this library.
+The application image can only include this library when the NSIB is disabled.</p>
+<p>The library has the following functions for either reading or writing, or in some cases both reading and writing:</p>
+<ul class="simple">
+<li><p>The lifecycle state of the device, used to deny certain operations when in wrong lifecycle state.</p></li>
+<li><p>A 32-byte user-defined implementation ID, used to identify the immutable bootloader.</p></li>
+<li><p>Image slot addresses.</p></li>
+<li><p>A monotonic counter, used to enforce anti-rollback protection.</p></li>
+<li><p>Hashes of public keys.</p></li>
+<li><p>Invalidation tokens, used to revoke public keys.</p></li>
+<li><p>Additional public key metadata.</p></li>
+</ul>
+<p>The library uses either the OTP region of the User information configuration registers (UICR), when present on SoCs like the nRF9160 or nRF5340, or the internal flash memory.
+When the library uses the internal flash memory, the bootloader blocks the write access before booting the next image.</p>
+<p>See <a class="reference internal" href="../../samples/bootloader/README.html#bootloader-provisioning"><span class="std std-ref">Provisioning</span></a> for more information about the provisioned data and how the bootloader uses it.</p>
+<p>See <code class="file docutils literal notranslate"><span class="pre">tests/subsys/bootloader/bl_storage/</span></code> for tests of the library.</p>
+<section id="api-documentation">
+<h2><a class="toc-backref" href="#id7">API documentation</a><a class="headerlink" href="#api-documentation" title="Permalink to this heading"></a></h2>
+<div class="line-block">
+<div class="line">Header file: <code class="file docutils literal notranslate"><span class="pre">include/bl_storage.h</span></code></div>
+<div class="line">Source files: <code class="file docutils literal notranslate"><span class="pre">subsys/bootloader/bl_storage/</span></code></div>
+</div>
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="group__bl__storage"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">bl_storage</span></span></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-defines">Defines</p>
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.STATE_ENTERED">
+<span class="target" id="group__bl__storage_1ga235d632546cec659c8fa8a3c6ec56513"></span><span class="sig-name descname"><span class="n"><span class="pre">STATE_ENTERED</span></span></span><a class="headerlink" href="#c.STATE_ENTERED" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.STATE_NOT_ENTERED">
+<span class="target" id="group__bl__storage_1ga6a4f8e634f110d0b7904870e90ed7cf6"></span><span class="sig-name descname"><span class="n"><span class="pre">STATE_NOT_ENTERED</span></span></span><a class="headerlink" href="#c.STATE_NOT_ENTERED" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-enums">Enums</p>
+<dl class="c enum">
+<dt class="sig sig-object c" id="c.lcs">
+<span class="target" id="group__bl__storage_1gaf8733603bf55c32765f5cfbd6f2eabcd"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lcs</span></span></span><a class="headerlink" href="#c.lcs" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The PSA life cycle states a device can be in. </p>
+<p>The LCS can be only transitioned in the order they are defined here. </p>
+<p><em>Values:</em></p>
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.lcs.BL_STORAGE_LCS_UNKNOWN">
+<span class="target" id="group__bl__storage_1ggaf8733603bf55c32765f5cfbd6f2eabcda43a4f5082ffa684b29a98f09b13c4bb1"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BL_STORAGE_LCS_UNKNOWN</span></span></span><a class="headerlink" href="#c.lcs.BL_STORAGE_LCS_UNKNOWN" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.lcs.BL_STORAGE_LCS_ASSEMBLY">
+<span class="target" id="group__bl__storage_1ggaf8733603bf55c32765f5cfbd6f2eabcda58c9c02d7fd57b482f15c80687d1d3cb"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BL_STORAGE_LCS_ASSEMBLY</span></span></span><a class="headerlink" href="#c.lcs.BL_STORAGE_LCS_ASSEMBLY" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.lcs.BL_STORAGE_LCS_PROVISIONING">
+<span class="target" id="group__bl__storage_1ggaf8733603bf55c32765f5cfbd6f2eabcdab7e8f66de38ac9459818c7b8aca4794f"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BL_STORAGE_LCS_PROVISIONING</span></span></span><a class="headerlink" href="#c.lcs.BL_STORAGE_LCS_PROVISIONING" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.lcs.BL_STORAGE_LCS_SECURED">
+<span class="target" id="group__bl__storage_1ggaf8733603bf55c32765f5cfbd6f2eabcdadf07c4391c4ad03ac021b161223cac83"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BL_STORAGE_LCS_SECURED</span></span></span><a class="headerlink" href="#c.lcs.BL_STORAGE_LCS_SECURED" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.lcs.BL_STORAGE_LCS_DECOMMISSIONED">
+<span class="target" id="group__bl__storage_1ggaf8733603bf55c32765f5cfbd6f2eabcda055815a9342f0ac679391c8be61dad16"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BL_STORAGE_LCS_DECOMMISSIONED</span></span></span><a class="headerlink" href="#c.lcs.BL_STORAGE_LCS_DECOMMISSIONED" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.s0_address_read">
+<span class="target" id="group__bl__storage_1ga588b9be770d1f9f90e8d97ace8aefb35"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">s0_address_read</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.s0_address_read" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Function for reading address of slot 0. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Address of slot 0. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.s1_address_read">
+<span class="target" id="group__bl__storage_1gac1b4e16ed57411c4dcf6271c4f763b9b"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">s1_address_read</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.s1_address_read" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Function for reading address of slot 1. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Address of slot 1. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.num_public_keys_read">
+<span class="target" id="group__bl__storage_1ga5f01045a46e0cd6015081a1ecf33597d"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">num_public_keys_read</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.num_public_keys_read" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Function for reading number of public key data slots. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Number of public key data slots. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.verify_public_keys">
+<span class="target" id="group__bl__storage_1ga398093b212163efead6fa1eca64cb943"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">verify_public_keys</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.verify_public_keys" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Function for reading number of public key data slots. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Return values</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>0</strong> – if all keys are ok. </p></li>
+<li><p><strong>-EHASHFF</strong> – if one or more keys contains an aligned 0xFFFF. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.public_key_data_read">
+<span class="target" id="group__bl__storage_1gab4f1cd8d93f5c2910f1ce01b7d8eb300"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">public_key_data_read</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n"><span class="pre">key_idx</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">p_buf</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.public_key_data_read" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Function for reading public key hashes. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>key_idx</strong> – <strong>[in]</strong> Index of key. </p></li>
+<li><p><strong>p_buf</strong> – <strong>[out]</strong> Pointer to where the hash will be written. The buffer must be at least SB_PUBLIC_KEY_HASH_LEN bytes large. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>-EINVAL</strong> – Key has been invalidated. </p></li>
+<li><p><strong>-EFAULT</strong> – key_idx is too large. There is no key with that index. </p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Number of successfully written bytes to p_buf. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.invalidate_public_key">
+<span class="target" id="group__bl__storage_1ga93cdbed56da0e3cd0ffa705715863aad"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">invalidate_public_key</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n"><span class="pre">key_idx</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.invalidate_public_key" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Function for invalidating a public key. </p>
+<p>The public key will no longer be returned by <a class="reference internal" href="#group__bl__storage_1gab4f1cd8d93f5c2910f1ce01b7d8eb300"><span class="std std-ref">public_key_data_read</span></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>key_idx</strong> – <strong>[in]</strong> Index of key. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.num_monotonic_counter_slots">
+<span class="target" id="group__bl__storage_1gaa7ec999e86dc9211a52f01b2a8ccfa93"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">num_monotonic_counter_slots</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">counter_desc</span></span>, <span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">counter_slots</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.num_monotonic_counter_slots" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the number of monotonic counter slots. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>counter_desc</strong> – <strong>[in]</strong> Counter description. </p></li>
+<li><p><strong>counter_slots</strong> – <strong>[out]</strong> Number of slots occupied by the counter.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>0</strong> – Success </p></li>
+<li><p><strong>-EINVAL</strong> – Cannot find counters with description <code class="docutils literal notranslate"><span class="pre">counter_desc</span></code> or the pointer to <code class="docutils literal notranslate"><span class="pre">counter_slots</span></code> is NULL. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.get_monotonic_counter">
+<span class="target" id="group__bl__storage_1gaf5a6d81c229c93e57045763540798929"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_monotonic_counter</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">counter_desc</span></span>, <span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">counter_value</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.get_monotonic_counter" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the current HW monotonic counter. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>counter_desc</strong> – <strong>[in]</strong> Counter description. </p></li>
+<li><p><strong>counter_value</strong> – <strong>[out]</strong> The value of the current counter.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>0</strong> – Success </p></li>
+<li><p><strong>-EINVAL</strong> – Cannot find counters with description <code class="docutils literal notranslate"><span class="pre">counter_desc</span></code> or the pointer to <code class="docutils literal notranslate"><span class="pre">counter_value</span></code> is NULL. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.set_monotonic_counter">
+<span class="target" id="group__bl__storage_1gac8c5257a0802478447c6cf4b1ddf7ef0"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_monotonic_counter</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">counter_desc</span></span>, <span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">new_counter</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.set_monotonic_counter" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Set the current HW monotonic counter. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>FYI for users looking at the values directly in flash: Values are stored with their bits flipped. This is to squeeze one more value out of the counter.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>counter_desc</strong> – <strong>[in]</strong> Counter description. </p></li>
+<li><p><strong>new_counter</strong> – <strong>[in]</strong> The new counter value. Must be larger than the current value.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>0</strong> – The counter was updated successfully. </p></li>
+<li><p><strong>-EINVAL</strong> – <code class="docutils literal notranslate"><span class="pre">new_counter</span></code> is invalid (must be larger than current counter, and cannot be 0xFFFF). </p></li>
+<li><p><strong>-ENOMEM</strong> – There are no more free counter slots (see <span> <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_SB_NUM_VER_COUNTER_SLOTS</span></code> </span>). </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.otp_copy32">
+<span class="target" id="group__bl__storage_1ga74d02e3eeb5ad4d8a86d69438f14ff7a"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">otp_copy32</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="k"><span class="pre">restrict</span></span><span class="w"> </span><span class="n"><span class="pre">dst</span></span>, <span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="k"><span class="pre">volatile</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="k"><span class="pre">restrict</span></span><span class="w"> </span><span class="n"><span class="pre">src</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n"><span class="pre">size</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.otp_copy32" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Copies <code class="docutils literal notranslate"><span class="pre">src</span></code> into <code class="docutils literal notranslate"><span class="pre">dst</span></code>. Reads from <code class="docutils literal notranslate"><span class="pre">src</span></code> are done 32 bits at a time. Writes to <code class="docutils literal notranslate"><span class="pre">dst</span></code> are done a byte at a time.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dst</strong> – <strong>[out]</strong> destination buffer. </p></li>
+<li><p><strong>src</strong> – <strong>[in]</strong> source buffer. Must be 4-byte-aligned. </p></li>
+<li><p><strong>size</strong> – <strong>[in]</strong> number of <em>bytes</em> in src to copy into dst. Must be divisible by 4. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.read_implementation_id_from_otp">
+<span class="target" id="group__bl__storage_1gae408b04b2de98d475945c9cbb15f0632"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">read_implementation_id_from_otp</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">buf</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.read_implementation_id_from_otp" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Read the implementation id from OTP and copy it into a given buffer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>buf</strong> – <strong>[out]</strong> Buffer that has at least BL_STORAGE_IMPLEMENTATION_ID_SIZE bytes </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.read_life_cycle_state">
+<span class="target" id="group__bl__storage_1ga7c065e99da679c80dce34b0b1309fe78"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">read_life_cycle_state</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#c.read_life_cycle_state" title="lcs"><span class="n"><span class="pre">lcs</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">lcs</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.read_life_cycle_state" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Read the current life cycle state the device is in from OTP,. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lcs</strong> – <strong>[out]</strong> Will be set to the current LCS the device is in</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>0</strong> – The LCS read was successful. </p></li>
+<li><p><strong>-EREADLCS</strong> – Error on reading from OTP or invalid OTP content. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.update_life_cycle_state">
+<span class="target" id="group__bl__storage_1gab309f6576a50a508e932fe14baea9de4"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">update_life_cycle_state</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#c.lcs" title="lcs"><span class="n"><span class="pre">lcs</span></span></a><span class="w"> </span><span class="n"><span class="pre">next_lcs</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.update_life_cycle_state" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Update the life cycle state in OTP. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>next_lcs</strong> – <strong>[in]</strong> Must be the same or the successor state of the current one.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>0</strong> – Success. </p></li>
+<li><p><strong>-EREADLCS</strong> – Reading the current state failed. </p></li>
+<li><p><strong>-EINVALIDLCS</strong> – Invalid next state. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="bl_validation.html" class="btn btn-neutral float-right" title="Bootloader firmware validation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="bl_crypto.html" class="btn btn-neutral" title="Bootloader crypto" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

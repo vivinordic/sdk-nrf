@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HID configurator for nRF Desktop &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../_static/js/ncs.js"
+></script>
+<script src="../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Partition Manager" href="../partition_manager/partition_manager.html" />
+    <link rel="prev" title="Fast Pair provision script" href="../nrf_provision/fast_pair/README.html" />
+<link
+  href="../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drivers.html">Drivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../scripts.html">Scripts</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../shell/ble_console/README.html">Bluetooth LE Console</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nrf_provision/fast_pair/README.html">Fast Pair provision script</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">HID configurator for nRF Desktop</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#requirements">Requirements</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#windows">Windows</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#debian-ubuntu-linux-mint">Debian/Ubuntu/Linux Mint</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#using-the-script">Using the script</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#displaying-the-supported-modules-and-options">Displaying the supported modules and options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuring-device-runtime-options">Configuring device runtime options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#performing-dfu">Performing DFU</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rebooting-the-device">Rebooting the device</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#getting-information-about-the-firmware-version">Getting information about the firmware version</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#playing-led-stream">Playing LED stream</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#implementation-details">Implementation details</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dependencies">Dependencies</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../partition_manager/partition_manager.html">Partition Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../west_commands/sbom/README.html">Software Bill of Materials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../memfault/README.html">MDS BLE gateway script</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../scripts.html">Scripts</a></li>
+      <li class="breadcrumb-item active">HID configurator for nRF Desktop</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/scripts/hid_configurator/README.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="hid-configurator-for-nrf-desktop">
+<span id="nrf-desktop-config-channel-script"></span><h1>HID configurator for nRF Desktop<a class="headerlink" href="#hid-configurator-for-nrf-desktop" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#overview" id="id6">Overview</a></p></li>
+<li><p><a class="reference internal" href="#requirements" id="id7">Requirements</a></p>
+<ul>
+<li><p><a class="reference internal" href="#windows" id="id8">Windows</a></p></li>
+<li><p><a class="reference internal" href="#debian-ubuntu-linux-mint" id="id9">Debian/Ubuntu/Linux Mint</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#using-the-script" id="id10">Using the script</a></p>
+<ul>
+<li><p><a class="reference internal" href="#displaying-the-supported-modules-and-options" id="id11">Displaying the supported modules and options</a></p></li>
+<li><p><a class="reference internal" href="#configuring-device-runtime-options" id="id12">Configuring device runtime options</a></p></li>
+<li><p><a class="reference internal" href="#performing-dfu" id="id13">Performing DFU</a></p></li>
+<li><p><a class="reference internal" href="#rebooting-the-device" id="id14">Rebooting the device</a></p></li>
+<li><p><a class="reference internal" href="#getting-information-about-the-firmware-version" id="id15">Getting information about the firmware version</a></p></li>
+<li><p><a class="reference internal" href="#playing-led-stream" id="id16">Playing LED stream</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#implementation-details" id="id17">Implementation details</a></p></li>
+<li><p><a class="reference internal" href="#dependencies" id="id18">Dependencies</a></p></li>
+</ul>
+</div>
+<p>This Python application uses <a class="reference internal" href="../../applications/nrf_desktop/doc/config_channel.html#nrf-desktop-config-channel"><span class="std std-ref">Configuration channel</span></a> for communication between a computer and firmware.</p>
+<p>The script controls the <a class="reference internal" href="../../applications/nrf_desktop/README.html#nrf-desktop"><span class="std std-ref">nRF Desktop</span></a> firmware parameters at runtime.
+It can be used for the following purposes:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#displaying-the-supported-modules-and-options">Displaying the supported modules and options</a></p></li>
+<li><p><a class="reference internal" href="#configuring-device-runtime-options">Configuring device runtime options</a></p></li>
+<li><p><a class="reference internal" href="#performing-dfu">Performing DFU</a></p></li>
+<li><p><a class="reference internal" href="#rebooting-the-device">Rebooting the device</a></p></li>
+<li><p><a class="reference internal" href="#getting-information-about-the-firmware-version">Getting information about the firmware version</a></p></li>
+<li><p><a class="reference internal" href="#playing-led-stream">Playing LED stream</a></p></li>
+</ul>
+<section id="overview">
+<h2><a class="toc-backref" href="#id6">Overview</a><a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+<p>The script looks for nRF Desktop devices connected to the host through USB, Bluetooth®, or nRF Desktop dongle.
+The devices are identified based on Vendor ID.</p>
+<p>The script exchanges data with the device using <a class="reference internal" href="../../applications/nrf_desktop/doc/config_channel.html#nrf-desktop-config-channel"><span class="std std-ref">Configuration channel</span></a>.
+The data is sent using HID feature reports and targets a specific firmware module of the nRF Desktop application.</p>
+<p>For more information about the architecture of the nRF Desktop configuration channel, see <a class="reference internal" href="../../applications/nrf_desktop/doc/config_channel.html#nrf-desktop-config-channel"><span class="std std-ref">Configuration channel</span></a>.
+The configuration channel uses a cross-platform HIDAPI library to communicate with HID devices attached to the operating system.
+See <a class="reference internal" href="#dependencies">Dependencies</a> for more information.</p>
+</section>
+<section id="requirements">
+<h2><a class="toc-backref" href="#id7">Requirements</a><a class="headerlink" href="#requirements" title="Permalink to this heading"></a></h2>
+<p>To use the HID configurator, you must set up the required <a class="reference internal" href="#dependencies">Dependencies</a>.
+Complete the following instructions, depending on your operating system:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#windows">Windows</a></p></li>
+<li><p><a class="reference internal" href="#debian-ubuntu-linux-mint">Debian/Ubuntu/Linux Mint</a></p></li>
+</ul>
+<section id="windows">
+<h3><a class="toc-backref" href="#id8">Windows</a><a class="headerlink" href="#windows" title="Permalink to this heading"></a></h3>
+<p>Complete the following steps:</p>
+<ol class="arabic">
+<li><p>Download the HIDAPI library from <a class="reference external" href="https://github.com/libusb/hidapi/releases">HIDAPI releases</a>.
+Use the bundled DLL or build it according to instructions in <a class="reference external" href="https://github.com/libusb/hidapi">HIDAPI library</a>.</p></li>
+<li><p>Install <a class="reference external" href="https://github.com/apmorton/pyhidapi">pyhidapi Python wrapper</a> and other required libraries with the following command:</p>
+<div class="highlight highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">py</span> <span class="o">-</span><span class="mi">3</span> <span class="o">-</span><span class="n">m</span> <span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+</li>
+<li><p>If you want to display LED stream based on sound data, you must also install the additional requirements using the following command:</p>
+<div class="highlight highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">py</span> <span class="o">-</span><span class="mi">3</span> <span class="o">-</span><span class="n">m</span> <span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements_music_led_stream</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<p>For more detailed information about LED stream functionality, see the <a class="reference internal" href="#playing-led-stream">Playing LED stream</a> section.</p>
+</section>
+<section id="debian-ubuntu-linux-mint">
+<h3><a class="toc-backref" href="#id9">Debian/Ubuntu/Linux Mint</a><a class="headerlink" href="#debian-ubuntu-linux-mint" title="Permalink to this heading"></a></h3>
+<p>Complete the following steps:</p>
+<ol class="arabic">
+<li><p>Run the following commands to install the basic requirements:</p>
+<div class="highlight highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">libhidapi</span><span class="o">-</span><span class="n">hidraw0</span>
+<span class="n">pip3</span> <span class="n">install</span> <span class="o">--</span><span class="n">user</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When using the configuration channel for Bluetooth LE devices on Linux, use the BlueZ version 5.56 or higher.
+In versions earlier than 5.44, the HID device attached by BlueZ could obtain wrong VID and PID values (ignoring values in Device Information Service), which would stop HIDAPI from opening the device.
+In versions earlier than 5.56, the HID device attached by BlueZ might provide incomplete HID feature report on get operation.</p>
+</div>
+</li>
+<li><p>If you do not want to use the root access to run the Python script, copy the provided udev rule from the <code class="file docutils literal notranslate"><span class="pre">99-hid.rules</span></code> file to the <code class="file docutils literal notranslate"><span class="pre">/etc/udev/rules.d</span></code> and reconnect the device.</p></li>
+<li><p>If you want to connect to a device with a different Vendor or Product ID other than the one specified in the file, use one of the following options:</p>
+<ul class="simple">
+<li><p>Run the script with the root permission.</p></li>
+<li><p>Complete the following steps to run the script without root permission:</p>
+<ol class="loweralpha simple">
+<li><p>Add a new entry to the <code class="file docutils literal notranslate"><span class="pre">99-hid.rules</span></code> file with your Vendor and Product ID.</p></li>
+<li><p>Copy the provided udev rule from the <code class="file docutils literal notranslate"><span class="pre">99-hid.rules</span></code> file to the <code class="file docutils literal notranslate"><span class="pre">/etc/udev/rules.d</span></code>.</p></li>
+<li><p>Reconnect the device.</p></li>
+</ol>
+</li>
+</ul>
+<p>Vendor and Product ID can be specified in the configuration file related to the nRF Desktop application.
+The following examples shows the entry to add to the <code class="file docutils literal notranslate"><span class="pre">99-hid.rules</span></code> file to add device connected with USB and Bluetooth:</p>
+<div class="highlight highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Device</span> <span class="n">connected</span> <span class="n">using</span> <span class="n">USB</span><span class="p">:</span>
+<span class="n">ATTRS</span><span class="p">{</span><span class="n">idVendor</span><span class="p">}</span><span class="o">==</span><span class="s2">&quot;my Vendor ID&quot;</span><span class="p">,</span> <span class="n">ATTRS</span><span class="p">{</span><span class="n">idProduct</span><span class="p">}</span><span class="o">==</span><span class="s2">&quot;my Product ID&quot;</span><span class="p">,</span> <span class="n">MODE</span><span class="o">=</span><span class="s2">&quot;0666&quot;</span><span class="p">,</span> <span class="n">SYMLINK</span><span class="o">+=</span><span class="s2">&quot;nrf52-desktop-my-dev-name&quot;</span>
+
+<span class="n">Device</span> <span class="n">connected</span> <span class="n">using</span> <span class="n">Bluetooth</span><span class="p">:</span>
+<span class="n">ATTRS</span><span class="p">{</span><span class="n">name</span><span class="p">}</span><span class="o">==</span><span class="s2">&quot;Name of my Bluetooth device &quot;</span><span class="p">,</span> <span class="n">SUBSYSTEMS</span><span class="o">==</span><span class="s2">&quot;input&quot;</span><span class="p">,</span> <span class="n">MODE</span><span class="o">=</span><span class="s2">&quot;0666&quot;</span><span class="p">,</span> <span class="n">SYMLINK</span><span class="o">+=</span><span class="s2">&quot;nrf52-desktop-my-dev-name&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>If you want to display an LED stream based on sound data, you must also install the additional requirements using the following commands:</p>
+<div class="highlight highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">portaudio19</span><span class="o">-</span><span class="n">dev</span> <span class="n">python3</span><span class="o">-</span><span class="n">pyaudio</span>
+<span class="n">pip3</span> <span class="n">install</span> <span class="o">--</span><span class="n">user</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements_music_led_stream</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<blockquote>
+<div><p>For more detailed information about LED stream functionality, see the <a class="reference internal" href="#playing-led-stream">Playing LED stream</a> section.</p>
+</div></blockquote>
+</section>
+</section>
+<section id="using-the-script">
+<h2><a class="toc-backref" href="#id10">Using the script</a><a class="headerlink" href="#using-the-script" title="Permalink to this heading"></a></h2>
+<p>See the script’s help by running the following command:</p>
+<div class="highlight highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="n">configurator_cli</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">h</span>
+</pre></div>
+</div>
+<p>Display the list of all configurable devices that are connected to the host by running the script without providing additional arguments:</p>
+<div class="highlight highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="n">configurator_cli</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p>Perform the selected command on the connected device by using the following command syntax:</p>
+<div class="highlight highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="n">configurator_cli</span><span class="o">.</span><span class="n">py</span> <span class="n">DEVICE</span> <span class="n">COMMAND_NAME</span> <span class="o">...</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The device can be identified by type, board name, or hardware ID (HW ID).
+The mapping from device type to board list is defined in <code class="file docutils literal notranslate"><span class="pre">NrfHidManager.py</span></code>.</p>
+</div>
+<p>A command may require additional, command-specific arguments.</p>
+<section id="displaying-the-supported-modules-and-options">
+<h3><a class="toc-backref" href="#id11">Displaying the supported modules and options</a><a class="headerlink" href="#displaying-the-supported-modules-and-options" title="Permalink to this heading"></a></h3>
+<p>The script can show the supported configuration channel modules and options for the connected device.
+Use the following syntax to show the modules and options:</p>
+<div class="highlight highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="n">configurator_cli</span><span class="o">.</span><span class="n">py</span> <span class="n">DEVICE</span> <span class="n">show</span>
+</pre></div>
+</div>
+</section>
+<section id="configuring-device-runtime-options">
+<h3><a class="toc-backref" href="#id12">Configuring device runtime options</a><a class="headerlink" href="#configuring-device-runtime-options" title="Permalink to this heading"></a></h3>
+<p>The script can pass the configuration values to the linked firmware module using the <code class="docutils literal notranslate"><span class="pre">config</span></code> command.
+Use the following syntax to display the list of modules that can have device runtime options configured:</p>
+<div class="highlight highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="n">configurator_cli</span><span class="o">.</span><span class="n">py</span> <span class="n">DEVICE</span> <span class="n">config</span> <span class="o">-</span><span class="n">h</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The list contains all the configurable modules used by nRF Desktop devices.
+Make sure that the selected module and option combination is supported by the configured device using <code class="docutils literal notranslate"><span class="pre">show</span></code> command.</p>
+</div>
+<p>Use the following syntax to display list of options for the given module that can have device runtime options configured:</p>
+<div class="highlight highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="n">configurator_cli</span><span class="o">.</span><span class="n">py</span> <span class="n">DEVICE</span> <span class="n">config</span> <span class="n">MODULE_NAME</span> <span class="o">-</span><span class="n">h</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The available configurable modules and options are defined by the <code class="file docutils literal notranslate"><span class="pre">nrf/scripts/hid_configurator/modules/module_config.py</span></code> file.</p>
+<p>You can add another configurable module to the file.
+Use the existing modules as examples.
+Make sure to also add the application firmware module as a <a class="reference internal" href="../../applications/nrf_desktop/doc/config_channel.html#nrf-desktop-config-channel"><span class="std std-ref">Configuration channel</span></a> listener, as described on the configuration channel page.</p>
+</div>
+<p>Customize the command with the following variables:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">MODULE_NAME</span></code> - The third argument is used to pass the name of the module to be configured.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">OPTION_NAME</span></code> - The fourth argument is used to pass the name of the option.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VALUE</span></code> - Optional fifth argument is used to pass a new value of the selected option.</p></li>
+</ul>
+<p>To read the currently set value, pass the name of the module and the option to the <code class="docutils literal notranslate"><span class="pre">config</span></code> command, without providing any value:</p>
+<div class="highlight highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="n">configurator_cli</span><span class="o">.</span><span class="n">py</span> <span class="n">DEVICE</span> <span class="n">config</span> <span class="n">MODULE_NAME</span> <span class="n">OPTION_NAME</span>
+</pre></div>
+</div>
+<p>To write a new value for the selected option, pass the value as the fifth argument:</p>
+<div class="highlight highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="n">configurator_cli</span><span class="o">.</span><span class="n">py</span> <span class="n">DEVICE</span> <span class="n">config</span> <span class="n">MODULE_NAME</span> <span class="n">OPTION_NAME</span> <span class="n">VALUE</span>
+</pre></div>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>If the module that is a configuration channel listener specifies its variant, you must refer to the module using the following syntax: <code class="docutils literal notranslate"><span class="pre">module_name/variant</span></code>.
+For example, the <a class="reference internal" href="../../applications/nrf_desktop/doc/motion.html#nrf-desktop-motion"><span class="std std-ref">Motion module</span></a> variant that depends on the motion sensor model requires the following naming convention:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">motion/paw3212</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motion/pmw3360</span></code></p></li>
+</ul>
+</div>
+</section>
+<section id="performing-dfu">
+<h3><a class="toc-backref" href="#id13">Performing DFU</a><a class="headerlink" href="#performing-dfu" title="Permalink to this heading"></a></h3>
+<p>The nRF Desktop application supports background DFU (Device Firmware Upgrade).
+The image is passed to the device while the device is in normal operation.
+The new image is stored on a dedicated update partition of the flash memory.
+When the whole image is transmitted, the update process is completed during the next reboot of the device.</p>
+<p>If the DFU process is interrupted, it can be resumed using the same image, unless the device restarts.
+After the device reboots, the process always starts from the beginning.
+For more information, see nRF Desktop’s <a class="reference internal" href="../../applications/nrf_desktop/doc/dfu.html#nrf-desktop-dfu"><span class="std std-ref">Device Firmware Upgrade module</span></a>.
+The DFU functionality on the host computer is implemented in the <code class="file docutils literal notranslate"><span class="pre">nrf/scripts/hid_configurator/modules/dfu.py</span></code> file.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">dfu</span></code> command reads the version of the firmware and the bootloader variant that are running on the device and compares them with the firmware version and the bootloader variant in the update image at the provided path.
+If the process is to be continued, the script uploads the image data to the device.
+When the upload is completed, the script reboots the device.</p>
+<p>Customize the command with the following variable:</p>
+<p><code class="docutils literal notranslate"><span class="pre">UPDATE_IMAGE_PATH</span></code> - Path to the DFU update file.</p>
+<p>To perform a DFU operation, run the following command:</p>
+<div class="highlight highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="n">configurator_cli</span><span class="o">.</span><span class="n">py</span> <span class="n">DEVICE</span> <span class="n">dfu</span> <span class="n">UPDATE_IMAGE_PATH</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Only devices with <a class="reference internal" href="../../applications/nrf_desktop/doc/dfu.html#nrf-desktop-dfu"><span class="std std-ref">Device Firmware Upgrade module</span></a> support the <code class="docutils literal notranslate"><span class="pre">dfu</span></code> command.</p>
+</div>
+</section>
+<section id="rebooting-the-device">
+<h3><a class="toc-backref" href="#id14">Rebooting the device</a><a class="headerlink" href="#rebooting-the-device" title="Permalink to this heading"></a></h3>
+<p>To perform a device reboot operation, run the following command:</p>
+<div class="highlight highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="n">configurator_cli</span><span class="o">.</span><span class="n">py</span> <span class="n">DEVICE</span> <span class="n">fwreboot</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Only devices with <a class="reference internal" href="../../applications/nrf_desktop/doc/dfu.html#nrf-desktop-dfu"><span class="std std-ref">Device Firmware Upgrade module</span></a> support the <code class="docutils literal notranslate"><span class="pre">fwreboot</span></code> command.</p>
+</div>
+</section>
+<section id="getting-information-about-the-firmware-version">
+<h3><a class="toc-backref" href="#id15">Getting information about the firmware version</a><a class="headerlink" href="#getting-information-about-the-firmware-version" title="Permalink to this heading"></a></h3>
+<p>To obtain information about the firmware running on the device, run the following command:</p>
+<div class="highlight highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="n">configurator_cli</span><span class="o">.</span><span class="n">py</span> <span class="n">DEVICE</span> <span class="n">fwinfo</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Only devices with <a class="reference internal" href="../../applications/nrf_desktop/doc/dfu.html#nrf-desktop-dfu"><span class="std std-ref">Device Firmware Upgrade module</span></a> support the <code class="docutils literal notranslate"><span class="pre">fwinfo</span></code> command.</p>
+</div>
+</section>
+<section id="playing-led-stream">
+<h3><a class="toc-backref" href="#id16">Playing LED stream</a><a class="headerlink" href="#playing-led-stream" title="Permalink to this heading"></a></h3>
+<p>The LED stream is a feature of nRF Desktop that allows you to send a stream of color data to be replayed on the device LED.
+For more information about its implementation, see nRF Desktop’s <a class="reference internal" href="../../applications/nrf_desktop/doc/led_stream.html#nrf-desktop-led-stream"><span class="std std-ref">LED stream module</span></a>.
+The LED stream functionality on the host computer is implemented by the following files:</p>
+<ul class="simple">
+<li><p><code class="file docutils literal notranslate"><span class="pre">nrf/scripts/hid_configurator/modules/led_stream.py</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">nrf/scripts/hid_configurator/modules/music_led_stream.py</span></code>.</p></li>
+</ul>
+<p>HID configurator’s <code class="docutils literal notranslate"><span class="pre">led_stream</span></code> command starts the LED stream playback on the device.</p>
+<p>Customize the command with the following variables:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">LED_ID</span></code> - The third argument to the script is the ID of the LED on which the stream is to be replayed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">FREQUENCY</span></code> - The fourth argument to the script is the frequency at which the data is to be generated.
+The higher the frequency, the more often the colors change.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--file</span> <span class="pre">WAVE_FILE</span></code> - Optional argument for opening a wave file and using it to generate the stream of colors based on the sound data.</p></li>
+</ul>
+<p>To start the LED stream payback, run the following command:</p>
+<div class="highlight highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="n">configurator_cli</span><span class="o">.</span><span class="n">py</span> <span class="n">DEVICE</span> <span class="n">led_stream</span> <span class="n">LED_ID</span> <span class="n">FREQUENCY</span> <span class="o">--</span><span class="n">file</span> <span class="n">WAVE_FILE</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Only devices with <a class="reference internal" href="../../applications/nrf_desktop/doc/led_stream.html#nrf-desktop-led-stream"><span class="std std-ref">LED stream module</span></a> support the <code class="docutils literal notranslate"><span class="pre">led_stream</span></code> commands.</p>
+</div>
+</section>
+</section>
+<section id="implementation-details">
+<h2><a class="toc-backref" href="#id17">Implementation details</a><a class="headerlink" href="#implementation-details" title="Permalink to this heading"></a></h2>
+<p>Every nRF Desktop device must be discovered by the script before it can be configured.
+The script fetches the hardware ID and board name and scans for the configurable modules.
+For each module, it obtains the list of available options.
+For details about options available within each module, see the module documentation.</p>
+<p>From the user perspective, the nRF Desktop device is handled in the same way, regardless of it being connected to the host directly or through the nRF Desktop dongle.
+During the device discovery, the script asks for the nRF Desktop peripherals connected through Bluetooth.
+If the currently discovered device has connected peripherals, they are discovered and prepared for configuration.</p>
+<p>The device discovery procedure is described on the <a class="reference internal" href="../../applications/nrf_desktop/doc/config_channel.html#nrf-desktop-config-channel-device-discovery"><span class="std std-ref">configuration channel documentation page</span></a>.
+An example of implementation is available in the <code class="file docutils literal notranslate"><span class="pre">scripts/hid_configurator/NrfHidDevice.py</span></code> file.
+The device discovery is implemented in the <code class="docutils literal notranslate"><span class="pre">__init__</span></code> function of the <code class="docutils literal notranslate"><span class="pre">NrfHidDevice</span></code> class.</p>
+</section>
+<section id="dependencies">
+<h2><a class="toc-backref" href="#id18">Dependencies</a><a class="headerlink" href="#dependencies" title="Permalink to this heading"></a></h2>
+<p>The configuration channel has the following dependencies:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/libusb/hidapi">HIDAPI library</a></p></li>
+<li><p><a class="reference external" href="https://github.com/apmorton/pyhidapi">pyhidapi Python wrapper</a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../partition_manager/partition_manager.html" class="btn btn-neutral float-right" title="Partition Manager" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../nrf_provision/fast_pair/README.html" class="btn btn-neutral" title="Fast Pair provision script" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

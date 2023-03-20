@@ -1,0 +1,377 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="group__qos" kind="group">
+    <compoundname>qos</compoundname>
+    <title>Quality of Service library</title>
+    <innerclass refid="structqos__payload" prot="public">qos_payload</innerclass>
+    <innerclass refid="structqos__data" prot="public">qos_data</innerclass>
+    <innerclass refid="structqos__evt" prot="public">qos_evt</innerclass>
+    <innergroup refid="group__qos__flag__bitmask">QoS library flag bitmask values.</innergroup>
+      <sectiondef kind="enum">
+      <memberdef kind="enum" id="group__qos_1ga1c6be71f9b5c800fe34198f3c0ae51a0" prot="public" static="no" strong="no">
+        <type></type>
+        <name>qos_evt_type</name>
+        <enumvalue id="group__qos_ga1c6be71f9b5c800fe34198f3c0ae51a0_1gga1c6be71f9b5c800fe34198f3c0ae51a0a4033e445e925bf060babb2d959ef552f" prot="public">
+          <name>QOS_EVT_MESSAGE_NEW</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>A new message is ready. Payload is of type <ref refid="structqos__data" kindref="compound">qos_data</ref>. (message) </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group__qos_ga1c6be71f9b5c800fe34198f3c0ae51a0_1gga1c6be71f9b5c800fe34198f3c0ae51a0a41cbdd1062ad60ae4fc48ad19acd4d30" prot="public">
+          <name>QOS_EVT_MESSAGE_TIMER_EXPIRED</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>The internal backoff timer has expired. This callback contains one or more messages that should be sent. Payload is of type <ref refid="structqos__data" kindref="compound">qos_data</ref>. (message)</para>
+<para>Callbacks of this event type are notified in system workqueue context. </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group__qos_ga1c6be71f9b5c800fe34198f3c0ae51a0_1gga1c6be71f9b5c800fe34198f3c0ae51a0a85ce79a0f819801ba08fe56d9d46c302" prot="public">
+          <name>QOS_EVT_MESSAGE_REMOVED_FROM_LIST</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>Event received when the internal list of pending messages is full or a message has been removed from the list using the <ref refid="group__qos_gaa3b6098d7d0c5b557f46365f7ae1dd3c_1gaa3b6098d7d0c5b557f46365f7ae1dd3c" kindref="member">qos_message_remove()</ref> API call.</para>
+<para>If the heap_allocated flag is set in the <ref refid="structqos__data" kindref="compound">qos_data</ref> message structure the corresponding buffer (message.data.buf) must be freed by the caller. Payload is of type <ref refid="structqos__data" kindref="compound">qos_data</ref>. </para>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Events notified by the library&apos;s callback handler. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/qos.h" line="53" column="1" bodyfile="include/qos.h" bodystart="53" bodyend="76"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="group__qos_1gaae5efa78763f4f34473073001fb309bd" prot="public" static="no">
+        <type>void(*</type>
+        <definition>typedef void(* qos_evt_handler_t) (const struct qos_evt *evt)</definition>
+        <argsstring>)(const struct qos_evt *evt)</argsstring>
+        <name>qos_evt_handler_t</name>
+        <briefdescription>
+<para>QoS library event handler. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">evt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The event and the associated parameters. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/qos.h" line="130" column="9" bodyfile="include/qos.h" bodystart="130" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__qos_1ga8f4635fe86e0ba557fe170eaa9c23c6d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int qos_init</definition>
+        <argsstring>(qos_evt_handler_t evt_handler)</argsstring>
+        <name>qos_init</name>
+        <param>
+          <type><ref refid="group__qos_gaae5efa78763f4f34473073001fb309bd_1gaae5efa78763f4f34473073001fb309bd" kindref="member">qos_evt_handler_t</ref></type>
+          <declname>evt_handler</declname>
+        </param>
+        <briefdescription>
+<para>Function that initializes the QoS library. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>evt_handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the event callback handler. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/qos.h" line="136" column="5" declfile="include/qos.h" declline="136" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="group__qos_1ga69a7d4837fe2d64f28dbe0a50f96b828" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int qos_message_add</definition>
+        <argsstring>(struct qos_data *message)</argsstring>
+        <name>qos_message_add</name>
+        <param>
+          <type>struct <ref refid="structqos__data" kindref="compound">qos_data</ref> *</type>
+          <declname>message</declname>
+        </param>
+        <briefdescription>
+<para>Add a message to the library. If the message fails to be added to the internal list because the list is full, the message will be notified with the QOS_EVT_MESSAGE_REMOVED_FROM_LIST event, so that it can be freed if heap allocated. When this API is called, the event QOS_EVT_MESSAGE_NEW is always notified with the corresponding message. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>message</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the corresponding message</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>0</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>on success. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>-EINVAL</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If the message pointer is NULL. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>-ENOMEM</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If the internal list is full. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/qos.h" line="150" column="5" declfile="include/qos.h" declline="150" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="group__qos_1gaa3b6098d7d0c5b557f46365f7ae1dd3c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int qos_message_remove</definition>
+        <argsstring>(uint32_t id)</argsstring>
+        <name>qos_message_remove</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+<para>Remove message from internal list. An event QOS_EVT_MESSAGE_REMOVED_FROM_LIST will be notified in the library callback. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Message ID of message to be removed.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>0</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>on success. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>-ENODATA</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If the passed in message ID is not found in the internal list. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/qos.h" line="160" column="5" declfile="include/qos.h" declline="160" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="group__qos_1ga9e9ac45c7ff8195ea2f7e83111a82a03" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool qos_message_has_flag</definition>
+        <argsstring>(const struct qos_data *message, uint32_t flag)</argsstring>
+        <name>qos_message_has_flag</name>
+        <param>
+          <type>const struct <ref refid="structqos__data" kindref="compound">qos_data</ref> *</type>
+          <declname>message</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>flag</declname>
+        </param>
+        <briefdescription>
+<para>Function that checks if a flag is part of the bitmask associated with a message. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>message</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to message. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>flag</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Flag to check for.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>true</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if the flag checked for is a part of the message flag bitmask. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>false</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if flag checked for is not a part of the message flag bitmask. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/qos.h" line="170" column="6" declfile="include/qos.h" declline="170" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="group__qos_1gab40df62651913d83ae8a51c6cdae4d8b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void qos_message_print</definition>
+        <argsstring>(const struct qos_data *message)</argsstring>
+        <name>qos_message_print</name>
+        <param>
+          <type>const struct <ref refid="structqos__data" kindref="compound">qos_data</ref> *</type>
+          <declname>message</declname>
+        </param>
+        <briefdescription>
+<para>Function that prints the contents of a qos message structure. This requires that the library log level is set to debug level. CONFIG_QOS_LOG_LEVEL_DBG=y. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/qos.h" line="176" column="6" declfile="include/qos.h" declline="176" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="group__qos_1ga53870ab671709f85da3c9c9ed6ee4606" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint16_t</type>
+        <definition>uint16_t qos_message_id_get_next</definition>
+        <argsstring>(void)</argsstring>
+        <name>qos_message_id_get_next</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Generate message ID that counts from QOS_MESSAGE_ID_BASE message ID base. Count is reset if UINT16_MAX is reached. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Message</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>ID. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/qos.h" line="183" column="10" declfile="include/qos.h" declline="183" declcolumn="10"/>
+      </memberdef>
+      <memberdef kind="function" id="group__qos_1ga4461a5f74134f422e3191dc32c773248" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void qos_message_notify_all</definition>
+        <argsstring>(void)</argsstring>
+        <name>qos_message_notify_all</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Notify all pending messages. All messages that are currently stored in the internal list will be notified via the QOS_EVT_MESSAGE_TIMER_EXPIRED event. This API does not clear the internal pending list. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/qos.h" line="189" column="6" declfile="include/qos.h" declline="189" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="group__qos_1ga958989c04c26681215ab0cc4472d99cf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void qos_message_remove_all</definition>
+        <argsstring>(void)</argsstring>
+        <name>qos_message_remove_all</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Remove all pending messages. All messages that are currently stored in the internal list will removed. Each message will be notified in the QOS_EVT_MESSAGE_REMOVED_FROM_LIST callback event. This API clears the internal pending list. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/qos.h" line="196" column="6" declfile="include/qos.h" declline="196" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="group__qos_1gafb915070e20326739eddf74ddd0ece76" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void qos_timer_reset</definition>
+        <argsstring>(void)</argsstring>
+        <name>qos_timer_reset</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Reset and stop an ongoing timer backoff. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/qos.h" line="199" column="6" declfile="include/qos.h" declline="199" declcolumn="6"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="group__qos_1ga7e15941995698236d043e8e54844de63" prot="public" static="no">
+        <name>QOS_MESSAGE_ID_BASE</name>
+        <initializer>15000</initializer>
+        <briefdescription>
+<para>ID base used for message IDs retrieved using <ref refid="group__qos_ga53870ab671709f85da3c9c9ed6ee4606_1ga53870ab671709f85da3c9c9ed6ee4606" kindref="member">qos_message_id_get_next()</ref> API. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/qos.h" line="26" column="9" bodyfile="include/qos.h" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>QoS library that provides functionality to store and handle acknowledgment of multiple in-flight messages. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

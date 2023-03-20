@@ -1,0 +1,326 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="group__event__manager__proxy" kind="group">
+    <compoundname>event_manager_proxy</compoundname>
+    <title>Event Manager Proxy</title>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__event__manager__proxy_1gadbc0285baec71f036cdbffdcedcd5be4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int event_manager_proxy_add_remote</definition>
+        <argsstring>(const struct device *instance)</argsstring>
+        <name>event_manager_proxy_add_remote</name>
+        <param>
+          <type>const struct device *</type>
+          <declname>instance</declname>
+        </param>
+        <briefdescription>
+<para>Add remote core communication channel. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function registers endpoint used to communication with another core.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>instance</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The instance used for IPC service to transfer data between cores. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>-EALREADY</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Given remote instance was added already. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>-ENOMEM</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>No place for the new endpoint. See<verbatim>embed:rst:inline :kconfig:option:`CONFIG_EVENT_MANAGER_PROXY_CH_COUNT` </verbatim>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>-EIO</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Comes from IPC service, see ipc_service_open_instance or ipc_service_register_endpoint. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>-EINVAL</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Comes from IPC service, see ipc_service_open_instance or ipc_service_register_endpoint. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>-EBUSY</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Comes from IPC service, see ipc_service_register_endpoint.</para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>0</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>On success. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>errno codes depending on the IPC service backend implementation. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/event_manager_proxy.h" line="54" column="5" declfile="include/event_manager_proxy.h" declline="54" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="group__event__manager__proxy_1gaa0b37caf8ac560a5f84acce34334e5ae" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int event_manager_proxy_subscribe</definition>
+        <argsstring>(const struct device *instance, const struct event_type *local_event_id, const char *remote_event_name)</argsstring>
+        <name>event_manager_proxy_subscribe</name>
+        <param>
+          <type>const struct device *</type>
+          <declname>instance</declname>
+        </param>
+        <param>
+          <type>const struct event_type *</type>
+          <declname>local_event_id</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>remote_event_name</declname>
+        </param>
+        <briefdescription>
+<para>Subscribe for the remote event. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function registers the local event proxy to remote event proxy to listen selected event.</para>
+<para><simplesect kind="note"><para>This function may wait for the IPC endpoint to bond. To be sure that it will be available to bond write the code this way that all the remotes are added first by <ref refid="group__event__manager__proxy_gadbc0285baec71f036cdbffdcedcd5be4_1gadbc0285baec71f036cdbffdcedcd5be4" kindref="member">event_manager_proxy_add_remote</ref> and then start to add listeners. In other case if the other core adds more than one remote, we run into risk that we will wait for the endpoint to bond while the remote core waits for other endpoint to bond and never configures the requested endpoint.</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>instance</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Remote IPC instance. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>local_event_id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The id of the event we wish to receive for the event on the remote core. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>remote_event_name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The name of the event to register.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>0</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>On success. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>-EACCES</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Function called after <ref refid="group__event__manager__proxy_gad737d9244f8f9df12d1c0a2bf1a89de4_1gad737d9244f8f9df12d1c0a2bf1a89de4" kindref="member">event_manager_proxy_start</ref>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>-EPIPE</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The remote core did not bond in during timeout period. No communication. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>-ETIME</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Timeout while waiting for the response from the other core. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>errno code. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/event_manager_proxy.h" line="80" column="5" declfile="include/event_manager_proxy.h" declline="80" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="group__event__manager__proxy_1gad737d9244f8f9df12d1c0a2bf1a89de4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int event_manager_proxy_start</definition>
+        <argsstring>(void)</argsstring>
+        <name>event_manager_proxy_start</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Start events transfer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function sends start command to all added remote cores. This command finalizes initialization process, therefore the functions <ref refid="group__event__manager__proxy_gadbc0285baec71f036cdbffdcedcd5be4_1gadbc0285baec71f036cdbffdcedcd5be4" kindref="member">event_manager_proxy_add_remote</ref> and <ref refid="group__event__manager__proxy_gaa0b37caf8ac560a5f84acce34334e5ae_1gaa0b37caf8ac560a5f84acce34334e5ae" kindref="member">event_manager_proxy_subscribe</ref> cannot be used anymore.</para>
+<para><parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>0</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>On success. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>-EPIPE</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The remote core did not bond in during timeout period. No communication. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>errno code. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/event_manager_proxy.h" line="97" column="5" declfile="include/event_manager_proxy.h" declline="97" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="group__event__manager__proxy_1gabafb9a3283216697574ce8cbbf6b915c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int event_manager_proxy_wait_for_remotes</definition>
+        <argsstring>(k_timeout_t timeout)</argsstring>
+        <name>event_manager_proxy_wait_for_remotes</name>
+        <param>
+          <type>k_timeout_t</type>
+          <declname>timeout</declname>
+        </param>
+        <briefdescription>
+<para>Wait for all the remote cores to report their readiness. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function stops the current thread if there is any remote that did not finish its initialization.</para>
+<para><simplesect kind="note"><para>Call this function only after <ref refid="group__event__manager__proxy_gad737d9244f8f9df12d1c0a2bf1a89de4_1gad737d9244f8f9df12d1c0a2bf1a89de4" kindref="member">event_manager_proxy_start</ref>. </para>
+</simplesect>
+<simplesect kind="note"><para>This function may be called multiple times.</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>timeout</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Waiting period for all the remote cores to finish theirs initialization.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>0</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>On success. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>-ETIME</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Timeout reached. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/event_manager_proxy.h" line="115" column="5" declfile="include/event_manager_proxy.h" declline="115" declcolumn="5"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="group__event__manager__proxy_1gaca3033f9ddb719309a6703546918a9f0" prot="public" static="no">
+        <name>EVENT_MANAGER_PROXY_SUBSCRIBE</name>
+        <param><defname>instance</defname></param>
+        <param><defname>ename</defname></param>
+        <initializer>	<ref refid="group__event__manager__proxy_gaa0b37caf8ac560a5f84acce34334e5ae_1gaa0b37caf8ac560a5f84acce34334e5ae" kindref="member">event_manager_proxy_subscribe</ref>((instance), _EVENT_ID(ename), STRINGIFY(ename))</initializer>
+        <briefdescription>
+<para>Subscribe for the remote event. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Register the listener for the event from the remote core. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>instance</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The instance used for IPC service to transfer data between cores. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ename</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Name of the event. The event name has to be the same on remote and local cores. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>See <ref refid="group__event__manager__proxy_gaa0b37caf8ac560a5f84acce34334e5ae_1gaa0b37caf8ac560a5f84acce34334e5ae" kindref="member">event_manager_proxy_subscribe</ref>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/event_manager_proxy.h" line="34" column="9" bodyfile="include/event_manager_proxy.h" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Event Manager Proxy. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

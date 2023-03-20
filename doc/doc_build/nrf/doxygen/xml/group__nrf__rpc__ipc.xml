@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="group__nrf__rpc__ipc" kind="group">
+    <compoundname>nrf_rpc_ipc</compoundname>
+    <title>nRF RPC IPC Service transport</title>
+    <innerclass refid="structnrf__rpc__ipc__endpoint" prot="public">nrf_rpc_ipc_endpoint</innerclass>
+    <innerclass refid="structnrf__rpc__ipc" prot="public">nrf_rpc_ipc</innerclass>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="group__nrf__rpc__ipc_1ga0219e7b354e765895e177d043b6d08e4" prot="public" static="no" mutable="no">
+        <type>const struct nrf_rpc_tr_api</type>
+        <definition>const struct nrf_rpc_tr_api nrf_rpc_ipc_service_api</definition>
+        <argsstring></argsstring>
+        <name>nrf_rpc_ipc_service_api</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/nrf_rpc/nrf_rpc_ipc.h" line="1" column="0" declfile="include/nrf_rpc/nrf_rpc_ipc.h" declline="1" declcolumn="0"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="group__nrf__rpc__ipc_1ga493b5459e2a2d39c996996401ce04a65" prot="public" static="no">
+        <name>NRF_RPC_IPC_TRANSPORT_DECLARE</name>
+        <param><defname>_name</defname></param>
+        <initializer>	extern const struct nrf_rpc_tr _name</initializer>
+        <briefdescription>
+<para>Extern nRF RPC IPC Service transport declaration. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Can be used in header files. It is useful when several nRF RPC group are defined amongst different source files but they can share the same transport instance.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">_name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Name of the nRF RPC transport. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/nrf_rpc/nrf_rpc_ipc.h" line="71" column="9" bodyfile="include/nrf_rpc/nrf_rpc_ipc.h" bodystart="71" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__nrf__rpc__ipc_1ga2302fc4263e07193dd06c886c05c36f1" prot="public" static="no">
+        <name>NRF_RPC_IPC_TRANSPORT</name>
+        <param><defname>_name</defname></param>
+        <param><defname>_ipc</defname></param>
+        <param><defname>_ept_name</defname></param>
+        <initializer>	static struct <ref refid="structnrf__rpc__ipc" kindref="compound">nrf_rpc_ipc</ref> _name##_instance = {                       \
+	       .ipc = _ipc,                                                  \
+	       .endpoint.ept_cfg.name = _ept_name,                           \
+	};                                                                   \
+									     \
+	const struct nrf_rpc_tr _name = {                                    \
+		.api = &amp;<ref refid="group__nrf__rpc__ipc_ga0219e7b354e765895e177d043b6d08e4_1ga0219e7b354e765895e177d043b6d08e4" kindref="member">nrf_rpc_ipc_service_api</ref>,                             \
+		.ctx = &amp;_name##_instance                                     \
+	}</initializer>
+        <briefdescription>
+<para>Defines the nRF IPC Transport instance. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>It creates the nRF RPC IPC Service transport instance. The <computeroutput>_ipc</computeroutput> parameter defines the destination remote CPU. A single instance of this transport can be shared between several nRF RPC groups. Thus, a single endpoint is shared by multiple nRF RPC groups. It is also allowed to share a single IPC instance with a different endpoint name between groups.</para>
+<para>Example:</para>
+<para><itemizedlist>
+<listitem><para>Two groups share the same IPC instance and the same endpoint:</para>
+<para>NRF_RPC_IPC_TRANSPORT(nrf_rpc_1, DEVICE_DT_GET(DT_NODELABEL(ipc0)), &quot;nrf_rpc_ept_1&quot;);</para>
+<para>NRF_RPC_GROUP_DEFINE(group_1, &quot;Group_1&quot;, &amp;nrf_rpc_1, NULL, NULL, NULL); NRF_RPC_GROUP_DEFINE(group_2, &quot;Group_2&quot;, &amp;nrf_rpc_1, NULL, NULL, NULL);</para>
+</listitem><listitem><para>Two groups share the same IPC instance but endpoint is different for each group:</para>
+<para>NRF_RPC_IPC_TRANSPORT(nrf_rpc_1, DEVICE_DT_GET(DT_NODELABEL(ipc0)), &quot;nrf_rpc_ept_1&quot;); NRF_RPC_IPC_TRANSPORT(nrf_rpc_2, DEVICE_DT_GET(DT_NODELABEL(ipc0)), &quot;nrf_rpc_ept_2&quot;);</para>
+<para>NRF_RPC_GROUP_DEFINE(group_1, &quot;Group_1&quot;, &amp;nrf_rpc_1, NULL, NULL, NULL); NRF_RPC_GROUP_DEFINE(group_2, &quot;Group_2&quot;, &amp;nrf_rpc_2, NULL, NULL, NULL);</para>
+</listitem><listitem><para>Each group use different IPC instance, for example each IPC instance defined communication with different remote CPUs:</para>
+<para>NRF_RPC_IPC_TRANSPORT(nrf_rpc_1, DEVICE_DT_GET(DT_NODELABEL(ipc0)), &quot;nrf_rpc_ept&quot;); NRF_RPC_IPC_TRANSPORT(nrf_rpc_2, DEVICE_DT_GET(DT_NODELABEL(ipc1)), &quot;nrf_rpc_ept&quot;);</para>
+<para>NRF_RPC_GROUP_DEFINE(group_1, &quot;Group_1&quot;, &amp;nrf_rpc_1, NULL, NULL, NULL); NRF_RPC_GROUP_DEFINE(group_2, &quot;Group_2&quot;, &amp;nrf_rpc_2, NULL, NULL, NULL);</para>
+</listitem></itemizedlist>
+</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">_name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>nRF RPC IPC Service transport instance name. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">_ipc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The instance used for the IPC Service to transfer data between CPUs. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">_ept_name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>IPC Service endpoint name. The endpoint must have the same name on the corresponding remote CPU. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/nrf_rpc/nrf_rpc_ipc.h" line="113" column="9" bodyfile="include/nrf_rpc/nrf_rpc_ipc.h" bodystart="113" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>nRF RPC IPC Service transport. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

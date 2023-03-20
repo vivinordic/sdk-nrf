@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Secure bootloader chain &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../_static/js/ncs.js"
+></script>
+<script src="../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Adding a bootloader chain" href="bootloader_adding.html" />
+    <link rel="prev" title="Bootloaders and Device Firmware Updates" href="index.html" />
+<link
+  href="../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev_model.html">Development model</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../app_dev.html">Application development</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../board_support/index.html">Board support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pin_control/index.html">Pin control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../build_and_config_system/index.html">Build and configuration system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../optimizing/index.html">Optimizing application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ap_protect/index.html">Enabling access port protection mechanism</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Bootloaders and Device Firmware Updates</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Secure bootloader chain</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#chain-of-trust">Chain of trust</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#architecture">Architecture</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="bootloader_adding.html">Adding a bootloader chain</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bootloader_testing.html">Testing the bootloader chain</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bootloader_external_flash.html">Using external flash memory partitions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bootloader_config.html">Customizing the bootloader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fw_update.html">Firmware updates</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../logging/index.html">Logging in nRF Connect SDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multi_image/index.html">Multi-image builds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../testing_unity_cmock/index.html">Testing with Unity and CMock</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tfm/index.html">Running applications with Trusted Firmware-M</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_fem/index.html">Working with RF front-end modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../wifi_coex/index.html">Adding Wi-Fi Coexistence support to short-range radio applications</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drivers.html">Drivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../app_dev.html">Application development</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Bootloaders and Device Firmware Updates</a></li>
+      <li class="breadcrumb-item active">Secure bootloader chain</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/app_dev/bootloaders_and_dfu/bootloader.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="secure-bootloader-chain">
+<span id="ug-bootloader"></span><h1>Secure bootloader chain<a class="headerlink" href="#secure-bootloader-chain" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#chain-of-trust" id="id6">Chain of trust</a></p></li>
+<li><p><a class="reference internal" href="#architecture" id="id7">Architecture</a></p>
+<ul>
+<li><p><a class="reference internal" href="#first-stage-immutable-bootloader" id="id8">First-stage immutable bootloader</a></p></li>
+<li><p><a class="reference internal" href="#second-stage-upgradable-bootloader" id="id9">Second-stage Upgradable bootloader</a></p></li>
+<li><p><a class="reference internal" href="#flash-memory-partitions" id="id10">Flash memory partitions</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>The architecture behind the secure bootloader solutions provided by nRF Connect SDK is based on the <em>chain of trust</em> concept.</p>
+<p>By using this secure bootloader chain, you can ensure that all code being executed has been authorized and that your application is protected against running altered code.
+If, for example, an attacker tries to modify your application, or you have a bug in your code that overwrites parts of the application firmware image, the secure bootloader chain detects that the firmware has been altered and your application does not start.</p>
+<p>Choose the structure of the secure bootloader chain depending on which firmware update scheme you need:</p>
+<ul class="simple">
+<li><p>If you want the bootloader to perform firmware updates for only upgrading an application, then use the <a class="reference internal" href="#immutable-bootloader"><span class="std std-ref">single-stage, immutable bootloader</span></a> solution.</p></li>
+<li><p>If you want the bootloader to support firmware updates for both itself and the application, then use the <a class="reference internal" href="#upgradable-bootloader"><span class="std std-ref">two-stage, upgradable bootloader</span></a> solution.</p></li>
+</ul>
+<section id="chain-of-trust">
+<h2><a class="toc-backref" href="#id6">Chain of trust</a><a class="headerlink" href="#chain-of-trust" title="Permalink to this heading"></a></h2>
+<p>A secure system depends on building and maintaining a chain of trust through all the layers in the system.
+Each step in this chain guarantees that the next step can be trusted to have certain properties because any unauthorized modification of a subsequent step will be detected and the process halted.
+Each layer guarantees the trustworthiness of the following layer, all the way back to a property in the system referred to as <em>root of trust</em> (RoT).</p>
+<p>A RoT consists of hardware, software, and data components that must always behave as expected because any misbehavior cannot be detected.</p>
+<p>You can compare a chain of trust to the concept of a door with its root of trust being a key:</p>
+<ol class="arabic simple">
+<li><p>You trust a door because you trust the lock.</p></li>
+<li><p>You trust the lock because you trust the key.</p></li>
+<li><p>You trust the key because it is in your pocket.</p></li>
+</ol>
+<p>If you lose this key, you can no longer trust this door.</p>
+<p>In the context of the bootloader, a step in the chain of trust is the boot of a specific image.
+As such, the secure bootloader chain consists of a sequence of images that are booted one after the other.</p>
+<p>For a system to establish a root of trust, the first image in the system verifies the signature of the next image, which can either be an application or another bootloader image.
+If the next image is another bootloader image, that one must verify the image following it to maintain the chain of trust.
+After all of the images in the bootloader chain have been verified successfully, the application starts.</p>
+</section>
+<section id="architecture">
+<span id="ug-bootloader-architecture"></span><h2><a class="toc-backref" href="#id7">Architecture</a><a class="headerlink" href="#architecture" title="Permalink to this heading"></a></h2>
+<p>There are two implementations currently supported:</p>
+<ul>
+<li><p>The first implementation provides the first stage in the chain, the immutable <a class="reference internal" href="../../samples/bootloader/README.html#bootloader"><span class="std std-ref">nRF Secure Immutable Bootloader</span></a>, which could be either nRF Secure Immutable Bootloader or <span class="xref std std-doc">MCUboot</span>.
+It does not support bootloader upgradability, but it is useful if you need just the capability to update your application.</p>
+<p>See the following image for an abstract representation of the memory layout for an application that uses only an immutable bootloader in its boot chain:</p>
+<figure class="align-default">
+<img alt="Memory layout" src="../../_images/bootloader_memory_layout_onestage.svg" /></figure>
+</li>
+<li><p>The second implementation provides both the first stage in the chain, the immutable bootloader (nRF Secure Immutable Bootloader), and uses <span class="xref std std-doc">MCUboot</span> as the upgradable second-stage bootloader.
+This implementation provides the capability to update both your bootloader and your application.
+This is useful when a bootloader performs additional complex operations, like using a software stack.</p>
+<p>See the following image for an abstract representation of the memory layout for an application that uses both an immutable and an upgradable bootloader in its boot chain:</p>
+<figure class="align-default">
+<img alt="Memory layout" src="../../_images/bootloader_memory_layout.svg" /></figure>
+</li>
+</ul>
+<p>For detailed information about the memory layout, see the partition configuration in the <code class="file docutils literal notranslate"><span class="pre">partitions.yml</span></code> file, located in the build folder directory, or run <code class="docutils literal notranslate"><span class="pre">ninja</span> <span class="pre">partition_manager_report</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You must enable the Partition Manager to make the <code class="file docutils literal notranslate"><span class="pre">partitions.yml</span></code> file and the <code class="docutils literal notranslate"><span class="pre">partition_manager_report</span></code> target available.
+See <a class="reference internal" href="../../scripts/partition_manager/partition_manager.html#partition-manager"><span class="std std-ref">Partition Manager</span></a> and <a class="reference internal" href="../multi_image/index.html#ug-multi-image"><span class="std std-ref">Multi-image builds</span></a> for details.</p>
+</div>
+<p>By default, building an application with any bootloader configuration creates a <a class="reference internal" href="../multi_image/index.html#ug-multi-image"><span class="std std-ref">multi-image build</span></a>, where the <a class="reference internal" href="../../scripts/partition_manager/partition_manager.html#partition-manager"><span class="std std-ref">Partition Manager</span></a> manages its memory partitions.
+When building an application with <a class="reference internal" href="../board_support/index.html#app-boards-spe-nspe-cpuapp-ns"><span class="std std-ref">Cortex-M Security Extensions (CMSE) enabled</span></a>, then <a class="reference internal" href="../tfm/index.html#ug-tfm"><span class="std std-ref">Trusted Firmware-M (TF-M)</span></a> is also built with the image automatically.</p>
+<section id="first-stage-immutable-bootloader">
+<span id="immutable-bootloader"></span><h3><a class="toc-backref" href="#id8">First-stage immutable bootloader</a><a class="headerlink" href="#first-stage-immutable-bootloader" title="Permalink to this heading"></a></h3>
+<p>The first step in the chain of trust is a secure, immutable, first-stage bootloader.</p>
+<p>This immutable bootloader runs after every reset and establishes the root of trust by verifying the signature and metadata of the next image in the boot sequence.
+If the verification fails, the boot process stops.
+This way, the immutable bootloader can guarantee that the next image in the boot sequence will not start up if it has been tampered with in any way.
+For example, if an attacker attempts to take over the device by altering the firmware, the device will not boot, and thus not run the infected code.</p>
+<p>The immutable bootloader is flash-locked and cannot be modified or deleted without erasing the entire device.
+For the nRF Secure Immutable Bootloader, see <a class="reference internal" href="../../samples/bootloader/README.html#bootloader-rot"><span class="std std-ref">Locking the flash memory</span></a> for more information.</p>
+<p>Except for providing your own keys, there is no need to modify the immutable bootloader in any way before you program it.
+The verification provided by this bootloader is recommended and suitable for all the most common user scenarios and includes the following checks:</p>
+<ul class="simple">
+<li><p>Signature verification - Verifies that the key used for signing the next image in the boot sequence matches one of the provided public keys.</p></li>
+<li><p>Metadata verification - Checks that the images are compatible.</p></li>
+</ul>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>You must generate and use your own signing keys while in development and before deploying when using either MCUboot or the nRF Secure Immutable Bootloader as an immutable bootloader.
+See <a class="reference internal" href="fw_update.html#ug-fw-update-development-keys"><span class="std std-ref">Using development keys</span></a> for more information.</p>
+</div>
+<p>The <a class="reference internal" href="index.html#app-bootloaders-support-table"><span class="std std-ref">bootloader capabilities table</span></a> indicates the bootloaders that are valid for use as immutable bootloaders.</p>
+</section>
+<section id="second-stage-upgradable-bootloader">
+<span id="upgradable-bootloader"></span><h3><a class="toc-backref" href="#id9">Second-stage Upgradable bootloader</a><a class="headerlink" href="#second-stage-upgradable-bootloader" title="Permalink to this heading"></a></h3>
+<p>If you also need the capability of updating the bootloader, you can add a second-stage upgradable bootloader to the bootloader chain.
+It can be updated through either wired or <a class="reference internal" href="../../libraries/networking/fota_download.html#lib-fota-download"><span class="std std-ref">over-the-air (OTA)</span></a> updates, unlike the immutable bootloader.</p>
+<p>The immutable bootloader, acting as the root of trust, protects the upgradable bootloader, which must also continue the chain of trust by verifying the next image in the boot sequence.
+For this reason, the immutable bootloader is responsible for upgrading the upgradable bootloader and verifying its metadata and image integrity.
+For more information about how the immutable bootloader accomplishes this, see the <a class="reference internal" href="../../samples/bootloader/README.html#bootloader-flash-layout"><span class="std std-ref">Flash memory layout</span></a> section of the nRF Secure Immutable Bootloader.</p>
+<p>The upgradable bootloader carries out the same signature and metadata verification as the immutable bootloader.
+Also, it can upgrade both itself and the following image in the boot sequence, which, in most cases, is an application.</p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>You should add a second-stage bootloader only when necessary by the design or firmware upgrade needs.
+Adding the second stage bootloader for no reason will lead to a degradation of the system’s overall security, as attackers can exploit bugs that may exist in either bootloader.</p>
+</div>
+<p>The <a class="reference internal" href="index.html#app-bootloaders-support-table"><span class="std std-ref">bootloader capabilities table</span></a> indicates the bootloaders that are valid for use as an upgradable bootloader.</p>
+<section id="pre-signed-variants">
+<span id="upgradable-bootloader-presigned-variants"></span><h4>Pre-signed variants<a class="headerlink" href="#pre-signed-variants" title="Permalink to this heading"></a></h4>
+<p>When programming an upgradable bootloader, the build system can automatically generate pre-signed variants of the image verified by the nRF Secure Immutable Bootloader.
+The upgradable bootloader does not use pre-signed variants for updating the application.</p>
+<p>You must build with pre-signed variants when building upgrade images for the image that follows the nRF Secure Immutable Bootloader in the boot chain, such as the upgradable bootloader or the application.
+Firmware update packages of the upgradable bootloader must contain images for both slots, since it may not be known which slot is in use by its current version while deployed in the field.
+See the <a class="reference internal" href="../../samples/bootloader/README.html#bootloader-pre-signed-variants"><span class="std std-ref">Pre-signed variants</span></a> section of the nRF Secure Immutable Bootloader documentation for more details.</p>
+<p>When not building firmware update packages, pre-signed variants are not strictly necessary but can be used as a backup mechanism in case the image in the primary slot becomes corrupted, for example from a bit-flip.
+Having both slots programmed allows the immutable bootloader to invalidate the corrupt image and boot into a valid one.</p>
+</section>
+</section>
+<section id="flash-memory-partitions">
+<span id="ug-bootloader-flash"></span><h3><a class="toc-backref" href="#id10">Flash memory partitions</a><a class="headerlink" href="#flash-memory-partitions" title="Permalink to this heading"></a></h3>
+<p>Flash memory partitioning is handled differently for each bootloader.</p>
+<p>After building the application, you can print a report of how the flash partitioning has been handled for a bootloader, or combination of bootloaders, by using <a class="reference internal" href="../../scripts/partition_manager/partition_manager.html#pm-partition-reports"><span class="std std-ref">Partition placement reports</span></a>.</p>
+<section id="nsib-partitions">
+<span id="ug-bootloader-flash-b0"></span><h4>nRF Secure Immutable Bootloader partitions<a class="headerlink" href="#nsib-partitions" title="Permalink to this heading"></a></h4>
+<p>See <a class="reference internal" href="../../samples/bootloader/README.html#bootloader-flash-layout"><span class="std std-ref">Flash memory layout</span></a> for implementation-specific information about this bootloader.</p>
+</section>
+<section id="mcuboot-partitions">
+<span id="ug-bootloader-flash-mcuboot"></span><h4>MCUboot partitions<a class="headerlink" href="#mcuboot-partitions" title="Permalink to this heading"></a></h4>
+<p>For most applications, MCUboot requires two image slots:</p>
+<ul class="simple">
+<li><p>The <em>primary slot</em>, containing the application that will be booted.</p></li>
+<li><p>The <em>secondary slot</em>, where a new application can be stored before it is activated.</p></li>
+</ul>
+<p>It is possible to use only the <em>primary slot</em> for MCUboot by using the <code class="docutils literal notranslate"><span class="pre">CONFIG_SINGLE_APPLICATION_SLOT</span></code> option.
+This is particularly useful in memory-constrained devices to avoid providing space for two images.</p>
+<p>See the <em>Image Slots</em> section in the <span class="xref std std-doc">MCUboot documentation</span> for more information.</p>
+<p>The nRF Connect SDK variant of MCUboot uses the <a class="reference internal" href="../../scripts/partition_manager/partition_manager.html#partition-manager"><span class="std std-ref">Partition Manager</span></a> to configure the flash memory partitions for these image slots.
+In the default configuration, defined in <code class="file docutils literal notranslate"><span class="pre">bootloader/mcuboot/boot/zephyr/pm.yml</span></code>, the partition manager dynamically sets up the partitions as required for MCUboot.
+For example, the partition layout for <code class="file docutils literal notranslate"><span class="pre">zephyr/samples/hello_world</span></code> using MCUboot on the <code class="docutils literal notranslate"><span class="pre">nrf52840dk_nrf52840</span></code> board would look like the following:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go"> (0x100000 - 1024.0kB):</span>
+<span class="go">+-----------------------------------------+</span>
+<span class="go">| 0x0: mcuboot (0xc000)                   |</span>
+<span class="go">+---0xc000: mcuboot_primary (0x7a000)-----+</span>
+<span class="go">| 0xc000: mcuboot_pad (0x200)             |</span>
+<span class="go">+---0xc200: mcuboot_primary_app (0x79e00)-+</span>
+<span class="go">| 0xc200: app (0x79e00)                   |</span>
+<span class="go">| 0x86000: mcuboot_secondary (0x7a000)    |</span>
+<span class="go">+-----------------------------------------+</span>
+</pre></div>
+</div>
+<p>You can also store secondary slot images in external flash memory when using MCUboot.
+See <a class="reference internal" href="bootloader_external_flash.html#ug-bootloader-external-flash"><span class="std std-ref">Using external flash memory partitions</span></a> for more information.</p>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="bootloader_adding.html" class="btn btn-neutral float-right" title="Adding a bootloader chain" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Bootloaders and Device Firmware Updates" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

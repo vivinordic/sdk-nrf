@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Testing and debugging an application &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../_static/js/ncs.js"
+></script>
+<script src="../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Modifying an application" href="modifying.html" />
+    <link rel="prev" title="Building and programming an application" href="programming.html" />
+<link
+  href="../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../getting_started.html">Getting started</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="recommended_versions.html">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assistant.html">Installing automatically</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installing.html">Installing manually</a></li>
+<li class="toctree-l2"><a class="reference internal" href="programming.html">Building and programming an application</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Testing and debugging an application</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-connect-with-nrfvsc">How to connect with nRF Connect for VS Code extension</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-connect-with-putty">How to connect with PuTTY</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-use-rtt">How to use RTT</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#connecting-using-rtt">Connecting using RTT</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-connect-with-lte-link-monitor">How to connect with LTE Link Monitor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#debugging-an-application">Debugging an application</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#debugging-secure-and-non-secure-firmware">Debugging secure and non-secure firmware</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#debug-configuration">Debug configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#debug-tools">Debug tools</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modifying.html">Modifying an application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="updating.html">Updating repositories and tools</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../drivers.html">Drivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../getting_started.html">Getting started</a></li>
+      <li class="breadcrumb-item active">Testing and debugging an application</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/getting_started/testing.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="testing-and-debugging-an-application">
+<span id="gs-testing"></span><h1>Testing and debugging an application<a class="headerlink" href="#testing-and-debugging-an-application" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#how-to-connect-with-nrfvsc" id="id6">How to connect with nRF Connect for VS Code extension</a></p></li>
+<li><p><a class="reference internal" href="#how-to-connect-with-putty" id="id7">How to connect with PuTTY</a></p></li>
+<li><p><a class="reference internal" href="#how-to-use-rtt" id="id8">How to use RTT</a></p>
+<ul>
+<li><p><a class="reference internal" href="#connecting-using-rtt" id="id9">Connecting using RTT</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#how-to-connect-with-lte-link-monitor" id="id10">How to connect with LTE Link Monitor</a></p></li>
+<li><p><a class="reference internal" href="#debugging-an-application" id="id11">Debugging an application</a></p>
+<ul>
+<li><p><a class="reference internal" href="#debugging-secure-and-non-secure-firmware" id="id12">Debugging secure and non-secure firmware</a></p></li>
+<li><p><a class="reference internal" href="#debug-configuration" id="id13">Debug configuration</a></p></li>
+<li><p><a class="reference internal" href="#debug-tools" id="id14">Debug tools</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>For simplicity, this guide will refer to both <a class="reference internal" href="../samples.html#samples"><span class="std std-ref">samples</span></a> and <a class="reference internal" href="../applications.html#applications"><span class="std std-ref">applications</span></a> as “applications”.</p>
+<p>Follow the instructions in the testing section of the application’s documentation to make sure that the application runs as expected.</p>
+<p>Information about the current state of the application is usually provided through the LEDs or through UART, or through both.
+See the user interface section of the application’s documentation for description of the LED states or available UART commands.</p>
+<section id="how-to-connect-with-nrfvsc">
+<span id="testing-vscode"></span><h2><a class="toc-backref" href="#id6">How to connect with nRF Connect for VS Code extension</a><a class="headerlink" href="#how-to-connect-with-nrfvsc" title="Permalink to this heading"></a></h2>
+<p>The nRF Connect for VS Code extension is a complete IDE for developing applications for nRF91, nRF53 and nRF52 Series devices.
+The extension pack includes an integrated serial port and RTT terminal, which you can use to connect to your board.
+For detailed instructions, see the <a class="reference external" href="https://nrfconnect.github.io/vscode-nrf-connect/get_started/quick_debug.html">How to connect to the terminal</a> section on the <a class="reference external" href="https://nrfconnect.github.io/vscode-nrf-connect">nRF Connect for Visual Studio Code</a> documentation site.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The nRF Connect for VS Code extension lets you build and program with custom options.
+For more information, read about the advanced <a class="reference external" href="https://nrfconnect.github.io/vscode-nrf-connect/guides/debug_advanced.html#custom-launch-and-debug-configurations">Custom launch and debug configurations</a> and <a class="reference external" href="https://nrfconnect.github.io/vscode-nrf-connect/guides/bd_work_with_boards.html#how-to-flash-boards">Application-specific flash options</a> in the extension documentation.</p>
+</div>
+</section>
+<section id="how-to-connect-with-putty">
+<span id="putty"></span><h2><a class="toc-backref" href="#id7">How to connect with PuTTY</a><a class="headerlink" href="#how-to-connect-with-putty" title="Permalink to this heading"></a></h2>
+<p>To see the UART output, connect to the development kit with a terminal emulator, for example, PuTTY.</p>
+<p>Connect with the following settings:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Baud rate: 115200</p></li>
+<li><p>8 data bits</p></li>
+<li><p>1 stop bit</p></li>
+<li><p>No parity</p></li>
+<li><p>HW flow control: None</p></li>
+</ul>
+</div></blockquote>
+<p>If you want to send commands through UART, make sure to configure the required line endings and turn on local echo and local line editing:</p>
+<figure class="align-default">
+<img alt="PuTTY configuration for sending commands through UART" src="../_images/putty.svg" /></figure>
+<p>UART can also be used for logging purposes as one of the <a class="reference internal" href="../app_dev/logging/index.html#ug-logging-backends"><span class="std std-ref">logging backends</span></a>.</p>
+</section>
+<section id="how-to-use-rtt">
+<span id="testing-rtt"></span><h2><a class="toc-backref" href="#id8">How to use RTT</a><a class="headerlink" href="#how-to-use-rtt" title="Permalink to this heading"></a></h2>
+<p>To view the logging output using Real Time Transfer (RTT), modify the configuration settings of the application to override the default UART console:</p>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>CONFIG_USE_SEGGER_RTT=y
+CONFIG_RTT_CONSOLE=y
+CONFIG_UART_CONSOLE=n
+</pre></div>
+</div>
+</div></blockquote>
+<p>SEGGER’s J-Link RTT can also be used for logging purposes as one of the <a class="reference internal" href="../app_dev/logging/index.html#ug-logging-backends"><span class="std std-ref">logging backends</span></a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>SEGGER’s J-Link RTT is part of the <a class="reference external" href="https://www.segger.com/downloads/jlink">J-Link Software and Documentation Pack</a>.
+You must have this software installed on your platform to use RTT.</p>
+</div>
+<section id="connecting-using-rtt">
+<span id="testing-rtt-connect"></span><h3><a class="toc-backref" href="#id9">Connecting using RTT</a><a class="headerlink" href="#connecting-using-rtt" title="Permalink to this heading"></a></h3>
+<p>To run RTT on your platform, complete the following steps:</p>
+<ol class="arabic">
+<li><p>From the J-Link installation directory, open the J-Link RTT Viewer application:</p>
+<ul class="simple">
+<li><p>On Windows, the executable is called <code class="file docutils literal notranslate"><span class="pre">JLinkRTTViewer.exe</span></code>.</p></li>
+<li><p>On Linux, the executable is called <code class="file docutils literal notranslate"><span class="pre">JLinkRTTViewerExe</span></code>.</p></li>
+</ul>
+</li>
+<li><p>Select the following options to configure your connection:</p>
+<ul class="simple">
+<li><p>Connection to J-Link: USB</p></li>
+<li><p>Target Device: Select your IC from the list</p></li>
+<li><p>Target Interface and Speed: SWD, 4000 KHz</p></li>
+<li><p>RTT Control Block: Auto Detection</p></li>
+</ul>
+<figure class="align-default">
+<img alt="Example of RTT Viewer configuration" src="../_images/rtt_viewer_configuration.png" />
+</figure>
+</li>
+<li><p>Click <span class="guilabel">OK</span> to view the logging output from the device.</p></li>
+</ol>
+</section>
+</section>
+<section id="how-to-connect-with-lte-link-monitor">
+<span id="lte-connect"></span><h2><a class="toc-backref" href="#id10">How to connect with LTE Link Monitor</a><a class="headerlink" href="#how-to-connect-with-lte-link-monitor" title="Permalink to this heading"></a></h2>
+<p>To connect to nRF9160-based kits (for example, the nRF9160 DK or Nordic Thingy:91), you can also use <a class="reference external" href="https://infocenter.nordicsemi.com/topic/ug_link_monitor/UG/link_monitor/lm_intro.html">LTE Link Monitor</a>, which is implemented in <a class="reference external" href="https://www.nordicsemi.com/Software-and-Tools/Development-Tools/nRF-Connect-for-desktop">nRF Connect for Desktop</a>.
+This application is used to establish LTE communication with the nRF9160 modem through AT commands, and it also displays the UART output.</p>
+<p>To connect to the nRF9160-based kit with LTE Link Monitor, perform the following steps:</p>
+<ol class="arabic">
+<li><p>Launch the LTE Link Monitor app.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Make sure that <span class="guilabel">Automatic requests</span> (in the <strong>SETTINGS</strong> section) is enabled in LTE Link Monitor.</p>
+</div>
+</li>
+<li><p>Connect the nRF9160-based kit to the PC with a USB cable.</p></li>
+<li><p>Power on the nRF9160-based kit.</p></li>
+<li><p>Click <span class="guilabel">Select Device</span> and select the particular kit entry from the drop-down list in the LTE Link Monitor.</p></li>
+<li><p>Observe that the LTE Link monitor app starts AT communication with the modem of the nRF9160-based kit and shows the status of the communication in the display terminal.
+The app also displays any information that is logged on UART.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In the case of nRF9160 DK, the reset button must be pressed to restart the device and to start the application.</p>
+</div>
+</li>
+</ol>
+</section>
+<section id="debugging-an-application">
+<span id="gs-debugging"></span><h2><a class="toc-backref" href="#id11">Debugging an application</a><a class="headerlink" href="#debugging-an-application" title="Permalink to this heading"></a></h2>
+<p>To debug an application, set up the debug session as described in the <a class="reference external" href="https://nrfconnect.github.io/vscode-nrf-connect/get_started/quick_debug.html">How to debug an application</a> section in the nRF Connect for VS Code extension documentation.
+nRF Debug is the default debugger for nRF Connect for VS Code extension.</p>
+<p>If you use a multi-core SoC, for example from the nRF53 Series, and you only wish to debug the application core firmware, a single debug session is sufficient.
+To debug the firmware running on the network core, you need to set up two separate debug sessions: one for the network core and one for the application core.
+When debugging the network core, the application core debug session runs in the background and you can debug both cores if needed.</p>
+<p>Complete the following steps to start debugging the network core:</p>
+<ol class="arabic">
+<li><p>Set up sessions for the application core and network core as mentioned in the <a class="reference external" href="https://nrfconnect.github.io/vscode-nrf-connect/guides/debug_use.html#how-to-debug-applications-for-a-multi-core-system-on-chip">Debugging applications for a multi-core System on Chip</a> section in the nRF Connect for VS Code extension documentation.</p></li>
+<li><p>Select the appropriate CPU for debugging in each session, corresponding to the application core and the network core of your SoC, respectively.</p></li>
+<li><p>Once both sessions are established, execute the code on the application core.</p>
+<p>The startup code releases the <code class="docutils literal notranslate"><span class="pre">NETWORK.FORCEOFF</span></code> signal to start the network core and allocates the necessary GPIO pins for it.</p>
+</li>
+<li><p>Start code execution on the network core in the other debug session.</p></li>
+</ol>
+<p>If you want to reset the network core while debugging, make sure to first reset the application core and execute the code.</p>
+<section id="debugging-secure-and-non-secure-firmware">
+<span id="gs-debugging-spe-nspe"></span><h3><a class="toc-backref" href="#id12">Debugging secure and non-secure firmware</a><a class="headerlink" href="#debugging-secure-and-non-secure-firmware" title="Permalink to this heading"></a></h3>
+<p>When using a build target with <a class="reference internal" href="../app_dev/board_support/index.html#app-boards-spe-nspe-cpuapp-ns"><span class="std std-ref">CMSE enabled</span></a> (<code class="docutils literal notranslate"><span class="pre">_ns</span></code>), by default you can only debug firmware in the non-secure environment of the application core firmware.</p>
+<p>To debug firmware running in the secure environment, you need to build Trusted Firmware-M with debug symbols enabled and load the symbols during the debugging session.
+To build Trusted Firmware-M with debug symbols, set the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_TFM_CMAKE_BUILD_TYPE_RELWITHDEBINFO</span></code> Kconfig option.</p>
+<p>nRF Debug in the nRF Connect for VS Code extension automatically loads the Trusted Firmware-M debug symbols.</p>
+</section>
+<section id="debug-configuration">
+<h3><a class="toc-backref" href="#id13">Debug configuration</a><a class="headerlink" href="#debug-configuration" title="Permalink to this heading"></a></h3>
+<p>When you are following the <a class="reference external" href="https://nrfconnect.github.io/vscode-nrf-connect/get_started/quick_debug.html">How to debug an application</a> process in the nRF Connect for VS Code extension and select the <span class="guilabel">Enable debug options</span> checkbox in the <strong>Add Build Configuration</strong> page, the following Kconfig options are set to <code class="docutils literal notranslate"><span class="pre">y</span></code> when you add the configuration:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_DEBUG_OPTIMIZATIONS</span></code> - This option limits the optimizations made by the compiler to only those that do not impact debugging.</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_DEBUG_THREAD_INFO</span></code> - This option adds additional information to the thread object, so that the debugger can discover the threads.
+This will work for any debugger.</p></li>
+</ul>
+<p>You can also set these options to <code class="docutils literal notranslate"><span class="pre">y</span></code> manually.
+There are many more Kconfig options for debugging that are specific to different modules.
+For details, see the respective documentation pages of the modules.</p>
+<section id="debug-build-types">
+<h4>Debug build types<a class="headerlink" href="#debug-build-types" title="Permalink to this heading"></a></h4>
+<p>Some applications and samples provide a specific build type that enables additional debug functionalities.
+You can select build types when you are <a class="reference internal" href="modifying.html#gs-modifying-build-types"><span class="std std-ref">configuring the build settings</span></a>.</p>
+</section>
+<section id="debug-logging">
+<h4>Debug logging<a class="headerlink" href="#debug-logging" title="Permalink to this heading"></a></h4>
+<p>You can use logging system to get more information about the state of your application.
+Logs are integrated to many various modules and subsystems in the nRF Connect SDK and Zephyr.
+These logs are visible once you configure logger for your application.</p>
+<p>You can also configure log level per logger module, for example to get more information about a given subsystem.
+See <a class="reference internal" href="../app_dev/logging/index.html#ug-logging"><span class="std std-ref">Logging in nRF Connect SDK</span></a> for details on how to enable and configure logs.</p>
+</section>
+<section id="debug-libraries">
+<h4>Debug libraries<a class="headerlink" href="#debug-libraries" title="Permalink to this heading"></a></h4>
+<p>The nRF Connect SDK also provides several libraries and drivers for debugging different components.
+For example:</p>
+<ul class="simple">
+<li><p>You can use <a class="reference internal" href="../libraries/debug/index.html#lib-debug"><span class="std std-ref">Debug libraries</span></a> for any of your applications, for example to measure CPU load or trace hardware peripheral events on pins.</p></li>
+<li><p>You can use <a class="reference internal" href="../libraries/others/nrf_profiler.html#nrf-profiler"><span class="std std-ref">nRF Profiler</span></a> to measure performance and debug applications without introducing big performance overhead.
+This option requires introducing additional code changes: your application must register profiler events and log their occurrences.</p></li>
+<li><p>When working with the <a class="reference internal" href="#testing-rtt-connect"><span class="std std-ref">SEGGER J-Link with the RTT feature</span></a>, you can use the <a class="reference internal" href="../drivers/eth_rtt.html#lib-eth-rtt"><span class="std std-ref">Ethernet over RTT driver</span></a>, which is useful for handling data transfer.</p></li>
+<li><p>The Thread protocol implementation offers <a class="reference internal" href="../protocols/thread/prebuilt_libs.html#thread-ug-feature-updating-libs"><span class="std std-ref">pre-built libraries with debug symbols</span></a>.</p></li>
+<li><p>The Zigbee protocol implementation offers <a class="reference internal" href="../libraries/zigbee/osif.html#lib-zigbee-osif"><span class="std std-ref">Zigbee ZBOSS OSIF</span></a> and <a class="reference internal" href="../libraries/zigbee/shell.html#lib-zigbee-shell"><span class="std std-ref">Zigbee shell</span></a> with custom Kconfig options that you can set for debugging.</p></li>
+</ul>
+</section>
+<section id="debugging-stack-overflows">
+<h4>Debugging stack overflows<a class="headerlink" href="#debugging-stack-overflows" title="Permalink to this heading"></a></h4>
+<p>One of the potential root causes of fatal errors in an application are stack overflows.
+Read the Stack Overflows section on the <span class="xref std std-ref">zephyr:fatal</span> page in the Zephyr documentation to learn about stack overflows and how to debug them.</p>
+<p>You can also use a separate module to make sure that the stack sizes used by your application are big enough to avoid stack overflows.
+One of such modules is for example Zephyr’s <span class="xref std std-ref">zephyr:thread_analyzer</span>.</p>
+</section>
+</section>
+<section id="debug-tools">
+<h3><a class="toc-backref" href="#id14">Debug tools</a><a class="headerlink" href="#debug-tools" title="Permalink to this heading"></a></h3>
+<p>The main recommended tool for debugging in the nRF Connect SDK is <a class="reference external" href="https://nrfconnect.github.io/vscode-nrf-connect/guides/debug_use.html#how-to-debug-applications-for-a-multi-core-system-on-chip">nRF Debug</a> of the nRF Connect for VS Code extension.
+The tool uses <a class="reference external" href="https://github.com/microsoft/MIEngine/">Microsoft’s debug adaptor</a> and integrates custom debugging features specific for the nRF Connect SDK.</p>
+<ul class="simple">
+<li><p>When working with the nRF Connect for VS Code extension, use nRF Debug after adding the required Kconfig options to the <code class="file docutils literal notranslate"><span class="pre">prj.conf</span></code> file.</p></li>
+<li><p>If you are working from the command line, you can use west with nRF Debug.
+For details, read the <span class="xref std std-ref">Debugging with west debug</span> section on the <span class="xref std std-ref">zephyr:west-build-flash-debug</span> page in the Zephyr documentation.</p></li>
+</ul>
+<p>A useful tool for debugging the communication over Bluetooth and mesh networking protocols, such as <a class="reference internal" href="../protocols/thread/index.html#ug-thread"><span class="std std-ref">Thread</span></a> or <a class="reference internal" href="../protocols/zigbee/index.html#ug-zigbee"><span class="std std-ref">Zigbee</span></a>, is the <a class="reference external" href="https://infocenter.nordicsemi.com/topic/ug_sniffer_802154/UG/sniffer_802154/intro_802154.html">nRF Sniffer for 802.15.4</a>.
+The nRF Sniffer allows you to look into data exchanged over-the-air between devices.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="modifying.html" class="btn btn-neutral float-right" title="Modifying an application" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="programming.html" class="btn btn-neutral" title="Building and programming an application" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

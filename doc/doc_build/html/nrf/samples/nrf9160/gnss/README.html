@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>nRF9160: GNSS &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../../_static/js/ncs.js"
+></script>
+<script src="../../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="nRF9160: HTTPS Client" href="../https_client/README.html" />
+    <link rel="prev" title="nRF9160: Full modem firmware update using SMP Server" href="../fmfu_smp_svr/README.html" />
+<link
+  href="../../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../applications.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../samples.html">Samples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../bl.html">Bluetooth samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../crypto.html">Cryptography samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../edge.html">Edge Impulse samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gazell.html">Gazell samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../matter.html">Matter samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nfc.html">NFC samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nrf5340.html">nRF5340 samples</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../nrf9160.html">nRF9160 samples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../at_client/README.html">nRF9160: AT Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../at_monitor/README.html">nRF9160: AT monitor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../aws_iot/README.html">nRF9160: AWS IoT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../azure_fota/README.html">nRF9160: Azure FOTA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../azure_iot_hub/README.html">nRF9160: Azure IoT Hub</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ciphersuites/README.html">nRF9160: TLS cipher suites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../coap_client/README.html">nRF9160: nRF CoAP Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../download/README.html">nRF9160: Download client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fmfu_smp_svr/README.html">nRF9160: Full modem firmware update using SMP Server</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">nRF9160: GNSS</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#requirements">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuration">Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#building-and-running">Building and running</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dependencies">Dependencies</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../https_client/README.html">nRF9160: HTTPS Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../location/README.html">nRF9160: Location</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../lte_ble_gateway/README.html">nRF9160: LTE Sensor Gateway</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../lwm2m_carrier/README.html">nRF9160: LwM2M carrier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../lwm2m_client/README.html">nRF9160: LwM2M Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../memfault/README.html">nRF9160: Memfault</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modem_callbacks/README.html">nRF9160: Modem callbacks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modem_shell/README.html">nRF9160: Modem Shell</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modem_trace_backend/README.html">nRF9160: Modem trace backend</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modem_trace_flash/README.html">nRF9160: Modem trace external flash backend</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../nidd/README.html">nRF9160: NIDD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../nrf_cloud_mqtt_multi_service/README.html">nRF9160: nRF Cloud MQTT multi-service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../nrf_cloud_rest_cell_location/README.html">nRF9160: nRF Cloud REST cellular location</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../nrf_cloud_rest_device_message/README.html">nRF9160: nRF Cloud REST Device Message</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../nrf_cloud_rest_fota/README.html">nRF9160: nRF Cloud REST FOTA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pdn/README.html">nRF9160: PDN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../slm_shell/README.html">nRF9160: SLM Shell</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../sms/README.html">nRF9160: SMS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../udp/README.html">nRF9160: UDP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../net/mqtt/README.html">MQTT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../http_update/application_update/README.html">nRF9160: HTTP application update</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../http_update/full_modem_update/README.html">nRF9160: HTTP full modem update</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../http_update/modem_delta_update/README.html">nRF9160: HTTP modem delta update</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../tfm.html">Trusted Firmware-M (TF-M) samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../thread.html">Thread samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../zigbee.html">Zigbee samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../wifi.html">Wi-Fi samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../other.html">Other samples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../drivers.html">Drivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../samples.html">Samples</a></li>
+          <li class="breadcrumb-item"><a href="../../nrf9160.html">nRF9160 samples</a></li>
+      <li class="breadcrumb-item active">nRF9160: GNSS</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/samples/nrf9160/gnss/README.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="nrf9160-gnss">
+<span id="gnss-sample"></span><span id="agps-sample"></span><span id="gps-with-supl-support-sample"></span><h1>nRF9160: GNSS<a class="headerlink" href="#nrf9160-gnss" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#requirements" id="id6">Requirements</a></p></li>
+<li><p><a class="reference internal" href="#overview" id="id7">Overview</a></p>
+<ul>
+<li><p><a class="reference internal" href="#operation-modes" id="id8">Operation modes</a></p></li>
+<li><p><a class="reference internal" href="#output-modes" id="id9">Output modes</a></p></li>
+<li><p><a class="reference internal" href="#a-gps-and-p-gps" id="id10">A-GPS and P-GPS</a></p></li>
+<li><p><a class="reference internal" href="#minimal-assistance" id="id11">Minimal assistance</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#configuration" id="id12">Configuration</a></p>
+<ul>
+<li><p><a class="reference internal" href="#configuration-options" id="id13">Configuration options</a></p></li>
+<li><p><a class="reference internal" href="#additional-configuration" id="id14">Additional configuration</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#building-and-running" id="id15">Building and running</a></p>
+<ul>
+<li><p><a class="reference internal" href="#testing" id="id16">Testing</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#dependencies" id="id17">Dependencies</a></p></li>
+</ul>
+</div>
+<p>This sample demonstrates how to use the <span class="xref std std-ref">nrfxlib:gnss_interface</span> to control the <a class="reference external" href="https://en.wikipedia.org/wiki/Satellite_navigation">GNSS</a> module.
+It also shows how to improve fix speed and accuracy with the <a class="reference internal" href="../../../libraries/networking/nrf_cloud_agps.html#lib-nrf-cloud-agps"><span class="std std-ref">nRF Cloud A-GPS</span></a> library and how to use the <a class="reference internal" href="../../../libraries/networking/nrf_cloud_pgps.html#lib-nrf-cloud-pgps"><span class="std std-ref">nRF Cloud P-GPS</span></a> library.
+Assistance data is downloaded from nRF Cloud using <a class="reference external" href="https://docs.nrfcloud.com/APIs/REST/RESTIntro/">nRF Cloud’s REST-based device API</a>.</p>
+<section id="requirements">
+<h2><a class="toc-backref" href="#id6">Requirements</a><a class="headerlink" href="#requirements" title="Permalink to this heading"></a></h2>
+<p>The sample supports the following development kit:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 28%" />
+<col style="width: 8%" />
+<col style="width: 42%" />
+<col style="width: 23%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Hardware platforms</p></th>
+<th class="head"><p>PCA</p></th>
+<th class="head"><p>Board name</p></th>
+<th class="head"><p>Build target</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../working_with_nrf/nrf91/nrf9160.html#ug-nrf9160"><span class="std std-ref">nRF9160 DK</span></a></p></td>
+<td><p>PCA10090</p></td>
+<td><p><span class="xref std std-ref">nrf9160dk_nrf9160</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nrf9160dk_nrf9160_ns</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>When built for an <code class="docutils literal notranslate"><span class="pre">_ns</span></code> build target, the sample is configured to compile and run as a non-secure application with <a class="reference internal" href="../../../app_dev/board_support/index.html#app-boards-spe-nspe-cpuapp-ns"><span class="std std-ref">Cortex-M Security Extensions enabled</span></a>.
+Therefore, it automatically includes <a class="reference internal" href="../../../app_dev/tfm/index.html#ug-tfm"><span class="std std-ref">Trusted Firmware-M</span></a> that prepares the required peripherals and secure services to be available for the application.</p>
+</section>
+<section id="overview">
+<h2><a class="toc-backref" href="#id7">Overview</a><a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+<p>The sample first initializes the GNSS module.
+Then it handles events from the interface, reads the associated data and outputs information to the console.
+Because <a class="reference external" href="https://www.gpsworld.com/what-exactly-is-gps-nmea-data/">NMEA</a> data needs to be read as soon as an NMEA event is received, a <span class="xref std std-ref">Zephyr message queue</span> is used for buffering the NMEA strings.
+The event handler function reads the received NMEA strings and puts those into the message queue.
+The consumer loop reads from the queue and outputs the strings to the console.</p>
+<section id="operation-modes">
+<h3><a class="toc-backref" href="#id8">Operation modes</a><a class="headerlink" href="#operation-modes" title="Permalink to this heading"></a></h3>
+<p>The sample supports different operation modes:</p>
+<ul class="simple">
+<li><p>Continuous</p></li>
+<li><p>Periodic</p></li>
+<li><p>Time-to-first-fix (TTFF) test</p></li>
+</ul>
+<p>By default, the sample runs in continuous tracking mode.
+In continuous mode, GNSS tries to acquire a fix once a second.</p>
+<p>In periodic mode, fixes are acquired periodically with the set interval.</p>
+<p>In TTFF test mode, the sample acquires fixes periodically and calculates the TTFF for each fix.
+You can use the TTFF test mode without assistance or with any supported assistance method.
+You can also configure it to perform cold starts, where the stored data is deleted from GNSS before each start.
+If you enable assistance with cold starts, new assistance data is also downloaded and injected to GNSS before each start.</p>
+</section>
+<section id="output-modes">
+<h3><a class="toc-backref" href="#id9">Output modes</a><a class="headerlink" href="#output-modes" title="Permalink to this heading"></a></h3>
+<p>The sample supports two output modes:</p>
+<ul class="simple">
+<li><p>Position, Velocity, and Time (PVT) and NMEA</p></li>
+<li><p>NMEA-only</p></li>
+</ul>
+<p>By default, the sample displays information from both PVT and NMEA strings.
+You can also configure the sample to run in NMEA-only output mode, where only the NMEA strings are displayed in the console.
+In the NMEA-only output mode, you can visualize the data from the GNSS using a third-party tool.</p>
+</section>
+<section id="a-gps-and-p-gps">
+<h3><a class="toc-backref" href="#id10">A-GPS and P-GPS</a><a class="headerlink" href="#a-gps-and-p-gps" title="Permalink to this heading"></a></h3>
+<p>When support for A-GPS or P-GPS, or both, is enabled, a <span class="xref std std-ref">Zephyr workqueue</span> is used for downloading the assistance data.
+Downloading the data can take some time.
+The workqueue ensures that the main thread is not blocked during the operation.</p>
+<p>When assistance support is enabled, the sample receives an A-GPS data request notification from the GNSS module, and it starts downloading the assistance data requested by the GNSS module.
+The sample then displays the information in the terminal about the download process.
+Finally, after the download completes, the sample switches back to the previous display mode.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To download assistance data, your device must have a valid JWT signing key installed and registered with <a class="reference external" href="https://nrfcloud.com/">nRF Cloud</a>.</p>
+<p>(See <a class="reference external" href="https://docs.nrfcloud.com/APIs/REST/RESTIntro/">nRF Cloud REST API</a> and <a class="reference external" href="https://docs.nrfcloud.com/Devices/Security/Credentials/">Securely generating credentials on the nRF9160</a> for more details on this requirement).</p>
+<p>Modem version v1.3.x or later is also required.</p>
+<ul class="simple">
+<li><p>Your device may ship with modem firmware older than v1.3.x, so verify that you have the latest installed.</p></li>
+<li><p>For instructions on updating your device’s modem firmware, see the following documents:</p>
+<ul>
+<li><p><a class="reference internal" href="../../../working_with_nrf/nrf91/nrf9160_gs.html#nrf9160-gs-updating-fw-modem"><span class="std std-ref">Updating modem firmware on nRF9160 DK</span></a></p></li>
+<li><p><a class="reference internal" href="../../../working_with_nrf/nrf91/thingy91_gsg.html#programming-thingy"><span class="std std-ref">Updating modem firmware on Thingy:91</span></a></p></li>
+</ul>
+</li>
+</ul>
+<p>To obtain and register a valid signing key, you can do one of the following:</p>
+<ul class="simple">
+<li><p>Provision your device on nRF Cloud using Just-In-Time Provisioning (JITP) (detailed below).</p></li>
+<li><p>Provision your device on nRF Cloud with preconnect provisioning (detailed in <a class="reference external" href="https://docs.nrfcloud.com/Devices/Associations/Provisioning/">nRF Cloud Provisioning</a>).</p></li>
+<li><p>Install or generate a private key on your device and register its public key with nRF Cloud (detailed in <a class="reference external" href="https://docs.nrfcloud.com/Devices/Security/Credentials/">Securely generating credentials on the nRF9160</a>).</p></li>
+</ul>
+<p>To provision your device on nRF Cloud using JITP, complete the following steps:</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="../../../working_with_nrf/nrf91/nrf9160.html#nrf9160-ug-updating-cloud-certificate"><span class="std std-ref">Ensure valid nRF Cloud credentials are installed</span></a>.
+nRF9160 DK and Thingy:91 have credentials pre-installed, but some may be shipped with RSA256 credentials; JWT signing requires ES256 credentials.
+These devices need new credentials to be installed before they can perform REST requests.</p></li>
+<li><p>Install a sample or application that supports JITP.
+You can use the <a class="reference internal" href="../../../applications/asset_tracker_v2/README.html#asset-tracker-v2"><span class="std std-ref">Asset Tracker V2</span></a> application for this purpose.</p></li>
+<li><p>Allow your device to connect to nRF Cloud and add it to the nRF Cloud portal.
+When successfully provisioned, the device appears in the devices list of the nRF Cloud portal.</p></li>
+<li><p>Once your device is provisioned, you may reinstall this sample and the provisioning persists.</p></li>
+</ol>
+</div>
+</section>
+<section id="minimal-assistance">
+<h3><a class="toc-backref" href="#id11">Minimal assistance</a><a class="headerlink" href="#minimal-assistance" title="Permalink to this heading"></a></h3>
+<p>GNSS satellite acquisition can also be assisted by providing factory almanac, GPS time, and coarse location to the GNSS module.
+Using this information, GNSS can calculate which satellites it should search for and what are the expected Doppler frequencies.</p>
+<p>The sample includes a factory almanac that is written to the file system when the sample starts.
+The date for the factory almanac generation is in the <code class="file docutils literal notranslate"><span class="pre">factory_almanac.h</span></code> file.
+The almanac gets inaccurate with time and should be updated occasionally.
+GNSS can use an almanac until it is two years old, but generally it should be updated every few months.</p>
+</section>
+</section>
+<section id="configuration">
+<h2><a class="toc-backref" href="#id12">Configuration</a><a class="headerlink" href="#configuration" title="Permalink to this heading"></a></h2>
+<p>See <a class="reference internal" href="../../../getting_started/modifying.html#configure-application"><span class="std std-ref">Configuring your application</span></a> for information about how to permanently or temporarily change the configuration.</p>
+<section id="configuration-options">
+<h3><a class="toc-backref" href="#id13">Configuration options</a><a class="headerlink" href="#configuration-options" title="Permalink to this heading"></a></h3>
+<p>Check and configure the following Kconfig options for the sample:</p>
+<dl class="simple" id="config-gnss-sample-nmea-only">
+<dt>CONFIG_GNSS_SAMPLE_NMEA_ONLY - To enable NMEA-only output mode</dt><dd><p>The NMEA-only output mode can be used for example with 3rd party tools to visualize the GNSS output.</p>
+</dd>
+</dl>
+<dl class="simple" id="config-gnss-sample-assistance-nrf-cloud">
+<dt>CONFIG_GNSS_SAMPLE_ASSISTANCE_NRF_CLOUD - To use nRF Cloud A-GPS</dt><dd><p>This configuration option enables A-GPS usage.</p>
+</dd>
+</dl>
+<dl class="simple" id="config-gnss-sample-assistance-minimal">
+<dt>CONFIG_GNSS_SAMPLE_ASSISTANCE_MINIMAL - To use minimal assistance</dt><dd><p>This configuration option enables assistance with factory almanac, time and location.</p>
+</dd>
+</dl>
+<dl class="simple" id="config-gnss-sample-mode-periodic">
+<dt>CONFIG_GNSS_SAMPLE_MODE_PERIODIC - To enable periodic fixes</dt><dd><p>This configuration option enables periodic fixes instead of continuous tracking.</p>
+</dd>
+</dl>
+<dl class="simple" id="config-gnss-sample-periodic-interval">
+<dt>CONFIG_GNSS_SAMPLE_PERIODIC_INTERVAL - To set interval (in seconds) for periodic fixes</dt><dd><p>This configuration option sets the desired fix interval.</p>
+</dd>
+</dl>
+<dl class="simple" id="config-gnss-sample-periodic-timeout">
+<dt>CONFIG_GNSS_SAMPLE_PERIODIC_TIMEOUT - To set desired timeout (in seconds) for periodic fixes</dt><dd><p>This configuration option sets the desired timeout for periodic fixes.</p>
+</dd>
+</dl>
+<dl class="simple" id="config-gnss-sample-mode-ttff-test">
+<dt>CONFIG_GNSS_SAMPLE_MODE_TTFF_TEST - To enable time-to-first-fix (TTFF) test mode</dt><dd><p>This configuration enables the TTFF test mode instead of continuous tracking.
+When TTFF test mode is enabled, the <a class="reference internal" href="#config-gnss-sample-nmea-only"><span class="std std-ref">CONFIG_GNSS_SAMPLE_NMEA_ONLY</span></a> option is automatically selected.</p>
+</dd>
+</dl>
+<dl class="simple" id="config-gnss-sample-mode-ttff-test-interval">
+<dt>CONFIG_GNSS_SAMPLE_MODE_TTFF_TEST_INTERVAL - To set the time between fixes in TTFF test mode</dt><dd><p>This configuration option sets the time between fixes in TTFF test mode.</p>
+</dd>
+</dl>
+<dl class="simple" id="config-gnss-sample-mode-ttff-test-cold-start">
+<dt>CONFIG_GNSS_SAMPLE_MODE_TTFF_TEST_COLD_START - To perform cold starts in TTFF test mode</dt><dd><p>This configuration option makes the sample perform GNSS cold starts instead of hot starts in TTFF test mode.
+When assistance is used, LTE may block the GNSS operation and increase the time needed to get a fix.</p>
+</dd>
+</dl>
+<dl class="simple" id="config-gnss-sample-lte-on-demand">
+<dt>CONFIG_GNSS_SAMPLE_LTE_ON_DEMAND - To disable LTE after assistance download</dt><dd><p>When using assistance, LTE may block the GNSS operation and increase the time needed to get a fix.
+This configuration option disables LTE after the assistance data has been downloaded, so that GNSS can run without interruptions.</p>
+</dd>
+</dl>
+</section>
+<section id="additional-configuration">
+<h3><a class="toc-backref" href="#id14">Additional configuration</a><a class="headerlink" href="#additional-configuration" title="Permalink to this heading"></a></h3>
+<p>Check and configure the following library option that is used by the sample:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MODEM_ANTENNA_GNSS_EXTERNAL</span></code> - Selects an external GNSS antenna.</p></li>
+</ul>
+</section>
+</section>
+<section id="building-and-running">
+<h2><a class="toc-backref" href="#id15">Building and running</a><a class="headerlink" href="#building-and-running" title="Permalink to this heading"></a></h2>
+<p>This sample can be found under <code class="file docutils literal notranslate"><span class="pre">samples/nrf9160/gnss</span></code> in the nRF Connect SDK folder structure.</p>
+<p>When built as firmware image for the <code class="docutils literal notranslate"><span class="pre">_ns</span></code> build target, the sample has Cortex-M Security Extensions (CMSE) enabled and separates the firmware between Non-Secure Processing Environment (NSPE) and Secure Processing Environment (SPE).
+Because of this, it automatically includes the <a class="reference internal" href="../../../app_dev/tfm/index.html#ug-tfm"><span class="std std-ref">Trusted Firmware-M (TF-M)</span></a>.
+To read more about CMSE, see <a class="reference internal" href="../../../app_dev/board_support/index.html#app-boards-spe-nspe"><span class="std std-ref">Processing environments</span></a>.</p>
+<p>To build the sample with Visual Studio Code, follow the steps listed on the <a class="reference external" href="https://nrfconnect.github.io/vscode-nrf-connect/get_started/build_app_ncs.html">How to build an application</a> page in the nRF Connect for VS Code extension documentation.
+See <a class="reference internal" href="../../../getting_started/programming.html#gs-programming"><span class="std std-ref">Building and programming an application</span></a> for other building and programming scenarios and <a class="reference internal" href="../../../getting_started/testing.html#gs-testing"><span class="std std-ref">Testing and debugging an application</span></a> for general information about testing and debugging in the nRF Connect SDK.</p>
+<p>If the sample is to be used with the SUPL client library, the library must be downloaded and enabled in the sample configuration.
+You can download it from the <a class="reference external" href="https://www.nordicsemi.com/">Nordic Semiconductor website</a>.
+See <a class="reference internal" href="../../../libraries/others/supl_os_client.html#supl-client"><span class="std std-ref">SUPL client and SUPL client OS integration</span></a> for information on installing and enabling the SUPL client library.</p>
+<section id="testing">
+<h3><a class="toc-backref" href="#id16">Testing</a><a class="headerlink" href="#testing" title="Permalink to this heading"></a></h3>
+<p>After programming the sample and all the prerequisites to the development kit, test it by performing the following steps:</p>
+<ol class="arabic">
+<li><p>Connect your nRF9160 DK to the PC using a USB cable and power on or reset your nRF9160 DK.</p></li>
+<li><p>Open a terminal emulator.</p></li>
+<li><p>Test the sample by performing the following steps:</p>
+<p>If the default output mode is enabled:</p>
+<ol class="loweralpha">
+<li><p>Observe that the following information is displayed in the terminal emulator:</p>
+<blockquote>
+<div><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">Tracking:  0 Using:  0 Unhealthy: 0</span>
+<span class="go">-----------------------------------</span>
+<span class="go">Seconds since last fix: 1</span>
+<span class="go">Searching [-]</span>
+
+<span class="go">NMEA strings:</span>
+
+<span class="gp">$</span>GPGGA,000000.00,,,,,0,,99.99,,M,0,,*37
+<span class="gp">$</span>GPGLL,,,,,000000.00,V,A*45
+<span class="gp">$</span>GPGSA,A,1,,,,,,,,,,,,,99.99,99.99,99.99,1*2D
+<span class="gp">$</span>GPGSV,1,1,0,,,,,,,,,,,,,,,,,1*54
+<span class="gp">$</span>GPRMC,000000.00,V,,,,,,,060180,,,N,V*08
+<span class="go">---------------------------------</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Observe that the numbers associated with the displayed parameters <strong>Tracking</strong> and <strong>Using</strong> change.</p></li>
+<li><p>Observe that the sample displays the following information upon acquiring a fix:</p>
+<blockquote>
+<div><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">Tracking:  7 Using:  5 Unhealthy: 0</span>
+<span class="go">-----------------------------------</span>
+<span class="go">Latitude:       61.491275</span>
+<span class="go">Longitude:      23.771611</span>
+<span class="go">Altitude:       116.3 m</span>
+<span class="go">Accuracy:       4.2 m</span>
+<span class="go">Speed:          0.0 m/s</span>
+<span class="go">Speed accuracy: 0.8 m/s</span>
+<span class="go">Heading:        0.0 deg</span>
+<span class="go">Date:           2020-03-06</span>
+<span class="go">Time (UTC):     05:48:24</span>
+<span class="go">PDOP:           3.1</span>
+<span class="go">HDOP:           2.1</span>
+<span class="go">VDOP:           2.3</span>
+<span class="go">TDOP:           1.8</span>
+
+<span class="go">NMEA strings:</span>
+
+<span class="gp">$</span>GPGGA,054824.58,6129.28608,N,02346.17887,E,1,07,2.05,116.27,M,0,,*22
+<span class="gp">$</span>GPGLL,6129.28608,N,02346.17887,E,054824.58,A,A*6B
+<span class="gp">$</span>GPGSA,A,3,10,12,17,24,28,,,,,,,,3.05,2.05,2.25,1*13
+<span class="gp">$</span>GPGSV,2,1,7,17,50,083,41,24,68,250,38,10,14,294,46,28,23,071,38,1*56
+<span class="gp">$</span>GPGSV,2,2,7,12,29,240,36,19,00,000,32,1,00,000,33,1*50
+<span class="gp">$</span>GPRMC,054824.58,A,6129.28608,N,02346.17887,E,0.08,0.00,030620,,,A,V*29
+<span class="go">---------------------------------</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+<p>If NMEA-only output mode is enabled:</p>
+<ol class="loweralpha">
+<li><p>Observe that the following information is displayed in the terminal emulator:</p>
+<blockquote>
+<div><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span>GPGGA,000000.00,,,,,0,,99.99,,M,0,,*37
+<span class="gp">$</span>GPGLL,,,,,000000.00,V,A*45
+<span class="gp">$</span>GPGSA,A,1,,,,,,,,,,,,,99.99,99.99,99.99,1*2D
+<span class="gp">$</span>GPGSV,1,1,0,,,,,,,,,,,,,,,,,1*54
+<span class="gp">$</span>GPRMC,000000.00,V,,,,,,,060180,,,N,V*08
+<span class="gp">$</span>GPGGA,000001.00,,,,,0,02,99.99,,M,0,,*34
+<span class="gp">$</span>GPGLL,,,,,000001.00,V,A*44
+<span class="gp">$</span>GPGSA,A,1,,,,,,,,,,,,,99.99,99.99,99.99,1*2D
+<span class="gp">$</span>GPGSV,1,1,2,17,,,24,1,,,28,1*6D
+<span class="gp">$</span>GPRMC,000001.00,V,,,,,,,060180,,,N,V*09
+<span class="gp">$</span>GPGGA,000002.00,,,,,0,02,99.99,,M,0,,*37
+<span class="gp">$</span>GPGLL,,,,,000002.00,V,A*47
+<span class="gp">$</span>GPGSA,A,1,,,,,,,,,,,,,99.99,99.99,99.99,1*2D
+<span class="gp">$</span>GPGSV,1,1,2,17,,,24,1,,,28,1*6D
+<span class="gp">$</span>GPRMC,000002.00,V,,,,,,,060180,,,N,V*0A
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+<p>If TTFF test mode is enabled:</p>
+<ol class="loweralpha">
+<li><p>Observe that the following information is displayed in the terminal emulator:</p>
+<blockquote>
+<div><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span>GPGGA,000033.00,,,,,0,,99.99,,M,,M,,*66
+<span class="gp">$</span>GPGLL,,,,,000033.00,V,N*4A
+<span class="gp">$</span>GPGSA,A,1,,,,,,,,,,,,,99.99,99.99,99.99,1*2D
+<span class="gp">$</span>GPGSV,3,1,10,1,,,36,5,,,26,7,,,25,10,,,44,1*53
+<span class="gp">$</span>GPGSV,3,2,10,14,,,43,17,,,37,21,,,41,23,,,43,1*64
+<span class="gp">$</span>GPGSV,3,3,10,24,,,31,28,,,39,1*61
+<span class="gp">$</span>GPRMC,000033.00,V,,,,,,,060180,,,N,V*08
+<span class="gp">$</span>GPGGA,121300.68,6129.28608,N,02346.17887,E,1,05,2.41,123.44,M,,M,,*7A
+<span class="gp">$</span>GPGLL,6129.28608,N,02346.17887,E,121300.68,A,A*63
+<span class="gp">$</span>GPGSA,A,3,01,10,17,21,23,,,,,,,,6.32,2.41,5.84,1*12
+<span class="gp">$</span>GPGSV,4,1,14,1,17,047,37,7,-22,107,25,10,22,314,44,12,09,232,,1*41
+<span class="gp">$</span>GPGSV,4,2,14,13,29,173,,14,38,072,44,15,40,211,,17,46,106,37,1*65
+<span class="gp">$</span>GPGSV,4,3,14,19,35,139,,21,15,019,41,23,19,279,42,24,51,273,32,1*6F
+<span class="gp">$</span>GPGSV,4,4,14,28,,,39,30,00,110,,1*52
+<span class="gp">$</span>GPRMC,121300.68,A,6129.28608,N,02346.17887,E,0.10,0.00,200122,,,A,V*2C
+<span class="go">[00:00:34.790,649] &lt;inf&gt; gnss_sample: Time to fix: 34</span>
+<span class="go">[00:00:34.796,447] &lt;inf&gt; gnss_sample: Sleeping for 120 seconds</span>
+<span class="go">[00:02:34.699,493] &lt;inf&gt; gnss_sample: Starting GNSS</span>
+<span class="gp">$</span>GPGGA,121500.82,,,,,0,,99.99,,M,,M,,*6B
+<span class="gp">$</span>GPGLL,,,,,121500.82,V,N*47
+<span class="gp">$</span>GPGSA,A,1,,,,,,,,,,,,,99.99,99.99,99.99,1*2D
+<span class="gp">$</span>GPGSV,1,1,0,,,,,,,,,,,,,,,,,1*54
+<span class="gp">$</span>GPRMC,121500.82,V,,,,,,,200122,,,N,V*09
+<span class="gp">$</span>GPGGA,121501.82,6129.28608,N,02346.17887,E,1,04,2.73,118.22,M,,M,,*78
+<span class="gp">$</span>GPGLL,6129.28608,N,02346.17887,E,121501.82,A,A*69
+<span class="gp">$</span>GPGSA,A,3,10,17,21,23,,,,,,,,,7.59,2.73,7.08,1*18
+<span class="gp">$</span>GPGSV,4,1,13,1,18,046,28,10,22,313,49,12,10,232,26,13,28,173,25,1*51
+<span class="gp">$</span>GPGSV,4,2,13,14,37,072,50,15,40,211,25,17,46,105,45,19,35,138,31,1*63
+<span class="gp">$</span>GPGSV,4,3,13,21,15,018,45,23,18,278,45,24,52,273,,28,,,44,1*57
+<span class="gp">$</span>GPGSV,4,4,13,30,00,110,,1*55
+<span class="gp">$</span>GPRMC,121501.82,A,6129.28608,N,02346.17887,E,0.16,0.00,200122,,,A,V*20
+<span class="go">[00:02:35.940,582] &lt;inf&gt; gnss_sample: Time to fix: 1</span>
+<span class="go">[00:02:35.946,319] &lt;inf&gt; gnss_sample: Sleeping for 120 seconds</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Observe that the samples displays the time to fix for each fix.</p></li>
+</ol>
+<p>If A-GPS and/or P-GPS support is enabled:</p>
+<ol class="loweralpha">
+<li><p>Observe that the following message is displayed in the terminal emulator immediately after the device boots:</p>
+<blockquote>
+<div><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">[00:00:04.488,494] &lt;inf&gt; gnss_sample: Assistance data needed, ephe 0xffffffff, alm 0xffffffff, flags 0x3b</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Observe the following actions in the terminal emulator:</p>
+<ol class="lowerroman simple">
+<li><p>The sample downloads the requested assistance data if needed (with P-GPS, the data may already be available in the flash memory).</p></li>
+<li><p>The sample continues after the download has completed.</p></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</section>
+</section>
+<section id="dependencies">
+<h2><a class="toc-backref" href="#id17">Dependencies</a><a class="headerlink" href="#dependencies" title="Permalink to this heading"></a></h2>
+<p>This sample uses the following nRF Connect SDK libraries:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../../libraries/networking/nrf_cloud_agps.html#lib-nrf-cloud-agps"><span class="std std-ref">nRF Cloud A-GPS</span></a></p></li>
+<li><p><a class="reference internal" href="../../../libraries/networking/nrf_cloud_pgps.html#lib-nrf-cloud-pgps"><span class="std std-ref">nRF Cloud P-GPS</span></a></p></li>
+<li><p><a class="reference internal" href="../../../libraries/networking/nrf_cloud_rest.html#lib-nrf-cloud-rest"><span class="std std-ref">nRF Cloud REST</span></a></p></li>
+<li><p><a class="reference internal" href="../../../libraries/others/supl_os_client.html#supl-client"><span class="std std-ref">SUPL client and SUPL client OS integration</span></a></p></li>
+<li><p><a class="reference internal" href="../../../libraries/modem/at_host.html#lib-at-host"><span class="std std-ref">AT Host</span></a></p></li>
+</ul>
+<p>It uses the following <a class="reference external" href="https://github.com/nrfconnect/sdk-nrfxlib">sdk-nrfxlib</a> library:</p>
+<ul class="simple">
+<li><p><span class="xref std std-ref">nrfxlib:nrf_modem</span></p></li>
+</ul>
+<p>It uses the following Zephyr library:</p>
+<ul class="simple">
+<li><p><span class="xref std std-ref">net_socket_offloading</span></p></li>
+<li><p><span class="xref std std-ref">settings_api</span></p></li>
+</ul>
+<p>In addition, it uses the following secure firmware component:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../../app_dev/tfm/index.html#ug-tfm"><span class="std std-ref">Trusted Firmware-M</span></a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../https_client/README.html" class="btn btn-neutral float-right" title="nRF9160: HTTPS Client" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../fmfu_smp_svr/README.html" class="btn btn-neutral" title="nRF9160: Full modem firmware update using SMP Server" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

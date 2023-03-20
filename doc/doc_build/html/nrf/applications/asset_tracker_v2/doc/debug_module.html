@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Debug module &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../../_static/js/ncs.js"
+></script>
+<script src="../../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Location module" href="location_module.html" />
+    <link rel="prev" title="Cloud wrapper API" href="cloud_wrapper.html" />
+<link
+  href="../../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../protocols.html">Protocols</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../applications.html">Applications</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../connectivity_bridge/README.html">Connectivity bridge</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../README.html">nRF9160: Asset Tracker v2</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="asset_tracker_v2_description.html">Application description</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_behavior.html">Application behavior and functionality</a></li>
+<li class="toctree-l3"><a class="reference internal" href="firmware_architecture.html">Firmware architecture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lwm2m_carrier_library.html">Using the carrier library</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_module.html">Application module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_module.html">Data module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloud_module.html">Cloud module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloud_wrapper.html">Cloud wrapper API</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Debug module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#features">Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuration-options">Configuration options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-states">Module states</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-events">Module events</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#api-documentation">API documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="location_module.html">Location module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modem_module.html">Modem module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sensor_module.html">Sensor module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ui_module.html">User Interface module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="util_module.html">Utility module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules_common.html">Modules common API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="unit_test.html">Unit tests</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../serial_lte_modem/README.html">nRF9160: Serial LTE modem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nrf_desktop/README.html">nRF Desktop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nrf5340_audio/README.html">nRF5340 Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../machine_learning/README.html">nRF Machine Learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../matter_weather_station/README.html">Thingy:53: Matter weather station</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../zigbee_weather_station/README.html">Thingy:53: Zigbee weather station</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../drivers.html">Drivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../applications.html">Applications</a></li>
+          <li class="breadcrumb-item"><a href="../README.html">nRF9160: Asset Tracker v2</a></li>
+      <li class="breadcrumb-item active">Debug module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/applications/asset_tracker_v2/doc/debug_module.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="debug-module">
+<span id="asset-tracker-v2-debug-module"></span><h1>Debug module<a class="headerlink" href="#debug-module" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#features" id="id8">Features</a></p>
+<ul>
+<li><p><a class="reference internal" href="#memfault" id="id9">Memfault</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#configuration-options" id="id10">Configuration options</a></p>
+<ul>
+<li><p><a class="reference internal" href="#module-configurations" id="id11">Module configurations</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#module-states" id="id12">Module states</a></p></li>
+<li><p><a class="reference internal" href="#module-events" id="id13">Module events</a></p></li>
+<li><p><a class="reference internal" href="#dependencies" id="id14">Dependencies</a></p></li>
+<li><p><a class="reference internal" href="#api-documentation" id="id15">API documentation</a></p></li>
+</ul>
+</div>
+<p>The debug module intends to improve the overall debugging experience in the application.
+By default, it subscribes to all the events in the system and implements support for <a class="reference external" href="https://memfault.com/">Memfault</a> through the <a class="reference internal" href="../../../libraries/others/memfault_ncs.html#mod-memfault"><span class="std std-ref">Memfault</span></a> module integrated in nRF Connect SDK.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To enable the debug module, you must include the <code class="file docutils literal notranslate"><span class="pre">../overlay-debug.conf</span></code> overlay configuration file when building the application.</p>
+</div>
+<section id="features">
+<h2><a class="toc-backref" href="#id8">Features</a><a class="headerlink" href="#features" title="Permalink to this heading"></a></h2>
+<p>This section documents the various features implemented by the module.</p>
+<section id="memfault">
+<h3><a class="toc-backref" href="#id9">Memfault</a><a class="headerlink" href="#memfault" title="Permalink to this heading"></a></h3>
+<p>The debug module uses <a class="reference external" href="https://docs.memfault.com/docs/embedded/introduction/">Memfault SDK</a> to track nRF Connect SDK specific metrics such as LTE and stack metrics.
+In addition, the following types of custom Memfault metrics are defined and tracked when compiling in the debug module:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">GnssTimeToFix</span></code> - Time duration between the start of a GNSS search and obtaining a fix.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">GnssSatellitesTracked</span></code> - Number of satellites tracked during a GNSS search window.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LocationTimeoutSearchTime</span></code> - Time duration between the start of a location search and a search timeout.</p></li>
+</ul>
+</div></blockquote>
+<p>The debug module also implements <a class="reference external" href="https://docs.memfault.com/docs/embedded/introduction/">Memfault SDK</a> software watchdog, which is designed to trigger an assert before an actual watchdog timeout.
+This enables the application to be able to collect coredump data before a reboot occurs.</p>
+<p>To enable Memfault, you must include the <code class="file docutils literal notranslate"><span class="pre">../overlay-memfault.conf</span></code> when building the application.
+To get started with Memfault integration in nRF Connect SDK, see <a class="reference internal" href="../../../external_comp/memfault.html#ug-memfault"><span class="std std-ref">Memfault integration</span></a>.</p>
+<section id="custom-transport">
+<span id="asset-tracker-v2-ext-transport"></span><h4>Custom transport<a class="headerlink" href="#custom-transport" title="Permalink to this heading"></a></h4>
+<p>The data that is collected from the device can be routed through a custom transport to the Memfault cloud instead of using Memfault’s own HTTPS transport.
+To do this, enable the <a class="reference internal" href="#config-debug-module-memfault-use-external-transport"><span class="std std-ref">CONFIG_DEBUG_MODULE_MEMFAULT_USE_EXTERNAL_TRANSPORT</span></a> Kconfig option.
+If this option is enabled, the debug module forwards the captured Memfault data through the <a class="reference internal" href="#c.debug_module_event_type.DEBUG_EVT_MEMFAULT_DATA_READY" title="DEBUG_EVT_MEMFAULT_DATA_READY"><code class="xref c c-enumerator docutils literal notranslate"><span class="pre">DEBUG_EVT_MEMFAULT_DATA_READY</span></code></a> event.
+If the <a class="reference internal" href="#config-debug-module-memfault-use-external-transport"><span class="std std-ref">CONFIG_DEBUG_MODULE_MEMFAULT_USE_EXTERNAL_TRANSPORT</span></a> Kconfig option is disabled, the debug module uses the <a class="reference external" href="https://github.com/memfault/memfault-firmware-sdk">Memfault firmware SDK’s</a> own internal HTTP transport.
+Transporting Memfault data through a pre-established transport can save overhead related to maintaining multiple connections at the same time.
+Currently, only the AWS IoT configuration supports this configuration.</p>
+</section>
+</section>
+</section>
+<section id="configuration-options">
+<h2><a class="toc-backref" href="#id10">Configuration options</a><a class="headerlink" href="#configuration-options" title="Permalink to this heading"></a></h2>
+<dl class="simple" id="config-debug-module-memfault-use-external-transport">
+<dt>CONFIG_DEBUG_MODULE_MEMFAULT_USE_EXTERNAL_TRANSPORT - Configuration for transfer of Memfault data</dt><dd><p>This option, if enabled, makes the debug module trigger events carrying Memfault data. This data can be routed through an external transport to Memfault cloud, for example, through AWS IoT, Azure IoT Hub, or <a class="reference external" href="https://nrfcloud.com/">nRF Cloud</a>.</p>
+</dd>
+</dl>
+<dl class="simple" id="config-debug-module-memfault-heartbeat-interval-sec">
+<dt>CONFIG_DEBUG_MODULE_MEMFAULT_HEARTBEAT_INTERVAL_SEC - Configuration for nRF Connect SDK Memfault metrics tracking interval</dt><dd><p>This option sets the time interval for tracking nRF Connect SDK Memfault metrics.</p>
+</dd>
+</dl>
+<dl class="simple" id="config-debug-module-memfault-chunk-size-max">
+<dt>CONFIG_DEBUG_MODULE_MEMFAULT_CHUNK_SIZE_MAX - Configuration for maximum size of transmitted packets</dt><dd><p>This option sets the maximum size of packets transmitted over the configured custom transport.</p>
+</dd>
+</dl>
+<section id="module-configurations">
+<h3><a class="toc-backref" href="#id11">Module configurations</a><a class="headerlink" href="#module-configurations" title="Permalink to this heading"></a></h3>
+<p>To enable Memfault, you must set the following mandatory options:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MEMFAULT</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MEMFAULT_NCS_PROJECT_KEY</span></code></p></li>
+</ul>
+</div></blockquote>
+<p>To get more detailed stack traces in coredumps sent to Memfault, you can increase the values of the following options:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MEMFAULT_RAM_BACKED_COREDUMP_SIZE</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MEMFAULT_COREDUMP_STACK_SIZE_TO_COLLECT</span></code></p></li>
+</ul>
+</div></blockquote>
+<p>Coredumps are by default stored to non-initialized RAM.
+To enable storing to flash, configure the following options:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MEMFAULT_NCS_INTERNAL_FLASH_BACKED_COREDUMP</span></code> - To enable storing to flash.</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_PM_PARTITION_SIZE_MEMFAULT_STORAGE</span></code> - To set the size of the coredumps storage flash partition.</p></li>
+</ul>
+</div></blockquote>
+<p>For extended documentation regarding nRF Connect SDK Memfault integration, see <a class="reference internal" href="../../../external_comp/memfault.html#ug-memfault"><span class="std std-ref">Memfault integration</span></a> documentation.</p>
+</section>
+</section>
+<section id="module-states">
+<h2><a class="toc-backref" href="#id12">Module states</a><a class="headerlink" href="#module-states" title="Permalink to this heading"></a></h2>
+<p>This module has no internal states.</p>
+</section>
+<section id="module-events">
+<h2><a class="toc-backref" href="#id13">Module events</a><a class="headerlink" href="#module-events" title="Permalink to this heading"></a></h2>
+<p>The <code class="file docutils literal notranslate"><span class="pre">asset_tracker_v2/src/events/debug_module_event.h</span></code> header file contains a list of various events sent by the module.</p>
+</section>
+<section id="dependencies">
+<h2><a class="toc-backref" href="#id14">Dependencies</a><a class="headerlink" href="#dependencies" title="Permalink to this heading"></a></h2>
+<p>This application uses the following nRF Connect SDK libraries and drivers:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../../libraries/others/app_event_manager.html#app-event-manager"><span class="std std-ref">Application Event Manager</span></a></p></li>
+<li><p><a class="reference internal" href="../../../libraries/others/memfault_ncs.html#mod-memfault"><span class="std std-ref">Memfault</span></a></p></li>
+</ul>
+</section>
+<section id="api-documentation">
+<h2><a class="toc-backref" href="#id15">API documentation</a><a class="headerlink" href="#api-documentation" title="Permalink to this heading"></a></h2>
+<div class="line-block">
+<div class="line">Header file: <code class="file docutils literal notranslate"><span class="pre">asset_tracker_v2/src/events/debug_module_event.h</span></code></div>
+<div class="line">Source files: <code class="file docutils literal notranslate"><span class="pre">asset_tracker_v2/src/events/debug_module_event.c</span></code></div>
+</div>
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="group__debug__module__event"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">debug_module_event</span></span></dt>
+<dd><p>Debug module event. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-enums">Enums</p>
+<dl class="c enum">
+<dt class="sig sig-object c" id="c.debug_module_event_type">
+<span class="target" id="group__debug__module__event_1ga00d96ddf87d2eb2b7094133150238799"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">debug_module_event_type</span></span></span><a class="headerlink" href="#c.debug_module_event_type" title="Permalink to this definition"></a><br /></dt>
+<dd><p><em>Values:</em></p>
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.debug_module_event_type.DEBUG_EVT_MEMFAULT_DATA_READY">
+<span class="target" id="group__debug__module__event_1gga00d96ddf87d2eb2b7094133150238799a0aec778a173bb4b30039b3a4153b95e3"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">DEBUG_EVT_MEMFAULT_DATA_READY</span></span></span><a class="headerlink" href="#c.debug_module_event_type.DEBUG_EVT_MEMFAULT_DATA_READY" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Event carrying Memfault data that should be forwarded via the configured cloud backend to Memfault cloud. Only sent if CONFIG_DEBUG_MODULE_MEMFAULT_USE_EXTERNAL_TRANSPORT is enabled. Payload is of type <a class="reference internal" href="#structdebug__module__memfault__data"><span class="std std-ref">debug_module_memfault_data</span></a>.</p>
+<p>The payload is heap allocated and must be freed after use. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.debug_module_event_type.DEBUG_EVT_EMULATOR_INITIALIZED">
+<span class="target" id="group__debug__module__event_1gga00d96ddf87d2eb2b7094133150238799ad2dba88043d9c12019344bac805bd69d"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">DEBUG_EVT_EMULATOR_INITIALIZED</span></span></span><a class="headerlink" href="#c.debug_module_event_type.DEBUG_EVT_EMULATOR_INITIALIZED" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Event sent after boot when building for PC. This event acts as a placeholder for MODEM_EVT_INITIALIZED which is not sent due to the modem module being disabled for PC builds. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.debug_module_event_type.DEBUG_EVT_EMULATOR_NETWORK_CONNECTED">
+<span class="target" id="group__debug__module__event_1gga00d96ddf87d2eb2b7094133150238799ae982a3f76e7ab5ac262905b5fcfe2760"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">DEBUG_EVT_EMULATOR_NETWORK_CONNECTED</span></span></span><a class="headerlink" href="#c.debug_module_event_type.DEBUG_EVT_EMULATOR_NETWORK_CONNECTED" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Event sent when the application is built for PC. When built for PC it is assumed that the application is connected to the network. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.debug_module_event_type.DEBUG_EVT_ERROR">
+<span class="target" id="group__debug__module__event_1gga00d96ddf87d2eb2b7094133150238799a2c2f95d05e536b56cb20084079fac008"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">DEBUG_EVT_ERROR</span></span></span><a class="headerlink" href="#c.debug_module_event_type.DEBUG_EVT_ERROR" title="Permalink to this definition"></a><br /></dt>
+<dd><p>An irrecoverable error has occurred in the debug module. Error details are attached in the event structure. </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.debug_module_memfault_data">
+<span class="target" id="structdebug__module__memfault__data"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">debug_module_memfault_data</span></span></span><a class="headerlink" href="#c.debug_module_memfault_data" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;debug_module_event.h&gt;</em></div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.debug_module_event">
+<span class="target" id="structdebug__module__event"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">debug_module_event</span></span></span><a class="headerlink" href="#c.debug_module_event" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;debug_module_event.h&gt;</em></div>
+<p>Debug event. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.debug_module_event.err">
+<span class="target" id="structdebug__module__event_1a624f2742bef174bbaf00439cbe5fb372"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">err</span></span></span><a class="headerlink" href="#c.debug_module_event.err" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Code signifying the cause of error. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="location_module.html" class="btn btn-neutral float-right" title="Location module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="cloud_wrapper.html" class="btn btn-neutral" title="Cloud wrapper API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

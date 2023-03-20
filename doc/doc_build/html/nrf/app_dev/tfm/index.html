@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Running applications with Trusted Firmware-M &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../_static/js/ncs.js"
+></script>
+<script src="../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Working with RF front-end modules" href="../working_with_fem/index.html" />
+    <link rel="prev" title="Testing with Unity and CMock" href="../testing_unity_cmock/index.html" />
+<link
+  href="../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev_model.html">Development model</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../app_dev.html">Application development</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../board_support/index.html">Board support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pin_control/index.html">Pin control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../build_and_config_system/index.html">Build and configuration system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../optimizing/index.html">Optimizing application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ap_protect/index.html">Enabling access port protection mechanism</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bootloaders_and_dfu/index.html">Bootloaders and Device Firmware Updates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../logging/index.html">Logging in nRF Connect SDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multi_image/index.html">Multi-image builds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../testing_unity_cmock/index.html">Testing with Unity and CMock</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Running applications with Trusted Firmware-M</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#building">Building</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#enabling-secure-services">Enabling secure services</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#minimal-build">Minimal build</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#programming">Programming</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#logging">Logging</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#virtual-com-ports-on-the-nrf5340-dk">Virtual COM ports on the nRF5340 DK</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#limitations">Limitations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#migrating-from-secure-partition-manager-to-trusted-firmware-m">Migrating from Secure Partition Manager to Trusted Firmware-M</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_fem/index.html">Working with RF front-end modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../wifi_coex/index.html">Adding Wi-Fi Coexistence support to short-range radio applications</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drivers.html">Drivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../app_dev.html">Application development</a></li>
+      <li class="breadcrumb-item active">Running applications with Trusted Firmware-M</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/app_dev/tfm/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="running-applications-with-trusted-firmware-m">
+<span id="ug-tfm"></span><h1>Running applications with Trusted Firmware-M<a class="headerlink" href="#running-applications-with-trusted-firmware-m" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#overview" id="id6">Overview</a></p></li>
+<li><p><a class="reference internal" href="#building" id="id7">Building</a></p>
+<ul>
+<li><p><a class="reference internal" href="#enabling-secure-services" id="id8">Enabling secure services</a></p></li>
+<li><p><a class="reference internal" href="#minimal-build" id="id9">Minimal build</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#programming" id="id10">Programming</a></p></li>
+<li><p><a class="reference internal" href="#logging" id="id11">Logging</a></p>
+<ul>
+<li><p><a class="reference internal" href="#virtual-com-ports-on-the-nrf5340-dk" id="id12">Virtual COM ports on the nRF5340 DK</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#limitations" id="id13">Limitations</a></p></li>
+<li><p><a class="reference internal" href="#migrating-from-secure-partition-manager-to-trusted-firmware-m" id="id14">Migrating from Secure Partition Manager to Trusted Firmware-M</a></p></li>
+</ul>
+</div>
+<p>On nRF5340 and nRF9160, Trusted Firmware-M (TF-M) is used to configure and boot an application as non-secure.</p>
+<section id="overview">
+<h2><a class="toc-backref" href="#id6">Overview</a><a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+<p>TF-M is the reference implementation of <a class="reference external" href="https://www.psacertified.org/what-is-psa-certified/">Platform Security Architecture (PSA)</a>.</p>
+<p>It provides a highly configurable set of software components to create a Trusted Execution Environment.
+This is achieved by a set of secure run time services such as Secure Storage, Cryptography, Audit Logs, and Attestation.
+Additionally, secure boot through MCUboot in TF-M ensures integrity of runtime software and supports firmware upgrade.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Support for TF-M with <a class="reference internal" href="#tfm-minimal-build"><span class="std std-ref">minimal version</span></a> disabled in nRF Connect SDK is currently <a class="reference internal" href="../../software_maturity.html#software-maturity"><span class="std std-ref">experimental</span></a>.</p>
+</div>
+<p>For official documentation, see the <a class="reference external" href="https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/tfm/index.html">TF-M documentation</a>.</p>
+<p>The TF-M implementation in nRF Connect SDK is currently demonstrated in the following samples:</p>
+<ul class="simple">
+<li><p>The <a class="reference internal" href="../../samples/tfm/tfm_hello_world/README.html#tfm-hello-world"><span class="std std-ref">TF-M Hello World</span></a> sample</p></li>
+<li><p>The <a class="reference internal" href="../../samples/tfm/tfm_secure_peripheral/README.html#tfm-secure-peripheral-partition"><span class="std std-ref">TF-M secure peripheral partition</span></a> sample</p></li>
+<li><p>All <a class="reference internal" href="../../samples/crypto.html#crypto-samples"><span class="std std-ref">cryptography samples</span></a> in this SDK</p></li>
+<li><p>A series of <span class="xref std std-ref">TF-M integration samples</span> available in Zephyr</p></li>
+<li><p>The <a class="reference internal" href="../../samples/nrf9160/https_client/README.html#https-client"><span class="std std-ref">nRF9160: HTTPS Client</span></a> sample for nRF9160 in this SDK</p></li>
+<li><p>The <a class="reference internal" href="../../samples/thread.html#openthread-samples"><span class="std std-ref">Thread samples</span></a> that support the <code class="docutils literal notranslate"><span class="pre">nrf5340dk_nrf5340_cpuapp_ns</span></code> build target in this SDK</p></li>
+</ul>
+</section>
+<section id="building">
+<h2><a class="toc-backref" href="#id7">Building</a><a class="headerlink" href="#building" title="Permalink to this heading"></a></h2>
+<p>TF-M is one of the images that are built as part of a multi-image application.
+For more information about multi-image builds, see <a class="reference internal" href="../multi_image/index.html#ug-multi-image"><span class="std std-ref">Multi-image builds</span></a>.</p>
+<p>To add TF-M to your build, enable the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BUILD_WITH_TFM</span></code> configuration option by adding it to your <code class="file docutils literal notranslate"><span class="pre">prj.conf</span></code> file.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you use menuconfig to enable <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BUILD_WITH_TFM</span></code>, you must also enable its dependencies.</p>
+</div>
+<p>By default, TF-M is configured to build the <a class="reference internal" href="#tfm-minimal-build"><span class="std std-ref">minimal version</span></a>.
+To use the full TF-M, you must disable the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_TFM_MINIMAL</span></code> option.</p>
+<p>You must build TF-M using a non-secure build target.
+The following platforms are currently supported:</p>
+<ul class="simple">
+<li><p>nRF5340</p></li>
+<li><p>nRF9160</p></li>
+</ul>
+<p>TF-M uses UART1 for logging from the secure application.
+To disable logging, enable the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">TFM_LOG_LEVEL_SILENCE</span></code> option.
+When building TF-M with logging enabled, UART1 must be disabled in the non-secure application, otherwise the non-secure application will fail to run.
+The recommended way to do this is to copy the .overlay file from the <a class="reference internal" href="../../samples/tfm/tfm_hello_world/README.html#tfm-hello-world"><span class="std std-ref">TF-M Hello World</span></a> sample.</p>
+<section id="enabling-secure-services">
+<h3><a class="toc-backref" href="#id8">Enabling secure services</a><a class="headerlink" href="#enabling-secure-services" title="Permalink to this heading"></a></h3>
+<p>When using the <span class="xref std std-ref">nrfxlib:nrf_security</span>, if <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BUILD_WITH_TFM</span></code> is enabled together with <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NORDIC_SECURITY_BACKEND</span></code>, the TF-M secure image will enable the use of the hardware acceleration of Arm CryptoCell.
+In such case, the Kconfig configurations in the Nordic Security Backend control the features enabled through TF-M.</p>
+<p>You can configure what crypto modules to include in TF-M by using the <code class="docutils literal notranslate"><span class="pre">TFM_CRYPTO_</span></code> Kconfig options found in file <code class="file docutils literal notranslate"><span class="pre">zephyr/modules/trusted-firmware-m/Kconfig.tfm.crypto_modules</span></code>.</p>
+<p>TF-M utilizes <a class="reference internal" href="../../libraries/others/hw_unique_key.html#lib-hw-unique-key"><span class="std std-ref">hardware unique keys</span></a> when the PSA Crypto key derivation APIs are used, and <code class="docutils literal notranslate"><span class="pre">psa_key_derivation_setup</span></code> is called with the algorithm <code class="docutils literal notranslate"><span class="pre">TFM_CRYPTO_ALG_HUK_DERIVATION</span></code>.
+For more information about the PSA cryptography and the API, see <a class="reference external" href="https://armmbed.github.io/mbed-crypto/1.0.1/html/index.html">PSA Cryptography API 1.0.1</a>.</p>
+</section>
+<section id="minimal-build">
+<span id="tfm-minimal-build"></span><h3><a class="toc-backref" href="#id9">Minimal build</a><a class="headerlink" href="#minimal-build" title="Permalink to this heading"></a></h3>
+<p>The default configuration of TF-M has all supported features enabled, which results in a significant memory footprint.
+A minimal version of the TF-M secure application is provided in nRF Connect SDK to show how to configure a reduced version of TF-M.</p>
+<p>The secure services supported by this minimal version allow for generating random numbers, and the platform services.</p>
+<p>The minimal version of TF-M is disabled by setting the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_TFM_PROFILE_TYPE_NOT_SET</span></code> option or one of the other build profiles.</p>
+<p>When <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_TFM_PROFILE_TYPE_MINIMAL</span></code> is set, the configurability of TF-M is severely limited.
+Hence, it is not possible to modify the TF-M minimal configuration to create your own variant of the minimal configuration.
+Instead, the default configuration must be used as a starting point.</p>
+</section>
+</section>
+<section id="programming">
+<h2><a class="toc-backref" href="#id10">Programming</a><a class="headerlink" href="#programming" title="Permalink to this heading"></a></h2>
+<p>The procedure for programming an application with TF-M is the same as for other multi-image applications in nRF Connect SDK.</p>
+<p>After building the application, a <code class="file docutils literal notranslate"><span class="pre">merged.hex</span></code> file is created that contains MCUboot, TF-M, and the application.
+The <code class="file docutils literal notranslate"><span class="pre">merged.hex</span></code> file can be then <a class="reference internal" href="../../getting_started/programming.html#gs-programming-vsc"><span class="std std-ref">programmed using nRF Connect for Visual Studio Code</span></a>.
+When using the command line, the file is programmed automatically when you call <code class="docutils literal notranslate"><span class="pre">ninja</span> <span class="pre">flash</span></code> or <code class="docutils literal notranslate"><span class="pre">west</span> <span class="pre">flash</span></code>.</p>
+</section>
+<section id="logging">
+<h2><a class="toc-backref" href="#id11">Logging</a><a class="headerlink" href="#logging" title="Permalink to this heading"></a></h2>
+<p>TF-M employs two UART interfaces for logging: one for the secure part (MCUboot and TF-M), and one for the non-secure application.
+The logs arrive on different COM ports on the host PC.</p>
+<section id="virtual-com-ports-on-the-nrf5340-dk">
+<h3><a class="toc-backref" href="#id12">Virtual COM ports on the nRF5340 DK</a><a class="headerlink" href="#virtual-com-ports-on-the-nrf5340-dk" title="Permalink to this heading"></a></h3>
+<p>On the nRF5340 DK v1.0.0, you must connect specific wires on the kit to receive secure logs on the host PC.
+Specifically, wire the pins <strong>P0.25</strong> and <strong>P0.26</strong> of the <strong>P2</strong> connector to <strong>RxD</strong> and <strong>TxD</strong> of the <strong>P24</strong> connector respectively.
+See <a class="reference internal" href="../../working_with_nrf/nrf53/nrf5340.html#logging-cpunet"><span class="std std-ref">Getting logging output</span></a> on the Working with nRF5340 DK page for more information.</p>
+<p>On the nRF5340 DK v2.0.0, there are only two virtual COM ports available.
+By default, one of the ports is used by the non-secure UART0 peripheral from the application and the other by the UART1 peripheral from the network core.</p>
+<p>There are several options to get UART output from the secure TF-M:</p>
+<ul class="simple">
+<li><p>Disable the output for the network core and change the pins used by TF-M.
+The network core will usually have an nRF Connect SDK child image.
+To configure a child image, see Configuration of the child image section described in <a class="reference internal" href="../../working_with_nrf/nrf53/nrf5340.html#ug-nrf5340-multi-image"><span class="std std-ref">Multi-image builds</span></a>.
+To configure logging in an nRF Connect SDK image, see <a class="reference internal" href="../logging/index.html#ug-logging"><span class="std std-ref">Logging in nRF Connect SDK</span></a>.
+To change the pins used by TF-M, the RXD (<code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_TFM_UART1_RXD_PIN</span></code>) and TXD (<code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_TFM_UART1_TXD_PIN</span></code>) Kconfig options in the application image can be set to <strong>P1.00</strong> (32) and <strong>P1.01</strong> (33).</p></li>
+<li><p>The secure and non-secure UART peripherals can be wired to the same pins.
+Specifically, physically wire together the pins <strong>P0.25</strong> and <strong>P0.26</strong> to <strong>P0.20</strong> and <strong>P0.22</strong>, respectively.</p></li>
+<li><p>If the non-secure application, network core and TF-M outputs are all needed simultaneously, additional UART &lt;-&gt; USB hardware is needed.
+A second nRF DK can be used if available.
+Pin <strong>P0.25</strong> needs to be wired to the TXD pin, and <strong>P0.26</strong> to the RXD pin of the external hardware.
+These pins will provide the secure TF-M output, while the two native COM ports of the DK will be used for the non-secure application and the network core output.</p></li>
+</ul>
+</section>
+</section>
+<section id="limitations">
+<h2><a class="toc-backref" href="#id13">Limitations</a><a class="headerlink" href="#limitations" title="Permalink to this heading"></a></h2>
+<p>The following services are not supported:</p>
+<ul class="simple">
+<li><p>Audit Log service in IPC model</p></li>
+<li><p>Firmware Update service</p></li>
+<li><p>Attestation service</p></li>
+</ul>
+<p>The following Crypto modules or ciphers are not supported:</p>
+<ul class="simple">
+<li><p>OFB</p></li>
+<li><p>CFB</p></li>
+</ul>
+<p>Isolation level 3 is not supported.</p>
+<p>In Isolation level 2 or higher, the number of peripherals configured as secure in Application Root of Trust (ARoT) is limited by the number of available MPU regions.</p>
+<p>Nordic platforms support only the GCC toolchain for building TF-M.</p>
+<p>Enabling Floating point support in TF-M is currently not supported.
+Enabling Floating point Hard ABI (<code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_FP_HARDABI</span></code>) in the application is currently not supported.</p>
+</section>
+<section id="migrating-from-secure-partition-manager-to-trusted-firmware-m">
+<span id="ug-tfm-migrate"></span><h2><a class="toc-backref" href="#id14">Migrating from Secure Partition Manager to Trusted Firmware-M</a><a class="headerlink" href="#migrating-from-secure-partition-manager-to-trusted-firmware-m" title="Permalink to this heading"></a></h2>
+<p>The interface to TF-M is different from the interface to SPM.
+Due to that, the application code that uses the SPM Secure Services needs to be ported to use TF-M instead.</p>
+<p>TF-M can replace the following SPM services:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">spm_request_system_reboot</span></code> with <code class="docutils literal notranslate"><span class="pre">tfm_platform_system_reset</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">spm_request_random_number</span></code> with <code class="docutils literal notranslate"><span class="pre">psa_generate_random</span></code> or <code class="docutils literal notranslate"><span class="pre">entropy_get_entropy</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">spm_request_read</span></code> with <code class="docutils literal notranslate"><span class="pre">tfm_platform_mem_read</span></code> or <code class="docutils literal notranslate"><span class="pre">soc_secure_mem_read</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">spm_s0_active</span></code> with <code class="docutils literal notranslate"><span class="pre">tfm_platform_s0_active</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">spm_firmware_info</span></code> with <code class="docutils literal notranslate"><span class="pre">tfm_firmware_info</span></code>.</p></li>
+</ul>
+<p>The following SPM services have no replacement in TF-M:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">spm_prevalidate_b1_upgrade</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">spm_busy_wait</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">spm_set_ns_fatal_error_handler</span></code></p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>By default, TF-M configures memory regions as secure memory, while SPM configures memory regions as non-secure.
+The partitions <code class="docutils literal notranslate"><span class="pre">tfm_nonsecure</span></code>, <code class="docutils literal notranslate"><span class="pre">mcuboot_secondary</span></code>, and <code class="docutils literal notranslate"><span class="pre">nonsecure_storage</span></code> are configured as non-secure flash memory regions.
+The partition <code class="docutils literal notranslate"><span class="pre">sram_nonsecure</span></code> is configured as a non-secure RAM region.</p>
+</div>
+<p>If a static partition file is used for the application, make the following changes:</p>
+<ul class="simple">
+<li><p>Rename the <code class="docutils literal notranslate"><span class="pre">spm</span></code> partition to <code class="docutils literal notranslate"><span class="pre">tfm</span></code>.</p></li>
+<li><p>Add a partition called <code class="docutils literal notranslate"><span class="pre">tfm_secure</span></code> that spans <code class="docutils literal notranslate"><span class="pre">mcuboot_pad</span></code> (if MCUboot is enabled) and <code class="docutils literal notranslate"><span class="pre">tfm</span></code> partitions.</p></li>
+<li><p>Add a partition called <code class="docutils literal notranslate"><span class="pre">tfm_nonsecure</span></code> that spans the application, and other possible application partitions that must be non-secure.</p></li>
+<li><p>For non-secure storage partitions, place the partitions inside the <code class="docutils literal notranslate"><span class="pre">nonsecure_storage</span></code> partition.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../working_with_fem/index.html" class="btn btn-neutral float-right" title="Working with RF front-end modules" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../testing_unity_cmock/index.html" class="btn btn-neutral" title="Testing with Unity and CMock" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

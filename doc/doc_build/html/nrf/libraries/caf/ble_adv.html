@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CAF: Bluetooth LE advertising module &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../_static/js/ncs.js"
+></script>
+<script src="../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="CAF: Bluetooth LE bond module" href="ble_bond.html" />
+    <link rel="prev" title="Common Application Framework overview" href="caf_overview.html" />
+<link
+  href="../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drivers.html">Drivers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Libraries</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../bin/index.html">Binary libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bluetooth_services/index.html">Bluetooth libraries and services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bootloader/index.html">Bootloader libraries</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Common Application Framework</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="caf_overview.html">Common Application Framework overview</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">CAF: Bluetooth LE advertising module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#configuration">Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#implementation-details">Implementation details</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ble_bond.html">CAF: Bluetooth LE bond module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ble_smp.html">CAF: Simple Management Protocol module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ble_state.html">CAF: Bluetooth LE state module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ble_state_pm.html">CAF: Bluetooth state power manager module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="buttons.html">CAF: Buttons module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="buttons_pm_keep_alive.html">CAF: Power manager keep alive module for buttons</a></li>
+<li class="toctree-l3"><a class="reference internal" href="click_detector.html">CAF: Click detector module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="leds.html">CAF: LEDs module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="net_state.html">CAF: Network state module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="power_manager.html">CAF: Power manager module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sensor_data_aggregator.html">CAF: Sensor data aggregator module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sensor_manager.html">CAF: Sensor manager module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="settings_loader.html">CAF: Settings loader module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../debug/index.html">Debug libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dfu/index.html">DFU libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gazell/index.html">Gazell libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modem/index.html">Modem libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mpsl/index.html">Multiprotocol Service Layer libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../networking/index.html">Libraries for networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nfc/index.html">Libraries for NFC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nrf_rpc/index.html">nRF RPC libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../others/index.html">Other libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../shell/index.html">Shell libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tfm/index.html">TF-M libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../zigbee/index.html">Libraries for Zigbee</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Libraries</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Common Application Framework</a></li>
+      <li class="breadcrumb-item active">CAF: Bluetooth LE advertising module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/libraries/caf/ble_adv.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="caf-bluetooth-le-advertising-module">
+<span id="caf-ble-adv"></span><h1>CAF: Bluetooth LE advertising module<a class="headerlink" href="#caf-bluetooth-le-advertising-module" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#configuration" id="id6">Configuration</a></p>
+<ul>
+<li><p><a class="reference internal" href="#enabling-the-module" id="id7">Enabling the module</a></p></li>
+<li><p><a class="reference internal" href="#using-directed-advertising" id="id8">Using directed advertising</a></p></li>
+<li><p><a class="reference internal" href="#changing-advertising-interval" id="id9">Changing advertising interval</a></p></li>
+<li><p><a class="reference internal" href="#synchronizing-rpa-and-advertising-data-updates" id="id10">Synchronizing RPA and advertising data updates</a></p></li>
+<li><p><a class="reference internal" href="#power-down" id="id11">Power-down</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#implementation-details" id="id12">Implementation details</a></p>
+<ul>
+<li><p><a class="reference internal" href="#undirected-advertising-data-update" id="id13">Undirected advertising data update</a></p></li>
+<li><p><a class="reference internal" href="#reaction-on-bluetooth-peer-operation" id="id14">Reaction on Bluetooth peer operation</a></p></li>
+<li><p><a class="reference internal" href="#avoiding-connection-requests-from-unbonded-centrals-when-bonded" id="id15">Avoiding connection requests from unbonded centrals when bonded</a></p></li>
+<li><p><a class="reference internal" href="#grace-period-with-synchronized-updates-of-rpa-and-advertising-data" id="id16">Grace period with synchronized updates of RPA and advertising data</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>When enabled for an application, the Bluetooth® LE advertising module is responsible for controlling the Bluetooth LE advertising for Bluetooth LE Peripheral device.</p>
+<p>This module can only work together with the <a class="reference internal" href="ble_state.html#caf-ble-state"><span class="std std-ref">CAF Bluetooth LE state module</span></a>.
+The Bluetooth LE state module is a core Bluetooth module in the <a class="reference internal" href="index.html#lib-caf"><span class="std std-ref">Common Application Framework</span></a> (CAF).</p>
+<section id="configuration">
+<h2><a class="toc-backref" href="#id6">Configuration</a><a class="headerlink" href="#configuration" title="Permalink to this heading"></a></h2>
+<p>The following Kconfig options are available for this module:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_CAF_BLE_ADV</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_CAF_BLE_ADV_PM_EVENTS</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_CAF_BLE_ADV_DIRECT_ADV</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_CAF_BLE_ADV_FAST_ADV</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_CAF_BLE_ADV_FAST_ADV_TIMEOUT</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_CAF_BLE_ADV_FILTER_ACCEPT_LIST</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_CAF_BLE_ADV_GRACE_PERIOD</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_CAF_BLE_ADV_ROTATE_RPA</span></code></p></li>
+</ul>
+<p>Read about some of these options in the following sections.</p>
+<section id="enabling-the-module">
+<h3><a class="toc-backref" href="#id7">Enabling the module</a><a class="headerlink" href="#enabling-the-module" title="Permalink to this heading"></a></h3>
+<p>To enable the Bluetooth LE advertising module, complete the following steps:</p>
+<ol class="arabic simple">
+<li><p>Enable and configure the <a class="reference internal" href="ble_state.html#caf-ble-state"><span class="std std-ref">CAF Bluetooth LE state module</span></a>.</p></li>
+<li><p>Set the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_CAF_BLE_ADV</span></code> Kconfig option.</p></li>
+<li><p>Configure the advertising data and scan response data for undirected advertising.
+Both advertising data and scan response data are managed by Bluetooth LE advertising providers.
+See <a class="reference internal" href="../bluetooth_services/adv_prov.html#bt-le-adv-prov-readme"><span class="std std-ref">Bluetooth LE advertising providers</span></a> for details.
+Also see <a class="reference internal" href="../../applications/nrf_desktop/doc/ble_adv.html#nrf-desktop-ble-adv"><span class="std std-ref">Bluetooth LE advertising module</span></a> for an example of the Bluetooth LE advertising providers configuration defined by an application.</p></li>
+</ol>
+</section>
+<section id="using-directed-advertising">
+<h3><a class="toc-backref" href="#id8">Using directed advertising</a><a class="headerlink" href="#using-directed-advertising" title="Permalink to this heading"></a></h3>
+<p>By default, the module uses indirect advertising.
+Set the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_CAF_BLE_ADV_DIRECT_ADV</span></code> option to use directed advertising.
+The directed advertising can be used to call the selected peer device to connect as quickly as possible.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The module will not advertise directly towards a Central that uses Resolvable Private Address (RPA).
+The Bluetooth LE Peripheral does not read the Central Address Resolution GATT characteristic of the Bluetooth LE Central, so the Peripheral does not know if the remote device supports the address resolution of directed advertisements.</p>
+</div>
+</section>
+<section id="changing-advertising-interval">
+<h3><a class="toc-backref" href="#id9">Changing advertising interval</a><a class="headerlink" href="#changing-advertising-interval" title="Permalink to this heading"></a></h3>
+<p>Set the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_CAF_BLE_ADV_FAST_ADV</span></code> Kconfig option to make the Peripheral initially advertise with a shorter interval.
+This lets you speed up finding the Peripheral by Bluetooth Centrals.</p>
+<ul class="simple">
+<li><p>If the device uses indirect advertising, it will switch to slower advertising after the period of time defined in <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_CAF_BLE_ADV_FAST_ADV_TIMEOUT</span></code> (in seconds).</p></li>
+<li><p>If the device uses directed advertising, the Bluetooth LE advertising module will receive <a class="reference internal" href="caf_overview.html#c.ble_peer_event" title="ble_peer_event"><code class="xref c c-struct docutils literal notranslate"><span class="pre">ble_peer_event</span></code></a> with <a class="reference internal" href="caf_overview.html#c.ble_peer_event.state" title="ble_peer_event.state"><code class="xref c c-member docutils literal notranslate"><span class="pre">ble_peer_event.state</span></code></a> set to <a class="reference internal" href="caf_overview.html#c.peer_state.PEER_STATE_CONN_FAILED" title="PEER_STATE_CONN_FAILED"><code class="xref c c-enumerator docutils literal notranslate"><span class="pre">PEER_STATE_CONN_FAILED</span></code></a> if the Central does not connect during the predefined period of fast directed advertising.
+The <a class="reference internal" href="caf_overview.html#c.ble_peer_event" title="ble_peer_event"><code class="xref c c-struct docutils literal notranslate"><span class="pre">ble_peer_event</span></code></a> is submitted by <a class="reference internal" href="ble_state.html#caf-ble-state"><span class="std std-ref">CAF: Bluetooth LE state module</span></a>.
+After the event is received, the device will switch to the low duty cycle directed advertising.</p></li>
+</ul>
+<p>Switching to slower advertising is done to reduce the energy consumption.</p>
+</section>
+<section id="synchronizing-rpa-and-advertising-data-updates">
+<h3><a class="toc-backref" href="#id10">Synchronizing RPA and advertising data updates</a><a class="headerlink" href="#synchronizing-rpa-and-advertising-data-updates" title="Permalink to this heading"></a></h3>
+<p>With the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_PRIVACY</span></code> Kconfig option enabled, set the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_CAF_BLE_ADV_ROTATE_RPA</span></code> option to synchronize Resolvable Private Address (RPA) rotation with the undirected advertising data update.
+You can control the rotation period with the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_CAF_BLE_ADV_ROTATE_RPA_TIMEOUT</span></code> option and change the randomization factor of the rotation period with the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_CAF_BLE_ADV_ROTATE_RPA_TIMEOUT_RAND</span></code> option.</p>
+</section>
+<section id="power-down">
+<h3><a class="toc-backref" href="#id11">Power-down</a><a class="headerlink" href="#power-down" title="Permalink to this heading"></a></h3>
+<p>When the system goes to the power-down state, the advertising either instantly stops or enters the grace period state.</p>
+<section id="grace-period">
+<span id="caf-ble-adv-grace-period"></span><h4>Grace period<a class="headerlink" href="#grace-period" title="Permalink to this heading"></a></h4>
+<p>The grace period is an advertising state, during which the advertising is still active, but the advertising data and scan response data can be modified to inform that system is about to go to the power-down state.</p>
+<p>If any advertising data provider requests non-zero grace period time, the stopping of advertising on power-down is delayed by the requested time.
+Instead of instantly stopping, the advertising enters the grace period.
+After the grace period ends, the advertising stops.</p>
+<p>The grace period is requested for example by the <a class="reference external" href="https://docs.microsoft.com/en-us/windows-hardware/design/device-experiences/bluetooth-swift-pair">Swift Pair</a> advertising data provider (<code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_ADV_PROV_SWIFT_PAIR</span></code>).
+During the grace period, Swift Pair data is removed from the advertising packet and the device enters Swift Pair’s cool-down phase.
+This is done to ensure that the user does not try to connect to the device that is no longer available.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Make sure that <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_CAF_BLE_ADV_GRACE_PERIOD</span></code> Kconfig option is enabled if both following conditions are met:</p>
+<ul class="simple">
+<li><p>Any of the providers requests the grace period.</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_CAF_BLE_ADV_PM_EVENTS</span></code> is enabled.</p></li>
+</ul>
+<p>The <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_CAF_BLE_ADV_GRACE_PERIOD</span></code> is enabled by default if the Swift Pair advertising data provider is enabled in the configuration.</p>
+</div>
+</section>
+</section>
+</section>
+<section id="implementation-details">
+<h2><a class="toc-backref" href="#id12">Implementation details</a><a class="headerlink" href="#implementation-details" title="Permalink to this heading"></a></h2>
+<p>The Bluetooth LE advertising module is used only by Bluetooth Peripheral devices.</p>
+<p>The Bluetooth LE advertising module uses Zephyr’s <span class="xref std std-ref">zephyr:settings_api</span> to store the information if the peer for the given local identity uses the Resolvable Private Address (RPA).</p>
+<section id="undirected-advertising-data-update">
+<h3><a class="toc-backref" href="#id13">Undirected advertising data update</a><a class="headerlink" href="#undirected-advertising-data-update" title="Permalink to this heading"></a></h3>
+<p>The module does not instantly update advertising and scan response payloads when either advertising data or scan response data (provided by <a class="reference internal" href="../bluetooth_services/adv_prov.html#bt-le-adv-prov-readme"><span class="std std-ref">Bluetooth LE advertising providers</span></a>) is modified.
+The module automatically gets new advertising data and scan response data from Bluetooth LE’s advertising data provider subsystem only in the following cases:</p>
+<ul class="simple">
+<li><p>Bluetooth LE undirected advertising is started or restarted.</p></li>
+<li><p>Undirected advertising enters the <a class="reference internal" href="#caf-ble-adv-grace-period"><span class="std std-ref">Grace period</span></a>.</p></li>
+<li><p>RPA is rotated with the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_CAF_BLE_ADV_ROTATE_RPA</span></code> option enabled.</p></li>
+</ul>
+<p>The payload update can be triggered by the application using <a class="reference internal" href="caf_overview.html#c.ble_adv_data_update_event" title="ble_adv_data_update_event"><code class="xref c c-struct docutils literal notranslate"><span class="pre">ble_adv_data_update_event</span></code></a>.
+Make sure to submit the event after changing the Bluetooth data provided by a provider.</p>
+</section>
+<section id="reaction-on-bluetooth-peer-operation">
+<h3><a class="toc-backref" href="#id14">Reaction on Bluetooth peer operation</a><a class="headerlink" href="#reaction-on-bluetooth-peer-operation" title="Permalink to this heading"></a></h3>
+<p>If the application supports Bluetooth LE bond management (<code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_CAF_BLE_BOND_SUPPORTED</span></code>), the Bluetooth LE bond module defined for the application is used to control the Bluetooth bonds.
+The Bluetooth LE bond module broadcasts information related to bond control using <a class="reference internal" href="caf_overview.html#c.ble_peer_operation_event" title="ble_peer_operation_event"><code class="xref c c-struct docutils literal notranslate"><span class="pre">ble_peer_operation_event</span></code></a>.</p>
+<p>The Bluetooth LE advertising module reacts on <a class="reference internal" href="caf_overview.html#c.ble_peer_operation_event" title="ble_peer_operation_event"><code class="xref c c-struct docutils literal notranslate"><span class="pre">ble_peer_operation_event</span></code></a> related to the Bluetooth peer change or erase advertising.
+The module performs one of the following operations:</p>
+<ul class="simple">
+<li><p>If there is a peer connected over Bluetooth, the Bluetooth LE advertising module triggers disconnection and submits a <a class="reference internal" href="caf_overview.html#c.ble_peer_event" title="ble_peer_event"><code class="xref c c-struct docutils literal notranslate"><span class="pre">ble_peer_event</span></code></a> with <a class="reference internal" href="caf_overview.html#c.ble_peer_event.state" title="ble_peer_event.state"><code class="xref c c-member docutils literal notranslate"><span class="pre">ble_peer_event.state</span></code></a> set to <a class="reference internal" href="caf_overview.html#c.peer_state.PEER_STATE_DISCONNECTING" title="PEER_STATE_DISCONNECTING"><code class="xref c c-enum docutils literal notranslate"><span class="pre">PEER_STATE_DISCONNECTING</span></code></a> to let other application modules prepare for the planned disconnection.</p></li>
+<li><p>Otherwise, the Bluetooth advertising with the newly selected Bluetooth local identity is started.</p></li>
+</ul>
+</section>
+<section id="avoiding-connection-requests-from-unbonded-centrals-when-bonded">
+<h3><a class="toc-backref" href="#id15">Avoiding connection requests from unbonded centrals when bonded</a><a class="headerlink" href="#avoiding-connection-requests-from-unbonded-centrals-when-bonded" title="Permalink to this heading"></a></h3>
+<p>If <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_CAF_BLE_ADV_FILTER_ACCEPT_LIST</span></code> is enabled and the Bluetooth local identity currently in use already has a bond, the device will filter incoming scan response data requests and connection requests.
+In that case, only the bonded peer can connect or request scan response data.
+This is done to prevent Bluetooth Centrals other than the bonded one from connecting with the device.</p>
+</section>
+<section id="grace-period-with-synchronized-updates-of-rpa-and-advertising-data">
+<h3><a class="toc-backref" href="#id16">Grace period with synchronized updates of RPA and advertising data</a><a class="headerlink" href="#grace-period-with-synchronized-updates-of-rpa-and-advertising-data" title="Permalink to this heading"></a></h3>
+<p>With both the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_CAF_BLE_ADV_GRACE_PERIOD</span></code> and the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_CAF_BLE_ADV_ROTATE_RPA</span></code> options enabled, if the RPA rotation occurs in the grace period, it terminates the grace period prematurely.
+This limitation is caused by the Bluetooth API, which doesn’t allow to delay the RPA rotation.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="ble_bond.html" class="btn btn-neutral float-right" title="CAF: Bluetooth LE bond module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="caf_overview.html" class="btn btn-neutral" title="Common Application Framework overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

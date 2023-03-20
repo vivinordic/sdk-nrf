@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quality of Service &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../_static/js/ncs.js"
+></script>
+<script src="../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="RAM power-down" href="ram_pwrdn.html" />
+    <link rel="prev" title="PCM Stream Channel Modifier" href="pcm_stream_channel_modifier.html" />
+<link
+  href="../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drivers.html">Drivers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Libraries</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../bin/index.html">Binary libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bluetooth_services/index.html">Bluetooth libraries and services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bootloader/index.html">Bootloader libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../caf/index.html">Common Application Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../debug/index.html">Debug libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dfu/index.html">DFU libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gazell/index.html">Gazell libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modem/index.html">Modem libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mpsl/index.html">Multiprotocol Service Layer libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../networking/index.html">Libraries for networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nfc/index.html">Libraries for NFC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nrf_rpc/index.html">nRF RPC libraries</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Other libraries</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="adp536x.html">adp536x</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_event_manager.html">Application Event Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_event_manager_profiler_tracer.html">Application Event Manager profiler tracer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contin_array.html">Continuous array</a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_fifo.html">Data FIFO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="date_time.html">Date-Time</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dk_buttons_and_leds.html">DK Buttons and LEDs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dm.html">Distance Measurement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ei_wrapper.html">Edge Impulse wrapper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="emds.html">Emergency data storage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="esb.html">Enhanced ShockBurst</a></li>
+<li class="toctree-l3"><a class="reference internal" href="event_manager_proxy.html">Event Manager Proxy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fatal_error.html">Fatal error handler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="flash_map_pm.html">Partition Manager flash map</a></li>
+<li class="toctree-l3"><a class="reference internal" href="flash_patch.html">Flash patch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fprotect.html">Hardware flash write protection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fw_info.html">Firmware information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hw_id.html">Hardware ID</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hw_unique_key.html">Hardware unique key</a></li>
+<li class="toctree-l3"><a class="reference internal" href="identity_key.html">Identity key</a></li>
+<li class="toctree-l3"><a class="reference internal" href="memfault_ncs.html">Memfault</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nrf_profiler.html">nRF Profiler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pcm_mix.html">Pulse Code Modulation audio mixer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pcm_stream_channel_modifier.html">PCM Stream Channel Modifier</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Quality of Service</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#implementation">Implementation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ram_pwrdn.html">RAM power-down</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sfloat.html">Short float (SFLOAT)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="st25r3911b_nfc.html">NFC Reader ST25R3911B</a></li>
+<li class="toctree-l3"><a class="reference internal" href="supl_os_client.html">SUPL client and SUPL client OS integration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tone.html">Tone generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wave_gen.html">Wave generator</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../shell/index.html">Shell libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tfm/index.html">TF-M libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../zigbee/index.html">Libraries for Zigbee</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Libraries</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Other libraries</a></li>
+      <li class="breadcrumb-item active">Quality of Service</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/libraries/others/qos.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="quality-of-service">
+<span id="qos"></span><h1>Quality of Service<a class="headerlink" href="#quality-of-service" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#implementation" id="id8">Implementation</a></p>
+<ul>
+<li><p><a class="reference internal" href="#configuration" id="id9">Configuration</a></p></li>
+<li><p><a class="reference internal" href="#usage" id="id10">Usage</a></p></li>
+<li><p><a class="reference internal" href="#samples-using-the-library" id="id11">Samples using the library</a></p></li>
+<li><p><a class="reference internal" href="#api-documentation" id="id12">API documentation</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>The Quality of Service (QoS) library provides APIs to store and handle acknowledgment of multiple in-flight messages.
+The library is transport agnostic, which means that it does not enforce any transport-related functionality to the caller.</p>
+<section id="implementation">
+<h2><a class="toc-backref" href="#id8">Implementation</a><a class="headerlink" href="#implementation" title="Permalink to this heading"></a></h2>
+<p>The following sequence diagram shows a typical usage of the library:</p>
+<figure class="align-default" id="id7">
+<img alt="Sequence diagram general" src="../../_images/qos_sequence.svg" /><figcaption>
+<p><span class="caption-text">QoS library implementation sequence diagram</span><a class="headerlink" href="#id7" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<section id="configuration">
+<h3><a class="toc-backref" href="#id9">Configuration</a><a class="headerlink" href="#configuration" title="Permalink to this heading"></a></h3>
+<p>To use this library, set the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_QOS</span></code> Kconfig option and include the <code class="file docutils literal notranslate"><span class="pre">include/lib/qos.h</span></code> file to your project.</p>
+<p>Additionally, Configure the following options when using this library:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_QOS_PENDING_MESSAGES_MAX</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_QOS_MESSAGE_NOTIFIED_COUNT_MAX</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_QOS_MESSAGE_NOTIFY_TIMEOUT_SECONDS</span></code></p></li>
+</ul>
+</section>
+<section id="usage">
+<h3><a class="toc-backref" href="#id10">Usage</a><a class="headerlink" href="#usage" title="Permalink to this heading"></a></h3>
+<p>The <a class="reference internal" href="#c.qos_message_add" title="qos_message_add"><code class="xref c c-func docutils literal notranslate"><span class="pre">qos_message_add()</span></code></a> and <a class="reference internal" href="#c.qos_message_remove" title="qos_message_remove"><code class="xref c c-func docutils literal notranslate"><span class="pre">qos_message_remove()</span></code></a> functions add and remove the messages respectively from the library.
+Before adding a message, it must be associated with a message flag.
+This flag determines whether or not the message needs to be stored in the pending list that is internal to the library and how the message must be notified.
+Following are the available flags:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">QOS_FLAG_RELIABILITY_ACK_DISABLED</span></code> - The library notifies the message only once and is not added to the internal pending list.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">QOS_FLAG_RELIABILITY_ACK_REQUIRED</span></code> - The library adds the message to the internal pending list and notifies after every time interval set in the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_QOS_MESSAGE_NOTIFY_TIMEOUT_SECONDS</span></code> Kconfig option with the <a class="reference internal" href="#c.qos_evt_type.QOS_EVT_MESSAGE_TIMER_EXPIRED" title="QOS_EVT_MESSAGE_TIMER_EXPIRED"><code class="xref c c-enum docutils literal notranslate"><span class="pre">QOS_EVT_MESSAGE_TIMER_EXPIRED</span></code></a> event.
+The library notifies the message until the message is removed or the limit set through the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_QOS_MESSAGE_NOTIFIED_COUNT_MAX</span></code> Kconfig option is reached.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>All messages that are added to the library using the <a class="reference internal" href="#c.qos_message_add" title="qos_message_add"><code class="xref c c-func docutils literal notranslate"><span class="pre">qos_message_add()</span></code></a> function is notified with the <a class="reference internal" href="#c.qos_evt_type.QOS_EVT_MESSAGE_TIMER_EXPIRED" title="QOS_EVT_MESSAGE_TIMER_EXPIRED"><code class="xref c c-enum docutils literal notranslate"><span class="pre">QOS_EVT_MESSAGE_TIMER_EXPIRED</span></code></a> event.</p>
+</div>
+<p>The following code block displays how the library can be initialized and a single message is added:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/* Define message types that can be used to route data. */</span>
+<span class="k">enum</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="n">SENSOR_DATA</span><span class="p">,</span>
+<span class="w">   </span><span class="n">DIAGNOSTIC_DATA</span>
+<span class="p">};</span>
+
+<span class="cm">/* Event handler used to receive notifications from the library. */</span>
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">qos_event_handler</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">qos_evt</span><span class="w"> </span><span class="o">*</span><span class="n">evt</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">   </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">evt</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="k">case</span><span class="w"> </span><span class="no">QOS_EVT_MESSAGE_NEW</span><span class="p">:</span>
+<span class="w">   </span><span class="k">case</span><span class="w"> </span><span class="no">QOS_EVT_MESSAGE_TIMER_EXPIRED</span><span class="p">:</span>
+<span class="w">      </span><span class="cm">/* Check evt-&gt;message.type and route message based on type. */</span>
+<span class="w">      </span><span class="k">break</span><span class="p">;</span>
+<span class="w">   </span><span class="k">case</span><span class="w"> </span><span class="no">QOS_EVT_MESSAGE_REMOVED_FROM_LIST</span><span class="p">:</span>
+<span class="w">      </span><span class="cm">/* Free payload if (evt-&gt;message.heap_allocated == true) */</span>
+<span class="w">      </span><span class="k">break</span><span class="p">;</span>
+<span class="w">   </span><span class="k">default</span><span class="o">:</span>
+<span class="w">      </span><span class="k">break</span><span class="p">;</span>
+<span class="w">   </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="cm">/* QoS library message data structure. */</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">qos_data</span><span class="w"> </span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">             </span><span class="p">.</span><span class="n">heap_allocated</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">,</span>
+<span class="w">             </span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">buf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pointer_to_payload</span><span class="p">,</span>
+<span class="w">             </span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">len</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">size_of_payload</span><span class="p">,</span>
+<span class="w">             </span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">qos_message_id_get_next</span><span class="p">(),</span>
+<span class="w">             </span><span class="p">.</span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SENSOR_DATA</span><span class="p">,</span>
+<span class="w">             </span><span class="p">.</span><span class="n">flags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">QOS_FLAG_RELIABILITY_ACK_REQUIRED</span>
+<span class="p">};</span>
+
+<span class="cm">/* Initialize the QoS library and set the library event handler. */</span>
+<span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">qos_init</span><span class="p">(</span><span class="n">qos_event_handler</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="n">LOG_ERR</span><span class="p">(</span><span class="s">&quot;qos_init, err&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">err</span><span class="p">);</span>
+<span class="w">   </span><span class="k">return</span><span class="w"> </span><span class="n">err</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/* Add a single message. */</span>
+<span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">qos_message_add</span><span class="p">(</span><span class="o">&amp;</span><span class="n">message</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="n">LOG_ERR</span><span class="p">(</span><span class="s">&quot;qos_message_add, error: %d&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">err</span><span class="p">);</span>
+<span class="w">   </span><span class="k">return</span><span class="w"> </span><span class="n">err</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>To remove a message from the pending list, call <a class="reference internal" href="#c.qos_message_remove" title="qos_message_remove"><code class="xref c c-func docutils literal notranslate"><span class="pre">qos_message_remove()</span></code></a> with the message ID of the corresponding message:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">qos_message_remove</span><span class="p">(</span><span class="n">message_id</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="n">LOG_ERR</span><span class="p">(</span><span class="s">&quot;qos_message_remove, error: %d&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">err</span><span class="p">);</span>
+<span class="w">   </span><span class="k">return</span><span class="w"> </span><span class="n">err</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Messages added to the library can be associated with specific message types.
+These message types can be used to route messages after they have been notified in the library callback handler.
+For messages that require acknowledgment, message transport libraries often need a message ID.
+The application can use the <a class="reference internal" href="#c.qos_message_id_get_next" title="qos_message_id_get_next"><code class="xref c c-func docutils literal notranslate"><span class="pre">qos_message_id_get_next()</span></code></a> function to generate the Message IDs.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Some transport libraries reserve specific message IDs for internal use, typically lower integer ranges.
+Hence, the <a class="reference internal" href="#c.qos_message_id_get_next" title="qos_message_id_get_next"><code class="xref c c-func docutils literal notranslate"><span class="pre">qos_message_id_get_next()</span></code></a> function generates IDs based on an ID base, <a class="reference internal" href="#c.QOS_MESSAGE_ID_BASE" title="QOS_MESSAGE_ID_BASE"><code class="xref c c-macro docutils literal notranslate"><span class="pre">QOS_MESSAGE_ID_BASE</span></code></a> of 15000.</p>
+</div>
+</section>
+<section id="samples-using-the-library">
+<h3><a class="toc-backref" href="#id11">Samples using the library</a><a class="headerlink" href="#samples-using-the-library" title="Permalink to this heading"></a></h3>
+<p>The <a class="reference internal" href="../../applications/asset_tracker_v2/doc/asset_tracker_v2_description.html#asset-tracker-v2-description"><span class="std std-ref">nRF9160:Asset Tracker v2</span></a> application uses this library.</p>
+</section>
+<section id="api-documentation">
+<h3><a class="toc-backref" href="#id12">API documentation</a><a class="headerlink" href="#api-documentation" title="Permalink to this heading"></a></h3>
+<div class="line-block">
+<div class="line">Header file: <code class="file docutils literal notranslate"><span class="pre">include/lib/qos.h</span></code></div>
+<div class="line">Source files: <code class="file docutils literal notranslate"><span class="pre">lib/qos.c</span></code></div>
+</div>
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="group__qos"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">qos</span></span></dt>
+<dd><p>QoS library that provides functionality to store and handle acknowledgment of multiple in-flight messages. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-defines">Defines</p>
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.QOS_MESSAGE_ID_BASE">
+<span class="target" id="group__qos_1ga7e15941995698236d043e8e54844de63"></span><span class="sig-name descname"><span class="n"><span class="pre">QOS_MESSAGE_ID_BASE</span></span></span><a class="headerlink" href="#c.QOS_MESSAGE_ID_BASE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ID base used for message IDs retrieved using <a class="reference internal" href="#group__qos_1ga53870ab671709f85da3c9c9ed6ee4606"><span class="std std-ref">qos_message_id_get_next()</span></a> API. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-typedefs">Typedefs</p>
+<dl class="c type">
+<dt class="sig sig-object c" id="c.qos_evt_handler_t">
+<span class="target" id="group__qos_1gaae5efa78763f4f34473073001fb309bd"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">qos_evt_handler_t</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.qos_evt" title="qos_evt"><span class="n"><span class="pre">qos_evt</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">evt</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#c.qos_evt_handler_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>QoS library event handler. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Param evt</dt>
+<dd class="field-odd"><p><strong>[in]</strong> The event and the associated parameters. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-enums">Enums</p>
+<dl class="c enum">
+<dt class="sig sig-object c" id="c.qos_evt_type">
+<span class="target" id="group__qos_1ga1c6be71f9b5c800fe34198f3c0ae51a0"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qos_evt_type</span></span></span><a class="headerlink" href="#c.qos_evt_type" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Events notified by the library’s callback handler. </p>
+<p><em>Values:</em></p>
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.qos_evt_type.QOS_EVT_MESSAGE_NEW">
+<span class="target" id="group__qos_1gga1c6be71f9b5c800fe34198f3c0ae51a0a4033e445e925bf060babb2d959ef552f"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">QOS_EVT_MESSAGE_NEW</span></span></span><a class="headerlink" href="#c.qos_evt_type.QOS_EVT_MESSAGE_NEW" title="Permalink to this definition"></a><br /></dt>
+<dd><p>A new message is ready. Payload is of type <a class="reference internal" href="#structqos__data"><span class="std std-ref">qos_data</span></a>. (message) </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.qos_evt_type.QOS_EVT_MESSAGE_TIMER_EXPIRED">
+<span class="target" id="group__qos_1gga1c6be71f9b5c800fe34198f3c0ae51a0a41cbdd1062ad60ae4fc48ad19acd4d30"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">QOS_EVT_MESSAGE_TIMER_EXPIRED</span></span></span><a class="headerlink" href="#c.qos_evt_type.QOS_EVT_MESSAGE_TIMER_EXPIRED" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The internal backoff timer has expired. This callback contains one or more messages that should be sent. Payload is of type <a class="reference internal" href="#structqos__data"><span class="std std-ref">qos_data</span></a>. (message)</p>
+<p>Callbacks of this event type are notified in system workqueue context. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.qos_evt_type.QOS_EVT_MESSAGE_REMOVED_FROM_LIST">
+<span class="target" id="group__qos_1gga1c6be71f9b5c800fe34198f3c0ae51a0a85ce79a0f819801ba08fe56d9d46c302"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">QOS_EVT_MESSAGE_REMOVED_FROM_LIST</span></span></span><a class="headerlink" href="#c.qos_evt_type.QOS_EVT_MESSAGE_REMOVED_FROM_LIST" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Event received when the internal list of pending messages is full or a message has been removed from the list using the <a class="reference internal" href="#group__qos_1gaa3b6098d7d0c5b557f46365f7ae1dd3c"><span class="std std-ref">qos_message_remove()</span></a> API call.</p>
+<p>If the heap_allocated flag is set in the <a class="reference internal" href="#structqos__data"><span class="std std-ref">qos_data</span></a> message structure the corresponding buffer (message.data.buf) must be freed by the caller. Payload is of type <a class="reference internal" href="#structqos__data"><span class="std std-ref">qos_data</span></a>. </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.qos_init">
+<span class="target" id="group__qos_1ga8f4635fe86e0ba557fe170eaa9c23c6d"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qos_init</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#c.qos_evt_handler_t" title="qos_evt_handler_t"><span class="n"><span class="pre">qos_evt_handler_t</span></span></a><span class="w"> </span><span class="n"><span class="pre">evt_handler</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qos_init" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Function that initializes the QoS library. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>evt_handler</strong> – Pointer to the event callback handler. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.qos_message_add">
+<span class="target" id="group__qos_1ga69a7d4837fe2d64f28dbe0a50f96b828"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qos_message_add</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.qos_data" title="qos_data"><span class="n"><span class="pre">qos_data</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">message</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qos_message_add" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Add a message to the library. If the message fails to be added to the internal list because the list is full, the message will be notified with the QOS_EVT_MESSAGE_REMOVED_FROM_LIST event, so that it can be freed if heap allocated. When this API is called, the event QOS_EVT_MESSAGE_NEW is always notified with the corresponding message. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>message</strong> – Pointer to the corresponding message</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>0</strong> – on success. </p></li>
+<li><p><strong>-EINVAL</strong> – If the message pointer is NULL. </p></li>
+<li><p><strong>-ENOMEM</strong> – If the internal list is full. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.qos_message_remove">
+<span class="target" id="group__qos_1gaa3b6098d7d0c5b557f46365f7ae1dd3c"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qos_message_remove</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n"><span class="pre">id</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qos_message_remove" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Remove message from internal list. An event QOS_EVT_MESSAGE_REMOVED_FROM_LIST will be notified in the library callback. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> – Message ID of message to be removed.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>0</strong> – on success. </p></li>
+<li><p><strong>-ENODATA</strong> – If the passed in message ID is not found in the internal list. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.qos_message_has_flag">
+<span class="target" id="group__qos_1ga9e9ac45c7ff8195ea2f7e83111a82a03"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qos_message_has_flag</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.qos_data" title="qos_data"><span class="n"><span class="pre">qos_data</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">message</span></span>, <span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n"><span class="pre">flag</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qos_message_has_flag" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Function that checks if a flag is part of the bitmask associated with a message. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>message</strong> – Pointer to message. </p></li>
+<li><p><strong>flag</strong> – Flag to check for.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>true</strong> – if the flag checked for is a part of the message flag bitmask. </p></li>
+<li><p><strong>false</strong> – if flag checked for is not a part of the message flag bitmask. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.qos_message_print">
+<span class="target" id="group__qos_1gab40df62651913d83ae8a51c6cdae4d8b"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qos_message_print</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.qos_data" title="qos_data"><span class="n"><span class="pre">qos_data</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">message</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qos_message_print" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Function that prints the contents of a qos message structure. This requires that the library log level is set to debug level. CONFIG_QOS_LOG_LEVEL_DBG=y. </p>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.qos_message_id_get_next">
+<span class="target" id="group__qos_1ga53870ab671709f85da3c9c9ed6ee4606"></span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qos_message_id_get_next</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qos_message_id_get_next" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Generate message ID that counts from QOS_MESSAGE_ID_BASE message ID base. Count is reset if UINT16_MAX is reached. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Return values</dt>
+<dd class="field-odd"><p><strong>Message</strong> – ID. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.qos_message_notify_all">
+<span class="target" id="group__qos_1ga4461a5f74134f422e3191dc32c773248"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qos_message_notify_all</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qos_message_notify_all" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Notify all pending messages. All messages that are currently stored in the internal list will be notified via the QOS_EVT_MESSAGE_TIMER_EXPIRED event. This API does not clear the internal pending list. </p>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.qos_message_remove_all">
+<span class="target" id="group__qos_1ga958989c04c26681215ab0cc4472d99cf"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qos_message_remove_all</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qos_message_remove_all" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Remove all pending messages. All messages that are currently stored in the internal list will removed. Each message will be notified in the QOS_EVT_MESSAGE_REMOVED_FROM_LIST callback event. This API clears the internal pending list. </p>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.qos_timer_reset">
+<span class="target" id="group__qos_1gafb915070e20326739eddf74ddd0ece76"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qos_timer_reset</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qos_timer_reset" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Reset and stop an ongoing timer backoff. </p>
+</dd></dl>
+
+</div>
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.qos_payload">
+<span class="target" id="structqos__payload"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qos_payload</span></span></span><a class="headerlink" href="#c.qos_payload" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;qos.h&gt;</em></div>
+<p>Structure used to keep track of unACKed messages. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.qos_payload.buf">
+<span class="target" id="structqos__payload_1a9f0d1e621009e90665dc7e44a4a445a3"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">buf</span></span></span><a class="headerlink" href="#c.qos_payload.buf" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Pointer to data. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.qos_payload.len">
+<span class="target" id="structqos__payload_1a4df29c1c6c39b597eec2719212ebd46c"></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">len</span></span></span><a class="headerlink" href="#c.qos_payload.len" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Length of data. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.qos_data">
+<span class="target" id="structqos__data"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qos_data</span></span></span><a class="headerlink" href="#c.qos_data" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;qos.h&gt;</em></div>
+<p>Structure that contains the message payload and corresponding metadata. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.qos_data.flags">
+<span class="target" id="structqos__data_1af4ff0bb2f463b601c5283aad2a8ff83b"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">flags</span></span></span><a class="headerlink" href="#c.qos_data.flags" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Flags associated with the message. See QoS library flag bitmask values. for documentation on the various flags that can be set. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.qos_data.id">
+<span class="target" id="structqos__data_1a786bdc07156015749ebaf91ebdbf2b68"></span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">id</span></span></span><a class="headerlink" href="#c.qos_data.id" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Message ID </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.qos_data.notified_count">
+<span class="target" id="structqos__data_1a54d950b9caef8143f55e76a8d3140a17"></span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">notified_count</span></span></span><a class="headerlink" href="#c.qos_data.notified_count" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Number of times that the message has been notified by the library. This count is not incremented for messages flagged with QOS_FLAG_RELIABILITY_ACK_DISABLED. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.qos_data.type">
+<span class="target" id="structqos__data_1ad1a16909d0210dd69b21556cccec9e28"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">type</span></span></span><a class="headerlink" href="#c.qos_data.type" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Type of the message.</p>
+<p>The message type can be used to route data after a new or timed out message is received with the QOS_MESSAGE_NEW or QOS_EVT_MESSAGE_TIMER_EXPIRED events. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.qos_data.data">
+<span class="target" id="structqos__data_1ac862ffaa85413ccfca4e2921abcd9dc3"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.qos_payload" title="qos_payload"><span class="n"><span class="pre">qos_payload</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">data</span></span></span><a class="headerlink" href="#c.qos_data.data" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Variable to keep track of user-allocated payload. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.qos_data.heap_allocated">
+<span class="target" id="structqos__data_1a7810cecf71796aec705072793a715a70"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">heap_allocated</span></span></span><a class="headerlink" href="#c.qos_data.heap_allocated" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Flag signifying if the payload is heap allocated. When a message has been removed from the library using <a class="reference internal" href="#group__qos_1gaa3b6098d7d0c5b557f46365f7ae1dd3c"><span class="std std-ref">qos_message_remove()</span></a> the payload buffer must be freed if this flag has been set. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.qos_evt">
+<span class="target" id="structqos__evt"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qos_evt</span></span></span><a class="headerlink" href="#c.qos_evt" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;qos.h&gt;</em></div>
+<p>Library callback event structure. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.qos_evt.type">
+<span class="target" id="structqos__evt_1a4f385847f5594412b106d1537ee29179"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#c.qos_evt_type" title="qos_evt_type"><span class="n"><span class="pre">qos_evt_type</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">type</span></span></span><a class="headerlink" href="#c.qos_evt.type" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Event type notified by the library. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.qos_evt.message">
+<span class="target" id="structqos__evt_1a72058114ae2f27c8a1a97beafa7dd5f0"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.qos_data" title="qos_data"><span class="n"><span class="pre">qos_data</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">message</span></span></span><a class="headerlink" href="#c.qos_evt.message" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Payload and corresponding metadata. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="ram_pwrdn.html" class="btn btn-neutral float-right" title="RAM power-down" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="pcm_stream_channel_modifier.html" class="btn btn-neutral" title="PCM Stream Channel Modifier" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

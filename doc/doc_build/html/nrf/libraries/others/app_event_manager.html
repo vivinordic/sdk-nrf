@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Application Event Manager &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../_static/js/ncs.js"
+></script>
+<script src="../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Application Event Manager profiler tracer" href="app_event_manager_profiler_tracer.html" />
+    <link rel="prev" title="adp536x" href="adp536x.html" />
+<link
+  href="../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drivers.html">Drivers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Libraries</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../bin/index.html">Binary libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bluetooth_services/index.html">Bluetooth libraries and services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bootloader/index.html">Bootloader libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../caf/index.html">Common Application Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../debug/index.html">Debug libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dfu/index.html">DFU libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gazell/index.html">Gazell libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modem/index.html">Modem libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mpsl/index.html">Multiprotocol Service Layer libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../networking/index.html">Libraries for networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nfc/index.html">Libraries for NFC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nrf_rpc/index.html">nRF RPC libraries</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Other libraries</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="adp536x.html">adp536x</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Application Event Manager</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#events">Events</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modules">Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuration">Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#implementing-events-and-modules">Implementing events and modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#application-event-manager-extensions">Application Event Manager extensions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#api-documentation">API documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="app_event_manager_profiler_tracer.html">Application Event Manager profiler tracer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contin_array.html">Continuous array</a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_fifo.html">Data FIFO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="date_time.html">Date-Time</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dk_buttons_and_leds.html">DK Buttons and LEDs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dm.html">Distance Measurement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ei_wrapper.html">Edge Impulse wrapper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="emds.html">Emergency data storage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="esb.html">Enhanced ShockBurst</a></li>
+<li class="toctree-l3"><a class="reference internal" href="event_manager_proxy.html">Event Manager Proxy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fatal_error.html">Fatal error handler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="flash_map_pm.html">Partition Manager flash map</a></li>
+<li class="toctree-l3"><a class="reference internal" href="flash_patch.html">Flash patch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fprotect.html">Hardware flash write protection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fw_info.html">Firmware information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hw_id.html">Hardware ID</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hw_unique_key.html">Hardware unique key</a></li>
+<li class="toctree-l3"><a class="reference internal" href="identity_key.html">Identity key</a></li>
+<li class="toctree-l3"><a class="reference internal" href="memfault_ncs.html">Memfault</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nrf_profiler.html">nRF Profiler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pcm_mix.html">Pulse Code Modulation audio mixer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pcm_stream_channel_modifier.html">PCM Stream Channel Modifier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qos.html">Quality of Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ram_pwrdn.html">RAM power-down</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sfloat.html">Short float (SFLOAT)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="st25r3911b_nfc.html">NFC Reader ST25R3911B</a></li>
+<li class="toctree-l3"><a class="reference internal" href="supl_os_client.html">SUPL client and SUPL client OS integration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tone.html">Tone generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wave_gen.html">Wave generator</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../shell/index.html">Shell libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tfm/index.html">TF-M libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../zigbee/index.html">Libraries for Zigbee</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Libraries</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Other libraries</a></li>
+      <li class="breadcrumb-item active">Application Event Manager</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/libraries/others/app_event_manager.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="application-event-manager">
+<span id="app-event-manager"></span><h1>Application Event Manager<a class="headerlink" href="#application-event-manager" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#events" id="id7">Events</a></p></li>
+<li><p><a class="reference internal" href="#modules" id="id8">Modules</a></p></li>
+<li><p><a class="reference internal" href="#configuration" id="id9">Configuration</a></p></li>
+<li><p><a class="reference internal" href="#implementing-events-and-modules" id="id10">Implementing events and modules</a></p>
+<ul>
+<li><p><a class="reference internal" href="#implementing-an-event-type" id="id11">Implementing an event type</a></p></li>
+<li><p><a class="reference internal" href="#submitting-an-event" id="id12">Submitting an event</a></p></li>
+<li><p><a class="reference internal" href="#registering-a-module-as-listener" id="id13">Registering a module as listener</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#application-event-manager-extensions" id="id14">Application Event Manager extensions</a></p>
+<ul>
+<li><p><a class="reference internal" href="#initialization-hook" id="id15">Initialization hook</a></p></li>
+<li><p><a class="reference internal" href="#tracing-hooks" id="id16">Tracing hooks</a></p></li>
+<li><p><a class="reference internal" href="#memory-management-hooks" id="id17">Memory management hooks</a></p></li>
+<li><p><a class="reference internal" href="#shell-integration" id="id18">Shell integration</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#api-documentation" id="id19">API documentation</a></p></li>
+</ul>
+</div>
+<p>The Application Event Manager is a piece of software that supports development of consistent, modular, event-based applications.
+In an event-based application, parts of the application functionality are separated into isolated modules that communicate with each other using events.
+Events are submitted by modules and other modules can subscribe and react to them.
+The Application Event Manager acts as coordinator of the event-based communication.</p>
+<figure class="align-default">
+<img alt="Architecture of an application based on Application Event Manager" src="../../_images/em_overview.svg" /></figure>
+<p>For a usage example of the Event Manger module and event structure in the nRF Connect SDK, see the <a class="reference internal" href="../caf/index.html#lib-caf"><span class="std std-ref">Common Application Framework</span></a> (CAF).</p>
+<p>See the <a class="reference internal" href="../../samples/app_event_manager/README.html#app-event-manager-sample"><span class="std std-ref">Application Event Manager</span></a> sample for a simple example of how to use the Application Event Manager.</p>
+<section id="events">
+<h2><a class="toc-backref" href="#id7">Events</a><a class="headerlink" href="#events" title="Permalink to this heading"></a></h2>
+<p>Events are structured data types that are defined by the application and can contain additional data.</p>
+<p>The Application Event Manager handles the events by processing and propagating all of them to the modules (listeners) that subscribe to a specific event.
+Multiple modules can subscribe to the same event.
+As part of this communication, listeners can process events differently based on their type.</p>
+<p>The Application Event Manager provides API for defining, creating, and subscribing events.
+See <a class="reference internal" href="#implementing-an-event-type">Implementing an event type</a> for details about how to create custom event types.</p>
+</section>
+<section id="modules">
+<h2><a class="toc-backref" href="#id8">Modules</a><a class="headerlink" href="#modules" title="Permalink to this heading"></a></h2>
+<p>Modules are separate source files that can subscribe to every defined event.
+You can use events for communication between modules.</p>
+<p>There is no limitation as to how many events each module can subscribe to.
+An application can have as many modules as required.</p>
+<p>The Application Event Manager provides an API for subscribing modules to specific events defined in the application.
+When a module subscribes to a specific event, it is called a listener module.
+Every listener is identified by a unique name.</p>
+</section>
+<section id="configuration">
+<span id="app-event-manager-configuration"></span><h2><a class="toc-backref" href="#id9">Configuration</a><a class="headerlink" href="#configuration" title="Permalink to this heading"></a></h2>
+<p>To use the Application Event Manager, enable it using the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_APP_EVENT_MANAGER</span></code> Kconfig option and initialize it in your <code class="file docutils literal notranslate"><span class="pre">main.c</span></code> file.
+Initializing the Application Event Manager allows it to handle submitted events and deliver them to modules that subscribe to the specified event type.</p>
+<p>Complete the following steps:</p>
+<ol class="arabic simple">
+<li><p>Enable the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_APP_EVENT_MANAGER</span></code> Kconfig option.</p></li>
+<li><p>Include <code class="file docutils literal notranslate"><span class="pre">app_event_manager.h</span></code> in your <code class="file docutils literal notranslate"><span class="pre">main.c</span></code> file.</p></li>
+<li><p>Call <a class="reference internal" href="#c.app_event_manager_init" title="app_event_manager_init"><code class="xref c c-func docutils literal notranslate"><span class="pre">app_event_manager_init()</span></code></a>.</p></li>
+</ol>
+</section>
+<section id="implementing-events-and-modules">
+<span id="app-event-manager-implementing-events"></span><h2><a class="toc-backref" href="#id10">Implementing events and modules</a><a class="headerlink" href="#implementing-events-and-modules" title="Permalink to this heading"></a></h2>
+<p>If an application module is supposed to react to an event, your application must implement an event type, submit the event, and register the module as listener.
+Read the following sections for details.</p>
+<section id="implementing-an-event-type">
+<h3><a class="toc-backref" href="#id11">Implementing an event type</a><a class="headerlink" href="#implementing-an-event-type" title="Permalink to this heading"></a></h3>
+<p>If you want to easily create and implement custom event types, the Application Event Manager provides macros to add a new event type in your application.
+Complete the following steps:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#create-a-header-file">Create a header file</a> for the event type you want to define</p></li>
+<li><p><a class="reference internal" href="#create-a-source-file">Create a source file</a> for the event type</p></li>
+</ul>
+<section id="create-a-header-file">
+<h4>Create a header file<a class="headerlink" href="#create-a-header-file" title="Permalink to this heading"></a></h4>
+<p>To create a header file for the event type you want to define:</p>
+<ol class="arabic">
+<li><p>Make sure the header file includes the Application Event Manager header file:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;app_event_manager.h&gt;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Define the new event type by creating a structure that contains an <code class="xref c c-struct docutils literal notranslate"><span class="pre">app_event_header</span></code> named <code class="docutils literal notranslate"><span class="pre">header</span></code> as the first field.</p></li>
+<li><p>Optionally, add additional custom data fields to the structure.</p></li>
+<li><p>Declare the event type with the <a class="reference internal" href="#c.APP_EVENT_TYPE_DECLARE" title="APP_EVENT_TYPE_DECLARE"><code class="xref c c-macro docutils literal notranslate"><span class="pre">APP_EVENT_TYPE_DECLARE</span></code></a> macro, passing the name of the created structure as an argument.</p></li>
+</ol>
+<p>The following code example shows a header file for the event type <code class="xref c c-struct docutils literal notranslate"><span class="pre">sample_event</span></code>:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;app_event_manager.h&gt;</span>
+
+<span class="k">struct</span><span class="w"> </span><span class="nc">sample_event</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">struct</span><span class="w"> </span><span class="nc">app_event_header</span><span class="w"> </span><span class="n">header</span><span class="p">;</span>
+
+<span class="w">        </span><span class="cm">/* Custom data fields. */</span>
+<span class="w">        </span><span class="kt">int8_t</span><span class="w"> </span><span class="n">value1</span><span class="p">;</span>
+<span class="w">        </span><span class="kt">int16_t</span><span class="w"> </span><span class="n">value2</span><span class="p">;</span>
+<span class="w">        </span><span class="kt">int32_t</span><span class="w"> </span><span class="n">value3</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="n">APP_EVENT_TYPE_DECLARE</span><span class="p">(</span><span class="n">sample_event</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>In some use cases, the length of the data associated with an event may vary.
+You can use the <a class="reference internal" href="#c.APP_EVENT_TYPE_DYNDATA_DECLARE" title="APP_EVENT_TYPE_DYNDATA_DECLARE"><code class="xref c c-macro docutils literal notranslate"><span class="pre">APP_EVENT_TYPE_DYNDATA_DECLARE</span></code></a> macro instead of <a class="reference internal" href="#c.APP_EVENT_TYPE_DECLARE" title="APP_EVENT_TYPE_DECLARE"><code class="xref c c-macro docutils literal notranslate"><span class="pre">APP_EVENT_TYPE_DECLARE</span></code></a> to declare an event type with variable data size.
+In such case, add the data with the variable size as the last member of the event structure.
+For example, you can add variable sized data to the previously defined event by applying the following change to the code:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;app_event_manager.h&gt;</span>
+
+<span class="k">struct</span><span class="w"> </span><span class="nc">sample_event</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">struct</span><span class="w"> </span><span class="nc">app_event_header</span><span class="w"> </span><span class="n">header</span><span class="p">;</span>
+
+<span class="w">        </span><span class="cm">/* Custom data fields. */</span>
+<span class="w">        </span><span class="kt">int8_t</span><span class="w"> </span><span class="n">value1</span><span class="p">;</span>
+<span class="w">        </span><span class="kt">int16_t</span><span class="w"> </span><span class="n">value2</span><span class="p">;</span>
+<span class="w">        </span><span class="kt">int32_t</span><span class="w"> </span><span class="n">value3</span><span class="p">;</span>
+<span class="w">        </span><span class="k">struct</span><span class="w"> </span><span class="nc">event_dyndata</span><span class="w"> </span><span class="n">dyndata</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="n">APP_EVENT_TYPE_DYNDATA_DECLARE</span><span class="p">(</span><span class="n">sample_event</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>In this example, the <code class="xref c c-struct docutils literal notranslate"><span class="pre">event_dyndata</span></code> structure contains the following information:</p>
+<ul class="simple">
+<li><p>A zero-length array that is used as a buffer with variable size (<code class="xref c c-member docutils literal notranslate"><span class="pre">event_dyndata.data</span></code>).</p></li>
+<li><p>A number representing the size of the buffer (<code class="xref c c-member docutils literal notranslate"><span class="pre">event_dyndata.size</span></code>).</p></li>
+</ul>
+</section>
+<section id="create-a-source-file">
+<h4>Create a source file<a class="headerlink" href="#create-a-source-file" title="Permalink to this heading"></a></h4>
+<p>To create a source file for the event type you defined in the header file:</p>
+<ol class="arabic simple">
+<li><p>Include the header file for the new event type in your source file.</p></li>
+<li><p>Define the event type with the <a class="reference internal" href="#c.APP_EVENT_TYPE_DEFINE" title="APP_EVENT_TYPE_DEFINE"><code class="xref c c-macro docutils literal notranslate"><span class="pre">APP_EVENT_TYPE_DEFINE</span></code></a> macro.
+Pass the name of the event type as declared in the header along with additional parameters.
+For example, you can provide a function that logs a string version of the event data by using the :c:macro:APP_EVENT_MANAGER_LOG macro.
+The <a class="reference internal" href="#c.APP_EVENT_TYPE_DEFINE" title="APP_EVENT_TYPE_DEFINE"><code class="xref c c-macro docutils literal notranslate"><span class="pre">APP_EVENT_TYPE_DEFINE</span></code></a> macro adds flags as a last parameter.
+These flags are constant and can only be set using <a class="reference internal" href="#c.APP_EVENT_FLAGS_CREATE" title="APP_EVENT_FLAGS_CREATE"><code class="xref c c-macro docutils literal notranslate"><span class="pre">APP_EVENT_FLAGS_CREATE</span></code></a> on <a class="reference internal" href="#c.APP_EVENT_TYPE_DEFINE" title="APP_EVENT_TYPE_DEFINE"><code class="xref c c-macro docutils literal notranslate"><span class="pre">APP_EVENT_TYPE_DEFINE</span></code></a> macro.
+To not set any flag, use the <a class="reference internal" href="#c.APP_EVENT_FLAGS_CREATE" title="APP_EVENT_FLAGS_CREATE"><code class="xref c c-macro docutils literal notranslate"><span class="pre">APP_EVENT_FLAGS_CREATE</span></code></a> macro without any argument.
+To enable logging from the application start, use the <a class="reference internal" href="#c.app_event_type_flags.APP_EVENT_TYPE_FLAGS_INIT_LOG_ENABLE" title="APP_EVENT_TYPE_FLAGS_INIT_LOG_ENABLE"><code class="xref c c-enum docutils literal notranslate"><span class="pre">APP_EVENT_TYPE_FLAGS_INIT_LOG_ENABLE</span></code></a> enum as shown in the following example.
+To get value of specific flag, use <a class="reference internal" href="#c.app_event_get_type_flag" title="app_event_get_type_flag"><code class="xref c c-func docutils literal notranslate"><span class="pre">app_event_get_type_flag()</span></code></a> function.</p></li>
+</ol>
+<p>The following code example shows a source file for the event type <code class="docutils literal notranslate"><span class="pre">sample_event</span></code>:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;sample_event.h&quot;</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">log_sample_event</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">app_event_header</span><span class="w"> </span><span class="o">*</span><span class="n">aeh</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">        </span><span class="k">struct</span><span class="w"> </span><span class="nc">sample_event</span><span class="w"> </span><span class="o">*</span><span class="n">event</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cast_sample_event</span><span class="p">(</span><span class="n">aeh</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">APP_EVENT_MANAGER_LOG</span><span class="p">(</span><span class="n">aeh</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;val1=%d val2=%d val3=%d&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">event</span><span class="o">-&gt;</span><span class="n">value1</span><span class="p">,</span>
+<span class="w">                        </span><span class="n">event</span><span class="o">-&gt;</span><span class="n">value2</span><span class="p">,</span><span class="w"> </span><span class="n">event</span><span class="o">-&gt;</span><span class="n">value3</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">APP_EVENT_TYPE_DEFINE</span><span class="p">(</span><span class="n">sample_event</span><span class="p">,</span><span class="w">                                                  </span><span class="cm">/* Unique event name. */</span>
+<span class="w">                  </span><span class="n">log_sample_event</span><span class="p">,</span><span class="w">                                                  </span><span class="cm">/* Function logging event data. */</span>
+<span class="w">                  </span><span class="nb">NULL</span><span class="p">,</span><span class="w">                                                              </span><span class="cm">/* No event info provided. */</span>
+<span class="w">                  </span><span class="n">APP_EVENT_FLAGS_CREATE</span><span class="p">(</span><span class="n">APP_EVENT_TYPE_FLAGS_INIT_LOG_ENABLE</span><span class="p">));</span><span class="w">     </span><span class="cm">/* Flags managing event type. */</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>There is a deprecated way of logging Application Event Manager events by writing a string to the provided buffer that will be supported until a future release of nRF Connect SDK.
+To use the deprecated way, you need to set the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_APP_EVENT_MANAGER_USE_DEPRECATED_LOG_FUN</span></code> option.
+You can then use both ways of logging events.
+Application Event Manager figures out which way to be used based on the type of the logging function passed.</p>
+</div>
+</section>
+</section>
+<section id="submitting-an-event">
+<h3><a class="toc-backref" href="#id12">Submitting an event</a><a class="headerlink" href="#submitting-an-event" title="Permalink to this heading"></a></h3>
+<p>To submit an event of a given type, for example <code class="docutils literal notranslate"><span class="pre">sample_event</span></code>:</p>
+<ol class="arabic simple">
+<li><p>Allocate the event by calling the function with the name <em>new_event_type_name</em>.
+For example, <code class="docutils literal notranslate"><span class="pre">new_sample_event()</span></code>.</p></li>
+<li><p>Write values to the data fields.</p></li>
+<li><p>Use <a class="reference internal" href="#c.APP_EVENT_SUBMIT" title="APP_EVENT_SUBMIT"><code class="xref c c-macro docutils literal notranslate"><span class="pre">APP_EVENT_SUBMIT</span></code></a> to submit the event.</p></li>
+</ol>
+<p>The following code example shows how to create and submit an event of type <code class="docutils literal notranslate"><span class="pre">sample_event</span></code> that has three data fields:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/* Allocate event. */</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">sample_event</span><span class="w"> </span><span class="o">*</span><span class="n">event</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">new_sample_event</span><span class="p">();</span>
+
+<span class="cm">/* Write data to datafields. */</span>
+<span class="n">event</span><span class="o">-&gt;</span><span class="n">value1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">value1</span><span class="p">;</span>
+<span class="n">event</span><span class="o">-&gt;</span><span class="n">value2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">value2</span><span class="p">;</span>
+<span class="n">event</span><span class="o">-&gt;</span><span class="n">value3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">value3</span><span class="p">;</span>
+
+<span class="cm">/* Submit event. */</span>
+<span class="n">APP_EVENT_SUBMIT</span><span class="p">(</span><span class="n">event</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>If an event type also defines data with variable size, you must also pass the size of the data as an argument to the function that allocates the event.
+For example, if the <code class="docutils literal notranslate"><span class="pre">sample_event</span></code> also contains data with variable size, you must apply the following changes to the code:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/* Allocate event. */</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">sample_event</span><span class="w"> </span><span class="o">*</span><span class="n">event</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">new_sample_event</span><span class="p">(</span><span class="n">my_data_size</span><span class="p">);</span>
+
+<span class="cm">/* Write data to datafields. */</span>
+<span class="n">event</span><span class="o">-&gt;</span><span class="n">value1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">value1</span><span class="p">;</span>
+<span class="n">event</span><span class="o">-&gt;</span><span class="n">value2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">value2</span><span class="p">;</span>
+<span class="n">event</span><span class="o">-&gt;</span><span class="n">value3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">value3</span><span class="p">;</span>
+
+<span class="cm">/* Write data with variable size. */</span>
+<span class="n">memcpy</span><span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">dyndata</span><span class="p">.</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="n">my_buf</span><span class="p">,</span><span class="w"> </span><span class="n">my_data_size</span><span class="p">);</span>
+
+<span class="cm">/* Submit event. */</span>
+<span class="n">APP_EVENT_SUBMIT</span><span class="p">(</span><span class="n">event</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>After the event is submitted, the Application Event Manager adds it to the processing queue.
+When the event is processed, the Application Event Manager notifies all modules that subscribe to this event type.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Events are dynamically allocated and must be submitted.
+If an event is not submitted, it will not be handled and the memory will not be freed.</p>
+</div>
+</section>
+<section id="registering-a-module-as-listener">
+<span id="app-event-manager-register-module-as-listener"></span><h3><a class="toc-backref" href="#id13">Registering a module as listener</a><a class="headerlink" href="#registering-a-module-as-listener" title="Permalink to this heading"></a></h3>
+<p>If you want a module to receive events managed by the Application Event Manager, you must register it as a listener and you must subscribe it to a given event type.</p>
+<p>To turn a module into a listener for specific event types, complete the following steps:</p>
+<ol class="arabic simple">
+<li><p>Include the header files for the respective event types, for example, <code class="docutils literal notranslate"><span class="pre">#include</span> <span class="pre">&quot;sample_event.h&quot;</span></code>.</p></li>
+<li><p><a class="reference internal" href="#app-event-manager-register-module-as-listener-handler"><span class="std std-ref">Implement an Event handler function</span></a> and define the module as a listener with the <a class="reference internal" href="#c.APP_EVENT_LISTENER" title="APP_EVENT_LISTENER"><code class="xref c c-macro docutils literal notranslate"><span class="pre">APP_EVENT_LISTENER</span></code></a> macro, passing both the name of the module and the event handler function as arguments.</p></li>
+<li><p>Subscribe the listener to specific event types.</p></li>
+</ol>
+<p>The Application Event Manager provides four types of events subscriptions, differing in priority.
+They can be registered with the following macros:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#c.APP_EVENT_SUBSCRIBE_FIRST" title="APP_EVENT_SUBSCRIBE_FIRST"><code class="xref c c-macro docutils literal notranslate"><span class="pre">APP_EVENT_SUBSCRIBE_FIRST</span></code></a> - notification as the first subscriber</p></li>
+<li><p><a class="reference internal" href="#c.APP_EVENT_SUBSCRIBE_EARLY" title="APP_EVENT_SUBSCRIBE_EARLY"><code class="xref c c-macro docutils literal notranslate"><span class="pre">APP_EVENT_SUBSCRIBE_EARLY</span></code></a> - notification before other listeners</p></li>
+<li><p><a class="reference internal" href="#c.APP_EVENT_SUBSCRIBE" title="APP_EVENT_SUBSCRIBE"><code class="xref c c-macro docutils literal notranslate"><span class="pre">APP_EVENT_SUBSCRIBE</span></code></a> - standard notification</p></li>
+<li><p><a class="reference internal" href="#c.APP_EVENT_SUBSCRIBE_FINAL" title="APP_EVENT_SUBSCRIBE_FINAL"><code class="xref c c-macro docutils literal notranslate"><span class="pre">APP_EVENT_SUBSCRIBE_FINAL</span></code></a> - notification as the last, final subscriber</p></li>
+</ul>
+<p>There is no defined order in which subscribers of the same priority are notified.</p>
+<p>The module will receive events for the subscribed event types only.
+The listener name passed to the subscribe macro must be the same one used in the macro <a class="reference internal" href="#c.APP_EVENT_LISTENER" title="APP_EVENT_LISTENER"><code class="xref c c-macro docutils literal notranslate"><span class="pre">APP_EVENT_LISTENER</span></code></a>.</p>
+<section id="implementing-an-event-handler-function">
+<span id="app-event-manager-register-module-as-listener-handler"></span><h4>Implementing an event handler function<a class="headerlink" href="#implementing-an-event-handler-function" title="Permalink to this heading"></a></h4>
+<p>The event handler function is called when any of the subscribed event types are being processed.
+Only one event handler function can be registered per listener.
+Therefore, if a listener subscribes to multiple event types, the function must handle all of them.</p>
+<p>The event handler gets a pointer to the <code class="xref c c-struct docutils literal notranslate"><span class="pre">app_event_header</span></code> structure as the function argument.
+The function should return <code class="docutils literal notranslate"><span class="pre">true</span></code> to consume the event, which means that the event is not propagated to further listeners, or <code class="docutils literal notranslate"><span class="pre">false</span></code>, otherwise.</p>
+<p>To check if an event has a given type, call the function with the name <em>is</em>_<em>event_type_name</em> (for example, <code class="docutils literal notranslate"><span class="pre">is_sample_event()</span></code>), passing the pointer to the application event header as the argument.
+This function returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if the event matches the given type, or <code class="docutils literal notranslate"><span class="pre">false</span></code> otherwise.</p>
+<p>To access the event data, cast the <code class="xref c c-struct docutils literal notranslate"><span class="pre">app_event_header</span></code> structure to a proper event type, using the function with the name <em>cast</em>_<em>event_type_name</em> (for example, <code class="docutils literal notranslate"><span class="pre">cast_sample_event()</span></code>), passing the pointer to the application event header as the argument.</p>
+</section>
+<section id="code-example">
+<h4>Code example<a class="headerlink" href="#code-example" title="Permalink to this heading"></a></h4>
+<p>The following code example shows how to register an event listener with an event handler function and subscribe to the event type <code class="docutils literal notranslate"><span class="pre">sample_event</span></code>:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;sample_event.h&quot;</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">app_event_handler</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">app_event_header</span><span class="w"> </span><span class="o">*</span><span class="n">aeh</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">is_sample_event</span><span class="p">(</span><span class="n">aeh</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">                </span><span class="cm">/* Accessing event data. */</span>
+<span class="w">                </span><span class="k">struct</span><span class="w"> </span><span class="nc">sample_event</span><span class="w"> </span><span class="o">*</span><span class="n">event</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cast_sample_event</span><span class="p">(</span><span class="n">aeh</span><span class="p">);</span>
+
+<span class="w">                </span><span class="kt">int8_t</span><span class="w"> </span><span class="n">v1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">event</span><span class="o">-&gt;</span><span class="n">value1</span><span class="p">;</span>
+<span class="w">                </span><span class="kt">int16_t</span><span class="w"> </span><span class="n">v2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">event</span><span class="o">-&gt;</span><span class="n">value2</span><span class="p">;</span>
+<span class="w">                </span><span class="kt">int32_t</span><span class="w"> </span><span class="n">v3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">event</span><span class="o">-&gt;</span><span class="n">value3</span><span class="p">;</span>
+
+<span class="w">                </span><span class="cm">/* Actions when received given event type. */</span>
+<span class="w">                </span><span class="n">foo</span><span class="p">(</span><span class="n">v1</span><span class="p">,</span><span class="w"> </span><span class="n">v2</span><span class="p">,</span><span class="w"> </span><span class="n">v3</span><span class="p">);</span>
+
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">APP_EVENT_LISTENER</span><span class="p">(</span><span class="n">sample_module</span><span class="p">,</span><span class="w"> </span><span class="n">app_event_handler</span><span class="p">);</span>
+<span class="n">APP_EVENT_SUBSCRIBE</span><span class="p">(</span><span class="n">sample_module</span><span class="p">,</span><span class="w"> </span><span class="n">sample_event</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The variable size data is accessed in the same way as the other members of the structure defining an event.</p>
+</section>
+</section>
+</section>
+<section id="application-event-manager-extensions">
+<h2><a class="toc-backref" href="#id14">Application Event Manager extensions</a><a class="headerlink" href="#application-event-manager-extensions" title="Permalink to this heading"></a></h2>
+<p>The Application Event Manager provides additional features that could be helpful when debugging event-based applications.</p>
+<section id="initialization-hook">
+<span id="app-event-manager-profiling-init-hooks"></span><h3><a class="toc-backref" href="#id15">Initialization hook</a><a class="headerlink" href="#initialization-hook" title="Permalink to this heading"></a></h3>
+<p>The Application Event Manager provides an initialization hook for any module that relies on the Application Event Manager initialization before the first event is processed.
+The hook function should be declared in the <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">hook(void)</span></code> format.
+If the hook function returns a non-zero value, the initialization process is interrupted and a related error is returned.</p>
+<p>To register the initialization hook, use the macro <a class="reference internal" href="#c.APP_EVENT_MANAGER_HOOK_POSTINIT_REGISTER" title="APP_EVENT_MANAGER_HOOK_POSTINIT_REGISTER"><code class="xref c c-macro docutils literal notranslate"><span class="pre">APP_EVENT_MANAGER_HOOK_POSTINIT_REGISTER</span></code></a>.
+For details, refer to <a class="reference internal" href="#app-event-manager-api"><span class="std std-ref">API documentation</span></a>.</p>
+</section>
+<section id="tracing-hooks">
+<span id="app-event-manager-profiling-tracing-hooks"></span><h3><a class="toc-backref" href="#id16">Tracing hooks</a><a class="headerlink" href="#tracing-hooks" title="Permalink to this heading"></a></h3>
+<p>The Application Event Manager uses flexible mechanism to implement hooks when an event is submitted, before it is processed, and after its processing.
+The tracing hooks are originally designed to implement event tracing, but you can use them for other purposes as well.
+The registered hook function should be declared in the <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">hook(const</span> <span class="pre">struct</span> <span class="pre">app_event_header</span> <span class="pre">*aeh)</span></code> format.</p>
+<p>The following macros are implemented to register event tracing hooks:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#c.APP_EVENT_HOOK_ON_SUBMIT_REGISTER_FIRST" title="APP_EVENT_HOOK_ON_SUBMIT_REGISTER_FIRST"><code class="xref c c-macro docutils literal notranslate"><span class="pre">APP_EVENT_HOOK_ON_SUBMIT_REGISTER_FIRST</span></code></a>, <a class="reference internal" href="#c.APP_EVENT_HOOK_ON_SUBMIT_REGISTER" title="APP_EVENT_HOOK_ON_SUBMIT_REGISTER"><code class="xref c c-macro docutils literal notranslate"><span class="pre">APP_EVENT_HOOK_ON_SUBMIT_REGISTER</span></code></a>, <a class="reference internal" href="#c.APP_EVENT_HOOK_ON_SUBMIT_REGISTER_LAST" title="APP_EVENT_HOOK_ON_SUBMIT_REGISTER_LAST"><code class="xref c c-macro docutils literal notranslate"><span class="pre">APP_EVENT_HOOK_ON_SUBMIT_REGISTER_LAST</span></code></a></p></li>
+<li><p><a class="reference internal" href="#c.APP_EVENT_HOOK_PREPROCESS_REGISTER_FIRST" title="APP_EVENT_HOOK_PREPROCESS_REGISTER_FIRST"><code class="xref c c-macro docutils literal notranslate"><span class="pre">APP_EVENT_HOOK_PREPROCESS_REGISTER_FIRST</span></code></a>, <a class="reference internal" href="#c.APP_EVENT_HOOK_PREPROCESS_REGISTER" title="APP_EVENT_HOOK_PREPROCESS_REGISTER"><code class="xref c c-macro docutils literal notranslate"><span class="pre">APP_EVENT_HOOK_PREPROCESS_REGISTER</span></code></a>, <a class="reference internal" href="#c.APP_EVENT_HOOK_PREPROCESS_REGISTER_LAST" title="APP_EVENT_HOOK_PREPROCESS_REGISTER_LAST"><code class="xref c c-macro docutils literal notranslate"><span class="pre">APP_EVENT_HOOK_PREPROCESS_REGISTER_LAST</span></code></a></p></li>
+<li><p><a class="reference internal" href="#c.APP_EVENT_HOOK_POSTPROCESS_REGISTER_FIRST" title="APP_EVENT_HOOK_POSTPROCESS_REGISTER_FIRST"><code class="xref c c-macro docutils literal notranslate"><span class="pre">APP_EVENT_HOOK_POSTPROCESS_REGISTER_FIRST</span></code></a>, <a class="reference internal" href="#c.APP_EVENT_HOOK_POSTPROCESS_REGISTER" title="APP_EVENT_HOOK_POSTPROCESS_REGISTER"><code class="xref c c-macro docutils literal notranslate"><span class="pre">APP_EVENT_HOOK_POSTPROCESS_REGISTER</span></code></a>, <a class="reference internal" href="#c.APP_EVENT_HOOK_POSTPROCESS_REGISTER_LAST" title="APP_EVENT_HOOK_POSTPROCESS_REGISTER_LAST"><code class="xref c c-macro docutils literal notranslate"><span class="pre">APP_EVENT_HOOK_POSTPROCESS_REGISTER_LAST</span></code></a></p></li>
+</ul>
+<p>For details, refer to <a class="reference internal" href="#app-event-manager-api"><span class="std std-ref">API documentation</span></a>.</p>
+</section>
+<section id="memory-management-hooks">
+<span id="app-event-manager-profiling-mem-hooks"></span><h3><a class="toc-backref" href="#id17">Memory management hooks</a><a class="headerlink" href="#memory-management-hooks" title="Permalink to this heading"></a></h3>
+<p>The Application Event Manager implements default memory management functions using weak implementation.
+You can override this implementation to implement other types of memory allocation.</p>
+<p>The following weak functions are provided by the Application Event Manager as the memory management hooks:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#c.app_event_manager_alloc" title="app_event_manager_alloc"><code class="xref c c-func docutils literal notranslate"><span class="pre">app_event_manager_alloc()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#c.app_event_manager_free" title="app_event_manager_free"><code class="xref c c-func docutils literal notranslate"><span class="pre">app_event_manager_free()</span></code></a></p></li>
+</ul>
+<p>For details, refer to <a class="reference internal" href="#app-event-manager-api"><span class="std std-ref">API documentation</span></a>.</p>
+</section>
+<section id="shell-integration">
+<h3><a class="toc-backref" href="#id18">Shell integration</a><a class="headerlink" href="#shell-integration" title="Permalink to this heading"></a></h3>
+<p>Shell integration (<code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_APP_EVENT_MANAGER_SHELL</span></code>) is available to display additional information and to dynamically enable or disable logging for given event types.
+The shell integration is enabled by default.</p>
+<p>The Application Event Manager is integrated with Zephyr’s <span class="xref std std-ref">zephyr:shell_api</span> module.
+When the shell integration is turned on, an additional subcommand set (<strong class="command">app_event_manager</strong>) is added.</p>
+<p>This subcommand set contains the following commands:</p>
+<dl class="simple">
+<dt><strong class="command">show_listeners</strong></dt><dd><p>Show all registered listeners.</p>
+</dd>
+<dt><strong class="command">show_subscribers</strong></dt><dd><p>Show all registered subscribers.</p>
+</dd>
+<dt><strong class="command">show_events</strong></dt><dd><p>Show all registered event types.
+The letters “E” or “D” indicate if logging is currently enabled or disabled for a given event type.</p>
+</dd>
+<dt><strong class="command">enable</strong> or <strong class="command">disable</strong></dt><dd><p>Enable or disable logging.
+If called without additional arguments, the command applies to all event types.
+To enable or disable logging for specific event types, pass the event type indexes, as displayed by <strong class="command">show_events</strong>, as arguments.</p>
+</dd>
+</dl>
+</section>
+</section>
+<section id="api-documentation">
+<span id="app-event-manager-api"></span><h2><a class="toc-backref" href="#id19">API documentation</a><a class="headerlink" href="#api-documentation" title="Permalink to this heading"></a></h2>
+<div class="line-block">
+<div class="line">Header file: <code class="file docutils literal notranslate"><span class="pre">include/app_event_manager.h</span></code></div>
+<div class="line">Source files: <code class="file docutils literal notranslate"><span class="pre">subsys/app_event_manager/</span></code></div>
+</div>
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="group__app__event__manager"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">app_event_manager</span></span></dt>
+<dd><p>Application Event Manager. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-defines">Defines</p>
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.APP_EVENT_LISTENER">
+<span class="target" id="group__app__event__manager_1ga8851fe81b98a24ea4ae430fc8db260ed"></span><span class="sig-name descname"><span class="n"><span class="pre">APP_EVENT_LISTENER</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">lname</span></span>, <span class="n"><span class="pre">cb_fn</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.APP_EVENT_LISTENER" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Create an event listener object. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lname</strong> – Module name. </p></li>
+<li><p><strong>cb_fn</strong> – Pointer to the event handler function. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.APP_EVENT_SUBSCRIBE_FIRST">
+<span class="target" id="group__app__event__manager_1gaf3d8db5b3001506e0543f7e204887a0a"></span><span class="sig-name descname"><span class="n"><span class="pre">APP_EVENT_SUBSCRIBE_FIRST</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">lname</span></span>, <span class="n"><span class="pre">ename</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.APP_EVENT_SUBSCRIBE_FIRST" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Subscribe a listener to an event type as first module that is being notified. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lname</strong> – Name of the listener. </p></li>
+<li><p><strong>ename</strong> – Name of the event. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.APP_EVENT_SUBSCRIBE_EARLY">
+<span class="target" id="group__app__event__manager_1ga974ce8a06a1dbbb804e8ecd062784c19"></span><span class="sig-name descname"><span class="n"><span class="pre">APP_EVENT_SUBSCRIBE_EARLY</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">lname</span></span>, <span class="n"><span class="pre">ename</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.APP_EVENT_SUBSCRIBE_EARLY" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Subscribe a listener to the early notification list for an event type. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lname</strong> – Name of the listener. </p></li>
+<li><p><strong>ename</strong> – Name of the event. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.APP_EVENT_SUBSCRIBE">
+<span class="target" id="group__app__event__manager_1gaab0e8a3a85b9873c85b7a35b6fa5e888"></span><span class="sig-name descname"><span class="n"><span class="pre">APP_EVENT_SUBSCRIBE</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">lname</span></span>, <span class="n"><span class="pre">ename</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.APP_EVENT_SUBSCRIBE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Subscribe a listener to the normal notification list for an event type. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lname</strong> – Name of the listener. </p></li>
+<li><p><strong>ename</strong> – Name of the event. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.APP_EVENT_SUBSCRIBE_FINAL">
+<span class="target" id="group__app__event__manager_1ga4e8ce4a02c50695e42c37bc5dc032415"></span><span class="sig-name descname"><span class="n"><span class="pre">APP_EVENT_SUBSCRIBE_FINAL</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">lname</span></span>, <span class="n"><span class="pre">ename</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.APP_EVENT_SUBSCRIBE_FINAL" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Subscribe a listener to an event type as final module that is being notified. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lname</strong> – Name of the listener. </p></li>
+<li><p><strong>ename</strong> – Name of the event. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.APP_EVENT_TYPE_DECLARE">
+<span class="target" id="group__app__event__manager_1ga099480328bc5dbdc7c2ba95db75feb1e"></span><span class="sig-name descname"><span class="n"><span class="pre">APP_EVENT_TYPE_DECLARE</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">ename</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.APP_EVENT_TYPE_DECLARE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Declare an event type. </p>
+<p>This macro provides declarations required for an event to be used by other modules.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ename</strong> – Name of the event. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.APP_EVENT_TYPE_DYNDATA_DECLARE">
+<span class="target" id="group__app__event__manager_1ga57b345dc4b9a3fe4b07fca7e96979dfc"></span><span class="sig-name descname"><span class="n"><span class="pre">APP_EVENT_TYPE_DYNDATA_DECLARE</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">ename</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.APP_EVENT_TYPE_DYNDATA_DECLARE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Declare an event type with dynamic data size. </p>
+<p>This macro provides declarations required for an event to be used by other modules. Declared event will use dynamic data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ename</strong> – Name of the event. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.APP_EVENT_TYPE_DEFINE">
+<span class="target" id="group__app__event__manager_1gaea29d02dfaf6d109ff53ad74181ec738"></span><span class="sig-name descname"><span class="n"><span class="pre">APP_EVENT_TYPE_DEFINE</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">ename</span></span>, <span class="n"><span class="pre">log_fn</span></span>, <span class="n"><span class="pre">ev_info_struct</span></span>, <span class="n"><span class="pre">app_event_type_flags</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.APP_EVENT_TYPE_DEFINE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Define an event type. </p>
+<p>This macro defines an event type. In addition, it defines functions specific to the event type and the event type structure.</p>
+<p>For every defined event, the following functions are created, where <em>event_type</em> is replaced with the given event type name <code class="docutils literal notranslate"><span class="pre">ename</span></code> (for example, <a class="reference internal" href="../caf/caf_overview.html#structbutton__event"><span class="std std-ref">button_event</span></a>):<ul class="simple">
+<li><p>new_<em>event_type</em> - Allocates an event of a given type.</p></li>
+<li><p>is_<em>event_type</em> - Checks if the application event header that is provided as argument represents the given event type.</p></li>
+<li><p>cast_<em>event_type</em> - Casts the application event header that is provided as argument to an event of the given type.</p></li>
+</ul>
+</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ename</strong> – Name of the event. </p></li>
+<li><p><strong>log_fn</strong> – Function to stringify an event of this type. </p></li>
+<li><p><strong>ev_info_struct</strong> – Data structure describing the event type. </p></li>
+<li><p><strong>app_event_type_flags</strong> – Event type flags. You should use APP_EVENT_FLAGS_CREATE to define them. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.APP_EVENT_ASSERT_ID">
+<span class="target" id="group__app__event__manager_1gaef465cf254e426d93060894ae43ee82d"></span><span class="sig-name descname"><span class="n"><span class="pre">APP_EVENT_ASSERT_ID</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">id</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.APP_EVENT_ASSERT_ID" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Verify if an event ID is valid. </p>
+<p>The pointer to an event type structure is used as its ID. This macro validates that the provided pointer is within the range where event type structures are defined.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> – ID. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.APP_EVENT_SUBMIT">
+<span class="target" id="group__app__event__manager_1gaecbb9c71724df279f30031be97369383"></span><span class="sig-name descname"><span class="n"><span class="pre">APP_EVENT_SUBMIT</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">event</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.APP_EVENT_SUBMIT" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Submit an event. </p>
+<p>This helper macro simplifies the event submission.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>event</strong> – Pointer to the event object. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.APP_EVENT_MANAGER_HOOK_POSTINIT_REGISTER">
+<span class="target" id="group__app__event__manager_1ga86b2e07ed2d4302e33627d3d22ac0fa8"></span><span class="sig-name descname"><span class="n"><span class="pre">APP_EVENT_MANAGER_HOOK_POSTINIT_REGISTER</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">hook_fn</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.APP_EVENT_MANAGER_HOOK_POSTINIT_REGISTER" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Register event hook after the Application Event Manager is initialized. </p>
+<p>The event hook called after the app_event_manager is initialized to provide some additional initialization of the modules that depends on it. The hook function should have a form <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">hook(void)</span></code>. If the initialization hook returns non-zero value the initialization process is interrupted.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hook_fn</strong> – Hook function. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.APP_EVENT_HOOK_ON_SUBMIT_REGISTER_FIRST">
+<span class="target" id="group__app__event__manager_1ga2ceff57c7501fb91babd6902056974e5"></span><span class="sig-name descname"><span class="n"><span class="pre">APP_EVENT_HOOK_ON_SUBMIT_REGISTER_FIRST</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">hook_fn</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.APP_EVENT_HOOK_ON_SUBMIT_REGISTER_FIRST" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Register hook called on event submission. The hook would be called first. </p>
+<p>The event hook called when the event is submitted. The hook function should have a form <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">hook(const</span> <span class="pre">struct</span> <span class="pre">app_event_header</span> <span class="pre">*aeh)</span></code>. The macro makes sure that the hook provided here is called first. Only one hook can be registered with this macro.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The registered hook may be called from many contexts. To ensure that order of events in the queue matches the order of the registered callbacks calls, the callbacks are called under the same spinlock as adding events to the queue.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hook_fn</strong> – Hook function. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.APP_EVENT_HOOK_ON_SUBMIT_REGISTER">
+<span class="target" id="group__app__event__manager_1gab7c7f34f7a9f1df59908f8ab5dff3b71"></span><span class="sig-name descname"><span class="n"><span class="pre">APP_EVENT_HOOK_ON_SUBMIT_REGISTER</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">hook_fn</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.APP_EVENT_HOOK_ON_SUBMIT_REGISTER" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Register event hook on submission. </p>
+<p>The event hook called when the event is submitted. The hook function should have a form <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">hook(const</span> <span class="pre">struct</span> <span class="pre">app_event_header</span> <span class="pre">*aeh)</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The registered hook may be called from many contexts. To ensure that order of events in the queue matches the order of the registered callbacks calls, the callbacks are called under the same spinlock as adding events to the queue.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hook_fn</strong> – Hook function. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.APP_EVENT_HOOK_ON_SUBMIT_REGISTER_LAST">
+<span class="target" id="group__app__event__manager_1ga5d7a09cf8d02e091fbe50ef632f34c40"></span><span class="sig-name descname"><span class="n"><span class="pre">APP_EVENT_HOOK_ON_SUBMIT_REGISTER_LAST</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">hook_fn</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.APP_EVENT_HOOK_ON_SUBMIT_REGISTER_LAST" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Register event hook on submission. The hook would be called last. </p>
+<p>The event hook called when the event is submitted. The hook function should have a form <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">hook(const</span> <span class="pre">struct</span> <span class="pre">app_event_header</span> <span class="pre">*aeh)</span></code>. The macro makes sure that the hook provided here is called last. Only one hook can be registered with this macro.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The registered hook may be called from many contexts. To ensure that order of events in the queue matches the order of the registered callbacks calls, the callbacks are called under the same spinlock as adding events to the queue.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hook_fn</strong> – Hook function. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.APP_EVENT_HOOK_PREPROCESS_REGISTER_FIRST">
+<span class="target" id="group__app__event__manager_1ga56e672c76848611fdb655eef3191a1b0"></span><span class="sig-name descname"><span class="n"><span class="pre">APP_EVENT_HOOK_PREPROCESS_REGISTER_FIRST</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">hook_fn</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.APP_EVENT_HOOK_PREPROCESS_REGISTER_FIRST" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Register event hook on the start of event processing. The hook would be called first. </p>
+<p>The hook function should have a form <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">hook(const</span> <span class="pre">struct</span> <span class="pre">app_event_header</span> <span class="pre">*aeh)</span></code>. The macro makes sure that the hook provided here is called first. Only one hook can be registered with this macro.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hook_fn</strong> – Hook function. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.APP_EVENT_HOOK_PREPROCESS_REGISTER">
+<span class="target" id="group__app__event__manager_1gad4edb97a0f301f7a9c64d122686878a0"></span><span class="sig-name descname"><span class="n"><span class="pre">APP_EVENT_HOOK_PREPROCESS_REGISTER</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">hook_fn</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.APP_EVENT_HOOK_PREPROCESS_REGISTER" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Register event hook on the start of event processing. </p>
+<p>The event hook called when the event is being processed. The hook function should have a form <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">hook(const</span> <span class="pre">struct</span> <span class="pre">app_event_header</span> <span class="pre">*aeh)</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hook_fn</strong> – Hook function. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.APP_EVENT_HOOK_PREPROCESS_REGISTER_LAST">
+<span class="target" id="group__app__event__manager_1ga2f40c65a62099b1a2136ded94980967c"></span><span class="sig-name descname"><span class="n"><span class="pre">APP_EVENT_HOOK_PREPROCESS_REGISTER_LAST</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">hook_fn</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.APP_EVENT_HOOK_PREPROCESS_REGISTER_LAST" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Register event hook on the start of event processing. The hook would be called last. </p>
+<p>The event hook called when the event is being processed. The hook function should have a form <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">hook(const</span> <span class="pre">struct</span> <span class="pre">app_event_header</span> <span class="pre">*aeh)</span></code>. The macro makes sure that the hook provided here is called last. Only one hook can be registered with this macro.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hook_fn</strong> – Hook function. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.APP_EVENT_HOOK_POSTPROCESS_REGISTER_FIRST">
+<span class="target" id="group__app__event__manager_1gac933c115a1ff13d7a22861a44f4eefe7"></span><span class="sig-name descname"><span class="n"><span class="pre">APP_EVENT_HOOK_POSTPROCESS_REGISTER_FIRST</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">hook_fn</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.APP_EVENT_HOOK_POSTPROCESS_REGISTER_FIRST" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Register event hook on the end of event processing. The hook would be called first. </p>
+<p>The event hook called after the event is processed. The hook function should have a form <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">hook(const</span> <span class="pre">struct</span> <span class="pre">app_event_header</span> <span class="pre">*aeh)</span></code>. The macro makes sure that the hook provided here is called first. Only one hook can be registered with this macro.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hook_fn</strong> – Hook function. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.APP_EVENT_HOOK_POSTPROCESS_REGISTER">
+<span class="target" id="group__app__event__manager_1ga3bd09356b7d4591b3421572d54bda0c5"></span><span class="sig-name descname"><span class="n"><span class="pre">APP_EVENT_HOOK_POSTPROCESS_REGISTER</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">hook_fn</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.APP_EVENT_HOOK_POSTPROCESS_REGISTER" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Register event hook on the end of event processing. </p>
+<p>The event hook called after the event is processed. The hook function should have a form <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">hook(const</span> <span class="pre">struct</span> <span class="pre">app_event_header</span> <span class="pre">*aeh)</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hook_fn</strong> – Hook function. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.APP_EVENT_HOOK_POSTPROCESS_REGISTER_LAST">
+<span class="target" id="group__app__event__manager_1gabdddc61d63d3d9d16f9c3cfeee44cd30"></span><span class="sig-name descname"><span class="n"><span class="pre">APP_EVENT_HOOK_POSTPROCESS_REGISTER_LAST</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">hook_fn</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.APP_EVENT_HOOK_POSTPROCESS_REGISTER_LAST" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Register event hook on the end of event processing. The hook would be called last. </p>
+<p>The event hook called after the event is processed. The hook function should have a form <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">hook(const</span> <span class="pre">struct</span> <span class="pre">app_event_header</span> <span class="pre">*aeh)</span></code>. The macro makes sure that the hook provided here is called last. Only one hook can be registered with this macro.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hook_fn</strong> – Hook function. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.APP_EVENT_MANAGER_LOG">
+<span class="target" id="group__app__event__manager_1ga5f9fd5f602317beb6ec72e1782e9552a"></span><span class="sig-name descname"><span class="n"><span class="pre">APP_EVENT_MANAGER_LOG</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">aeh</span></span>, <span class="p"><span class="pre">...</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.APP_EVENT_MANAGER_LOG" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Log event. </p>
+<p>This helper macro simplifies event logging.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>aeh</strong> – Pointer to the application event header of the event that is processed by app_event_manager. </p></li>
+<li><p><strong>...</strong> – <code class="docutils literal notranslate"><span class="pre">printf</span></code>- like format string and variadic list of arguments corresponding to the format string. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.APP_EVENT_FLAGS_CREATE">
+<span class="target" id="group__app__event__manager_1ga4e27f518fd0f7a5043ab677c51fb3d6a"></span><span class="sig-name descname"><span class="n"><span class="pre">APP_EVENT_FLAGS_CREATE</span></span></span><span class="sig-paren">(</span><span class="p"><span class="pre">...</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.APP_EVENT_FLAGS_CREATE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Define flags for event type. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>...</strong> – Comma-separated list of flags which should be set. In case no flags should be set leave it empty. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-typedefs">Typedefs</p>
+<dl class="c type">
+<dt class="sig sig-object c" id="c.cb_fn">
+<span class="target" id="group__app__event__manager_1ga9f326beeb8739a0f6319745b4e2e3a38"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">cb_fn</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">app_event_header</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">aeh</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#c.cb_fn" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Pointer to the event handler function. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Param aeh</dt>
+<dd class="field-odd"><p>Pointer to the application event header of the event that is processed by app_event_manager. </p>
+</dd>
+<dt class="field-even">Retval True</dt>
+<dd class="field-even"><p>if event was consumed and should not be propagated to other listeners, false otherwise. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-enums">Enums</p>
+<dl class="c enum">
+<dt class="sig sig-object c" id="c.app_event_type_flags">
+<span class="target" id="group__app__event__manager_1gab6470c650120d82270f7acd43d15afa0"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">app_event_type_flags</span></span></span><a class="headerlink" href="#c.app_event_type_flags" title="Permalink to this definition"></a><br /></dt>
+<dd><p>List of bits in event type flags. </p>
+<p><em>Values:</em></p>
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.app_event_type_flags.APP_EVENT_TYPE_FLAGS_SYSTEM_START">
+<span class="target" id="group__app__event__manager_1ggab6470c650120d82270f7acd43d15afa0ae355788e3fd07b6fca841bce3547539b"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">APP_EVENT_TYPE_FLAGS_SYSTEM_START</span></span></span><a class="headerlink" href="#c.app_event_type_flags.APP_EVENT_TYPE_FLAGS_SYSTEM_START" title="Permalink to this definition"></a><br /></dt>
+<dd><p>marks beginning of flags controlled internally by Application Event Manager. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.app_event_type_flags.APP_EVENT_TYPE_FLAGS_HAS_DYNDATA">
+<span class="target" id="group__app__event__manager_1ggab6470c650120d82270f7acd43d15afa0a50493196cfa17cebe2d9923980c6c1c9"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">APP_EVENT_TYPE_FLAGS_HAS_DYNDATA</span></span></span><a class="headerlink" href="#c.app_event_type_flags.APP_EVENT_TYPE_FLAGS_HAS_DYNDATA" title="Permalink to this definition"></a><br /></dt>
+<dd><p>indicates that event type has variable data size. Flag set internally by Application Event Manager. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.app_event_type_flags.APP_EVENT_TYPE_FLAGS_USER_SETTABLE_START">
+<span class="target" id="group__app__event__manager_1ggab6470c650120d82270f7acd43d15afa0a04cfbb8eedcd87d2876cbac1284ae631"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">APP_EVENT_TYPE_FLAGS_USER_SETTABLE_START</span></span></span><a class="headerlink" href="#c.app_event_type_flags.APP_EVENT_TYPE_FLAGS_USER_SETTABLE_START" title="Permalink to this definition"></a><br /></dt>
+<dd><p>marks beginning of flags set by user. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.app_event_type_flags.APP_EVENT_TYPE_FLAGS_INIT_LOG_ENABLE">
+<span class="target" id="group__app__event__manager_1ggab6470c650120d82270f7acd43d15afa0a3adab2a25815875693a8309b15622a2c"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">APP_EVENT_TYPE_FLAGS_INIT_LOG_ENABLE</span></span></span><a class="headerlink" href="#c.app_event_type_flags.APP_EVENT_TYPE_FLAGS_INIT_LOG_ENABLE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>enables event logging from the application start. Flag set by user. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.app_event_type_flags.APP_EVENT_TYPE_FLAGS_COUNT">
+<span class="target" id="group__app__event__manager_1ggab6470c650120d82270f7acd43d15afa0ab1831a9744815847a6dd49e77fa28b23"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">APP_EVENT_TYPE_FLAGS_COUNT</span></span></span><a class="headerlink" href="#c.app_event_type_flags.APP_EVENT_TYPE_FLAGS_COUNT" title="Permalink to this definition"></a><br /></dt>
+<dd><p>shows number of predefined flags. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.app_event_type_flags.APP_EVENT_TYPE_FLAGS_USER_DEFINED_START">
+<span class="target" id="group__app__event__manager_1ggab6470c650120d82270f7acd43d15afa0a56b939efdd1011a6cbf925399a2c30d5"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">APP_EVENT_TYPE_FLAGS_USER_DEFINED_START</span></span></span><a class="headerlink" href="#c.app_event_type_flags.APP_EVENT_TYPE_FLAGS_USER_DEFINED_START" title="Permalink to this definition"></a><br /></dt>
+<dd><p>marks beginning of user-specific flags. </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.app_event_get_type_flag">
+<span class="target" id="group__app__event__manager_1ga58ab9ff503fabc8949820b61527886ca"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">app_event_get_type_flag</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">event_type</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">et</span></span>, <span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#c.app_event_type_flags" title="app_event_type_flags"><span class="n"><span class="pre">app_event_type_flags</span></span></a><span class="w"> </span><span class="n"><span class="pre">flag</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.app_event_get_type_flag" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get event type flag’s value. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>flag</strong> – Selected event type flag. </p></li>
+<li><p><strong>et</strong> – Pointer to the event type. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><p><strong>Boolean</strong> – value of requested flag. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.app_event_manager_event_size">
+<span class="target" id="group__app__event__manager_1gadd96fc8dec8ce6af024e74c864517073"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">app_event_manager_event_size</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">app_event_header</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">aeh</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.app_event_manager_event_size" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the event size. </p>
+<p>Function that calculates the event size using its header. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For this function to be available the <span> <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_APP_EVENT_MANAGER_PROVIDE_EVENT_SIZE</span></code> </span> option needs to be enabled.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>aeh</strong> – Pointer to the application event header.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Event size in bytes. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.app_event_manager_init">
+<span class="target" id="group__app__event__manager_1ga2d091cdeb35ee8c9e4f55c257bc621c0"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">app_event_manager_init</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.app_event_manager_init" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Initialize the Application Event Manager. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Return values</dt>
+<dd class="field-odd"><p><strong>0</strong> – If the operation was successful. Error values can be added by the hooks registered by <a class="reference internal" href="#group__app__event__manager_1ga86b2e07ed2d4302e33627d3d22ac0fa8"><span class="std std-ref">APP_EVENT_MANAGER_HOOK_POSTINIT_REGISTER</span></a> macro. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.app_event_manager_alloc">
+<span class="target" id="group__app__event__manager_1gadb3e5d6ce9048e270e12b2a9ea829920"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">app_event_manager_alloc</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n"><span class="pre">size</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.app_event_manager_alloc" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Allocate event. </p>
+<p>The behavior of this function depends on the actual implementation. The default implementation of this function is same as k_malloc. It is annotated as weak and can be overridden by user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>size</strong> – Amount of memory requested (in bytes). </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><p><strong>Address</strong> – of the allocated memory if successful, otherwise NULL. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.app_event_manager_free">
+<span class="target" id="group__app__event__manager_1gaf1aab7a2dd043b8c1c59a983c2d319cb"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">app_event_manager_free</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">addr</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.app_event_manager_free" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Free memory occupied by the event. </p>
+<p>The behavior of this function depends on the actual implementation. The default implementation of this function is same as k_free. It is annotated as weak and can be overridden by user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>addr</strong> – Pointer to previously allocated memory. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="app_event_manager_profiler_tracer.html" class="btn btn-neutral float-right" title="Application Event Manager profiler tracer" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="adp536x.html" class="btn btn-neutral" title="adp536x" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

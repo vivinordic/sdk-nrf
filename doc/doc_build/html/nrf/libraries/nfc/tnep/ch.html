@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NFC TNEP Connection Handover &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../../_static/js/ncs.js"
+></script>
+<script src="../../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="TNEP for polling device" href="poller.html" />
+    <link rel="prev" title="Tag NDEF Exchange Protocol (TNEP)" href="index.html" />
+<link
+  href="../../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../drivers.html">Drivers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Libraries</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../bin/index.html">Binary libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../bluetooth_services/index.html">Bluetooth libraries and services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../bootloader/index.html">Bootloader libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../caf/index.html">Common Application Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../debug/index.html">Debug libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../dfu/index.html">DFU libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gazell/index.html">Gazell libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../modem/index.html">Modem libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mpsl/index.html">Multiprotocol Service Layer libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../networking/index.html">Libraries for networking</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Libraries for NFC</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../ndef/index.html">NFC Data Exchange Format (NDEF)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../t2t/index.html">Type 2 Tag</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../t4t/index.html">Type 4 Tag</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Tag NDEF Exchange Protocol (TNEP)</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">NFC TNEP Connection Handover</a></li>
+<li class="toctree-l4"><a class="reference internal" href="poller.html">TNEP for polling device</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tag.html">TNEP for tag device</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../nrf_rpc/index.html">nRF RPC libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../others/index.html">Other libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../shell/index.html">Shell libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tfm/index.html">TF-M libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../zigbee/index.html">Libraries for Zigbee</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Libraries</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Libraries for NFC</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Tag NDEF Exchange Protocol (TNEP)</a></li>
+      <li class="breadcrumb-item active">NFC TNEP Connection Handover</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/libraries/nfc/tnep/ch.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="nfc-tnep-connection-handover">
+<span id="nfc-tnep-ch-readme"></span><h1>NFC TNEP Connection Handover<a class="headerlink" href="#nfc-tnep-connection-handover" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#handover-protocol" id="id7">Handover protocol</a></p>
+<ul>
+<li><p><a class="reference internal" href="#static-handover" id="id8">Static handover</a></p></li>
+<li><p><a class="reference internal" href="#negotiated-handover" id="id9">Negotiated handover</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#device-role" id="id10">Device Role</a></p></li>
+<li><p><a class="reference internal" href="#nfc-tag-device" id="id11">NFC Tag Device</a></p></li>
+<li><p><a class="reference internal" href="#nfc-poller-device" id="id12">NFC Poller Device</a></p></li>
+<li><p><a class="reference internal" href="#api-documentation" id="id13">API documentation</a></p></li>
+</ul>
+</div>
+<p>The NFC TNEP Connection Handover service handles the exchange of Connection Handover Messages between an NFC Forum Tag and an NFC Forum Poller device.
+It uses the TNEP protocol in the Single Response Communication mode to exchange the handover messages between:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>NFC Tag Device (see <a class="reference internal" href="tag.html#tnep-tag-readme"><span class="std std-ref">TNEP for tag device</span></a>)</p></li>
+<li><p>NFC Poller Device (see <a class="reference internal" href="poller.html#tnep-poller-readme"><span class="std std-ref">TNEP for polling device</span></a>)</p></li>
+</ul>
+</div></blockquote>
+<p>The Connection Handover Service name URI for the service announced in the Service Parameter record is <code class="docutils literal notranslate"><span class="pre">urn:nfc:sn:handover</span></code>.</p>
+<section id="handover-protocol">
+<h2><a class="toc-backref" href="#id7">Handover protocol</a><a class="headerlink" href="#handover-protocol" title="Permalink to this heading"></a></h2>
+<p>The Connection Handover Protocol enables two NFC Forum devices to negotiate a shared set of alternative (non-NFC) communication carriers.
+The Handover Requester Device is the NFC Forum Device that initiates the handover negotiation.
+The Handover Selector Device is the NFC Forum Device that is initially passive and responds to the Handover Requester.</p>
+<section id="static-handover">
+<h3><a class="toc-backref" href="#id8">Static handover</a><a class="headerlink" href="#static-handover" title="Permalink to this heading"></a></h3>
+<p>In the static handover, the Handover Requester only reads a Handover Select Message from the NFC Tag Device.
+TNEP is not used in this communication form.</p>
+<figure class="align-default">
+<img alt="Static handover" src="../../../_images/nfc_static_connection_handover2.svg" /></figure>
+</section>
+<section id="negotiated-handover">
+<h3><a class="toc-backref" href="#id9">Negotiated handover</a><a class="headerlink" href="#negotiated-handover" title="Permalink to this heading"></a></h3>
+<p>In the negotiated handover, the Handover Requester provides a Handover Request Message that contains its set of supported carriers to the Handover Selector.
+The Handover Selector replies with a Handover Select Message that contains the list of carriers that they both support.
+Connection Handover NDEF messages are exchanged as defined by TNEP.</p>
+<figure class="align-default">
+<img alt="Negotiated handover" src="../../../_images/nfc_negotiated_connection_handover2.svg" /></figure>
+</section>
+</section>
+<section id="device-role">
+<h2><a class="toc-backref" href="#id10">Device Role</a><a class="headerlink" href="#device-role" title="Permalink to this heading"></a></h2>
+<p>The role of the NFC Poller Device depends on the NFC Tag Device.
+If the NFC Tag Device takes the role of the Handover Requester, it responds to the Service Select with a Handover Request Message.
+This message includes a TNEP status record.
+The NFC Poller Device responds with the Handover Select Message after having received the Handover Request Message.</p>
+<p>If the NFC Tag Device takes the role of the Handover Selector, then the NFC Tag Device does not add any NDEF records defined in this specification into the TNEP status message.
+The TNEP status message follows the Service Select message and the NFC Tag Device waits for a Handover Request Message from the NFC Poller Device.</p>
+<p>The NFC Tag Device role is defined by callback sets in structure <a class="reference internal" href="#c.nfc_tnep_ch_cb" title="nfc_tnep_ch_cb"><code class="xref c c-type docutils literal notranslate"><span class="pre">nfc_tnep_ch_cb</span></code></a> passed to <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">nfc_tnep_ch_service_init()</span></code>.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Handover Selector role. Set <code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">request_msg_recv</span></code>.</p></li>
+<li><p>Handover Requester role. Set <code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">request_msg_prepare</span></code> and <code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">select_msg_recv</span></code>.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="nfc-tag-device">
+<h2><a class="toc-backref" href="#id11">NFC Tag Device</a><a class="headerlink" href="#nfc-tag-device" title="Permalink to this heading"></a></h2>
+<p>The following code sample demonstrates how to use this module with an NFC Tag Device:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">carrier_prepare</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">	</span><span class="k">static</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">nfc_ndef_le_oob_rec_payload_desc</span><span class="w"> </span><span class="n">rec_payload</span><span class="p">;</span>
+
+<span class="w">	</span><span class="n">NFC_NDEF_LE_OOB_RECORD_DESC_DEF</span><span class="p">(</span><span class="n">oob_rec</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;0&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rec_payload</span><span class="p">);</span>
+<span class="w">	</span><span class="n">NFC_NDEF_CH_AC_RECORD_DESC_DEF</span><span class="p">(</span><span class="n">oob_ac</span><span class="p">,</span><span class="w"> </span><span class="n">NFC_AC_CPS_ACTIVE</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;0&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+
+<span class="w">	</span><span class="n">memset</span><span class="p">(</span><span class="o">&amp;</span><span class="n">rec_payload</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">rec_payload</span><span class="p">));</span>
+
+<span class="w">	</span><span class="n">rec_payload</span><span class="p">.</span><span class="n">addr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">oob_local</span><span class="p">.</span><span class="n">addr</span><span class="p">;</span>
+<span class="w">	</span><span class="n">rec_payload</span><span class="p">.</span><span class="n">le_sc_data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">oob_local</span><span class="p">.</span><span class="n">le_sc_data</span><span class="p">;</span>
+<span class="w">	</span><span class="n">rec_payload</span><span class="p">.</span><span class="n">tk_value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tk_value</span><span class="p">;</span>
+<span class="w">	</span><span class="n">rec_payload</span><span class="p">.</span><span class="n">local_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bt_get_name</span><span class="p">();</span>
+<span class="w">	</span><span class="n">rec_payload</span><span class="p">.</span><span class="n">le_role</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NFC_NDEF_LE_OOB_REC_LE_ROLE</span><span class="p">(</span>
+<span class="w">		</span><span class="n">NFC_NDEF_LE_OOB_REC_LE_ROLE_PERIPH_ONLY</span><span class="p">);</span>
+<span class="w">	</span><span class="n">rec_payload</span><span class="p">.</span><span class="n">appearance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NFC_NDEF_LE_OOB_REC_APPEARANCE</span><span class="p">(</span>
+<span class="w">		</span><span class="n">CONFIG_BT_DEVICE_APPEARANCE</span><span class="p">);</span>
+<span class="w">	</span><span class="n">rec_payload</span><span class="p">.</span><span class="n">flags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NFC_NDEF_LE_OOB_REC_FLAGS</span><span class="p">(</span><span class="n">BT_LE_AD_NO_BREDR</span><span class="p">);</span>
+
+<span class="w">	</span><span class="k">return</span><span class="w"> </span><span class="n">nfc_tnep_ch_carrier_set</span><span class="p">(</span><span class="o">&amp;</span><span class="n">NFC_NDEF_CH_AC_RECORD_DESC</span><span class="p">(</span><span class="n">oob_ac</span><span class="p">),</span>
+<span class="w">				       </span><span class="o">&amp;</span><span class="n">NFC_NDEF_LE_OOB_RECORD_DESC</span><span class="p">(</span><span class="n">oob_rec</span><span class="p">),</span>
+<span class="w">				       </span><span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="cp">#if defined(CONFIG_NFC_TAG_CH_REQUESTER)</span>
+<span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">tnep_ch_request_prepare</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">	</span><span class="n">bt_le_adv_stop</span><span class="p">();</span>
+<span class="w">	</span><span class="k">return</span><span class="w"> </span><span class="n">carrier_prepare</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">tnep_ch_select_received</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">nfc_tnep_ch_record</span><span class="w"> </span><span class="o">*</span><span class="n">ch_select</span><span class="p">,</span>
+<span class="w">				   </span><span class="kt">bool</span><span class="w"> </span><span class="n">inactive</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">	</span><span class="kt">int</span><span class="w"> </span><span class="n">err</span><span class="p">;</span>
+<span class="w">	</span><span class="k">const</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">nfc_ndef_record_desc</span><span class="w"> </span><span class="o">*</span><span class="n">oob_data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+
+<span class="w">	</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">ch_select</span><span class="o">-&gt;</span><span class="n">count</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="o">-</span><span class="n">EINVAL</span><span class="p">;</span>
+<span class="w">	</span><span class="p">}</span>
+
+<span class="w">	</span><span class="cm">/* All alternative carrier are inactive */</span>
+<span class="w">	</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">inactive</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">		</span><span class="cm">/* Try send request again. */</span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="n">carrier_prepare</span><span class="p">();</span>
+<span class="w">	</span><span class="p">}</span>
+
+<span class="w">	</span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">check_oob_carrier</span><span class="p">(</span><span class="n">ch_select</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">oob_data</span><span class="p">);</span>
+<span class="w">	</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="n">err</span><span class="p">;</span>
+<span class="w">	</span><span class="p">}</span>
+
+<span class="w">	</span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">oob_le_data_handle</span><span class="p">(</span><span class="n">oob_data</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">);</span>
+<span class="w">	</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="n">err</span><span class="p">;</span>
+<span class="w">	</span><span class="p">}</span>
+
+<span class="w">	</span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="p">}</span>
+<span class="cp">#endif </span><span class="cm">/* defined(CONFIG_NFC_TAG_CH_REQUESTER) */</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">tnep_ch_request_received</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">nfc_tnep_ch_request</span><span class="w"> </span><span class="o">*</span><span class="n">ch_req</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">	</span><span class="kt">int</span><span class="w"> </span><span class="n">err</span><span class="p">;</span>
+<span class="w">	</span><span class="k">const</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">nfc_ndef_record_desc</span><span class="w"> </span><span class="o">*</span><span class="n">oob_data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+
+<span class="w">	</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">ch_req</span><span class="o">-&gt;</span><span class="n">ch_record</span><span class="p">.</span><span class="n">count</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="o">-</span><span class="n">EINVAL</span><span class="p">;</span>
+<span class="w">	</span><span class="p">}</span>
+
+<span class="w">	</span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">check_oob_carrier</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ch_req</span><span class="o">-&gt;</span><span class="n">ch_record</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">oob_data</span><span class="p">);</span>
+<span class="w">	</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="n">err</span><span class="p">;</span>
+<span class="w">	</span><span class="p">}</span>
+
+<span class="w">	</span><span class="n">bt_le_adv_stop</span><span class="p">();</span>
+
+<span class="w">	</span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">oob_le_data_handle</span><span class="p">(</span><span class="n">oob_data</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">);</span>
+<span class="w">	</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="n">err</span><span class="p">;</span>
+<span class="w">	</span><span class="p">}</span>
+
+<span class="w">	</span><span class="k">return</span><span class="w"> </span><span class="n">carrier_prepare</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="k">static</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">nfc_tnep_ch_cb</span><span class="w"> </span><span class="n">ch_cb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="cp">#if defined(CONFIG_NFC_TAG_CH_REQUESTER)</span>
+<span class="w">	</span><span class="p">.</span><span class="n">request_msg_prepare</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tnep_ch_request_prepare</span><span class="p">,</span>
+<span class="w">	</span><span class="p">.</span><span class="n">select_msg_recv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tnep_ch_select_received</span><span class="p">,</span>
+<span class="cp">#endif</span>
+<span class="w">	</span><span class="p">.</span><span class="n">request_msg_recv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tnep_ch_request_received</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>This library is used in the <a class="reference internal" href="../../../samples/bluetooth/peripheral_nfc_pairing/README.html#peripheral-nfc-pairing"><span class="std std-ref">Bluetooth: NFC pairing</span></a> sample.</p>
+</section>
+<section id="nfc-poller-device">
+<h2><a class="toc-backref" href="#id12">NFC Poller Device</a><a class="headerlink" href="#nfc-poller-device" title="Permalink to this heading"></a></h2>
+<p>The following code sample demonstrates how to use this module with an NFC Poller Device:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">carrier_prepare</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">	</span><span class="k">static</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">nfc_ndef_le_oob_rec_payload_desc</span><span class="w"> </span><span class="n">rec_payload</span><span class="p">;</span>
+
+<span class="w">	</span><span class="n">NFC_NDEF_LE_OOB_RECORD_DESC_DEF</span><span class="p">(</span><span class="n">oob_rec</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;0&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rec_payload</span><span class="p">);</span>
+<span class="w">	</span><span class="n">NFC_NDEF_CH_AC_RECORD_DESC_DEF</span><span class="p">(</span><span class="n">oob_ac</span><span class="p">,</span><span class="w"> </span><span class="n">NFC_AC_CPS_ACTIVE</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;0&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+
+<span class="w">	</span><span class="n">memset</span><span class="p">(</span><span class="o">&amp;</span><span class="n">rec_payload</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">rec_payload</span><span class="p">));</span>
+
+<span class="w">	</span><span class="n">rec_payload</span><span class="p">.</span><span class="n">addr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">oob_local</span><span class="p">.</span><span class="n">addr</span><span class="p">;</span>
+<span class="w">	</span><span class="n">rec_payload</span><span class="p">.</span><span class="n">le_sc_data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">oob_local</span><span class="p">.</span><span class="n">le_sc_data</span><span class="p">;</span>
+<span class="w">	</span><span class="n">rec_payload</span><span class="p">.</span><span class="n">tk_value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tk_value</span><span class="p">;</span>
+<span class="w">	</span><span class="n">rec_payload</span><span class="p">.</span><span class="n">local_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bt_get_name</span><span class="p">();</span>
+<span class="w">	</span><span class="n">rec_payload</span><span class="p">.</span><span class="n">le_role</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NFC_NDEF_LE_OOB_REC_LE_ROLE</span><span class="p">(</span>
+<span class="w">		</span><span class="n">NFC_NDEF_LE_OOB_REC_LE_ROLE_CENTRAL_ONLY</span><span class="p">);</span>
+<span class="w">	</span><span class="n">rec_payload</span><span class="p">.</span><span class="n">appearance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NFC_NDEF_LE_OOB_REC_APPEARANCE</span><span class="p">(</span>
+<span class="w">		</span><span class="n">CONFIG_BT_DEVICE_APPEARANCE</span><span class="p">);</span>
+<span class="w">	</span><span class="n">rec_payload</span><span class="p">.</span><span class="n">flags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NFC_NDEF_LE_OOB_REC_FLAGS</span><span class="p">(</span><span class="n">BT_LE_AD_NO_BREDR</span><span class="p">);</span>
+
+<span class="w">	</span><span class="k">return</span><span class="w"> </span><span class="n">nfc_tnep_ch_carrier_set</span><span class="p">(</span><span class="o">&amp;</span><span class="n">NFC_NDEF_CH_AC_RECORD_DESC</span><span class="p">(</span><span class="n">oob_ac</span><span class="p">),</span>
+<span class="w">				       </span><span class="o">&amp;</span><span class="n">NFC_NDEF_LE_OOB_RECORD_DESC</span><span class="p">(</span><span class="n">oob_rec</span><span class="p">),</span>
+<span class="w">				       </span><span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">tnep_ch_request_prepare</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">	</span><span class="k">return</span><span class="w"> </span><span class="n">carrier_prepare</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">tnep_ch_select_received</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">nfc_tnep_ch_record</span><span class="w"> </span><span class="o">*</span><span class="n">ch_select</span><span class="p">,</span>
+<span class="w">				   </span><span class="kt">bool</span><span class="w"> </span><span class="n">inactive</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">	</span><span class="kt">int</span><span class="w"> </span><span class="n">err</span><span class="p">;</span>
+<span class="w">	</span><span class="k">const</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">nfc_ndef_record_desc</span><span class="w"> </span><span class="o">*</span><span class="n">oob_data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+
+<span class="w">	</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">ch_select</span><span class="o">-&gt;</span><span class="n">count</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="o">-</span><span class="n">EINVAL</span><span class="p">;</span>
+<span class="w">	</span><span class="p">}</span>
+
+<span class="w">	</span><span class="cm">/* All alternative carrier are inactive */</span>
+<span class="w">	</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">inactive</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">		</span><span class="cm">/* Try send request again. */</span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="n">carrier_prepare</span><span class="p">();</span>
+<span class="w">	</span><span class="p">}</span>
+
+<span class="w">	</span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">check_oob_carrier</span><span class="p">(</span><span class="n">ch_select</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">oob_data</span><span class="p">);</span>
+<span class="w">	</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="n">err</span><span class="p">;</span>
+<span class="w">	</span><span class="p">}</span>
+
+<span class="w">	</span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">oob_le_data_handle</span><span class="p">(</span><span class="n">oob_data</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">);</span>
+<span class="w">	</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="n">err</span><span class="p">;</span>
+<span class="w">	</span><span class="p">}</span>
+
+<span class="w">	</span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="p">}</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">tnep_ch_request_received</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">nfc_tnep_ch_request</span><span class="w"> </span><span class="o">*</span><span class="n">ch_req</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">	</span><span class="kt">int</span><span class="w"> </span><span class="n">err</span><span class="p">;</span>
+<span class="w">	</span><span class="k">const</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">nfc_ndef_record_desc</span><span class="w"> </span><span class="o">*</span><span class="n">oob_data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+
+<span class="w">	</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">ch_req</span><span class="o">-&gt;</span><span class="n">ch_record</span><span class="p">.</span><span class="n">count</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="o">-</span><span class="n">EINVAL</span><span class="p">;</span>
+<span class="w">	</span><span class="p">}</span>
+
+<span class="w">	</span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">check_oob_carrier</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ch_req</span><span class="o">-&gt;</span><span class="n">ch_record</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">oob_data</span><span class="p">);</span>
+<span class="w">	</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="n">err</span><span class="p">;</span>
+<span class="w">	</span><span class="p">}</span>
+
+<span class="w">	</span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">oob_le_data_handle</span><span class="p">(</span><span class="n">oob_data</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">);</span>
+<span class="w">	</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="n">err</span><span class="p">;</span>
+<span class="w">	</span><span class="p">}</span>
+
+<span class="w">	</span><span class="k">return</span><span class="w"> </span><span class="n">carrier_prepare</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="k">static</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">nfc_tnep_ch_cb</span><span class="w"> </span><span class="n">ch_cb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">	</span><span class="p">.</span><span class="n">request_msg_prepare</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tnep_ch_request_prepare</span><span class="p">,</span>
+<span class="w">	</span><span class="p">.</span><span class="n">select_msg_recv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tnep_ch_select_received</span><span class="p">,</span>
+<span class="w">	</span><span class="p">.</span><span class="n">request_msg_recv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tnep_ch_request_received</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>This library is used in the <a class="reference internal" href="../../../samples/bluetooth/central_nfc_pairing/README.html#central-nfc-pairing"><span class="std std-ref">Bluetooth: Central NFC pairing</span></a> sample.</p>
+</section>
+<section id="api-documentation">
+<h2><a class="toc-backref" href="#id13">API documentation</a><a class="headerlink" href="#api-documentation" title="Permalink to this heading"></a></h2>
+<div class="line-block">
+<div class="line">Header file: <code class="file docutils literal notranslate"><span class="pre">include/nfc/tnep/ch.h</span></code></div>
+<div class="line">Source files: <code class="file docutils literal notranslate"><span class="pre">subsys/nfc/tnep/ch/</span></code></div>
+</div>
+<dl id="nfc-tnep-ch">
+<dt class="sig sig-object cpp">
+<span class="target" id="group__nfc__tnep__ch"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">nfc_tnep_ch</span></span></dt>
+<dd><p>NFC Connection Handover TNEP service API. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-defines">Defines</p>
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.NFC_TNEP_CH_URI_LENGTH">
+<span class="target" id="group__nfc__tnep__ch_1ga0939837844ec0d8fc0a61b660aa5d0e6"></span><span class="sig-name descname"><span class="n"><span class="pre">NFC_TNEP_CH_URI_LENGTH</span></span></span><a class="headerlink" href="#c.NFC_TNEP_CH_URI_LENGTH" title="Permalink to this definition"></a><br /></dt>
+<dd><p>NFC Connection Handover service URI name length. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.nfc_tnep_ch_service_init">
+<span class="target" id="group__nfc__tnep__ch_1gae98f341fde036d90d8146209bdd4d4fe"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nfc_tnep_ch_service_init</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.nfc_tnep_ch_cb" title="nfc_tnep_ch_cb"><span class="n"><span class="pre">nfc_tnep_ch_cb</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">cb</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.nfc_tnep_ch_service_init" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Initialize the TNEP Connection Handover service. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cb</strong> – <strong>[in]</strong> Callback structure.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><p><strong>0</strong> – If the operation was successful. Otherwise, a (negative) error code is returned. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.nfc_tnep_ch_carrier_set">
+<span class="target" id="group__nfc__tnep__ch_1ga3fb33feb5d0209add173f0ed610a068d"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nfc_tnep_ch_carrier_set</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="../ndef/msg.html#c.nfc_ndef_record_desc" title="nfc_ndef_record_desc"><span class="n"><span class="pre">nfc_ndef_record_desc</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ac_rec</span></span>, <span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="../ndef/msg.html#c.nfc_ndef_record_desc" title="nfc_ndef_record_desc"><span class="n"><span class="pre">nfc_ndef_record_desc</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">carrier_rec</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n"><span class="pre">count</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.nfc_tnep_ch_carrier_set" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Set Connection Handover carriers. </p>
+<p>Function for setting the Connection Handover carriers. It should be used in the callback from <a class="reference internal" href="#structnfc__tnep__ch__cb"><span class="std std-ref">nfc_tnep_ch_cb</span></a> when the Application should reply to the Connection Handover Message. The type of message is determined automatically based on the received message and the role of the device in the data exchange.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ac_rec</strong> – <strong>[in]</strong> Array of the Alternative Carrier Records. </p></li>
+<li><p><strong>carrier_rec</strong> – <strong>[in]</strong> Array of the Carrier Records. </p></li>
+<li><p><strong>count</strong> – <strong>[in]</strong> Count of the Alternative Carrier Records and the Carrier Records.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><p><strong>0</strong> – If the operation was successful. Otherwise, a (negative) error code is returned. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.nfc_tnep_ch_svc_search">
+<span class="target" id="group__nfc__tnep__ch_1gab1d928a92bec2e56fc21fa28f19fa9cf"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">nfc_ndef_tnep_rec_svc_param</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">nfc_tnep_ch_svc_search</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">nfc_ndef_tnep_rec_svc_param</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">services</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n"><span class="pre">cnt</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.nfc_tnep_ch_svc_search" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Helper function for searching the Connection Handover service in the Initial NDEF Message. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>services</strong> – <strong>[in]</strong> Array of the TNEP services. </p></li>
+<li><p><strong>cnt</strong> – <strong>[in]</strong> Services count.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Pointer to the Connection Handover service. NULL if service is not found. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-variables">Variables</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.nfc_tnep_ch_svc_uri">
+<span class="target" id="group__nfc__tnep__ch_1gad3387b5d654d2f741153cc4ff85c014a"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nfc_tnep_ch_svc_uri</span></span></span><span class="p"><span class="pre">[</span></span><span class="m"><span class="pre">19</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#c.nfc_tnep_ch_svc_uri" title="Permalink to this definition"></a><br /></dt>
+<dd><p>NFC Connection Handover service URI. </p>
+</dd></dl>
+
+</div>
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.nfc_tnep_ch_record">
+<span class="target" id="structnfc__tnep__ch__record"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nfc_tnep_ch_record</span></span></span><a class="headerlink" href="#c.nfc_tnep_ch_record" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;ch.h&gt;</em></div>
+<p>Connection Handover Record structure. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.nfc_tnep_ch_record.ac">
+<span class="target" id="structnfc__tnep__ch__record_1aa0f0208c9acebbc72f7794c4cc5c2559"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="../ndef/ch_msg.html#c.nfc_ndef_ch_ac_rec" title="nfc_ndef_ch_ac_rec"><span class="n"><span class="pre">nfc_ndef_ch_ac_rec</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">ac</span></span></span><a class="headerlink" href="#c.nfc_tnep_ch_record.ac" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Pointer to the first Alternative Carrier Record. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.nfc_tnep_ch_record.carrier">
+<span class="target" id="structnfc__tnep__ch__record_1a74033ebfb185d369912b35b7cc7c70aa"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="../ndef/msg.html#c.nfc_ndef_record_desc" title="nfc_ndef_record_desc"><span class="n"><span class="pre">nfc_ndef_record_desc</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">carrier</span></span></span><a class="headerlink" href="#c.nfc_tnep_ch_record.carrier" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Pointer to the first Carrier Record. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.nfc_tnep_ch_record.count">
+<span class="target" id="structnfc__tnep__ch__record_1aa33f7be8a007daacd2e511b58c73caed"></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">count</span></span></span><a class="headerlink" href="#c.nfc_tnep_ch_record.count" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Count of the Alternative Carriers Records and Carrier Records. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.nfc_tnep_ch_record.major_ver">
+<span class="target" id="structnfc__tnep__ch__record_1afe72dc817df48bccfa77654a090f405d"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">major_ver</span></span></span><a class="headerlink" href="#c.nfc_tnep_ch_record.major_ver" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Connection Handover major version. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.nfc_tnep_ch_record.minor_ver">
+<span class="target" id="structnfc__tnep__ch__record_1a11e09d736cdf3769c67b6e2fc76c6d08"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">minor_ver</span></span></span><a class="headerlink" href="#c.nfc_tnep_ch_record.minor_ver" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Connection Handover minor version. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.nfc_tnep_ch_request">
+<span class="target" id="structnfc__tnep__ch__request"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nfc_tnep_ch_request</span></span></span><a class="headerlink" href="#c.nfc_tnep_ch_request" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;ch.h&gt;</em></div>
+<p>Connection Handover Request Record structure. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.nfc_tnep_ch_request.cr">
+<span class="target" id="structnfc__tnep__ch__request_1a9bcef8aa68fff847c5238f76b548d7ef"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="../ndef/ch_msg.html#c.nfc_ndef_ch_cr_rec" title="nfc_ndef_ch_cr_rec"><span class="n"><span class="pre">nfc_ndef_ch_cr_rec</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">cr</span></span></span><a class="headerlink" href="#c.nfc_tnep_ch_request.cr" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Pointer to the Collision Resolution Record data. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.nfc_tnep_ch_request.ch_record">
+<span class="target" id="structnfc__tnep__ch__request_1affe83f0361aa11c8471ec55b88de09a3"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.nfc_tnep_ch_record" title="nfc_tnep_ch_record"><span class="n"><span class="pre">nfc_tnep_ch_record</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ch_record</span></span></span><a class="headerlink" href="#c.nfc_tnep_ch_request.ch_record" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Connection Handover Record data. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.nfc_tnep_ch_cb">
+<span class="target" id="structnfc__tnep__ch__cb"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nfc_tnep_ch_cb</span></span></span><a class="headerlink" href="#c.nfc_tnep_ch_cb" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;ch.h&gt;</em></div>
+<p>Connection Handover service callback structure. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.nfc_tnep_ch_cb.request_msg_prepare">
+<span class="target" id="structnfc__tnep__ch__cb_1a360e51b3b8323c292e57015badc758a4"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">request_msg_prepare</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#c.nfc_tnep_ch_cb.request_msg_prepare" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The Connection Handover Request Message prepare callback. </p>
+<p>This callback is called every time when the NFC Forum Device takes the Connection Handover Requester role and the Connection Handover Message must be sent to the other NFC Forum Device.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Retval 0</dt>
+<dd class="field-odd"><p>If the operation was successful. Otherwise, a (negative) error code is returned. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.nfc_tnep_ch_cb.request_msg_recv">
+<span class="target" id="structnfc__tnep__ch__cb_1a7b7acc418909aa13d107abf2a5c28e08"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">request_msg_recv</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.nfc_tnep_ch_request" title="nfc_tnep_ch_request"><span class="n"><span class="pre">nfc_tnep_ch_request</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ch_req</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#c.nfc_tnep_ch_cb.request_msg_recv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The Connection Handover Request Message received callback. </p>
+<p>This callback is called always when NFC Forum Device which supports TNEP received the Connection Handover Request Message. After receiving this message, application shall respond with the Handover Select Message by calling <a class="reference internal" href="#group__nfc__tnep__ch_1ga3fb33feb5d0209add173f0ed610a068d"><span class="std std-ref">nfc_tnep_ch_carrier_set</span></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Param ch_req</dt>
+<dd class="field-odd"><p><strong>[in]</strong> Pointer to the Connection Handover Request structure which contains the parsed Connection Handover Request Message.</p>
+</dd>
+<dt class="field-even">Retval 0</dt>
+<dd class="field-even"><p>If the operation was successful. Otherwise, a (negative) error code is returned. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.nfc_tnep_ch_cb.select_msg_recv">
+<span class="target" id="structnfc__tnep__ch__cb_1a5469796ebf454f080e815fe5883a81d9"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">select_msg_recv</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.nfc_tnep_ch_record" title="nfc_tnep_ch_record"><span class="n"><span class="pre">nfc_tnep_ch_record</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ch_select</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n"><span class="pre">inactive</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#c.nfc_tnep_ch_cb.select_msg_recv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The Connection Handover Select Message received callback. </p>
+<p>This callback is called always when the NFC Device receive the Connection Select Message in response to the Connection Handover Request message.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Param ch_select</dt>
+<dd class="field-odd"><p><strong>[in]</strong> Pointer to Connection Handover structure which contains the parsed Connection Handover Select Message. </p>
+</dd>
+<dt class="field-even">Param inactive</dt>
+<dd class="field-even"><p><strong>[in]</strong> Indicates that all Alternative Carriers are inactive. The Handover Request Message should be sent again with only one Alternative Carrier using <a class="reference internal" href="#group__nfc__tnep__ch_1ga3fb33feb5d0209add173f0ed610a068d"><span class="std std-ref">nfc_tnep_ch_carrier_set</span></a>.</p>
+</dd>
+<dt class="field-odd">Retval 0</dt>
+<dd class="field-odd"><p>If the operation was successful. Otherwise, a (negative) error code is returned. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.nfc_tnep_ch_cb.mediation_req_recv">
+<span class="target" id="structnfc__tnep__ch__cb_1a436024c4e40f72a6cf15d4afb45ddc51"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">mediation_req_recv</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#c.nfc_tnep_ch_cb.mediation_req_recv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The Connection Handover Mediation Request Message received callback. </p>
+<p>This callback is called when an NFC Forum Tag Device that supports TNEP receives a Connection Handover Request Message that contains, in a Handover Carrier Record, the information for a single alternative carrier of NFC Forum Well Known type “Hm”. After receiving this message, the application shall respond with the Handover Mediation Message by calling <a class="reference internal" href="#group__nfc__tnep__ch_1ga3fb33feb5d0209add173f0ed610a068d"><span class="std std-ref">nfc_tnep_ch_carrier_set</span></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Retval 0</dt>
+<dd class="field-odd"><p>If the operation was successful. Otherwise, a (negative) error code is returned. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.nfc_tnep_ch_cb.initial_msg_recv">
+<span class="target" id="structnfc__tnep__ch__cb_1aaeb44a26eb00fd2e4bcb0ea2b1f825e5"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">initial_msg_recv</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.nfc_tnep_ch_record" title="nfc_tnep_ch_record"><span class="n"><span class="pre">nfc_tnep_ch_record</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ch_initial</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#c.nfc_tnep_ch_cb.initial_msg_recv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The Connection Handover Initial Message received callback. </p>
+<p>This callback is called always when NFC Forum Tag Device which supports TNEP receives the Connection Handover Initial Message. After receiving this message, application shall respond also with the Handover Initial Message by calling <a class="reference internal" href="#group__nfc__tnep__ch_1ga3fb33feb5d0209add173f0ed610a068d"><span class="std std-ref">nfc_tnep_ch_carrier_set</span></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Param ch_initial</dt>
+<dd class="field-odd"><p><strong>[in]</strong> Pointer to Connection Handover structure which contains the parsed Connection Handover Initial Message.</p>
+</dd>
+<dt class="field-even">Retval 0</dt>
+<dd class="field-even"><p>If the operation was successful. Otherwise, a (negative) error code is returned. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.nfc_tnep_ch_cb.error">
+<span class="target" id="structnfc__tnep__ch__cb_1ab3e2ebd6bd4f3d96b96168600122f0ef"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">error</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">err</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#c.nfc_tnep_ch_cb.error" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Error callback. </p>
+<p>Called always when internal error was detected.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Param err</dt>
+<dd class="field-odd"><p><strong>[in]</strong> Detected error code. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="poller.html" class="btn btn-neutral float-right" title="TNEP for polling device" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Tag NDEF Exchange Protocol (TNEP)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Memory footprint optimization &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../_static/js/ncs.js"
+></script>
+<script src="../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Power optimization" href="power.html" />
+    <link rel="prev" title="Optimizing application" href="index.html" />
+<link
+  href="../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev_model.html">Development model</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../app_dev.html">Application development</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../board_support/index.html">Board support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pin_control/index.html">Pin control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../build_and_config_system/index.html">Build and configuration system</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Optimizing application</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Memory footprint optimization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#general-recommendations">General recommendations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bluetooth">Bluetooth</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bluetooth-mesh">Bluetooth mesh</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gazell">Gazell</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#matter">Matter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nfc">NFC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#thread">Thread</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#zigbee">Zigbee</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="power.html">Power optimization</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../ap_protect/index.html">Enabling access port protection mechanism</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bootloaders_and_dfu/index.html">Bootloaders and Device Firmware Updates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../logging/index.html">Logging in nRF Connect SDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multi_image/index.html">Multi-image builds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../testing_unity_cmock/index.html">Testing with Unity and CMock</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tfm/index.html">Running applications with Trusted Firmware-M</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_fem/index.html">Working with RF front-end modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../wifi_coex/index.html">Adding Wi-Fi Coexistence support to short-range radio applications</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drivers.html">Drivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../app_dev.html">Application development</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Optimizing application</a></li>
+      <li class="breadcrumb-item active">Memory footprint optimization</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/app_dev/optimizing/memory.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="memory-footprint-optimization">
+<span id="app-memory"></span><h1>Memory footprint optimization<a class="headerlink" href="#memory-footprint-optimization" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#general-recommendations" id="id7">General recommendations</a></p></li>
+<li><p><a class="reference internal" href="#bluetooth" id="id8">Bluetooth</a></p></li>
+<li><p><a class="reference internal" href="#bluetooth-mesh" id="id9">Bluetooth mesh</a></p></li>
+<li><p><a class="reference internal" href="#gazell" id="id10">Gazell</a></p></li>
+<li><p><a class="reference internal" href="#matter" id="id11">Matter</a></p></li>
+<li><p><a class="reference internal" href="#nfc" id="id12">NFC</a></p>
+<ul>
+<li><p><a class="reference internal" href="#tag" id="id13">Tag</a></p></li>
+<li><p><a class="reference internal" href="#poller" id="id14">Poller</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#thread" id="id15">Thread</a></p></li>
+<li><p><a class="reference internal" href="#zigbee" id="id16">Zigbee</a></p></li>
+</ul>
+</div>
+<p>When developing an application, ROM and RAM footprint are important factors, especially when the firmware runs on the most resource-constrained devices like nRF52810 or nRF52811.</p>
+<section id="general-recommendations">
+<span id="app-memory-general"></span><h2><a class="toc-backref" href="#id7">General recommendations</a><a class="headerlink" href="#general-recommendations" title="Permalink to this heading"></a></h2>
+<p>To reduce the memory footprint, ensure that your application uses the minimum required resources and tune the nRF Connect SDK configuration parameters.
+Complete the following actions to optimize your application:</p>
+<ul class="simple">
+<li><p>Use the <a class="reference external" href="https://nrfconnect.github.io/vscode-nrf-connect/guides/memory_overview.html">Memory report</a> feature in the nRF Connect for VS Code extension to check the size and percentage of memory that each symbol uses on your device for RAM, ROM, and partitions (when applicable).</p></li>
+<li><p>Follow the guides for <span class="xref std std-ref">optimizing Zephyr</span>.
+Also see the implementation of the <span class="xref std std-ref">zephyr:minimal_sample</span> sample.</p></li>
+<li><p>Analyze stack usage in each thread of your application by using the <span class="xref std std-ref">zephyr:thread_analyzer</span>.
+Reduce the stack sizes where possible.</p></li>
+<li><p>Limit or disable debugging features, such as logging or asserts.</p></li>
+<li><p>Go through each component and subsystem and turn off all peripherals and features that your application does not use.</p></li>
+</ul>
+<p>The following subsections give more information on how to optimize specific subsystems.</p>
+</section>
+<section id="bluetooth">
+<span id="app-memory-bt"></span><h2><a class="toc-backref" href="#id8">Bluetooth</a><a class="headerlink" href="#bluetooth" title="Permalink to this heading"></a></h2>
+<p>Besides applying <a class="reference internal" href="#general-recommendations">General recommendations</a>, you can also complete the following actions to optimize the Bluetooth® part of your application:</p>
+<ul>
+<li><p>Disable features that your application does not use.
+For example, disable the following features:</p>
+<ul class="simple">
+<li><p>Data Length Update</p></li>
+<li><p>Extended Advertising</p></li>
+<li><p>PHY Update</p></li>
+<li><p>Security Manager Protocol (if no encryption and authentication is needed)</p></li>
+<li><p>GATT Caching</p></li>
+<li><p>GATT Service Changed</p></li>
+</ul>
+</li>
+<li><p>Reduce the stack sizes of the Bluetooth internal threads where possible.
+Use the <span class="xref std std-ref">zephyr:thread_analyzer</span> to analyze the stack usage.</p>
+<p>The following configuration options affect the stack sizes of the Bluetooth threads:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_RX_STACK_SIZE</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_HCI_TX_STACK_SIZE</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MPSL_WORK_STACK_SIZE</span></code></p></li>
+</ul>
+</li>
+<li><p>Reduce the overall number and the sizes of the Bluetooth buffers, based on the expected data traffic in your application.</p>
+<p>The following configuration options affect the Bluetooth buffers:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_BUF_EVT_DISCARDABLE_COUNT</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_BUF_EVT_DISCARDABLE_SIZE</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_BUF_EVT_RX_COUNT</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_CONN_TX_MAX</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_L2CAP_TX_BUF_COUNT</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_CTLR_RX_BUFFERS</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_BUF_ACL_TX_COUNT</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_BUF_ACL_TX_SIZE</span></code></p></li>
+</ul>
+</li>
+</ul>
+<p>For reference, you can find minimal footprint configurations of the <a class="reference internal" href="../../samples/bluetooth/peripheral_lbs/README.html#peripheral-lbs"><span class="std std-ref">Bluetooth: Peripheral LBS</span></a> sample in <code class="file docutils literal notranslate"><span class="pre">nrf/samples/bluetooth/peripheral_lbs/minimal.conf</span></code> and the <a class="reference internal" href="../../samples/bluetooth/peripheral_uart/README.html#peripheral-uart"><span class="std std-ref">Bluetooth: Peripheral UART</span></a> sample in <code class="file docutils literal notranslate"><span class="pre">nrf/samples/bluetooth/peripheral_uart/minimal.conf</span></code>.</p>
+</section>
+<section id="bluetooth-mesh">
+<span id="app-memory-bt-mesh"></span><h2><a class="toc-backref" href="#id9">Bluetooth mesh</a><a class="headerlink" href="#bluetooth-mesh" title="Permalink to this heading"></a></h2>
+<p>Besides applying <a class="reference internal" href="#general-recommendations">General recommendations</a> and <a class="reference internal" href="#bluetooth">Bluetooth</a> optimization actions, there are some configuration options you can use to optimize the <a class="reference internal" href="../../protocols/bt_mesh/index.html#ug-bt-mesh"><span class="std std-ref">Bluetooth mesh</span></a> part of your application.
+Changing any of these options will change the functional capabilities of the Bluetooth mesh device, and thereby result in changes to RAM and flash memory footprint.</p>
+<p>Changing the values of the following options will affect the RAM footprint and the amount of space needed for persistent storage of the associated configuration data:</p>
+<ul class="simple">
+<li><p>General node configuration:</p>
+<ul>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_MESH_MODEL_KEY_COUNT</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_MESH_MODEL_GROUP_COUNT</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_MESH_SUBNET_COUNT</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_MESH_APP_KEY_COUNT</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_MESH_LABEL_COUNT</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_MESH_CRPL</span></code></p></li>
+</ul>
+</li>
+<li><p>For Provisioner device, the following configuration database (CDB) options are available (like how many nodes it can provision, or maximum number of supported application keys):</p>
+<ul>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_MESH_CDB_NODE_COUNT</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_MESH_CDB_SUBNET_COUNT</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_MESH_CDB_APP_KEY_COUNT</span></code></p></li>
+</ul>
+</li>
+</ul>
+<p>Changing the values of the following options will only affect the RAM footprint:</p>
+<ul class="simple">
+<li><p>Configuration options for segmented messages (for example how many segmented messages a node can send or receive, and the number of segments per message):</p>
+<ul>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_MESH_TX_SEG_MSG_COUNT</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_MESH_RX_SEG_MSG_COUNT</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_MESH_SEG_BUFS</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_MESH_RX_SEG_MAX</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_MESH_TX_SEG_MAX</span></code></p></li>
+</ul>
+</li>
+<li><p>Advertiser configuration:</p>
+<ul>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_MESH_ADV_BUF_COUNT</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_MESH_RELAY_BUF_COUNT</span></code></p></li>
+</ul>
+</li>
+<li><p>Extended advertising configuration:</p>
+<ul>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_MESH_ADV_EXT</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_MESH_RELAY_ADV_SETS</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_MESH_ADV_EXT_GATT_SEPARATE</span></code></p></li>
+</ul>
+</li>
+<li><p>Legacy advertising configuration:</p>
+<ul>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_MESH_ADV_STACK_SIZE</span></code></p>
+</li>
+</ul>
+</li>
+<li><p>If Friend feature is enabled, the following configuration options are relevant:</p>
+<ul>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_MESH_FRIEND_QUEUE_SIZE</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_MESH_FRIEND_SUB_LIST_SIZE</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_MESH_FRIEND_LPN_COUNT</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_MESH_FRIEND_SEG_RX</span></code></p></li>
+</ul>
+</li>
+<li><p>If Low Power node (LPN) feature is enabled, the following configuration option is relevant:</p>
+<ul>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_MESH_LPN_GROUPS</span></code></p></li>
+</ul>
+</li>
+<li><p>If the proxy server is enabled (option <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">BT_MESH_GATT_PROXY</span></code>), pay attention to the proxy server filter size:</p>
+<ul>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_MESH_PROXY_FILTER_SIZE</span></code></p></li>
+</ul>
+</li>
+<li><p>Other device configuration:</p>
+<ul>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_MESH_LOOPBACK_BUFS</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_MESH_MSG_CACHE_SIZE</span></code></p></li>
+</ul>
+</li>
+</ul>
+<p>Model configuration options that affect stack size at runtime:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_MESH_SENSOR_SRV_SENSORS_MAX</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_MESH_SENSOR_SRV_SETTINGS_MAX</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_MESH_SCENES_MAX</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_MESH_PROP_MAXSIZE</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_MESH_PROP_MAXCOUNT</span></code></p></li>
+</ul>
+</section>
+<section id="gazell">
+<span id="app-memory-gazell"></span><h2><a class="toc-backref" href="#id10">Gazell</a><a class="headerlink" href="#gazell" title="Permalink to this heading"></a></h2>
+<p>To optimize the Gazell memory footprint, follow the <a class="reference internal" href="#general-recommendations">General recommendations</a>.
+Specifically, study the ISR stack size.
+If your application is in a pairing device, pay attention to the system workqueue stack size.</p>
+<p>Do not enable features that your application does not use.
+The configuration options default to disabling optional features, such as:</p>
+<ul class="simple">
+<li><p>Pairing</p></li>
+<li><p>Pairing encryption</p></li>
+<li><p>Pairing settings persistent storage</p></li>
+</ul>
+<p>To reduce the logging level, set the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_GAZELL_LOG_LEVEL_CHOICE</span></code> Kconfig option.</p>
+</section>
+<section id="matter">
+<span id="app-memory-matter"></span><h2><a class="toc-backref" href="#id11">Matter</a><a class="headerlink" href="#matter" title="Permalink to this heading"></a></h2>
+<p>Besides applying <a class="reference internal" href="#general-recommendations">General recommendations</a>, you can also complete the following actions to optimize the <a class="reference internal" href="../../protocols/matter/index.html#ug-matter"><span class="std std-ref">Matter</span></a> part of your application:</p>
+<ul class="simple">
+<li><p>Make sure Zephyr’s <span class="xref std std-ref">zephyr:shell_api</span> is disabled for your application.
+Related configuration options are listed in a dedicated section in each Matter sample’s <code class="file docutils literal notranslate"><span class="pre">prj.conf</span></code> file.</p></li>
+<li><p>Use <code class="file docutils literal notranslate"><span class="pre">prj_release.conf</span></code> for building the application.
+The release configuration has a smaller memory footprint than the default, debug-enabled <code class="file docutils literal notranslate"><span class="pre">prj.conf</span></code>.</p></li>
+<li><p>If the logs in your application do not use the default log level, you can change the default log level of Zephyr modules from <code class="docutils literal notranslate"><span class="pre">info</span></code> to <code class="docutils literal notranslate"><span class="pre">warning</span></code> by setting <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LOG_DEFAULT_LEVEL</span></code> to <code class="docutils literal notranslate"><span class="pre">2</span></code>.</p></li>
+<li><p>Change the log level of the Matter logs from <code class="docutils literal notranslate"><span class="pre">debug</span></code> to <code class="docutils literal notranslate"><span class="pre">info</span></code> by setting <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MATTER_LOG_LEVEL_INFO</span></code> to <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p></li>
+<li><p>Reduce the verbosity of assert messages by setting <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ASSERT_VERBOSE</span></code> to <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p></li>
+<li><p>Check <a class="reference internal" href="#thread">Thread</a> memory footprint optimization actions, as the Matter application layer uses OpenThread.</p></li>
+</ul>
+</section>
+<section id="nfc">
+<span id="app-memory-nfc"></span><h2><a class="toc-backref" href="#id12">NFC</a><a class="headerlink" href="#nfc" title="Permalink to this heading"></a></h2>
+<p>The <a class="reference internal" href="../../protocols/nfc/index.html#ug-nfc"><span class="std std-ref">Near Field Communication (NFC)</span></a> protocol implementation in the nRF Connect SDK provides some options for optimizing memory footprint for both the tag and the poller roles.</p>
+<section id="tag">
+<h3><a class="toc-backref" href="#id13">Tag</a><a class="headerlink" href="#tag" title="Permalink to this heading"></a></h3>
+<p>To optimize your application that supports the NFC tag functionality, follow the <a class="reference internal" href="#general-recommendations">General recommendations</a>.
+The NFC <span class="xref std std-ref">type_2_tag</span> and <span class="xref std std-ref">type_4_tag</span> libraries do not provide configuration options that have an effect on memory usage in an application.
+However, there are a few Kconfig configuration options you can use to optimize memory usage related to NFC.</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NFC_PLATFORM_LOG_LEVEL_CHOICE</span></code> to reduce logging level in the NFC integration module.</p></li>
+</ul>
+<p>For an application that uses the <span class="xref std std-ref">type_4_tag</span> library, you can set the following options:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NDEF_FILE_SIZE</span></code> for the maximum NDEF file size, if the read-write mode is supported,</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NFC_TNEP_RX_MAX_RECORD_CNT</span></code> and <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NFC_TNEP_RX_MAX_RECORD_SIZE</span></code> for the maximum buffer size of NDEF message exchange, if the <a class="reference internal" href="../../libraries/nfc/tnep/index.html#lib-nfc-tnep"><span class="std std-ref">Tag NDEF Exchange Protocol (TNEP)</span></a> is supported.</p></li>
+</ul>
+</section>
+<section id="poller">
+<h3><a class="toc-backref" href="#id14">Poller</a><a class="headerlink" href="#poller" title="Permalink to this heading"></a></h3>
+<p>To optimize an application that supports the NFC poller functionality using the <a class="reference internal" href="../../libraries/others/st25r3911b_nfc.html#st25r3911b-nfc-readme"><span class="std std-ref">NFC Reader ST25R3911B</span></a> library, you can set the following options:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ST25R3911B_LIB_LOG_LEVEL_CHOICE</span></code> and similar options to reduce the logging level of the NFC components used in the application.</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NFC_T4T_HL_PROCEDURE_CC_BUFFER_SIZE</span></code> and <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NFC_T4T_HL_PROCEDURE_APDU_BUF_SIZE</span></code> to adjust the buffer sizes in the NFC T4T protocol implementation of the poller side.</p></li>
+</ul>
+<p>If the application supports the <a class="reference internal" href="../../libraries/nfc/tnep/index.html#lib-nfc-tnep"><span class="std std-ref">Tag NDEF Exchange Protocol (TNEP)</span></a>, you can set the following options:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NFC_TNEP_POLLER_RX_MAX_RECORD_CNT</span></code> for the maximum number of NDEF records in the received message.</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NFC_TNEP_CH_POLLER_RX_BUF_SIZE</span></code> for the Connection Handover receive buffer size of the poller mode, if the application uses the <a class="reference internal" href="../../libraries/nfc/tnep/ch.html#nfc-tnep-ch-readme"><span class="std std-ref">NFC TNEP Connection Handover</span></a> library.</p></li>
+</ul>
+<p>If the application uses the NFC TNEP protocol for the Bluetooth LE out-of-band pairing procedure (<a class="reference internal" href="../../libraries/nfc/tnep/ch.html#nfc-tnep-ch-readme"><span class="std std-ref">NFC TNEP Connection Handover</span></a>), regardless of the role (tag or poller), you can set the following options:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NFC_TNEP_CH_MAX_RECORD_COUNT</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NFC_TNEP_CH_MAX_LOCAL_RECORD_COUNT</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NFC_TNEP_CH_PARSER_BUFFER_SIZE</span></code></p></li>
+</ul>
+</section>
+</section>
+<section id="thread">
+<span id="app-memory-thread"></span><h2><a class="toc-backref" href="#id15">Thread</a><a class="headerlink" href="#thread" title="Permalink to this heading"></a></h2>
+<p>The current Thread memory requirements are listed on the <a class="reference internal" href="../../protocols/thread/overview/ot_memory.html#thread-ot-memory"><span class="std std-ref">OpenThread memory requirements</span></a> page.</p>
+<p>Besides applying <a class="reference internal" href="#general-recommendations">General recommendations</a>, you can also complete the following actions to optimize the <a class="reference internal" href="../../protocols/thread/index.html#ug-thread"><span class="std std-ref">Thread</span></a> part of your application:</p>
+<ul>
+<li><p>Disable Thread features that your application does not use.
+For example, disable network shell and OpenThread CLI shell support (see <a class="reference internal" href="../../protocols/thread/configuring.html#ug-thread-configuring-additional"><span class="std std-ref">Additional configuration options</span></a>)</p></li>
+<li><p><a class="reference internal" href="../../protocols/thread/configuring.html#ug-thread-configuring-basic-building"><span class="std std-ref">Configure the OpenThread stack.</span></a></p></li>
+<li><p><a class="reference internal" href="../../protocols/thread/configuring.html#thread-ug-device-type"><span class="std std-ref">Select the appropriate OpenThread device type.</span></a></p></li>
+<li><p>Reduce the stack sizes of the Thread internal threads where possible.
+Use the <span class="xref std std-ref">zephyr:thread_analyzer</span> to analyze the stack usage.</p>
+<p>The following configuration options affect the stack sizes of the Thread threads:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_OPENTHREAD_THREAD_STACK_SIZE</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NET_CONNECTION_MANAGER_STACK_SIZE</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NET_RX_STACK_SIZE</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NET_TX_STACK_SIZE</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NET_MGMT_EVENT_STACK_SIZE</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_IEEE802154_NRF5_RX_STACK_SIZE</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_SYSTEM_WORKQUEUE_STACK_SIZE</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MPSL_WORK_STACK_SIZE</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_SHELL_STACK_SIZE</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_IDLE_STACK_SIZE</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MAIN_STACK_SIZE</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ISR_STACK_SIZE</span></code></p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="zigbee">
+<span id="app-memory-zigbee"></span><h2><a class="toc-backref" href="#id16">Zigbee</a><a class="headerlink" href="#zigbee" title="Permalink to this heading"></a></h2>
+<p>The current Zigbee memory requirements are listed on the <a class="reference internal" href="../../protocols/zigbee/memory.html#zigbee-memory"><span class="std std-ref">Zigbee memory requirements</span></a> page.</p>
+<p>Apply <a class="reference internal" href="#general-recommendations">General recommendations</a> to optimize the <a class="reference internal" href="../../protocols/zigbee/index.html#ug-zigbee"><span class="std std-ref">Zigbee</span></a> part of your application.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="power.html" class="btn btn-neutral float-right" title="Power optimization" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Optimizing application" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

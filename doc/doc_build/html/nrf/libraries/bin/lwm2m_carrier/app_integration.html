@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Application integration &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../../_static/js/ncs.js"
+></script>
+<script src="../../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Requirements and application limitations" href="requirements.html" />
+    <link rel="prev" title="Certification and version dependencies" href="certification.html" />
+<link
+  href="../../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../drivers.html">Drivers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Libraries</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Binary libraries</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">LwM2M carrier</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="certification.html">Certification and version dependencies</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Application integration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="requirements.html">Requirements and application limitations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="msc.html">Message sequence charts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="API_documentation.html">API documentation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="CHANGELOG.html">Changelog</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../bluetooth_services/index.html">Bluetooth libraries and services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../bootloader/index.html">Bootloader libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../caf/index.html">Common Application Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../debug/index.html">Debug libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../dfu/index.html">DFU libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gazell/index.html">Gazell libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../modem/index.html">Modem libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mpsl/index.html">Multiprotocol Service Layer libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../networking/index.html">Libraries for networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nfc/index.html">Libraries for NFC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nrf_rpc/index.html">nRF RPC libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../others/index.html">Other libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../shell/index.html">Shell libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tfm/index.html">TF-M libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../zigbee/index.html">Libraries for Zigbee</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Libraries</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Binary libraries</a></li>
+          <li class="breadcrumb-item"><a href="index.html">LwM2M carrier</a></li>
+      <li class="breadcrumb-item active">Application integration</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/libraries/bin/lwm2m_carrier/app_integration.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="application-integration">
+<span id="lwm2m-app-int"></span><h1>Application integration<a class="headerlink" href="#application-integration" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#configuration" id="id9">Configuration</a></p>
+<ul>
+<li><p><a class="reference internal" href="#general-options" id="id10">General options</a></p></li>
+<li><p><a class="reference internal" href="#server-options" id="id11">Server options</a></p></li>
+<li><p><a class="reference internal" href="#device-options" id="id12">Device options</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#lwm2m-carrier-library-events" id="id13">LwM2M carrier library events</a></p></li>
+<li><p><a class="reference internal" href="#lwm2m-carrier-shell-configuration" id="id14">LwM2M carrier shell configuration</a></p>
+<ul>
+<li><p><a class="reference internal" href="#carrier-config" id="id15">carrier_config</a></p></li>
+<li><p><a class="reference internal" href="#carrier-api" id="id16">carrier_api</a></p></li>
+<li><p><a class="reference internal" href="#help" id="id17">help</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#objects" id="id18">Objects</a></p>
+<ul>
+<li><p><a class="reference internal" href="#resources" id="id19">Resources</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>This section describes the needed interaction between the LwM2M carrier library and the user application.</p>
+<figure class="align-default" id="id6">
+<img alt="Interaction between the LwM2M carrier library and the user application" src="../../../_images/lwm2m_carrier_overview.svg" /><figcaption>
+<p><span class="caption-text">Interaction between the LwM2M carrier library and the user application</span><a class="headerlink" href="#id6" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>The LwM2M carrier library has an OS abstraction layer.
+This abstraction layer makes the LwM2M carrier library independent of the nRF Connect SDK modules and underlying implementation of primitives such as timers, non-volatile storage, and heap allocation.
+For more information, see <code class="file docutils literal notranslate"><span class="pre">lwm2m_os.h</span></code>.</p>
+<figure class="align-default" id="id7">
+<img alt="LwM2M library OS abstraction overview" src="../../../_images/lwm2m_carrier_os_abstraction.svg" /><figcaption>
+<p><span class="caption-text">LwM2M library OS abstraction overview</span><a class="headerlink" href="#id7" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>It provides an abstraction of the following modules:</p>
+<ul class="simple">
+<li><p>nRF Connect SDK modules:</p>
+<ul>
+<li><p><a class="reference internal" href="../../modem/at_monitor.html#at-monitor-readme"><span class="std std-ref">AT monitor</span></a></p></li>
+<li><p><a class="reference internal" href="../../modem/lte_lc.html#lte-lc-readme"><span class="std std-ref">LTE link controller</span></a></p></li>
+<li><p><a class="reference internal" href="../../networking/download_client.html#lib-download-client"><span class="std std-ref">Download client</span></a></p></li>
+<li><p><a class="reference internal" href="../../modem/sms.html#sms-readme"><span class="std std-ref">SMS subscriber</span></a></p></li>
+<li><p><a class="reference internal" href="../../modem/pdn.html#pdn-readme"><span class="std std-ref">PDN</span></a></p></li>
+<li><p><a class="reference internal" href="../../dfu/dfu_target.html#lib-dfu-target"><span class="std std-ref">DFU target</span></a></p></li>
+</ul>
+</li>
+<li><p>Zephyr modules:</p>
+<ul>
+<li><p><span class="xref std std-ref">zephyr:kernel_api</span> (<code class="docutils literal notranslate"><span class="pre">include/kernel.h</span></code>)</p></li>
+<li><p><span class="xref std std-ref">zephyr:nvs_api</span></p></li>
+</ul>
+</li>
+</ul>
+<p>The OS abstraction layer is fully implemented for the nRF Connect SDK, and it needs to be ported if used with other RTOS or on other systems.</p>
+<p>When the LwM2M carrier library is enabled in your application, it includes the file <code class="file docutils literal notranslate"><span class="pre">nrf/lib/bin/lwm2m_carrier/os/lwm2m_carrier.c</span></code>.
+This automatically initializes the library (using <a class="reference internal" href="API_documentation.html#c.lwm2m_carrier_init" title="lwm2m_carrier_init"><code class="xref c c-func docutils literal notranslate"><span class="pre">lwm2m_carrier_init()</span></code></a>) and runs the library’s main function (<a class="reference internal" href="API_documentation.html#c.lwm2m_carrier_run" title="lwm2m_carrier_run"><code class="xref c c-func docutils literal notranslate"><span class="pre">lwm2m_carrier_run()</span></code></a>).</p>
+<section id="configuration">
+<span id="lwm2m-configuration"></span><h2><a class="toc-backref" href="#id9">Configuration</a><a class="headerlink" href="#configuration" title="Permalink to this heading"></a></h2>
+<p>To run the library in an application, you must implement the application with the API of the library.
+Enable the library by setting the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LWM2M_CARRIER</span></code> Kconfig option to <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p>
+<p>The <a class="reference internal" href="../../../samples/nrf9160/lwm2m_carrier/README.html#lwm2m-carrier"><span class="std std-ref">nRF9160: LwM2M carrier</span></a> sample project configuration (<code class="file docutils literal notranslate"><span class="pre">nrf/samples/nrf9160/lwm2m_carrier/prj.conf</span></code>) contains all the configurations that are needed by the LwM2M carrier library.</p>
+<p>To overwrite the carrier default settings, you can provide the initialization parameter <a class="reference internal" href="API_documentation.html#c.lwm2m_carrier_config_t" title="lwm2m_carrier_config_t"><code class="xref c c-type docutils literal notranslate"><span class="pre">lwm2m_carrier_config_t</span></code></a> with the Kconfig options specified in the following sections.
+You can also use the provided <a class="reference internal" href="#lwm2m-carrier-shell"><span class="std std-ref">LwM2M carrier shell configuration</span></a> to quickly get started and experiment with the API.</p>
+<section id="general-options">
+<span id="general-options-lwm2m"></span><h3><a class="toc-backref" href="#id10">General options</a><a class="headerlink" href="#general-options" title="Permalink to this heading"></a></h3>
+<p>Following are some of the general Kconfig options that you can configure:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LWM2M_CARRIER_BOOTSTRAP_SMARTCARD</span></code>:</p>
+<ul>
+<li><p>This configuration allows the LwM2M carrier library to use the bootstrap information stored on the SIM card.
+The configuration in the SIM will take precedence over any other configuration.
+For example, if a bootstrap server URI is fetched from the SIM, the configuration set by the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LWM2M_CARRIER_IS_BOOTSTRAP_SERVER</span></code> Kconfig option is ignored.</p></li>
+</ul>
+</li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LWM2M_CARRIER_SESSION_IDLE_TIMEOUT</span></code>:</p>
+<ul>
+<li><p>This configuration specifies the session idle timeout (inactivity).
+Upon timeout, the LwM2M carrier library disconnects from one or more device management servers.</p></li>
+<li><p>The timeout closes the DTLS session.
+A new DTLS session will be created on the next activity (for example, lifetime trigger).</p></li>
+<li><p>Leaving this configuration empty (0) sets it to a default of 60 seconds.</p></li>
+</ul>
+</li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LWM2M_CARRIER_COAP_CON_INTERVAL</span></code>:</p>
+<ul>
+<li><p>This configuration specifies how often to send a Confirmable message instead of a Non-Confirmable message, according to RFC 7641 section 4.5.</p></li>
+<li><p>Leaving this configuration empty (0) sets it to a default of 24 hours.</p></li>
+<li><p>Setting this to -1 will always use Confirmable notifications.</p></li>
+</ul>
+</li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LWM2M_CARRIER_CUSTOM_APN</span></code>:</p>
+<ul>
+<li><p>This configuration produces different results depending on normal or generic mode of operation.</p></li>
+<li><p>If <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LWM2M_CARRIER_CUSTOM_URI</span></code> is not set (normal), this configuration provides a fallback APN.
+This might be required in your application, depending on the requirements from the carrier.</p></li>
+<li><p>If <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LWM2M_CARRIER_CUSTOM_URI</span></code> is set (generic), <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LWM2M_CARRIER_CUSTOM_APN</span></code> is used instead of the default APN.
+The default APN becomes the fallback APN.</p></li>
+</ul>
+</li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LWM2M_CARRIER_PDN_TYPE</span></code>:</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>This configuration selects the PDN type of the custom APN (<code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LWM2M_CARRIER_CUSTOM_APN</span></code>).</p></li>
+<li><p>The default value is IPV4V6.</p></li>
+<li><p>If <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LWM2M_CARRIER_CUSTOM_APN</span></code> is not set, this configuration is ignored.</p></li>
+</ul>
+</div></blockquote>
+<ul>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LWM2M_CARRIER_GENERIC</span></code>, <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LWM2M_CARRIER_VERIZON</span></code>, <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LWM2M_CARRIER_ATT</span></code> , <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LWM2M_CARRIER_LG_UPLUS</span></code>.</p>
+<ul class="simple">
+<li><p>These configurations allow you to choose the networks in which the carrier library will apply.</p></li>
+<li><p>For example, If you are deploying a product in several networks but only need to enable the carrier library within Verizon, you must set <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LWM2M_CARRIER_VERIZON</span></code> to <code class="docutils literal notranslate"><span class="pre">y</span></code> and all the others to <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p></li>
+<li><p>If only one carrier is selected, then the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LWM2M_CARRIER_CUSTOM_URI</span></code> and <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LWM2M_CARRIER_SERVER_SEC_TAG</span></code> will be used for this carrier.</p>
+<ul>
+<li><p>This will typically have to be done while you are certifying your product, to be able to connect to the carriers certification servers, since they will require a URI different from the default live servers.</p></li>
+<li><p>See <a class="reference internal" href="../../../samples/nrf9160/lwm2m_carrier/provisioning.html#lwm2m-carrier-provisioning"><span class="std std-ref">Preparing for production</span></a> for more information on the test configuration.</p></li>
+</ul>
+</li>
+<li><p>If multiple operator networks are selected then the “Custom URI” and “Custom sec_tag” will be used for Generic mode, which is used when not in any of the other selected networks.</p></li>
+</ul>
+</li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LWM2M_CARRIER_LG_UPLUS</span></code>, <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LWM2M_CARRIER_LG_UPLUS_SERVICE_CODE</span></code>:</p>
+<ul class="simple">
+<li><p>The <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LWM2M_CARRIER_LG_UPLUS_SERVICE_CODE</span></code> Kconfig option sets the LG U+ service code, which is needed to identify your device in the LG U+ device management.</p></li>
+</ul>
+</li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LWM2M_CARRIER_LG_UPLUS_DEVICE_SERIAL_NUMBER</span></code>:</p>
+<ul class="simple">
+<li><p>This configuration lets you choose between using the nRF9160 SoC 2DID Serial Number, or the device IMEI as a serial number when connecting to the LG U+ device management server.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Application DFU is needed to enable LG U+ functionality.</p>
+</div>
+</li>
+</ul>
+</section>
+<section id="server-options">
+<h3><a class="toc-backref" href="#id11">Server options</a><a class="headerlink" href="#server-options" title="Permalink to this heading"></a></h3>
+<p>Following are some of the server Kconfig options that you can configure:</p>
+<p>The server settings can put the LwM2M carrier library either in the normal mode where it connects to the applicable carriers, or in the generic mode where it can connect to any bootstrap server.</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LWM2M_CARRIER_IS_BOOTSTRAP_SERVER</span></code>:</p>
+<ul>
+<li><p>This configuration specifies if the custom LwM2M server is an LwM2M Bootstrap Server.</p></li>
+</ul>
+</li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LWM2M_CARRIER_CUSTOM_URI</span></code>:</p>
+<ul>
+<li><p>This configuration lets the LwM2M carrier library connect to a custom server other than the normal carrier server and enables the generic mode if used in an operator network that is not supported.</p></li>
+<li><p>You must set this option during self-testing, or if the end product is not to be certified with the applicable carriers.
+For more information, see <a class="reference internal" href="certification.html#lwm2m-certification"><span class="std std-ref">Certification and version dependencies</span></a>.</p></li>
+</ul>
+</li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LWM2M_CARRIER_SERVER_SEC_TAG</span></code>:</p>
+<ul>
+<li><p>This configuration provides the library with a security tag containing a PSK.</p></li>
+<li><p>This configuration should normally be left empty (0) unless stated by the operator, or when connecting to a custom URI.
+In this case, the library will automatically apply the correct PSK for the different carrier device management.</p></li>
+<li><p>The <a class="reference internal" href="../../../samples/nrf9160/lwm2m_carrier/README.html#lwm2m-carrier"><span class="std std-ref">sample</span></a> allows you to set a PSK that is written to a modem security tag using the <a class="reference internal" href="../../../samples/nrf9160/lwm2m_carrier/sample_description.html#config-carrier-app-psk"><span class="std std-ref">CONFIG_CARRIER_APP_PSK</span></a> and <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LWM2M_CARRIER_SERVER_SEC_TAG</span></code> Kconfig options.
+This is convenient for developing and debugging but must be avoided in the final product.
+Instead, see <a class="reference internal" href="../../modem/modem_key_mgmt.html#modem-key-mgmt"><span class="std std-ref">Modem key management</span></a> or <a class="reference internal" href="../../../samples/nrf9160/at_client/README.html#at-client-sample"><span class="std std-ref">nRF9160: AT Client</span></a> sample for <a class="reference external" href="https://infocenter.nordicsemi.com/topic/ug_link_monitor/UG/link_monitor/lm_certificate_manager.html">provisioning a PSK</a>.</p></li>
+</ul>
+</li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LWM2M_CARRIER_SERVER_LIFETIME</span></code>:</p>
+<ul>
+<li><p>This configuration specifies the lifetime of the custom LwM2M server.</p></li>
+<li><p>This configuration is ignored if <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LWM2M_CARRIER_IS_BOOTSTRAP_SERVER</span></code> is set.</p></li>
+</ul>
+</li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">LWM2M_SERVER_BINDING_CHOICE</span></code>.</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>The binding can be either ‘U’ (UDP) or ‘N’ (Non-IP).</p></li>
+<li><p>Leaving this configuration empty will select the default binding (UDP).</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="device-options">
+<h3><a class="toc-backref" href="#id12">Device options</a><a class="headerlink" href="#device-options" title="Permalink to this heading"></a></h3>
+<p>These values are reported in the Device Object and are not expected to change during run time.
+These configurations can be left empty unless otherwise stated by your operator.
+The library will automatically set the values according to the detected operator.</p>
+<p>Following are the device Kconfig options:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LWM2M_CARRIER_DEVICE_MANUFACTURER</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LWM2M_CARRIER_DEVICE_MODEL_NUMBER</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LWM2M_CARRIER_DEVICE_TYPE</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LWM2M_CARRIER_DEVICE_HARDWARE_VERSION</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LWM2M_CARRIER_DEVICE_SOFTWARE_VERSION</span></code></p></li>
+</ul>
+</section>
+</section>
+<section id="lwm2m-carrier-library-events">
+<span id="lwm2m-events"></span><h2><a class="toc-backref" href="#id13">LwM2M carrier library events</a><a class="headerlink" href="#lwm2m-carrier-library-events" title="Permalink to this heading"></a></h2>
+<p>The <a class="reference internal" href="API_documentation.html#c.lwm2m_carrier_event_handler" title="lwm2m_carrier_event_handler"><code class="xref c c-func docutils literal notranslate"><span class="pre">lwm2m_carrier_event_handler()</span></code></a> function must be implemented by your application.
+This is shown in the <a class="reference internal" href="../../../samples/nrf9160/lwm2m_carrier/README.html#lwm2m-carrier"><span class="std std-ref">nRF9160: LwM2M carrier</span></a> sample.
+A <code class="docutils literal notranslate"><span class="pre">__weak</span></code> implementation is included in <code class="file docutils literal notranslate"><span class="pre">nrf/lib/bin/lwm2m_carrier/os/lwm2m_carrier.c</span></code>.</p>
+<p>Following are the various LwM2M carrier library events that are also listed in <code class="file docutils literal notranslate"><span class="pre">nrf/lib/bin/lwm2m_carrier/include/lwm2m_carrier.h</span></code>.</p>
+<ul>
+<li><p><a class="reference internal" href="API_documentation.html#c.LWM2M_CARRIER_EVENT_INIT" title="LWM2M_CARRIER_EVENT_INIT"><code class="xref c c-macro docutils literal notranslate"><span class="pre">LWM2M_CARRIER_EVENT_INIT</span></code></a>:</p>
+<ul class="simple">
+<li><p>This event indicates that the carrier library has been successfully initialized.
+<span class="xref std std-ref">nrf_modem</span> is initialized and can be used.
+See <a class="reference internal" href="requirements.html#req-appln-limitations"><span class="std std-ref">Requirements and application limitations</span></a>.</p></li>
+<li><p>If CA certificates are not already present in the modem, they can be written when receiving this event (and before attaching to the network).
+The CA certificates needed for your device depend on your network operator.
+The LwM2M carrier library will apply these certificates during certain out-of-band FOTA updates.
+See <a class="reference internal" href="../../../samples/nrf9160/lwm2m_carrier/README.html#lwm2m-carrier"><span class="std std-ref">nRF9160: LwM2M carrier</span></a> sample for an example of how these certificates are written to the modem using <a class="reference internal" href="../../modem/modem_key_mgmt.html#modem-key-mgmt"><span class="std std-ref">Modem key management</span></a> library.</p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="API_documentation.html#c.LWM2M_CARRIER_EVENT_LTE_LINK_DOWN" title="LWM2M_CARRIER_EVENT_LTE_LINK_DOWN"><code class="xref c c-macro docutils literal notranslate"><span class="pre">LWM2M_CARRIER_EVENT_LTE_LINK_DOWN</span></code></a>:</p>
+<ul class="simple">
+<li><p>This event indicates that the device must disconnect to the LTE network.</p></li>
+<li><p>It occurs during the bootstrapping process and FOTA.
+It can also be triggered when the application calls <a class="reference internal" href="API_documentation.html#c.lwm2m_carrier_request" title="lwm2m_carrier_request"><code class="xref c c-func docutils literal notranslate"><span class="pre">lwm2m_carrier_request()</span></code></a>.</p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="API_documentation.html#c.LWM2M_CARRIER_EVENT_LTE_LINK_UP" title="LWM2M_CARRIER_EVENT_LTE_LINK_UP"><code class="xref c c-macro docutils literal notranslate"><span class="pre">LWM2M_CARRIER_EVENT_LTE_LINK_UP</span></code></a>:</p>
+<ul class="simple">
+<li><p>This event indicates that the device must connect from the LTE network.</p></li>
+<li><p>It occurs during the bootstrapping process, startup, and FOTA.
+It can also be triggered when the application calls <a class="reference internal" href="API_documentation.html#c.lwm2m_carrier_request" title="lwm2m_carrier_request"><code class="xref c c-func docutils literal notranslate"><span class="pre">lwm2m_carrier_request()</span></code></a>.</p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="API_documentation.html#c.LWM2M_CARRIER_EVENT_BOOTSTRAPPED" title="LWM2M_CARRIER_EVENT_BOOTSTRAPPED"><code class="xref c c-macro docutils literal notranslate"><span class="pre">LWM2M_CARRIER_EVENT_BOOTSTRAPPED</span></code></a>:</p>
+<ul class="simple">
+<li><p>This event indicates that the bootstrap sequence is complete, and that the device is ready to be registered.</p></li>
+<li><p>This event is typically seen during the first boot-up.</p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="API_documentation.html#c.LWM2M_CARRIER_EVENT_REGISTERED" title="LWM2M_CARRIER_EVENT_REGISTERED"><code class="xref c c-macro docutils literal notranslate"><span class="pre">LWM2M_CARRIER_EVENT_REGISTERED</span></code></a>:</p>
+<ul class="simple">
+<li><p>This event indicates that the device has registered successfully to the carrier’s device management servers.</p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="API_documentation.html#c.LWM2M_CARRIER_EVENT_DEFERRED" title="LWM2M_CARRIER_EVENT_DEFERRED"><code class="xref c c-macro docutils literal notranslate"><span class="pre">LWM2M_CARRIER_EVENT_DEFERRED</span></code></a>:</p>
+<ul class="simple">
+<li><p>This event indicates that the connection to the device management server has failed.</p></li>
+<li><p>The <a class="reference internal" href="API_documentation.html#c.LWM2M_CARRIER_EVENT_DEFERRED" title="LWM2M_CARRIER_EVENT_DEFERRED"><code class="xref c c-macro docutils literal notranslate"><span class="pre">LWM2M_CARRIER_EVENT_DEFERRED</span></code></a> event appears instead of the <a class="reference internal" href="API_documentation.html#c.LWM2M_CARRIER_EVENT_REGISTERED" title="LWM2M_CARRIER_EVENT_REGISTERED"><code class="xref c c-macro docutils literal notranslate"><span class="pre">LWM2M_CARRIER_EVENT_REGISTERED</span></code></a> event.</p></li>
+<li><p>The <code class="xref c c-member docutils literal notranslate"><span class="pre">timeout</span></code> parameter supplied with this event determines when the LwM2M carrier library will retry the connection.</p></li>
+<li><p>Following are the various deferred reasons:</p>
+<ul>
+<li><p><a class="reference internal" href="API_documentation.html#c.LWM2M_CARRIER_DEFERRED_NO_REASON" title="LWM2M_CARRIER_DEFERRED_NO_REASON"><code class="xref c c-macro docutils literal notranslate"><span class="pre">LWM2M_CARRIER_DEFERRED_NO_REASON</span></code></a> - The application need not take any special action. If <code class="xref c c-member docutils literal notranslate"><span class="pre">timeout</span></code> is 24 hours, the application can proceed with other activities until the retry takes place.</p></li>
+<li><p><a class="reference internal" href="API_documentation.html#c.LWM2M_CARRIER_DEFERRED_PDN_ACTIVATE" title="LWM2M_CARRIER_DEFERRED_PDN_ACTIVATE"><code class="xref c c-macro docutils literal notranslate"><span class="pre">LWM2M_CARRIER_DEFERRED_PDN_ACTIVATE</span></code></a> - This event indicates problem with the SIM card, or temporary network problems. If this persists, contact your carrier.</p></li>
+<li><p><a class="reference internal" href="API_documentation.html#c.LWM2M_CARRIER_DEFERRED_BOOTSTRAP_CONNECT" title="LWM2M_CARRIER_DEFERRED_BOOTSTRAP_CONNECT"><code class="xref c c-macro docutils literal notranslate"><span class="pre">LWM2M_CARRIER_DEFERRED_BOOTSTRAP_CONNECT</span></code></a> - The DTLS handshake with the bootstrap server has failed. If the application is using a custom PSK, verify that the format is correct.</p></li>
+<li><p><a class="reference internal" href="API_documentation.html#c.LWM2M_CARRIER_DEFERRED_BOOTSTRAP_SEQUENCE" title="LWM2M_CARRIER_DEFERRED_BOOTSTRAP_SEQUENCE"><code class="xref c c-macro docutils literal notranslate"><span class="pre">LWM2M_CARRIER_DEFERRED_BOOTSTRAP_SEQUENCE</span></code></a> - The bootstrap sequence is incomplete. The server failed either to acknowledge the request by the library, or to send objects to the library. Confirm that the carrier is aware of the IMEI.</p></li>
+<li><p><a class="reference internal" href="API_documentation.html#c.LWM2M_CARRIER_DEFERRED_SERVER_NO_ROUTE" title="LWM2M_CARRIER_DEFERRED_SERVER_NO_ROUTE"><code class="xref c c-macro docutils literal notranslate"><span class="pre">LWM2M_CARRIER_DEFERRED_SERVER_NO_ROUTE</span></code></a>, <a class="reference internal" href="API_documentation.html#c.LWM2M_CARRIER_DEFERRED_BOOTSTRAP_NO_ROUTE" title="LWM2M_CARRIER_DEFERRED_BOOTSTRAP_NO_ROUTE"><code class="xref c c-macro docutils literal notranslate"><span class="pre">LWM2M_CARRIER_DEFERRED_BOOTSTRAP_NO_ROUTE</span></code></a> - There is a routing problem in the carrier network. If this event persists, contact the carrier.</p></li>
+<li><p><a class="reference internal" href="API_documentation.html#c.LWM2M_CARRIER_DEFERRED_SERVER_CONNECT" title="LWM2M_CARRIER_DEFERRED_SERVER_CONNECT"><code class="xref c c-macro docutils literal notranslate"><span class="pre">LWM2M_CARRIER_DEFERRED_SERVER_CONNECT</span></code></a> - This event indicates that the DTLS handshake with the server has failed. This typically happens if the bootstrap sequence has failed on the carrier side.</p></li>
+<li><p><a class="reference internal" href="API_documentation.html#c.LWM2M_CARRIER_DEFERRED_SERVER_REGISTRATION" title="LWM2M_CARRIER_DEFERRED_SERVER_REGISTRATION"><code class="xref c c-macro docutils literal notranslate"><span class="pre">LWM2M_CARRIER_DEFERRED_SERVER_REGISTRATION</span></code></a> - The server registration has not completed, and the server does not recognize the connecting device. If this event persists, contact the carrier.</p></li>
+<li><p><a class="reference internal" href="API_documentation.html#c.LWM2M_CARRIER_DEFERRED_SERVICE_UNAVAILABLE" title="LWM2M_CARRIER_DEFERRED_SERVICE_UNAVAILABLE"><code class="xref c c-macro docutils literal notranslate"><span class="pre">LWM2M_CARRIER_DEFERRED_SERVICE_UNAVAILABLE</span></code></a> - The server is unavailable due to maintenance.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="API_documentation.html#c.LWM2M_CARRIER_EVENT_FOTA_START" title="LWM2M_CARRIER_EVENT_FOTA_START"><code class="xref c c-macro docutils literal notranslate"><span class="pre">LWM2M_CARRIER_EVENT_FOTA_START</span></code></a>:</p>
+<ul class="simple">
+<li><p>This event indicates that the modem update has started.</p></li>
+<li><p>The application must immediately terminate any open TLS and DTLS sessions.</p></li>
+<li><p>See <a class="reference internal" href="requirements.html#req-appln-limitations"><span class="std std-ref">Requirements and application limitations</span></a>.</p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="API_documentation.html#c.LWM2M_CARRIER_EVENT_REBOOT" title="LWM2M_CARRIER_EVENT_REBOOT"><code class="xref c c-macro docutils literal notranslate"><span class="pre">LWM2M_CARRIER_EVENT_REBOOT</span></code></a>:</p>
+<ul class="simple">
+<li><p>This event indicates that the LwM2M carrier library will reboot the device.</p></li>
+<li><p>If the application is not ready to reboot, it must return non-zero and then reboot at the earliest convenient time.</p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="API_documentation.html#c.LWM2M_CARRIER_EVENT_ERROR" title="LWM2M_CARRIER_EVENT_ERROR"><code class="xref c c-macro docutils literal notranslate"><span class="pre">LWM2M_CARRIER_EVENT_ERROR</span></code></a>:</p>
+<ul>
+<li><p>This event indicates an error.</p></li>
+<li><p>The event data struct <a class="reference internal" href="API_documentation.html#c.lwm2m_carrier_event_error_t" title="lwm2m_carrier_event_error_t"><code class="xref c c-type docutils literal notranslate"><span class="pre">lwm2m_carrier_event_error_t</span></code></a> contains the information about the error (<code class="xref c c-member docutils literal notranslate"><span class="pre">code</span></code> and <code class="xref c c-member docutils literal notranslate"><span class="pre">value</span></code>).</p></li>
+<li><p>Following are the valid error codes:</p>
+<ul>
+<li><p><code class="xref c c-macro docutils literal notranslate"><span class="pre">LWM2M_CARRIER_ERROR_CONNECT_FAIL</span></code> - This error is generated from the <a class="reference internal" href="../../modem/lte_lc.html#c.lte_lc_init_and_connect" title="lte_lc_init_and_connect"><code class="xref c c-func docutils literal notranslate"><span class="pre">lte_lc_init_and_connect()</span></code></a> function. It indicates possible problems with the SIM card, or insufficient network coverage. See <code class="xref c c-member docutils literal notranslate"><span class="pre">value</span></code> field of the event.</p></li>
+<li><p><code class="xref c c-macro docutils literal notranslate"><span class="pre">LWM2M_CARRIER_ERROR_DISCONNECT_FAIL</span></code> - This error is generated from the <a class="reference internal" href="../../modem/lte_lc.html#c.lte_lc_offline" title="lte_lc_offline"><code class="xref c c-func docutils literal notranslate"><span class="pre">lte_lc_offline()</span></code></a> function. See <code class="xref c c-member docutils literal notranslate"><span class="pre">value</span></code> field of the event.</p></li>
+<li><p><a class="reference internal" href="API_documentation.html#c.LWM2M_CARRIER_ERROR_BOOTSTRAP" title="LWM2M_CARRIER_ERROR_BOOTSTRAP"><code class="xref c c-macro docutils literal notranslate"><span class="pre">LWM2M_CARRIER_ERROR_BOOTSTRAP</span></code></a> - This error is generated during the bootstrap procedure.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 29%" />
+<col style="width: 45%" />
+<col style="width: 26%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Errors</p></th>
+<th class="head"><p>More information</p></th>
+<th class="head"><p>Recovery</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Retry limit for connecting to the bootstrap
+server has been reached (<code class="docutils literal notranslate"><span class="pre">-ETIMEDOUT</span></code>).</p></td>
+<td><p>Common reason for this failure can be incorrect URI or PSK,
+or the server is unavailable (for example, temporary network issues).
+If this error persists, contact your carrier.</p></td>
+<td><p>Library retries after next device reboot.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Failure to provision the PSK
+needed for the bootstrap procedure.</p></td>
+<td><p>If the LTE link is up while the modem attempts to write keys to the modem,
+the error will be <code class="docutils literal notranslate"><span class="pre">-EACCES</span></code>. Verify that the application prioritizes the
+<code class="docutils literal notranslate"><span class="pre">LWM2M_CARRIER_EVENT_LTE_LINK_UP</span></code> and <code class="docutils literal notranslate"><span class="pre">LWM2M_CARRIER_EVENT_LTE_LINK_DOWN</span></code> events.</p></td>
+<td><p>Library retries after 24 hours.</p></td>
+</tr>
+<tr class="row-even"><td><p>Failure to read MSISDN or ICCID values (<code class="docutils literal notranslate"><span class="pre">-EFAULT</span></code>).</p></td>
+<td><p>ICCID is fetched from SIM, while MSISDN is received from the network for
+some carriers. If it has not been issued yet, the bootstrap process cannot proceed.</p></td>
+<td><p>Library retries upon next network connection.</p></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><p><a class="reference internal" href="API_documentation.html#c.LWM2M_CARRIER_ERROR_FOTA_PKG" title="LWM2M_CARRIER_ERROR_FOTA_PKG"><code class="xref c c-macro docutils literal notranslate"><span class="pre">LWM2M_CARRIER_ERROR_FOTA_PKG</span></code></a> - This error indicates that the update package has been rejected. The integrity check has failed because of a wrong package sent from the server, or a wrong package received by client. The <code class="xref c c-member docutils literal notranslate"><span class="pre">value</span></code> field will have an error of type <code class="xref c c-type docutils literal notranslate"><span class="pre">nrf_dfu_err_t</span></code> from the file <code class="file docutils literal notranslate"><span class="pre">nrfxlib/nrf_modem/include/nrf_socket.h</span></code>.</p></li>
+<li><p><a class="reference internal" href="API_documentation.html#c.LWM2M_CARRIER_ERROR_FOTA_PROTO" title="LWM2M_CARRIER_ERROR_FOTA_PROTO"><code class="xref c c-macro docutils literal notranslate"><span class="pre">LWM2M_CARRIER_ERROR_FOTA_PROTO</span></code></a> - This error indicates a protocol error. There might be unexpected HTTP header contents. The server might not support partial content requests.</p></li>
+<li><p><a class="reference internal" href="API_documentation.html#c.LWM2M_CARRIER_ERROR_FOTA_CONN" title="LWM2M_CARRIER_ERROR_FOTA_CONN"><code class="xref c c-macro docutils literal notranslate"><span class="pre">LWM2M_CARRIER_ERROR_FOTA_CONN</span></code></a> - This error indicates a connection problem. Either the server host name could not be resolved, or the remote server refused the connection.</p></li>
+<li><p><a class="reference internal" href="API_documentation.html#c.LWM2M_CARRIER_ERROR_FOTA_CONN_LOST" title="LWM2M_CARRIER_ERROR_FOTA_CONN_LOST"><code class="xref c c-macro docutils literal notranslate"><span class="pre">LWM2M_CARRIER_ERROR_FOTA_CONN_LOST</span></code></a> - This error indicates a loss of connection, or an unexpected closure of connection by the server.</p></li>
+<li><p><a class="reference internal" href="API_documentation.html#c.LWM2M_CARRIER_ERROR_FOTA_FAIL" title="LWM2M_CARRIER_ERROR_FOTA_FAIL"><code class="xref c c-macro docutils literal notranslate"><span class="pre">LWM2M_CARRIER_ERROR_FOTA_FAIL</span></code></a> - This error indicates a failure in applying a valid update. If this error persists, create a ticket in <a class="reference external" href="https://devzone.nordicsemi.com/">DevZone</a> with the modem trace.</p></li>
+<li><p><a class="reference internal" href="API_documentation.html#c.LWM2M_CARRIER_ERROR_CONFIGURATION" title="LWM2M_CARRIER_ERROR_CONFIGURATION"><code class="xref c c-macro docutils literal notranslate"><span class="pre">LWM2M_CARRIER_ERROR_CONFIGURATION</span></code></a> - This error indicates that an illegal object configuration was detected.</p></li>
+<li><p><a class="reference internal" href="API_documentation.html#c.LWM2M_CARRIER_ERROR_INTERNAL" title="LWM2M_CARRIER_ERROR_INTERNAL"><code class="xref c c-macro docutils literal notranslate"><span class="pre">LWM2M_CARRIER_ERROR_INTERNAL</span></code></a> - This error indicates an irrecoverable error between the modem and carrier library. The LwM2M carrier library recovers only upon reboot.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="lwm2m-carrier-shell-configuration">
+<span id="lwm2m-carrier-shell"></span><h2><a class="toc-backref" href="#id14">LwM2M carrier shell configuration</a><a class="headerlink" href="#lwm2m-carrier-shell-configuration" title="Permalink to this heading"></a></h2>
+<p>The LwM2M carrier shell allows you to interact with the carrier library through the shell command line.
+This allows you to overwrite initialization parameters and call the different runtime APIs of the library.
+This can be useful for getting started and debugging.
+See <span class="xref std std-ref">zephyr:shell_api</span> for more information.</p>
+<p>To enable and configure the LwM2M carrier shell, set the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LWM2M_CARRIER_SHELL</span></code> Kconfig option to <code class="docutils literal notranslate"><span class="pre">y</span></code>.
+The <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LWM2M_CARRIER_SHELL</span></code> Kconfig option has the following dependencies:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_FLASH_MAP</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_SHELL</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_SETTINGS</span></code></p></li>
+</ul>
+<p>In the <a class="reference internal" href="../../../samples/nrf9160/lwm2m_carrier/README.html#lwm2m-carrier"><span class="std std-ref">nRF9160: LwM2M carrier</span></a> sample, you can enable the LwM2M carrier shell by <a class="reference internal" href="../../../samples/nrf9160/lwm2m_carrier/sample_description.html#lwm2m-carrier-shell-overlay"><span class="std std-ref">building with the overlay file</span></a> <code class="file docutils literal notranslate"><span class="pre">overlay-shell.conf</span></code>.</p>
+<figure class="align-default" id="id8">
+<img alt="LwM2M carrier shell" src="../../../_images/lwm2m_carrier_os_abstraction_shell.svg" /><figcaption>
+<p><span class="caption-text">LwM2M carrier shell</span><a class="headerlink" href="#id8" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<section id="carrier-config">
+<h3><a class="toc-backref" href="#id15">carrier_config</a><a class="headerlink" href="#carrier-config" title="Permalink to this heading"></a></h3>
+<p>The initialization parameter <a class="reference internal" href="API_documentation.html#c.lwm2m_carrier_config_t" title="lwm2m_carrier_config_t"><code class="xref c c-type docutils literal notranslate"><span class="pre">lwm2m_carrier_config_t</span></code></a> can be overwritten with custom settings through the LwM2M carrier shell command group <code class="docutils literal notranslate"><span class="pre">carrier_config</span></code>.
+Use the <code class="docutils literal notranslate"><span class="pre">print</span></code> command to display the configurations that are written with <code class="docutils literal notranslate"><span class="pre">carrier_config</span></code>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt; carrier_config print</span>
+<span class="go">Automatic startup                No</span>
+
+<span class="go">Custom carrier settings          Yes</span>
+<span class="go">  Carriers enabled               All</span>
+<span class="go">  Bootstrap from smartcard       Yes</span>
+<span class="go">  Session idle timeout           0</span>
+<span class="go">  CoAP confirmable interval      0</span>
+<span class="go">  APN</span>
+<span class="go">  PDN type                       IPv4v6</span>
+<span class="go">  Service code</span>
+<span class="go">  Device Serial Number type      0</span>
+
+<span class="go">Custom carrier server settings   No</span>
+<span class="go">  Is bootstrap server            No  (Not used without server URI)</span>
+<span class="go">  Server URI</span>
+<span class="go">  PSK security tag               0</span>
+<span class="go">  Server lifetime                0</span>
+<span class="go">  Server binding                 U</span>
+
+<span class="go">Custom carrier device settings   No</span>
+<span class="go">  Manufacturer</span>
+<span class="go">  Model number</span>
+<span class="go">  Device type</span>
+<span class="go">  Hardware version</span>
+<span class="go">  Software version</span>
+</pre></div>
+</div>
+<p>To allow time to change configurations before the library applies them, the application waits in the initialization phase (<a class="reference internal" href="API_documentation.html#c.lwm2m_carrier_custom_init" title="lwm2m_carrier_custom_init"><code class="xref c c-func docutils literal notranslate"><span class="pre">lwm2m_carrier_custom_init()</span></code></a>) until <code class="docutils literal notranslate"><span class="pre">auto_startup</span></code> is set.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>uart:~$ carrier_config auto_startup y
+Set auto startup: Yes
+</pre></div>
+</div>
+<p>The settings are applied by the function <a class="reference internal" href="API_documentation.html#c.lwm2m_carrier_custom_init" title="lwm2m_carrier_custom_init"><code class="xref c c-func docutils literal notranslate"><span class="pre">lwm2m_carrier_custom_init()</span></code></a>.</p>
+<p>This function is implemented in <code class="file docutils literal notranslate"><span class="pre">nrf/lib/bin/lwm2m_carrier/os/lwm2m_settings.c</span></code> that is included in the project when you enable the LwM2M carrier shell.
+The library thread calls the <a class="reference internal" href="API_documentation.html#c.lwm2m_carrier_custom_init" title="lwm2m_carrier_custom_init"><code class="xref c c-func docutils literal notranslate"><span class="pre">lwm2m_carrier_custom_init()</span></code></a> function before calling the <a class="reference internal" href="API_documentation.html#c.lwm2m_carrier_run" title="lwm2m_carrier_run"><code class="xref c c-func docutils literal notranslate"><span class="pre">lwm2m_carrier_run()</span></code></a> function.</p>
+</section>
+<section id="carrier-api">
+<h3><a class="toc-backref" href="#id16">carrier_api</a><a class="headerlink" href="#carrier-api" title="Permalink to this heading"></a></h3>
+<p>The LwM2M carrier shell command group <code class="docutils literal notranslate"><span class="pre">carrier_api</span></code> allows you to access the public LwM2M API as shown in <code class="file docutils literal notranslate"><span class="pre">nrf/lib/bin/lwm2m_carrier/include/lwm2m_carrier.h</span></code>.</p>
+<p>For example, to indicate the battery level of the device to the carrier, the function <a class="reference internal" href="API_documentation.html#c.lwm2m_carrier_battery_level_set" title="lwm2m_carrier_battery_level_set"><code class="xref c c-func docutils literal notranslate"><span class="pre">lwm2m_carrier_battery_level_set()</span></code></a> is used.
+This can also be done through the <code class="docutils literal notranslate"><span class="pre">carrier_api</span></code> command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">carrier_api</span> <span class="n">device</span> <span class="n">battery_level</span> <span class="mi">20</span>
+<span class="n">Battery</span> <span class="n">level</span> <span class="n">updated</span> <span class="n">successfully</span>
+</pre></div>
+</div>
+</section>
+<section id="help">
+<h3><a class="toc-backref" href="#id17">help</a><a class="headerlink" href="#help" title="Permalink to this heading"></a></h3>
+<p>To display help for all available shell commands, pass the following command to shell:</p>
+<pre class="highlight literal-block">&gt; [<em>group</em>] help</pre>
+<p>If the optional argument is not provided, the command displays help for all command groups.</p>
+<p>If the optional argument is provided, it displays help for subcommands of the specified command group.
+For example, <code class="docutils literal notranslate"><span class="pre">carrier_config</span> <span class="pre">help</span></code> displays help for all <code class="docutils literal notranslate"><span class="pre">carrier_config</span></code> commands.</p>
+</section>
+</section>
+<section id="objects">
+<h2><a class="toc-backref" href="#id18">Objects</a><a class="headerlink" href="#objects" title="Permalink to this heading"></a></h2>
+<p>The objects enabled depend on the carrier network.
+When connecting to a generic LwM2M server, the following objects are enabled:</p>
+<ul class="simple">
+<li><p>Security</p></li>
+<li><p>Server</p></li>
+<li><p>Access Control</p></li>
+<li><p>Device</p></li>
+<li><p>Connectivity Monitoring</p></li>
+<li><p>Firmware Update</p></li>
+<li><p>Location</p></li>
+<li><p>Connectivity Statistics</p></li>
+<li><p>Cellular Connectivity</p></li>
+<li><p>APN Connection Profile</p></li>
+</ul>
+<section id="resources">
+<h3><a class="toc-backref" href="#id19">Resources</a><a class="headerlink" href="#resources" title="Permalink to this heading"></a></h3>
+<p>The following values that reflect the state of the device must be kept up to date by the application:</p>
+<ul class="simple">
+<li><p>Available Power Sources - Defaults to <code class="docutils literal notranslate"><span class="pre">0</span></code> if not set (DC Power).</p></li>
+<li><p>Power Source Voltage - Defaults to <code class="docutils literal notranslate"><span class="pre">0</span></code> if not set.</p></li>
+<li><p>Power Source Current - Defaults to <code class="docutils literal notranslate"><span class="pre">0</span></code> if not set.</p></li>
+<li><p>Battery Level - Defaults to <code class="docutils literal notranslate"><span class="pre">0</span></code> if not set.</p></li>
+<li><p>Battery Status - Defaults to <code class="docutils literal notranslate"><span class="pre">5</span></code> if not set (Not Installed).</p></li>
+<li><p>Memory Total - Defaults to <code class="docutils literal notranslate"><span class="pre">0</span></code> if not set.</p></li>
+<li><p>Error Code - Defaults to <code class="docutils literal notranslate"><span class="pre">0</span></code> if not set (No Error).</p></li>
+<li><p>Device Type - Defaults to <code class="docutils literal notranslate"><span class="pre">Smart</span> <span class="pre">Device</span></code> if not set.</p></li>
+<li><p>Software Version - Defaults to <code class="docutils literal notranslate"><span class="pre">LwM2M</span> <span class="pre">&lt;libversion&gt;</span></code>. For example, <code class="docutils literal notranslate"><span class="pre">LwM2M</span> <span class="pre">0.30.2</span></code> for release 0.30.2.</p></li>
+<li><p>Hardware Version - Default value is read from the modem. An example value is <code class="docutils literal notranslate"><span class="pre">nRF9160</span> <span class="pre">SICA</span> <span class="pre">B0A</span></code>.</p></li>
+<li><p>Location - Defaults to <code class="docutils literal notranslate"><span class="pre">0</span></code> if not set.</p></li>
+</ul>
+<p>The following values are read from the modem by default but can be overwritten:</p>
+<ul class="simple">
+<li><p>Manufacturer</p></li>
+<li><p>Model Number</p></li>
+<li><p>UTC Offset</p></li>
+<li><p>Time zone</p></li>
+<li><p>Current Time</p></li>
+</ul>
+<p>For example, the carrier device management platform can observe the battery level of your device.
+The application uses the <a class="reference internal" href="API_documentation.html#c.lwm2m_carrier_battery_level_set" title="lwm2m_carrier_battery_level_set"><code class="xref c c-func docutils literal notranslate"><span class="pre">lwm2m_carrier_battery_level_set()</span></code></a> function to indicate the current battery level of the device to the carrier.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="requirements.html" class="btn btn-neutral float-right" title="Requirements and application limitations" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="certification.html" class="btn btn-neutral" title="Certification and version dependencies" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

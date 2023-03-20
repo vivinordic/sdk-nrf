@@ -1,0 +1,677 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="modem__slm_8h" kind="file" language="C++">
+    <compoundname>modem_slm.h</compoundname>
+    <includes local="no">stddef.h</includes>
+    <includes local="no">stdbool.h</includes>
+    <includes local="no">zephyr/types.h</includes>
+    <includes local="no">zephyr/kernel.h</includes>
+    <includes local="no">zephyr/sys/util_macro.h</includes>
+    <includes local="no">zephyr/toolchain/common.h</includes>
+    <incdepgraph>
+      <node id="3">
+        <label>stdbool.h</label>
+      </node>
+      <node id="1">
+        <label>include/modem/modem_slm.h</label>
+        <link refid="modem__slm_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>stddef.h</label>
+      </node>
+      <node id="7">
+        <label>zephyr/toolchain/common.h</label>
+      </node>
+      <node id="6">
+        <label>zephyr/sys/util_macro.h</label>
+      </node>
+      <node id="4">
+        <label>zephyr/types.h</label>
+      </node>
+      <node id="5">
+        <label>zephyr/kernel.h</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="structslm__monitor__entry" prot="public">slm_monitor_entry</innerclass>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="group__modem__slm_ga21be10b06d3fb6f00a1d142015262f26_1ga21be10b06d3fb6f00a1d142015262f26" prot="public" static="no">
+        <name>SLM_AT_CMD_RESPONSE_MAX_LEN</name>
+        <initializer>2100</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Max size of AT command response is 2100 bytes. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/modem/modem_slm.h" line="32" column="9" bodyfile="include/modem/modem_slm.h" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__modem__slm_gadd41d47fa5992fac9a931b712337a1f1_1gadd41d47fa5992fac9a931b712337a1f1" prot="public" static="no">
+        <name>MON_ANY</name>
+        <initializer>NULL</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Wildcard. Match any notifications. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/modem/modem_slm.h" line="148" column="9" bodyfile="include/modem/modem_slm.h" bodystart="148" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__modem__slm_gacbf7b83426d8503fdf466da24fa23d8d_1gacbf7b83426d8503fdf466da24fa23d8d" prot="public" static="no">
+        <name>MON_PAUSED</name>
+        <initializer>1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Monitor is paused. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/modem/modem_slm.h" line="150" column="9" bodyfile="include/modem/modem_slm.h" bodystart="150" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__modem__slm_gaa231dc1553710ecb6dfc56e596259435_1gaa231dc1553710ecb6dfc56e596259435" prot="public" static="no">
+        <name>MON_ACTIVE</name>
+        <initializer>0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Monitor is active, default </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/modem/modem_slm.h" line="152" column="9" bodyfile="include/modem/modem_slm.h" bodystart="152" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__modem__slm_ga1543c9436b1870ec24307f4faef850ea_1ga1543c9436b1870ec24307f4faef850ea" prot="public" static="no">
+        <name>SLM_MONITOR</name>
+        <param><defname>name</defname></param>
+        <param><defname>_filter</defname></param>
+        <param><defname>_handler</defname></param>
+        <param><defname>...</defname></param>
+        <initializer>	static void _handler(const char *);                                                        \
+	static STRUCT_SECTION_ITERABLE(<ref refid="structslm__monitor__entry" kindref="compound">slm_monitor_entry</ref>, name) = {                                \
+		.filter = _filter,                                                                 \
+		.handler = _handler,                                                               \
+		COND_CODE_1(__VA_ARGS__, (.paused = __VA_ARGS__,), ())                             \
+	}</initializer>
+        <briefdescription>
+<para>Define an SLM monitor to receive notifications in the system workqueue thread. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The monitor&apos;s name. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>_filter</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The filter for AT notification the monitor should receive, or <computeroutput>MON_ANY</computeroutput> to receive all notifications. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>_handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The monitor callback. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>...</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Optional monitor initial state (<computeroutput>MON_PAUSED</computeroutput> or <computeroutput>MON_ACTIVE</computeroutput>). The default initial state of a monitor is <computeroutput>MON_ACTIVE</computeroutput>. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/modem/modem_slm.h" line="164" column="9" bodyfile="include/modem/modem_slm.h" bodystart="164" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="enum">
+      <memberdef kind="enum" id="group__modem__slm_ga010fd2ed5ee35e4ed0f831ea16cec130_1ga010fd2ed5ee35e4ed0f831ea16cec130" prot="public" static="no" strong="no">
+        <type></type>
+        <name>at_cmd_state</name>
+        <enumvalue id="group__modem__slm_ga010fd2ed5ee35e4ed0f831ea16cec130_1gga010fd2ed5ee35e4ed0f831ea16cec130a1c41f23636a4ee32d1a5f73794356389" prot="public">
+          <name>AT_CMD_OK</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group__modem__slm_ga010fd2ed5ee35e4ed0f831ea16cec130_1gga010fd2ed5ee35e4ed0f831ea16cec130ae13a0ed344d6139161b17515b1fcfc9a" prot="public">
+          <name>AT_CMD_ERROR</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group__modem__slm_ga010fd2ed5ee35e4ed0f831ea16cec130_1gga010fd2ed5ee35e4ed0f831ea16cec130a21abd45fbfca090a692d5ba74fa94532" prot="public">
+          <name>AT_CMD_ERROR_CMS</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group__modem__slm_ga010fd2ed5ee35e4ed0f831ea16cec130_1gga010fd2ed5ee35e4ed0f831ea16cec130a8271417491a7379a61b3d03fc1ffa4f2" prot="public">
+          <name>AT_CMD_ERROR_CME</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group__modem__slm_ga010fd2ed5ee35e4ed0f831ea16cec130_1gga010fd2ed5ee35e4ed0f831ea16cec130ae3364bb44e277829210bb25df8220b38" prot="public">
+          <name>AT_CMD_PENDING</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>AT command result codes. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/modem/modem_slm.h" line="37" column="1" bodyfile="include/modem/modem_slm.h" bodystart="37" bodyend="43"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="group__modem__slm_gac1301202c057774814a6546fe914955d_1gac1301202c057774814a6546fe914955d" prot="public" static="no">
+        <type>void(*</type>
+        <definition>slm_data_handler_t</definition>
+        <argsstring>)(const uint8_t *data, size_t datalen)</argsstring>
+        <name>slm_data_handler_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Handler to handle data received from SLM, which could be AT response, AT notification or simply raw data (for example DFU image).</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Data received from SLM. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>datalen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the data received.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>The handler runs from uart callback. It must not call <ref refid="group__modem__slm_ga5be4d145875f91a0b411dc7df83ab6ee_1ga5be4d145875f91a0b411dc7df83ab6ee" kindref="member">modem_slm_send_cmd</ref>. The data should be copied out by the application as soon as called. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/modem/modem_slm.h" line="57" column="9" bodyfile="include/modem/modem_slm.h" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="group__modem__slm_ga4e82037fbfeea776c31d54852f468272_1ga4e82037fbfeea776c31d54852f468272" prot="public" static="no">
+        <type>void(*</type>
+        <definition>slm_ind_handler_t</definition>
+        <argsstring>)(void)</argsstring>
+        <name>slm_ind_handler_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Handler to handle MODEM_SLM_INDICATE_PIN signal from SLM. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/modem/modem_slm.h" line="64" column="9" bodyfile="include/modem/modem_slm.h" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="group__modem__slm_ga305393394b94abf8fb4118117c43609e_1ga305393394b94abf8fb4118117c43609e" prot="public" static="no">
+        <type>void(*</type>
+        <definition>typedef void(* slm_monitor_handler_t) (const char *notif)</definition>
+        <argsstring>)(const char *notif)</argsstring>
+        <name>slm_monitor_handler_t</name>
+        <briefdescription>
+<para>SLM monitor callback. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>notif</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The AT notification callback. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/modem/modem_slm.h" line="133" column="9" bodyfile="include/modem/modem_slm.h" bodystart="133" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__modem__slm_ga6fa7b43b2164057b1428c785a045d7d3_1ga6fa7b43b2164057b1428c785a045d7d3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int modem_slm_init</definition>
+        <argsstring>(slm_data_handler_t handler)</argsstring>
+        <name>modem_slm_init</name>
+        <param>
+          <type><ref refid="group__modem__slm_gac1301202c057774814a6546fe914955d_1gac1301202c057774814a6546fe914955d" kindref="member">slm_data_handler_t</ref></type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>Initialize Modem SLM library. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to a handler function of type <ref refid="group__modem__slm_gac1301202c057774814a6546fe914955d_1gac1301202c057774814a6546fe914955d" kindref="member">slm_data_handler_t</ref>.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Zero on success, non-zero otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/modem/modem_slm.h" line="72" column="5" declfile="include/modem/modem_slm.h" declline="72" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="group__modem__slm_ga105ebd65a28fe1eeefa0146de3408123_1ga105ebd65a28fe1eeefa0146de3408123" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int modem_slm_uninit</definition>
+        <argsstring>(void)</argsstring>
+        <name>modem_slm_uninit</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Un-initialize Modem SLM library. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/modem/modem_slm.h" line="77" column="5" declfile="include/modem/modem_slm.h" declline="77" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="group__modem__slm_ga183834673433944de89507eccaf4c6d8_1ga183834673433944de89507eccaf4c6d8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int modem_slm_register_ind</definition>
+        <argsstring>(slm_ind_handler_t handler, bool wakeup)</argsstring>
+        <name>modem_slm_register_ind</name>
+        <param>
+          <type><ref refid="group__modem__slm_ga4e82037fbfeea776c31d54852f468272_1ga4e82037fbfeea776c31d54852f468272" kindref="member">slm_ind_handler_t</ref></type>
+          <declname>handler</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>wakeup</declname>
+        </param>
+        <briefdescription>
+<para>Register callback for MODEM_SLM_INDICATE_PIN indication. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to a handler function of type <ref refid="group__modem__slm_ga4e82037fbfeea776c31d54852f468272_1ga4e82037fbfeea776c31d54852f468272" kindref="member">slm_ind_handler_t</ref>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>wakeup</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Enable/disable System Off wakeup by GPIO Sense.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Zero</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Success. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>-EFAULT</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if MODEM_SLM_INDICATE_PIN is not defined. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/modem/modem_slm.h" line="88" column="5" declfile="include/modem/modem_slm.h" declline="88" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="group__modem__slm_ga0d5715faf4670a50aae9e73d2674d595_1ga0d5715faf4670a50aae9e73d2674d595" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int modem_slm_wake_up</definition>
+        <argsstring>(void)</argsstring>
+        <name>modem_slm_wake_up</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Wakeup nRF9160 SiP via MODEM_SLM_WAKEUP_PIN. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Zero on success, non-zero otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/modem/modem_slm.h" line="95" column="5" declfile="include/modem/modem_slm.h" declline="95" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="group__modem__slm_gab6cdd00944597ff021f1e298994ff920_1gab6cdd00944597ff021f1e298994ff920" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void modem_slm_reset_uart</definition>
+        <argsstring>(void)</argsstring>
+        <name>modem_slm_reset_uart</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Reset the RX function of the serial interface. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/modem/modem_slm.h" line="101" column="6" declfile="include/modem/modem_slm.h" declline="101" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="group__modem__slm_ga5be4d145875f91a0b411dc7df83ab6ee_1ga5be4d145875f91a0b411dc7df83ab6ee" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int modem_slm_send_cmd</definition>
+        <argsstring>(const char *const command, uint32_t timeout)</argsstring>
+        <name>modem_slm_send_cmd</name>
+        <param>
+          <type>const char *const</type>
+          <declname>command</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>timeout</declname>
+        </param>
+        <briefdescription>
+<para>Function to send an AT command in SLM command mode. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function wait until command result is received. The response of the AT command is received via the <ref refid="group__modem__slm_ga4e82037fbfeea776c31d54852f468272_1ga4e82037fbfeea776c31d54852f468272" kindref="member">slm_ind_handler_t</ref> registered in <ref refid="group__modem__slm_ga6fa7b43b2164057b1428c785a045d7d3_1ga6fa7b43b2164057b1428c785a045d7d3" kindref="member">modem_slm_init</ref>.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>command</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to null terminated AT command string without command terminator </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>timeout</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Response timeout for the command in seconds, Zero means infinite wait</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>state</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="group__modem__slm_ga010fd2ed5ee35e4ed0f831ea16cec130_1ga010fd2ed5ee35e4ed0f831ea16cec130" kindref="member">at_cmd_state</ref> if command execution succeeds. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>-EAGAIN</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if command execution times out. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if command execution fails. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/modem/modem_slm.h" line="116" column="5" declfile="include/modem/modem_slm.h" declline="116" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="group__modem__slm_ga21f668584578d0b016f8a2e25b1c379b_1ga21f668584578d0b016f8a2e25b1c379b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int modem_slm_send_data</definition>
+        <argsstring>(const uint8_t *const data, size_t datalen)</argsstring>
+        <name>modem_slm_send_data</name>
+        <param>
+          <type>const uint8_t *const</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>datalen</declname>
+        </param>
+        <briefdescription>
+<para>Function to send raw data in SLM data mode. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Raw data to send </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>datalen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the raw data</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Zero on success, non-zero otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/modem/modem_slm.h" line="126" column="5" declfile="include/modem/modem_slm.h" declline="126" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="group__modem__slm_gad4f2a1e82e30c84b6f51f56f7dcab44a_1gad4f2a1e82e30c84b6f51f56f7dcab44a" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void slm_monitor_pause</definition>
+        <argsstring>(struct slm_monitor_entry *mon)</argsstring>
+        <name>slm_monitor_pause</name>
+        <param>
+          <type>struct <ref refid="structslm__monitor__entry" kindref="compound">slm_monitor_entry</ref> *</type>
+          <declname>mon</declname>
+        </param>
+        <briefdescription>
+<para>Pause monitor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Pause monitor <computeroutput>mon</computeroutput> from receiving notifications.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>mon</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The monitor to pause. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/modem/modem_slm.h" line="179" column="20" bodyfile="include/modem/modem_slm.h" bodystart="179" bodyend="182"/>
+      </memberdef>
+      <memberdef kind="function" id="group__modem__slm_ga6712f425688e71a473f44691ee252322_1ga6712f425688e71a473f44691ee252322" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void slm_monitor_resume</definition>
+        <argsstring>(struct slm_monitor_entry *mon)</argsstring>
+        <name>slm_monitor_resume</name>
+        <param>
+          <type>struct <ref refid="structslm__monitor__entry" kindref="compound">slm_monitor_entry</ref> *</type>
+          <declname>mon</declname>
+        </param>
+        <briefdescription>
+<para>Resume monitor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Resume forwarding notifications to monitor <computeroutput>mon</computeroutput>.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>mon</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The monitor to resume. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/modem/modem_slm.h" line="191" column="20" bodyfile="include/modem/modem_slm.h" bodystart="191" bodyend="194"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="2"><highlight class="comment"><sp/>*<sp/>Copyright<sp/>(c)<sp/>2023<sp/>Nordic<sp/>Semiconductor<sp/>ASA</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/>*<sp/>SPDX-License-Identifier:<sp/>LicenseRef-Nordic-5-Clause</highlight></codeline>
+<codeline lineno="5"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>MODEM_SLM_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>MODEM_SLM_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;C&quot;</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stddef.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdbool.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;zephyr/types.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;zephyr/kernel.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;zephyr/sys/util_macro.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;zephyr/toolchain/common.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="32" refid="group__modem__slm_ga21be10b06d3fb6f00a1d142015262f26_1ga21be10b06d3fb6f00a1d142015262f26" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SLM_AT_CMD_RESPONSE_MAX_LEN<sp/>2100</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight></codeline>
+<codeline lineno="37" refid="group__modem__slm_ga010fd2ed5ee35e4ed0f831ea16cec130_1ga010fd2ed5ee35e4ed0f831ea16cec130" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/><ref refid="group__modem__slm_ga010fd2ed5ee35e4ed0f831ea16cec130_1ga010fd2ed5ee35e4ed0f831ea16cec130" kindref="member">at_cmd_state</ref><sp/>{</highlight></codeline>
+<codeline lineno="38" refid="group__modem__slm_ga010fd2ed5ee35e4ed0f831ea16cec130_1gga010fd2ed5ee35e4ed0f831ea16cec130a1c41f23636a4ee32d1a5f73794356389" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group__modem__slm_ga010fd2ed5ee35e4ed0f831ea16cec130_1gga010fd2ed5ee35e4ed0f831ea16cec130a1c41f23636a4ee32d1a5f73794356389" kindref="member">AT_CMD_OK</ref>,</highlight></codeline>
+<codeline lineno="39" refid="group__modem__slm_ga010fd2ed5ee35e4ed0f831ea16cec130_1gga010fd2ed5ee35e4ed0f831ea16cec130ae13a0ed344d6139161b17515b1fcfc9a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group__modem__slm_ga010fd2ed5ee35e4ed0f831ea16cec130_1gga010fd2ed5ee35e4ed0f831ea16cec130ae13a0ed344d6139161b17515b1fcfc9a" kindref="member">AT_CMD_ERROR</ref>,</highlight></codeline>
+<codeline lineno="40" refid="group__modem__slm_ga010fd2ed5ee35e4ed0f831ea16cec130_1gga010fd2ed5ee35e4ed0f831ea16cec130a21abd45fbfca090a692d5ba74fa94532" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group__modem__slm_ga010fd2ed5ee35e4ed0f831ea16cec130_1gga010fd2ed5ee35e4ed0f831ea16cec130a21abd45fbfca090a692d5ba74fa94532" kindref="member">AT_CMD_ERROR_CMS</ref>,</highlight></codeline>
+<codeline lineno="41" refid="group__modem__slm_ga010fd2ed5ee35e4ed0f831ea16cec130_1gga010fd2ed5ee35e4ed0f831ea16cec130a8271417491a7379a61b3d03fc1ffa4f2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group__modem__slm_ga010fd2ed5ee35e4ed0f831ea16cec130_1gga010fd2ed5ee35e4ed0f831ea16cec130a8271417491a7379a61b3d03fc1ffa4f2" kindref="member">AT_CMD_ERROR_CME</ref>,</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group__modem__slm_ga010fd2ed5ee35e4ed0f831ea16cec130_1gga010fd2ed5ee35e4ed0f831ea16cec130ae3364bb44e277829210bb25df8220b38" kindref="member">AT_CMD_PENDING</ref></highlight></codeline>
+<codeline lineno="43" refid="group__modem__slm_ga010fd2ed5ee35e4ed0f831ea16cec130_1gga010fd2ed5ee35e4ed0f831ea16cec130ae3364bb44e277829210bb25df8220b38" refkind="member"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight></codeline>
+<codeline lineno="57" refid="group__modem__slm_gac1301202c057774814a6546fe914955d_1gac1301202c057774814a6546fe914955d" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/>void<sp/>(*<ref refid="group__modem__slm_gac1301202c057774814a6546fe914955d_1gac1301202c057774814a6546fe914955d" kindref="member">slm_data_handler_t</ref>)(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint8_t<sp/>*data,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>datalen);</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight></codeline>
+<codeline lineno="64" refid="group__modem__slm_ga4e82037fbfeea776c31d54852f468272_1ga4e82037fbfeea776c31d54852f468272" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/>void<sp/>(*<ref refid="group__modem__slm_ga4e82037fbfeea776c31d54852f468272_1ga4e82037fbfeea776c31d54852f468272" kindref="member">slm_ind_handler_t</ref>)(void);</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight></codeline>
+<codeline lineno="72" refid="group__modem__slm_ga6fa7b43b2164057b1428c785a045d7d3_1ga6fa7b43b2164057b1428c785a045d7d3" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="group__modem__slm_ga6fa7b43b2164057b1428c785a045d7d3_1ga6fa7b43b2164057b1428c785a045d7d3" kindref="member">modem_slm_init</ref>(<ref refid="group__modem__slm_gac1301202c057774814a6546fe914955d_1gac1301202c057774814a6546fe914955d" kindref="member">slm_data_handler_t</ref><sp/>handler);</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight></codeline>
+<codeline lineno="77" refid="group__modem__slm_ga105ebd65a28fe1eeefa0146de3408123_1ga105ebd65a28fe1eeefa0146de3408123" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="group__modem__slm_ga105ebd65a28fe1eeefa0146de3408123_1ga105ebd65a28fe1eeefa0146de3408123" kindref="member">modem_slm_uninit</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"></highlight></codeline>
+<codeline lineno="88" refid="group__modem__slm_ga183834673433944de89507eccaf4c6d8_1ga183834673433944de89507eccaf4c6d8" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="group__modem__slm_ga183834673433944de89507eccaf4c6d8_1ga183834673433944de89507eccaf4c6d8" kindref="member">modem_slm_register_ind</ref>(<ref refid="group__modem__slm_ga4e82037fbfeea776c31d54852f468272_1ga4e82037fbfeea776c31d54852f468272" kindref="member">slm_ind_handler_t</ref><sp/>handler,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>wakeup);</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight></codeline>
+<codeline lineno="95" refid="group__modem__slm_ga0d5715faf4670a50aae9e73d2674d595_1ga0d5715faf4670a50aae9e73d2674d595" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="group__modem__slm_ga0d5715faf4670a50aae9e73d2674d595_1ga0d5715faf4670a50aae9e73d2674d595" kindref="member">modem_slm_wake_up</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"></highlight></codeline>
+<codeline lineno="101" refid="group__modem__slm_gab6cdd00944597ff021f1e298994ff920_1gab6cdd00944597ff021f1e298994ff920" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="group__modem__slm_gab6cdd00944597ff021f1e298994ff920_1gab6cdd00944597ff021f1e298994ff920" kindref="member">modem_slm_reset_uart</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"></highlight></codeline>
+<codeline lineno="116" refid="group__modem__slm_ga5be4d145875f91a0b411dc7df83ab6ee_1ga5be4d145875f91a0b411dc7df83ab6ee" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="group__modem__slm_ga5be4d145875f91a0b411dc7df83ab6ee_1ga5be4d145875f91a0b411dc7df83ab6ee" kindref="member">modem_slm_send_cmd</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>command,<sp/>uint32_t<sp/>timeout);</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"></highlight></codeline>
+<codeline lineno="126" refid="group__modem__slm_ga21f668584578d0b016f8a2e25b1c379b_1ga21f668584578d0b016f8a2e25b1c379b" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="group__modem__slm_ga21f668584578d0b016f8a2e25b1c379b_1ga21f668584578d0b016f8a2e25b1c379b" kindref="member">modem_slm_send_data</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint8_t<sp/>*</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>data,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>datalen);</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"></highlight></codeline>
+<codeline lineno="133" refid="group__modem__slm_ga305393394b94abf8fb4118117c43609e_1ga305393394b94abf8fb4118117c43609e" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/>void<sp/>(*<ref refid="group__modem__slm_ga305393394b94abf8fb4118117c43609e_1ga305393394b94abf8fb4118117c43609e" kindref="member">slm_monitor_handler_t</ref>)(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*notif);</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"></highlight></codeline>
+<codeline lineno="138" refid="structslm__monitor__entry" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structslm__monitor__entry" kindref="compound">slm_monitor_entry</ref><sp/>{</highlight></codeline>
+<codeline lineno="140" refid="structslm__monitor__entry_a0f2043541c197a2210340014c68b29e8_1a0f2043541c197a2210340014c68b29e8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*<ref refid="structslm__monitor__entry_a0f2043541c197a2210340014c68b29e8_1a0f2043541c197a2210340014c68b29e8" kindref="member">filter</ref>;</highlight></codeline>
+<codeline lineno="142" refid="structslm__monitor__entry_a3688665f80b486ae278976e8309ccc2f_1a3688665f80b486ae278976e8309ccc2f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group__modem__slm_ga305393394b94abf8fb4118117c43609e_1ga305393394b94abf8fb4118117c43609e" kindref="member">slm_monitor_handler_t</ref><sp/><ref refid="structslm__monitor__entry_a3688665f80b486ae278976e8309ccc2f_1a3688665f80b486ae278976e8309ccc2f" kindref="member">handler</ref>;</highlight></codeline>
+<codeline lineno="144" refid="structslm__monitor__entry_a188f49cc15f12a25f987ac2abdd3f7e6_1a188f49cc15f12a25f987ac2abdd3f7e6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint8_t<sp/><ref refid="structslm__monitor__entry_a188f49cc15f12a25f987ac2abdd3f7e6_1a188f49cc15f12a25f987ac2abdd3f7e6" kindref="member">paused</ref>;</highlight></codeline>
+<codeline lineno="145"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"></highlight></codeline>
+<codeline lineno="148" refid="group__modem__slm_gadd41d47fa5992fac9a931b712337a1f1_1gadd41d47fa5992fac9a931b712337a1f1" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>MON_ANY<sp/>NULL</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="150" refid="group__modem__slm_gacbf7b83426d8503fdf466da24fa23d8d_1gacbf7b83426d8503fdf466da24fa23d8d" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>MON_PAUSED<sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="152" refid="group__modem__slm_gaa231dc1553710ecb6dfc56e596259435_1gaa231dc1553710ecb6dfc56e596259435" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>MON_ACTIVE<sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="153"><highlight class="normal"></highlight></codeline>
+<codeline lineno="164" refid="group__modem__slm_ga1543c9436b1870ec24307f4faef850ea_1ga1543c9436b1870ec24307f4faef850ea" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SLM_MONITOR(name,<sp/>_filter,<sp/>_handler,<sp/>...)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="165"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>static<sp/>void<sp/>_handler(const<sp/>char<sp/>*);<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="166"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>static<sp/>STRUCT_SECTION_ITERABLE(slm_monitor_entry,<sp/>name)<sp/>=<sp/>{<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="167"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.filter<sp/>=<sp/>_filter,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="168"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.handler<sp/>=<sp/>_handler,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="169"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>COND_CODE_1(__VA_ARGS__,<sp/>(.paused<sp/>=<sp/>__VA_ARGS__,),<sp/>())<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="170"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="171"><highlight class="normal"></highlight></codeline>
+<codeline lineno="179" refid="group__modem__slm_gad4f2a1e82e30c84b6f51f56f7dcab44a_1gad4f2a1e82e30c84b6f51f56f7dcab44a" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="group__modem__slm_gad4f2a1e82e30c84b6f51f56f7dcab44a_1gad4f2a1e82e30c84b6f51f56f7dcab44a" kindref="member">slm_monitor_pause</ref>(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structslm__monitor__entry" kindref="compound">slm_monitor_entry</ref><sp/>*mon)</highlight></codeline>
+<codeline lineno="180"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>mon-&gt;<ref refid="structslm__monitor__entry_a188f49cc15f12a25f987ac2abdd3f7e6_1a188f49cc15f12a25f987ac2abdd3f7e6" kindref="member">paused</ref><sp/>=<sp/><ref refid="group__modem__slm_gacbf7b83426d8503fdf466da24fa23d8d_1gacbf7b83426d8503fdf466da24fa23d8d" kindref="member">MON_PAUSED</ref>;</highlight></codeline>
+<codeline lineno="182"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"></highlight></codeline>
+<codeline lineno="191" refid="group__modem__slm_ga6712f425688e71a473f44691ee252322_1ga6712f425688e71a473f44691ee252322" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="group__modem__slm_ga6712f425688e71a473f44691ee252322_1ga6712f425688e71a473f44691ee252322" kindref="member">slm_monitor_resume</ref>(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structslm__monitor__entry" kindref="compound">slm_monitor_entry</ref><sp/>*mon)</highlight></codeline>
+<codeline lineno="192"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>mon-&gt;<ref refid="structslm__monitor__entry_a188f49cc15f12a25f987ac2abdd3f7e6_1a188f49cc15f12a25f987ac2abdd3f7e6" kindref="member">paused</ref><sp/>=<sp/><ref refid="group__modem__slm_gaa231dc1553710ecb6dfc56e596259435_1gaa231dc1553710ecb6dfc56e596259435" kindref="member">MON_ACTIVE</ref>;</highlight></codeline>
+<codeline lineno="194"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"></highlight></codeline>
+<codeline lineno="196"><highlight class="normal"></highlight></codeline>
+<codeline lineno="199"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="200"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="201"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="202"><highlight class="normal"></highlight></codeline>
+<codeline lineno="203"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>MODEM_SLM_H_<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="include/modem/modem_slm.h"/>
+  </compounddef>
+</doxygen>

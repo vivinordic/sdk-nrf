@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Enabling access port protection mechanism &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../_static/js/ncs.js"
+></script>
+<script src="../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Bootloaders and Device Firmware Updates" href="../bootloaders_and_dfu/index.html" />
+    <link rel="prev" title="Power optimization" href="../optimizing/power.html" />
+<link
+  href="../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev_model.html">Development model</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../app_dev.html">Application development</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../board_support/index.html">Board support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pin_control/index.html">Pin control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../build_and_config_system/index.html">Build and configuration system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../optimizing/index.html">Optimizing application</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Enabling access port protection mechanism</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#implementation-overview">Implementation overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configuration-overview-in-the-ncs">Configuration overview in the nRF Connect SDK</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#enabling-ap-protect-with-config-nrf-approtect-lock">Enabling AP-Protect with <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF_APPROTECT_LOCK</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enabling-ap-protect-with-config-nrf-approtect-user-handling">Enabling AP-Protect with <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF_APPROTECT_USER_HANDLING</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enabling-ap-protect-with-config-nrf-approtect-use-uicr">Enabling AP-Protect with <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF_APPROTECT_USE_UICR</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../bootloaders_and_dfu/index.html">Bootloaders and Device Firmware Updates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../logging/index.html">Logging in nRF Connect SDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multi_image/index.html">Multi-image builds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../testing_unity_cmock/index.html">Testing with Unity and CMock</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tfm/index.html">Running applications with Trusted Firmware-M</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_fem/index.html">Working with RF front-end modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../wifi_coex/index.html">Adding Wi-Fi Coexistence support to short-range radio applications</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drivers.html">Drivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../app_dev.html">Application development</a></li>
+      <li class="breadcrumb-item active">Enabling access port protection mechanism</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/app_dev/ap_protect/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="enabling-access-port-protection-mechanism">
+<span id="app-approtect"></span><h1>Enabling access port protection mechanism<a class="headerlink" href="#enabling-access-port-protection-mechanism" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#implementation-overview" id="id9">Implementation overview</a></p></li>
+<li><p><a class="reference internal" href="#configuration-overview-in-the-ncs" id="id10">Configuration overview in the nRF Connect SDK</a></p>
+<ul>
+<li><p><a class="reference internal" href="#enabling-ap-protect-with-config-nrf-approtect-lock" id="id11">Enabling AP-Protect with <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF_APPROTECT_LOCK</span></code></a></p></li>
+<li><p><a class="reference internal" href="#enabling-ap-protect-with-config-nrf-approtect-user-handling" id="id12">Enabling AP-Protect with <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF_APPROTECT_USER_HANDLING</span></code></a></p></li>
+<li><p><a class="reference internal" href="#enabling-ap-protect-with-config-nrf-approtect-use-uicr" id="id13">Enabling AP-Protect with <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF_APPROTECT_USE_UICR</span></code></a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>Several Nordic Semiconductor SoCs supported in the nRF Connect SDK offer an implementation of the access port protection mechanism (AP-Protect).
+When enabled, this mechanism blocks the debugger from read and write access to all CPU registers and memory-mapped addresses.
+Accessing these registers and addresses again requires disabling the mechanism and erasing the flash.</p>
+<section id="implementation-overview">
+<span id="app-approtect-implementation-overview"></span><h2><a class="toc-backref" href="#id9">Implementation overview</a><a class="headerlink" href="#implementation-overview" title="Permalink to this heading"></a></h2>
+<p>The following table provides a general overview of the available access port protection mechanisms in Nordic Semiconductor devices.
+For detailed information, refer to the hardware documentation.</p>
+<table class="docutils align-default" id="id6">
+<caption><span class="caption-text">AP-Protect implementations</span><a class="headerlink" href="#id6" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>AP-Protect implementation type</p></th>
+<th class="head"><p>Default factory state</p></th>
+<th class="head"><p>How to enable</p></th>
+<th class="head"><p>How to disable</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Hardware</p></td>
+<td><p>Disabled</p></td>
+<td><p>Writing <code class="docutils literal notranslate"><span class="pre">UICR.APPROTECT</span></code> to <code class="docutils literal notranslate"><span class="pre">Enabled</span></code> and performing a reset.</p></td>
+<td><p>Issuing an <code class="docutils literal notranslate"><span class="pre">ERASEALL</span></code> command via CTRL-AP.
+This command erases the flash, UICR, and RAM, including <code class="docutils literal notranslate"><span class="pre">UICR.APPROTECT</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Hardware and software</p></td>
+<td><p>Enabled</p></td>
+<td><p>When AP-Protect is disabled, a reset or a wake enables the access port protection again.</p></td>
+<td><p>Issuing an <code class="docutils literal notranslate"><span class="pre">ERASEALL</span></code> command via CTRL-AP.
+This command erases the flash, UICR, and RAM, including <code class="docutils literal notranslate"><span class="pre">UICR.APPROTECT</span></code>.</p>
+<p>To keep the AP-Protect disabled, <code class="docutils literal notranslate"><span class="pre">UICR.APPROTECT</span></code> must be programmed to <code class="docutils literal notranslate"><span class="pre">HwDisabled</span></code> and the firmware must write <code class="docutils literal notranslate"><span class="pre">APPROTECT.DISABLE</span></code> to <code class="docutils literal notranslate"><span class="pre">SwDisable</span></code>.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>The following table lists related SoCs with information about the AP-Protect mechanism they support.
+For some SoCs, the AP-Protect implementation is different depending on the build code of the device.
+See the related hardware documentation for more information about which implementation is supported for which build code and about the differences between the supported implementations.</p>
+<table class="docutils align-default" id="id7">
+<caption><span class="caption-text">SoC AP-Protect matrix</span><a class="headerlink" href="#id7" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>SoC</p></th>
+<th class="head"><p>Hardware AP-Protect support</p></th>
+<th class="head"><p>Hardware and software AP-Protect support</p></th>
+<th class="head"><p>Related hardware documentation</p></th>
+<th class="head"><p>Additional information</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>nRF9160</p></td>
+<td><p>✔</p></td>
+<td></td>
+<td><p><a class="reference external" href="https://infocenter.nordicsemi.com/topic/ps_nrf9160/dif.html#debugger_access">Debugger access protection for nRF9160</a></p></td>
+<td><p>Also supports Secure AP-Protect (see note below)</p></td>
+</tr>
+<tr class="row-odd"><td><p>nRF5340</p></td>
+<td></td>
+<td><p>✔</p></td>
+<td><p><a class="reference external" href="https://infocenter.nordicsemi.com/topic/ps_nrf5340/debugandtrace.html#access_port_protection">AP-Protect for nRF5340</a></p></td>
+<td><p>Also supports Secure AP-Protect (see note below)</p></td>
+</tr>
+<tr class="row-even"><td><p>nRF52840</p></td>
+<td><p>✔</p></td>
+<td><p>✔</p></td>
+<td><p><a class="reference external" href="https://infocenter.nordicsemi.com/topic/ps_nrf52840/dif.html#concept_udr_mns_1s">AP-Protect for nRF52840</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>nRF52833</p></td>
+<td><p>✔</p></td>
+<td><p>✔</p></td>
+<td><p><a class="reference external" href="https://infocenter.nordicsemi.com/topic/ps_nrf52833/dif.html#concept_udr_mns_1s">AP-Protect for nRF52833</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>nRF52832</p></td>
+<td><p>✔</p></td>
+<td><p>✔</p></td>
+<td><p><a class="reference external" href="https://infocenter.nordicsemi.com/topic/com.nordic.infocenter.nrf52832.ps.v1.1/dif.html#concept_udr_mns_1s">AP-Protect for nRF52832</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>nRF52820</p></td>
+<td><p>✔</p></td>
+<td><p>✔</p></td>
+<td><p><a class="reference external" href="https://infocenter.nordicsemi.com/topic/ps_nrf52820/dif.html#concept_udr_mns_1s">AP-Protect for nRF52820</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>nRF52811</p></td>
+<td><p>✔</p></td>
+<td><p>✔</p></td>
+<td><p><a class="reference external" href="https://infocenter.nordicsemi.com/topic/ps_nrf52811/dif.html#concept_udr_mns_1s">AP-Protect for nRF52811</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>nRF52810</p></td>
+<td><p>✔</p></td>
+<td><p>✔</p></td>
+<td><p><a class="reference external" href="https://infocenter.nordicsemi.com/topic/ps_nrf52810/dif.html#concept_udr_mns_1s">AP-Protect for nRF52810</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>nRF52805</p></td>
+<td><p>✔</p></td>
+<td><p>✔</p></td>
+<td><p><a class="reference external" href="https://infocenter.nordicsemi.com/topic/ps_nrf52805/dif.html#concept_udr_mns_1s">AP-Protect for nRF52805</a></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The SoCs that support <a class="reference external" href="https://developer.arm.com/documentation/100690/0200/ARM-TrustZone-technology?lang=en">ARM TrustZone</a> and different <a class="reference internal" href="../board_support/index.html#app-boards-spe-nspe"><span class="std std-ref">Processing environments</span></a> (nRF5340 and nRF9160) implement two AP-Protect systems: AP-Protect and Secure AP-Protect.
+While AP-Protect blocks access to all CPU registers and memories, Secure AP-Protect limits access to the CPU to only non-secure accesses.
+This means that the CPU is entirely unavailable while it is running the code in the Secure Processing Environment, and only non-secure registers and address-mapped resources can be accessed.</p>
+</div>
+</section>
+<section id="configuration-overview-in-the-ncs">
+<span id="app-approtect-ncs"></span><h2><a class="toc-backref" href="#id10">Configuration overview in the nRF Connect SDK</a><a class="headerlink" href="#configuration-overview-in-the-ncs" title="Permalink to this heading"></a></h2>
+<p>Based on the available implementation types, you can configure the access port protection mechanism in the nRF Connect SDK to one of the following states:</p>
+<table class="docutils align-default" id="id8">
+<caption><span class="caption-text">AP-Protect states</span><a class="headerlink" href="#id8" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>AP-Protect state</p></th>
+<th class="head"><p>Related Kconfig option in the nRF Connect SDK</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>AP-Protect implementation type</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Locked</p></td>
+<td><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF_APPROTECT_LOCK</span></code> (<code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF_SECURE_APPROTECT_LOCK</span></code> for Secure AP-Protect)</p></td>
+<td><p>In this state, CPU writes to enable and lock AP-Protect. UICR is not modified.</p></td>
+<td><p>Hardware and software</p></td>
+</tr>
+<tr class="row-odd"><td><p>Authenticated</p></td>
+<td><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF_APPROTECT_USER_HANDLING</span></code> (<code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF_SECURE_APPROTECT_USER_HANDLING</span></code> for Secure AP-Protect)</p></td>
+<td><p>In this state, AP-Protect is left enabled and it is up to the user handler to unlock the device if needed.</p></td>
+<td><p>Hardware and software</p></td>
+</tr>
+<tr class="row-even"><td><p>Open</p></td>
+<td><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF_APPROTECT_USE_UICR</span></code> (<code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF_SECURE_APPROTECT_USE_UICR</span></code> for Secure AP-Protect)</p></td>
+<td><p>In this state, AP-Protect follows the UICR register. If the UICR is open, the AP-Protect will be disabled.</p></td>
+<td><p>Hardware; hardware and software</p></td>
+</tr>
+</tbody>
+</table>
+<section id="enabling-ap-protect-with-config-nrf-approtect-lock">
+<span id="app-approtect-ncs-lock"></span><h3><a class="toc-backref" href="#id11">Enabling AP-Protect with <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF_APPROTECT_LOCK</span></code></a><a class="headerlink" href="#enabling-ap-protect-with-config-nrf-approtect-lock" title="Permalink to this heading"></a></h3>
+<p>Setting the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF_APPROTECT_LOCK</span></code> Kconfig option to <code class="docutils literal notranslate"><span class="pre">y</span></code> and compiling the firmware is enough to enable the access port protection mechanism for SoCs of the nRF53 Series and those SoCs of the nRF52 Series that feature the hardware and software type of AP-Protect.
+The access port protection configured in this way cannot be disabled without erasing the flash.</p>
+</section>
+<section id="enabling-ap-protect-with-config-nrf-approtect-user-handling">
+<span id="app-approtect-ncs-user-handling"></span><h3><a class="toc-backref" href="#id12">Enabling AP-Protect with <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF_APPROTECT_USER_HANDLING</span></code></a><a class="headerlink" href="#enabling-ap-protect-with-config-nrf-approtect-user-handling" title="Permalink to this heading"></a></h3>
+<p>Setting the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF_APPROTECT_USER_HANDLING</span></code> Kconfig option to <code class="docutils literal notranslate"><span class="pre">y</span></code> and compiling the firmware allows you to handle the state of AP-Protect at a later stage.
+This option in fact does not touch the mechanism and keeps it closed.</p>
+<p>You can use this option for example to implement the authenticated debug and lock.
+See the SoC hardware documentation for more information.</p>
+</section>
+<section id="enabling-ap-protect-with-config-nrf-approtect-use-uicr">
+<span id="app-approtect-ncs-use-uicr"></span><h3><a class="toc-backref" href="#id13">Enabling AP-Protect with <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF_APPROTECT_USE_UICR</span></code></a><a class="headerlink" href="#enabling-ap-protect-with-config-nrf-approtect-use-uicr" title="Permalink to this heading"></a></h3>
+<p>Setting the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF_APPROTECT_USE_UICR</span></code> Kconfig option to <code class="docutils literal notranslate"><span class="pre">y</span></code> and compiling the firmware makes the AP-Protect disabled by default.</p>
+<p>You can start debugging the firmware without additional steps needed.</p>
+<p>Once you are done debugging, run the following command to enable the access port protection:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">nrfjprog --rbp ALL</span>
+</pre></div>
+</div>
+<p>This command enables the AP-Protect and resets the device.</p>
+<p>To enable only the Secure AP-Protect, run the following command:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">nrfjprog --rbp SECURE</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../bootloaders_and_dfu/index.html" class="btn btn-neutral float-right" title="Bootloaders and Device Firmware Updates" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../optimizing/power.html" class="btn btn-neutral" title="Power optimization" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

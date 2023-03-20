@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Managing the code base &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../_static/js/ncs.js"
+></script>
+<script src="../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Adding your own code" href="adding_code.html" />
+    <link rel="prev" title="nRF Connect SDK code base" href="code_base.html" />
+<link
+  href="../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../dev_model.html">Development model</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="code_base.html">nRF Connect SDK code base</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Managing the code base</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#obtaining-a-copy-of-the-ncs">Obtaining a copy of the nRF Connect SDK</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#updating-a-copy-of-the-ncs">Updating a copy of the nRF Connect SDK</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#forking-a-repository-of-the-ncs">Forking a repository of the nRF Connect SDK</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="adding_code.html">Adding your own code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ncs_distro.html">Redistributing the nRF Connect SDK</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../drivers.html">Drivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../dev_model.html">Development model</a></li>
+      <li class="breadcrumb-item active">Managing the code base</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/developing/managing_code.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="managing-the-code-base">
+<span id="dm-managing-code"></span><h1>Managing the code base<a class="headerlink" href="#managing-the-code-base" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#obtaining-a-copy-of-the-ncs" id="id6">Obtaining a copy of the nRF Connect SDK</a></p></li>
+<li><p><a class="reference internal" href="#updating-a-copy-of-the-ncs" id="id7">Updating a copy of the nRF Connect SDK</a></p></li>
+<li><p><a class="reference internal" href="#forking-a-repository-of-the-ncs" id="id8">Forking a repository of the nRF Connect SDK</a></p></li>
+</ul>
+</div>
+<p>To obtain and manage the nRF Connect SDK code base, you must use a combination of <a class="reference external" href="https://git-scm.com/">Git</a> and <span class="xref std std-ref">west</span>.</p>
+<p>As described in <a class="reference internal" href="code_base.html#dm-code-base"><span class="std std-ref">nRF Connect SDK code base</span></a>, the nRF Connect SDK contains the following repositories:</p>
+<ul class="simple">
+<li><p>The manifest repository, <a class="reference external" href="https://github.com/nrfconnect/sdk-nrf">sdk-nrf</a>.
+This repository is managed by the user using Git exclusively, since west will not modify or update it in any way.
+The exception to this is the <code class="docutils literal notranslate"><span class="pre">west</span> <span class="pre">init</span></code> command, which can clone the manifest repository automatically at an arbitrary revision.</p></li>
+<li><p>The west projects.
+Those are listed in the manifest repository’s <code class="file docutils literal notranslate"><span class="pre">west.yml</span></code> manifest file.
+They are entirely managed by west, which will clone them or check out a specific revision of them every time you run <code class="docutils literal notranslate"><span class="pre">west</span> <span class="pre">update</span></code>.</p></li>
+</ul>
+<section id="obtaining-a-copy-of-the-ncs">
+<span id="dm-wf-get-ncs"></span><h2><a class="toc-backref" href="#id6">Obtaining a copy of the nRF Connect SDK</a><a class="headerlink" href="#obtaining-a-copy-of-the-ncs" title="Permalink to this heading"></a></h2>
+<p>To obtain a fresh copy of the nRF Connect SDK at revision <code class="docutils literal notranslate"><span class="pre">{revision}</span></code> and place it in a folder named <code class="file docutils literal notranslate"><span class="pre">ncs</span></code>, use the following commands:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">west</span> <span class="n">init</span> <span class="o">-</span><span class="n">m</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">nrfconnect</span><span class="o">/</span><span class="n">sdk</span><span class="o">-</span><span class="n">nrf</span> <span class="o">--</span><span class="n">mr</span> <span class="p">{</span><span class="n">revision</span><span class="p">}</span> <span class="n">ncs</span>
+<span class="n">cd</span> <span class="n">ncs</span>
+<span class="n">west</span> <span class="n">update</span>
+</pre></div>
+</div>
+<p>Replace <code class="docutils literal notranslate"><span class="pre">{revision}</span></code> with any revision you wish to obtain.
+This can be <code class="docutils literal notranslate"><span class="pre">main</span></code> if you want the latest state, or any released version (for example, <code class="docutils literal notranslate"><span class="pre">v2.3.0</span></code>).
+If you omit the <code class="docutils literal notranslate"><span class="pre">--mr</span></code> parameter, west defaults to <code class="docutils literal notranslate"><span class="pre">main</span></code>.</p>
+<p>This is the procedure used for <a class="reference internal" href="../getting_started/installing.html#cloning-the-repositories"><span class="std std-ref">getting the nRF Connect SDK code</span></a> when <a class="reference internal" href="../getting_started/installing.html#gs-installing"><span class="std std-ref">Installing manually</span></a>.</p>
+</section>
+<section id="updating-a-copy-of-the-ncs">
+<span id="dm-wf-update-ncs"></span><h2><a class="toc-backref" href="#id7">Updating a copy of the nRF Connect SDK</a><a class="headerlink" href="#updating-a-copy-of-the-ncs" title="Permalink to this heading"></a></h2>
+<p>If you already have a copy of the nRF Connect SDK and wish to update it or switch to a new revision, then you only need to do the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">ncs</span><span class="o">/</span><span class="n">nrf</span>
+<span class="n">git</span> <span class="n">fetch</span> <span class="p">{</span><span class="n">remote</span><span class="p">}</span>
+<span class="c1"># Check out the latest main branch</span>
+<span class="n">git</span> <span class="n">checkout</span> <span class="p">{</span><span class="n">remote</span><span class="p">}</span><span class="o">/</span><span class="n">main</span>
+<span class="c1"># or check out a release</span>
+<span class="n">git</span> <span class="n">checkout</span> <span class="p">{</span><span class="n">revision</span><span class="p">}</span>
+<span class="n">west</span> <span class="n">update</span>
+</pre></div>
+</div>
+<p>Where <code class="docutils literal notranslate"><span class="pre">{remote}</span></code> is the Git remote that points to the official Nordic repository.
+This is called <code class="docutils literal notranslate"><span class="pre">origin</span></code> by default for the <a class="reference external" href="https://github.com/nrfconnect/sdk-nrf">sdk-nrf</a> repository and <code class="docutils literal notranslate"><span class="pre">ncs</span></code> for most others, but <a class="reference internal" href="#dm-wf-fork"><span class="std std-ref">may have another name</span></a>.
+You can use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">remote</span> <span class="pre">-v</span></code> to list all your remotes.</p>
+<p>This is the procedure used for <a class="reference internal" href="../getting_started/updating.html#gs-updating-repos"><span class="std std-ref">Updating the repositories</span></a> after <a class="reference internal" href="../getting_started/installing.html#gs-installing"><span class="std std-ref">Installing manually</span></a>.
+However, using <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span></code> is one of multiple ways of achieving this.
+Git offers several commands and mechanisms to set the current working copy of a repository to a particular revision.
+Depending on how you manage the branches of your local clone of the <a class="reference external" href="https://github.com/nrfconnect/sdk-nrf">sdk-nrf</a> repository, you can also replace the use of <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span></code> with, among many others:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># If you have no changes of your own</span>
+<span class="n">git</span> <span class="n">reset</span> <span class="o">--</span><span class="n">hard</span> <span class="p">{</span><span class="n">remote</span><span class="p">}</span><span class="o">/</span><span class="n">main</span>
+<span class="n">git</span> <span class="n">reset</span> <span class="o">--</span><span class="n">hard</span> <span class="p">{</span><span class="n">revision</span><span class="p">}</span>
+<span class="c1"># If you have changes of your own</span>
+<span class="n">git</span> <span class="n">rebase</span> <span class="p">{</span><span class="n">remote</span><span class="p">}</span><span class="o">/</span><span class="n">main</span>
+<span class="n">git</span> <span class="n">rebase</span> <span class="p">{</span><span class="n">revision</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Describing the exact differences between the commands above is outside the scope of this section.
+Refer to the publicly available <a class="reference external" href="https://git-scm.com/">Git</a> documentation.</p>
+</section>
+<section id="forking-a-repository-of-the-ncs">
+<span id="dm-wf-fork"></span><h2><a class="toc-backref" href="#id8">Forking a repository of the nRF Connect SDK</a><a class="headerlink" href="#forking-a-repository-of-the-ncs" title="Permalink to this heading"></a></h2>
+<p>In some cases, you might want to keep a <a class="reference internal" href="../glossary.html#term-Soft-fork"><span class="xref std std-term">Soft fork</span></a> of one or more repositories that are part of the nRF Connect SDK.
+The procedure to achieve that is the same regardless of whether you fork the manifest repository and/or one or more project repositories.</p>
+<p>There are two similar but slightly different meanings to the term “fork”, as described in the <a class="reference internal" href="../glossary.html#glossary"><span class="std std-ref">Glossary</span></a>:</p>
+<ul class="simple">
+<li><p>A fork in general terms is a server-hosted copy of an upstream repository with a few downstream changes on top of it.
+It can be hosted on GitHub or elsewhere.</p></li>
+<li><p>A <a class="reference external" href="https://docs.github.com/en/github/getting-started-with-github/quickstart/fork-a-repo">GitHub fork</a> is GitHub’s mechanism to copy an existing repository and then send Pull Requests from it to the upstream repository.</p></li>
+</ul>
+<p>A GitHub fork can be used to send Pull Requests and to act as a regular long-lived fork in general terms.
+You can also create standard forks with GitHub by just creating an empty repository first and then initializing it with the contents of the upstream repository you wish to fork.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>About Git remotes: The default name for a remote is <code class="docutils literal notranslate"><span class="pre">origin</span></code> but you can pick any arbitrary name for a remote.
+By convention, the following remote names are typically used:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">origin</span></code> usually points to the user’s personal copy of the repository.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ncs</span></code> is used to point to the nRF Connect SDK repository.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">upstream</span></code> typically points to the upstream repository, when applicable.</p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">west</span> <span class="pre">init</span></code> command creates a remote named <code class="docutils literal notranslate"><span class="pre">origin</span></code> that points to the original location of the cloned manifest repository.
+The <code class="docutils literal notranslate"><span class="pre">west</span> <span class="pre">update</span></code> command, on the other hand, uses the <code class="docutils literal notranslate"><span class="pre">remote:</span></code> property in the <code class="file docutils literal notranslate"><span class="pre">west.yml</span></code> file to name the remote pointing to the original location.</p>
+</div>
+<p>If you want to create a <a class="reference external" href="https://docs.github.com/en/github/getting-started-with-github/quickstart/fork-a-repo">GitHub fork</a> follow the steps below:</p>
+<ol class="arabic">
+<li><p>Create a <a class="reference external" href="https://docs.github.com/en/github/getting-started-with-github/quickstart/fork-a-repo">GitHub fork</a> using the <span class="guilabel">Fork</span> button in the GitHub user interface.</p></li>
+<li><p>Add the newly created remote repository as a Git remote:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">ncs</span><span class="o">/</span><span class="p">{</span><span class="n">folder_path</span><span class="p">}</span>
+<span class="c1"># Rename the default remote from &#39;origin&#39; to &#39;ncs&#39;, if required</span>
+<span class="n">git</span> <span class="n">remote</span> <span class="n">rename</span> <span class="n">origin</span> <span class="n">ncs</span>
+<span class="n">git</span> <span class="n">remote</span> <span class="n">add</span> <span class="n">origin</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="p">{</span><span class="n">username</span><span class="p">}</span><span class="o">/</span><span class="p">{</span><span class="n">repo</span><span class="p">}</span><span class="o">.</span><span class="n">git</span>
+</pre></div>
+</div>
+<p>For example, to create a fork of the <a class="reference external" href="https://github.com/nrfconnect/sdk-nrf">sdk-nrf</a> repository for GitHub user <code class="docutils literal notranslate"><span class="pre">foo</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">ncs</span><span class="o">/</span><span class="n">nrf</span>
+<span class="c1"># The manifest repository defaults to a remote named &#39;origin&#39;</span>
+<span class="n">git</span> <span class="n">remote</span> <span class="n">rename</span> <span class="n">origin</span> <span class="n">ncs</span>
+<span class="n">git</span> <span class="n">remote</span> <span class="n">add</span> <span class="n">origin</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">foo</span><span class="o">/</span><span class="n">sdk</span><span class="o">-</span><span class="n">nrf</span><span class="o">.</span><span class="n">git</span>
+</pre></div>
+</div>
+<p>If you were to fork an OSS repository instead, which itself is already a fork of the original upstream project:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">ncs</span><span class="o">/</span><span class="n">zephyr</span>
+<span class="c1"># No need to rename the remote, since it will already be named &#39;ncs&#39;</span>
+<span class="n">git</span> <span class="n">remote</span> <span class="n">add</span> <span class="n">origin</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">foo</span><span class="o">/</span><span class="n">sdk</span><span class="o">-</span><span class="n">zephyr</span><span class="o">.</span><span class="n">git</span>
+<span class="n">git</span> <span class="n">remote</span> <span class="n">add</span> <span class="n">upstream</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">zephyrproject</span><span class="o">-</span><span class="n">rtos</span><span class="o">/</span><span class="n">zephyr</span><span class="o">.</span><span class="n">git</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<blockquote>
+<div><p>That way you would actually have three remotes, each pointing to the relevant copy of the Zephyr codebase:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">origin</span></code> pointing to your own fork of <code class="docutils literal notranslate"><span class="pre">sdk-zephyr</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ncs</span></code> pointing to the nRF Connect SDK <a class="reference external" href="https://github.com/nrfconnect/sdk-zephyr">sdk-zephyr</a>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">upstream</span></code> pointing to the upstream <a class="reference external" href="https://github.com/zephyrproject-rtos/zephyr">official Zephyr repository</a>.</p></li>
+</ul>
+</div></blockquote>
+<p>To create a regular fork, follow the exact same steps as above, but the actual repository must be created by you beforehand, instead of clicking <span class="guilabel">Fork</span> in GitHub.
+Also, since a GitHub fork automatically initializes the forked repository with the exact same contents as the original one, you must push the contents yourself:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">ncs</span><span class="o">/</span><span class="p">{</span><span class="n">folder_path</span><span class="p">}</span>
+<span class="c1"># Rename the default remote from &#39;origin&#39; to &#39;ncs&#39;</span>
+<span class="n">git</span> <span class="n">remote</span> <span class="n">rename</span> <span class="n">origin</span> <span class="n">ncs</span>
+<span class="n">git</span> <span class="n">remote</span> <span class="n">add</span> <span class="n">origin</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="p">{</span><span class="n">username</span><span class="p">}</span><span class="o">/</span><span class="p">{</span><span class="n">repo</span><span class="p">}</span><span class="o">.</span><span class="n">git</span>
+<span class="n">git</span> <span class="n">push</span> <span class="n">origin</span> <span class="n">main</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="adding_code.html" class="btn btn-neutral float-right" title="Adding your own code" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="code_base.html" class="btn btn-neutral" title="nRF Connect SDK code base" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

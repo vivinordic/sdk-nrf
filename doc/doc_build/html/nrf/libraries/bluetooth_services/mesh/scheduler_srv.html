@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scheduler Server &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../../_static/js/ncs.js"
+></script>
+<script src="../../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Scheduler Client" href="scheduler_cli.html" />
+    <link rel="prev" title="Scheduler models" href="scheduler.html" />
+<link
+  href="../../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../drivers.html">Drivers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Libraries</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../bin/index.html">Binary libraries</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Bluetooth libraries and services</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../adv_prov.html">Bluetooth LE advertising providers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../conn_ctx.html">Bluetooth connection context</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../enocean.html">Bluetooth EnOcean</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gatt_dm.html">GATT Discovery Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gatt_pool.html">Bluetooth GATT attribute pools</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../mesh.html">Bluetooth mesh profile</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="model_types.html">Bluetooth mesh models overview</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="models.html">Bluetooth mesh models</a></li>
+<li class="toctree-l4"><a class="reference internal" href="properties.html">Bluetooth mesh properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dk_prov.html">Bluetooth mesh provisioning handler for Nordic DKs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sensor.html">Bluetooth mesh sensors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sensor_types.html">Bluetooth mesh sensor types</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../rpc.html">Bluetooth Low Energy Remote Procedure Call</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../scan.html">Scanning module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../services/ams_client.html">Apple Media Service (AMS) Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../services/ancs_client.html">Apple Notification Center Service (ANCS) Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../services/bas_client.html">GATT Battery Service (BAS) Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../services/bms.html">GATT Bond Management Service (BMS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../services/cgms.html">GATT Continuous Glucose Monitoring Service (CGMS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../services/cts_client.html">GATT Current Time Service (CTS) Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../services/ddfs.html">Direction and Distance Finding Service (DDFS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../services/dfu_smp.html">GATT DFU SMP Service Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../services/fast_pair.html">Google Fast Pair Service (GFPS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../services/gattp.html">Generic Attribute (GATT) Profile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../services/hids.html">GATT Human Interface Device (HID) Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../services/hogp.html">GATT Human Interface Device Service (HIDS) Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../services/hrs_client.html">GATT Heart Rate Service (HRS) Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../services/latency.html">GATT Latency Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../services/latency_client.html">GATT Latency Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../services/lbs.html">LED Button Service (LBS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../services/mds.html">Memfault Diagnostic Service (MDS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../services/nsms.html">Nordic Status Message Service (NSMS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../services/nus.html">Nordic UART Service (NUS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../services/nus_client.html">Nordic UART Service (NUS) Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../services/rscs.html">Running Speed and Cadence Service (RSCS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../services/throughput.html">GATT Throughput Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../services/wifi_prov.html">Wi-Fi Provisioning Service</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../bootloader/index.html">Bootloader libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../caf/index.html">Common Application Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../debug/index.html">Debug libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../dfu/index.html">DFU libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gazell/index.html">Gazell libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../modem/index.html">Modem libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mpsl/index.html">Multiprotocol Service Layer libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../networking/index.html">Libraries for networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nfc/index.html">Libraries for NFC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nrf_rpc/index.html">nRF RPC libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../others/index.html">Other libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../shell/index.html">Shell libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tfm/index.html">TF-M libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../zigbee/index.html">Libraries for Zigbee</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Libraries</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Bluetooth libraries and services</a></li>
+          <li class="breadcrumb-item"><a href="../mesh.html">Bluetooth mesh profile</a></li>
+          <li class="breadcrumb-item"><a href="models.html">Bluetooth mesh models</a></li>
+          <li class="breadcrumb-item"><a href="scheduler.html">Scheduler models</a></li>
+      <li class="breadcrumb-item active">Scheduler Server</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/libraries/bluetooth_services/mesh/scheduler_srv.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="scheduler-server">
+<span id="bt-mesh-scheduler-srv-readme"></span><h1>Scheduler Server<a class="headerlink" href="#scheduler-server" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#operation" id="id7">Operation</a></p></li>
+<li><p><a class="reference internal" href="#states" id="id8">States</a></p></li>
+<li><p><a class="reference internal" href="#extended-models" id="id9">Extended models</a></p></li>
+<li><p><a class="reference internal" href="#persistent-storage" id="id10">Persistent storage</a></p></li>
+<li><p><a class="reference internal" href="#api-documentation" id="id11">API documentation</a></p></li>
+</ul>
+</div>
+<p>The Scheduler Server model holds the current state of the Scheduler Register, and performs scheduling of the configured actions.
+The model notifies appropriate <a class="reference internal" href="scene_srv.html#bt-mesh-scene-srv-readme"><span class="std std-ref">Scene Server</span></a> and <a class="reference internal" href="gen_onoff_srv.html#bt-mesh-onoff-srv-readme"><span class="std std-ref">Generic OnOff Server</span></a> instances about actions in progress.</p>
+<p>The Scheduler Server relies on the <a class="reference internal" href="time_srv.html#bt-mesh-time-srv-readme"><span class="std std-ref">Time Server</span></a> that is provided during initialization.
+However, it is the application that should handle the Time Server events and notify the Scheduler Server if the UTC time or the Time Zone have changed.</p>
+<p>The Scheduler Server model adds two model instances in the composition data:</p>
+<ul class="simple">
+<li><p>Scheduler Server</p></li>
+<li><p>Scheduler Setup Server</p></li>
+</ul>
+<p>The two model instances share the states of the Scheduler Server, but accept different messages.
+This allows for a fine-grained control of the access rights for the Scheduler Server states, as the two model instances can be bound to different application keys.</p>
+<ul class="simple">
+<li><p>Scheduler Server manages the scheduled actions.</p></li>
+<li><p>Scheduler Setup Server provides functionality for configuration and recalling of actions in the Scheduler Server’s Scheduler Register state.</p></li>
+</ul>
+<section id="operation">
+<h2><a class="toc-backref" href="#id7">Operation</a><a class="headerlink" href="#operation" title="Permalink to this heading"></a></h2>
+<p>The Scheduler models perform conversion of the configuration parameters from incoming client messages into <a class="reference internal" href="time_tai.html#bt-mesh-time-tai-readme"><span class="std std-ref">international atomic time (TAI)</span></a>.
+The configuration parameters with calculated time closest to the current time are scheduled as actions.
+If an action requires rescheduling when the scheduled time has expired, the Scheduler Server calculates new time and repeats the scheduling procedure.
+However, the Scheduler Server skips configuration parameters not allowing to calculate the exact time of the action.
+Such actions will never be executed.</p>
+<p>When the scheduled action is executed, the Scheduler Server sends a notification about the action in progress to appropriate Scene or OnOff Server instances, starting with the same element on which the Scheduler Server is present.
+The Scene or OnOff Server instances are notified until the Scheduler Server reaches another element with a Scheduler Server instance, or there are just no elements left.
+The Scene or OnOff Servers publish their states if the states have changed.</p>
+<p>The application should notify the Scheduler Server if the Time Zone or the UTC time has changed, using the Scheduler Server API:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#c.bt_mesh_scheduler_srv_time_update" title="bt_mesh_scheduler_srv_time_update"><code class="xref c c-func docutils literal notranslate"><span class="pre">bt_mesh_scheduler_srv_time_update()</span></code></a>: Notify server about UTC time or Time Zone changes</p></li>
+</ul>
+<p>The Scheduler Server will recalculate time for the actions.</p>
+</section>
+<section id="states">
+<h2><a class="toc-backref" href="#id8">States</a><a class="headerlink" href="#states" title="Permalink to this heading"></a></h2>
+<dl class="simple">
+<dt>Schedule Register: <a class="reference internal" href="scheduler.html#c.bt_mesh_schedule_entry" title="bt_mesh_schedule_entry"><code class="xref c c-type docutils literal notranslate"><span class="pre">bt_mesh_schedule_entry</span></code></a></dt><dd><p>The Scheduler Server model offers a Schedule Register that contains up to sixteen registered action entries.</p>
+</dd>
+</dl>
+<p>Each entry has the following fields:</p>
+<ul>
+<li><p>Year: 2 least significant digits of the year</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 49%" />
+<col style="width: 51%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Value</p></td>
+<td><p>Description</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00-0x63</p></td>
+<td><p>2 least significant digits of the year</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scheduler.html#c.BT_MESH_SCHEDULER_ANY_YEAR" title="BT_MESH_SCHEDULER_ANY_YEAR"><code class="xref c c-macro docutils literal notranslate"><span class="pre">BT_MESH_SCHEDULER_ANY_YEAR</span></code></a></p></td>
+<td><p>Any year</p></td>
+</tr>
+<tr class="row-even"><td><p>All other values</p></td>
+<td><p>Prohibited</p></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><p>Month: Bitmask of the months in the year in which the scheduled event is enabled <a class="reference internal" href="scheduler.html#c.bt_mesh_scheduler_month" title="bt_mesh_scheduler_month"><code class="xref c c-enum docutils literal notranslate"><span class="pre">bt_mesh_scheduler_month</span></code></a></p></li>
+<li><p>Day: The day of the month the scheduled event occurs</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 68%" />
+<col style="width: 32%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Value</p></td>
+<td><p>Description</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scheduler.html#c.BT_MESH_SCHEDULER_ANY_DAY" title="BT_MESH_SCHEDULER_ANY_DAY"><code class="xref c c-macro docutils literal notranslate"><span class="pre">BT_MESH_SCHEDULER_ANY_DAY</span></code></a></p></td>
+<td><p>Any day</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x01-0x1F</p></td>
+<td><p>Day of the month</p></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><p>Hour: The hour when the scheduled event occurs</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 55%" />
+<col style="width: 45%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Value</p></td>
+<td><p>Description</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00-0x17</p></td>
+<td><p>Hour of the day (00 to 23 hours)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scheduler.html#c.BT_MESH_SCHEDULER_ANY_HOUR" title="BT_MESH_SCHEDULER_ANY_HOUR"><code class="xref c c-macro docutils literal notranslate"><span class="pre">BT_MESH_SCHEDULER_ANY_HOUR</span></code></a></p></td>
+<td><p>Any hour of the day</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scheduler.html#c.BT_MESH_SCHEDULER_ONCE_A_DAY" title="BT_MESH_SCHEDULER_ONCE_A_DAY"><code class="xref c c-macro docutils literal notranslate"><span class="pre">BT_MESH_SCHEDULER_ONCE_A_DAY</span></code></a></p></td>
+<td><p>Once a day (at a random hour)</p></td>
+</tr>
+<tr class="row-odd"><td><p>All other values</p></td>
+<td><p>Prohibited</p></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><p>Minute: The minute when the scheduled event occurs</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 45%" />
+<col style="width: 55%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Value</p></td>
+<td><p>Description</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00-0x3B</p></td>
+<td><p>Minute of the hour (00 to 59)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scheduler.html#c.BT_MESH_SCHEDULER_ANY_MINUTE" title="BT_MESH_SCHEDULER_ANY_MINUTE"><code class="xref c c-macro docutils literal notranslate"><span class="pre">BT_MESH_SCHEDULER_ANY_MINUTE</span></code></a></p></td>
+<td><p>Any minute of the hour</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scheduler.html#c.BT_MESH_SCHEDULER_EVERY_15_MINUTES" title="BT_MESH_SCHEDULER_EVERY_15_MINUTES"><code class="xref c c-macro docutils literal notranslate"><span class="pre">BT_MESH_SCHEDULER_EVERY_15_MINUTES</span></code></a></p></td>
+<td><p>Every 15 minutes (minute modulo 15 is 0) (0, 15, 30, 45)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scheduler.html#c.BT_MESH_SCHEDULER_EVERY_20_MINUTES" title="BT_MESH_SCHEDULER_EVERY_20_MINUTES"><code class="xref c c-macro docutils literal notranslate"><span class="pre">BT_MESH_SCHEDULER_EVERY_20_MINUTES</span></code></a></p></td>
+<td><p>Every 20 minutes (minute modulo 20 is 0) (0, 20, 40)</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scheduler.html#c.BT_MESH_SCHEDULER_ONCE_AN_HOUR" title="BT_MESH_SCHEDULER_ONCE_AN_HOUR"><code class="xref c c-macro docutils literal notranslate"><span class="pre">BT_MESH_SCHEDULER_ONCE_AN_HOUR</span></code></a></p></td>
+<td><p>Once an hour (at a random minute)</p></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><p>Second: The second when the scheduled event occurs</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 45%" />
+<col style="width: 55%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Value</p></td>
+<td><p>Description</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00-0x3B</p></td>
+<td><p>Second of the minute (00 to 59)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scheduler.html#c.BT_MESH_SCHEDULER_ANY_SECOND" title="BT_MESH_SCHEDULER_ANY_SECOND"><code class="xref c c-macro docutils literal notranslate"><span class="pre">BT_MESH_SCHEDULER_ANY_SECOND</span></code></a></p></td>
+<td><p>Any second of the minute</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scheduler.html#c.BT_MESH_SCHEDULER_EVERY_15_SECONDS" title="BT_MESH_SCHEDULER_EVERY_15_SECONDS"><code class="xref c c-macro docutils literal notranslate"><span class="pre">BT_MESH_SCHEDULER_EVERY_15_SECONDS</span></code></a></p></td>
+<td><p>Every 15 seconds (second modulo 15 is 0) (0, 15, 30, 45)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scheduler.html#c.BT_MESH_SCHEDULER_EVERY_20_SECONDS" title="BT_MESH_SCHEDULER_EVERY_20_SECONDS"><code class="xref c c-macro docutils literal notranslate"><span class="pre">BT_MESH_SCHEDULER_EVERY_20_SECONDS</span></code></a></p></td>
+<td><p>Every 20 seconds (second modulo 20 is 0) (0, 20, 40)</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scheduler.html#c.BT_MESH_SCHEDULER_ONCE_A_MINUTE" title="BT_MESH_SCHEDULER_ONCE_A_MINUTE"><code class="xref c c-macro docutils literal notranslate"><span class="pre">BT_MESH_SCHEDULER_ONCE_A_MINUTE</span></code></a></p></td>
+<td><p>Once a minute (at a random second)</p></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><p>DayOfWeek: Bitmask of the days of the week when the scheduled event is enabled <a class="reference internal" href="scheduler.html#c.bt_mesh_scheduler_wday" title="bt_mesh_scheduler_wday"><code class="xref c c-enum docutils literal notranslate"><span class="pre">bt_mesh_scheduler_wday</span></code></a></p></li>
+<li><p>Action: Action to be executed for a scheduled event <a class="reference internal" href="scheduler.html#c.bt_mesh_scheduler_action" title="bt_mesh_scheduler_action"><code class="xref c c-enum docutils literal notranslate"><span class="pre">bt_mesh_scheduler_action</span></code></a></p></li>
+<li><p>Transition Time: Transition time for the action</p>
+<ul class="simple">
+<li><p>Step count: 6 bits (range <cite>0x00</cite> to <cite>0x3e</cite>)</p></li>
+<li><p>Step resolution: 2 bits</p></li>
+</ul>
+</li>
+<li><p>Scene Number: Scene number to be used for the action</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 56%" />
+<col style="width: 44%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Value</p></td>
+<td><p>Description</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0000</p></td>
+<td><p>No scene</p></td>
+</tr>
+<tr class="row-odd"><td><p>All other values</p></td>
+<td><p>Scene number</p></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</section>
+<section id="extended-models">
+<h2><a class="toc-backref" href="#id9">Extended models</a><a class="headerlink" href="#extended-models" title="Permalink to this heading"></a></h2>
+<p>The Scheduler Server is implemented as a root model.
+When a Scheduler Server model is present on an element, the Scene Server model (see the <a class="reference internal" href="scene_srv.html#bt-mesh-scene-srv-readme"><span class="std std-ref">Scene Server</span></a> documentation) shall also be present on the same element.</p>
+</section>
+<section id="persistent-storage">
+<h2><a class="toc-backref" href="#id10">Persistent storage</a><a class="headerlink" href="#persistent-storage" title="Permalink to this heading"></a></h2>
+<p>The Scheduler Server stores the following information:</p>
+<ul class="simple">
+<li><p>Any changes to the Schedule Register state</p></li>
+</ul>
+<p>This information is used to restore previously configured register entries when the device powers up.</p>
+<p>The scheduler operation depends on the availability of the updated current time provided by the Time Server.
+It is the application’s responsibility to call <a class="reference internal" href="#c.bt_mesh_scheduler_srv_time_update" title="bt_mesh_scheduler_srv_time_update"><code class="xref c c-func docutils literal notranslate"><span class="pre">bt_mesh_scheduler_srv_time_update()</span></code></a> after the current local
+time has been updated to schedule available entries correctly.</p>
+</section>
+<section id="api-documentation">
+<h2><a class="toc-backref" href="#id11">API documentation</a><a class="headerlink" href="#api-documentation" title="Permalink to this heading"></a></h2>
+<div class="line-block">
+<div class="line">Header file: <code class="file docutils literal notranslate"><span class="pre">include/bluetooth/mesh/scheduler_srv.h</span></code></div>
+<div class="line">Source file: <code class="file docutils literal notranslate"><span class="pre">subsys/bluetooth/mesh/scheduler_srv.c</span></code></div>
+</div>
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="group__bt__mesh__scheduler__srv"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">bt_mesh_scheduler_srv</span></span></dt>
+<dd><p>API for the Scheduler Server model. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-defines">Defines</p>
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.BT_MESH_SCHEDULER_SRV_INIT">
+<span class="target" id="group__bt__mesh__scheduler__srv_1ga3a9c85fabca3e925897a98c9f793fe5f"></span><span class="sig-name descname"><span class="n"><span class="pre">BT_MESH_SCHEDULER_SRV_INIT</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">_action_set_cb</span></span>, <span class="n"><span class="pre">_time_srv</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.BT_MESH_SCHEDULER_SRV_INIT" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Initialization parameters for <a class="reference internal" href="#group__bt__mesh__scheduler__srv"><span class="std std-ref">Scheduler Server model</span></a>. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>_action_set_cb</strong> – <strong>[in]</strong> Action Set callback. </p></li>
+<li><p><strong>_time_srv</strong> – <strong>[in]</strong> Timer server that is used for action scheduling. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.BT_MESH_MODEL_SCHEDULER_SRV">
+<span class="target" id="group__bt__mesh__scheduler__srv_1ga7e357ee07da7bc0eb045db6077101c9e"></span><span class="sig-name descname"><span class="n"><span class="pre">BT_MESH_MODEL_SCHEDULER_SRV</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">_srv</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.BT_MESH_MODEL_SCHEDULER_SRV" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Scheduler Server model composition data entry. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If the Scheduler model is registered on the element then the Scene model shouldn’t. The Scheduler model includes already the Scene model.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>_srv</strong> – <strong>[in]</strong> Pointer to a <a class="reference internal" href="#group__bt__mesh__scheduler__srv"><span class="std std-ref">Scheduler Server model</span></a> instance. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_mesh_scheduler_srv_time_update">
+<span class="target" id="group__bt__mesh__scheduler__srv_1gacff2b7b1f5e022154e11185480c75f52"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_mesh_scheduler_srv_time_update</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_mesh_scheduler_srv" title="bt_mesh_scheduler_srv"><span class="n"><span class="pre">bt_mesh_scheduler_srv</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">srv</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_mesh_scheduler_srv_time_update" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Update time of the scheduled action. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This API is required to update time if referenced time server updated Time Zone <a class="reference internal" href="time_srv.html#group__bt__mesh__time__srv_1ggade0ce76afb492f00de0f118ad38d8a5baa6eda533aa9b02af67726a3e9cb6408f"><span class="std std-ref">BT_MESH_TIME_SRV_ZONE_UPDATE</span></a> or UTC <a class="reference internal" href="time_srv.html#group__bt__mesh__time__srv_1ggade0ce76afb492f00de0f118ad38d8a5bae92c707ae44482990a44253ec4f23030"><span class="std std-ref">BT_MESH_TIME_SRV_UTC_UPDATE</span></a>.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>srv</strong> – <strong>[in]</strong> Scheduler server model.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>0</strong> – Successfully updated time of the ongoing action. </p></li>
+<li><p><strong>-EINVAL</strong> – Invalid parameters. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.bt_mesh_scheduler_srv">
+<span class="target" id="structbt__mesh__scheduler__srv"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_mesh_scheduler_srv</span></span></span><a class="headerlink" href="#c.bt_mesh_scheduler_srv" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;scheduler_srv.h&gt;</em></div>
+<p>Scheduler Server model instance </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_mesh_scheduler_srv.&#64;131">
+<span class="target" id="structbt__mesh__scheduler__srv_1af2696818c98c2471940b30b8b5b2ce3e"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_mesh_scheduler_srv" title="bt_mesh_scheduler_srv"><span class="n"><span class="pre">bt_mesh_scheduler_srv</span></span></a><span class="p"><span class="pre">.</span></span><span class="n"><span class="pre">[anonymous]</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">[anonymous]</span></span></span><a class="headerlink" href="#c.bt_mesh_scheduler_srv.@131" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Model state related structure of the Scheduler Server instance. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_mesh_scheduler_srv.model">
+<span class="target" id="structbt__mesh__scheduler__srv_1a7aaa761fc38e7ce6b22aabfbd76d784d"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">bt_mesh_model</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">model</span></span></span><a class="headerlink" href="#c.bt_mesh_scheduler_srv.model" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Composition data model pointer. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_mesh_scheduler_srv.pub">
+<span class="target" id="structbt__mesh__scheduler__srv_1a872ec6d4017f66e4ea758948d3dc0585"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">bt_mesh_model_pub</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pub</span></span></span><a class="headerlink" href="#c.bt_mesh_scheduler_srv.pub" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Publication state. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_mesh_scheduler_srv.time_srv">
+<span class="target" id="structbt__mesh__scheduler__srv_1a96b787b4ee4598c7044f3b71e48862fc"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="time_srv.html#c.bt_mesh_time_srv" title="bt_mesh_time_srv"><span class="n"><span class="pre">bt_mesh_time_srv</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">time_srv</span></span></span><a class="headerlink" href="#c.bt_mesh_scheduler_srv.time_srv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Referenced time server to get time for scheduling. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_mesh_scheduler_srv.scene_srv">
+<span class="target" id="structbt__mesh__scheduler__srv_1ab9d5618ab447e430c03fffb3c1d8b7e3"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="scene_srv.html#c.bt_mesh_scene_srv" title="bt_mesh_scene_srv"><span class="n"><span class="pre">bt_mesh_scene_srv</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">scene_srv</span></span></span><a class="headerlink" href="#c.bt_mesh_scheduler_srv.scene_srv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Scene server instance that is extended by the Scheduler model. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_mesh_scheduler_srv.action_set_cb">
+<span class="target" id="structbt__mesh__scheduler__srv_1aebd847cdb3bd7d5e7f6d2686b4810244"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">action_set_cb</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_mesh_scheduler_srv" title="bt_mesh_scheduler_srv"><span class="n"><span class="pre">bt_mesh_scheduler_srv</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">srv</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">bt_mesh_msg_ctx</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">idx</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="scheduler.html#c.bt_mesh_schedule_entry" title="bt_mesh_schedule_entry"><span class="n"><span class="pre">bt_mesh_schedule_entry</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">entry</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#c.bt_mesh_scheduler_srv.action_set_cb" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Scheduler action set callback. </p>
+<p>Called whenever the server receives an action set both ack or unack</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This handler is optional.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Param srv</dt>
+<dd class="field-odd"><p><strong>[in]</strong> Scheduler server instance. </p>
+</dd>
+<dt class="field-even">Param ctx</dt>
+<dd class="field-even"><p><strong>[in]</strong> Context information about received message. </p>
+</dd>
+<dt class="field-odd">Param idx</dt>
+<dd class="field-odd"><p><strong>[in]</strong> Scheduler Register state index. </p>
+</dd>
+<dt class="field-even">Param entry</dt>
+<dd class="field-even"><p><strong>[in]</strong> Scheduler Register state entry. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="scheduler_cli.html" class="btn btn-neutral float-right" title="Scheduler Client" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="scheduler.html" class="btn btn-neutral" title="Scheduler models" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

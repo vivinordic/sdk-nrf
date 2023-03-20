@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>nRF9160: nRF Cloud MQTT multi-service &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../../_static/js/ncs.js"
+></script>
+<script src="../../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="nRF9160: nRF Cloud REST cellular location" href="../nrf_cloud_rest_cell_location/README.html" />
+    <link rel="prev" title="nRF9160: NIDD" href="../nidd/README.html" />
+<link
+  href="../../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../applications.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../samples.html">Samples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../bl.html">Bluetooth samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../crypto.html">Cryptography samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../edge.html">Edge Impulse samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gazell.html">Gazell samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../matter.html">Matter samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nfc.html">NFC samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nrf5340.html">nRF5340 samples</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../nrf9160.html">nRF9160 samples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../at_client/README.html">nRF9160: AT Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../at_monitor/README.html">nRF9160: AT monitor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../aws_iot/README.html">nRF9160: AWS IoT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../azure_fota/README.html">nRF9160: Azure FOTA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../azure_iot_hub/README.html">nRF9160: Azure IoT Hub</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ciphersuites/README.html">nRF9160: TLS cipher suites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../coap_client/README.html">nRF9160: nRF CoAP Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../download/README.html">nRF9160: Download client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fmfu_smp_svr/README.html">nRF9160: Full modem firmware update using SMP Server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gnss/README.html">nRF9160: GNSS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../https_client/README.html">nRF9160: HTTPS Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../location/README.html">nRF9160: Location</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../lte_ble_gateway/README.html">nRF9160: LTE Sensor Gateway</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../lwm2m_carrier/README.html">nRF9160: LwM2M carrier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../lwm2m_client/README.html">nRF9160: LwM2M Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../memfault/README.html">nRF9160: Memfault</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modem_callbacks/README.html">nRF9160: Modem callbacks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modem_shell/README.html">nRF9160: Modem Shell</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modem_trace_backend/README.html">nRF9160: Modem trace backend</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../modem_trace_flash/README.html">nRF9160: Modem trace external flash backend</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../nidd/README.html">nRF9160: NIDD</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">nRF9160: nRF Cloud MQTT multi-service</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#requirements">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#features">Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#structure-and-theory-of-operation">Structure and theory of operation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuration">Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#building-and-running">Building and running</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dependencies">Dependencies</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../nrf_cloud_rest_cell_location/README.html">nRF9160: nRF Cloud REST cellular location</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../nrf_cloud_rest_device_message/README.html">nRF9160: nRF Cloud REST Device Message</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../nrf_cloud_rest_fota/README.html">nRF9160: nRF Cloud REST FOTA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pdn/README.html">nRF9160: PDN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../slm_shell/README.html">nRF9160: SLM Shell</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../sms/README.html">nRF9160: SMS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../udp/README.html">nRF9160: UDP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../net/mqtt/README.html">MQTT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../http_update/application_update/README.html">nRF9160: HTTP application update</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../http_update/full_modem_update/README.html">nRF9160: HTTP full modem update</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../http_update/modem_delta_update/README.html">nRF9160: HTTP modem delta update</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../tfm.html">Trusted Firmware-M (TF-M) samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../thread.html">Thread samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../zigbee.html">Zigbee samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../wifi.html">Wi-Fi samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../other.html">Other samples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../drivers.html">Drivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../samples.html">Samples</a></li>
+          <li class="breadcrumb-item"><a href="../../nrf9160.html">nRF9160 samples</a></li>
+      <li class="breadcrumb-item active">nRF9160: nRF Cloud MQTT multi-service</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/samples/nrf9160/nrf_cloud_mqtt_multi_service/README.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="nrf9160-nrf-cloud-mqtt-multi-service">
+<span id="nrf-cloud-mqtt-multi-service"></span><h1>nRF9160: nRF Cloud MQTT multi-service<a class="headerlink" href="#nrf9160-nrf-cloud-mqtt-multi-service" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#requirements" id="id6">Requirements</a></p></li>
+<li><p><a class="reference internal" href="#features" id="id7">Features</a></p></li>
+<li><p><a class="reference internal" href="#structure-and-theory-of-operation" id="id8">Structure and theory of operation</a></p>
+<ul>
+<li><p><a class="reference internal" href="#connection-management-loop" id="id9">Connection management loop</a></p></li>
+<li><p><a class="reference internal" href="#device-message-queue" id="id10">Device message queue</a></p></li>
+<li><p><a class="reference internal" href="#application-thread-and-main-application-loop" id="id11">Application thread and main application loop</a></p></li>
+<li><p><a class="reference internal" href="#fota" id="id12">FOTA</a></p></li>
+<li><p><a class="reference internal" href="#temperature-sensing" id="id13">Temperature sensing</a></p></li>
+<li><p><a class="reference internal" href="#location-tracking" id="id14">Location tracking</a></p></li>
+<li><p><a class="reference internal" href="#remote-execution-of-modem-at-commands" id="id15">Remote execution of modem AT commands</a></p></li>
+<li><p><a class="reference internal" href="#led-status-indication" id="id16">LED status indication</a></p></li>
+<li><p><a class="reference internal" href="#test-counter" id="id17">Test counter</a></p></li>
+<li><p><a class="reference internal" href="#device-message-formatting" id="id18">Device message formatting</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#configuration" id="id19">Configuration</a></p>
+<ul>
+<li><p><a class="reference internal" href="#disabling-key-features" id="id20">Disabling key features</a></p></li>
+<li><p><a class="reference internal" href="#customizing-gnss-antenna-configuration" id="id21">Customizing GNSS antenna configuration</a></p></li>
+<li><p><a class="reference internal" href="#customizing-led-status-indication" id="id22">Customizing LED status indication</a></p></li>
+<li><p><a class="reference internal" href="#configuring-led-status-indication-for-third-party-boards" id="id23">Configuring LED status indication for third-party boards</a></p></li>
+<li><p><a class="reference internal" href="#useful-debugging-options" id="id24">Useful debugging options</a></p></li>
+<li><p><a class="reference internal" href="#configuration-options" id="id25">Configuration options</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#building-and-running" id="id26">Building and running</a></p>
+<ul>
+<li><p><a class="reference internal" href="#building-with-nrf7002-ek-wi-fi-scanning-support-for-nrf9160-dk" id="id27">Building with nRF7002 EK Wi-Fi scanning support (for nRF9160 DK)</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#dependencies" id="id28">Dependencies</a></p></li>
+</ul>
+</div>
+<p>This sample is a minimal, error tolerant, integrated demonstration of the <a class="reference internal" href="../../../libraries/networking/nrf_cloud.html#lib-nrf-cloud"><span class="std std-ref">nRF Cloud</span></a>, <a class="reference internal" href="../../../libraries/modem/location.html#lib-location"><span class="std std-ref">Location</span></a>, and <a class="reference internal" href="../../../libraries/modem/at_host.html#lib-at-host"><span class="std std-ref">AT Host</span></a> libraries.
+It demonstrates how you can use these libraries together to support Firmware-Over-The-Air (FOTA), Location Services, periodic sensor samples, and more in your <a class="reference external" href="https://nrfcloud.com/">nRF Cloud</a>-enabled application.
+It also demonstrates how to implement error tolerance in your cellular applications without relying on reboot loops.</p>
+<section id="requirements">
+<span id="nrf-cloud-mqtt-multi-service-requirements"></span><h2><a class="toc-backref" href="#id6">Requirements</a><a class="headerlink" href="#requirements" title="Permalink to this heading"></a></h2>
+<p>The sample supports the following development kits:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 28%" />
+<col style="width: 8%" />
+<col style="width: 42%" />
+<col style="width: 23%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Hardware platforms</p></th>
+<th class="head"><p>PCA</p></th>
+<th class="head"><p>Board name</p></th>
+<th class="head"><p>Build target</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../working_with_nrf/nrf91/thingy91.html#ug-thingy91"><span class="std std-ref">Thingy:91</span></a></p></td>
+<td><p>PCA20035</p></td>
+<td><p>thingy91_nrf9160</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">thingy91_nrf9160_ns</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../working_with_nrf/nrf91/nrf9160.html#ug-nrf9160"><span class="std std-ref">nRF9160 DK</span></a></p></td>
+<td><p>PCA10090</p></td>
+<td><p><span class="xref std std-ref">nrf9160dk_nrf9160</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nrf9160dk_nrf9160_ns</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>When built for an <code class="docutils literal notranslate"><span class="pre">_ns</span></code> build target, the sample is configured to compile and run as a non-secure application with <a class="reference internal" href="../../../app_dev/board_support/index.html#app-boards-spe-nspe-cpuapp-ns"><span class="std std-ref">Cortex-M Security Extensions enabled</span></a>.
+Therefore, it automatically includes <a class="reference internal" href="../../../app_dev/tfm/index.html#ug-tfm"><span class="std std-ref">Trusted Firmware-M</span></a> that prepares the required peripherals and secure services to be available for the application.</p>
+</section>
+<section id="features">
+<span id="nrf-cloud-mqtt-multi-service-features"></span><h2><a class="toc-backref" href="#id7">Features</a><a class="headerlink" href="#features" title="Permalink to this heading"></a></h2>
+<p>This sample implements or demonstrates the following features:</p>
+<ul class="simple">
+<li><p>Error-tolerant use of the <a class="reference external" href="https://docs.nrfcloud.com/APIs/MQTT/MQTTIntro/">nRF Cloud MQTT API</a> using the <span class="xref std std-ref">nrf_modem</span> and <a class="reference internal" href="../../../libraries/networking/nrf_cloud.html#lib-nrf-cloud"><span class="std std-ref">nRF Cloud</span></a> library.</p></li>
+<li><p>Support for <a class="reference external" href="https://docs.nrfcloud.com/Devices/FirmwareUpdate/FOTATutorial/">Firmware-Over-The-Air (FOTA) update service</a> using the <a class="reference external" href="https://nrfcloud.com/">nRF Cloud</a> portal.</p></li>
+<li><p>Support for <a class="reference external" href="https://infocenter.nordicsemi.com/topic/ref_at_commands/REF/at_commands/intro.html">modem AT commands</a> over UART using the <a class="reference internal" href="../../../libraries/modem/at_host.html#lib-at-host"><span class="std std-ref">AT Host</span></a> library.</p></li>
+<li><p>Support for remote execution of modem AT commands using application-specific device messages.</p></li>
+<li><p>Periodic cellular, Wi-Fi, and GNSS location tracking using the <a class="reference internal" href="../../../libraries/modem/location.html#lib-location"><span class="std std-ref">Location</span></a> library.</p></li>
+<li><p>Periodic temperature sensor sampling on your <a class="reference external" href="https://www.nordicsemi.com/Software-and-tools/Prototyping-platforms/Nordic-Thingy-91">Nordic Thingy:91</a>, or fake temperature  measurements on your <a class="reference external" href="https://www.nordicsemi.com/Products/Development-hardware/nrf9160-dk/">Nordic nRF9160 DK</a>.</p></li>
+<li><p>Transmission of sensor and GNSS location samples to the nRF Cloud portal as <a class="reference external" href="https://docs.nrfcloud.com/Devices/Messages/DeviceMessages/">nRF Cloud device messages</a>.</p></li>
+<li><p>Construction of valid <a class="reference external" href="https://docs.nrfcloud.com/Devices/Messages/DeviceMessages/">nRF Cloud device messages</a> using <a class="reference external" href="https://github.com/nrfconnect/sdk-cjson">cJSON</a>.</p></li>
+<li><p>Minimal LED status indication using the <a class="reference external" href="https://docs.zephyrproject.org/latest/hardware/peripherals/led.html">Zephyr LED API</a>.</p></li>
+</ul>
+</section>
+<section id="structure-and-theory-of-operation">
+<span id="nrf-cloud-mqtt-multi-service-structure-and-theory-of-operation"></span><h2><a class="toc-backref" href="#id8">Structure and theory of operation</a><a class="headerlink" href="#structure-and-theory-of-operation" title="Permalink to this heading"></a></h2>
+<p>This sample is separated into a number of smaller functional units.
+The top level functional unit and entry point for the sample is the <code class="file docutils literal notranslate"><span class="pre">src/main.c</span></code> file.
+This file starts three primary threads, each with a distinct function:</p>
+<ul class="simple">
+<li><p>The connection thread (<code class="docutils literal notranslate"><span class="pre">con_thread</span></code>) runs the <a class="reference internal" href="#nrf-cloud-mqtt-multi-service-connection-management-loop"><span class="std std-ref">Connection management loop</span></a>, which maintains a connection to <a class="reference external" href="https://nrfcloud.com/">nRF Cloud</a>.</p></li>
+<li><p>The application thread (<code class="docutils literal notranslate"><span class="pre">app_thread</span></code>) Runs the <a class="reference internal" href="#nrf-cloud-mqtt-multi-service-application-thread-and-main-application-loop"><span class="std std-ref">Application thread and main application loop</span></a>, which may add <a class="reference external" href="https://docs.nrfcloud.com/Devices/Messages/DeviceMessages/">device messages</a> to the <a class="reference internal" href="#nrf-cloud-mqtt-multi-service-device-message-queue"><span class="std std-ref">Device message queue</span></a>.</p></li>
+<li><p>The message thread (<code class="docutils literal notranslate"><span class="pre">msg_thread</span></code>) processes the <a class="reference internal" href="#nrf-cloud-mqtt-multi-service-device-message-queue"><span class="std std-ref">Device message queue</span></a> whenever there is an active connection.</p></li>
+</ul>
+<p><code class="file docutils literal notranslate"><span class="pre">src/main.c</span></code> also optionally starts a fourth thread, the <code class="docutils literal notranslate"><span class="pre">led_thread</span></code>, which animates any onboard LEDs if <a class="reference internal" href="#nrf-cloud-mqtt-multi-service-led-status-indication"><span class="std std-ref">LED status indication</span></a> is enabled.</p>
+<section id="connection-management-loop">
+<span id="nrf-cloud-mqtt-multi-service-connection-management-loop"></span><h3><a class="toc-backref" href="#id9">Connection management loop</a><a class="headerlink" href="#connection-management-loop" title="Permalink to this heading"></a></h3>
+<p>The connection management loop performs the following four primary tasks:</p>
+<ol class="arabic simple">
+<li><p>Configures and activates the cellular modem.</p></li>
+<li><p>Starts a connection to the LTE network.</p></li>
+<li><p>Maintains a connection to <a class="reference external" href="https://nrfcloud.com/">nRF Cloud</a>.</p></li>
+<li><p>Re-establishes or retries all lost or failed connections.</p></li>
+</ol>
+<p>The modem only needs to be set up and connected to LTE once.
+If LTE is lost, the modem automatically works to re-establish it.</p>
+<p>The connection to nRF Cloud must be maintained manually by the application.
+A significant portion of the <code class="file docutils literal notranslate"><span class="pre">src/connection.c</span></code> file is dedicated to this task.</p>
+<p>This file also maintains a number of <a class="reference external" href="https://docs.zephyrproject.org/latest/kernel/services/synchronization/events.html">Zephyr Events</a> tracking the state of the LTE and nRF Cloud connections.
+The connection management loop relies on these events to control its progression.</p>
+<p>The connection management loop must conform to the <a class="reference internal" href="../../../libraries/networking/nrf_cloud.html#lib-nrf-cloud-connect"><span class="std std-ref">nRF Cloud connection process</span></a>.
+This is mostly handled by the <a class="reference internal" href="../../../libraries/networking/nrf_cloud.html#lib-nrf-cloud"><span class="std std-ref">nRF Cloud</span></a> library, with exception to the following behavior:
+When a device is first being associated with an nRF Cloud account, the <a class="reference external" href="https://docs.nrfcloud.com/APIs/MQTT/MQTTIntro/">nRF Cloud MQTT API</a> will send a user association request notification to the device.
+Upon receiving this notification, the device must wait for a user association success notification, and then manually disconnect from and reconnect to nRF Cloud.
+Notifications of user association success are sent for every subsequent connection after this as well, so the device must only disconnect and reconnect if it previously received a user association request notification.
+This behavior is handled by the <code class="docutils literal notranslate"><span class="pre">NRF_CLOUD_EVT_USER_ASSOCIATION_REQUEST</span></code> and <code class="docutils literal notranslate"><span class="pre">NRF_CLOUD_EVT_USER_ASSOCIATED</span></code> cases inside the <code class="xref c c-func docutils literal notranslate"><span class="pre">cloud_event_handler()</span></code> function in the <code class="file docutils literal notranslate"><span class="pre">src/connection.c</span></code> file.</p>
+<p>The application must also manually reset its connection to nRF Cloud whenever LTE is lost.
+Otherwise, the <a class="reference internal" href="../../../libraries/networking/nrf_cloud.html#lib-nrf-cloud"><span class="std std-ref">nRF Cloud</span></a> library will deadlock.
+The <code class="docutils literal notranslate"><span class="pre">LTE_LC_EVT_NW_REG_STATUS</span></code> case inside the <code class="xref c c-func docutils literal notranslate"><span class="pre">lte_event_handler()</span></code> function performs this task.</p>
+<p>Upon startup, the connection management loop also updates the <a class="reference external" href="https://docs.nrfcloud.com/Devices/Properties/Shadows/">Device Shadow</a>.
+This is performed in the <code class="xref c c-func docutils literal notranslate"><span class="pre">update_shadow()</span></code> function of the <code class="file docutils literal notranslate"><span class="pre">src/connection.c</span></code> file.</p>
+</section>
+<section id="device-message-queue">
+<span id="nrf-cloud-mqtt-multi-service-device-message-queue"></span><h3><a class="toc-backref" href="#id10">Device message queue</a><a class="headerlink" href="#device-message-queue" title="Permalink to this heading"></a></h3>
+<p>Any thread may submit <a class="reference external" href="https://docs.nrfcloud.com/Devices/Messages/DeviceMessages/">device messages</a> to the device message queue, where they are stored until a working connection to <a class="reference external" href="https://nrfcloud.com/">nRF Cloud</a> is established.
+Once this happens, the message thread transmits all enqueued device messages, one at a time and in fast succession, to nRF Cloud.
+If an enqueued message fails to send, it will be sent back to the queue and tried again later.
+If more than <a class="reference internal" href="#config-max-consecutive-send-failures"><span class="std std-ref">CONFIG_MAX_CONSECUTIVE_SEND_FAILURES</span></a> messages fail to send in a row, the connection to nRF Cloud is reset and re-established after a short delay.
+The transmission pauses again whenever connection to nRF Cloud is lost.
+Management of the device message queue is implemented entirely in the <code class="file docutils literal notranslate"><span class="pre">src/connection.c</span></code> file.</p>
+</section>
+<section id="application-thread-and-main-application-loop">
+<span id="nrf-cloud-mqtt-multi-service-application-thread-and-main-application-loop"></span><h3><a class="toc-backref" href="#id11">Application thread and main application loop</a><a class="headerlink" href="#application-thread-and-main-application-loop" title="Permalink to this heading"></a></h3>
+<p>The application thread is implemented in the <code class="file docutils literal notranslate"><span class="pre">src/application.c</span></code> file, and is responsible for the high-level behavior of this sample.
+It performs the following major tasks:</p>
+<ul class="simple">
+<li><p>Establishes periodic position tracking (which the <a class="reference internal" href="../../../libraries/modem/location.html#lib-location"><span class="std std-ref">Location</span></a> library performs).</p></li>
+<li><p>Periodically samples temperature data (using the <code class="file docutils literal notranslate"><span class="pre">src/temperature.c</span></code> file).</p></li>
+<li><p>Constructs timestamped sensor sample and location <a class="reference external" href="https://docs.nrfcloud.com/Devices/Messages/DeviceMessages/">device messages</a> using <a class="reference external" href="https://github.com/nrfconnect/sdk-cjson">cJSON</a>.</p></li>
+<li><p>Sends sensor sample and location device messages to the <a class="reference internal" href="#nrf-cloud-mqtt-multi-service-device-message-queue"><span class="std std-ref">Device message queue</span></a>.</p></li>
+<li><p>Checks for and executes <a class="reference internal" href="#nrf-cloud-mqtt-multi-service-remote-at"><span class="std std-ref">remote modem AT command requests</span></a>.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Periodic location tracking is handled by the <a class="reference internal" href="../../../libraries/modem/location.html#lib-location"><span class="std std-ref">Location</span></a> library once it has been requested, whereas temperature samples are individually requested by the Main Application Loop.</p>
+</div>
+</section>
+<section id="fota">
+<span id="nrf-cloud-mqtt-multi-service-fota"></span><h3><a class="toc-backref" href="#id12">FOTA</a><a class="headerlink" href="#fota" title="Permalink to this heading"></a></h3>
+<p>The <a class="reference external" href="https://docs.nrfcloud.com/Devices/FirmwareUpdate/FOTATutorial/">FOTA update</a> support is almost entirely implemented by enabling the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF_CLOUD_FOTA</span></code> option (which is implicitly enabled by <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF_CLOUD_MQTT</span></code>).</p>
+<p>However, even with <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF_CLOUD_FOTA</span></code> enabled, applications must still reboot themselves manually after FOTA download completion, and must still update their <a class="reference external" href="https://docs.nrfcloud.com/Devices/Properties/Shadows/">Device Shadow</a> to reflect FOTA support.</p>
+<p>Reboot after download completion is handled by the <code class="file docutils literal notranslate"><span class="pre">src/fota_support.c</span></code> file, triggered by a call from the <code class="file docutils literal notranslate"><span class="pre">src/connection.c</span></code> file.</p>
+<p><a class="reference external" href="https://docs.nrfcloud.com/Devices/Properties/Shadows/">Device Shadow</a> updates are performed in the <code class="file docutils literal notranslate"><span class="pre">src/connection.c</span></code> file.</p>
+<p>In a real-world setting, these two behaviors could be directly implemented in the <code class="file docutils literal notranslate"><span class="pre">src/connection.c</span></code> file.
+In this sample, they are separated for clarity.</p>
+<p>This sample supports full modem FOTA for the nRF9160 development kit version 0.14.0 and higher.
+To enable full modem FOTA, add the following parameter to your build command:</p>
+<p><code class="docutils literal notranslate"><span class="pre">-DOVERLAY_CONFIG=overlay_full_modem_fota.conf</span></code></p>
+<p>Also, specify your development kit version by appending it to the board name. For example, if your development kit version is 1.0.1, use the following board name in your build command:</p>
+<p><code class="docutils literal notranslate"><span class="pre">nrf9160dk_nrf9160_ns&#64;1_0_1</span></code></p>
+<p>This sample also supports placement of the MCUboot secondary partition in external flash for the nRF9160 development kit version 0.14.0 and higher.
+To enable this, add the following parameter to your build command:</p>
+<p><code class="docutils literal notranslate"><span class="pre">-DOVERLAY_CONFIG=overlay_mcuboot_ext_flash.conf</span></code></p>
+<p>Then specify your development kit version as described earlier.</p>
+</section>
+<section id="temperature-sensing">
+<span id="nrf-cloud-mqtt-multi-service-temperature-sensing"></span><h3><a class="toc-backref" href="#id13">Temperature sensing</a><a class="headerlink" href="#temperature-sensing" title="Permalink to this heading"></a></h3>
+<p>Temperature sensing is mostly implemented in the <code class="file docutils literal notranslate"><span class="pre">src/temperature.c</span></code> file.
+This includes generation of false temperature readings on the <a class="reference external" href="https://www.nordicsemi.com/Products/Development-hardware/nrf9160-dk/">Nordic nRF9160 DK</a>, which does not have a built-in temperature sensor.</p>
+<p>Using the built-in temperature sensor of the <a class="reference external" href="https://www.nordicsemi.com/Software-and-tools/Prototyping-platforms/Nordic-Thingy-91">Nordic Thingy:91</a> requires a <a class="reference external" href="https://docs.zephyrproject.org/latest/build/dts/howtos.html#set-devicetree-overlays">devicetree overlay</a> file, namely the <code class="file docutils literal notranslate"><span class="pre">boards/thingy91_nrf9160_ns.overlay</span></code> file, as well as enabling the Kconfig options <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_SENSOR</span></code> and <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BME680</span></code>.
+The devicetree overlay file is automatically applied during compilation whenever the <code class="docutils literal notranslate"><span class="pre">thingy91_nrf9160_ns</span></code> target is selected.
+The required Kconfig options are implicitly enabled by <a class="reference internal" href="#config-temp-data-use-sensor"><span class="std std-ref">CONFIG_TEMP_DATA_USE_SENSOR</span></a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For temperature readings to be visible in the nRF Cloud portal, they must be marked as enabled in the <a class="reference external" href="https://docs.nrfcloud.com/Devices/Properties/Shadows/">Device Shadow</a>.
+This is performed by the <code class="file docutils literal notranslate"><span class="pre">src/connection.c</span></code> file.</p>
+</div>
+</section>
+<section id="location-tracking">
+<span id="nrf-cloud-mqtt-multi-service-location-tracking"></span><h3><a class="toc-backref" href="#id14">Location tracking</a><a class="headerlink" href="#location-tracking" title="Permalink to this heading"></a></h3>
+<p>All matters concerning location tracking are handled in the <code class="file docutils literal notranslate"><span class="pre">src/location_tracking.c</span></code> file.
+This involves setting up a periodic location request, and then passing the results to a callback configured by the <code class="file docutils literal notranslate"><span class="pre">src/application.c</span></code> file.</p>
+<p>For location readings to be visible in the nRF Cloud portal, they must be marked as enabled in the <a class="reference external" href="https://docs.nrfcloud.com/Devices/Properties/Shadows/">Device Shadow</a>.
+This is performed by the <code class="file docutils literal notranslate"><span class="pre">src/connection.c</span></code> file.</p>
+<p>Each enabled location method is tried in the following order until one succeeds: GNSS, Wi-Fi, then cellular.</p>
+<p>The GNSS and cellular location tracking methods are enabled by default and will work on both Thingy:91 and nRF9160 DK targets.</p>
+<p id="nrf-cloud-mqtt-multi-service-wifi-location-tracking">The Wi-Fi location tracking method is not enabled by default and requires the nRF7002 Wi-Fi companion chip.</p>
+<p>When enabled, this location method scans the MAC addresses of nearby access points and submits them to nRF Cloud to obtain a location estimate.</p>
+<p>See <a class="reference internal" href="#nrf-cloud-mqtt-multi-service-building-wifi"><span class="std std-ref">Building with nRF7002 EK Wi-Fi scanning support (for nRF9160 DK)</span></a> for details on how to enable Wi-Fi location tracking.</p>
+<p>This sample supports placing P-GPS data in external flash for the nRF9160 development kit version 0.14.0 and later.
+To enable this, add the following parameter to your build command:</p>
+<p><code class="docutils literal notranslate"><span class="pre">-DOVERLAY_CONFIG=overlay_pgps_ext_flash.conf</span></code></p>
+<p>Also, specify your development kit version by appending it to the board name.
+For example, if your development kit version is 1.0.1, use the following board name in your build command:</p>
+<p><code class="docutils literal notranslate"><span class="pre">nrf9160dk_nrf9160_ns&#64;1_0_1</span></code></p>
+</section>
+<section id="remote-execution-of-modem-at-commands">
+<span id="nrf-cloud-mqtt-multi-service-remote-at"></span><h3><a class="toc-backref" href="#id15">Remote execution of modem AT commands</a><a class="headerlink" href="#remote-execution-of-modem-at-commands" title="Permalink to this heading"></a></h3>
+<p>If the <a class="reference internal" href="#config-at-cmd-requests"><span class="std std-ref">CONFIG_AT_CMD_REQUESTS</span></a> Kconfig option is enabled, you can remotely execute modem AT commands on your device by sending a device message with appId <code class="docutils literal notranslate"><span class="pre">MODEM</span></code>, messageType <code class="docutils literal notranslate"><span class="pre">CMD</span></code>, and the data key set to the command you would like to execute.</p>
+<p>The application executes the command stored in the data key, and responds with a device message containing either an error code or the response from the modem to the AT command.</p>
+<p>For example, if you send the following device message to a device running this sample with <a class="reference internal" href="#config-at-cmd-requests"><span class="std std-ref">CONFIG_AT_CMD_REQUESTS</span></a> enabled:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="nt">&quot;appId&quot;</span><span class="p">:</span><span class="s2">&quot;MODEM&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;messageType&quot;</span><span class="p">:</span><span class="s2">&quot;CMD&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="s2">&quot;AT+CGMR&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>It executes the modem AT command <code class="docutils literal notranslate"><span class="pre">AT+CGMR</span></code> and sends a device message similar to the following back to nRF Cloud:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">   </span><span class="nt">&quot;appId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MODEM&quot;</span><span class="p">,</span>
+<span class="w">   </span><span class="nt">&quot;messageType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;DATA&quot;</span><span class="p">,</span>
+<span class="w">   </span><span class="nt">&quot;ts&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1669244834095</span><span class="p">,</span>
+<span class="w">   </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;mfw_nrf9160_1.3.2\r\nOK&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>To do this in the nRF Cloud portal, write <cite>{“appId”:”MODEM”, “messageType”:”CMD”, “data”:”AT+CGMR”}</cite> into the <strong>Send a message</strong> box of the <strong>Terminal</strong> card and click <span class="guilabel">Send</span>.</p>
+</section>
+<section id="led-status-indication">
+<span id="nrf-cloud-mqtt-multi-service-led-status-indication"></span><h3><a class="toc-backref" href="#id16">LED status indication</a><a class="headerlink" href="#led-status-indication" title="Permalink to this heading"></a></h3>
+<p>On boards that support LED status indication, this sample can indicate its current status with any on-board LEDs.</p>
+<p>This is performed by a background thread implemented in the <code class="file docutils literal notranslate"><span class="pre">src/led_control.c</span></code> file.</p>
+<p>Other threads may request either a temporary or indefinite LED pattern.
+This wakes up the <code class="docutils literal notranslate"><span class="pre">led_thread</span></code>, which begins animating the requested pattern, sleeping for 100 milliseconds at a time between animation frames, until the requested pattern has completed (if it is temporary), or until a new pattern is requested in its place.</p>
+<p>This feature is enabled by default for the <code class="docutils literal notranslate"><span class="pre">thingy91_nrf9160_ns</span></code> (Thingy:91) and <code class="docutils literal notranslate"><span class="pre">nrf9160dk_nrf9160_ns</span></code> (nRF9160 DK) targets.</p>
+<p>The patterns displayed, the states they describe, and the options required for them to appear are as follows:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 13%" />
+<col style="width: 34%" />
+<col style="width: 35%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Status</p></th>
+<th class="head"><p>Thingy:91</p></th>
+<th class="head"><p>nRF9160 DK</p></th>
+<th class="head"><p>Conditions</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Trying to connect to nRF Cloud (for the first time)</p></td>
+<td><p>Pulsating orange LED</p></td>
+<td><p>Single LED lit, spinning around the square of LEDs</p></td>
+<td><p>LED status indication is enabled</p></td>
+</tr>
+<tr class="row-odd"><td><p>Connection to nRF Cloud lost, reconnecting</p></td>
+<td><p>Pulsating orange LED</p></td>
+<td><p>Single LED lit, spinning around the square of LEDs</p></td>
+<td><p>The <a class="reference internal" href="#config-led-verbose-indication"><span class="std std-ref">CONFIG_LED_VERBOSE_INDICATION</span></a> option is enabled</p></td>
+</tr>
+<tr class="row-even"><td><p>Fatal error</p></td>
+<td><p>Blinking red LED, 75% duty cycle</p></td>
+<td><p>All four LEDs blinking, 75% duty cycle</p></td>
+<td><p>LED status indication is enabled</p></td>
+</tr>
+<tr class="row-odd"><td><p>Device message sent successfully</p></td>
+<td><p>Blinking green LED, 25% duty cycle</p></td>
+<td><p>Alternating checkerboard pattern (two LEDs are lit at a time, either LED1 and LED4, or LED2 and LED3)</p></td>
+<td><p>The <a class="reference internal" href="#config-led-verbose-indication"><span class="std std-ref">CONFIG_LED_VERBOSE_INDICATION</span></a> option is enabled</p></td>
+</tr>
+<tr class="row-even"><td><p>Idle</p></td>
+<td><p>LED pulsating between blue and cyan</p></td>
+<td><p>Single LED lit, bouncing between opposite corners (LED1 and LED4)</p></td>
+<td><p>The <a class="reference internal" href="#config-led-continuous-indication"><span class="std std-ref">CONFIG_LED_CONTINUOUS_INDICATION</span></a> option is enabled</p></td>
+</tr>
+</tbody>
+</table>
+<p>Under all other circumstances, on-board LEDs are turned off.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <a class="reference internal" href="#config-led-verbose-indication"><span class="std std-ref">CONFIG_LED_VERBOSE_INDICATION</span></a> and <a class="reference internal" href="#config-led-continuous-indication"><span class="std std-ref">CONFIG_LED_CONTINUOUS_INDICATION</span></a> options are enabled by default.</p>
+</div>
+<p>See <a class="reference internal" href="#nrf-cloud-mqtt-multi-service-customizing-led-status-indication"><span class="std std-ref">Customizing LED status indication</span></a> for details on customizing the LED behavior.</p>
+<p>See <a class="reference internal" href="#nrf-cloud-mqtt-multi-service-led-third-party"><span class="std std-ref">Configuring LED status indication for third-party boards</span></a> for details on configuring LED status indication on third-party boards.</p>
+</section>
+<section id="test-counter">
+<span id="nrf-cloud-mqtt-multi-service-test-counter"></span><h3><a class="toc-backref" href="#id17">Test counter</a><a class="headerlink" href="#test-counter" title="Permalink to this heading"></a></h3>
+<p>You can enable a test counter by enabling the <a class="reference internal" href="#config-test-counter"><span class="std std-ref">CONFIG_TEST_COUNTER</span></a> option.
+Every time a sensor sample is sent, this counter is incremented by one, and its current value is sent to <a class="reference external" href="https://nrfcloud.com/">nRF Cloud</a>.
+A plot of the value of the counter over time is automatically shown in the nRF Cloud portal.
+This plot is useful for tracking, visualizing, and debugging connection loss, resets, and re-establishment behavior.</p>
+</section>
+<section id="device-message-formatting">
+<span id="nrf-cloud-mqtt-multi-service-device-message-formatting"></span><h3><a class="toc-backref" href="#id18">Device message formatting</a><a class="headerlink" href="#device-message-formatting" title="Permalink to this heading"></a></h3>
+<p>This sample constructs JSON-based <a class="reference external" href="https://docs.nrfcloud.com/Devices/Messages/DeviceMessages/">device messages</a> using <a class="reference external" href="https://github.com/nrfconnect/sdk-cjson">cJSON</a>.</p>
+<p>While any valid JSON string can be sent as a device message, and accepted and stored by <a class="reference external" href="https://nrfcloud.com/">nRF Cloud</a>, there are some pre-designed message structures, known as schemas.
+The nRF Cloud portal knows how to interpret these schemas.
+These schemas are described in <a class="reference external" href="https://github.com/nRFCloud/application-protocols">nRF Cloud application protocols for long-range devices</a>.
+The device messages constructed in the <code class="file docutils literal notranslate"><span class="pre">src/application.c</span></code> file all adhere to the general message schema.</p>
+<p>GNSS and temperature data device messages conform to the <code class="docutils literal notranslate"><span class="pre">gnss</span></code> and <code class="docutils literal notranslate"><span class="pre">temp</span></code> <code class="docutils literal notranslate"><span class="pre">deviceToCloud</span></code> schemas respectively.</p>
+</section>
+</section>
+<section id="configuration">
+<span id="nrf-cloud-mqtt-multi-service-configuration"></span><h2><a class="toc-backref" href="#id19">Configuration</a><a class="headerlink" href="#configuration" title="Permalink to this heading"></a></h2>
+<p>See <a class="reference internal" href="../../../getting_started/modifying.html#configure-application"><span class="std std-ref">Configuring your application</span></a> for information about how to permanently or temporarily change the configuration.</p>
+<section id="disabling-key-features">
+<h3><a class="toc-backref" href="#id20">Disabling key features</a><a class="headerlink" href="#disabling-key-features" title="Permalink to this heading"></a></h3>
+<p>The following key features of this sample may be independently disabled:</p>
+<ul class="simple">
+<li><p>GNSS-based location tracking - by setting the <a class="reference internal" href="#config-location-tracking-gnss"><span class="std std-ref">CONFIG_LOCATION_TRACKING_GNSS</span></a> option to disabled.</p></li>
+<li><p>Cellular-based location tracking - by setting the <a class="reference internal" href="#config-location-tracking-cellular"><span class="std std-ref">CONFIG_LOCATION_TRACKING_CELLULAR</span></a> option to disabled.</p></li>
+<li><p>Temperature tracking - by setting the <a class="reference internal" href="#config-temp-tracking"><span class="std std-ref">CONFIG_TEMP_TRACKING</span></a> option to disabled.</p></li>
+<li><p>GNSS assistance (A-GPS) - by setting the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF_CLOUD_AGPS</span></code> option to disabled.</p></li>
+<li><p>Predictive GNSS assistance (P-GPS) - by setting the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF_CLOUD_PGPS</span></code> option to disabled.</p></li>
+</ul>
+<p>If you disable both GNSS and cellular-based location tracking, location tracking is completely disabled.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>MQTT should only be used with applications that need to stay connected constantly or transfer data frequently.
+While this sample does allow its core features to be slowed or completely disabled, in real-world applications, you should carefully consider your data throughput and whether MQTT is an appropriate solution.
+If you want to disable or excessively slow all of these features for a real-world application, other solutions, such as the <a class="reference external" href="https://docs.nrfcloud.com/APIs/REST/RESTIntro/">nRF Cloud Rest API</a>, may be more appropriate.</p>
+</div>
+</section>
+<section id="customizing-gnss-antenna-configuration">
+<h3><a class="toc-backref" href="#id21">Customizing GNSS antenna configuration</a><a class="headerlink" href="#customizing-gnss-antenna-configuration" title="Permalink to this heading"></a></h3>
+<p>This sample uses the <a class="reference internal" href="../../../libraries/modem/modem_antenna.html#lib-modem-antenna"><span class="std std-ref">Modem antenna</span></a> library, which is enabled by default for builds targeting either the <code class="docutils literal notranslate"><span class="pre">nrf9160dk_nrf9160_ns</span></code> or <code class="docutils literal notranslate"><span class="pre">thingy91_nrf9160_ns</span></code> board names.</p>
+<p>If you are using a different board or build target, or would like to use a custom or external GNSS antenna, see the <a class="reference internal" href="../../../libraries/modem/modem_antenna.html#lib-modem-antenna"><span class="std std-ref">Modem antenna</span></a> library documentation for configuration instructions.</p>
+<p>Enable <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MODEM_ANTENNA_GNSS_EXTERNAL</span></code> to use an external antenna.</p>
+</section>
+<section id="customizing-led-status-indication">
+<span id="nrf-cloud-mqtt-multi-service-customizing-led-status-indication"></span><h3><a class="toc-backref" href="#id22">Customizing LED status indication</a><a class="headerlink" href="#customizing-led-status-indication" title="Permalink to this heading"></a></h3>
+<p>To disable LED status indication (other than the selected idle behavior) after a connection to nRF Cloud has been established at least once, disable <a class="reference internal" href="#config-led-verbose-indication"><span class="std std-ref">CONFIG_LED_VERBOSE_INDICATION</span></a>.</p>
+<p>To turn the LED off while the sample is idle (rather than show an idle pattern), disable <a class="reference internal" href="#config-led-continuous-indication"><span class="std std-ref">CONFIG_LED_CONTINUOUS_INDICATION</span></a>.</p>
+<p>If you disable both of these options together, the status indicator LED remains off after a connection to nRF Cloud has been established at least once.</p>
+</section>
+<section id="configuring-led-status-indication-for-third-party-boards">
+<span id="nrf-cloud-mqtt-multi-service-led-third-party"></span><h3><a class="toc-backref" href="#id23">Configuring LED status indication for third-party boards</a><a class="headerlink" href="#configuring-led-status-indication-for-third-party-boards" title="Permalink to this heading"></a></h3>
+<p>This sample assumes that the target board either has a single RGB LED with PWM support, or four discrete LEDs available.</p>
+<p>For third-party boards, you can select the RGB LED option by enabling both the <a class="reference internal" href="#config-led-indication-pwm"><span class="std std-ref">CONFIG_LED_INDICATION_PWM</span></a> and <a class="reference internal" href="#config-led-indicator-rgb"><span class="std std-ref">CONFIG_LED_INDICATION_RGB</span></a> options.
+In this case, the board must have a devicetree entry marked as compatible with the <a class="reference external" href="https://docs.zephyrproject.org/latest/build/dts/api/bindings/led/pwm-leds.html">Zephyr pwm-leds</a> driver.</p>
+<p>Otherwise, the four-LED option (<a class="reference internal" href="#config-led-indication-gpio"><span class="std std-ref">CONFIG_LED_INDICATION_GPIO</span></a> and <a class="reference internal" href="#config-led-indicator-4led"><span class="std std-ref">CONFIG_LED_INDICATOR_4LED</span></a>) is selected by default as long as there is a devicetree entry compatible with the <a class="reference external" href="https://docs.zephyrproject.org/latest/build/dts/api/bindings/led/gpio-leds.html">Zephyr gpio-leds</a> driver.</p>
+<p>The four-LED option should work even if there are not four LEDs available, as long as an appropriate devicetree entry exists.
+However, if fewer than four LEDs are available, the patterns may be difficult to identify.</p>
+<p>To add your own LED indication implementations, you can add values to the <code class="docutils literal notranslate"><span class="pre">LED_INDICATOR</span></code> Kconfig choice and modify the <code class="file docutils literal notranslate"><span class="pre">src/led_control.c</span></code> file accordingly.</p>
+<p>To disable LED indication, enable the <a class="reference internal" href="#config-led-indication-disabled"><span class="std std-ref">CONFIG_LED_INDICATION_DISABLED</span></a> option.</p>
+<p>For examples of how to set up devicetree entries compatible with the Zephyr <code class="docutils literal notranslate"><span class="pre">gpio-leds</span></code> and <code class="docutils literal notranslate"><span class="pre">pwm-leds</span></code> drivers, see the files <code class="file docutils literal notranslate"><span class="pre">zephyr/boards/arm/nrf9160dk_nrf9160/nrf9160dk_nrf9160_common.dts</span></code> and <code class="file docutils literal notranslate"><span class="pre">zephyr/boards/arm/thingy91_nrf9160/thingy91_nrf9160_common.dts</span></code>.
+Search for nodes with <code class="docutils literal notranslate"><span class="pre">compatible</span> <span class="pre">=</span> <span class="pre">&quot;gpio-leds&quot;;</span></code> and <code class="docutils literal notranslate"><span class="pre">compatible</span> <span class="pre">=</span> <span class="pre">&quot;pwm-leds&quot;;</span></code> respectively.</p>
+</section>
+<section id="useful-debugging-options">
+<h3><a class="toc-backref" href="#id24">Useful debugging options</a><a class="headerlink" href="#useful-debugging-options" title="Permalink to this heading"></a></h3>
+<p>To see all debug output for this sample, enable the <a class="reference internal" href="#config-mqtt-multi-service-log-level-dbg"><span class="std std-ref">CONFIG_MQTT_MULTI_SERVICE_LOG_LEVEL_DBG</span></a> option.</p>
+<p>To monitor the GNSS module (for instance, to see whether A-GPS or P-GPS assistance data is being consumed), enable the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF_CLOUD_GPS_LOG_LEVEL_DBG</span></code> option.</p>
+<p>See also the <a class="reference internal" href="#nrf-cloud-mqtt-multi-service-test-counter"><span class="std std-ref">Test counter</span></a>.</p>
+</section>
+<section id="configuration-options">
+<h3><a class="toc-backref" href="#id25">Configuration options</a><a class="headerlink" href="#configuration-options" title="Permalink to this heading"></a></h3>
+<p>Set the following configuration options for the sample:</p>
+<dl class="simple" id="config-mqtt-multi-service-log-level-dbg">
+<dt>CONFIG_MQTT_MULTI_SERVICE_LOG_LEVEL_DBG - Sample debug logging</dt><dd><p>Sets the log level for this sample to debug.</p>
+</dd>
+</dl>
+<dl class="simple" id="config-power-saving-mode-enable">
+<dt>CONFIG_POWER_SAVING_MODE_ENABLE - Enable Power Saving Mode (PSM)</dt><dd><p>Requests Power Saving Mode from cellular network when enabled.</p>
+</dd>
+</dl>
+<dl class="simple" id="config-lte-init-retry-timeout-seconds">
+<dt>CONFIG_LTE_INIT_RETRY_TIMEOUT_SECONDS - LTE initialization retry timeout</dt><dd><p>Sets the number of seconds between each LTE modem initialization retry.</p>
+</dd>
+</dl>
+<dl class="simple" id="config-cloud-connection-retry-timeout-seconds">
+<dt>CONFIG_CLOUD_CONNECTION_RETRY_TIMEOUT_SECONDS - Cloud connection retry timeout (seconds)</dt><dd><p>Sets the cloud connection retry timeout in seconds.</p>
+</dd>
+</dl>
+<dl class="simple" id="config-cloud-connection-reestablish-delay-seconds">
+<dt>CONFIG_CLOUD_CONNECTION_REESTABLISH_DELAY_SECONDS - Cloud connection re-establishment delay (seconds)</dt><dd><p>Sets the connection re-establishment delay in seconds.
+When the connection to nRF Cloud has been reset, wait for this amount of time before a new attempt to connect.</p>
+</dd>
+</dl>
+<dl class="simple" id="config-cloud-ready-timeout-seconds">
+<dt>CONFIG_CLOUD_READY_TIMEOUT_SECONDS - Cloud readiness timeout (seconds)</dt><dd><p>Sets the cloud readiness timeout in seconds.
+If the connection to nRF Cloud does not become ready within this timeout, the sample will reset its connection and try again.</p>
+</dd>
+</dl>
+<dl class="simple" id="config-date-time-establishment-timeout-seconds">
+<dt>CONFIG_DATE_TIME_ESTABLISHMENT_TIMEOUT_SECONDS - Modem date and time establishment timeout (seconds)</dt><dd><p>Sets the timeout for modem date and time establishment (in seconds).
+The sample waits for this number of seconds for the modem to determine the current date and time before giving up and moving on.</p>
+</dd>
+</dl>
+<dl class="simple" id="config-application-thread-stack-size">
+<dt>CONFIG_APPLICATION_THREAD_STACK_SIZE - Application Thread Stack Size (bytes)</dt><dd><p>Sets the stack size (in bytes) for the application thread of the sample.</p>
+</dd>
+</dl>
+<dl class="simple" id="config-connection-thread-stack-size">
+<dt>CONFIG_CONNECTION_THREAD_STACK_SIZE - Connection Thread Stack Size (bytes)</dt><dd><p>Sets the stack size (in bytes) for the connection thread of the sample.</p>
+</dd>
+</dl>
+<dl class="simple" id="config-message-thread-stack-size">
+<dt>CONFIG_MESSAGE_THREAD_STACK_SIZE - Message Queue Thread Stack Size (bytes)</dt><dd><p>Sets the stack size (in bytes) for the message queue processing thread of the sample.</p>
+</dd>
+</dl>
+<dl class="simple" id="config-max-outgoing-messages">
+<dt>CONFIG_MAX_OUTGOING_MESSAGES - Outgoing message maximum</dt><dd><p>Sets the maximum number of messages that can be in the outgoing message queue.
+Messages submitted past this limit will not be enqueued.</p>
+</dd>
+</dl>
+<dl class="simple" id="config-max-consecutive-send-failures">
+<dt>CONFIG_MAX_CONSECUTIVE_SEND_FAILURES - Max outgoing consecutive send failures</dt><dd><p>Sets the maximum number of device messages which may fail to send before a connection reset and cooldown is triggered.</p>
+</dd>
+</dl>
+<dl class="simple" id="config-consecutive-send-failure-cooldown-seconds">
+<dt>CONFIG_CONSECUTIVE_SEND_FAILURE_COOLDOWN_SECONDS - Cooldown after max consecutive send failures exceeded (seconds)</dt><dd><p>Sets the cooldown time (in seconds) after the maximum number of consecutive send failures is exceeded.
+If a connection reset is triggered by too many failed device messages, the sample waits for this long (in seconds) before trying again.</p>
+</dd>
+</dl>
+<dl class="simple" id="config-sensor-sample-interval-seconds">
+<dt>CONFIG_SENSOR_SAMPLE_INTERVAL_SECONDS - Sensor sampling interval (seconds)</dt><dd><p>Sets the time to wait between each temperature sensor sample.</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Decreasing the sensor sampling interval too much leads to more frequent use of the LTE connection, which can prevent GNSS from obtaining a fix.
+This is because GNSS can operate only when the LTE connection is not active.
+Every time a sensor sample is sent, it interrupts any attempted GNSS fix.
+The exact time required to obtain a GNSS fix will vary depending on satellite visibility, time since last fix, the type of antenna used, and other environmental factors.
+In good conditions, and with A-GPS data, one minute is a reasonable interval for reliably getting a location estimate.
+This allows using long enough value for <a class="reference internal" href="#config-gnss-fix-timeout-seconds"><span class="std std-ref">CONFIG_GNSS_FIX_TIMEOUT_SECONDS</span></a>, while still leaving enough time for falling back to cellular positioning if needed.</p>
+<p>The default sensor sampling interval, 60 seconds, will quickly consume cellular data, and should not be used in a production environment.
+Instead, consider using a less frequent interval, and if necessary, combining multiple sensor samples into a single <a class="reference external" href="https://docs.nrfcloud.com/Devices/Messages/DeviceMessages/">device message</a> , or combining multiple device messages using the <a class="reference external" href="https://docs.nrfcloud.com/APIs/MQTT/Topics/">d2c/bulk device message topic</a>.</p>
+<p>If you significantly increase the sampling interval, you must keep the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MQTT_KEEPALIVE</span></code> short to avoid the carrier silently closing the MQTT connection due to inactivity, which could result in dropped device messages.
+The exact maximum value depends on your carrier.
+In general, a few minutes or less should work well.</p>
+</div>
+<dl class="simple" id="config-gnss-fix-timeout-seconds">
+<dt>CONFIG_GNSS_FIX_TIMEOUT_SECONDS - GNSS fix timeout (seconds)</dt><dd><p>Sets the GNSS fix timeout in seconds.
+On each location sample, try for this long to achieve a GNSS fix before falling back to cellular positioning.</p>
+</dd>
+</dl>
+<dl class="simple" id="config-location-tracking-sample-interval-seconds">
+<dt>CONFIG_LOCATION_TRACKING_SAMPLE_INTERVAL_SECONDS - Location sampling interval (seconds)</dt><dd><p>Sets the location sampling interval in seconds.</p>
+</dd>
+</dl>
+<dl class="simple" id="config-location-tracking-gnss">
+<dt>CONFIG_LOCATION_TRACKING_GNSS - GNSS location tracking</dt><dd><p>Enables GNSS location tracking.
+Disable all location tracking methods to completely disable location tracking.
+Defaults to enabled.</p>
+</dd>
+</dl>
+<dl class="simple" id="config-location-tracking-cellular">
+<dt>CONFIG_LOCATION_TRACKING_CELLULAR - Cellular location tracking</dt><dd><p>Enables cellular location tracking.
+Disable all location tracking methods to completely disable location tracking.
+Defaults to enabled.</p>
+</dd>
+</dl>
+<dl class="simple" id="config-location-tracking-wifi">
+<dt>CONFIG_LOCATION_TRACKING_WIFI - Wi-Fi location tracking</dt><dd><p>Enables Wi-Fi location tracking.
+Disable all location tracking methods to completely disable location tracking.
+Requires the use of an nRF7002 companion chip.
+Defaults to disabled.</p>
+</dd>
+</dl>
+<dl class="simple" id="config-temp-data-use-sensor">
+<dt>CONFIG_TEMP_DATA_USE_SENSOR - Use genuine temperature data</dt><dd><p>Sets whether to take genuine temperature measurements from a connected BME680 sensor, or just simulate sensor data.</p>
+</dd>
+</dl>
+<dl class="simple" id="config-temp-tracking">
+<dt>CONFIG_TEMP_TRACKING - Track temperature data</dt><dd><p>Enables tracking and reporting of temperature data to <a class="reference external" href="https://nrfcloud.com/">nRF Cloud</a>.
+Defaults to enabled.</p>
+</dd>
+</dl>
+<dl class="simple" id="config-led-indication-pwm">
+<dt>CONFIG_LED_INDICATION_PWM - PWM LED indication</dt><dd><p>Use the <a class="reference external" href="https://docs.zephyrproject.org/latest/build/dts/api/bindings/led/pwm-leds.html">Zephyr pwm-leds</a> driver for LED indication.
+Defaults to enabled on the Thingy:91.</p>
+</dd>
+</dl>
+<dl class="simple" id="config-led-indication-gpio">
+<dt>CONFIG_LED_INDICATION_GPIO - GPIO LED indication</dt><dd><p>Use the <a class="reference external" href="https://docs.zephyrproject.org/latest/build/dts/api/bindings/led/gpio-leds.html">Zephyr gpio-leds</a> driver for LED indication.
+Defaults to enabled if there is a compatible devicetree entry, and the Thingy:91 is not the target.
+Defaults to enabled on the nRF9160DK.</p>
+</dd>
+</dl>
+<dl class="simple" id="config-led-indication-disabled">
+<dt>CONFIG_LED_INDICATION_DISABLED - Completely disable LED indication</dt><dd><p>Defaults to enabled if both <a class="reference internal" href="#config-led-indication-pwm"><span class="std std-ref">CONFIG_LED_INDICATION_PWM</span></a> and <a class="reference internal" href="#config-led-indication-gpio"><span class="std std-ref">CONFIG_LED_INDICATION_GPIO</span></a> are disabled.</p>
+</dd>
+</dl>
+<dl class="simple" id="config-led-indicator-rgb">
+<dt>CONFIG_LED_INDICATOR_RGB - RGB LED status indication</dt><dd><p>Use an on-board RGB LED for status indication.
+Defaults to enabled on the Thingy:91.</p>
+</dd>
+</dl>
+<dl class="simple" id="config-led-indicator-4led">
+<dt>CONFIG_LED_INDICATOR_4LED - Four-LED status indication</dt><dd><p>Use four discrete LEDs for status indication.
+Defaults to enabled if <a class="reference internal" href="#config-led-indicator-rgb"><span class="std std-ref">CONFIG_LED_INDICATOR_RGB</span></a> is disabled and LED indication is not disabled.</p>
+</dd>
+</dl>
+<dl class="simple" id="config-led-verbose-indication">
+<dt>CONFIG_LED_VERBOSE_INDICATION - Verbose LED status indication</dt><dd><p>Show more detailed LED status updates.
+Show a pattern when device messages are successfully sent, and when the initial connection to nRF Cloud is lost.
+Defaults to enabled if LED indication is enabled.</p>
+</dd>
+</dl>
+<dl class="simple" id="config-led-continuous-indication">
+<dt>CONFIG_LED_CONTINUOUS_INDICATION - Continuous LED status indication</dt><dd><p>Show an idle pattern, rather than turn the LEDs off, when the sample is idle.
+Defaults to enabled if LED indication is enabled.</p>
+</dd>
+</dl>
+<dl class="simple" id="config-test-counter">
+<dt>CONFIG_TEST_COUNTER - Enable test counter</dt><dd><p>Enables the test counter.</p>
+</dd>
+</dl>
+<dl class="simple" id="config-at-cmd-requests">
+<dt>CONFIG_AT_CMD_REQUESTS - Enable AT command requests</dt><dd><p>Allow remote execution of modem AT commands, requested using application-specific device messages.
+See <a class="reference internal" href="#nrf-cloud-mqtt-multi-service-remote-at"><span class="std std-ref">Remote execution of modem AT commands</span></a> for details.</p>
+</dd>
+</dl>
+<dl class="simple" id="config-at-cmd-request-response-buffer-length">
+<dt>CONFIG_AT_CMD_REQUEST_RESPONSE_BUFFER_LENGTH - Length of AT command request response buffer (bytes)</dt><dd><p>Sets the size of the buffer for storing responses to modem AT commands before they are forwarded to the cloud.
+Modem responses longer than this length will be replaced with an error code message (-NRF_E2BIG).
+Cannot be less than 40 bytes.</p>
+</dd>
+</dl>
+</section>
+</section>
+<section id="building-and-running">
+<span id="nrf-cloud-mqtt-multi-service-building-and-running"></span><h2><a class="toc-backref" href="#id26">Building and running</a><a class="headerlink" href="#building-and-running" title="Permalink to this heading"></a></h2>
+<p>This sample can be found under <code class="file docutils literal notranslate"><span class="pre">samples/nrf9160/nrf_cloud_mqtt_multi_service</span></code> in the nRF Connect SDK folder structure.</p>
+<p>When built as firmware image for the <code class="docutils literal notranslate"><span class="pre">_ns</span></code> build target, the sample has Cortex-M Security Extensions (CMSE) enabled and separates the firmware between Non-Secure Processing Environment (NSPE) and Secure Processing Environment (SPE).
+Because of this, it automatically includes the <a class="reference internal" href="../../../app_dev/tfm/index.html#ug-tfm"><span class="std std-ref">Trusted Firmware-M (TF-M)</span></a>.
+To read more about CMSE, see <a class="reference internal" href="../../../app_dev/board_support/index.html#app-boards-spe-nspe"><span class="std std-ref">Processing environments</span></a>.</p>
+<p>To build the sample with Visual Studio Code, follow the steps listed on the <a class="reference external" href="https://nrfconnect.github.io/vscode-nrf-connect/get_started/build_app_ncs.html">How to build an application</a> page in the nRF Connect for VS Code extension documentation.
+See <a class="reference internal" href="../../../getting_started/programming.html#gs-programming"><span class="std std-ref">Building and programming an application</span></a> for other building and programming scenarios and <a class="reference internal" href="../../../getting_started/testing.html#gs-testing"><span class="std std-ref">Testing and debugging an application</span></a> for general information about testing and debugging in the nRF Connect SDK.</p>
+<section id="building-with-nrf7002-ek-wi-fi-scanning-support-for-nrf9160-dk">
+<span id="nrf-cloud-mqtt-multi-service-building-wifi"></span><h3><a class="toc-backref" href="#id27">Building with nRF7002 EK Wi-Fi scanning support (for nRF9160 DK)</a><a class="headerlink" href="#building-with-nrf7002-ek-wi-fi-scanning-support-for-nrf9160-dk" title="Permalink to this heading"></a></h3>
+<p>To build the sample with nRF7002 EK Wi-Fi scanning support, use the <code class="docutils literal notranslate"><span class="pre">-DSHIELD=nrf7002_ek</span></code>, <code class="docutils literal notranslate"><span class="pre">-DDTC_OVERLAY_FILE=nrf9160dk_with_nrf7002ek.overlay</span></code> and  <code class="docutils literal notranslate"><span class="pre">-DOVERLAY_CONFIG=overlay-nrf7002ek-wifi-scan-only.conf</span></code> options.</p>
+<p>This enables the Wi-Fi location tracking method automatically.</p>
+<p>For example:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">west build -p -b nrf9160dk_nrf9160_ns -- -DSHIELD=nrf7002_ek -DDTC_OVERLAY_FILE=&quot;nrf9160dk_with_nrf7002ek.overlay&quot; -DOVERLAY_CONFIG=&quot;overlay-nrf7002ek-wifi-scan-only.conf&quot;</span>
+</pre></div>
+</div>
+<p>This is only supported on the <a class="reference external" href="https://www.nordicsemi.com/Products/Development-hardware/nrf9160-dk/">Nordic nRF9160 DK</a> with an attached nRF7002 EK.</p>
+<p>See also <a class="reference internal" href="#nrf-cloud-mqtt-multi-service-wifi-location-tracking"><span class="std std-ref">the paragraphs on the Wi-Fi location tracking method</span></a>.</p>
+</section>
+</section>
+<section id="dependencies">
+<span id="nrf-cloud-mqtt-multi-service-dependencies"></span><h2><a class="toc-backref" href="#id28">Dependencies</a><a class="headerlink" href="#dependencies" title="Permalink to this heading"></a></h2>
+<p>This sample uses the following nRF Connect SDK libraries and drivers:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../../libraries/networking/nrf_cloud.html#lib-nrf-cloud"><span class="std std-ref">nRF Cloud</span></a></p></li>
+<li><p><a class="reference internal" href="../../../libraries/modem/location.html#lib-location"><span class="std std-ref">Location</span></a></p></li>
+<li><p><a class="reference internal" href="../../../libraries/modem/at_host.html#lib-at-host"><span class="std std-ref">AT Host</span></a></p></li>
+<li><p><a class="reference internal" href="../../../libraries/modem/lte_lc.html#lte-lc-readme"><span class="std std-ref">LTE link controller</span></a></p></li>
+</ul>
+<p>It uses the following <a class="reference external" href="https://github.com/nrfconnect/sdk-nrfxlib">sdk-nrfxlib</a> library:</p>
+<ul class="simple">
+<li><p><span class="xref std std-ref">nrfxlib:nrf_modem</span></p></li>
+</ul>
+<p>In addition, it uses the following secure firmware component:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../../app_dev/tfm/index.html#ug-tfm"><span class="std std-ref">Trusted Firmware-M</span></a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../nrf_cloud_rest_cell_location/README.html" class="btn btn-neutral float-right" title="nRF9160: nRF Cloud REST cellular location" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../nidd/README.html" class="btn btn-neutral" title="nRF9160: NIDD" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LwM2M location assistance &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../_static/js/ncs.js"
+></script>
+<script src="../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="MQTT helper" href="mqtt_helper.html" />
+    <link rel="prev" title="LwM2M client utils" href="lwm2m_client_utils.html" />
+<link
+  href="../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drivers.html">Drivers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Libraries</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../bin/index.html">Binary libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bluetooth_services/index.html">Bluetooth libraries and services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bootloader/index.html">Bootloader libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../caf/index.html">Common Application Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../debug/index.html">Debug libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dfu/index.html">DFU libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gazell/index.html">Gazell libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modem/index.html">Modem libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mpsl/index.html">Multiprotocol Service Layer libraries</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Libraries for networking</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="aws_fota.html">AWS FOTA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="aws_iot.html">AWS IoT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="aws_jobs.html">AWS jobs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="azure_fota.html">Azure FOTA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="azure_iot_hub.html">Azure IoT Hub</a></li>
+<li class="toctree-l3"><a class="reference internal" href="coap_utils.html">CoAP utils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="download_client.html">Download client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fota_download.html">FOTA download</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ftp_client.html">FTP client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="icalendar_parser.html">iCalendar parser</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lwm2m_client_utils.html">LwM2M client utils</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">LwM2M location assistance</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#supported-features">Supported features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#api-usage">API usage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuration">Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#api-documentation">API documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="mqtt_helper.html">MQTT helper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="multicell_location.html">Multicell location</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nrf_cloud.html">nRF Cloud</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nrf_cloud_agps.html">nRF Cloud A-GPS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nrf_cloud_alerts.html">nRF Cloud Alerts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nrf_cloud_location.html">nRF Cloud location</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nrf_cloud_pgps.html">nRF Cloud P-GPS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nrf_cloud_rest.html">nRF Cloud REST</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rest_client.html">REST client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wifi_credentials.html">Wi-Fi credentials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wifi_mgmt_ext.html">Wi-Fi management extension</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../nfc/index.html">Libraries for NFC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nrf_rpc/index.html">nRF RPC libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../others/index.html">Other libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../shell/index.html">Shell libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tfm/index.html">TF-M libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../zigbee/index.html">Libraries for Zigbee</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Libraries</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Libraries for networking</a></li>
+      <li class="breadcrumb-item active">LwM2M location assistance</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/libraries/networking/lwm2m_location_assistance.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="lwm2m-location-assistance">
+<span id="lib-lwm2m-location-assistance"></span><h1>LwM2M location assistance<a class="headerlink" href="#lwm2m-location-assistance" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#overview" id="id7">Overview</a></p></li>
+<li><p><a class="reference internal" href="#supported-features" id="id8">Supported features</a></p></li>
+<li><p><a class="reference internal" href="#api-usage" id="id9">API usage</a></p>
+<ul>
+<li><p><a class="reference internal" href="#cell-based-location" id="id10">Cell-based location</a></p></li>
+<li><p><a class="reference internal" href="#wi-fi-based-location" id="id11">Wi-Fi based location</a></p></li>
+<li><p><a class="reference internal" href="#a-gps-assistance" id="id12">A-GPS assistance</a></p></li>
+<li><p><a class="reference internal" href="#p-gps-assistance" id="id13">P-GPS assistance</a></p></li>
+<li><p><a class="reference internal" href="#result-codes-and-automatic-resend" id="id14">Result codes and automatic resend</a></p></li>
+<li><p><a class="reference internal" href="#using-a-gps-and-p-gps-simultaneously" id="id15">Using A-GPS and P-GPS simultaneously</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#configuration" id="id16">Configuration</a></p></li>
+<li><p><a class="reference internal" href="#api-documentation" id="id17">API documentation</a></p></li>
+</ul>
+</div>
+<p>The LwM2M location assistance library provides a proprietary mechanism to fetch location assistance data from <a class="reference external" href="https://nrfcloud.com/">nRF Cloud</a> by proxying it through the LwM2M server.</p>
+<section id="overview">
+<h2><a class="toc-backref" href="#id7">Overview</a><a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+<p>Location Assistance object is a proprietary LwM2M object used to deliver information required by various location services through LwM2M.
+This feature is currently under development and considered <a class="reference internal" href="../../software_maturity.html#software-maturity"><span class="std std-ref">experimental</span></a>.
+As of now, only AVSystem’s Coiote LwM2M server can be used for utilizing the location assistance data from nRF Cloud.
+To know more about the AVSystem integration with nRF Connect SDK, see <a class="reference internal" href="../../external_comp/avsystem.html#ug-avsystem"><span class="std std-ref">AVSystem integration</span></a>.</p>
+<p>The library adds support for four objects related to location assistance:</p>
+<ul class="simple">
+<li><p>GNSS Assistance object (ID 33625) for requesting and handling A-GPS and P-GPS assistance data.</p></li>
+<li><p>Ground Fix Location object (ID 33626) for requesting and storing estimated cell and Wi-Fi based location.</p></li>
+<li><p>Visible Wi-Fi Access Point object (ID 33627) for storing nearby Wi-Fi Access Point information.</p></li>
+<li><p>ECID-Signal Measurement Information object (ID 10256) for storing the cell neighborhood information.</p></li>
+</ul>
+<p>The Ground Fix Location object works in co-operation with the Visible Wi-Fi Access Point object and the ECID-Signal Measurement Information object.
+When using ground fix, the library always sends as much information about the location to be estimated as it can.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The old Location Assistance object (ID 50001) has been removed.</p>
+</div>
+</section>
+<section id="supported-features">
+<h2><a class="toc-backref" href="#id8">Supported features</a><a class="headerlink" href="#supported-features" title="Permalink to this heading"></a></h2>
+<p>There are four different supported methods of obtaining the location assistance:</p>
+<ul class="simple">
+<li><p>Location based on cell information - The device sends information about the current cell and possibly about the neighboring cells to the LwM2M server.
+The LwM2M server then sends the location request to nRF Cloud, which responds with the location data.</p></li>
+<li><p>Location based on Wi-Fi access points - The device sends information about the nearby Wi-Fi access points to the LwM2M server.
+The LwM2M server then sends the location request to nRF Cloud, which responds with the location data.</p></li>
+<li><p>Query of A-GPS assistance data - The A-GPS assistance data is queried from nRF Cloud and provided back to the device through the LwM2M server.
+The A-GPS assistance data is then provided to the GNSS module for obtaining the position fix faster.</p></li>
+<li><p>Query of P-GPS predictions - The P-GPS predictions are queried from nRF Cloud and provided back to the device through the LwM2M server.
+The predictions are stored in the device flash and injected to the GNSS module when needed.</p></li>
+</ul>
+</section>
+<section id="api-usage">
+<h2><a class="toc-backref" href="#id9">API usage</a><a class="headerlink" href="#api-usage" title="Permalink to this heading"></a></h2>
+<p>This section describes API usage in different scenarios.</p>
+<section id="cell-based-location">
+<span id="location-assistance-cell"></span><h3><a class="toc-backref" href="#id10">Cell-based location</a><a class="headerlink" href="#cell-based-location" title="Permalink to this heading"></a></h3>
+<p>Cell-based location uses only current cell or current and neighboring cells.
+To get information about the current cell, use the Connectivity Monitor object (ID 4).
+When you enable the Kconfig option <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LWM2M_CLIENT_UTILS_CONN_MON_OBJ_SUPPORT</span></code>, the connectivity monitor is populated with data about the current cell.</p>
+<p>To get information about the neighboring cells, use a collection of ECID-Signal Measurement Information objects (ID 10256).
+To populate the objects, call the <a class="reference internal" href="#c.lwm2m_ncell_handler_register" title="lwm2m_ncell_handler_register"><code class="xref c c-func docutils literal notranslate"><span class="pre">lwm2m_ncell_handler_register()</span></code></a> function to register the listener for the neighborhood measurements and <a class="reference internal" href="#c.lwm2m_ncell_schedule_measurement" title="lwm2m_ncell_schedule_measurement"><code class="xref c c-func docutils literal notranslate"><span class="pre">lwm2m_ncell_schedule_measurement()</span></code></a> to schedule a measurement.</p>
+<p>The Ground Fix Location object needs to address the <code class="docutils literal notranslate"><span class="pre">report_back</span></code> resource before sending a location request.
+Back reporting tells the server whether it needs to send the acquired location back to the device.
+If the location is sent back to the device, the location is stored only in the Ground Fix Location object.</p>
+<p>To send the location request for the cell-based location, call the <a class="reference internal" href="#c.location_assistance_ground_fix_request_send" title="location_assistance_ground_fix_request_send"><code class="xref c c-func docutils literal notranslate"><span class="pre">location_assistance_ground_fix_request_send()</span></code></a> function.</p>
+</section>
+<section id="wi-fi-based-location">
+<span id="location-assistance-wifi"></span><h3><a class="toc-backref" href="#id11">Wi-Fi based location</a><a class="headerlink" href="#wi-fi-based-location" title="Permalink to this heading"></a></h3>
+<p>Wi-Fi based location uses the nearby Wi-Fi access points for estimating location.
+The library uses a collection of Visible Wi-Fi Access Point objects (ID 33627) for storing the information about nearby Wi-Fi access points.
+To populate the objects, first enable the Kconfig option for the access point scanner <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LWM2M_CLIENT_UTILS_WIFI_AP_SCANNER</span></code> and call the <a class="reference internal" href="#c.lwm2m_wifi_request_scan" title="lwm2m_wifi_request_scan"><code class="xref c c-func docutils literal notranslate"><span class="pre">lwm2m_wifi_request_scan()</span></code></a> function to request the access point scan.</p>
+<p>The Ground Fix Location object is used in the same manner as it is used in the cell-based location when sending the location request.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Cell-based location and Wi-Fi based location can be combined.
+When combined, the ground fix assistance request contains data from both, the nearby cells and nearby Wi-Fi access points.</p>
+</div>
+</section>
+<section id="a-gps-assistance">
+<span id="location-assistance-agps-lwm2m"></span><h3><a class="toc-backref" href="#id12">A-GPS assistance</a><a class="headerlink" href="#a-gps-assistance" title="Permalink to this heading"></a></h3>
+<p>When using A-GPS assistance, the device requests A-GPS assistance data from the server.
+You can query the GNSS module for the data needed.
+A device can request for all data at once or split the request to reduce the memory usage.
+The request also contains information about the current cell the device is connected to and the information is similarly available on Connectivity Monitor object as in the cell-based location.</p>
+<p>When requesting for A-GPS assistance data, the device must first set the mask for the data it is requesting by calling the <a class="reference internal" href="#c.location_assistance_agps_set_mask" title="location_assistance_agps_set_mask"><code class="xref c c-func docutils literal notranslate"><span class="pre">location_assistance_agps_set_mask()</span></code></a> function.
+When the mask has been set, the <a class="reference internal" href="#c.location_assistance_agps_request_send" title="location_assistance_agps_request_send"><code class="xref c c-func docutils literal notranslate"><span class="pre">location_assistance_agps_request_send()</span></code></a> function sends the request with all necessary data to the server and responds with the A-GPS assistance data.
+The assistance data is written to the GNSS module automatically by the library.</p>
+<section id="filtered-a-gps">
+<h4>Filtered A-GPS<a class="headerlink" href="#filtered-a-gps" title="Permalink to this heading"></a></h4>
+<p>With filtered A-GPS, the satellites below the given angle above the ground are filtered out.
+You can set the angle to a degree <cite>[0 - 90]</cite> using the <a class="reference internal" href="#c.location_assist_agps_set_elevation_mask" title="location_assist_agps_set_elevation_mask"><code class="xref c c-func docutils literal notranslate"><span class="pre">location_assist_agps_set_elevation_mask()</span></code></a> function.
+Setting the degree to <cite>-1</cite> disables filtering, which is the default setting.</p>
+</section>
+</section>
+<section id="p-gps-assistance">
+<span id="location-assistance-pgps-lwm2m"></span><h3><a class="toc-backref" href="#id13">P-GPS assistance</a><a class="headerlink" href="#p-gps-assistance" title="Permalink to this heading"></a></h3>
+<p>When using P-GPS assistance, the device requests predictions for the satellites for a near future.
+P-GPS does not use information about current cell at all.
+It stores the information about satellites and injects the data to the GNSS module when needed.
+When using P-GPS, external flash is necessary as each prediction needs 2 kB of memory.</p>
+<p>When requesting for P-GPS assistance data, the device can set the P-GPS resources.
+If default values are used in the resources, predictions are requested for one week (42 predictions, 7 days, 4 hours between predictions).
+When the resources have been set, the <a class="reference internal" href="#c.location_assistance_pgps_request_send" title="location_assistance_pgps_request_send"><code class="xref c c-func docutils literal notranslate"><span class="pre">location_assistance_pgps_request_send()</span></code></a> function sends the request to the server.</p>
+</section>
+<section id="result-codes-and-automatic-resend">
+<h3><a class="toc-backref" href="#id14">Result codes and automatic resend</a><a class="headerlink" href="#result-codes-and-automatic-resend" title="Permalink to this heading"></a></h3>
+<p>The location assistance objects have a resource called <code class="docutils literal notranslate"><span class="pre">result_code</span></code>.
+This resource contains information about the request handling in the server side.
+It can have three different values:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">0</span></code>  - The request was handled successfully.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-1</span></code> - A permanent error in the server needs fixing.
+The library will reject further requests and the device must be rebooted after the issue has been resolved in the server.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">1</span></code>  - Due to a temporary error in the server, the device needs to retry sending the request after a while.</p></li>
+</ul>
+<p>The library has a resend handler for the temporary error code.
+You can initialize it with the <a class="reference internal" href="#c.location_assistance_init_resend_handler" title="location_assistance_init_resend_handler"><code class="xref c c-func docutils literal notranslate"><span class="pre">location_assistance_init_resend_handler()</span></code></a> function.
+It uses an exponential backoff for scheduling the resends.
+You can also set your own callbacks for the result code for better control of the application.</p>
+</section>
+<section id="using-a-gps-and-p-gps-simultaneously">
+<h3><a class="toc-backref" href="#id15">Using A-GPS and P-GPS simultaneously</a><a class="headerlink" href="#using-a-gps-and-p-gps-simultaneously" title="Permalink to this heading"></a></h3>
+<p>A-GPS and P-GPS can be used simultaneously.
+However, only one active request at a time for the object is allowed.
+The functions <a class="reference internal" href="#c.location_assistance_agps_set_mask" title="location_assistance_agps_set_mask"><code class="xref c c-func docutils literal notranslate"><span class="pre">location_assistance_agps_set_mask()</span></code></a>, <a class="reference internal" href="#c.location_assistance_agps_request_send" title="location_assistance_agps_request_send"><code class="xref c c-func docutils literal notranslate"><span class="pre">location_assistance_agps_request_send()</span></code></a> and <a class="reference internal" href="#c.location_assistance_pgps_request_send" title="location_assistance_pgps_request_send"><code class="xref c c-func docutils literal notranslate"><span class="pre">location_assistance_pgps_request_send()</span></code></a> return <code class="docutils literal notranslate"><span class="pre">-EAGAIN</span></code> if there is an active request.
+In such case, the device must resend the request after the previous request has been handled.</p>
+</section>
+</section>
+<section id="configuration">
+<h2><a class="toc-backref" href="#id16">Configuration</a><a class="headerlink" href="#configuration" title="Permalink to this heading"></a></h2>
+<p>To enable location assistance, configure either or both of the following Kconfig options:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LWM2M_CLIENT_UTILS_GNSS_ASSIST_OBJ_SUPPORT</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LWM2M_CLIENT_UTILS_GROUND_FIX_OBJ_SUPPORT</span></code></p></li>
+</ul>
+<p>Following are the other important library options:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LWM2M_CLIENT_UTILS_LOCATION_ASSIST_AGPS</span></code> -  nRF Cloud provides A-GPS assistance data and the GNSS-module in the device uses the data for obtaining a GNSS fix, which is reported back to the LwM2M server.</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LWM2M_CLIENT_UTILS_LOCATION_ASSIST_PGPS</span></code> -  nRF Cloud provides P-GPS predictions and the GNSS-module in the device uses the data for obtaining a GNSS fix, which is reported back to the LwM2M server.</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LWM2M_CLIENT_UTILS_LOCATION_ASSIST_CELL</span></code> -  nRF Cloud provides estimated location based on currently attached cell and its neighborhood.</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LWM2M_CLIENT_UTILS_CONN_MON_OBJ_SUPPORT</span></code> - Enable support for connectivity monitoring utilities.
+Provides data about the current cell and network the device has connected to.</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LWM2M_CLIENT_UTILS_VISIBLE_WIFI_AP_OBJ_SUPPORT</span></code> - Enable support for the Visible Wi-Fi Access Point objects (ID 33627).</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LWM2M_CLIENT_UTILS_WIFI_AP_SCANNER</span></code> - Enable support for scanning Wi-Fi access points and populating Visible Wi-Fi Access Point objects.</p></li>
+</ul>
+</section>
+<section id="api-documentation">
+<h2><a class="toc-backref" href="#id17">API documentation</a><a class="headerlink" href="#api-documentation" title="Permalink to this heading"></a></h2>
+<div class="line-block">
+<div class="line">Header file: <code class="file docutils literal notranslate"><span class="pre">include/net/lwm2m_client_utils_location.h</span></code></div>
+<div class="line">Source file: <code class="file docutils literal notranslate"><span class="pre">subsys/net/lib/lwm2m_client_utils/location/location_assistance.c</span></code></div>
+</div>
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="group__lwm2m__client__utils__location"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">lwm2m_client_utils_location</span></span></dt>
+<dd><p>API for the LwM2M based LOCATION. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-defines">Defines</p>
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.LOCATION_ASSIST_NEEDS_UTC">
+<span class="target" id="group__lwm2m__client__utils__location_1ga5c30c9c682ef60d276953f0e97245f43"></span><span class="sig-name descname"><span class="n"><span class="pre">LOCATION_ASSIST_NEEDS_UTC</span></span></span><a class="headerlink" href="#c.LOCATION_ASSIST_NEEDS_UTC" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.LOCATION_ASSIST_NEEDS_EPHEMERIES">
+<span class="target" id="group__lwm2m__client__utils__location_1ga112d0418d5ee88dae642dfcf533da63c"></span><span class="sig-name descname"><span class="n"><span class="pre">LOCATION_ASSIST_NEEDS_EPHEMERIES</span></span></span><a class="headerlink" href="#c.LOCATION_ASSIST_NEEDS_EPHEMERIES" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.LOCATION_ASSIST_NEEDS_ALMANAC">
+<span class="target" id="group__lwm2m__client__utils__location_1gad60281a9b06b28bd7999766098afdad8"></span><span class="sig-name descname"><span class="n"><span class="pre">LOCATION_ASSIST_NEEDS_ALMANAC</span></span></span><a class="headerlink" href="#c.LOCATION_ASSIST_NEEDS_ALMANAC" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.LOCATION_ASSIST_NEEDS_KLOBUCHAR">
+<span class="target" id="group__lwm2m__client__utils__location_1ga00866f1b9a2ada9f1850e5b6232e5688"></span><span class="sig-name descname"><span class="n"><span class="pre">LOCATION_ASSIST_NEEDS_KLOBUCHAR</span></span></span><a class="headerlink" href="#c.LOCATION_ASSIST_NEEDS_KLOBUCHAR" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.LOCATION_ASSIST_NEEDS_NEQUICK">
+<span class="target" id="group__lwm2m__client__utils__location_1ga4658c06016a7ddb1e0026e260bd9f8c9"></span><span class="sig-name descname"><span class="n"><span class="pre">LOCATION_ASSIST_NEEDS_NEQUICK</span></span></span><a class="headerlink" href="#c.LOCATION_ASSIST_NEEDS_NEQUICK" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.LOCATION_ASSIST_NEEDS_TOW">
+<span class="target" id="group__lwm2m__client__utils__location_1ga4133f5b23045a821b8a86451f73c503f"></span><span class="sig-name descname"><span class="n"><span class="pre">LOCATION_ASSIST_NEEDS_TOW</span></span></span><a class="headerlink" href="#c.LOCATION_ASSIST_NEEDS_TOW" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.LOCATION_ASSIST_NEEDS_CLOCK">
+<span class="target" id="group__lwm2m__client__utils__location_1gabf3a505ffc958f655526c758636ed2e8"></span><span class="sig-name descname"><span class="n"><span class="pre">LOCATION_ASSIST_NEEDS_CLOCK</span></span></span><a class="headerlink" href="#c.LOCATION_ASSIST_NEEDS_CLOCK" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.LOCATION_ASSIST_NEEDS_LOCATION">
+<span class="target" id="group__lwm2m__client__utils__location_1gaa2a3ee4d4bcc9d74560ec630eec4b5bf"></span><span class="sig-name descname"><span class="n"><span class="pre">LOCATION_ASSIST_NEEDS_LOCATION</span></span></span><a class="headerlink" href="#c.LOCATION_ASSIST_NEEDS_LOCATION" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.LOCATION_ASSIST_NEEDS_INTEGRITY">
+<span class="target" id="group__lwm2m__client__utils__location_1ga8aa790e046f30c8e31e1b61074d09cd4"></span><span class="sig-name descname"><span class="n"><span class="pre">LOCATION_ASSIST_NEEDS_INTEGRITY</span></span></span><a class="headerlink" href="#c.LOCATION_ASSIST_NEEDS_INTEGRITY" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.LOCATION_ASSIST_RESULT_CODE_OK">
+<span class="target" id="group__lwm2m__client__utils__location_1ga75c46bf37938973e2cf94d08c3067394"></span><span class="sig-name descname"><span class="n"><span class="pre">LOCATION_ASSIST_RESULT_CODE_OK</span></span></span><a class="headerlink" href="#c.LOCATION_ASSIST_RESULT_CODE_OK" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.LOCATION_ASSIST_RESULT_CODE_PERMANENT_ERR">
+<span class="target" id="group__lwm2m__client__utils__location_1ga1c08ba2401827f8467a2cff27e5d202d"></span><span class="sig-name descname"><span class="n"><span class="pre">LOCATION_ASSIST_RESULT_CODE_PERMANENT_ERR</span></span></span><a class="headerlink" href="#c.LOCATION_ASSIST_RESULT_CODE_PERMANENT_ERR" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.LOCATION_ASSIST_RESULT_CODE_TEMP_ERR">
+<span class="target" id="group__lwm2m__client__utils__location_1gaa3ab0c2763326b4ef151e5172e92eee7"></span><span class="sig-name descname"><span class="n"><span class="pre">LOCATION_ASSIST_RESULT_CODE_TEMP_ERR</span></span></span><a class="headerlink" href="#c.LOCATION_ASSIST_RESULT_CODE_TEMP_ERR" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.GNSS_ASSIST_OBJECT_ID">
+<span class="target" id="group__lwm2m__client__utils__location_1ga5c0795d7fcd626610c131a4b9fe43bf5"></span><span class="sig-name descname"><span class="n"><span class="pre">GNSS_ASSIST_OBJECT_ID</span></span></span><a class="headerlink" href="#c.GNSS_ASSIST_OBJECT_ID" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.GROUND_FIX_OBJECT_ID">
+<span class="target" id="group__lwm2m__client__utils__location_1gafd7dcb8e7a46b494f129f3cfe6645c9d"></span><span class="sig-name descname"><span class="n"><span class="pre">GROUND_FIX_OBJECT_ID</span></span></span><a class="headerlink" href="#c.GROUND_FIX_OBJECT_ID" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.VISIBLE_WIFI_AP_OBJECT_ID">
+<span class="target" id="group__lwm2m__client__utils__location_1gac0cf61e71276132690763784ddaa1186"></span><span class="sig-name descname"><span class="n"><span class="pre">VISIBLE_WIFI_AP_OBJECT_ID</span></span></span><a class="headerlink" href="#c.VISIBLE_WIFI_AP_OBJECT_ID" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.ECID_SIGNAL_MEASUREMENT_INFO_OBJECT_ID">
+<span class="target" id="group__lwm2m__client__utils__location_1ga804bc019910efeebdd11d65f66e00beb"></span><span class="sig-name descname"><span class="n"><span class="pre">ECID_SIGNAL_MEASUREMENT_INFO_OBJECT_ID</span></span></span><a class="headerlink" href="#c.ECID_SIGNAL_MEASUREMENT_INFO_OBJECT_ID" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.location_assistance_agps_set_mask">
+<span class="target" id="group__lwm2m__client__utils__location_1ga7df7a87921ffa028d08c85743e575681"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">location_assistance_agps_set_mask</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">nrf_modem_gnss_agps_data_frame</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">agps_req</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.location_assistance_agps_set_mask" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Set the A-GPS request mask. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>agps_req</strong> – The A-GPS request coming from the GNSS module. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns a negative error code (errno.h) indicating reason of failure or 0 for success. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.location_assistance_agps_request_send">
+<span class="target" id="group__lwm2m__client__utils__location_1gaeaa3e596a4d12cbf22c6b06506428a52"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">location_assistance_agps_request_send</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">lwm2m_ctx</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n"><span class="pre">confirmable</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.location_assistance_agps_request_send" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Send the A-GPS assistance request to LwM2M server. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ctx</strong> – LwM2M client context for sending the data. </p></li>
+<li><p><strong>confirmable</strong> – Boolean value to indicate should the server return confirmation. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns a negative error code (errno.h) indicating reason of failure or 0 for success. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.location_assistance_ground_fix_request_send">
+<span class="target" id="group__lwm2m__client__utils__location_1gac5e79e6f5b1705f1886e0c1a9e66b280"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">location_assistance_ground_fix_request_send</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">lwm2m_ctx</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n"><span class="pre">confirmable</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.location_assistance_ground_fix_request_send" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Send the Ground Fix request to LwM2M server. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ctx</strong> – LwM2M client context for sending the data. </p></li>
+<li><p><strong>confirmable</strong> – Boolean value to indicate should the server return confirmation. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns a negative error code (errno.h) indicating reason of failure or 0 for success. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.location_assistance_pgps_request_send">
+<span class="target" id="group__lwm2m__client__utils__location_1ga6f22ed5fd890fca2706921659c3e2be1"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">location_assistance_pgps_request_send</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">lwm2m_ctx</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n"><span class="pre">confirmable</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.location_assistance_pgps_request_send" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Send the P-GPS assistance request to LwM2M server. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ctx</strong> – LwM2M client context for sending the data. </p></li>
+<li><p><strong>confirmable</strong> – Boolean value to indicate should the server return confirmation. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns a negative error code (errno.h) indicating reason of failure or 0 for success. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.location_assistance_init_resend_handler">
+<span class="target" id="group__lwm2m__client__utils__location_1gae9890bf0063299a378080a94249f9d58"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">location_assistance_init_resend_handler</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.location_assistance_init_resend_handler" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Initialize the location assistance library resend handler. Handler will handle the result code from server and schedule resending in case of temporary error in server using an exponential backoff. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Returns a negative error code (errno.h) indicating reason of failure or 0 for success. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.location_event_handler_init">
+<span class="target" id="group__lwm2m__client__utils__location_1ga12179cac8253e94b9e5968d7e940fd0e"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">location_event_handler_init</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">lwm2m_ctx</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.location_event_handler_init" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Initialize the location assistance event handler. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ctx</strong> – LwM2M client context for sending the data. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns a negative error code (errno.h) indicating reason of failure or 0 for success. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.location_assist_agps_request_set">
+<span class="target" id="group__lwm2m__client__utils__location_1ga048c6b75b11016a4b69f8c54ec493518"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">location_assist_agps_request_set</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n"><span class="pre">request_mask</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.location_assist_agps_request_set" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Set an A-GPS assistance request mask for the object. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request_mask</strong> – A bitmask containing the requested parameters from the server </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.location_assist_agps_set_elevation_mask">
+<span class="target" id="group__lwm2m__client__utils__location_1ga6b8e12ced20b959686288714943ca4d6"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">location_assist_agps_set_elevation_mask</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">int32_t</span></span><span class="w"> </span><span class="n"><span class="pre">elevation_mask</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.location_assist_agps_set_elevation_mask" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Set the satellite elevation mask angle above the ground. Satellites below the angle will be filtered in the response. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>elevation_mask</strong> – Elevation mask angle in degrees above the ground level </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.location_assist_agps_get_elevation_mask">
+<span class="target" id="group__lwm2m__client__utils__location_1ga4ffe1164080c2fdbec377b586c387171"></span><span class="n"><span class="pre">int32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">location_assist_agps_get_elevation_mask</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.location_assist_agps_get_elevation_mask" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the satellite elevation mask currently stored in the resource. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Returns the currently stored elevation mask as degrees above the ground level. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.location_assist_pgps_set_prediction_count">
+<span class="target" id="group__lwm2m__client__utils__location_1ga67178f9108ae9f57f034e6f729b09239"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">location_assist_pgps_set_prediction_count</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">int32_t</span></span><span class="w"> </span><span class="n"><span class="pre">predictions</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.location_assist_pgps_set_prediction_count" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Set prediction count for the P-GPS query. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>predictions</strong> – Number of predictions requested </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns a negative error code (errno.h) indicating reason of failure or 0 for success. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.location_assist_pgps_set_prediction_interval">
+<span class="target" id="group__lwm2m__client__utils__location_1gacd1dd6713f76519455b4342145b2c34c"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">location_assist_pgps_set_prediction_interval</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">int32_t</span></span><span class="w"> </span><span class="n"><span class="pre">interval</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.location_assist_pgps_set_prediction_interval" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Set prediction interval as minutes for the P-GPS query. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>interval</strong> – Time in minutes between each query </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns a negative error code (errno.h) indicating reason of failure or 0 for success. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.location_assist_pgps_set_start_gps_day">
+<span class="target" id="group__lwm2m__client__utils__location_1ga9226d3d388d78a142d86191836f5c572"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">location_assist_pgps_set_start_gps_day</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">int32_t</span></span><span class="w"> </span><span class="n"><span class="pre">gps_day</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.location_assist_pgps_set_start_gps_day" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Set starting GPS day as days since GPS epoch. Setting the day as 0, will use the default value for the request which will be current GPS day. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gps_day</strong> – Day as a GPS days since GPS epoch. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.location_assist_pgps_get_start_gps_day">
+<span class="target" id="group__lwm2m__client__utils__location_1ga5fa8cbef5238c7a455f2d4f5a4126fc1"></span><span class="n"><span class="pre">int32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">location_assist_pgps_get_start_gps_day</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.location_assist_pgps_get_start_gps_day" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the GPS start day stored currently in the resource. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Returns the currently stored value for GPS start day. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.location_assist_pgps_set_start_time">
+<span class="target" id="group__lwm2m__client__utils__location_1ga5c9bfa2c692414647e68678ee5822bd2"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">location_assist_pgps_set_start_time</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">int32_t</span></span><span class="w"> </span><span class="n"><span class="pre">start_time</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.location_assist_pgps_set_start_time" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Set the GPS start time in seconds. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>start_time</strong> – Time of day in seconds. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns a negative error code (errno.h) indicating reason of failure or 0 for success. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.location_assist_gnss_get_result_code">
+<span class="target" id="group__lwm2m__client__utils__location_1gae8defa7c8e664d2e36efb58acf4d586b"></span><span class="n"><span class="pre">int32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">location_assist_gnss_get_result_code</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.location_assist_gnss_get_result_code" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the result code of the location request. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>int32_t Returns a result code from the LwM2M server. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.ground_fix_set_report_back">
+<span class="target" id="group__lwm2m__client__utils__location_1ga46998bf337673178eb3813c6eaf90f07"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ground_fix_set_report_back</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n"><span class="pre">report_back</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.ground_fix_set_report_back" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Set if the server should report the location back to the object after it has attained it. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>report_back</strong> – Boolean value showing if the server should report the location back. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.ground_fix_get_result_code">
+<span class="target" id="group__lwm2m__client__utils__location_1ga0b82fac0ba72609c6f01bcc8d8c2689a"></span><span class="n"><span class="pre">int32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ground_fix_get_result_code</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.ground_fix_get_result_code" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the result code of the location request. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>int32_t Returns a result code from the LwM2M server. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.lwm2m_signal_meas_info_inst_id_to_index">
+<span class="target" id="group__lwm2m__client__utils__location_1gab8e665a9bda3fbca3d9d3cb166e1325a"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lwm2m_signal_meas_info_inst_id_to_index</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">obj_inst_id</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.lwm2m_signal_meas_info_inst_id_to_index" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.lwm2m_signal_meas_info_index_to_inst_id">
+<span class="target" id="group__lwm2m__client__utils__location_1gabb1fce52e3c157c86e2d91237343e056"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lwm2m_signal_meas_info_index_to_inst_id</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">index</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.lwm2m_signal_meas_info_index_to_inst_id" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.lwm2m_update_signal_meas_objects">
+<span class="target" id="group__lwm2m__client__utils__location_1gab97ffcfc54300f192a82f074fa291e35"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lwm2m_update_signal_meas_objects</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="../modem/lte_lc.html#c.lte_lc_cells_info" title="lte_lc_cells_info"><span class="n"><span class="pre">lte_lc_cells_info</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">cells</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.lwm2m_update_signal_meas_objects" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Update the ECID-Signal Measurement Info objects with the recent neighbor cell data. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cells</strong> – Struct containing all the cell neighbors. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns a negative error code (errno.h) indicating reason of failure or 0 for success. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.lwm2m_ncell_handler_register">
+<span class="target" id="group__lwm2m__client__utils__location_1ga0bbaa1b603cfba4e8ce0789f4158032f"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lwm2m_ncell_handler_register</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.lwm2m_ncell_handler_register" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Register the handler for the Neighbor cell scanning. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Returns a negative error code (errno.h) indicating reason of failure or 0 for success. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.lwm2m_ncell_schedule_measurement">
+<span class="target" id="group__lwm2m__client__utils__location_1ga2dfcdcbc568323a4bfa19fc5e70d7399"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lwm2m_ncell_schedule_measurement</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.lwm2m_ncell_schedule_measurement" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.lwm2m_wifi_request_scan">
+<span class="target" id="group__lwm2m__client__utils__location_1ga6716e06c069cb0a3ad4f1062f2b86403"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lwm2m_wifi_request_scan</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.lwm2m_wifi_request_scan" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Request a Wi-Fi scan for nearby access points. </p>
+<p>The Wi-Fi access points are added to the Visible Wi-Fi Access Point objects (ID 33627) and used for the Wi-Fi based location when sending a ground fix request.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Returns a negative error code (errno.h) indicating the reason for failure or 0 for success. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="mqtt_helper.html" class="btn btn-neutral float-right" title="MQTT helper" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="lwm2m_client_utils.html" class="btn btn-neutral" title="LwM2M client utils" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

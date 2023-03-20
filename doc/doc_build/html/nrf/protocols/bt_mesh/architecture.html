@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bluetooth mesh stack architecture &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../_static/js/ncs.js"
+></script>
+<script src="../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Configuring Bluetooth mesh in nRF Connect SDK" href="configuring.html" />
+    <link rel="prev" title="Bluetooth mesh concepts" href="concepts.html" />
+<link
+  href="../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../protocols.html">Protocols</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../ble/index.html">Bluetooth LE Controller</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Bluetooth mesh</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="supported_features.html">Supported Bluetooth mesh features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Bluetooth mesh concepts</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Bluetooth mesh stack architecture</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#bluetooth-mesh-network-data-flow">Bluetooth mesh network data flow</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#models">Models</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#access">Access</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bluetooth-mesh-core">Bluetooth mesh core</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#provisioning">Provisioning</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="configuring.html">Configuring Bluetooth mesh in nRF Connect SDK</a></li>
+<li class="toctree-l3"><a class="reference internal" href="model_config_app.html">Configuring mesh models using the nRF Mesh mobile app</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fota.html">Performing FOTA updates in Bluetooth mesh</a></li>
+<li class="toctree-l3"><a class="reference internal" href="node_removal.html">Removing a node from a mesh network</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vendor_model/index.html">Creating a new model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reserved_ids.html">Reserved vendor model IDs and opcodes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../esb/index.html">Enhanced ShockBurst (ESB)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gazell/index.html">Gazell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../matter/index.html">Matter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multiprotocol/index.html">Multiprotocol support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nfc/index.html">Near Field Communication (NFC)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../thread/index.html">Thread</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../wifi/index.html">Wi-Fi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../zigbee/index.html">Zigbee</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drivers.html">Drivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../protocols.html">Protocols</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Bluetooth mesh</a></li>
+      <li class="breadcrumb-item active">Bluetooth mesh stack architecture</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/protocols/bt_mesh/architecture.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="bluetooth-mesh-stack-architecture">
+<span id="mesh-architecture"></span><h1>Bluetooth mesh stack architecture<a class="headerlink" href="#bluetooth-mesh-stack-architecture" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#bluetooth-mesh-network-data-flow" id="id8">Bluetooth mesh network data flow</a></p>
+<ul>
+<li><p><a class="reference internal" href="#source-node-with-a-light-switch" id="id9">Source node with a light switch</a></p></li>
+<li><p><a class="reference internal" href="#relay-node" id="id10">Relay node</a></p></li>
+<li><p><a class="reference internal" href="#destination-node-with-a-light-bulb" id="id11">Destination node with a light bulb</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#models" id="id12">Models</a></p></li>
+<li><p><a class="reference internal" href="#access" id="id13">Access</a></p></li>
+<li><p><a class="reference internal" href="#bluetooth-mesh-core" id="id14">Bluetooth mesh core</a></p></li>
+<li><p><a class="reference internal" href="#provisioning" id="id15">Provisioning</a></p></li>
+</ul>
+</div>
+<p>The Bluetooth® mesh stack in nRF Connect SDK is an extension of the Zephyr Bluetooth® mesh stack.
+The Zephyr Bluetooth mesh stack implements the Bluetooth mesh profile specification (see <span class="xref std std-ref">zephyr:bluetooth_mesh</span>), while nRF Connect SDK provides additional model implementations from the Bluetooth mesh model specification on top of the <span class="xref std std-ref">zephyr:bluetooth_mesh_access</span> API.</p>
+<figure class="align-default" id="id6">
+<img alt="Graphical representation of basic mesh stack architecture" src="../../_images/bt_mesh_basic_architecture.svg" /><figcaption>
+<p><span class="caption-text">Basic architecture of the mesh stack</span><a class="headerlink" href="#id6" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>The mesh stack’s structure corresponds to the structure of the Bluetooth mesh specification and follows the same naming conventions:</p>
+<ul class="simple">
+<li><p>Bluetooth mesh components in nRF Connect SDK</p>
+<ul>
+<li><p><a class="reference internal" href="#mesh-architecture-models"><span class="std std-ref">Models</span></a> - The Bluetooth mesh models present and implement device behavior.</p></li>
+</ul>
+</li>
+<li><p>Bluetooth mesh components in Zephyr</p>
+<ul>
+<li><p><a class="reference internal" href="#mesh-architecture-access"><span class="std std-ref">Access</span></a> - The Bluetooth mesh access layer organizes models and communication.</p></li>
+<li><p><a class="reference internal" href="#mesh-architecture-core"><span class="std std-ref">Core</span></a> - The core Bluetooth mesh layer takes care of encryption and message relaying.</p></li>
+<li><p><a class="reference internal" href="#mesh-architecture-provisioning"><span class="std std-ref">Provisioning</span></a> - The Bluetooth mesh provisioning protocol is used for adding devices to the network.</p></li>
+</ul>
+</li>
+</ul>
+<p>See the official <a class="reference external" href="https://www.bluetooth.com/learn-about-bluetooth/recent-enhancements/mesh/mesh-glossary/">Bluetooth mesh glossary</a> for definitions of the most important Bluetooth mesh-related terms used in this documentation.
+You can also read about <a class="reference internal" href="concepts.html#mesh-concepts"><span class="std std-ref">basic Bluetooth mesh concepts</span></a> for a concise introduction to the Bluetooth mesh.</p>
+<section id="bluetooth-mesh-network-data-flow">
+<span id="mesh-architecture-flow"></span><h2><a class="toc-backref" href="#id8">Bluetooth mesh network data flow</a><a class="headerlink" href="#bluetooth-mesh-network-data-flow" title="Permalink to this heading"></a></h2>
+<p>The following figure demonstrates how the data packets flow between mesh nodes and their layers within the mesh stack structure.</p>
+<figure class="align-default" id="id7">
+<img alt="Basic data flow within a mesh network in the |NCS| Bluetooth mesh" src="../../_images/bt_mesh_data_packet_flow.svg" /><figcaption>
+<p><span class="caption-text">Basic data flow within a mesh network in the nRF Connect SDK Bluetooth mesh</span><a class="headerlink" href="#id7" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>As an example, consider a Bluetooth mesh network with three devices/mesh network nodes and the process that takes place on each node when the light switch on the source node is pressed, as discussed in the following sections.</p>
+<section id="source-node-with-a-light-switch">
+<h3><a class="toc-backref" href="#id9">Source node with a light switch</a><a class="headerlink" href="#source-node-with-a-light-switch" title="Permalink to this heading"></a></h3>
+<p>The following process takes place at this stage:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>The application calls the light switch model’s publish function.</p></li>
+<li><p>The model includes an on/off message in a publishing packet with an opcode and sends it to the access layer.</p></li>
+<li><p>The access layer fetches the necessary publish parameters, like destination address, encryption keys and time to live value (TTL value), and passes the packet to the transport layer, the highest of the core layers.</p></li>
+<li><p>The transport layer then encrypts the message with the selected application key, and splits the message into segments if necessary.
+Each segment is passed to the network layer, which attaches a network header with a sequence number and encrypts the packet with the network key before passing it to the Bluetooth LE Controller.</p></li>
+<li><p>The Bluetooth LE Controller includes the network message in an advertisement packet, and schedules a time slot for the packet to be broadcasted.</p></li>
+</ol>
+</div></blockquote>
+</section>
+<section id="relay-node">
+<h3><a class="toc-backref" href="#id10">Relay node</a><a class="headerlink" href="#relay-node" title="Permalink to this heading"></a></h3>
+<p>The following process takes place at this stage:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>The broadcast is received by all mesh nodes within range, and is passed from their bearer layers to their network layers.</p></li>
+<li><p>The network packet is decrypted, and if the receiving node is not its destination, the packet’s TTL value is decreased by one, before being re-encrypted with the same network key and passed back to the Bluetooth LE Controller to be relayed.</p></li>
+</ol>
+</div></blockquote>
+</section>
+<section id="destination-node-with-a-light-bulb">
+<h3><a class="toc-backref" href="#id11">Destination node with a light bulb</a><a class="headerlink" href="#destination-node-with-a-light-bulb" title="Permalink to this heading"></a></h3>
+<p>The following process takes place at this stage:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Once the packet is relayed to the destination light bulb node, its network layer will decrypt the packet and pass it to the transport layer.</p></li>
+<li><p>Once all transport layer segments are received in this manner, the assembled message is decrypted with an application key, and passed on to the access layer.</p></li>
+<li><p>The access layer checks the opcode, application key and destination address, and passes the message to all eligible models.</p></li>
+<li><p>If one of these models is a light bulb model, the model parses the contents of the message, and notifies the application to turn the light bulb on or off.</p></li>
+</ol>
+</div></blockquote>
+<p>The light bulb model may respond to acknowledge the transmission, following the same procedure back to the light switch node, which can notify the application that the on/off message was received.</p>
+</section>
+</section>
+<section id="models">
+<span id="mesh-architecture-models"></span><h2><a class="toc-backref" href="#id12">Models</a><a class="headerlink" href="#models" title="Permalink to this heading"></a></h2>
+<p>The models define the behavior and communication formats of all data that is transmitted across the mesh.
+Equivalent to Bluetooth LE’s GATT services, the Bluetooth mesh models are independent, immutable implementations of specific behaviors or services.
+All mesh communication happens through models, and any application that exposes its behavior through the mesh must channel the communication through one or more models.</p>
+<p>The Bluetooth mesh specification defines a set of immutable models for typical usage scenarios, but vendors are also free to implement their own models.</p>
+<p>You can read more about the Bluetooth mesh models in nRF Connect SDK in <a class="reference internal" href="../../libraries/bluetooth_services/mesh/models.html#bt-mesh-models"><span class="std std-ref">Bluetooth mesh models</span></a>.</p>
+</section>
+<section id="access">
+<span id="mesh-architecture-access"></span><h2><a class="toc-backref" href="#id13">Access</a><a class="headerlink" href="#access" title="Permalink to this heading"></a></h2>
+<p>The access layer controls the device’s model composition.
+It holds references to:</p>
+<ul class="simple">
+<li><p>Models that are present on the device</p></li>
+<li><p>Messages these models accept</p></li>
+<li><p>Configuration of these models</p></li>
+</ul>
+<p>As the device receives mesh messages, the access layer finds which models the messages are for and forwards them to the model implementations.
+The access layer is implemented in Zephyr.
+For more information about the access layer, see <span class="xref std std-ref">zephyr:bluetooth_mesh_access</span>.</p>
+</section>
+<section id="bluetooth-mesh-core">
+<span id="mesh-architecture-core"></span><h2><a class="toc-backref" href="#id14">Bluetooth mesh core</a><a class="headerlink" href="#bluetooth-mesh-core" title="Permalink to this heading"></a></h2>
+<p>Consisting of a network and a transport layer, the Bluetooth mesh core module provides the mesh-specific transport for the messages.</p>
+<p>The transport layer provides in-network security by encrypting mesh packets with <em>application keys</em>, and splitting them into smaller segments that can go on air.
+The transport layer re-assembles incoming packet segments and presents the full mesh message to the access layer.</p>
+<p>The network layer encrypts each transport layer packet segment with a <em>network key</em>, and populates the source and destination address fields.
+When receiving a mesh packet, the network layer decrypts the message, inspects the source and destination addresses, and decides whether the packet is intended for this device and whether the network layer should relay it.</p>
+<p>The Bluetooth mesh core provides protection against malicious behavior and attacks against the mesh network through two-layer encryption, replay protection, and packet header obfuscation.
+The Bluetooth mesh core is implemented in Zephyr.
+Read more about the Bluetooth mesh core API in <span class="xref std std-ref">zephyr:bluetooth_mesh_core</span>.</p>
+</section>
+<section id="provisioning">
+<span id="mesh-architecture-provisioning"></span><h2><a class="toc-backref" href="#id15">Provisioning</a><a class="headerlink" href="#provisioning" title="Permalink to this heading"></a></h2>
+<p>Provisioning is the act of adding a device to a mesh network.
+The Provisioning module takes care of both sides of this process, by implementing a provisioner role (the network owner) and a provisionee role (the device to add).</p>
+<p>The mesh stack supports provisioning of a device directly through the PB-ADV/PB-GATT provisioning bearer, which can only happen between a provisioner and a provisionee that are within radio range of each other.
+The Bluetooth mesh provisioning protocol is implemented in Zephyr.
+For more information about the provisioning process and the API, see <span class="xref std std-ref">zephyr:bluetooth_mesh_provisioning</span>.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="configuring.html" class="btn btn-neutral float-right" title="Configuring Bluetooth mesh in nRF Connect SDK" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="concepts.html" class="btn btn-neutral" title="Bluetooth mesh concepts" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Multi-image builds &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../_static/js/ncs.js"
+></script>
+<script src="../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Testing with Unity and CMock" href="../testing_unity_cmock/index.html" />
+    <link rel="prev" title="Logging in nRF Connect SDK" href="../logging/index.html" />
+<link
+  href="../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev_model.html">Development model</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../app_dev.html">Application development</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../board_support/index.html">Board support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pin_control/index.html">Pin control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../build_and_config_system/index.html">Build and configuration system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../optimizing/index.html">Optimizing application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ap_protect/index.html">Enabling access port protection mechanism</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bootloaders_and_dfu/index.html">Bootloaders and Device Firmware Updates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../logging/index.html">Logging in nRF Connect SDK</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Multi-image builds</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#what-image-files-are">What image files are</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#when-to-use-multiple-images">When to use multiple images</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#default-configuration">Default configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#defining-and-enabling-a-child-image">Defining and enabling a child image</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#updating-the-build-scripts">Updating the build scripts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#adding-a-child-image-using-zephyr-modules">Adding a child image using Zephyr modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#adding-configuration-options">Adding configuration options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#image-specific-variables">Image-specific variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#child-image-devicetree-overlays">Child image devicetree overlays</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#child-image-targets">Child image targets</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#controlling-the-build-process">Controlling the build process</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#memory-placement">Memory placement</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../testing_unity_cmock/index.html">Testing with Unity and CMock</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tfm/index.html">Running applications with Trusted Firmware-M</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_fem/index.html">Working with RF front-end modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../wifi_coex/index.html">Adding Wi-Fi Coexistence support to short-range radio applications</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drivers.html">Drivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../app_dev.html">Application development</a></li>
+      <li class="breadcrumb-item active">Multi-image builds</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/app_dev/multi_image/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="multi-image-builds">
+<span id="ug-multi-image"></span><h1>Multi-image builds<a class="headerlink" href="#multi-image-builds" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#what-image-files-are" id="id6">What image files are</a></p></li>
+<li><p><a class="reference internal" href="#when-to-use-multiple-images" id="id7">When to use multiple images</a></p></li>
+<li><p><a class="reference internal" href="#default-configuration" id="id8">Default configuration</a></p></li>
+<li><p><a class="reference internal" href="#defining-and-enabling-a-child-image" id="id9">Defining and enabling a child image</a></p>
+<ul>
+<li><p><a class="reference internal" href="#updating-the-build-scripts" id="id10">Updating the build scripts</a></p></li>
+<li><p><a class="reference internal" href="#adding-a-child-image-using-zephyr-modules" id="id11">Adding a child image using Zephyr modules</a></p></li>
+<li><p><a class="reference internal" href="#adding-configuration-options" id="id12">Adding configuration options</a></p></li>
+<li><p><a class="reference internal" href="#image-specific-variables" id="id13">Image-specific variables</a></p></li>
+<li><p><a class="reference internal" href="#child-image-devicetree-overlays" id="id14">Child image devicetree overlays</a></p></li>
+<li><p><a class="reference internal" href="#child-image-targets" id="id15">Child image targets</a></p></li>
+<li><p><a class="reference internal" href="#controlling-the-build-process" id="id16">Controlling the build process</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#memory-placement" id="id17">Memory placement</a></p></li>
+</ul>
+</div>
+<p>The firmware programmed to a device can be composed of either one application or several separate images.
+In the latter case, one of the images (the <em>parent image</em>) requires one or more other images (the <em>child images</em>) to be present.
+The child image then <em>chain-loads</em>, or <em>boots</em>, the parent image, which could also be a child image to another parent image, and boots that one.</p>
+<p>The most common use cases for builds composed of multiple images are applications that require a bootloader to be present or applications for multi-core CPUs.</p>
+<section id="what-image-files-are">
+<span id="ug-multi-image-what-are-images"></span><h2><a class="toc-backref" href="#id6">What image files are</a><a class="headerlink" href="#what-image-files-are" title="Permalink to this heading"></a></h2>
+<p>The image file can refer to an <em>executable</em>, a <em>program</em>, or an <em>ELF file</em>.
+As one of the last build steps, the linker processes all object files by locating code, data, and symbols in sections in the final ELF file.
+The linker replaces all symbol references to code and data with addresses.
+A symbol table is created which maps addresses to symbol names, which is used by debuggers.
+When an ELF file is converted into another format, such as HEX or binary, the symbol table is lost.</p>
+<p>Depending on the application and the SoC, you can use one or several images.</p>
+<p>Using multiple images has the following advantages:</p>
+<ul class="simple">
+<li><p>You can run the linker multiple times and partition the final firmware into several regions.
+This partitioning is often useful for bootloaders.</p></li>
+<li><p>Since there is a symbol table for each image, the same symbol names can exist multiple times in the final firmware.
+This is useful for bootloader images, which can require their own copy of a library that the application uses, but in a different version or configuration.</p></li>
+<li><p>In multi-core builds, the build configuration of a child image in a separate core can be made known to the parent image.</p></li>
+</ul>
+<p>The following table lists build files that can be generated as output when building firmware for supported <a class="reference internal" href="../board_support/index.html#app-boards"><span class="std std-ref">build targets</span></a>.
+The table includes files for single-core and multi-core programming scenarios for both Visual Studio Code and command line building methods.
+Which files you are going to use depends on the application configuration and not directly on the type of SoC you are using.
+The following scenarios are possible:</p>
+<ul class="simple">
+<li><p>Single-image - Only one firmware image file is generated for a single core.</p></li>
+<li><p>Multi-image - Two or more firmware image files are generated for a single core.
+You can read more about this scenario in <a class="reference internal" href="#ug-multi-image"><span class="std std-ref">Multi-image builds</span></a>.</p></li>
+<li><p>Multi-core - Two or more firmware image files are generated for two or more cores.</p></li>
+</ul>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 40%" />
+<col style="width: 47%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>File</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Programming scenario</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="file docutils literal notranslate"><span class="pre">zephyr.hex</span></code></p></td>
+<td><p>Default full image.
+In a multi-image build, several <code class="file docutils literal notranslate"><span class="pre">zephyr.hex</span></code> files are generated, one for each image.</p></td>
+<td><ul class="simple">
+<li><p>Programming build targets with <a class="reference internal" href="../board_support/index.html#app-boards-spe-nspe"><span class="std std-ref">NSPE</span></a> or single-image.</p></li>
+<li><p>Testing DFU procedure with nrfjprog (programming directly to device).</p></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p><code class="file docutils literal notranslate"><span class="pre">merged.hex</span></code></p></td>
+<td><p>The result of merging all <code class="file docutils literal notranslate"><span class="pre">zephyr.hex</span></code> files for all images for a core
+in a multi-image build. Used by Nordic Semiconductor’s build targets in single-core
+multi-image builds. In multi-core builds, several <code class="file docutils literal notranslate"><span class="pre">merged_&lt;image_name&gt;.hex</span></code> fields
+are generated, where <em>&lt;image-name&gt;</em> indicates the core.</p></td>
+<td><ul class="simple">
+<li><p>Programming multi-core application.</p></li>
+<li><p>Testing DFU procedure with nrfjprog (programming directly to device).</p></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><p><code class="file docutils literal notranslate"><span class="pre">merged_domain.hex</span></code></p></td>
+<td><p>The result of merging all <code class="file docutils literal notranslate"><span class="pre">merged.hex</span></code> files for all cores or processing environments
+(<code class="file docutils literal notranslate"><span class="pre">merged.hex</span></code> for the application core and <code class="file docutils literal notranslate"><span class="pre">merged.hex</span></code> or <code class="file docutils literal notranslate"><span class="pre">zephyr.hex</span></code>
+for the network core).</p></td>
+<td><ul class="simple">
+<li><p>Programming <a class="reference internal" href="../board_support/index.html#app-boards-spe-nspe"><span class="std std-ref">SPE-only</span></a> and multi-core build targets.</p></li>
+<li><p>Testing DFU procedure with nrfjprog (programming directly to device).</p></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p><code class="file docutils literal notranslate"><span class="pre">tfm_s.hex</span></code></p></td>
+<td><p>Secure firmware image created by the TF-M build system in the background of the Zephyr build.
+It is used together with the <code class="file docutils literal notranslate"><span class="pre">zephyr.hex</span></code> file, which is intended for the Non-Secure
+Processing Environment (NSPE). Located in <code class="file docutils literal notranslate"><span class="pre">build/tfm/bin</span></code>.</p></td>
+<td><p>Programming <a class="reference internal" href="../board_support/index.html#app-boards-spe-nspe"><span class="std std-ref">SPE-only</span></a> and multi-core build targets.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="file docutils literal notranslate"><span class="pre">app_update.bin</span></code></p></td>
+<td><p>Application core update file used to create <code class="file docutils literal notranslate"><span class="pre">dfu_application.zip</span></code> for multi-core DFU.
+Can also be used standalone for a single-image DFU.
+Contains the signed version of the application.
+This file is transferred in the real-life update procedure, as opposed to HEX files
+that are transferred with nrfjprog when emulating an update procedure.
+<span class="xref std std-ref">Compatible with MCUboot</span>.</p></td>
+<td><p>DFU process for single-image build targets and the application core
+of the multi-core build targets.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="file docutils literal notranslate"><span class="pre">app_signed.hex</span></code></p></td>
+<td><p>HEX file variant of the <code class="file docutils literal notranslate"><span class="pre">app_update.bin</span></code> file.
+Can also be used standalone for a single-image DFU.
+Contains the signed version of the application.
+<span class="xref std std-ref">Compatible with MCUboot</span>.</p></td>
+<td><p>Programming single-image build targets and the application core
+of the multi-core build targets.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="file docutils literal notranslate"><span class="pre">net_core_app_update.bin</span></code></p></td>
+<td><p>Network core update file used to create <code class="file docutils literal notranslate"><span class="pre">dfu_application.zip</span></code>.
+This file is transferred in the real-life update procedure, as opposed to HEX files
+that are transferred with nrfjprog when emulating an update procedure.</p></td>
+<td><p>DFU process for the network core of multi-core build targets.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="file docutils literal notranslate"><span class="pre">dfu_application.zip</span></code></p></td>
+<td><p>Zip file containing both the MCUboot-compatible update image for one or more cores
+and a manifest describing its contents.</p></td>
+<td><p>DFU process for both single-core and multi-core applications.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="file docutils literal notranslate"><span class="pre">matter.ota</span></code></p></td>
+<td><p><a class="reference internal" href="../../protocols/matter/index.html#ug-matter"><span class="std std-ref">Matter</span></a>-specific OTA image that contains a Matter-compliant header
+and a DFU multi-image package that bundles user-selected firmware images.</p></td>
+<td><p>DFU over Matter for both single-core and multi-core applications.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="file docutils literal notranslate"><span class="pre">&lt;file_name&gt;.zigbee</span></code></p></td>
+<td><p><a class="reference internal" href="../../protocols/zigbee/index.html#ug-zigbee"><span class="std std-ref">Zigbee</span></a>-specific OTA image that contains the Zigbee application
+with the Zigbee OTA header used for providing information about the image to the OTA server.
+The <em>&lt;file_name&gt;</em> includes manufacturer’s code, image type, file version, and comment
+(customizable by user, sample name by default).
+For example: <code class="file docutils literal notranslate"><span class="pre">127F-0141-01020003-light_switch.zigbee</span></code>.</p></td>
+<td><p>DFU over Zigbee for both single-core and multi-core applications
+in the nRF Connect SDK v2.0.0 and later.</p></td>
+</tr>
+</tbody>
+</table>
+<p>For more information on other build output files refer to <a class="reference internal" href="../build_and_config_system/index.html#app-build-system"><span class="std std-ref">Build and configuration system</span></a> page.</p>
+</section>
+<section id="when-to-use-multiple-images">
+<span id="ug-multi-image-when-to-use-images"></span><h2><a class="toc-backref" href="#id7">When to use multiple images</a><a class="headerlink" href="#when-to-use-multiple-images" title="Permalink to this heading"></a></h2>
+<p>In the nRF Connect SDK, multiple images are required in the following scenarios:</p>
+<dl>
+<dt>First-stage and second-stage bootloaders</dt><dd><p>The first-stage bootloader establishes a root of trust by verifying the next step in the boot sequence.
+This first-stage bootloader is immutable, which means it cannot be updated or deleted.
+If a second-stage bootloader is present, then the first-stage bootloader is responsible for booting and updating the second-stage bootloader, which in turn is responsible for booting and updating the application.
+As such, the first-stage bootloader, the second-stage bootloader, and the application must be located in different images.
+In this scenario, the application is the parent image and the bootloaders are two separate child images.</p>
+<p>See <a class="reference internal" href="../bootloaders_and_dfu/bootloader.html#ug-bootloader"><span class="std std-ref">Secure bootloader chain</span></a> and <a class="reference internal" href="../bootloaders_and_dfu/bootloader_adding.html#ug-bootloader-adding"><span class="std std-ref">Adding a bootloader chain</span></a> for more information.</p>
+</dd>
+<dt>nRF5340 development kit support</dt><dd><p>The nRF5340 development kit (DK) contains two separate processors: a network core and an application core.
+When programming an application for the nRF5340 DK, the application must be divided into at least two images, one for each core.</p>
+<p>See <a class="reference internal" href="../../working_with_nrf/nrf53/nrf5340.html#ug-nrf5340"><span class="std std-ref">Developing with nRF5340 DK</span></a> for more information.</p>
+</dd>
+<dt>nRF5340 Audio development kit support</dt><dd><p>The nRF5340 Audio development kit (DK) is based on the nRF5340 development kit and also contains two separate processors.
+When programming an application for the nRF5340 Audio DK, the application core image is built from a combination of different configuration files.
+The network core image is programmed with an application-specific precompiled Bluetooth Low Energy Controller binary file that contains the LE Audio Controller Subsystem for nRF53.</p>
+<p>See the <a class="reference internal" href="../../applications/nrf5340_audio/README.html#nrf53-audio-app"><span class="std std-ref">nRF5340 Audio</span></a> application documentation for more information.</p>
+</dd>
+</dl>
+</section>
+<section id="default-configuration">
+<span id="ug-multi-image-default-config"></span><h2><a class="toc-backref" href="#id8">Default configuration</a><a class="headerlink" href="#default-configuration" title="Permalink to this heading"></a></h2>
+<p>The nRF Connect SDK samples are set up to build all related images as one solution, starting from the parent image.
+This is referred to as a <em>multi-image build</em>.</p>
+<p>When building the parent image, you can configure how the child image should be handled:</p>
+<ul class="simple">
+<li><p>Build the child image from the source and include it with the parent image.
+This is the default setting.</p></li>
+<li><p>Use a prebuilt HEX file of the child image and include it with the parent image.</p></li>
+<li><p>Ignore the child image.</p></li>
+</ul>
+<p>When building the child image from the source or using a prebuilt HEX file, the build system merges the HEX files of both the parent and child image, so that they can be programmed in one single step.
+This means that you can enable and integrate an additional image just by using the default configuration.</p>
+<p>To change the default configuration and configure how a child image is handled, locate the BUILD_STRATEGY configuration options for the child image in the parent image configuration.
+For example, to use a prebuilt HEX file of the MCUboot instead of building it, select <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MCUBOOT_BUILD_STRATEGY_USE_HEX_FILE</span></code> instead of the default <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MCUBOOT_BUILD_STRATEGY_FROM_SOURCE</span></code>, and specify the HEX file in <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MCUBOOT_HEX_FILE</span></code>.
+To ignore an MCUboot child image, select <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MCUBOOT_BUILD_STRATEGY_SKIP_BUILD</span></code> instead of <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MCUBOOT_BUILD_STRATEGY_FROM_SOURCE</span></code>.</p>
+</section>
+<section id="defining-and-enabling-a-child-image">
+<span id="ug-multi-image-defining"></span><h2><a class="toc-backref" href="#id9">Defining and enabling a child image</a><a class="headerlink" href="#defining-and-enabling-a-child-image" title="Permalink to this heading"></a></h2>
+<p>You can enable existing child images in the nRF Connect SDK by enabling the respective modules in the parent image and selecting the desired build strategy.</p>
+<p>To turn an application that you have implemented into a child image that can be included in a parent image, you must update the build scripts to enable the child image and add the required configuration options.
+You should also know how image-specific variables are disambiguated and what targets of the child images are available.</p>
+<section id="updating-the-build-scripts">
+<span id="ug-multi-image-build-scripts"></span><h3><a class="toc-backref" href="#id10">Updating the build scripts</a><a class="headerlink" href="#updating-the-build-scripts" title="Permalink to this heading"></a></h3>
+<p>To make it possible to enable a child image from a parent image, you must include the child image in the build script.
+If you need to perform this operation out-of-tree (that is, without modifying nRF Connect SDK code), or from the top-level CMakeLists.txt in your sample, see <a class="reference internal" href="#ug-multi-image-add-child-image-oot"><span class="std std-ref">Adding a child image using Zephyr modules</span></a>.</p>
+<p>To do so, place the code from the following example in the CMake tree that is conditional on a configuration option.
+In the nRF Connect SDK, the code is included in the <code class="file docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> file for the samples, and in the MCUboot repository.</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">if</span><span class="w"> </span><span class="p">(</span><span class="s">CONFIG_SECURE_BOOT</span><span class="p">)</span>
+<span class="w">  </span><span class="nb">add_child_image</span><span class="p">(</span>
+<span class="w">    </span><span class="s">NAME</span><span class="w"> </span><span class="s">b0</span>
+<span class="w">    </span><span class="s">SOURCE_DIR</span><span class="w"> </span><span class="o">${</span><span class="nv">CMAKE_CURRENT_LIST_DIR</span><span class="o">}</span><span class="s">/bootloader</span>
+<span class="w">    </span><span class="p">)</span>
+<span class="nb">endif</span><span class="p">()</span>
+
+<span class="nb">if</span><span class="w"> </span><span class="p">(</span><span class="s">CONFIG_BOOTLOADER_MCUBOOT</span><span class="p">)</span>
+<span class="w">   </span><span class="nb">add_child_image</span><span class="p">(</span>
+<span class="w">     </span><span class="s">NAME</span><span class="w"> </span><span class="s">mcuboot</span>
+<span class="w">     </span><span class="s">SOURCE_DIR</span><span class="w"> </span><span class="o">${</span><span class="nv">MCUBOOT_DIR</span><span class="o">}</span><span class="s">/boot/zephyr</span>
+<span class="w">     </span><span class="p">)</span>
+<span class="nb">endif</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>In this code, <code class="docutils literal notranslate"><span class="pre">add_child_image</span></code> registers the child image with the given name and file path and executes the build scripts of the child image.
+Note that both the child image’s application build scripts and the core build scripts are executed.
+The core build scripts might use a different configuration and possibly different devicetree settings.</p>
+<p>If you have to execute a child image on a different core, you must specify the namespace for the child image as <em>domain</em> when adding the child image.
+See the following example:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">add_child_image</span><span class="p">(</span>
+<span class="w">   </span><span class="s">NAME</span><span class="w"> </span><span class="s">hci_rpmsg</span>
+<span class="w">   </span><span class="s">SOURCE_DIR</span><span class="w"> </span><span class="o">${</span><span class="nv">ZEPHYR_BASE</span><span class="o">}</span><span class="s">/samples/bluetooth/hci_rpmsg</span>
+<span class="w">   </span><span class="s">DOMAIN</span><span class="w"> </span><span class="s">CPUNET</span>
+<span class="w">   </span><span class="p">)</span>
+</pre></div>
+</div>
+<p>A <em>domain</em> is well-defined if there is the <code class="docutils literal notranslate"><span class="pre">CONFIG_DOMAIN_${DOMAIN}_BOARD</span></code> configuration option in Kconfig.</p>
+</section>
+<section id="adding-a-child-image-using-zephyr-modules">
+<span id="ug-multi-image-add-child-image-oot"></span><h3><a class="toc-backref" href="#id11">Adding a child image using Zephyr modules</a><a class="headerlink" href="#adding-a-child-image-using-zephyr-modules" title="Permalink to this heading"></a></h3>
+<p>Any call to <code class="docutils literal notranslate"><span class="pre">add_child_image</span></code> must be done <em>after</em> <code class="file docutils literal notranslate"><span class="pre">nrf/cmake/extensions.cmake</span></code> is invoked, but <em>before</em> <code class="file docutils literal notranslate"><span class="pre">multi_image.cmake</span></code> is invoked.
+In some scenarios, this is not possible without modifying the nRF Connect SDK build code, for example, from top-level sample files and project <code class="file docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> files.</p>
+<p>To avoid this issue, use the <em>Modules</em> mechanism provided by the Zephyr build system.
+The following example shows how to add the required module from a top-level sample <code class="file docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code>.</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span><span class="w"> </span><span class="s">3.20.0</span><span class="p">)</span>
+
+<span class="nb">set</span><span class="p">(</span><span class="s">ZEPHYR_EXTRA_MODULES</span><span class="w"> </span><span class="o">${</span><span class="nv">CMAKE_CURRENT_LIST_DIR</span><span class="o">}</span><span class="p">)</span>
+
+<span class="nb">find_package</span><span class="p">(</span><span class="s">Zephyr</span><span class="w"> </span><span class="s">REQUIRED</span><span class="w"> </span><span class="s">HINTS</span><span class="w"> </span><span class="o">$ENV{</span><span class="nv">ZEPHYR_BASE</span><span class="o">}</span><span class="p">)</span>
+<span class="nb">project</span><span class="p">(</span><span class="s">app</span><span class="p">)</span>
+
+<span class="nb">target_sources</span><span class="p">(</span><span class="s">app</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="s">src/main.c</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>A <code class="file docutils literal notranslate"><span class="pre">zephyr/module.yml</span></code> file is needed at the base of the added module.
+The following example specifies only the path to the <code class="file docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> of the new module.
+See <span class="xref std std-ref">modules</span> for more details.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">build</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">cmake</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">aci</span>
+</pre></div>
+</div>
+<p>The <code class="file docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> located in the directory pointed to by <code class="file docutils literal notranslate"><span class="pre">zephyr/module.yml</span></code> will be invoked when <code class="docutils literal notranslate"><span class="pre">add_child_image</span></code> can be invoked.</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="nb">add_child_image</span><span class="p">(</span>
+<span class="w">    </span><span class="s">NAME</span><span class="w"> </span><span class="s">cpunet</span>
+<span class="w">    </span><span class="s">SOURCE_DIR</span><span class="w"> </span><span class="o">${</span><span class="nv">CMAKE_CURRENT_LIST_DIR</span><span class="o">}</span><span class="s">/../cpunet</span>
+<span class="w">    </span><span class="s">DOMAIN</span><span class="w"> </span><span class="s">CPUNET</span>
+<span class="w">    </span><span class="s">BOARD</span><span class="w"> </span><span class="o">${</span><span class="nv">CONFIG_DOMAIN_CPUNET_BOARD</span><span class="o">}</span>
+<span class="w">    </span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="adding-configuration-options">
+<h3><a class="toc-backref" href="#id12">Adding configuration options</a><a class="headerlink" href="#adding-configuration-options" title="Permalink to this heading"></a></h3>
+<p>When enabling a child image, you must select the build strategy to define how the image should be included.
+The following three options are available:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;IMAGE_NAME&gt;_BUILD_STRATEGY_FROM_SOURCE</span></code> - Build the child image from source along with the parent image.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;IMAGE_NAME&gt;_BUILD_STRATEGY_USE_HEX_FILE</span></code> - Merge the specified HEX file of the child image with the parent image, using <code class="docutils literal notranslate"><span class="pre">&lt;IMAGE_NAME&gt;_HEX_FILE</span></code> to specify the HEX file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;IMAGE_NAME&gt;_BUILD_STRATEGY_SKIP_BUILD</span></code> - Ignore the child image when building and build only the parent image.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Child images that are built with the build strategy <code class="docutils literal notranslate"><span class="pre">&lt;IMAGE_NAME&gt;_BUILD_STRATEGY_SKIP_BUILD</span></code> or <code class="docutils literal notranslate"><span class="pre">&lt;IMAGE_NAME&gt;_BUILD_STRATEGY_USE_HEX_FILE</span></code> must define a <a class="reference internal" href="../../scripts/partition_manager/partition_manager.html#ug-pm-static-providing"><span class="std std-ref">static partition</span></a>.</p>
+</div>
+<p>Add these configuration options to the Kconfig file of your child image, replacing <code class="docutils literal notranslate"><span class="pre">&lt;IMAGE_NAME&gt;</span></code> with the uppercase name of your child image that is specified in <code class="docutils literal notranslate"><span class="pre">add_child_image</span></code>.
+To do this, include the <code class="file docutils literal notranslate"><span class="pre">Kconfig.template.build_strategy</span></code> template as follows:</p>
+<div class="highlight-Kconfig notranslate"><div class="highlight"><pre><span></span>module=MCUBOOT
+<span class="k">source</span><span class="w"> </span><span class="s2">&quot;${ZEPHYR_NRF_MODULE_DIR}/subsys/partition_manager/Kconfig.template.build_strategy&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="image-specific-variables">
+<span id="ug-multi-image-variables"></span><h3><a class="toc-backref" href="#id13">Image-specific variables</a><a class="headerlink" href="#image-specific-variables" title="Permalink to this heading"></a></h3>
+<p>The child and parent images are executed in different CMake processes and thus have different namespaces.</p>
+<p>Variables in the parent image are not propagated to the child image, with the following exceptions:</p>
+<ul class="simple">
+<li><p>Any variable named <code class="docutils literal notranslate"><span class="pre">&lt;IMAGE_NAME&gt;_VARIABLEONE</span></code> in a parent image is propagated to the child image named <code class="docutils literal notranslate"><span class="pre">&lt;IMAGE_NAME&gt;</span></code> as <code class="docutils literal notranslate"><span class="pre">VARIABLEONE</span></code>.</p></li>
+<li><p>CMake build settings, such as <code class="docutils literal notranslate"><span class="pre">BOARD_DIR</span></code>, build type, toolchain info, partition manager info, and similar are always passed to child images.</p></li>
+</ul>
+<p>With these two mechanisms, you can set variables in child images from either parent images or the command line, and you can also set variables globally across all images.
+For example, to change the <code class="docutils literal notranslate"><span class="pre">VARIABLEONE</span></code> variable for the <code class="docutils literal notranslate"><span class="pre">childimageone</span></code> child image and the parent image, specify the CMake command as follows:</p>
+<blockquote>
+<div><pre class="highlight literal-block"> cmake -D<em>childimageone</em>_<em>VARIABLEONE</em>=value -D<em>VARIABLEONE</em>=value</pre>
+</div></blockquote>
+<p>You can extend the CMake command used to create the child images by adding flags to the CMake variable <code class="docutils literal notranslate"><span class="pre">EXTRA_MULTI_IMAGE_CMAKE_ARGS</span></code>.
+For example, add <code class="docutils literal notranslate"><span class="pre">--trace-expand</span></code> to that variable to output more debug information.</p>
+<p>With west, you can pass these configuration variables into CMake by using the <code class="docutils literal notranslate"><span class="pre">--</span></code> separator:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">west build -b nrf52840dk_nrf52840 zephyr/samples/hello_world -- \</span>
+<span class="go">-Dmcuboot_CONF_FILE=prj_a.conf \</span>
+<span class="go">-DCONF_FILE=app_prj.conf</span>
+</pre></div>
+</div>
+<p>You can make a project pass Kconfig configuration files, fragments, and devicetree overlays to child images by placing them in the <code class="file docutils literal notranslate"><span class="pre">child_image</span></code> folder in the application source directory.
+The listing below describes how to leverage this functionality, where <code class="docutils literal notranslate"><span class="pre">ACI_NAME</span></code> is the name of the child image to which the configuration will be applied.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="cp"># It is possible for a sample to use a custom set of Kconfig fragments for a</span>
+<span class="w">    </span><span class="cp"># child image, or to append additional Kconfig fragments to the child image.</span>
+<span class="w">    </span><span class="cp"># Note that &lt;ACI_NAME&gt; in this context is the name of the child image as</span>
+<span class="w">    </span><span class="cp"># passed to the &#39;add_child_image&#39; function.</span>
+<span class="w">    </span><span class="cp">#</span>
+<span class="w">    </span><span class="cp"># &lt;child-sample&gt; DIRECTORY</span>
+<span class="w">    </span><span class="cp"># | - prj.conf (A)</span>
+<span class="w">    </span><span class="cp"># | - prj_&lt;buildtype&gt;.conf (B)</span>
+<span class="w">    </span><span class="cp"># | - boards DIRECTORY</span>
+<span class="w">    </span><span class="cp"># | | - &lt;board&gt;.conf (C)</span>
+<span class="w">    </span><span class="cp"># | | - &lt;board&gt;_&lt;buildtype&gt;.conf (D)</span>
+
+
+<span class="w">    </span><span class="cp"># &lt;current-sample&gt; DIRECTORY</span>
+<span class="w">    </span><span class="cp"># | - prj.conf</span>
+<span class="w">    </span><span class="cp"># | - prj_&lt;buildtype&gt;.conf</span>
+<span class="w">    </span><span class="cp"># | - child_image DIRECTORY</span>
+<span class="w">    </span><span class="cp">#     |-- &lt;ACI_NAME&gt;.conf (I)                 Fragment, used together with (A) and (C)</span>
+<span class="w">    </span><span class="cp">#     |-- &lt;ACI_NAME&gt;_&lt;buildtype&gt;.conf (J)     Fragment, used together with (B) and (D)</span>
+<span class="w">    </span><span class="cp">#     |-- &lt;ACI_NAME&gt;.overlay                  If present, will be merged with BOARD.dts</span>
+<span class="w">    </span><span class="cp">#     |-- &lt;ACI_NAME&gt; DIRECTORY</span>
+<span class="w">    </span><span class="cp">#         |-- boards DIRECTORY</span>
+<span class="w">    </span><span class="cp">#         |   |-- &lt;board&gt;.conf (E)            If present, use instead of (C), requires (G).</span>
+<span class="w">    </span><span class="cp">#         |   |-- &lt;board&gt;_&lt;buildtype&gt;.conf (F)     If present, use instead of (D), requires (H).</span>
+<span class="w">    </span><span class="cp">#         |   |-- &lt;board&gt;.overlay             If present, will be merged with BOARD.dts</span>
+<span class="w">    </span><span class="cp">#         |   |-- &lt;board&gt;_&lt;revision&gt;.overlay  If present, will be merged with BOARD.dts</span>
+<span class="w">    </span><span class="cp">#         |-- prj.conf (G)                    If present, use instead of (A)</span>
+<span class="w">    </span><span class="cp">#         |                                   Note that (C) is ignored if this is present.</span>
+<span class="w">    </span><span class="cp">#         |                                   Use (E) instead.</span>
+<span class="w">    </span><span class="cp">#         |-- prj_&lt;buildtype&gt;.conf (H)        If present, used instead of (B) when user</span>
+<span class="w">    </span><span class="cp">#         |                                   specify `-DCONF_FILE=prj_&lt;buildtype&gt;.conf for</span>
+<span class="w">    </span><span class="cp">#         |                                   parent image. Note that any (C) is ignored</span>
+<span class="w">    </span><span class="cp">#         |                                   if this is present. Use (F) instead.</span>
+<span class="w">    </span><span class="cp">#         |-- &lt;board&gt;.overlay                 If present, will be merged with BOARD.dts</span>
+<span class="w">    </span><span class="cp">#         |-- &lt;board&gt;_&lt;revision&gt;.overlay      If present, will be merged with BOARD.dts</span>
+<span class="w">    </span><span class="cp">#</span>
+<span class="w">    </span><span class="cp"># Note: The folder `child_image/&lt;ACI_NAME&gt;` is only need when configurations</span>
+<span class="w">    </span><span class="cp">#       files must be used instead of the child image default configs.</span>
+<span class="w">    </span><span class="cp">#       The append a child image default config, place the additional settings</span>
+<span class="w">    </span><span class="cp">#       in `child_image/&lt;ACI_NAME&gt;.conf`.</span>
+</pre></div>
+</div>
+<section id="variables-in-child-images">
+<h4>Variables in child images<a class="headerlink" href="#variables-in-child-images" title="Permalink to this heading"></a></h4>
+<p>It is possible to provide configuration settings for child images, either as individual settings or using Kconfig fragments.
+Each child image is referenced using its image name.</p>
+<p>The following example sets the configuration option <code class="docutils literal notranslate"><span class="pre">CONFIG_VARIABLEONE=val</span></code> in the child image <code class="docutils literal notranslate"><span class="pre">childimageone</span></code>:</p>
+<blockquote>
+<div><pre class="highlight literal-block"> cmake -D<em>childimageone</em>_<em>CONFIG_VARIABLEONE=val</em>[...]</pre>
+</div></blockquote>
+<p>You can add a Kconfig fragment to the child image default configuration in a similar way.
+The following example adds an extra Kconfig fragment <code class="docutils literal notranslate"><span class="pre">extrafragment.conf</span></code> to <code class="docutils literal notranslate"><span class="pre">childimageone</span></code>:</p>
+<blockquote>
+<div><pre class="highlight literal-block"> cmake -D<em>childimageone</em>_OVERLAY_CONFIG=<em>extrafragment.conf</em>[...]</pre>
+</div></blockquote>
+<p>It is also possible to provide a custom configuration file as a replacement for the default Kconfig file for the child image.
+The following example uses the custom configuration file <code class="docutils literal notranslate"><span class="pre">myfile.conf</span></code> when building <code class="docutils literal notranslate"><span class="pre">childimageone</span></code>:</p>
+<blockquote>
+<div><pre class="highlight literal-block"> cmake -D<em>childimageone</em>_CONF_FILE=<em>myfile.conf</em>[...]</pre>
+</div></blockquote>
+<p>If your application includes multiple child images, then you can combine all the above as follows:</p>
+<ul>
+<li><p>Setting <code class="docutils literal notranslate"><span class="pre">CONFIG_VARIABLEONE=val</span></code> in the main application.</p></li>
+<li><p>Adding a Kconfig fragment <code class="docutils literal notranslate"><span class="pre">extrafragment.conf</span></code> to the <code class="docutils literal notranslate"><span class="pre">childimageone</span></code> child image, using <code class="docutils literal notranslate"><span class="pre">-Dchildimageone_OVERLAY_CONFIG=extrafragment.conf</span></code>.</p></li>
+<li><p>Using <code class="docutils literal notranslate"><span class="pre">myfile.conf</span></code> as configuration for the <code class="docutils literal notranslate"><span class="pre">quz</span></code> child image, using <code class="docutils literal notranslate"><span class="pre">-Dquz_CONF_FILE=myfile.conf</span></code>.</p>
+<pre class="highlight literal-block"> cmake -DCONFIG_VARIABLEONE=val -D<em>childimageone</em>_OVERLAY_CONFIG=<em>extrafragment.conf</em>-Dquz_CONF_FILE=<em>myfile.conf</em>[...]</pre>
+</li>
+</ul>
+<p>See <a class="reference internal" href="../bootloaders_and_dfu/bootloader.html#ug-bootloader"><span class="std std-ref">Secure bootloader chain</span></a> for more details.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The build system grabs the Kconfig fragment or configuration file specified in a CMake argument relative to that image’s application directory.
+For example, the build system uses <code class="docutils literal notranslate"><span class="pre">nrf/samples/bootloader/my-fragment.conf</span></code> when building with the <code class="docutils literal notranslate"><span class="pre">-Db0_OVERLAY_CONFIG=my-fragment.conf</span></code> option, whereas <code class="docutils literal notranslate"><span class="pre">-DOVERLAY_CONFIG=my-fragment.conf</span></code> grabs the fragment from the main application’s directory, such as <code class="docutils literal notranslate"><span class="pre">zephyr/samples/hello_world/my-fragment.conf</span></code>.</p>
+</div>
+<p>You can also merge multiple fragments into the overall configuration for an image by giving a list of Kconfig fragments as a string, separated using <code class="docutils literal notranslate"><span class="pre">;</span></code>.
+The following example shows how to combine <code class="docutils literal notranslate"><span class="pre">abc.conf</span></code>, Kconfig fragment of the <code class="docutils literal notranslate"><span class="pre">childimageone</span></code> child image, with the <code class="docutils literal notranslate"><span class="pre">extrafragment.conf</span></code> fragment:</p>
+<blockquote>
+<div><pre class="highlight literal-block"> cmake -D<em>childimageone</em>_OVERLAY_CONFIG='<em>extrafragment.conf</em>;<em>abc.conf</em>'</pre>
+</div></blockquote>
+<p>When the build system finds the fragment, it outputs their merge during the CMake build output as follows:</p>
+<pre class="highlight literal-block">...
+Merged configuration '<em>extrafragment.conf</em>'
+Merged configuration '<em>abc.conf</em>'
+...</pre>
+</section>
+</section>
+<section id="child-image-devicetree-overlays">
+<h3><a class="toc-backref" href="#id14">Child image devicetree overlays</a><a class="headerlink" href="#child-image-devicetree-overlays" title="Permalink to this heading"></a></h3>
+<p>You can provide devicetree overlays for a child image using <code class="docutils literal notranslate"><span class="pre">*.overlay</span></code> files.</p>
+<p>The following example sets the devicetree overlay <code class="docutils literal notranslate"><span class="pre">extra.overlay</span></code> to <code class="docutils literal notranslate"><span class="pre">childimageone</span></code>:</p>
+<pre class="highlight literal-block">cmake -D<em>childimageone</em>_DTC_OVERLAY_FILE='<em>extra.overlay</em>'</pre>
+<p>The build system does also automatically apply any devicetree overlay located in the <code class="docutils literal notranslate"><span class="pre">child_image</span></code> folder and named as follows (where <code class="docutils literal notranslate"><span class="pre">ACI_NAME</span></code> is the name of the child image):</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">child_image/&lt;ACI_NAME&gt;.overlay</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">child_image/&lt;ACI_NAME&gt;/&lt;board&gt;.overlay</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">child_image/&lt;ACI_NAME&gt;/&lt;board&gt;_&lt;revision&gt;.overlay</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">child_image/&lt;ACI_NAME&gt;/boards/&lt;board&gt;.overlay</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">child_image/&lt;ACI_NAME&gt;/boards/&lt;board&gt;_&lt;revision&gt;.overlay</span></code></p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The build system grabs the devicetree overlay files specified in a CMake argument relative to that image’s application directory.
+For example, the build system uses <code class="docutils literal notranslate"><span class="pre">nrf/samples/bootloader/my-dts.overlay</span></code> when building with the <code class="docutils literal notranslate"><span class="pre">-Db0_DTC_OVERLAY_FILE=my-dts.overlay</span></code> option, whereas <code class="docutils literal notranslate"><span class="pre">-DDTC_OVERLAY_FILE=my-dts.overlay</span></code> grabs the fragment from the main application’s directory, such as <code class="docutils literal notranslate"><span class="pre">zephyr/samples/hello_world/my-dts.overlay</span></code>.</p>
+</div>
+</section>
+<section id="child-image-targets">
+<h3><a class="toc-backref" href="#id15">Child image targets</a><a class="headerlink" href="#child-image-targets" title="Permalink to this heading"></a></h3>
+<p>You can indirectly invoke a selection of child image targets from the parent image.
+Currently, the child targets that can be invoked from the parent targets are <code class="docutils literal notranslate"><span class="pre">menuconfig</span></code>, <code class="docutils literal notranslate"><span class="pre">guiconfig</span></code>, and any targets listed in <code class="docutils literal notranslate"><span class="pre">EXTRA_KCONFIG_TARGETS</span></code>.</p>
+<p>To disambiguate targets, use the same prefix convention used for variables.
+For example, to run menuconfig, invoke the <code class="docutils literal notranslate"><span class="pre">menuconfig</span></code> target to configure the parent image and <code class="docutils literal notranslate"><span class="pre">mcuboot_menuconfig</span></code> to configure the MCUboot child image.</p>
+<p>You can also invoke any child target directly from its build directory.
+Child build directories are located at the root of the parent’s build directory.</p>
+</section>
+<section id="controlling-the-build-process">
+<h3><a class="toc-backref" href="#id16">Controlling the build process</a><a class="headerlink" href="#controlling-the-build-process" title="Permalink to this heading"></a></h3>
+<p>The child image is built using CMake’s build command <code class="docutils literal notranslate"><span class="pre">cmake</span> <span class="pre">--build</span></code>.
+This mechanism allows additional control of the build process through CMake.</p>
+<section id="cmake-options">
+<h4>CMake options<a class="headerlink" href="#cmake-options" title="Permalink to this heading"></a></h4>
+<p>The following CMake options are propagated from the CMake command of the parent image to the CMake command of the child image:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">CMAKE_BUILD_TYPE</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CMAKE_VERBOSE_MAKEFILE</span></code></p></li>
+</ul>
+<p>You can add other CMake options to a specific child image in the same way as you can set <a class="reference internal" href="#ug-multi-image-variables"><span class="std std-ref">Image-specific variables</span></a>.
+For example, add <code class="docutils literal notranslate"><span class="pre">-Dmcuboot_CMAKE_VERBOSE_MAKEFILE</span></code> to the parent’s CMake command to build the <code class="docutils literal notranslate"><span class="pre">mcuboot</span></code> child image with verbose output.</p>
+<p>To enable additional debug information for the multi-image build command, set the CMake option <code class="docutils literal notranslate"><span class="pre">MULTI_IMAGE_DEBUG_MAKEFILE</span></code> to the desired debug mode.
+For example, add <code class="docutils literal notranslate"><span class="pre">-DMULTI_IMAGE_DEBUG_MAKEFILE=explain</span></code> to log the reasons why a command was executed.</p>
+<p>See <a class="reference internal" href="../../getting_started/modifying.html#cmake-options"><span class="std std-ref">Providing CMake options</span></a> for instructions on how to specify these CMake options for the build.</p>
+</section>
+<section id="cmake-environment-variables">
+<h4>CMake environment variables<a class="headerlink" href="#cmake-environment-variables" title="Permalink to this heading"></a></h4>
+<p>Unlike CMake options, CMake environment variables allow you to control the build process without re-invoking CMake.</p>
+<p>You can use the CMake environment variables <a class="reference external" href="https://cmake.org/cmake/help/latest/envvar/VERBOSE.html">VERBOSE</a> and <a class="reference external" href="https://cmake.org/cmake/help/latest/envvar/CMAKE_BUILD_PARALLEL_LEVEL.html">CMAKE_BUILD_PARALLEL_LEVEL</a> to control the verbosity and the number of parallel jobs for a build:</p>
+<p>When using the command line or Visual Studio Code terminal window, you must set them before invoking west.
+They apply to both the parent and child images.
+For example, to build with verbose output and one parallel job, use the following command, where <em>build_target</em> is the target for the development kit for which you are building:</p>
+<pre class="highlight literal-block">west build -b <em>build_target</em> -- -DCMAKE_VERBOSE_MAKEFILE=1 -DCMAKE_BUILD_PARALLEL_LEVEL=1</pre>
+</section>
+</section>
+</section>
+<section id="memory-placement">
+<h2><a class="toc-backref" href="#id17">Memory placement</a><a class="headerlink" href="#memory-placement" title="Permalink to this heading"></a></h2>
+<p>In a multi-image build, all images must be placed in memory so that they do not overlap.
+The flash memory start address for each image must be specified by, for example, <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_FLASH_LOAD_OFFSET</span></code>.</p>
+<p>Hardcoding the image locations like this works fine for simple use cases like a bootloader that prepares a device, where there are no further requirements on where in memory each image must be placed.
+However, more advanced use cases require a memory layout where images are located in a specific order relative to one another.</p>
+<p>The nRF Connect SDK provides a Python tool that allows you to specify this kind of relative placement or even a static placement based on start addresses and sizes for the different images.</p>
+<p>See <a class="reference internal" href="../../scripts/partition_manager/partition_manager.html#partition-manager"><span class="std std-ref">Partition Manager</span></a> for more information about how to set up your partitions and configure your build system.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../testing_unity_cmock/index.html" class="btn btn-neutral float-right" title="Testing with Unity and CMock" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../logging/index.html" class="btn btn-neutral" title="Logging in nRF Connect SDK" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CAF: Sensor manager module &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../_static/js/ncs.js"
+></script>
+<script src="../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="CAF: Settings loader module" href="settings_loader.html" />
+    <link rel="prev" title="CAF: Sensor data aggregator module" href="sensor_data_aggregator.html" />
+<link
+  href="../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drivers.html">Drivers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Libraries</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../bin/index.html">Binary libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bluetooth_services/index.html">Bluetooth libraries and services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bootloader/index.html">Bootloader libraries</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Common Application Framework</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="caf_overview.html">Common Application Framework overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ble_adv.html">CAF: Bluetooth LE advertising module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ble_bond.html">CAF: Bluetooth LE bond module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ble_smp.html">CAF: Simple Management Protocol module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ble_state.html">CAF: Bluetooth LE state module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ble_state_pm.html">CAF: Bluetooth state power manager module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="buttons.html">CAF: Buttons module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="buttons_pm_keep_alive.html">CAF: Power manager keep alive module for buttons</a></li>
+<li class="toctree-l3"><a class="reference internal" href="click_detector.html">CAF: Click detector module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="leds.html">CAF: LEDs module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="net_state.html">CAF: Network state module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="power_manager.html">CAF: Power manager module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sensor_data_aggregator.html">CAF: Sensor data aggregator module</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">CAF: Sensor manager module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#configuration">Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#implementation-details">Implementation details</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="settings_loader.html">CAF: Settings loader module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../debug/index.html">Debug libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dfu/index.html">DFU libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gazell/index.html">Gazell libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modem/index.html">Modem libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mpsl/index.html">Multiprotocol Service Layer libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../networking/index.html">Libraries for networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nfc/index.html">Libraries for NFC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nrf_rpc/index.html">nRF RPC libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../others/index.html">Other libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../shell/index.html">Shell libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tfm/index.html">TF-M libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../zigbee/index.html">Libraries for Zigbee</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Libraries</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Common Application Framework</a></li>
+      <li class="breadcrumb-item active">CAF: Sensor manager module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/libraries/caf/sensor_manager.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="caf-sensor-manager-module">
+<span id="caf-sensor-manager"></span><h1>CAF: Sensor manager module<a class="headerlink" href="#caf-sensor-manager-module" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#configuration" id="id7">Configuration</a></p>
+<ul>
+<li><p><a class="reference internal" href="#enabling-sensor-trigger" id="id8">Enabling sensor trigger</a></p></li>
+<li><p><a class="reference internal" href="#enabling-passive-power-management" id="id9">Enabling passive power management</a></p></li>
+<li><p><a class="reference internal" href="#enabling-active-power-management" id="id10">Enabling active power management</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#implementation-details" id="id11">Implementation details</a></p>
+<ul>
+<li><p><a class="reference internal" href="#sensor-state-events" id="id12">Sensor state events</a></p></li>
+<li><p><a class="reference internal" href="#sensor-trigger-activation" id="id13">Sensor trigger activation</a></p></li>
+<li><p><a class="reference internal" href="#passive-power-management" id="id14">Passive power management</a></p></li>
+<li><p><a class="reference internal" href="#active-power-management" id="id15">Active power management</a></p></li>
+<li><p><a class="reference internal" href="#changing-sensor-sample-period" id="id16">Changing sensor sample period</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>The sensor manager module of the <a class="reference internal" href="index.html#lib-caf"><span class="std std-ref">Common Application Framework</span></a> (CAF) generates the following types of events in relation with the sensor defined in the module configuration:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="caf_overview.html#c.sensor_event" title="sensor_event"><code class="xref c c-struct docutils literal notranslate"><span class="pre">sensor_event</span></code></a> when the sensor is sampled.</p></li>
+<li><p><a class="reference internal" href="caf_overview.html#c.sensor_state_event" title="sensor_state_event"><code class="xref c c-struct docutils literal notranslate"><span class="pre">sensor_state_event</span></code></a> when the sensor state changes.</p></li>
+</ul>
+<section id="configuration">
+<h2><a class="toc-backref" href="#id7">Configuration</a><a class="headerlink" href="#configuration" title="Permalink to this heading"></a></h2>
+<p>The following Kconfig options are required:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_CAF_SENSOR_MANAGER</span></code> - This option enables the sensor manager module.</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_SENSOR</span></code> - This option enables Zephyr’s <span class="xref std std-ref">zephyr:sensor_api</span> driver, which is required for interacting with the sensors.</p></li>
+</ul>
+<p>The following Kconfig options are also available for the module:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_CAF_SENSOR_MANAGER_DEF_PATH</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_CAF_SENSOR_MANAGER_THREAD_STACK_SIZE</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_CAF_SENSOR_MANAGER_THREAD_PRIORITY</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_CAF_SENSOR_MANAGER_PM</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_CAF_SENSOR_MANAGER_ACTIVE_PM</span></code></p></li>
+</ul>
+<p>To use the module, you must complete the following requirements:</p>
+<ol class="arabic">
+<li><p>Physically connect the sensor.</p></li>
+<li><p>Add and enable the sensor in the Devicetree file.
+For example, in the <code class="file docutils literal notranslate"><span class="pre">BOARD.dts</span></code> file.
+For more information about adding sensor device to devicetree, refer to <span class="xref std std-ref">zephyr:use-dt-overlays</span>.</p></li>
+<li><p>Enable the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_CAF_SENSOR_MANAGER</span></code> and <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_SENSOR</span></code> Kconfig options.</p></li>
+<li><p>Enable the sensor of your choice in Kconfig.
+Each sensor has its own set of Kconfig options.</p></li>
+<li><p>Add the configuration file that contains an array of <code class="xref c c-struct docutils literal notranslate"><span class="pre">sm_sensor_config</span></code> for the sensor that you want to use in your application by completing the following steps:</p>
+<ol class="loweralpha">
+<li><p>Add a file that defines the following information in an array of <code class="xref c c-struct docutils literal notranslate"><span class="pre">sm_sensor_config</span></code> for every sensor that you want to be handled by the sensor manager module:</p>
+<ul class="simple">
+<li><p><code class="xref c c-member docutils literal notranslate"><span class="pre">sm_sensor_config.dev_name</span></code> - Sensor device name.
+The name must match the sensor label in the <code class="file docutils literal notranslate"><span class="pre">BOARD.dts</span></code> file.</p></li>
+<li><p><code class="xref c c-member docutils literal notranslate"><span class="pre">sm_sensor_config.event_descr</span></code> - Sensor event description.
+The event description is used to identify the sensor in the application.</p></li>
+<li><p><code class="xref c c-member docutils literal notranslate"><span class="pre">sm_sensor_config.chans</span></code> - Channel configuration.
+This is an array of <a class="reference internal" href="caf_overview.html#c.caf_sampled_channel" title="caf_sampled_channel"><code class="xref c c-struct docutils literal notranslate"><span class="pre">caf_sampled_channel</span></code></a> struct that configures the sensor channel with the following information:</p>
+<ul>
+<li><p><a class="reference internal" href="caf_overview.html#c.caf_sampled_channel.chan" title="caf_sampled_channel.chan"><code class="xref c c-member docutils literal notranslate"><span class="pre">caf_sampled_channel.chan</span></code></a> - Sensor channel.
+Depends on the particular sensor.</p></li>
+<li><p><a class="reference internal" href="caf_overview.html#c.caf_sampled_channel.data_cnt" title="caf_sampled_channel.data_cnt"><code class="xref c c-member docutils literal notranslate"><span class="pre">caf_sampled_channel.data_cnt</span></code></a> - Number of values in <a class="reference internal" href="caf_overview.html#c.caf_sampled_channel.chan" title="caf_sampled_channel.chan"><code class="xref c c-member docutils literal notranslate"><span class="pre">caf_sampled_channel.chan</span></code></a>.</p></li>
+</ul>
+</li>
+<li><p><code class="xref c c-member docutils literal notranslate"><span class="pre">sm_sensor_config.chan_cnt</span></code> - Size of the <code class="xref c c-member docutils literal notranslate"><span class="pre">sm_sensor_config.chans</span></code> array.</p></li>
+<li><p><code class="xref c c-member docutils literal notranslate"><span class="pre">sm_sensor_config.sampling_period_ms</span></code> - Sensor sampling period, in milliseconds.</p></li>
+<li><p><code class="xref c c-member docutils literal notranslate"><span class="pre">sm_sensor_config.active_events_limit</span></code> - Maximum number of unprocessed <a class="reference internal" href="caf_overview.html#c.sensor_event" title="sensor_event"><code class="xref c c-struct docutils literal notranslate"><span class="pre">sensor_event</span></code></a>.</p></li>
+</ul>
+<p>For example, the file content could look like follows:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;caf/sensor_manager.h&gt;</span>
+<span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">caf_sampled_channel</span><span class="w"> </span><span class="n">accel_chan</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">                </span><span class="p">.</span><span class="n">chan</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SENSOR_CHAN_ACCEL_XYZ</span><span class="p">,</span>
+<span class="w">                </span><span class="p">.</span><span class="n">data_cnt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="p">};</span>
+<span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">sm_sensor_config</span><span class="w"> </span><span class="n">sensor_configs</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">                </span><span class="p">.</span><span class="n">dev_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;LIS2DH12-ACCEL&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="p">.</span><span class="n">event_descr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;accel_xyz&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="p">.</span><span class="n">chans</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">accel_chan</span><span class="p">,</span>
+<span class="w">                </span><span class="p">.</span><span class="n">chan_cnt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ARRAY_SIZE</span><span class="p">(</span><span class="n">accel_chan</span><span class="p">),</span>
+<span class="w">                </span><span class="p">.</span><span class="n">sampling_period_ms</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span>
+<span class="w">                </span><span class="p">.</span><span class="n">active_events_limit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</li>
+<li><p>Specify the location of the file with the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_CAF_SENSOR_MANAGER_DEF_PATH</span></code> Kconfig option.</p></li>
+</ol>
+</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Only the configured module should include the configuration file.
+Do not include the configuration file in other source files.</p>
+</div>
+<section id="enabling-sensor-trigger">
+<span id="caf-sensor-manager-configuring-trigger"></span><h3><a class="toc-backref" href="#id8">Enabling sensor trigger</a><a class="headerlink" href="#enabling-sensor-trigger" title="Permalink to this heading"></a></h3>
+<p>The sensor manager module supports the sensor trigger functionality.
+This functionality allows the sensor manager module to stop sampling a specific sensor when specified conditions are met.
+For more details about the sensor trigger, see Zephyr’s <span class="xref std std-ref">zephyr:sensor_api</span> driver.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Not all sensors support the trigger functionality.
+For more details, see the sensor-specific Kconfig file.</p>
+</div>
+<p>To use the sensor trigger, complete the following steps:</p>
+<ol class="arabic">
+<li><p>Enable the sensor trigger option in the sensor-specific Kconfig file.
+The Kconfig option name is different for each sensor.
+For example, for the LIS2DH accelerometer, set the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_LIS2DH_TRIGGER_GLOBAL_THREAD</span></code> option to <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p></li>
+<li><p>Extend the module configuration file by adding <code class="xref c c-member docutils literal notranslate"><span class="pre">sm_sensor_config.trigger</span></code> in an array of <code class="xref c c-struct docutils literal notranslate"><span class="pre">sm_sensor_config</span></code>.
+<code class="xref c c-member docutils literal notranslate"><span class="pre">sm_sensor_config.trigger</span></code> configures the sensor trigger with the following information:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">.cfg</span></code> information that depends on the particular sensor API:</p>
+<ul>
+<li><p><code class="xref c c-member docutils literal notranslate"><span class="pre">sm_trigger.cfg.type</span></code> - Trigger type.
+The type depends on the particular sensor.</p></li>
+<li><p><code class="xref c c-member docutils literal notranslate"><span class="pre">sm_trigger.cfg.chan</span></code> - Channel on which the trigger is set.
+The channel depends on the particular sensor.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.activation</span></code> information that depends on the sensor manager module:</p>
+<ul>
+<li><p><code class="xref c c-member docutils literal notranslate"><span class="pre">sm_trigger.activation.type</span></code> - Sensor value comparison method.
+See <a class="reference internal" href="#sensor-trigger-activation">Sensor trigger activation</a> for more details.</p></li>
+<li><p><code class="xref c c-member docutils literal notranslate"><span class="pre">sm_trigger.activation.thresh</span></code> - Sensor trigger activation threshold.</p></li>
+<li><p><code class="xref c c-member docutils literal notranslate"><span class="pre">sm_trigger.activation.timeout_ms</span></code> - Time after which the sensor is put to sleep.</p></li>
+</ul>
+</li>
+</ul>
+</div></blockquote>
+<p>For example, the extended configuration file for the LIS2DH accelerometer could look like follows:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;caf/sensor_manager.h&gt;</span>
+
+<span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">caf_sampled_channel</span><span class="w"> </span><span class="n">accel_chan</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">                </span><span class="p">.</span><span class="n">chan</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SENSOR_CHAN_ACCEL_XYZ</span><span class="p">,</span>
+<span class="w">                </span><span class="p">.</span><span class="n">data_cnt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="p">};</span>
+
+<span class="k">static</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">sm_trigger</span><span class="w"> </span><span class="n">trig</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">.</span><span class="n">cfg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="p">.</span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SENSOR_TRIG_DELTA</span><span class="p">,</span>
+<span class="w">                </span><span class="p">.</span><span class="n">chan</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SENSOR_CHAN_ACCEL_XYZ</span><span class="p">,</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">.</span><span class="n">activation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="p">.</span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ACT_TYPE_ABS</span><span class="p">,</span>
+<span class="w">                </span><span class="p">.</span><span class="n">thresh</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span>
+<span class="w">                </span><span class="p">.</span><span class="n">timeout_ms</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4000</span><span class="p">,</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="p">};</span>
+
+<span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">sm_sensor_config</span><span class="w"> </span><span class="n">sensor_configs</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">                </span><span class="p">.</span><span class="n">dev_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;LIS2DH12-ACCEL&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="p">.</span><span class="n">event_descr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;accel_xyz&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="p">.</span><span class="n">chans</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">accel_chan</span><span class="p">,</span>
+<span class="w">                </span><span class="p">.</span><span class="n">chan_cnt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ARRAY_SIZE</span><span class="p">(</span><span class="n">accel_chan</span><span class="p">),</span>
+<span class="w">                </span><span class="p">.</span><span class="n">sampling_period_ms</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span>
+<span class="w">                </span><span class="p">.</span><span class="n">active_events_limit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">                </span><span class="p">.</span><span class="n">trigger</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">trig</span><span class="p">,</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Only the configured module should include the configuration file.
+Do not include the configuration file in other source files.</p>
+</div>
+</section>
+<section id="enabling-passive-power-management">
+<h3><a class="toc-backref" href="#id9">Enabling passive power management</a><a class="headerlink" href="#enabling-passive-power-management" title="Permalink to this heading"></a></h3>
+<p>The sensor manager module can react to <a class="reference internal" href="caf_overview.html#c.power_down_event" title="power_down_event"><code class="xref c c-struct docutils literal notranslate"><span class="pre">power_down_event</span></code></a> and <a class="reference internal" href="caf_overview.html#c.wake_up_event" title="wake_up_event"><code class="xref c c-struct docutils literal notranslate"><span class="pre">wake_up_event</span></code></a>.
+This functionality is called <em>passive power management</em> and allows the sensor manager module to manage sensors state.
+See <a class="reference internal" href="#passive-power-management">Passive power management</a> for more information.</p>
+<p>The configuration scenario depends on whether you configured and enabled the sensor trigger:</p>
+<ul class="simple">
+<li><p>If you <a class="reference internal" href="#caf-sensor-manager-configuring-trigger"><span class="std std-ref">enabled the sensor trigger</span></a> for your sensor, enable the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_CAF_SENSOR_MANAGER_PM</span></code> Kconfig option to use passive power management.</p></li>
+<li><p>If you did not enable the sensor trigger functionality, you need to manually configure passive power management.</p></li>
+</ul>
+<section id="manually-configuring-passive-power-management">
+<h4>Manually configuring passive power management<a class="headerlink" href="#manually-configuring-passive-power-management" title="Permalink to this heading"></a></h4>
+<p>To manually configure the passive power management functionality, complete the following steps:</p>
+<ol class="arabic">
+<li><p>Enable <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_CAF_SENSOR_MANAGER_PM</span></code> Kconfig option.</p></li>
+<li><p>Extend the module configuration file of the sensor of your choice by adding <code class="xref c c-member docutils literal notranslate"><span class="pre">sm_sensor_config.suspend</span></code> in an array of <code class="xref c c-struct docutils literal notranslate"><span class="pre">sm_sensor_config</span></code>.
+For example, the extended configuration file for the LIS2DH accelerometer could look like follows:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;caf/sensor_manager.h&gt;</span>
+
+<span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">sm_sensor_config</span><span class="w"> </span><span class="n">sensor_configs</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">                </span><span class="p">.</span><span class="n">dev_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;LIS2DH12-ACCEL&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="p">.</span><span class="n">event_descr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;accel_xyz&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="p">.</span><span class="n">chans</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">accel_chan</span><span class="p">,</span>
+<span class="w">                </span><span class="p">.</span><span class="n">chan_cnt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ARRAY_SIZE</span><span class="p">(</span><span class="n">accel_chan</span><span class="p">),</span>
+<span class="w">                </span><span class="p">.</span><span class="n">sampling_period_ms</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span>
+<span class="w">                </span><span class="p">.</span><span class="n">active_events_limit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">                </span><span class="p">.</span><span class="n">suspend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">,</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<p>If <code class="xref c c-member docutils literal notranslate"><span class="pre">sm_sensor_config.suspend</span></code> is true, the sensor is suspended when <a class="reference internal" href="caf_overview.html#c.power_down_event" title="power_down_event"><code class="xref c c-struct docutils literal notranslate"><span class="pre">power_down_event</span></code></a> is received.
+The default value for <code class="xref c c-member docutils literal notranslate"><span class="pre">sm_sensor_config.suspend</span></code> is <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Not all device power states might be supported by the sensor’s device.
+Check the sensor’s driver implementation before configuring <code class="xref c c-member docutils literal notranslate"><span class="pre">sm_sensor_config.suspend</span></code>.</p>
+</div>
+</section>
+</section>
+<section id="enabling-active-power-management">
+<h3><a class="toc-backref" href="#id10">Enabling active power management</a><a class="headerlink" href="#enabling-active-power-management" title="Permalink to this heading"></a></h3>
+<p>The sensor manager module can create <a class="reference internal" href="caf_overview.html#c.power_manager_restrict_event" title="power_manager_restrict_event"><code class="xref c c-struct docutils literal notranslate"><span class="pre">power_manager_restrict_event</span></code></a> and <a class="reference internal" href="caf_overview.html#c.wake_up_event" title="wake_up_event"><code class="xref c c-struct docutils literal notranslate"><span class="pre">wake_up_event</span></code></a>.
+This functionality is called <em>active power management</em>.
+See <a class="reference internal" href="#active-power-management">Active power management</a> for more information.</p>
+<p>To use the active power management in the sensor manager module, enable the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_CAF_SENSOR_MANAGER_ACTIVE_PM</span></code> Kconfig option.</p>
+</section>
+</section>
+<section id="implementation-details">
+<h2><a class="toc-backref" href="#id11">Implementation details</a><a class="headerlink" href="#implementation-details" title="Permalink to this heading"></a></h2>
+<p>The sensor manager module starts in reaction to <a class="reference internal" href="caf_overview.html#c.module_state_event" title="module_state_event"><code class="xref c c-struct docutils literal notranslate"><span class="pre">module_state_event</span></code></a>.
+When started, it can do the following operations:</p>
+<ul class="simple">
+<li><p>Periodically sample the configured sensors.</p></li>
+<li><p>Submit <a class="reference internal" href="caf_overview.html#c.sensor_event" title="sensor_event"><code class="xref c c-struct docutils literal notranslate"><span class="pre">sensor_event</span></code></a> when the sensor channels are sampled.</p></li>
+<li><p>Submit <a class="reference internal" href="caf_overview.html#c.sensor_state_event" title="sensor_state_event"><code class="xref c c-struct docutils literal notranslate"><span class="pre">sensor_state_event</span></code></a> if the sensor state changes.</p></li>
+</ul>
+<p>The sensor manager module samples sensors periodically, according to the configuration specified for each sensor.
+Sampling of the sensors is done from a dedicated preemptive thread.
+You can change the thread priority by setting the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_CAF_SENSOR_MANAGER_THREAD_PRIORITY</span></code> Kconfig option.
+Use the preemptive thread priority to make sure that the thread does not block other operations in the system.</p>
+<p>For each sensor, the sensor manager module limits the number of <a class="reference internal" href="caf_overview.html#c.sensor_event" title="sensor_event"><code class="xref c c-struct docutils literal notranslate"><span class="pre">sensor_event</span></code></a> events that it submits, but whose processing has not been completed.
+This is done to prevent out-of-memory error if the system workqueue is blocked.
+The limit value for the maximum number of unprocessed events for each sensor is placed in the <code class="xref c c-member docutils literal notranslate"><span class="pre">sm_sensor_config.active_events_limit</span></code> structure field in the configuration file.
+The <code class="docutils literal notranslate"><span class="pre">active_sensor_events_cnt</span></code> counter is incremented when <a class="reference internal" href="caf_overview.html#c.sensor_event" title="sensor_event"><code class="xref c c-struct docutils literal notranslate"><span class="pre">sensor_event</span></code></a> is sent and decremented when the event is processed by the sensor manager module that is the final subscriber of the event.
+A situation can occur that the <code class="docutils literal notranslate"><span class="pre">active_sensor_events_cnt</span></code> counter will already be decremented but the memory allocated by the event would not yet be freed.
+Because of this behavior, the maximum number of allocated sensor events for the given sensor is equal to <code class="xref c c-member docutils literal notranslate"><span class="pre">sm_sensor_config.active_events_limit</span></code> plus one.</p>
+<p>The dedicated thread uses its own thread stack.
+You can change the size of the stack by setting the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_CAF_SENSOR_MANAGER_THREAD_STACK_SIZE</span></code> Kconfig option.
+The thread stack size must be big enough for the sensors used.</p>
+<section id="sensor-state-events">
+<h3><a class="toc-backref" href="#id12">Sensor state events</a><a class="headerlink" href="#sensor-state-events" title="Permalink to this heading"></a></h3>
+<p>Each sensor can be in one of the following states:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="caf_overview.html#c.sensor_state.SENSOR_STATE_DISABLED" title="SENSOR_STATE_DISABLED"><code class="xref c c-enumerator docutils literal notranslate"><span class="pre">SENSOR_STATE_DISABLED</span></code></a> - Initial state.</p></li>
+<li><p><a class="reference internal" href="caf_overview.html#c.sensor_state.SENSOR_STATE_SLEEP" title="SENSOR_STATE_SLEEP"><code class="xref c c-enumerator docutils literal notranslate"><span class="pre">SENSOR_STATE_SLEEP</span></code></a> - Sensor sleeps and no sampling is performed.
+Available if the sensor trigger is configured or <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_CAF_SENSOR_MANAGER_PM</span></code> is enabled.</p></li>
+<li><p><a class="reference internal" href="caf_overview.html#c.sensor_state.SENSOR_STATE_ACTIVE" title="SENSOR_STATE_ACTIVE"><code class="xref c c-enumerator docutils literal notranslate"><span class="pre">SENSOR_STATE_ACTIVE</span></code></a> - Sensor is actively sampling.</p></li>
+<li><p><a class="reference internal" href="caf_overview.html#c.sensor_state.SENSOR_STATE_ERROR" title="SENSOR_STATE_ERROR"><code class="xref c c-enumerator docutils literal notranslate"><span class="pre">SENSOR_STATE_ERROR</span></code></a> - Sensor error.</p></li>
+</ul>
+<p>The following figure shows the possible state transitions.</p>
+<figure class="align-default" id="id6">
+<img alt="State transitions of the sensors used by the sensor manager module" src="../../_images/caf_sensor_states.svg" /><figcaption>
+<p><span class="caption-text">State transitions of the sensors used by the sensor manager module</span><a class="headerlink" href="#id6" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>The sensor manager module submits <a class="reference internal" href="caf_overview.html#c.sensor_state_event" title="sensor_state_event"><code class="xref c c-struct docutils literal notranslate"><span class="pre">sensor_state_event</span></code></a> whenever the sensor state changes.
+Each sensor starts in the <a class="reference internal" href="caf_overview.html#c.sensor_state.SENSOR_STATE_DISABLED" title="SENSOR_STATE_DISABLED"><code class="xref c c-enumerator docutils literal notranslate"><span class="pre">SENSOR_STATE_DISABLED</span></code></a> state, which is not reported by the module.
+Also, each sensor acts independently to others.
+If one of the sensors reports an error, it does not stop the sensor manager module from sampling other sensors.</p>
+<p>After the initialization, each sensor changes its state to <a class="reference internal" href="caf_overview.html#c.sensor_state.SENSOR_STATE_ACTIVE" title="SENSOR_STATE_ACTIVE"><code class="xref c c-enumerator docutils literal notranslate"><span class="pre">SENSOR_STATE_ACTIVE</span></code></a> and start periodic sampling.
+In case of an error sensor submits <a class="reference internal" href="caf_overview.html#c.sensor_state_event" title="sensor_state_event"><code class="xref c c-struct docutils literal notranslate"><span class="pre">sensor_state_event</span></code></a> with the <a class="reference internal" href="caf_overview.html#c.sensor_state.SENSOR_STATE_ERROR" title="SENSOR_STATE_ERROR"><code class="xref c c-enumerator docutils literal notranslate"><span class="pre">SENSOR_STATE_ERROR</span></code></a> state.</p>
+<p>If the trigger functionality or <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_CAF_SENSOR_MANAGER_PM</span></code> is enabled the sensor can be put into the <a class="reference internal" href="caf_overview.html#c.sensor_state.SENSOR_STATE_SLEEP" title="SENSOR_STATE_SLEEP"><code class="xref c c-enumerator docutils literal notranslate"><span class="pre">SENSOR_STATE_SLEEP</span></code></a> state.
+In this state, the sensor is not actively sampling and is not reporting any <a class="reference internal" href="caf_overview.html#c.sensor_event" title="sensor_event"><code class="xref c c-struct docutils literal notranslate"><span class="pre">sensor_event</span></code></a>.
+If the sensor trigger fires or the <a class="reference internal" href="caf_overview.html#c.wake_up_event" title="wake_up_event"><code class="xref c c-struct docutils literal notranslate"><span class="pre">wake_up_event</span></code></a> comes, the sensor state changes to <a class="reference internal" href="caf_overview.html#c.sensor_state.SENSOR_STATE_ACTIVE" title="SENSOR_STATE_ACTIVE"><code class="xref c c-enumerator docutils literal notranslate"><span class="pre">SENSOR_STATE_ACTIVE</span></code></a> and periodic sampling is restarted.</p>
+</section>
+<section id="sensor-trigger-activation">
+<h3><a class="toc-backref" href="#id13">Sensor trigger activation</a><a class="headerlink" href="#sensor-trigger-activation" title="Permalink to this heading"></a></h3>
+<p>The sensor trigger is activated and the sensor is put to sleep if the values measured by the sensor do not deviate from the last sensor value by more than <code class="xref c c-member docutils literal notranslate"><span class="pre">sm_trigger.activation.threshold</span></code> for the period of time specified in <code class="xref c c-member docutils literal notranslate"><span class="pre">sm_trigger.activation.timeout_ms</span></code>.
+If the value measured by the sensor does not fit within the threshold, the last sensor value is updated and the sensor continues the sampling process.</p>
+<p>The sensor trigger activation type is of the <code class="xref c c-enumerator docutils literal notranslate"><span class="pre">ACT_TYPE_ABS</span></code> (Absolute deviation) type.</p>
+</section>
+<section id="passive-power-management">
+<h3><a class="toc-backref" href="#id14">Passive power management</a><a class="headerlink" href="#passive-power-management" title="Permalink to this heading"></a></h3>
+<p>If the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_CAF_SENSOR_MANAGER_PM</span></code> Kconfig option is enabled, the sensors react to <a class="reference internal" href="caf_overview.html#c.power_down_event" title="power_down_event"><code class="xref c c-struct docutils literal notranslate"><span class="pre">power_down_event</span></code></a> and <a class="reference internal" href="caf_overview.html#c.wake_up_event" title="wake_up_event"><code class="xref c c-struct docutils literal notranslate"><span class="pre">wake_up_event</span></code></a>.</p>
+<p>If a <a class="reference internal" href="caf_overview.html#c.power_down_event" title="power_down_event"><code class="xref c c-struct docutils literal notranslate"><span class="pre">power_down_event</span></code></a> comes when the sensor is in the <a class="reference internal" href="caf_overview.html#c.sensor_state.SENSOR_STATE_ACTIVE" title="SENSOR_STATE_ACTIVE"><code class="xref c c-enumerator docutils literal notranslate"><span class="pre">SENSOR_STATE_ACTIVE</span></code></a> state, the sensor state changes to <a class="reference internal" href="caf_overview.html#c.sensor_state.SENSOR_STATE_SLEEP" title="SENSOR_STATE_SLEEP"><code class="xref c c-enumerator docutils literal notranslate"><span class="pre">SENSOR_STATE_SLEEP</span></code></a> and sensor stops sampling.</p>
+<p>Depending on the trigger functionality configuration:</p>
+<ul class="simple">
+<li><p>If the sensor has the trigger functionality configured, the trigger is activated and the <code class="xref c c-member docutils literal notranslate"><span class="pre">sm_sensor_config.suspend</span></code> is ignored.</p></li>
+<li><p>If no trigger is configured, the sensor is either resumed or suspended depending on the value of <code class="xref c c-member docutils literal notranslate"><span class="pre">sm_sensor_config.suspend</span></code>.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Not all device power states might be supported by the sensor’s device.
+Check the sensor’s driver implementation before configuring <code class="xref c c-member docutils literal notranslate"><span class="pre">sm_sensor_config.suspend</span></code>.</p>
+</div>
+<p>If a <a class="reference internal" href="caf_overview.html#c.wake_up_event" title="wake_up_event"><code class="xref c c-struct docutils literal notranslate"><span class="pre">wake_up_event</span></code></a> comes when the sensor is in the <a class="reference internal" href="caf_overview.html#c.sensor_state.SENSOR_STATE_SLEEP" title="SENSOR_STATE_SLEEP"><code class="xref c c-enumerator docutils literal notranslate"><span class="pre">SENSOR_STATE_SLEEP</span></code></a> state, the sensor switches to <a class="reference internal" href="caf_overview.html#c.sensor_state.SENSOR_STATE_ACTIVE" title="SENSOR_STATE_ACTIVE"><code class="xref c c-enumerator docutils literal notranslate"><span class="pre">SENSOR_STATE_ACTIVE</span></code></a> and starts actively sampling.</p>
+<p>Depending on the trigger functionality configuration:</p>
+<ul class="simple">
+<li><p>If the sensor does not support the trigger functionality and <code class="xref c c-member docutils literal notranslate"><span class="pre">sensor_config.suspend</span></code> is true, the sensor device is resumed.</p></li>
+<li><p>If the sensor supports the trigger functionality, the trigger is deactivated.</p></li>
+</ul>
+</section>
+<section id="active-power-management">
+<h3><a class="toc-backref" href="#id15">Active power management</a><a class="headerlink" href="#active-power-management" title="Permalink to this heading"></a></h3>
+<p>If <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_CAF_SENSOR_MANAGER_ACTIVE_PM</span></code> is enabled, the sensor can submit <a class="reference internal" href="caf_overview.html#c.power_manager_restrict_event" title="power_manager_restrict_event"><code class="xref c c-struct docutils literal notranslate"><span class="pre">power_manager_restrict_event</span></code></a> and <a class="reference internal" href="caf_overview.html#c.wake_up_event" title="wake_up_event"><code class="xref c c-struct docutils literal notranslate"><span class="pre">wake_up_event</span></code></a>.</p>
+<p>A <a class="reference internal" href="caf_overview.html#c.power_manager_restrict_event" title="power_manager_restrict_event"><code class="xref c c-struct docutils literal notranslate"><span class="pre">power_manager_restrict_event</span></code></a> restricts a power level to which the application can be put.
+It is submitted every time the allowed state changes.</p>
+<p>If there is any sensor that is in the <a class="reference internal" href="caf_overview.html#c.sensor_state.SENSOR_STATE_ACTIVE" title="SENSOR_STATE_ACTIVE"><code class="xref c c-enumerator docutils literal notranslate"><span class="pre">SENSOR_STATE_ACTIVE</span></code></a> state, the module power state is restricted to the <a class="reference internal" href="caf_overview.html#c.power_manager_level.POWER_MANAGER_LEVEL_ALIVE" title="POWER_MANAGER_LEVEL_ALIVE"><code class="xref c c-enumerator docutils literal notranslate"><span class="pre">POWER_MANAGER_LEVEL_ALIVE</span></code></a> state.
+If all the sensors are in the <a class="reference internal" href="caf_overview.html#c.sensor_state.SENSOR_STATE_SLEEP" title="SENSOR_STATE_SLEEP"><code class="xref c c-enumerator docutils literal notranslate"><span class="pre">SENSOR_STATE_SLEEP</span></code></a> state and if at least one sensor has trigger activated, the power state is restricted to the <a class="reference internal" href="caf_overview.html#c.power_manager_level.POWER_MANAGER_LEVEL_SUSPENDED" title="POWER_MANAGER_LEVEL_SUSPENDED"><code class="xref c c-enumerator docutils literal notranslate"><span class="pre">POWER_MANAGER_LEVEL_SUSPENDED</span></code></a> state.
+Having all the sensors sleeping and none of them with the trigger functionality enabled means that any power state is allowed.</p>
+<p>If the sensor’s trigger functionality is configured, each time the trigger is activated <a class="reference internal" href="caf_overview.html#c.wake_up_event" title="wake_up_event"><code class="xref c c-struct docutils literal notranslate"><span class="pre">wake_up_event</span></code></a> is created and sent to other modules.</p>
+<p>Sending <a class="reference internal" href="caf_overview.html#c.wake_up_event" title="wake_up_event"><code class="xref c c-struct docutils literal notranslate"><span class="pre">wake_up_event</span></code></a> to other modules results in waking up the whole system.</p>
+</section>
+<section id="changing-sensor-sample-period">
+<span id="sensor-sample-period"></span><h3><a class="toc-backref" href="#id16">Changing sensor sample period</a><a class="headerlink" href="#changing-sensor-sample-period" title="Permalink to this heading"></a></h3>
+<p>To change sensor sample period you have to send <a class="reference internal" href="caf_overview.html#c.set_sensor_period_event" title="set_sensor_period_event"><code class="xref c c-struct docutils literal notranslate"><span class="pre">set_sensor_period_event</span></code></a> with new period value in milliseconds.
+To identify which sensor sampling period you want to change, set the sensor description in <a class="reference internal" href="caf_overview.html#c.set_sensor_period_event" title="set_sensor_period_event"><code class="xref c c-struct docutils literal notranslate"><span class="pre">set_sensor_period_event</span></code></a>.
+The following code shows an example of changing accelerometer sampling to 400 ms:</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;caf/events/sensor_event.h&gt;</span>
+
+<span class="k">struct</span><span class="w"> </span><span class="nc">set_sensor_period_event</span><span class="w"> </span><span class="o">*</span><span class="n">event</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">new_set_sensor_period_event</span><span class="p">();</span>
+<span class="n">event</span><span class="o">-&gt;</span><span class="n">sampling_period</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">400</span><span class="p">;</span>
+<span class="n">event</span><span class="o">-&gt;</span><span class="n">descr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;accel_sim_xyz&quot;</span><span class="p">;</span>
+<span class="n">APP_EVENT_SUBMIT</span><span class="p">(</span><span class="n">event</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="settings_loader.html" class="btn btn-neutral float-right" title="CAF: Settings loader module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="sensor_data_aggregator.html" class="btn btn-neutral" title="CAF: Sensor data aggregator module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

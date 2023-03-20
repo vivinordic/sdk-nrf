@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Power optimization &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../_static/js/ncs.js"
+></script>
+<script src="../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Enabling access port protection mechanism" href="../ap_protect/index.html" />
+    <link rel="prev" title="Memory footprint optimization" href="memory.html" />
+<link
+  href="../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev_model.html">Development model</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../app_dev.html">Application development</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../board_support/index.html">Board support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pin_control/index.html">Pin control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../build_and_config_system/index.html">Build and configuration system</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Optimizing application</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="memory.html">Memory footprint optimization</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Power optimization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#disabling-serial-logging">Disabling serial logging</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#idle-current-due-to-other-peripherals">Idle current due to other peripherals</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cellular-applications">Cellular applications</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#power-saving-features">Power saving features</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../ap_protect/index.html">Enabling access port protection mechanism</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bootloaders_and_dfu/index.html">Bootloaders and Device Firmware Updates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../logging/index.html">Logging in nRF Connect SDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multi_image/index.html">Multi-image builds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../testing_unity_cmock/index.html">Testing with Unity and CMock</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tfm/index.html">Running applications with Trusted Firmware-M</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_fem/index.html">Working with RF front-end modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../wifi_coex/index.html">Adding Wi-Fi Coexistence support to short-range radio applications</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drivers.html">Drivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../app_dev.html">Application development</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Optimizing application</a></li>
+      <li class="breadcrumb-item active">Power optimization</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/app_dev/optimizing/power.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="power-optimization">
+<span id="app-power-opt"></span><h1>Power optimization<a class="headerlink" href="#power-optimization" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#disabling-serial-logging" id="id9">Disabling serial logging</a></p></li>
+<li><p><a class="reference internal" href="#idle-current-due-to-other-peripherals" id="id10">Idle current due to other peripherals</a></p></li>
+<li><p><a class="reference internal" href="#cellular-applications" id="id11">Cellular applications</a></p>
+<ul>
+<li><p><a class="reference internal" href="#psm-usage" id="id12">PSM usage</a></p></li>
+<li><p><a class="reference internal" href="#power-profiling-example-use-case" id="id13">Power profiling example use case</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#power-saving-features" id="id14">Power saving features</a></p>
+<ul>
+<li><p><a class="reference internal" href="#reduced-mobility" id="id15">Reduced mobility</a></p></li>
+<li><p><a class="reference internal" href="#country-specific-search-optimization" id="id16">Country-specific search optimization</a></p></li>
+<li><p><a class="reference internal" href="#abort-network-search-early" id="id17">Abort network search early</a></p></li>
+<li><p><a class="reference internal" href="#connection-evaluation-or-energy-estimation" id="id18">Connection evaluation or Energy estimation</a></p></li>
+<li><p><a class="reference internal" href="#synchronizing-application-with-modem-sleep" id="id19">Synchronizing application with modem sleep</a></p></li>
+<li><p><a class="reference internal" href="#release-assistance-indication-rai" id="id20">Release Assistance Indication (RAI)</a></p></li>
+<li><p><a class="reference internal" href="#low-battery-behavior" id="id21">Low battery behavior</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>Nordic System-on-Chip (SoC) designs are aimed at ease of use and ultra-low power consumption.
+A power-optimized development ecosystem typically consists of the following developer tools:</p>
+<ul class="simple">
+<li><p>nRF Connect SDK</p></li>
+<li><p>Development kits</p></li>
+<li><p><a class="reference external" href="https://devzone.nordicsemi.com/nordic/power/w/opp/3/online-power-profiler-for-lte">Online Power Profiler (OPP)</a></p></li>
+<li><p><a class="reference external" href="https://infocenter.nordicsemi.com/topic/ug_ppk2/UG/ppk/PPK_user_guide_Intro.html">Power Profiler Kit II (PPK2)</a></p></li>
+</ul>
+<p>Together, they provide a unified solution for developers to evaluate, develop and characterize ultra-low power designs with ease.
+See <a class="reference internal" href="../../getting_started.html#getting-started"><span class="std std-ref">Getting started</span></a> for more information about the nRF Connect SDK and the development environment.</p>
+<p>Online Power Profiler for LTE is a tool to estimate the current consumption of the nRF9160 LTE modem.
+See the <a class="reference external" href="https://devzone.nordicsemi.com/nordic/power/w/opp/4/user-guide-lte">Online Power Profiler user guide</a> for a basic overview of the tool and explanation of different parameters.</p>
+<p>Power Profiler Kit II is a flexible, low-cost tool that you can use for real-time power measurement of your design.
+You can measure power on a connected development kit or any external board.</p>
+<p>The following subsections demonstrate how you can use the power profiling tools to optimize the power consumption in your design.</p>
+<section id="disabling-serial-logging">
+<h2><a class="toc-backref" href="#id9">Disabling serial logging</a><a class="headerlink" href="#disabling-serial-logging" title="Permalink to this heading"></a></h2>
+<p>Current measurements on devices that have the nRF Connect SDK samples or applications programmed with the default configuration, might show elevated current values, when compared to the expected current values from  Nordic ultra-low power SoCs.
+It is because most of the samples and applications in the nRF Connect SDK are configured to perform logging over serial port (associated with UART(E) peripheral) by default.</p>
+<p>The image below shows the power measurement output on Power Profiler Kit II for an nRF9160 DK with the <span class="xref std std-ref">zephyr:blinky-sample</span> sample compiled for the <code class="docutils literal notranslate"><span class="pre">nrf9160dk_nrf9160_ns</span></code> build target without modifications in the sample configuration.</p>
+<figure class="align-default" id="id7">
+<a class="reference internal image-reference" href="../../_images/app_power_opt_blinky_serial_on.png"><img alt="Current measurement on the Blinky sample with serial logging enabled" src="../../_images/app_power_opt_blinky_serial_on.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-text">Current measurement for the Blinky sample with serial logging enabled</span><a class="headerlink" href="#id7" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>The average current is close to 470 µA, which drains a 500 mAh lithium polymer battery approximately in six weeks.
+To reduce current consumption, disable serial logging.</p>
+<p>To disable serial output, you must change the project configuration associated with the sample or application.
+See <a class="reference internal" href="../../getting_started/modifying.html#configure-application"><span class="std std-ref">Configuring your application</span></a> for information about how to permanently or temporarily change the configuration.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If the application consists of multiple images, like applications built for the nRF53 Series, logging must be disabled on both images.
+See <a class="reference internal" href="../../working_with_nrf/nrf53/nrf5340.html#ug-nrf5340"><span class="std std-ref">Developing with nRF5340 DK</span></a> and <a class="reference internal" href="../multi_image/index.html#ug-multi-image"><span class="std std-ref">Multi-image builds</span></a>.</p>
+</div>
+<ol class="arabic simple">
+<li><p>Set the project configuration <code class="docutils literal notranslate"><span class="pre">CONFIG_SERIAL</span></code> to <code class="docutils literal notranslate"><span class="pre">n</span></code> irrespective of whether you are building the sample for the <a class="reference internal" href="../board_support/index.html#app-boards-spe-nspe-cpuapp"><span class="std std-ref">SPE-only</span></a> build targets or build targets with <a class="reference internal" href="../board_support/index.html#app-boards-spe-nspe-cpuapp-ns"><span class="std std-ref">NSPE</span></a>.</p></li>
+<li><p>For the build target with NSPE (<code class="docutils literal notranslate"><span class="pre">nrf9160dk_nrf9160_ns</span></code>), ensure that serial logging is also disabled in Trusted Firmware-M by setting <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_TFM_LOG_LEVEL_SILENCE</span></code> to <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p></li>
+</ol>
+<p>The output on Power Profiler Kit II shows the power consumption on an nRF9160 DK with the sample compiled for the <code class="docutils literal notranslate"><span class="pre">nrf9160dk_nrf9160_ns</span></code> build target with <code class="docutils literal notranslate"><span class="pre">CONFIG_SERIAL=n</span></code>.</p>
+<figure class="align-default" id="id8">
+<a class="reference internal image-reference" href="../../_images/app_power_opt_blink_serial_off.png"><img alt="Current measurement on the Blinky sample with serial logging disabled" src="../../_images/app_power_opt_blink_serial_off.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-text">Current measurement on the Blinky sample with serial logging disabled</span><a class="headerlink" href="#id8" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>The average current reduces to 6 µA, which implies 9.5 years of battery life on a 500 mAh lithium polymer battery compared to the 6-week battery life of the previous measurement.</p>
+<p>For a similar configuration, see the <a class="reference internal" href="../../samples/nrf9160/udp/README.html#udp"><span class="std std-ref">nRF9160: UDP</span></a> sample, which transmits UDP packets to an LTE network using an nRF9160 DK.
+You can use the sample to characterize the current consumption of the nRF9160 SiP.
+It is optimized for low power operation on the <code class="docutils literal notranslate"><span class="pre">nrf9160dk_nrf9160_ns</span></code> build target without any modifications.</p>
+</section>
+<section id="idle-current-due-to-other-peripherals">
+<h2><a class="toc-backref" href="#id10">Idle current due to other peripherals</a><a class="headerlink" href="#idle-current-due-to-other-peripherals" title="Permalink to this heading"></a></h2>
+<p>Peripherals other than the serial ports can cause elevated currents.</p>
+<p>The power management of the Nordic SoCs automatically switches in and out the resources that are needed by the active peripherals.
+Peripherals that need a high frequency clock like UART, PWM, PDM or high frequency timers will show similar currents if enabled.
+See <a class="reference external" href="https://infocenter.nordicsemi.com/topic/ps_nrf9160/_tmp/alta.nRF9160/autodita/CURRENT/parameters.frontpage.html#">Electrical specification of nrf9160</a> for an overview of the current consumption in peripherals for the nRF9160 SoC.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Be careful with the use of pull-up resistors when designing the hardware for ultra-low power operation.
+An I/O pin with a 10 kΩ pull-up resistor that is set to <code class="docutils literal notranslate"><span class="pre">GND</span></code> will result in a current consumption of 300 µA at 3V.</p>
+</div>
+</section>
+<section id="cellular-applications">
+<h2><a class="toc-backref" href="#id11">Cellular applications</a><a class="headerlink" href="#cellular-applications" title="Permalink to this heading"></a></h2>
+<p>An nRF9160 DK can draw current ranging from a few micro amperes (in sleep mode) to hundreds of milli amperes (when the radio is active).
+To achieve long battery life, it is crucial that the application is optimized in the use of the radio.</p>
+<section id="psm-usage">
+<h3><a class="toc-backref" href="#id12">PSM usage</a><a class="headerlink" href="#psm-usage" title="Permalink to this heading"></a></h3>
+<p>Power Saving Mode (PSM) enables the modem to enter deep sleep when it does not need to communicate with the network.
+The modem can spend most of the time in deep sleep, only waking up when data needs to be sent or received.
+When implementing an application that uses PSM, keep in mind that requesting PSM does not mean that the modem can always enter PSM.</p>
+<p>Possible cases when PSM cannot be used:</p>
+<ul class="simple">
+<li><p>Network does not support PSM.</p></li>
+<li><p>Roaming network supports PSM, but does not allow the roaming subscription to use it.</p></li>
+<li><p>Modem does not find a suitable cell (a cell that provides normal service for the device).</p></li>
+</ul>
+<p>You can detect the first two cases by checking the <code class="docutils literal notranslate"><span class="pre">+CEREG</span></code> notification or <code class="docutils literal notranslate"><span class="pre">AT%XMONITOR</span></code> command output for Active-Time granted by the network.
+If the Active-Time is <code class="docutils literal notranslate"><span class="pre">11100000</span></code>, the timer is deactivated and PSM cannot be used.
+Using the <a class="reference internal" href="../../libraries/modem/lte_lc.html#lte-lc-readme"><span class="std std-ref">LTE link controller</span></a> library, the Active-Time is notified with the <a class="reference internal" href="../../libraries/modem/lte_lc.html#c.lte_lc_evt_type.LTE_LC_EVT_PSM_UPDATE" title="LTE_LC_EVT_PSM_UPDATE"><code class="xref c c-enum docutils literal notranslate"><span class="pre">LTE_LC_EVT_PSM_UPDATE</span></code></a> event and can be queried using the <a class="reference internal" href="../../libraries/modem/lte_lc.html#c.lte_lc_psm_get" title="lte_lc_psm_get"><code class="xref c c-func docutils literal notranslate"><span class="pre">lte_lc_psm_get()</span></code></a> function.
+Depending on the use case, it may be preferable to set the modem to offline mode during long periods of inactivity to save power when PSM is not available.</p>
+<p>The third case can happen when cellular network coverage is poor.
+After the modem has entered PSM, it stays in deep sleep regardless of cellular network availability.
+When the modem wakes up from PSM to transmit data or to do a periodic Tracking Area Update (TAU), it starts searching for a suitable cell.
+If a suitable cell is not found during the initial search, the modem will continue periodic cell searches until a suitable cell is found.
+Because modem can only enter PSM when it’s in registered state and camped on suitable cell, the modem cannot enter PSM until a suitable cell has been found.</p>
+<p>The following sections introduce ways to mitigate the increased power consumption caused by poor cellular coverage.</p>
+<section id="making-periodic-cell-searches-less-frequent">
+<h4>Making periodic cell searches less frequent<a class="headerlink" href="#making-periodic-cell-searches-less-frequent" title="Permalink to this heading"></a></h4>
+<p>You can modify the periodic cell search configuration to perform periodic searches less frequently.
+Use the <code class="docutils literal notranslate"><span class="pre">AT%XDATAPRFL</span></code> command to set the data profile to “ultra-low power” or modify the cell search configuration directly using <code class="docutils literal notranslate"><span class="pre">AT%PERIODICSEARCHCONF</span></code> or the <a class="reference internal" href="../../libraries/modem/lte_lc.html#c.lte_lc_periodic_search_set" title="lte_lc_periodic_search_set"><code class="xref c c-func docutils literal notranslate"><span class="pre">lte_lc_periodic_search_set()</span></code></a> function.
+For example, you can configure periodic searches to be performed infrequently and when data connectivity is needed, trigger an extra search immediately using <code class="docutils literal notranslate"><span class="pre">AT%PERIODICSEARCHCONF=3</span></code> or the <a class="reference internal" href="../../libraries/modem/lte_lc.html#c.lte_lc_periodic_search_request" title="lte_lc_periodic_search_request"><code class="xref c c-func docutils literal notranslate"><span class="pre">lte_lc_periodic_search_request()</span></code></a> function.
+In addition to periodic cell searches, the modem may remain in limited service on a cell that does not provide normal service for the device.
+This prevents the modem from going to deep sleep between periodic cell searches.</p>
+</section>
+<section id="setting-modem-to-offline-mode-when-it-cannot-enter-psm">
+<h4>Setting modem to offline mode when it cannot enter PSM<a class="headerlink" href="#setting-modem-to-offline-mode-when-it-cannot-enter-psm" title="Permalink to this heading"></a></h4>
+<p>If the modem does not enter PSM as expected, the application can set the modem to offline mode to prevent excessive current consumption when it cannot find a suitable cell.
+To detect this, monitor the modem sleep notifications.</p>
+<p>Preconditions:</p>
+<ul class="simple">
+<li><p>PSM has been negotiated with the network.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">+CSCON</span></code> RRC connection status notifications have been subscribed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">%XMODEMSLEEP</span></code> modem sleep notifications have been subscribed.</p></li>
+<li><p>User data communication has been completed.</p></li>
+</ul>
+<p>To check whether the modem is able to activate PSM after RRC connection release, complete the following steps:</p>
+<ol class="arabic">
+<li><p>Wait for AT notification indicating that RRC connection was released (<code class="docutils literal notranslate"><span class="pre">+CSCON:</span> <span class="pre">0</span></code> or <a class="reference internal" href="../../libraries/modem/lte_lc.html#c.lte_lc_evt_type.LTE_LC_EVT_RRC_UPDATE" title="LTE_LC_EVT_RRC_UPDATE"><code class="xref c c-enum docutils literal notranslate"><span class="pre">LTE_LC_EVT_RRC_UPDATE</span></code></a> event with RRC mode set to <a class="reference internal" href="../../libraries/modem/lte_lc.html#c.lte_lc_rrc_mode.LTE_LC_RRC_MODE_IDLE" title="LTE_LC_RRC_MODE_IDLE"><code class="xref c c-enum docutils literal notranslate"><span class="pre">LTE_LC_RRC_MODE_IDLE</span></code></a>).</p></li>
+<li><p>Read PSM active time using <code class="docutils literal notranslate"><span class="pre">AT%XMONITOR</span></code> or the <a class="reference internal" href="../../libraries/modem/lte_lc.html#c.lte_lc_psm_get" title="lte_lc_psm_get"><code class="xref c c-func docutils literal notranslate"><span class="pre">lte_lc_psm_get()</span></code></a> function.
+The active time is used in Step 3.</p></li>
+<li><p>Wait for <code class="docutils literal notranslate"><span class="pre">%XMODEMSLEEP:</span> <span class="pre">1</span></code> notification or <a class="reference internal" href="../../libraries/modem/lte_lc.html#c.lte_lc_evt_type.LTE_LC_EVT_MODEM_SLEEP_ENTER" title="LTE_LC_EVT_MODEM_SLEEP_ENTER"><code class="xref c c-enum docutils literal notranslate"><span class="pre">LTE_LC_EVT_MODEM_SLEEP_ENTER</span></code></a> event with type <a class="reference internal" href="../../libraries/modem/lte_lc.html#c.lte_lc_modem_sleep_type.LTE_LC_MODEM_SLEEP_PSM" title="LTE_LC_MODEM_SLEEP_PSM"><code class="xref c c-enum docutils literal notranslate"><span class="pre">LTE_LC_MODEM_SLEEP_PSM</span></code></a> indicating that modem has entered PSM.
+If this notification is not received within PSM active time (allow for some margin), the modem was not able to enter PSM.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">%XMODEMSLEEP:</span> <span class="pre">3</span></code> notification or <a class="reference internal" href="../../libraries/modem/lte_lc.html#c.lte_lc_evt_type.LTE_LC_EVT_MODEM_SLEEP_ENTER" title="LTE_LC_EVT_MODEM_SLEEP_ENTER"><code class="xref c c-enum docutils literal notranslate"><span class="pre">LTE_LC_EVT_MODEM_SLEEP_ENTER</span></code></a> event with type <a class="reference internal" href="../../libraries/modem/lte_lc.html#c.lte_lc_modem_sleep_type.LTE_LC_MODEM_SLEEP_LIMITED_SERVICE" title="LTE_LC_MODEM_SLEEP_LIMITED_SERVICE"><code class="xref c c-enum docutils literal notranslate"><span class="pre">LTE_LC_MODEM_SLEEP_LIMITED_SERVICE</span></code></a> is received while waiting for PSM, the cell has been lost and the modem cannot enter PSM.
+You can use this as a trigger to set the modem to offline mode quicker in this case, but it is not mandatory.</p>
+</li>
+<li><p>If RRC connection is activated again (<code class="docutils literal notranslate"><span class="pre">+CSCON:</span> <span class="pre">1</span></code> or <a class="reference internal" href="../../libraries/modem/lte_lc.html#c.lte_lc_evt_type.LTE_LC_EVT_RRC_UPDATE" title="LTE_LC_EVT_RRC_UPDATE"><code class="xref c c-enum docutils literal notranslate"><span class="pre">LTE_LC_EVT_RRC_UPDATE</span></code></a> event with RRC mode set to <a class="reference internal" href="../../libraries/modem/lte_lc.html#c.lte_lc_rrc_mode.LTE_LC_RRC_MODE_CONNECTED" title="LTE_LC_RRC_MODE_CONNECTED"><code class="xref c c-enum docutils literal notranslate"><span class="pre">LTE_LC_RRC_MODE_CONNECTED</span></code></a>) while waiting for PSM, go back to Step 1.</p></li>
+</ol>
+</section>
+</section>
+<section id="power-profiling-example-use-case">
+<h3><a class="toc-backref" href="#id13">Power profiling example use case</a><a class="headerlink" href="#power-profiling-example-use-case" title="Permalink to this heading"></a></h3>
+<p>To optimize the power, perform the following steps:</p>
+<ol class="arabic simple">
+<li><p>Simulate your use case with Online Power Profiler.</p></li>
+<li><p>Perform real-time current measurements using Power Profiler Kit II with the configuration obtained from Online Power Profiler.</p></li>
+<li><p>Use the results from the Power Profiler Kit II measurements to tune the simulation results in Online Power Profiler.</p></li>
+</ol>
+<p>Specifications for the example use case:</p>
+<ul class="simple">
+<li><p>Application - A battery driven sensor application</p></li>
+<li><p>Battery life - Two years battery life on 1000 mAh 3.7V battery</p></li>
+<li><p>Measurement characteristics:</p>
+<ul>
+<li><p>Measurements every ten minutes</p></li>
+<li><p>Each measurement equals 20 bytes of payload</p></li>
+<li><p>Frequency of payload transfer aligned with the expected 2-year battery life</p></li>
+</ul>
+</li>
+<li><p>Transport - UDP</p></li>
+<li><p>Network - LTE-M with PSM support</p></li>
+</ul>
+<p>Assumptions:</p>
+<ul class="simple">
+<li><p>Data is sent on a regular basis.</p></li>
+<li><p>The network is not present in the drop-down list corresponding to <span class="guilabel">Preset network parameters</span> in Online Power Profiler.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>All measurements and calculations in the example use case are based on nRF9160 Revision 2.</p>
+</div>
+<section id="simulation-using-online-power-profiler">
+<h4>Simulation using Online Power Profiler<a class="headerlink" href="#simulation-using-online-power-profiler" title="Permalink to this heading"></a></h4>
+<p>To simulate the use case with Online Power Profiler, complete the following steps:</p>
+<ol class="arabic">
+<li><p>Start the simulation in Online Power Profiler with the default settings and add the following changes to the default configuration:</p>
+<ol class="upperalpha simple">
+<li><p>In the <strong>PSM</strong> section on the left, set <strong>Active time (sec)</strong> to <code class="docutils literal notranslate"><span class="pre">0</span></code> (indicating that the device does not need to be active after sending the payload).</p></li>
+<li><p>In the <strong>Data transfer</strong> section on the left, select <span class="guilabel">Upload</span> from the <strong>Enable</strong> drop-down menu. The <strong>Data size (bytes)</strong> and <strong>Data transfer interval (sec)</strong> options are now visible. Set the options to the following values:</p></li>
+</ol>
+<blockquote>
+<div><ol class="loweralpha">
+<li><p>Set <strong>Data size (bytes)</strong> to <code class="docutils literal notranslate"><span class="pre">20</span></code>.</p></li>
+<li><p>Set <strong>Data transfer interval (sec)</strong> to <code class="docutils literal notranslate"><span class="pre">600</span></code> (10 minutes).</p>
+<p>The following image shows the result of the power profile simulation using Online Power Profiler:</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="../../_images/app_power_opt_opp_default_20byte_10min.png"><img alt="Online Power Profiler simulation for 20 bytes payload with 10 minutes interval" src="../../_images/app_power_opt_opp_default_20byte_10min.png" style="width: 100%;" /></a>
+</figure>
+<p>The total average current is now 82.84 µA.
+However, the battery charge is 1000 mAh.
+If you are targeting the application to run for two years on a single battery, the maximum average current that can be allowed for the use case is 57 µA (1000 mAh/two years).
+Hence, the estimation must target in bringing down the average current to or below 57 µA.</p>
+</li>
+</ol>
+</div></blockquote>
+</li>
+<li><p>Tune the current estimation:</p>
+<blockquote>
+<div><ol class="loweralpha simple">
+<li><p>Set <strong>Data size(bytes)</strong> to 40.</p></li>
+<li><p>Set <strong>Data transfer interval (sec)</strong> to 1200 (20 minutes).</p></li>
+</ol>
+<p>The tuning of parameters results in the following output in Online Power Profiler:</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="../../_images/app_power_opt_opp_default_40_byte_20min.png"><img alt="Online Power Profiler simulation for 40-byte payload with 20 minutes interval" src="../../_images/app_power_opt_opp_default_40_byte_20min.png" style="width: 100%;" /></a>
+</figure>
+<p>The average current is now 42.96 µA, which is below the calculated maximum limit of 57 µA.</p>
+</div></blockquote>
+</li>
+<li><p>Export the settings from the Online Power Profiler tool and compare them with the measurements in real networks.
+Complete the following sub-steps to export the settings from Online Power Profiler:</p>
+<ol class="loweralpha simple">
+<li><p>Click <span class="guilabel">Export settings</span> to store current Online Power Profiler settings to a <code class="file docutils literal notranslate"><span class="pre">.json</span></code> file.</p></li>
+<li><p>Click <span class="guilabel">Export NCS project config</span> to export the configuration parameters in an <code class="file docutils literal notranslate"><span class="pre">opp.conf</span></code> file that you can use when building the firmware.</p></li>
+</ol>
+</li>
+</ol>
+</section>
+<section id="real-time-power-measurement-using-power-profiler-kit-ii">
+<h4>Real-time power measurement using Power Profiler Kit II<a class="headerlink" href="#real-time-power-measurement-using-power-profiler-kit-ii" title="Permalink to this heading"></a></h4>
+<p>After exporting the settings from Online Power Profiler, use the settings while measuring current on an nRF9160 DK.
+To measure current on an nRF9160 DK using the Power Profiler Kit II, while it is connected to a live network, complete the following steps:</p>
+<ol class="arabic">
+<li><p>Connect Power Profiler Kit II to an nRF9160 DK as described in <a class="reference external" href="https://infocenter.nordicsemi.com/topic/ug_ppk2/UG/ppk/PPK_user_guide_Intro.html">Power Profiler Kit II user guide</a>.</p></li>
+<li><p>Navigate to the <a class="reference internal" href="../../samples/nrf9160/udp/README.html#udp"><span class="std std-ref">nRF9160: UDP</span></a> sample in nRF Connect SDK and copy the contents of the <code class="file docutils literal notranslate"><span class="pre">opp.conf</span></code> file that you exported from Online Power Profiler into the <code class="file docutils literal notranslate"><span class="pre">prj.conf</span></code> file in the UDP sample folder (<code class="docutils literal notranslate"><span class="pre">samples\\nrf9160\\udp</span></code>).</p></li>
+<li><p><a class="reference internal" href="../../getting_started/programming.html#gs-programming"><span class="std std-ref">Build and program the sample onto the nRF9160 DK</span></a>.</p></li>
+<li><p>If PSM is available in your network, the power measurement using Power Profiler Kit II produces the following results:</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="../../_images/app_power_opt_ppk_psm.png"><img alt="Power Profiler Kit II sample output with PSM" src="../../_images/app_power_opt_ppk_psm.png" style="width: 100%;" /></a>
+</figure>
+<p>If PSM is activated, you can see that the current value drops to a few µA.
+As long as the PSM mode is activated and no other activity occurs, the current value remains in the PSM floor as shown in the above image until a transmission occurs or until the PSM timer times out.
+Even though the requested time-out value in the use case is 60 minutes, it is decided by the network.
+The PSM floor current is now 3.44 µA.</p>
+</li>
+<li><p>Since the data transfer interval is 20 minutes, you can increase the frequency of transmission. Set <a class="reference internal" href="../../samples/nrf9160/udp/README.html#config-udp-data-upload-frequency-seconds"><span class="std std-ref">CONFIG_UDP_DATA_UPLOAD_FREQUENCY_SECONDS</span></a> to <code class="docutils literal notranslate"><span class="pre">120</span></code> in <code class="file docutils literal notranslate"><span class="pre">prj.conf</span></code>.</p></li>
+<li><p>Rebuild and program the sample.</p></li>
+<li><p>A 40-byte data packet is now sent every two minutes. Make sure that the frequency is sufficiently higher than the duration of RRC inactivity present in the network.</p>
+<p>RRC inactivity timer is a parameter that defines the duration of time, the device is required to stay in RRC connected mode before it can enter RRC idle mode (eDRX idle) or PSM.
+RRC inactivity timer value can be over one minute in some networks, and to get correct measurements, you must ensure that the device has gone into PSM before the new data packet is sent.
+After a duration of two minutes, observe the following results in the Power Profiler Kit II interface:</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="../../_images/app_power_opt_ppk_40_byte.png"><img alt="Power Profiler Kit II sample output for 40-byte payload" src="../../_images/app_power_opt_ppk_40_byte.png" style="width: 100%;" /></a>
+</figure>
+<p>The whole sequence of data transmission spans now 12.32 seconds and the process consumes a total battery charge of 115.06 mC.
+According to the Online Power Profiler estimation, the time duration available for the data transmission sequence is 7.9 seconds with a battery charge of 48.33 mC.
+The longer data transmission duration in the real-time measurement using Power Profiler Kit II might be due to the RRC inactivity timer network parameter.
+Hence, tune the parameters to match the network environment.</p>
+</li>
+<li><p>Before tuning, calculate the payload sending frequency, with the targeted battery life of two years:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>115.06 mC / (48.33-3.44) µA = 44.89 minutes (3.44 µA is the measured PSM floor)
+</pre></div>
+</div>
+<p>It is recommended to send a batch of six measurements for every 60 minutes to have some margin.
+Hence, you can change the payload size to a value of 120 bytes in the <code class="file docutils literal notranslate"><span class="pre">prj.conf</span></code> to observe how it affects the charge in a single transmission.</p>
+</li>
+<li><p>To change the payload size, set <a class="reference internal" href="../../samples/nrf9160/udp/README.html#config-udp-data-upload-size-bytes"><span class="std std-ref">CONFIG_UDP_DATA_UPLOAD_SIZE_BYTES</span></a> to <code class="docutils literal notranslate"><span class="pre">120</span></code> in <code class="file docutils literal notranslate"><span class="pre">prj.conf</span></code></p></li>
+<li><p>Rebuild and program the sample.</p>
+<p>Observe the results in the Power Profiler Kit II interface:</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="../../_images/app_power_opt_ppk_120_byte.png"><img alt="Power Profiler Kit II sample output for 120-byte payload" src="../../_images/app_power_opt_ppk_120_byte.png" style="width: 100%;" /></a>
+</figure>
+</li>
+</ol>
+<blockquote>
+<div><p>The overall charge is now 116.57 mC.
+However, in a real network, the values are bound to deviate.
+Therefore, it is recommended to do multiple measurements to understand the extent of deviations.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>1000 mAh / ((116.57 mC/60 minutes) + 3.44 uA) = 3.18 years
+</pre></div>
+</div>
+<p>With the above network conditions and the reporting interval, you can achieve two years of battery life.</p>
+</div></blockquote>
+</section>
+<section id="tuning-of-network-parameters">
+<h4>Tuning of network parameters<a class="headerlink" href="#tuning-of-network-parameters" title="Permalink to this heading"></a></h4>
+<p>To make the Online Power Profiler estimation closer to live network measurements, tune the network parameters.</p>
+<p>Important network parameters that contribute to the current consumption:</p>
+<ul class="simple">
+<li><p>PSM active timer</p></li>
+<li><p>RRC inactivity timer</p></li>
+<li><p>cDRX interval</p></li>
+<li><p>cDRX on duration</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The PSM active timer is set to zero in both simulation and the measurements and it does not contribute to the use case.</p>
+</div>
+<p>To tune the network parameters for the example use case, complete the following steps:</p>
+<ol class="arabic">
+<li><p>Measure the RRC inactivity timer value using Power Profiler Kit II.</p>
+<p>The image shows how you can measure the RRC inactivity timer with Power Profiler Kit II:</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="../../_images/app_power_opt_ppk_inactivity_timer.png"><img alt="Power Profiler Kit II RRC inactivity timer measurement" src="../../_images/app_power_opt_ppk_inactivity_timer.png" style="width: 100%;" /></a>
+</figure>
+<p>For the example use case, the RRC inactivity timer is 11 seconds.
+The charge during the interval is 93.82 mC (cDRX charge in Online Power Profiler).
+A closer inspection of the highlighted time duration shows that the <cite>cDRX Interval</cite> is 0.32 seconds:</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="../../_images/app_power_opt_ppk_cdrx_interval.png"><img alt="Power Profiler Kit II cDRX interval" src="../../_images/app_power_opt_ppk_cdrx_interval.png" style="width: 100%;" /></a>
+</figure>
+<p>The parameter <code class="docutils literal notranslate"><span class="pre">cDRX</span> <span class="pre">on</span> <span class="pre">duration</span></code> varies as shown in the following image, but the baseline (lowest value) is 40 milliseconds:</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="../../_images/app_power_opt_ppk_cdrx_duration_40ms.png"><img alt="Power Profiler Kit II cDRX duration" src="../../_images/app_power_opt_ppk_cdrx_duration_40ms.png" style="width: 100%;" /></a>
+</figure>
+</li>
+<li><p>Provide the measurements from the previous step to Online Power Profiler:</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="../../_images/app_power_opt_opp_tuned_with_measurements.png"><img alt="Tuning in Online Power Profiler" src="../../_images/app_power_opt_opp_tuned_with_measurements.png" style="width: 100%;" /></a>
+</figure>
+<p>The total charge is now 99.59 mC.
+There is still a difference of around 17 mC compared to the measurements with Power Profiler Kit II.
+The cDRX charge in Online Power Profiler is 68.89 mC, but the measured cDRX charge in Power Profiler Kit II is 93.82 mC.</p>
+<p>After comparing the measurements, it can be concluded that the energy in the cDRX is the main contributor to the difference in measurements of Power Profiler Kit II and Online Power Profiler.</p>
+<p>Observe that the charge values associated with the cDRX events varies a lot.
+The battery charge value of 1.92 mC in the baseline case fits well with the Online Power Profiler value:</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="../../_images/app_power_opp_cdrx_normal.png"><img alt="Normal cDRX" src="../../_images/app_power_opp_cdrx_normal.png" style="width: 100%;" /></a>
+</figure>
+<p>However, in one of the worst case cDRX events, you can see a total charge of 7.96 mC, which is more than three times the charge in the baseline case:</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="../../_images/app_power_opt_drx_long.png"><img alt="Long cDRX" src="../../_images/app_power_opt_drx_long.png" style="width: 100%;" /></a>
+</figure>
+</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To match the cDRX behavior in real networks, a rule of thumb is to multiply the cDRX charge in Online Power Profiler with a factor of 1.5 after you have tuned it for the baseline network parameters.
+It helps in obtaining an estimate that is within the range of the actual measurement.
+The recommended factor may not be suitable for some networks and you must confirm it with the Power Profiler Kit II measurements in the actual network.</p>
+</div>
+<p>For the example use case, an estimate (based on the values from Online Power Profiler) calculated with the recommended factor is:</p>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>(Total charge - cDRX charge) + cDRX charge * 1.5 = (99.59 mC - 68.89 mC) + 68.89 mC * 1.5 = 134.04 mC (which is close to the 116.57 mC from the Power Profiler Kit II measurements).
+</pre></div>
+</div>
+</div></blockquote>
+<section id="psm-active-timer">
+<h5>PSM active timer<a class="headerlink" href="#psm-active-timer" title="Permalink to this heading"></a></h5>
+<p>PSM active timer, also known as the T3324 timer, defines the duration of time the device must stay in RRC idle mode before entering the PSM mode.
+In RRC idle mode, the device is reachable by the network in case it needs to receive more data.
+The PSM active timer can be requested by the device.
+However, the requested value might not be supported by the network.</p>
+<p>In the example use case, PSM active timer is zero.
+Below is a measurement from Power Profiler Kit II with the PSM active timer set to 10 seconds.
+The rest of the parameters are identical to the previous measurements.</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="../../_images/app_power_opt_ppk_10sec_active_timer.png"><img alt="PSM active timer" src="../../_images/app_power_opt_ppk_10sec_active_timer.png" style="width: 100%;" /></a>
+</figure>
+<p>LTE activity is now extended by 10 seconds with a lower duty cycle operation (RRC Idle) compared to the previous measurements.</p>
+<p>For additional information on power optimization for nRF52-based devices, see <a class="reference external" href="https://devzone.nordicsemi.com/nordic/nordic-blog/b/blog/posts/optimizing-power-on-nrf52-designs">Optimizing Power on nRF52 Designs</a>.</p>
+</section>
+</section>
+</section>
+</section>
+<section id="power-saving-features">
+<h2><a class="toc-backref" href="#id14">Power saving features</a><a class="headerlink" href="#power-saving-features" title="Permalink to this heading"></a></h2>
+<p>The following section lists some features you can use to fine-tune cellular power consumption.</p>
+<section id="reduced-mobility">
+<h3><a class="toc-backref" href="#id15">Reduced mobility</a><a class="headerlink" href="#reduced-mobility" title="Permalink to this heading"></a></h3>
+<p>If the device in your application is mostly stationary, you can request the modem to reduce mobility.
+This feature is designed to reduce power consumption by reducing swapping between cells.
+You can use the <a class="reference internal" href="../../libraries/modem/lte_lc.html#lte-lc-readme"><span class="std std-ref">LTE link controller</span></a> to configure this feature.
+The following code shows how to configure this feature:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">lte_lc_reduced_mobility_set</span><span class="p">(</span><span class="n">LTE_LC_REDUCED_MOBILITY_NORDIC</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">printk</span><span class="p">(</span><span class="s">&quot;lte_lc_reduced_mobility_set, error: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">err</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="p">;</span>
+<span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>You can also enable this feature using the <code class="docutils literal notranslate"><span class="pre">AT%REDMOB=1</span></code> command.</p>
+</section>
+<section id="country-specific-search-optimization">
+<h3><a class="toc-backref" href="#id16">Country-specific search optimization</a><a class="headerlink" href="#country-specific-search-optimization" title="Permalink to this heading"></a></h3>
+<p>The initial search for a network in a new location can take several minutes and might therefore draw a considerable amount of power.
+This phase is not covered by the Online Power Profiler but might become a relevant factor if the device frequently travels long distances.</p>
+<p>To speed up network selection, you can provide country-specific search parameters for up to 70 countries.
+This list can be set using the <code class="docutils literal notranslate"><span class="pre">AT%XCOUNTRYDATA</span></code> command.</p>
+</section>
+<section id="abort-network-search-early">
+<h3><a class="toc-backref" href="#id17">Abort network search early</a><a class="headerlink" href="#abort-network-search-early" title="Permalink to this heading"></a></h3>
+<p>For weak radio conditions, the application can subscribe to <code class="docutils literal notranslate"><span class="pre">LTE_LC_MODEM_EVT_LIGHT_SEARCH_DONE</span></code> events.
+These occur when the modem finishes an initial search without connecting to a network.
+If the connection can wait some more time, the application can decide to abort the search and try again later.
+Without intervention, the modem continues with a more thorough search.</p>
+</section>
+<section id="connection-evaluation-or-energy-estimation">
+<h3><a class="toc-backref" href="#id18">Connection evaluation or Energy estimation</a><a class="headerlink" href="#connection-evaluation-or-energy-estimation" title="Permalink to this heading"></a></h3>
+<p>Before sending data, the application can request the modem to estimate energy efficiency of the cell that it connects to.
+The <a class="reference internal" href="../../libraries/modem/lte_lc.html#lte-lc-readme"><span class="std std-ref">LTE link controller</span></a> can be used to query this information.
+The following code shows how to query this information:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">lte_lc_conn_eval_params</span><span class="w"> </span><span class="n">params</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lte_lc_conn_eval_params_get</span><span class="p">(</span><span class="o">&amp;</span><span class="n">params</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="n">printk</span><span class="p">(</span><span class="s">&quot;lte_lc_conn_eval_params_get, error: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">err</span><span class="p">);</span>
+<span class="w">   </span><span class="k">return</span><span class="p">;</span>
+<span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>The following code block yields a high-level measure that can be used to delay network operations:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">params</span><span class="p">.</span><span class="n">energy_estimate</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">LTE_LC_ENERGY_CONSUMPTION_NORMAL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="cm">/* start delay timer */</span>
+<span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="cm">/* do network operation immediately */</span>
+<span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="synchronizing-application-with-modem-sleep">
+<h3><a class="toc-backref" href="#id19">Synchronizing application with modem sleep</a><a class="headerlink" href="#synchronizing-application-with-modem-sleep" title="Permalink to this heading"></a></h3>
+<p>Depending on network configuration, the modem wakes up at certain intervals.
+For example, it will have to do a Tracking Area Update (TAU) periodically to avoid reconnecting to the network.
+It is possible to subscribe to <code class="docutils literal notranslate"><span class="pre">LTE_LC_EVT_TAU_PRE_WARNING</span></code> or <code class="docutils literal notranslate"><span class="pre">LTE_LC_EVT_MODEM_SLEEP_EXIT_PRE_WARNING</span></code> events and then send application data whenever the modem wakes up.
+Use the pre-warning notifications to avoid having to wake up twice.</p>
+</section>
+<section id="release-assistance-indication-rai">
+<h3><a class="toc-backref" href="#id20">Release Assistance Indication (RAI)</a><a class="headerlink" href="#release-assistance-indication-rai" title="Permalink to this heading"></a></h3>
+<p>If you have low-level control over the protocol your IOT device uses, you might know when you should not expect more data.
+In that case, you can request to skip the RRC idle mode using <a class="reference internal" href="../../glossary.html#term-Release-Assistance-Indication-RAI"><span class="xref std std-term">Release Assistance Indication (RAI)</span></a>.
+The recommended way to do this is using setsockopt with an option like <code class="docutils literal notranslate"><span class="pre">SO_RAI_LAST</span></code>.</p>
+</section>
+<section id="low-battery-behavior">
+<h3><a class="toc-backref" href="#id21">Low battery behavior</a><a class="headerlink" href="#low-battery-behavior" title="Permalink to this heading"></a></h3>
+<p>You can configure low battery level warnings using the <code class="docutils literal notranslate"><span class="pre">AT%XVBATLOWLVL</span></code> command and subscribe using the <code class="docutils literal notranslate"><span class="pre">AT%XVBATLVL</span></code> command.
+There is also a power-off feature that notifies the application when the modem has shut down because of low power.
+It can be configured using the <code class="docutils literal notranslate"><span class="pre">AT%XPOFWARN</span></code> command.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../ap_protect/index.html" class="btn btn-neutral float-right" title="Enabling access port protection mechanism" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="memory.html" class="btn btn-neutral" title="Memory footprint optimization" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

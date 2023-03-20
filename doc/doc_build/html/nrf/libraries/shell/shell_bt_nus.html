@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nordic UART Service (NUS) shell transport &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../_static/js/ncs.js"
+></script>
+<script src="../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="IPC service shell transport" href="shell_ipc.html" />
+    <link rel="prev" title="Shell libraries" href="index.html" />
+<link
+  href="../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drivers.html">Drivers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Libraries</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../bin/index.html">Binary libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bluetooth_services/index.html">Bluetooth libraries and services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bootloader/index.html">Bootloader libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../caf/index.html">Common Application Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../debug/index.html">Debug libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dfu/index.html">DFU libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gazell/index.html">Gazell libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modem/index.html">Modem libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mpsl/index.html">Multiprotocol Service Layer libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../networking/index.html">Libraries for networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nfc/index.html">Libraries for NFC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nrf_rpc/index.html">nRF RPC libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../others/index.html">Other libraries</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Shell libraries</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Nordic UART Service (NUS) shell transport</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#setup">Setup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sending-shell-commands">Sending shell commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#api-documentation">API documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="shell_ipc.html">IPC service shell transport</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../tfm/index.html">TF-M libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../zigbee/index.html">Libraries for Zigbee</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Libraries</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Shell libraries</a></li>
+      <li class="breadcrumb-item active">Nordic UART Service (NUS) shell transport</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/libraries/shell/shell_bt_nus.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="nordic-uart-service-nus-shell-transport">
+<span id="shell-bt-nus-readme"></span><h1>Nordic UART Service (NUS) shell transport<a class="headerlink" href="#nordic-uart-service-nus-shell-transport" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#setup" id="id7">Setup</a></p></li>
+<li><p><a class="reference internal" href="#sending-shell-commands" id="id8">Sending shell commands</a></p>
+<ul>
+<li><p><a class="reference internal" href="#bt-nus-shell-py" id="id9">bt_nus_shell.py</a></p></li>
+<li><p><a class="reference internal" href="#bluetooth-le-console" id="id10">Bluetooth LE Console</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#api-documentation" id="id11">API documentation</a></p></li>
+</ul>
+</div>
+<p>The Bluetooth® LE GATT Nordic UART Service shell transport allows you to receive shell commands remotely over <em>Bluetooth</em>.
+It uses the <a class="reference internal" href="../bluetooth_services/services/nus.html#nus-service-readme"><span class="std std-ref">Nordic UART Service (NUS)</span></a>.</p>
+<p>The NUS Service shell transport is used in the <a class="reference internal" href="../../samples/bluetooth/shell_bt_nus/README.html#shell-bt-nus"><span class="std std-ref">Bluetooth: NUS shell transport</span></a> sample.</p>
+<section id="setup">
+<h2><a class="toc-backref" href="#id7">Setup</a><a class="headerlink" href="#setup" title="Permalink to this heading"></a></h2>
+<p>Enable NUS shell transport in your application to be able to receive shell commands remotely.</p>
+</section>
+<section id="sending-shell-commands">
+<span id="shell-bt-nus-host-tools"></span><h2><a class="toc-backref" href="#id8">Sending shell commands</a><a class="headerlink" href="#sending-shell-commands" title="Permalink to this heading"></a></h2>
+<p>The nRF Connect SDK provides two alternatives for sending shell commands from a host, like a PC, to the application that uses this module:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#bt-nus-shell-py">bt_nus_shell.py</a>. It is a Python script that requires a console application, like PuTTY, and a second development kit.</p></li>
+<li><p><a class="reference internal" href="#bluetooth-le-console">Bluetooth LE Console</a>. It is a stand-alone application for Linux.</p></li>
+</ul>
+<section id="bt-nus-shell-py">
+<h3><a class="toc-backref" href="#id9">bt_nus_shell.py</a><a class="headerlink" href="#bt-nus-shell-py" title="Permalink to this heading"></a></h3>
+<p>The script file <code class="file docutils literal notranslate"><span class="pre">scripts/shell/bt_nus_shell.py</span></code> contains a cross-platform example host application, written in Python 3.</p>
+<p>The script uses an additional Nordic development kit, like the PCA10040, as a Bluetooth central device.
+It connects to the specified device and forwards all NUS traffic to the network port.
+You can then use a console application, like PuTTY, to connect to that port and use the shell.
+The default port is set to <code class="docutils literal notranslate"><span class="pre">8889</span></code>.</p>
+<p>To install the script dependencies, open your preferred command-line interface, and enter the following command in the nRF Connect SDK root directory:</p>
+<blockquote>
+<div><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">pip install --user -r scripts/shell/requirements.txt</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>The script requires the following parameters:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">com</span></code> - the COM port of the development kit used by the script</p></li>
+</ul>
+<p>Additionally, following parameters are option:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">snr</span></code> - the SEGGER board ID</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">family</span></code> - the chip family of the development kit, for example, nRF52</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code> - the advertising name of the device with the NUS shell</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">port</span></code> - the local network port</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The script does not support reconnections.
+Therefore, you must restart both the script and the console application after each reconnection.</p>
+</div>
+<p>Perform the following steps to use the <code class="file docutils literal notranslate"><span class="pre">bt_nus_shell.py</span></code> script:</p>
+<ol class="arabic">
+<li><p>Connect a Nordic Development Kit, like the PCA10040, to your PC.</p></li>
+<li><p>Start the <code class="file docutils literal notranslate"><span class="pre">bt_nus_shell.py</span></code> script with the correct parameters, for example:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">bt_nus_shell.py --name BT_NUS_shell --com COM237 --family NRF52 --snr 682560213</span>
+</pre></div>
+</div>
+</li>
+<li><p>Open a console application, for example, PuTTY.
+Open a new session, setting the <span class="guilabel">Connection Type</span> to <span class="guilabel">Raw</span> and the <span class="guilabel">Destination Address</span> to <code class="docutils literal notranslate"><span class="pre">127.0.0.1:8889</span></code>.</p></li>
+<li><p>Press Enter in the terminal window.
+A console prompt is displayed.</p></li>
+<li><p>Enter the commands that you want to execute in the remote shell.</p></li>
+</ol>
+</section>
+<section id="bluetooth-le-console">
+<h3><a class="toc-backref" href="#id10">Bluetooth LE Console</a><a class="headerlink" href="#bluetooth-le-console" title="Permalink to this heading"></a></h3>
+<p>The Bluetooth LE Console is a stand-alone Linux application that uses a standard Bluetooth device, like an HCI dongle or a built-in Bluetooth device, and the BlueZ stack to communicate over Bluetooth with the device that runs the NUS shell transport.</p>
+<p>See <a class="reference internal" href="../../scripts/shell/ble_console/README.html#ble-console-readme"><span class="std std-ref">Bluetooth LE Console</span></a> for more information.</p>
+</section>
+</section>
+<section id="api-documentation">
+<h2><a class="toc-backref" href="#id11">API documentation</a><a class="headerlink" href="#api-documentation" title="Permalink to this heading"></a></h2>
+<div class="line-block">
+<div class="line">Header file: <code class="file docutils literal notranslate"><span class="pre">include/shell/shell_bt_nus.h</span></code></div>
+<div class="line">Source file: <code class="file docutils literal notranslate"><span class="pre">subsys/shell/shell_bt_nus.c</span></code></div>
+</div>
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="group__shell__bt__nus"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">shell_bt_nus</span></span></dt>
+<dd><p>Nordic UART Service (NUS) shell transport API. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-defines">Defines</p>
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.SHELL_BT_NUS_DEFINE">
+<span class="target" id="group__shell__bt__nus_1ga1f6d5aca8a1b5c9e83ac9b358236d030"></span><span class="sig-name descname"><span class="n"><span class="pre">SHELL_BT_NUS_DEFINE</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">_name</span></span>, <span class="n"><span class="pre">_tx_ringbuf_size</span></span>, <span class="n"><span class="pre">_rx_ringbuf_size</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.SHELL_BT_NUS_DEFINE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Macro for creating an instance of the module. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.shell_bt_nus_init">
+<span class="target" id="group__shell__bt__nus_1gad81e3b88456b7ebb230d963c3fbde53a"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">shell_bt_nus_init</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.shell_bt_nus_init" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Initialize the NUS shell transport instance. </p>
+<p>This function initializes a shell thread and the Nordic UART Service.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return values</dt>
+<dd class="field-odd"><p><strong>0</strong> – If the operation was successful. Otherwise, a (negative) error code is returned. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.shell_bt_nus_enable">
+<span class="target" id="group__shell__bt__nus_1ga6948adf5ea1a565f2d97b304917cd081"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">shell_bt_nus_enable</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">bt_conn</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">conn</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.shell_bt_nus_enable" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Enable the NUS shell transport instance. </p>
+<p>This function should be called when the connection is established.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>conn</strong> – Connection handle. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.shell_bt_nus_disable">
+<span class="target" id="group__shell__bt__nus_1gae36e210956395ed80f3cb137c245cc02"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">shell_bt_nus_disable</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.shell_bt_nus_disable" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Disable the NUS shell transport instance. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-variables">Variables</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.shell_bt_nus_transport_api">
+<span class="target" id="group__shell__bt__nus_1ga2d5e05db031c5cf1324e6254affb9f5f"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">shell_transport_api</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">shell_bt_nus_transport_api</span></span></span><a class="headerlink" href="#c.shell_bt_nus_transport_api" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.shell_bt_nus_ctrl_blk">
+<span class="target" id="structshell__bt__nus__ctrl__blk"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">shell_bt_nus_ctrl_blk</span></span></span><a class="headerlink" href="#c.shell_bt_nus_ctrl_blk" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;shell_bt_nus.h&gt;</em></div>
+<p>Instance control block (RW data). </p>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.shell_bt_nus">
+<span class="target" id="structshell__bt__nus"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">shell_bt_nus</span></span></span><a class="headerlink" href="#c.shell_bt_nus" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;shell_bt_nus.h&gt;</em></div>
+<p>Instance structure. </p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="shell_ipc.html" class="btn btn-neutral float-right" title="IPC service shell transport" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Shell libraries" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

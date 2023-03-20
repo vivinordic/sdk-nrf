@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bluetooth: Throughput &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../../_static/js/ncs.js"
+></script>
+<script src="../../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Bluetooth: Mesh and peripheral coexistence" href="../mesh/ble_peripheral_lbs_coex/README.html" />
+    <link rel="prev" title="Bluetooth: NUS shell transport" href="../shell_bt_nus/README.html" />
+<link
+  href="../../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../applications.html">Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../samples.html">Samples</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../bl.html">Bluetooth samples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../central_and_peripheral_hr/README.html">Bluetooth: Central and Peripheral HRS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../central_bas/README.html">Bluetooth: Central BAS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../central_hids/README.html">Bluetooth: Central HIDS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../central_hr_coded/README.html">Bluetooth: Central Heart Rate Monitor with Coded PHY</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../central_nfc_pairing/README.html">Bluetooth: Central NFC pairing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../central_smp_client/README.html">Bluetooth: Central SMP Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../central_uart/README.html">Bluetooth: Central UART</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../direct_test_mode/README.html">Bluetooth: Direct Test Mode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../direction_finding_central/README.html">Bluetooth: Direction finding central</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../direction_finding_connectionless_rx/README.html">Bluetooth: Direction finding connectionless locator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../direction_finding_connectionless_tx/README.html">Bluetooth: Direction finding connectionless beacon</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../direction_finding_peripheral/README.html">Bluetooth: Direction finding peripheral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../enocean/README.html">Bluetooth: EnOcean</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../hci_lpuart/README.html">Bluetooth: HCI low power UART</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../llpm/README.html">Bluetooth: LLPM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../multiple_adv_sets/README.html">Bluetooth: Multiple advertising sets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../nrf_dm/README.html">Bluetooth: nRF Distance Measurement with Bluetooth LE discovery</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_ams_client/README.html">Bluetooth: Peripheral AMS client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_ancs_client/README.html">Bluetooth: Peripheral ANCS client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_bms/README.html">Bluetooth: Peripheral Bond Management Service (BMS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_cgms/README.html">Bluetooth: Continuous Glucose Monitoring Service (CGMS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_cts_client/README.html">Bluetooth: Peripheral CTS client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_fast_pair/README.html">Bluetooth: Fast Pair</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_gatt_dm/README.html">Bluetooth: Peripheral GATT Discovery Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_hids_keyboard/README.html">Bluetooth: Peripheral HIDS keyboard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_hids_mouse/README.html">Bluetooth: Peripheral HIDS mouse</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_hr_coded/README.html">Bluetooth: Peripheral Heart Rate Monitor with Coded PHY</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_lbs/README.html">Bluetooth: Peripheral LBS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_mds/README.html">Bluetooth: Peripheral Memfault Diagnostic Service (MDS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_nfc_pairing/README.html">Bluetooth: NFC pairing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_power_profiling/README.html">Bluetooth: Peripheral power profiling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_rscs/README.html">Bluetooth: Peripheral Running Speed and Cadence Service (RSCS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_status/README.html">Bluetooth: Peripheral Status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../peripheral_uart/README.html">Bluetooth: Peripheral UART</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../radio_coex_1wire/README.html">Bluetooth: External radio coexistence using 1-wire interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../rpc_host/README.html">Bluetooth: Host for nRF RPC Bluetooth Low Energy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../shell_bt_nus/README.html">Bluetooth: NUS shell transport</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Bluetooth: Throughput</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#requirements">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#user-interface">User interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#building-and-running">Building and running</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../mesh/ble_peripheral_lbs_coex/README.html">Bluetooth: Mesh and peripheral coexistence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mesh/chat/README.html">Bluetooth: Mesh chat</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mesh/light/README.html">Bluetooth: Mesh light</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mesh/light_ctrl/README.html">Bluetooth: Mesh light fixture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mesh/light_switch/README.html">Bluetooth: Mesh light switch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mesh/sensor_client/README.html">Bluetooth: Mesh sensor observer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mesh/sensor_server/README.html">Bluetooth: Mesh sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mesh/silvair_enocean/README.html">Bluetooth: Mesh Silvair EnOcean</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../crypto.html">Cryptography samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../edge.html">Edge Impulse samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gazell.html">Gazell samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../matter.html">Matter samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nfc.html">NFC samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nrf5340.html">nRF5340 samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nrf9160.html">nRF9160 samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tfm.html">Trusted Firmware-M (TF-M) samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../thread.html">Thread samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../zigbee.html">Zigbee samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../wifi.html">Wi-Fi samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../other.html">Other samples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../drivers.html">Drivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../samples.html">Samples</a></li>
+          <li class="breadcrumb-item"><a href="../../bl.html">Bluetooth samples</a></li>
+      <li class="breadcrumb-item active">Bluetooth: Throughput</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/samples/bluetooth/throughput/README.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="bluetooth-throughput">
+<span id="ble-throughput"></span><h1>Bluetooth: Throughput<a class="headerlink" href="#bluetooth-throughput" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#requirements" id="id7">Requirements</a></p></li>
+<li><p><a class="reference internal" href="#overview" id="id8">Overview</a></p>
+<ul>
+<li><p><a class="reference internal" href="#changing-connection-parameter-values" id="id9">Changing connection parameter values</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#user-interface" id="id10">User interface</a></p></li>
+<li><p><a class="reference internal" href="#building-and-running" id="id11">Building and running</a></p>
+<ul>
+<li><p><a class="reference internal" href="#testing" id="id12">Testing</a></p></li>
+<li><p><a class="reference internal" href="#sample-output" id="id13">Sample output</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#dependencies" id="id14">Dependencies</a></p></li>
+<li><p><a class="reference internal" href="#references" id="id15">References</a></p></li>
+</ul>
+</div>
+<p>The Bluetooth® Throughput sample uses the <a class="reference internal" href="../../../libraries/bluetooth_services/services/throughput.html#throughput-readme"><span class="std std-ref">GATT Throughput Service</span></a> to measure Bluetooth Low Energy throughput performance.
+You can use it to determine the maximum throughput, or to experiment with different connection parameters and check their impact on the throughput.</p>
+<section id="requirements">
+<h2><a class="toc-backref" href="#id7">Requirements</a><a class="headerlink" href="#requirements" title="Permalink to this heading"></a></h2>
+<p>The sample supports the following development kits:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 26%" />
+<col style="width: 7%" />
+<col style="width: 41%" />
+<col style="width: 26%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Hardware platforms</p></th>
+<th class="head"><p>PCA</p></th>
+<th class="head"><p>Board name</p></th>
+<th class="head"><p>Build target</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../working_with_nrf/nrf53/nrf5340.html#ug-nrf5340"><span class="std std-ref">nRF5340 DK</span></a></p></td>
+<td><p>PCA10095</p></td>
+<td><p><span class="xref std std-ref">nrf5340dk_nrf5340</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nrf5340dk_nrf5340_cpuapp_ns</span></code>
+<code class="docutils literal notranslate"><span class="pre">nrf5340dk_nrf5340_cpuapp</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../working_with_nrf/nrf52/developing.html#ug-nrf52"><span class="std std-ref">nRF52 DK</span></a></p></td>
+<td><p>PCA10040</p></td>
+<td><p><span class="xref std std-ref">nrf52dk_nrf52832</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nrf52dk_nrf52832</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../working_with_nrf/nrf52/developing.html#ug-nrf52"><span class="std std-ref">nRF52840 DK</span></a></p></td>
+<td><p>PCA10056</p></td>
+<td><p><span class="xref std std-ref">nrf52840dk_nrf52840</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nrf52840dk_nrf52840</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>When built for an <code class="docutils literal notranslate"><span class="pre">_ns</span></code> build target, the sample is configured to compile and run as a non-secure application with <a class="reference internal" href="../../../app_dev/board_support/index.html#app-boards-spe-nspe-cpuapp-ns"><span class="std std-ref">Cortex-M Security Extensions enabled</span></a>.
+Therefore, it automatically includes <a class="reference internal" href="../../../app_dev/tfm/index.html#ug-tfm"><span class="std std-ref">Trusted Firmware-M</span></a> that prepares the required peripherals and secure services to be available for the application.</p>
+<p>You can use any two of the development kits listed above and mix different development kits.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you use nRF5340 DK, the additional configuration of the network core will be taken from the <code class="file docutils literal notranslate"><span class="pre">child_image</span></code> directory.
+For more details, see <a class="reference internal" href="../../../app_dev/multi_image/index.html#ug-multi-image-variables"><span class="std std-ref">Image-specific variables</span></a>.</p>
+</div>
+<p>The sample also requires a connection to a computer with a serial terminal that supports VT100/ANSI escape characters for each of the development kits.</p>
+</section>
+<section id="overview">
+<h2><a class="toc-backref" href="#id8">Overview</a><a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+<p>The sample transmits data between two development kits, the <em>tester</em> and the <em>peer</em>, and measures the throughput performance.
+It uses the <a class="reference internal" href="../../../libraries/bluetooth_services/services/throughput.html#throughput-readme"><span class="std std-ref">GATT Throughput Service</span></a> for this.
+To run the tests, connect to the kit using the serial port and send shell commands.
+Zephyr’s <span class="xref std std-ref">zephyr:shell_api</span> module is used to handle the commands.</p>
+<p>The sample demonstrates the interaction of the following connection parameters:</p>
+<dl class="simple">
+<dt>ATT_MTU size</dt><dd><p>In Bluetooth Low Energy, the default Maximum Transmission Unit (MTU) is 23 bytes.
+When increasing this value, longer ATT payloads can be achieved, increasing the ATT throughput.</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To configure the ATT_MTU size, use menuconfig and compile and program the sample again.</p>
+</div>
+<dl class="simple">
+<dt>Data length</dt><dd><p>In Bluetooth Low Energy, the default data length for a radio packet is 27 bytes.
+Data length extension allows to use larger radio packets, so that more data can be sent in one packet, increasing the throughput.</p>
+</dd>
+<dt>Connection interval</dt><dd><p>The connection interval defines how often the devices must listen to the radio.
+When increasing this value, more packets may be sent in one interval, but if a packet is lost, the wait until the retransmission is longer.</p>
+</dd>
+<dt>Physical layer (PHY) data rate</dt><dd><p>Starting with Bluetooth 5, the over-the-air data rate in Bluetooth Low Energy can exceed 1 Ms/s (mega symbols per second), which allows for faster transmission.
+In addition, you can use coded PHY (available on the nRF52840 SoC only) for long-range transmission.</p>
+</dd>
+</dl>
+<p>By default, the following connection parameter values are used:</p>
+<table class="docutils align-default" id="id6">
+<caption><span class="caption-text">Default parameter values</span><a class="headerlink" href="#id6" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ATT_MTU size</p></td>
+<td><p>498 bytes</p></td>
+</tr>
+<tr class="row-odd"><td><p>Data length</p></td>
+<td><p>251 bytes</p></td>
+</tr>
+<tr class="row-even"><td><p>Connection interval</p></td>
+<td><p>320 units (400 ms)</p></td>
+</tr>
+<tr class="row-odd"><td><p>PHY data rate</p></td>
+<td><p>2 Ms/s</p></td>
+</tr>
+</tbody>
+</table>
+<section id="changing-connection-parameter-values">
+<h3><a class="toc-backref" href="#id9">Changing connection parameter values</a><a class="headerlink" href="#changing-connection-parameter-values" title="Permalink to this heading"></a></h3>
+<p>To experiment with different connection parameter values, reconfigure the values using the <span class="xref std std-ref">zephyr:shell_api</span> interface before running a test.</p>
+<p>You can adjust the following parameters:</p>
+<ul class="simple">
+<li><p>PHY</p></li>
+<li><p>LE Data Length</p></li>
+<li><p>LE Connection interval</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In a Bluetooth Low Energy connection, the different devices negotiate the connection parameters that are used.
+If the configuration parameters for the devices differ, they agree on the lowest common denominator.</p>
+<p>By default, the sample uses the fastest connection parameters.
+You can change them to different valid values without a need to program both kits again.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When you have set the LE Connection Interval to high values and need to change the PHY or the Data Length in the next test, the PHY Update or Data Length Update procedure can take several seconds.</p>
+</div>
+</section>
+</section>
+<section id="user-interface">
+<h2><a class="toc-backref" href="#id10">User interface</a><a class="headerlink" href="#user-interface" title="Permalink to this heading"></a></h2>
+<dl class="simple">
+<dt>Button 1:</dt><dd><p>Set the board into a central (tester) role.</p>
+</dd>
+<dt>Button 2:</dt><dd><p>Set the board into a peripheral (peer) role.</p>
+</dd>
+</dl>
+</section>
+<section id="building-and-running">
+<h2><a class="toc-backref" href="#id11">Building and running</a><a class="headerlink" href="#building-and-running" title="Permalink to this heading"></a></h2>
+<p>This sample can be found under <code class="file docutils literal notranslate"><span class="pre">samples/bluetooth/throughput</span></code> in the nRF Connect SDK folder structure.</p>
+<p>When built as firmware image for the <code class="docutils literal notranslate"><span class="pre">_ns</span></code> build target, the sample has Cortex-M Security Extensions (CMSE) enabled and separates the firmware between Non-Secure Processing Environment (NSPE) and Secure Processing Environment (SPE).
+Because of this, it automatically includes the <a class="reference internal" href="../../../app_dev/tfm/index.html#ug-tfm"><span class="std std-ref">Trusted Firmware-M (TF-M)</span></a>.
+To read more about CMSE, see <a class="reference internal" href="../../../app_dev/board_support/index.html#app-boards-spe-nspe"><span class="std std-ref">Processing environments</span></a>.</p>
+<p>To build the sample with Visual Studio Code, follow the steps listed on the <a class="reference external" href="https://nrfconnect.github.io/vscode-nrf-connect/get_started/build_app_ncs.html">How to build an application</a> page in the nRF Connect for VS Code extension documentation.
+See <a class="reference internal" href="../../../getting_started/programming.html#gs-programming"><span class="std std-ref">Building and programming an application</span></a> for other building and programming scenarios and <a class="reference internal" href="../../../getting_started/testing.html#gs-testing"><span class="std std-ref">Testing and debugging an application</span></a> for general information about testing and debugging in the nRF Connect SDK.</p>
+<section id="testing">
+<h3><a class="toc-backref" href="#id12">Testing</a><a class="headerlink" href="#testing" title="Permalink to this heading"></a></h3>
+<p>After programming the sample to both kits, complete following steps to test it:</p>
+<ol class="arabic">
+<li><p>Connect to both kits with a terminal emulator that supports VT100/ANSI escape characters (for example, PuTTY).
+See <a class="reference internal" href="../../../getting_started/testing.html#putty"><span class="std std-ref">How to connect with PuTTY</span></a> for the required settings.</p></li>
+<li><p>Reset both kits.</p></li>
+<li><p>Press <strong>Button 1</strong> on the first development kit or type <code class="docutils literal notranslate"><span class="pre">central</span></code> in the terminal connected to the first kit to set it into the central (tester) role.</p></li>
+<li><p>Press <strong>Button 2</strong> on the second development kit or type <code class="docutils literal notranslate"><span class="pre">peripheral</span></code> in the terminal connected to the second kit to set it into the peripheral (peer) role.</p></li>
+<li><p>Observe that the kits establish a connection.
+The tester outputs the following information:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Type</span> <span class="s1">&#39;config&#39;</span> <span class="n">to</span> <span class="n">change</span> <span class="n">the</span> <span class="n">configuration</span> <span class="n">parameters</span><span class="o">.</span>
+<span class="n">You</span> <span class="n">can</span> <span class="n">use</span> <span class="n">the</span> <span class="n">Tab</span> <span class="n">key</span> <span class="n">to</span> <span class="n">autocomplete</span> <span class="n">your</span> <span class="nb">input</span><span class="o">.</span>
+<span class="n">Type</span> <span class="s1">&#39;run&#39;</span> <span class="n">when</span> <span class="n">you</span> <span class="n">are</span> <span class="n">ready</span> <span class="n">to</span> <span class="n">run</span> <span class="n">the</span> <span class="n">test</span><span class="o">.</span>
+</pre></div>
+</div>
+</li>
+<li><p>Type <code class="docutils literal notranslate"><span class="pre">config</span> <span class="pre">print</span></code> in the terminal to print the current configuration.
+Type <code class="docutils literal notranslate"><span class="pre">config</span></code> in the terminal to configure the test parameters to your choice.
+Use the Tab key for auto-completion and to view the options available for a parameter.</p></li>
+<li><p>Type <code class="docutils literal notranslate"><span class="pre">run</span></code> in the terminal to start the test.</p></li>
+<li><p>Observe the output while the tester sends data to the peer.
+At the end of the test, both tester and peer display the results of the test.</p></li>
+<li><p>Repeat the test after changing the parameters.
+Observe how the throughput changes for different sets of parameters.</p></li>
+</ol>
+</section>
+<section id="sample-output">
+<h3><a class="toc-backref" href="#id13">Sample output</a><a class="headerlink" href="#sample-output" title="Permalink to this heading"></a></h3>
+<p>The result should look similar to the following output.</p>
+<p>For the tester:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>*** Booting Zephyr OS build v3.0.99-ncs1  ***
+Starting Bluetooth Throughput example
+I: SoftDevice Controller build revision:
+I: 33 78 2a 18 20 f5 61 61 |3x*. .aa
+I: a6 8b 77 60 62 83 39 2a |..w`b.9*
+I: 7c f1 14 e4             ||...
+
+
+: HW Platform: Nordic Semiconductor (0x0002)
+I: HW Variant: nRF52x (0x0002)
+I: Firmware: Standard Bluetooth controller (0x00) Version 51.10872 Build 1643454488
+I: Identity: D7:D6:AD:A2:50:62 (random)
+I: HCI: version 5.3 (0x0c) revision 0x1136, manufacturer 0x0059
+I: LMP: version 5.3 (0x0c) subver 0x1136
+Bluetooth initialized
+
+Press button 1 or type &quot;central&quot; on the central board.
+Press button 2 or type &quot;peripheral&quot; on the peripheral board.
+uart:~$
+Central. Starting scanning
+Filters matched. Address: DC:D6:E5:EE:75:9A (random) connectable: 1
+Connected as central
+Conn. interval is 320 units
+Service discovery completed
+MTU exchange pending
+MTU exchange successful
+
+Type &#39;config&#39; to change the configuration parameters.
+You can use the Tab key to autocomplete your input.
+Type &#39;run&#39; when you are ready to run the test.
+run
+
+==== Starting throughput test ====
+PHY update pending
+LE PHY updated: TX PHY LE 2M, RX PHY LE 2M
+LE Data length update pending
+LE data len updated: TX (len: 251 time: 2120) RX (len: 251 time: 2120)
++---------------------------------------------------------------------------+
+|                                                                           |
+|                   ####                            :::###                  |
+|               ############                    :::::::######               |
+|           ####################            :::::::::::##########           |
+|       ############################    :::::::::::::::##############       |
+|    ###################################:::::::::::::::#################    |
+|    ::::###################################:::::::::::#################    |
+|    ::::::::###################################:::::::#################    |
+|    ::::::::::::###################################:::#################    |
+|    ::::::::::::::::###################################################    |
+|    ::::::::::::::::::::###############################################    |
+|    ::::::::::::::::::::::::###########################################    |
+|    ::::::::::::::::::::::::::::#######################################    |
+|    ::::::::::::::::::::::::::::::::###################################    |
+|    ::::::::::::::::::::::::::::::::::::###############################    |
+|    ::::::::::::::::::::::::::::::::::::::::###########################    |
+|    ::::::::::::::::::::::::::::::::::::::::::::#######################    |
+|    ::::::::::::::::::::::::::::::::::::::::::::::::###################    |
+|    :::::::::::::::::##::::::::::::::::::::::::::::::::################    |
+|    :::::::::::::::::#####:::::::::::::::::::::::::::::::::############    |
+|    :::::::::::::::::#########:::::::::::::::::::::::::::::::::########    |
+|    :::::::::::::::::##############:::::::::::::::::::::::::::::::::###    |
+|       ::::::::::::::##############    :::::::::::::::::::::::::::::       |
+|           ::::::::::##########           ::::::::::::::::::::::           |
+|               ::::::######                   ::::::::::::::               |
+|                   ::##                           :::::::                  |
+|                                                                           |
+|     @@      @@      @@@@@      @@@@@@     @@@@@@@     @@      @@@@@       |
+|     @@@@    @@    @@     @@    @@    @@   @@    @@    @@    @@     @@     |
+|     @@  @@  @@   @@       @@   @@@@@@     @@     @@   @@   @@             |
+|     @@    @@@@    @@     @@    @@  @@     @@    @@    @@    @@     @@     |
+|     @@      @@      @@@@@      @@    @@   @@@@@@@     @@      @@@@@       |
+|                                                                           |
+|       S    E    M    I    C    O    N    D    U    C    T    O    R       |
+|                                                                           |
++---------------------------------------------------------------------------+
+
+Done
+[local] sent 1242945 bytes (1213 KB) in 7292 ms at 1363 kbps
+[peer] received 1242945 bytes (1213 KB) in 2511 GATT writes at 1415583 bps
+
+Type &#39;config&#39; to change the configuration parameters.
+You can use the Tab key to autocomplete your input.
+Type &#39;run&#39; when you are ready to run the test.
+</pre></div>
+</div>
+<p>For the peer:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>*** Booting Zephyr OS build v3.0.99-ncs1  ***
+Starting Bluetooth Throughput example
+I: SoftDevice Controller build revision:
+I: 33 78 2a 18 20 f5 61 61 |3x*. .aa
+I: a6 8b 77 60 62 83 39 2a |..w`b.9*
+I: 7c f1 14 e4             ||...
+
+
+: HW Platform: Nordic Semiconductor (0x0002)
+I: HW Variant: nRF52x (0x0002)
+I: Firmware: Standard Bluetooth controller (0x00) Version 51.10872 Build 1643454488
+I: Identity: DC:D6:E5:EE:75:9A (random)
+I: HCI: version 5.3 (0x0c) revision 0x1136, manufacturer 0x0059
+I: LMP: version 5.3 (0x0c) subver 0x1136
+Bluetooth initialized
+
+Press button 1 or type &quot;central&quot; on the central board.
+Press button 2 or type &quot;peripheral&quot; on the peripheral board.
+uart:~$
+Peripheral. Starting advertising
+Connected as peripheral
+Conn. interval is 320 units
+LE PHY updated: TX PHY LE 2M, RX PHY LE 2M
+
+=============================================================================
+=============================================================================
+=============================================================================
+=============================================================================
+=============================================================================
+=============================================================================
+=============================================================================
+===========================================================
+[local] received 1242945 bytes (1213 KB) in 2511 GATT writes at 1415583 bps
+</pre></div>
+</div>
+</section>
+</section>
+<section id="dependencies">
+<h2><a class="toc-backref" href="#id14">Dependencies</a><a class="headerlink" href="#dependencies" title="Permalink to this heading"></a></h2>
+<p>This sample uses the following nRF Connect SDK libraries:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../../libraries/bluetooth_services/services/throughput.html#throughput-readme"><span class="std std-ref">GATT Throughput Service</span></a></p></li>
+</ul>
+<p>In addition, it uses the following Zephyr libraries:</p>
+<ul class="simple">
+<li><p><code class="file docutils literal notranslate"><span class="pre">include/console.h</span></code></p></li>
+<li><p><span class="xref std std-ref">zephyr:kernel_api</span>:</p>
+<ul>
+<li><p><code class="file docutils literal notranslate"><span class="pre">include/kernel.h</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">include/sys/printk.h</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">include/zephyr/types.h</span></code></p></li>
+<li><p><span class="xref std std-ref">zephyr:bluetooth_api</span>:</p>
+<ul>
+<li><p><code class="file docutils literal notranslate"><span class="pre">include/bluetooth/bluetooth.h</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">include/bluetooth/conn.h</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">include/bluetooth/gatt.h</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">include/bluetooth/hci.h</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">include/bluetooth/uuid.h</span></code></p></li>
+</ul>
+</li>
+<li><p><span class="xref std std-ref">zephyr:shell_api</span>:</p>
+<ul>
+<li><p><code class="file docutils literal notranslate"><span class="pre">include/shell/shell.h</span></code></p></li>
+</ul>
+</li>
+</ul>
+<p>The sample also uses the following secure firmware component:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../../app_dev/tfm/index.html#ug-tfm"><span class="std std-ref">Trusted Firmware-M</span></a></p></li>
+</ul>
+</section>
+<section id="references">
+<h2><a class="toc-backref" href="#id15">References</a><a class="headerlink" href="#references" title="Permalink to this heading"></a></h2>
+<p>For more information about the connection parameters that are used in this sample, see the following chapters in the <a class="reference external" href="https://www.bluetooth.com/specifications/specs/">Bluetooth Core Specification</a>:</p>
+<ul class="simple">
+<li><p>Vol 3, Part F, 3.2.8 Exchanging MTU Size</p></li>
+<li><p>Vol 6, Part B, 5.1.1 Connection Update Procedure</p></li>
+<li><p>Vol 6, Part B, 5.1.9 Data Length Update Procedure</p></li>
+<li><p>Vol 6, Part B, 5.1.10 PHY Update Procedure</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../mesh/ble_peripheral_lbs_coex/README.html" class="btn btn-neutral float-right" title="Bluetooth: Mesh and peripheral coexistence" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../shell_bt_nus/README.html" class="btn btn-neutral" title="Bluetooth: NUS shell transport" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

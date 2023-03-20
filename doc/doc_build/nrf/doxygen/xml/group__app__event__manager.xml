@@ -1,0 +1,928 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="group__app__event__manager" kind="group">
+    <compoundname>app_event_manager</compoundname>
+    <title>Application Event Manager</title>
+      <sectiondef kind="enum">
+      <memberdef kind="enum" id="group__app__event__manager_1gab6470c650120d82270f7acd43d15afa0" prot="public" static="no" strong="no">
+        <type></type>
+        <name>app_event_type_flags</name>
+        <enumvalue id="group__app__event__manager_gab6470c650120d82270f7acd43d15afa0_1ggab6470c650120d82270f7acd43d15afa0ae355788e3fd07b6fca841bce3547539b" prot="public">
+          <name>APP_EVENT_TYPE_FLAGS_SYSTEM_START</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>marks beginning of flags controlled internally by Application Event Manager. </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group__app__event__manager_gab6470c650120d82270f7acd43d15afa0_1ggab6470c650120d82270f7acd43d15afa0a50493196cfa17cebe2d9923980c6c1c9" prot="public">
+          <name>APP_EVENT_TYPE_FLAGS_HAS_DYNDATA</name>
+          <initializer>= APP_EVENT_TYPE_FLAGS_SYSTEM_START</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>indicates that event type has variable data size. Flag set internally by Application Event Manager. </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group__app__event__manager_gab6470c650120d82270f7acd43d15afa0_1ggab6470c650120d82270f7acd43d15afa0a04cfbb8eedcd87d2876cbac1284ae631" prot="public">
+          <name>APP_EVENT_TYPE_FLAGS_USER_SETTABLE_START</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>marks beginning of flags set by user. </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group__app__event__manager_gab6470c650120d82270f7acd43d15afa0_1ggab6470c650120d82270f7acd43d15afa0a3adab2a25815875693a8309b15622a2c" prot="public">
+          <name>APP_EVENT_TYPE_FLAGS_INIT_LOG_ENABLE</name>
+          <initializer>=
+		APP_EVENT_TYPE_FLAGS_USER_SETTABLE_START</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>enables event logging from the application start. Flag set by user. </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group__app__event__manager_gab6470c650120d82270f7acd43d15afa0_1ggab6470c650120d82270f7acd43d15afa0ab1831a9744815847a6dd49e77fa28b23" prot="public">
+          <name>APP_EVENT_TYPE_FLAGS_COUNT</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>shows number of predefined flags. </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group__app__event__manager_gab6470c650120d82270f7acd43d15afa0_1ggab6470c650120d82270f7acd43d15afa0a56b939efdd1011a6cbf925399a2c30d5" prot="public">
+          <name>APP_EVENT_TYPE_FLAGS_USER_DEFINED_START</name>
+          <initializer>= APP_EVENT_TYPE_FLAGS_COUNT</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>marks beginning of user-specific flags. </para>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>List of bits in event type flags. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/app_event_manager.h" line="44" column="1" bodyfile="include/app_event_manager.h" bodystart="44" bodyend="62"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="group__app__event__manager_1ga9f326beeb8739a0f6319745b4e2e3a38" prot="public" static="no">
+        <type>bool(*</type>
+        <definition>typedef bool(* cb_fn) (const struct app_event_header *aeh)</definition>
+        <argsstring>)(const struct app_event_header *aeh)</argsstring>
+        <name>cb_fn</name>
+        <briefdescription>
+<para>Pointer to the event handler function. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>aeh</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the application event header of the event that is processed by app_event_manager. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>True</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if event was consumed and should not be propagated to other listeners, false otherwise. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/app_event_manager.h" line="40" column="9" bodyfile="include/app_event_manager.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__app__event__manager_1ga58ab9ff503fabc8949820b61527886ca" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool app_event_get_type_flag</definition>
+        <argsstring>(const struct event_type *et, enum app_event_type_flags flag)</argsstring>
+        <name>app_event_get_type_flag</name>
+        <param>
+          <type>const struct event_type *</type>
+          <declname>et</declname>
+        </param>
+        <param>
+          <type>enum <ref refid="group__app__event__manager_gab6470c650120d82270f7acd43d15afa0_1gab6470c650120d82270f7acd43d15afa0" kindref="member">app_event_type_flags</ref></type>
+          <declname>flag</declname>
+        </param>
+        <briefdescription>
+<para>Get event type flag&apos;s value. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>flag</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Selected event type flag. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>et</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the event type. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Boolean</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>value of requested flag. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/app_event_manager.h" line="70" column="20" bodyfile="include/app_event_manager.h" bodystart="70" bodyend="74"/>
+      </memberdef>
+      <memberdef kind="function" id="group__app__event__manager_1gadd96fc8dec8ce6af024e74c864517073" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>size_t</type>
+        <definition>static size_t app_event_manager_event_size</definition>
+        <argsstring>(const struct app_event_header *aeh)</argsstring>
+        <name>app_event_manager_event_size</name>
+        <param>
+          <type>const struct app_event_header *</type>
+          <declname>aeh</declname>
+        </param>
+        <briefdescription>
+<para>Get the event size. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Function that calculates the event size using its header. <simplesect kind="note"><para>For this function to be available the <verbatim>embed:rst:inline :kconfig:option:`CONFIG_APP_EVENT_MANAGER_PROVIDE_EVENT_SIZE` </verbatim> option needs to be enabled.</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>aeh</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the application event header.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Event size in bytes. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/app_event_manager.h" line="216" column="22" bodyfile="include/app_event_manager.h" bodystart="216" bodyend="230"/>
+      </memberdef>
+      <memberdef kind="function" id="group__app__event__manager_1ga2d091cdeb35ee8c9e4f55c257bc621c0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int app_event_manager_init</definition>
+        <argsstring>(void)</argsstring>
+        <name>app_event_manager_init</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Initialize the Application Event Manager. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>0</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If the operation was successful. Error values can be added by the hooks registered by <ref refid="group__app__event__manager_ga86b2e07ed2d4302e33627d3d22ac0fa8_1ga86b2e07ed2d4302e33627d3d22ac0fa8" kindref="member">APP_EVENT_MANAGER_HOOK_POSTINIT_REGISTER</ref> macro. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/app_event_manager.h" line="371" column="5" declfile="include/app_event_manager.h" declline="371" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="group__app__event__manager_1gadb3e5d6ce9048e270e12b2a9ea829920" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void *</type>
+        <definition>void* app_event_manager_alloc</definition>
+        <argsstring>(size_t size)</argsstring>
+        <name>app_event_manager_alloc</name>
+        <param>
+          <type>size_t</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+<para>Allocate event. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The behavior of this function depends on the actual implementation. The default implementation of this function is same as k_malloc. It is annotated as weak and can be overridden by user.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Amount of memory requested (in bytes). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Address</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>of the allocated memory if successful, otherwise NULL. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/app_event_manager.h" line="382" column="6" declfile="include/app_event_manager.h" declline="382" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="group__app__event__manager_1gaf1aab7a2dd043b8c1c59a983c2d319cb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void app_event_manager_free</definition>
+        <argsstring>(void *addr)</argsstring>
+        <name>app_event_manager_free</name>
+        <param>
+          <type>void *</type>
+          <declname>addr</declname>
+        </param>
+        <briefdescription>
+<para>Free memory occupied by the event. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The behavior of this function depends on the actual implementation. The default implementation of this function is same as k_free. It is annotated as weak and can be overridden by user.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>addr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to previously allocated memory. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/app_event_manager.h" line="393" column="6" declfile="include/app_event_manager.h" declline="393" declcolumn="6"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="group__app__event__manager_1ga8851fe81b98a24ea4ae430fc8db260ed" prot="public" static="no">
+        <name>APP_EVENT_LISTENER</name>
+        <param><defname>lname</defname></param>
+        <param><defname>cb_fn</defname></param>
+        <initializer>_APP_EVENT_LISTENER(lname, <ref refid="group__app__event__manager_ga9f326beeb8739a0f6319745b4e2e3a38_1ga9f326beeb8739a0f6319745b4e2e3a38" kindref="member">cb_fn</ref>)</initializer>
+        <briefdescription>
+<para>Create an event listener object. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>lname</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Module name. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>cb_fn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the event handler function. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/app_event_manager.h" line="81" column="9" bodyfile="include/app_event_manager.h" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__app__event__manager_1gaf3d8db5b3001506e0543f7e204887a0a" prot="public" static="no">
+        <name>APP_EVENT_SUBSCRIBE_FIRST</name>
+        <param><defname>lname</defname></param>
+        <param><defname>ename</defname></param>
+        <initializer>	_APP_EVENT_SUBSCRIBE(lname, ename, _APP_EM_MARKER_FIRST_ELEMENT);			\
+	const struct {} _CONCAT(_CONCAT(__event_subscriber_, ename), first_sub_redefined) = {}</initializer>
+        <briefdescription>
+<para>Subscribe a listener to an event type as first module that is being notified. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>lname</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Name of the listener. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ename</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Name of the event. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/app_event_manager.h" line="90" column="9" bodyfile="include/app_event_manager.h" bodystart="90" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__app__event__manager_1ga974ce8a06a1dbbb804e8ecd062784c19" prot="public" static="no">
+        <name>APP_EVENT_SUBSCRIBE_EARLY</name>
+        <param><defname>lname</defname></param>
+        <param><defname>ename</defname></param>
+        <initializer>	_APP_EVENT_SUBSCRIBE(lname, ename, _APP_EM_SUBS_PRIO_ID(_APP_EM_SUBS_PRIO_EARLY))</initializer>
+        <briefdescription>
+<para>Subscribe a listener to the early notification list for an event type. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>lname</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Name of the listener. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ename</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Name of the event. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/app_event_manager.h" line="101" column="9" bodyfile="include/app_event_manager.h" bodystart="101" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__app__event__manager_1gaab0e8a3a85b9873c85b7a35b6fa5e888" prot="public" static="no">
+        <name>APP_EVENT_SUBSCRIBE</name>
+        <param><defname>lname</defname></param>
+        <param><defname>ename</defname></param>
+        <initializer>	_APP_EVENT_SUBSCRIBE(lname, ename, _APP_EM_SUBS_PRIO_ID(_APP_EM_SUBS_PRIO_NORMAL))</initializer>
+        <briefdescription>
+<para>Subscribe a listener to the normal notification list for an event type. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>lname</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Name of the listener. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ename</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Name of the event. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/app_event_manager.h" line="111" column="9" bodyfile="include/app_event_manager.h" bodystart="111" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__app__event__manager_1ga4e8ce4a02c50695e42c37bc5dc032415" prot="public" static="no">
+        <name>APP_EVENT_SUBSCRIBE_FINAL</name>
+        <param><defname>lname</defname></param>
+        <param><defname>ename</defname></param>
+        <initializer>	_APP_EVENT_SUBSCRIBE(lname, ename, _APP_EM_MARKER_FINAL_ELEMENT);			\
+	const struct {} _CONCAT(_CONCAT(__event_subscriber_, ename), final_sub_redefined) = {}</initializer>
+        <briefdescription>
+<para>Subscribe a listener to an event type as final module that is being notified. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>lname</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Name of the listener. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ename</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Name of the event. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/app_event_manager.h" line="121" column="9" bodyfile="include/app_event_manager.h" bodystart="121" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__app__event__manager_1ga099480328bc5dbdc7c2ba95db75feb1e" prot="public" static="no">
+        <name>APP_EVENT_TYPE_DECLARE</name>
+        <param><defname>ename</defname></param>
+        <initializer>_APP_EVENT_TYPE_DECLARE(ename)</initializer>
+        <briefdescription>
+<para>Declare an event type. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This macro provides declarations required for an event to be used by other modules.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ename</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Name of the event. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/app_event_manager.h" line="133" column="9" bodyfile="include/app_event_manager.h" bodystart="133" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__app__event__manager_1ga57b345dc4b9a3fe4b07fca7e96979dfc" prot="public" static="no">
+        <name>APP_EVENT_TYPE_DYNDATA_DECLARE</name>
+        <param><defname>ename</defname></param>
+        <initializer>_APP_EVENT_TYPE_DYNDATA_DECLARE(ename)</initializer>
+        <briefdescription>
+<para>Declare an event type with dynamic data size. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This macro provides declarations required for an event to be used by other modules. Declared event will use dynamic data.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ename</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Name of the event. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/app_event_manager.h" line="144" column="9" bodyfile="include/app_event_manager.h" bodystart="144" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__app__event__manager_1gaea29d02dfaf6d109ff53ad74181ec738" prot="public" static="no">
+        <name>APP_EVENT_TYPE_DEFINE</name>
+        <param><defname>ename</defname></param>
+        <param><defname>log_fn</defname></param>
+        <param><defname>ev_info_struct</defname></param>
+        <param><defname>app_event_type_flags</defname></param>
+        <initializer>	_APP_EVENT_TYPE_DEFINE(ename, log_fn, ev_info_struct, <ref refid="group__app__event__manager_gab6470c650120d82270f7acd43d15afa0_1gab6470c650120d82270f7acd43d15afa0" kindref="member">app_event_type_flags</ref>)</initializer>
+        <briefdescription>
+<para>Define an event type. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This macro defines an event type. In addition, it defines functions specific to the event type and the event type structure.</para>
+<para>For every defined event, the following functions are created, where <emphasis>event_type</emphasis> is replaced with the given event type name <computeroutput>ename</computeroutput> (for example, <ref refid="structbutton__event" kindref="compound">button_event</ref>):<itemizedlist>
+<listitem><para>new_<emphasis>event_type</emphasis> - Allocates an event of a given type.</para>
+</listitem><listitem><para>is_<emphasis>event_type</emphasis> - Checks if the application event header that is provided as argument represents the given event type.</para>
+</listitem><listitem><para>cast_<emphasis>event_type</emphasis> - Casts the application event header that is provided as argument to an event of the given type.</para>
+</listitem></itemizedlist>
+</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ename</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Name of the event. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>log_fn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Function to stringify an event of this type. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ev_info_struct</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Data structure describing the event type. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>app_event_type_flags</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Event type flags. You should use APP_EVENT_FLAGS_CREATE to define them. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/app_event_manager.h" line="167" column="9" bodyfile="include/app_event_manager.h" bodystart="167" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__app__event__manager_1gaef465cf254e426d93060894ae43ee82d" prot="public" static="no">
+        <name>APP_EVENT_ASSERT_ID</name>
+        <param><defname>id</defname></param>
+        <initializer>	__ASSERT_NO_MSG((id &gt;= _event_type_list_start) &amp;&amp; (id &lt; _event_type_list_end))</initializer>
+        <briefdescription>
+<para>Verify if an event ID is valid. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The pointer to an event type structure is used as its ID. This macro validates that the provided pointer is within the range where event type structures are defined.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>ID. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/app_event_manager.h" line="179" column="9" bodyfile="include/app_event_manager.h" bodystart="179" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__app__event__manager_1gaecbb9c71724df279f30031be97369383" prot="public" static="no">
+        <name>APP_EVENT_SUBMIT</name>
+        <param><defname>event</defname></param>
+        <initializer>_event_submit(&amp;event-&gt;header)</initializer>
+        <briefdescription>
+<para>Submit an event. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This helper macro simplifies the event submission.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>event</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the event object. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/app_event_manager.h" line="188" column="9" bodyfile="include/app_event_manager.h" bodystart="188" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__app__event__manager_1ga86b2e07ed2d4302e33627d3d22ac0fa8" prot="public" static="no">
+        <name>APP_EVENT_MANAGER_HOOK_POSTINIT_REGISTER</name>
+        <param><defname>hook_fn</defname></param>
+        <initializer>	_APP_EVENT_MANAGER_HOOK_POSTINIT_REGISTER(hook_fn,	\
+	_APP_EM_SUBS_PRIO_ID(_APP_EM_SUBS_PRIO_NORMAL))</initializer>
+        <briefdescription>
+<para>Register event hook after the Application Event Manager is initialized. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The event hook called after the app_event_manager is initialized to provide some additional initialization of the modules that depends on it. The hook function should have a form <computeroutput>int hook(void)</computeroutput>. If the initialization hook returns non-zero value the initialization process is interrupted.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hook_fn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Hook function. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/app_event_manager.h" line="200" column="9" bodyfile="include/app_event_manager.h" bodystart="200" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__app__event__manager_1ga2ceff57c7501fb91babd6902056974e5" prot="public" static="no">
+        <name>APP_EVENT_HOOK_ON_SUBMIT_REGISTER_FIRST</name>
+        <param><defname>hook_fn</defname></param>
+        <initializer>	const struct {} __event_hook_on_submit_first_sub_redefined = {};  \
+	_APP_EVENT_HOOK_ON_SUBMIT_REGISTER(hook_fn, _APP_EM_MARKER_FIRST_ELEMENT)</initializer>
+        <briefdescription>
+<para>Register hook called on event submission. The hook would be called first. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The event hook called when the event is submitted. The hook function should have a form <computeroutput>void hook(const struct app_event_header *aeh)</computeroutput>. The macro makes sure that the hook provided here is called first. Only one hook can be registered with this macro.</para>
+<para><simplesect kind="note"><para>The registered hook may be called from many contexts. To ensure that order of events in the queue matches the order of the registered callbacks calls, the callbacks are called under the same spinlock as adding events to the queue.</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hook_fn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Hook function. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/app_event_manager.h" line="248" column="9" bodyfile="include/app_event_manager.h" bodystart="248" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__app__event__manager_1gab7c7f34f7a9f1df59908f8ab5dff3b71" prot="public" static="no">
+        <name>APP_EVENT_HOOK_ON_SUBMIT_REGISTER</name>
+        <param><defname>hook_fn</defname></param>
+        <initializer>	_APP_EVENT_HOOK_ON_SUBMIT_REGISTER(hook_fn, _APP_EM_SUBS_PRIO_ID(_APP_EM_SUBS_PRIO_NORMAL))</initializer>
+        <briefdescription>
+<para>Register event hook on submission. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The event hook called when the event is submitted. The hook function should have a form <computeroutput>void hook(const struct app_event_header *aeh)</computeroutput>.</para>
+<para><simplesect kind="note"><para>The registered hook may be called from many contexts. To ensure that order of events in the queue matches the order of the registered callbacks calls, the callbacks are called under the same spinlock as adding events to the queue.</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hook_fn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Hook function. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/app_event_manager.h" line="265" column="9" bodyfile="include/app_event_manager.h" bodystart="265" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__app__event__manager_1ga5d7a09cf8d02e091fbe50ef632f34c40" prot="public" static="no">
+        <name>APP_EVENT_HOOK_ON_SUBMIT_REGISTER_LAST</name>
+        <param><defname>hook_fn</defname></param>
+        <initializer>	const struct {} __event_hook_on_submit_last_sub_redefined = {};  \
+	_APP_EVENT_HOOK_ON_SUBMIT_REGISTER(hook_fn, _APP_EM_MARKER_FINAL_ELEMENT)</initializer>
+        <briefdescription>
+<para>Register event hook on submission. The hook would be called last. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The event hook called when the event is submitted. The hook function should have a form <computeroutput>void hook(const struct app_event_header *aeh)</computeroutput>. The macro makes sure that the hook provided here is called last. Only one hook can be registered with this macro.</para>
+<para><simplesect kind="note"><para>The registered hook may be called from many contexts. To ensure that order of events in the queue matches the order of the registered callbacks calls, the callbacks are called under the same spinlock as adding events to the queue.</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hook_fn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Hook function. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/app_event_manager.h" line="283" column="9" bodyfile="include/app_event_manager.h" bodystart="283" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__app__event__manager_1ga56e672c76848611fdb655eef3191a1b0" prot="public" static="no">
+        <name>APP_EVENT_HOOK_PREPROCESS_REGISTER_FIRST</name>
+        <param><defname>hook_fn</defname></param>
+        <initializer>	const struct {} __event_hook_preprocess_first_sub_redefined = {};  \
+	_APP_EVENT_HOOK_PREPROCESS_REGISTER(hook_fn, _APP_EM_MARKER_FIRST_ELEMENT)</initializer>
+        <briefdescription>
+<para>Register event hook on the start of event processing. The hook would be called first. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The hook function should have a form <computeroutput>void hook(const struct app_event_header *aeh)</computeroutput>. The macro makes sure that the hook provided here is called first. Only one hook can be registered with this macro.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hook_fn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Hook function. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/app_event_manager.h" line="296" column="9" bodyfile="include/app_event_manager.h" bodystart="296" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__app__event__manager_1gad4edb97a0f301f7a9c64d122686878a0" prot="public" static="no">
+        <name>APP_EVENT_HOOK_PREPROCESS_REGISTER</name>
+        <param><defname>hook_fn</defname></param>
+        <initializer>	_APP_EVENT_HOOK_PREPROCESS_REGISTER(hook_fn, _APP_EM_SUBS_PRIO_ID(_APP_EM_SUBS_PRIO_NORMAL))</initializer>
+        <briefdescription>
+<para>Register event hook on the start of event processing. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The event hook called when the event is being processed. The hook function should have a form <computeroutput>void hook(const struct app_event_header *aeh)</computeroutput>.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hook_fn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Hook function. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/app_event_manager.h" line="308" column="9" bodyfile="include/app_event_manager.h" bodystart="308" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__app__event__manager_1ga2f40c65a62099b1a2136ded94980967c" prot="public" static="no">
+        <name>APP_EVENT_HOOK_PREPROCESS_REGISTER_LAST</name>
+        <param><defname>hook_fn</defname></param>
+        <initializer>	const struct {} __event_hook_preprocess_last_sub_redefined = {};  \
+	_APP_EVENT_HOOK_PREPROCESS_REGISTER(hook_fn, _APP_EM_MARKER_FINAL_ELEMENT)</initializer>
+        <briefdescription>
+<para>Register event hook on the start of event processing. The hook would be called last. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The event hook called when the event is being processed. The hook function should have a form <computeroutput>void hook(const struct app_event_header *aeh)</computeroutput>. The macro makes sure that the hook provided here is called last. Only one hook can be registered with this macro.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hook_fn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Hook function. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/app_event_manager.h" line="321" column="9" bodyfile="include/app_event_manager.h" bodystart="321" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__app__event__manager_1gac933c115a1ff13d7a22861a44f4eefe7" prot="public" static="no">
+        <name>APP_EVENT_HOOK_POSTPROCESS_REGISTER_FIRST</name>
+        <param><defname>hook_fn</defname></param>
+        <initializer>	const struct {} __event_hook_postprocess_first_sub_redefined = {};  \
+	_APP_EVENT_HOOK_POSTPROCESS_REGISTER(hook_fn, _APP_EM_MARKER_FIRST_ELEMENT)</initializer>
+        <briefdescription>
+<para>Register event hook on the end of event processing. The hook would be called first. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The event hook called after the event is processed. The hook function should have a form <computeroutput>void hook(const struct app_event_header *aeh)</computeroutput>. The macro makes sure that the hook provided here is called first. Only one hook can be registered with this macro.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hook_fn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Hook function. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/app_event_manager.h" line="335" column="9" bodyfile="include/app_event_manager.h" bodystart="335" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__app__event__manager_1ga3bd09356b7d4591b3421572d54bda0c5" prot="public" static="no">
+        <name>APP_EVENT_HOOK_POSTPROCESS_REGISTER</name>
+        <param><defname>hook_fn</defname></param>
+        <initializer>	_APP_EVENT_HOOK_POSTPROCESS_REGISTER(hook_fn,	\
+	_APP_EM_SUBS_PRIO_ID(_APP_EM_SUBS_PRIO_NORMAL))</initializer>
+        <briefdescription>
+<para>Register event hook on the end of event processing. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The event hook called after the event is processed. The hook function should have a form <computeroutput>void hook(const struct app_event_header *aeh)</computeroutput>.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hook_fn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Hook function. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/app_event_manager.h" line="347" column="9" bodyfile="include/app_event_manager.h" bodystart="347" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__app__event__manager_1gabdddc61d63d3d9d16f9c3cfeee44cd30" prot="public" static="no">
+        <name>APP_EVENT_HOOK_POSTPROCESS_REGISTER_LAST</name>
+        <param><defname>hook_fn</defname></param>
+        <initializer>	const struct {} __event_hook_postprocess_last_sub_redefined = {};  \
+	_APP_EVENT_HOOK_POSTPROCESS_REGISTER(hook_fn, _APP_EM_MARKER_FINAL_ELEMENT)</initializer>
+        <briefdescription>
+<para>Register event hook on the end of event processing. The hook would be called last. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The event hook called after the event is processed. The hook function should have a form <computeroutput>void hook(const struct app_event_header *aeh)</computeroutput>. The macro makes sure that the hook provided here is called last. Only one hook can be registered with this macro.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hook_fn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Hook function. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/app_event_manager.h" line="361" column="9" bodyfile="include/app_event_manager.h" bodystart="361" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__app__event__manager_1ga5f9fd5f602317beb6ec72e1782e9552a" prot="public" static="no">
+        <name>APP_EVENT_MANAGER_LOG</name>
+        <param><defname>aeh</defname></param>
+        <param><defname>...</defname></param>
+        <initializer>	do {							\
+	LOG_MODULE_DECLARE(app_event_manager, CONFIG_APP_EVENT_MANAGER_LOG_LEVEL);		\
+	if (IS_ENABLED(CONFIG_APP_EVENT_MANAGER_LOG_EVENT_TYPE)) {				\
+		LOG_INF(&quot;e:%s &quot; GET_ARG_N(1, __VA_ARGS__), aeh-&gt;type_id-&gt;name			\
+			COND_CODE_0(NUM_VA_ARGS_LESS_1(__VA_ARGS__),				\
+			    (),									\
+			    (, GET_ARGS_LESS_N(1, __VA_ARGS__))					\
+			));									\
+	} else {										\
+		LOG_INF(__VA_ARGS__);								\
+	}											\
+} while (0)</initializer>
+        <briefdescription>
+<para>Log event. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This helper macro simplifies event logging.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>aeh</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the application event header of the event that is processed by app_event_manager. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>...</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><computeroutput>printf</computeroutput>- like format string and variadic list of arguments corresponding to the format string. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/app_event_manager.h" line="405" column="9" bodyfile="include/app_event_manager.h" bodystart="405" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__app__event__manager_1ga4e27f518fd0f7a5043ab677c51fb3d6a" prot="public" static="no">
+        <name>APP_EVENT_FLAGS_CREATE</name>
+        <param><defname>...</defname></param>
+        <initializer>	(FOR_EACH_NONEMPTY_TERM(_APP_EVENT_FLAGS_JOIN, (|), __VA_ARGS__) 0)</initializer>
+        <briefdescription>
+<para>Define flags for event type. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>...</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Comma-separated list of flags which should be set. In case no flags should be set leave it empty. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/app_event_manager.h" line="425" column="10" bodyfile="include/app_event_manager.h" bodystart="425" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Application Event Manager. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

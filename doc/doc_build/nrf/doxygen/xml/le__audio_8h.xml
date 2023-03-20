@@ -1,0 +1,624 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="le__audio_8h" kind="file" language="C++">
+    <compoundname>le_audio.h</compoundname>
+    <includes local="no">zephyr/kernel.h</includes>
+    <includes local="no">zephyr/bluetooth/audio/audio.h</includes>
+    <includes refid="audio__defines_8h" local="no">audio_defines.h</includes>
+    <includedby refid="ctrl__events_8h" local="yes">applications/nrf5340_audio/src/events/ctrl_events.h</includedby>
+    <incdepgraph>
+      <node id="3">
+        <label>zephyr/bluetooth/audio/audio.h</label>
+      </node>
+      <node id="4">
+        <label>audio_defines.h</label>
+        <link refid="audio__defines_8h"/>
+      </node>
+      <node id="2">
+        <label>zephyr/kernel.h</label>
+      </node>
+      <node id="1">
+        <label>applications/nrf5340_audio/src/bluetooth/le_audio.h</label>
+        <link refid="le__audio_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="2">
+        <label>applications/nrf5340_audio/src/events/ctrl_events.h</label>
+        <link refid="ctrl__events_8h"/>
+      </node>
+      <node id="1">
+        <label>applications/nrf5340_audio/src/bluetooth/le_audio.h</label>
+        <link refid="le__audio_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="structle__audio__evt" prot="public">le_audio_evt</innerclass>
+    <innerclass refid="structencoded__audio" prot="public">encoded_audio</innerclass>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="le__audio_8h_a575bd4a2eed7baad34d52ebbe4318814_1a575bd4a2eed7baad34d52ebbe4318814" prot="public" static="no">
+        <name>DEVICE_NAME_PEER</name>
+        <initializer>CONFIG_BT_DEVICE_NAME</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="applications/nrf5340_audio/src/bluetooth/le_audio.h" line="14" column="9" bodyfile="applications/nrf5340_audio/src/bluetooth/le_audio.h" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="le__audio_8h_a53f0ee6b5c54ff1baba0046e3662af63_1a53f0ee6b5c54ff1baba0046e3662af63" prot="public" static="no">
+        <name>DEVICE_NAME_PEER_LEN</name>
+        <initializer>(sizeof(<ref refid="le__audio_8h_a575bd4a2eed7baad34d52ebbe4318814_1a575bd4a2eed7baad34d52ebbe4318814" kindref="member">DEVICE_NAME_PEER</ref>) - 1)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="applications/nrf5340_audio/src/bluetooth/le_audio.h" line="15" column="9" bodyfile="applications/nrf5340_audio/src/bluetooth/le_audio.h" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="le__audio_8h_a16357c31555c86f1412758ca43847dac_1a16357c31555c86f1412758ca43847dac" prot="public" static="no">
+        <name>LE_AUDIO_SDU_SIZE_OCTETS</name>
+        <param><defname>bitrate</defname></param>
+        <initializer>(bitrate / (1000000 / CONFIG_AUDIO_FRAME_DURATION_US) / 8)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="applications/nrf5340_audio/src/bluetooth/le_audio.h" line="17" column="9" bodyfile="applications/nrf5340_audio/src/bluetooth/le_audio.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="le__audio_8h_a5457b350616b02dbf5672fc5c4bff265_1a5457b350616b02dbf5672fc5c4bff265" prot="public" static="no">
+        <name>BT_AUDIO_LC3_PRESET_CONFIGURABLE</name>
+        <param><defname>_loc</defname></param>
+        <param><defname>_stream_context</defname></param>
+        <param><defname>_bitrate</defname></param>
+        <initializer>	BT_AUDIO_LC3_PRESET(                                                                       \
+		BT_CODEC_LC3_CONFIG(BT_AUDIO_CODEC_CONFIG_FREQ, BT_CODEC_CONFIG_LC3_DURATION_10,   \
+				    _loc, <ref refid="le__audio_8h_a16357c31555c86f1412758ca43847dac_1a16357c31555c86f1412758ca43847dac" kindref="member">LE_AUDIO_SDU_SIZE_OCTETS</ref>(_bitrate), 1, _stream_context), \
+		BT_CODEC_LC3_QOS_10_UNFRAMED(<ref refid="le__audio_8h_a16357c31555c86f1412758ca43847dac_1a16357c31555c86f1412758ca43847dac" kindref="member">LE_AUDIO_SDU_SIZE_OCTETS</ref>(_bitrate),                   \
+					     CONFIG_BT_AUDIO_RETRANSMITS,                          \
+					     CONFIG_BT_AUDIO_MAX_TRANSPORT_LATENCY_MS,             \
+					     CONFIG_BT_AUDIO_PRESENTATION_DELAY_US))</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="applications/nrf5340_audio/src/bluetooth/le_audio.h" line="30" column="9" bodyfile="applications/nrf5340_audio/src/bluetooth/le_audio.h" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="enum">
+      <memberdef kind="enum" id="le__audio_8h_a29a90ee96110017541cae349b605c4be_1a29a90ee96110017541cae349b605c4be" prot="public" static="no" strong="no">
+        <type></type>
+        <name>le_audio_evt_type</name>
+        <enumvalue id="le__audio_8h_a29a90ee96110017541cae349b605c4be_1a29a90ee96110017541cae349b605c4bea8373b832031a1640768f73928d48fa20" prot="public">
+          <name>LE_AUDIO_EVT_CONFIG_RECEIVED</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="le__audio_8h_a29a90ee96110017541cae349b605c4be_1a29a90ee96110017541cae349b605c4bea0bc23412f182d918eb135176add45d70" prot="public">
+          <name>LE_AUDIO_EVT_STREAMING</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="le__audio_8h_a29a90ee96110017541cae349b605c4be_1a29a90ee96110017541cae349b605c4bea2870ffc190350b58c31d96c7f3bc1530" prot="public">
+          <name>LE_AUDIO_EVT_NOT_STREAMING</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="le__audio_8h_a29a90ee96110017541cae349b605c4be_1a29a90ee96110017541cae349b605c4bea03719d693ebc5b43990465bcf8ab8da4" prot="public">
+          <name>LE_AUDIO_EVT_NUM_EVTS</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="applications/nrf5340_audio/src/bluetooth/le_audio.h" line="106" column="1" bodyfile="applications/nrf5340_audio/src/bluetooth/le_audio.h" bodystart="106" bodyend="111"/>
+      </memberdef>
+      <memberdef kind="enum" id="le__audio_8h_a1a8a4e92008e6769dc505b8ba49f60f4_1a1a8a4e92008e6769dc505b8ba49f60f4" prot="public" static="no" strong="no">
+        <type></type>
+        <name>le_audio_user_defined_action</name>
+        <enumvalue id="le__audio_8h_a1a8a4e92008e6769dc505b8ba49f60f4_1a1a8a4e92008e6769dc505b8ba49f60f4a89232b47d64b0ed0c1206b41ca3c38cd" prot="public">
+          <name>LE_AUDIO_USER_DEFINED_ACTION_1</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="le__audio_8h_a1a8a4e92008e6769dc505b8ba49f60f4_1a1a8a4e92008e6769dc505b8ba49f60f4a8cb67b81c25563c4ceca755a2e044f8c" prot="public">
+          <name>LE_AUDIO_USER_DEFINED_ACTION_2</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="le__audio_8h_a1a8a4e92008e6769dc505b8ba49f60f4_1a1a8a4e92008e6769dc505b8ba49f60f4aad4c88b5c1c9d40c116847439e507442" prot="public">
+          <name>LE_AUDIO_USER_DEFINED_ACTION_NUM</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="applications/nrf5340_audio/src/bluetooth/le_audio.h" line="129" column="1" bodyfile="applications/nrf5340_audio/src/bluetooth/le_audio.h" bodystart="129" bodyend="133"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="le__audio_8h_a30299f43be420aacca8b67ebc8d682d9_1a30299f43be420aacca8b67ebc8d682d9" prot="public" static="no">
+        <type>void(*</type>
+        <definition>typedef void(* le_audio_receive_cb) (const uint8_t *const data, size_t size, bool bad_frame, uint32_t sdu_ref, enum audio_channel channel_index)</definition>
+        <argsstring>)(const uint8_t *const data, size_t size, bool bad_frame, uint32_t sdu_ref, enum audio_channel channel_index)</argsstring>
+        <name>le_audio_receive_cb</name>
+        <briefdescription>
+<para>Callback for receiving Bluetooth LE Audio data. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to received data </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Size of received data </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>bad_frame</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Indicating if the frame is a bad frame or not </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>sdu_ref</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>ISO timestamp </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>channel_index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Audio channel index </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="applications/nrf5340_audio/src/bluetooth/le_audio.h" line="126" column="9" bodyfile="applications/nrf5340_audio/src/bluetooth/le_audio.h" bodystart="126" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="le__audio_8h_a9b1a6c8e6319090a911bcd089ce7b002_1a9b1a6c8e6319090a911bcd089ce7b002" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int le_audio_user_defined_button_press</definition>
+        <argsstring>(enum le_audio_user_defined_action action)</argsstring>
+        <name>le_audio_user_defined_button_press</name>
+        <param>
+          <type>enum <ref refid="le__audio_8h_a1a8a4e92008e6769dc505b8ba49f60f4_1a1a8a4e92008e6769dc505b8ba49f60f4" kindref="member">le_audio_user_defined_action</ref></type>
+          <declname>action</declname>
+        </param>
+        <briefdescription>
+<para>Generic function for a user defined button press. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>action</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>User defined action</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>0 for success, error otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="applications/nrf5340_audio/src/bluetooth/le_audio.h" line="153" column="5" declfile="applications/nrf5340_audio/src/bluetooth/le_audio.h" declline="153" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="le__audio_8h_accf721fc7cdcacb4b2efd77b1b07f3b9_1accf721fc7cdcacb4b2efd77b1b07f3b9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int le_audio_config_get</definition>
+        <argsstring>(uint32_t *bitrate, uint32_t *sampling_rate)</argsstring>
+        <name>le_audio_config_get</name>
+        <param>
+          <type>uint32_t *</type>
+          <declname>bitrate</declname>
+        </param>
+        <param>
+          <type>uint32_t *</type>
+          <declname>sampling_rate</declname>
+        </param>
+        <briefdescription>
+<para>Get configuration for audio stream. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>bitrate</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to bitrate used </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>sampling_rate</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to sampling rate used</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>0 for success, -ENXIO if the feature is disabled, error otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="applications/nrf5340_audio/src/bluetooth/le_audio.h" line="165" column="5" declfile="applications/nrf5340_audio/src/bluetooth/le_audio.h" declline="165" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="le__audio_8h_ae47f0bc2e0bbe34c54fcd07235e363fd_1ae47f0bc2e0bbe34c54fcd07235e363fd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int le_audio_volume_up</definition>
+        <argsstring>(void)</argsstring>
+        <name>le_audio_volume_up</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Increase volume by one step. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>0 for success, -ENXIO if the feature is disabled, error otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="applications/nrf5340_audio/src/bluetooth/le_audio.h" line="174" column="5" declfile="applications/nrf5340_audio/src/bluetooth/le_audio.h" declline="174" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="le__audio_8h_a6bec282a403dd62733a0c0cbc813e171_1a6bec282a403dd62733a0c0cbc813e171" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int le_audio_volume_down</definition>
+        <argsstring>(void)</argsstring>
+        <name>le_audio_volume_down</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Decrease volume by one step. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>0 for success, -ENXIO if the feature is disabled, error otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="applications/nrf5340_audio/src/bluetooth/le_audio.h" line="183" column="5" declfile="applications/nrf5340_audio/src/bluetooth/le_audio.h" declline="183" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="le__audio_8h_aa176608776bb909a94007ecff73af991_1aa176608776bb909a94007ecff73af991" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int le_audio_volume_mute</definition>
+        <argsstring>(void)</argsstring>
+        <name>le_audio_volume_mute</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Mute volume. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>0 for success, -ENXIO if the feature is disabled, error otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="applications/nrf5340_audio/src/bluetooth/le_audio.h" line="192" column="5" declfile="applications/nrf5340_audio/src/bluetooth/le_audio.h" declline="192" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="le__audio_8h_a526202e6e5eb0fc3325946bd60cba8d1_1a526202e6e5eb0fc3325946bd60cba8d1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int le_audio_play_pause</definition>
+        <argsstring>(void)</argsstring>
+        <name>le_audio_play_pause</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Either resume or pause the Bluetooth LE Audio stream, depending on the current state of the stream. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>0 for success, error otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="applications/nrf5340_audio/src/bluetooth/le_audio.h" line="200" column="5" declfile="applications/nrf5340_audio/src/bluetooth/le_audio.h" declline="200" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="le__audio_8h_a55e22f94893f4c4f597fb90296bc346b_1a55e22f94893f4c4f597fb90296bc346b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int le_audio_send</definition>
+        <argsstring>(struct encoded_audio enc_audio)</argsstring>
+        <name>le_audio_send</name>
+        <param>
+          <type>struct <ref refid="structencoded__audio" kindref="compound">encoded_audio</ref></type>
+          <declname>enc_audio</declname>
+        </param>
+        <briefdescription>
+<para>Send Bluetooth LE Audio data. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>enc_audio</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Encoded audio struct</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>0 for success, -ENXIO if the feature is disabled, error otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="applications/nrf5340_audio/src/bluetooth/le_audio.h" line="211" column="5" declfile="applications/nrf5340_audio/src/bluetooth/le_audio.h" declline="211" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="le__audio_8h_a7dbdfd58db1ed8ad79d51cd74a784610_1a7dbdfd58db1ed8ad79d51cd74a784610" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int le_audio_enable</definition>
+        <argsstring>(le_audio_receive_cb recv_cb)</argsstring>
+        <name>le_audio_enable</name>
+        <param>
+          <type><ref refid="le__audio_8h_a30299f43be420aacca8b67ebc8d682d9_1a30299f43be420aacca8b67ebc8d682d9" kindref="member">le_audio_receive_cb</ref></type>
+          <declname>recv_cb</declname>
+        </param>
+        <briefdescription>
+<para>Enable Bluetooth LE Audio. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>recv_cb</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Callback for receiving Bluetooth LE Audio data</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>0 for success, error otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="applications/nrf5340_audio/src/bluetooth/le_audio.h" line="220" column="5" declfile="applications/nrf5340_audio/src/bluetooth/le_audio.h" declline="220" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="le__audio_8h_addcfce02b8f36138a12dd23b7f8c9bba_1addcfce02b8f36138a12dd23b7f8c9bba" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int le_audio_disable</definition>
+        <argsstring>(void)</argsstring>
+        <name>le_audio_disable</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Disable Bluetooth LE Audio. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>0 for success, error otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="applications/nrf5340_audio/src/bluetooth/le_audio.h" line="227" column="5" declfile="applications/nrf5340_audio/src/bluetooth/le_audio.h" declline="227" declcolumn="5"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="2"><highlight class="comment"><sp/>*<sp/>Copyright<sp/>(c)<sp/>2022<sp/>Nordic<sp/>Semiconductor<sp/>ASA</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/>*<sp/>SPDX-License-Identifier:<sp/>LicenseRef-Nordic-5-Clause</highlight></codeline>
+<codeline lineno="5"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>_LE_AUDIO_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>_LE_AUDIO_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;zephyr/kernel.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;zephyr/bluetooth/audio/audio.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="audio__defines_8h" kindref="compound">audio_defines.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14" refid="le__audio_8h_a575bd4a2eed7baad34d52ebbe4318814_1a575bd4a2eed7baad34d52ebbe4318814" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>DEVICE_NAME_PEER<sp/>CONFIG_BT_DEVICE_NAME</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15" refid="le__audio_8h_a53f0ee6b5c54ff1baba0046e3662af63_1a53f0ee6b5c54ff1baba0046e3662af63" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>DEVICE_NAME_PEER_LEN<sp/>(sizeof(DEVICE_NAME_PEER)<sp/>-<sp/>1)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17" refid="le__audio_8h_a16357c31555c86f1412758ca43847dac_1a16357c31555c86f1412758ca43847dac" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LE_AUDIO_SDU_SIZE_OCTETS(bitrate)<sp/>(bitrate<sp/>/<sp/>(1000000<sp/>/<sp/>CONFIG_AUDIO_FRAME_DURATION_US)<sp/>/<sp/>8)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>(CONFIG_AUDIO_SAMPLE_RATE_48000_HZ)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BT_AUDIO_CODEC_CONFIG_FREQ<sp/>BT_CODEC_CONFIG_LC3_FREQ_48KHZ</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BT_AUDIO_CODEC_CAPABILIY_FREQ<sp/>BT_CODEC_LC3_FREQ_48KHZ</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="preprocessor">#elif<sp/>(CONFIG_AUDIO_SAMPLE_RATE_24000_HZ)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BT_AUDIO_CODEC_CONFIG_FREQ<sp/>BT_CODEC_CONFIG_LC3_FREQ_24KHZ</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BT_AUDIO_CODEC_CAPABILIY_FREQ<sp/>BT_CODEC_LC3_FREQ_24KHZ</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="preprocessor">#elif<sp/>(CONFIG_AUDIO_SAMPLE_RATE_16000_HZ)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BT_AUDIO_CODEC_CONFIG_FREQ<sp/>BT_CODEC_CONFIG_LC3_FREQ_16KHZ</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BT_AUDIO_CODEC_CAPABILIY_FREQ<sp/>BT_CODEC_LC3_FREQ_16KHZ</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>(CONFIG_AUDIO_SAMPLE_RATE_48000_HZ)<sp/>*/</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30" refid="le__audio_8h_a5457b350616b02dbf5672fc5c4bff265_1a5457b350616b02dbf5672fc5c4bff265" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BT_AUDIO_LC3_PRESET_CONFIGURABLE(_loc,<sp/>_stream_context,<sp/>_bitrate)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="31"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>BT_AUDIO_LC3_PRESET(<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="32"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>BT_CODEC_LC3_CONFIG(BT_AUDIO_CODEC_CONFIG_FREQ,<sp/>BT_CODEC_CONFIG_LC3_DURATION_10,<sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="33"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_loc,<sp/>LE_AUDIO_SDU_SIZE_OCTETS(_bitrate),<sp/>1,<sp/>_stream_context),<sp/>\</highlight></codeline>
+<codeline lineno="34"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>BT_CODEC_LC3_QOS_10_UNFRAMED(LE_AUDIO_SDU_SIZE_OCTETS(_bitrate),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="35"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>CONFIG_BT_AUDIO_RETRANSMITS,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="36"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>CONFIG_BT_AUDIO_MAX_TRANSPORT_LATENCY_MS,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="37"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>CONFIG_BT_AUDIO_PRESENTATION_DELAY_US))</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>CONFIG_TRANSPORT_CIS</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>CONFIG_BT_AUDIO_UNICAST_CONFIGURABLE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BT_AUDIO_LC3_UNICAST_PRESET_NRF5340_AUDIO_SINK<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="42"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>BT_AUDIO_LC3_PRESET_CONFIGURABLE(BT_AUDIO_LOCATION_FRONT_LEFT,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="43"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>BT_AUDIO_CONTEXT_TYPE_MEDIA,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="44"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>CONFIG_BT_AUDIO_BITRATE_UNICAST_SINK)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BT_AUDIO_LC3_UNICAST_PRESET_NRF5340_AUDIO_SOURCE<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="47"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>BT_AUDIO_LC3_PRESET_CONFIGURABLE(BT_AUDIO_LOCATION_FRONT_LEFT,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="48"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>BT_AUDIO_CONTEXT_TYPE_MEDIA,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="49"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>CONFIG_BT_AUDIO_BITRATE_UNICAST_SRC)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight><highlight class="preprocessor">#elif<sp/>CONFIG_BT_AUDIO_UNICAST_16_2_1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BT_AUDIO_LC3_UNICAST_PRESET_NRF5340_AUDIO_SINK<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="53"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>BT_AUDIO_LC3_UNICAST_PRESET_16_2_1(BT_AUDIO_LOCATION_FRONT_LEFT,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="54"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>BT_AUDIO_CONTEXT_TYPE_MEDIA)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BT_AUDIO_LC3_UNICAST_PRESET_NRF5340_AUDIO_SOURCE<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="57"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>BT_AUDIO_LC3_UNICAST_PRESET_16_2_1(BT_AUDIO_LOCATION_FRONT_LEFT,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="58"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>BT_AUDIO_CONTEXT_TYPE_MEDIA)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight><highlight class="preprocessor">#elif<sp/>CONFIG_BT_AUDIO_UNICAST_24_2_1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BT_AUDIO_LC3_UNICAST_PRESET_NRF5340_AUDIO_SINK<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="62"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>BT_AUDIO_LC3_UNICAST_PRESET_24_2_1(BT_AUDIO_LOCATION_FRONT_LEFT,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="63"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>BT_AUDIO_CONTEXT_TYPE_MEDIA)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BT_AUDIO_LC3_UNICAST_PRESET_NRF5340_AUDIO_SOURCE<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="66"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>BT_AUDIO_LC3_UNICAST_PRESET_24_2_1(BT_AUDIO_LOCATION_FRONT_LEFT,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="67"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>BT_AUDIO_CONTEXT_TYPE_MEDIA)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight><highlight class="preprocessor">#error<sp/>Unsupported<sp/>LC3<sp/>codec<sp/>preset<sp/>for<sp/>unicast</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>CONFIG_BT_AUDIO_UNICAST_CONFIGURABLE<sp/>*/</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>CONFIG_TRANSPORT_CIS<sp/>*/</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>CONFIG_TRANSPORT_BIS</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>CONFIG_BT_AUDIO_BROADCAST_CONFIGURABLE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BT_AUDIO_LC3_BROADCAST_PRESET_NRF5340_AUDIO<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="77"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>BT_AUDIO_LC3_PRESET_CONFIGURABLE(BT_AUDIO_LOCATION_FRONT_LEFT,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="78"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>BT_AUDIO_CONTEXT_TYPE_MEDIA,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="79"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>CONFIG_BT_AUDIO_BITRATE_BROADCAST_SRC)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight><highlight class="preprocessor">#elif<sp/>CONFIG_BT_AUDIO_BROADCAST_16_2_1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BT_AUDIO_LC3_BROADCAST_PRESET_NRF5340_AUDIO<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="83"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>BT_AUDIO_LC3_BROADCAST_PRESET_16_2_1(BT_AUDIO_LOCATION_FRONT_LEFT,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="84"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>BT_AUDIO_CONTEXT_TYPE_MEDIA)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="85"><highlight class="normal"></highlight></codeline>
+<codeline lineno="86"><highlight class="normal"></highlight><highlight class="preprocessor">#elif<sp/>CONFIG_BT_AUDIO_BROADCAST_24_2_1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BT_AUDIO_LC3_BROADCAST_PRESET_NRF5340_AUDIO<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="88"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>BT_AUDIO_LC3_BROADCAST_PRESET_24_2_1(BT_AUDIO_LOCATION_FRONT_LEFT,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="89"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>BT_AUDIO_CONTEXT_TYPE_MEDIA)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="90"><highlight class="normal"></highlight></codeline>
+<codeline lineno="91"><highlight class="normal"></highlight><highlight class="preprocessor">#elif<sp/>CONFIG_BT_AUDIO_BROADCAST_16_2_2</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="92"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BT_AUDIO_LC3_BROADCAST_PRESET_NRF5340_AUDIO<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="93"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>BT_AUDIO_LC3_BROADCAST_PRESET_16_2_2(BT_AUDIO_LOCATION_FRONT_LEFT,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="94"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>BT_AUDIO_CONTEXT_TYPE_MEDIA)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="95"><highlight class="normal"></highlight></codeline>
+<codeline lineno="96"><highlight class="normal"></highlight><highlight class="preprocessor">#elif<sp/>CONFIG_BT_AUDIO_BROADCAST_24_2_2</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="97"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BT_AUDIO_LC3_BROADCAST_PRESET_NRF5340_AUDIO<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="98"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>BT_AUDIO_LC3_BROADCAST_PRESET_24_2_2(BT_AUDIO_LOCATION_FRONT_LEFT,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="99"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>BT_AUDIO_CONTEXT_TYPE_MEDIA)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="100"><highlight class="normal"></highlight></codeline>
+<codeline lineno="101"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="102"><highlight class="normal"></highlight><highlight class="preprocessor">#error<sp/>Unsupported<sp/>LC3<sp/>codec<sp/>preset<sp/>for<sp/>broadcast</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="103"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>CONFIG_BT_AUDIO_BROADCAST_CONFIGURABLE<sp/>*/</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="104"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>CONFIG_TRANSPORT_BIS<sp/>*/</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="105"><highlight class="normal"></highlight></codeline>
+<codeline lineno="106" refid="le__audio_8h_a29a90ee96110017541cae349b605c4be_1a29a90ee96110017541cae349b605c4be" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/><ref refid="le__audio_8h_a29a90ee96110017541cae349b605c4be_1a29a90ee96110017541cae349b605c4be" kindref="member">le_audio_evt_type</ref><sp/>{</highlight></codeline>
+<codeline lineno="107" refid="le__audio_8h_a29a90ee96110017541cae349b605c4be_1a29a90ee96110017541cae349b605c4bea8373b832031a1640768f73928d48fa20" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="le__audio_8h_a29a90ee96110017541cae349b605c4be_1a29a90ee96110017541cae349b605c4bea8373b832031a1640768f73928d48fa20" kindref="member">LE_AUDIO_EVT_CONFIG_RECEIVED</ref>,</highlight></codeline>
+<codeline lineno="108" refid="le__audio_8h_a29a90ee96110017541cae349b605c4be_1a29a90ee96110017541cae349b605c4bea0bc23412f182d918eb135176add45d70" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="le__audio_8h_a29a90ee96110017541cae349b605c4be_1a29a90ee96110017541cae349b605c4bea0bc23412f182d918eb135176add45d70" kindref="member">LE_AUDIO_EVT_STREAMING</ref>,</highlight></codeline>
+<codeline lineno="109" refid="le__audio_8h_a29a90ee96110017541cae349b605c4be_1a29a90ee96110017541cae349b605c4bea2870ffc190350b58c31d96c7f3bc1530" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="le__audio_8h_a29a90ee96110017541cae349b605c4be_1a29a90ee96110017541cae349b605c4bea2870ffc190350b58c31d96c7f3bc1530" kindref="member">LE_AUDIO_EVT_NOT_STREAMING</ref>,</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="le__audio_8h_a29a90ee96110017541cae349b605c4be_1a29a90ee96110017541cae349b605c4bea03719d693ebc5b43990465bcf8ab8da4" kindref="member">LE_AUDIO_EVT_NUM_EVTS</ref></highlight></codeline>
+<codeline lineno="111" refid="le__audio_8h_a29a90ee96110017541cae349b605c4be_1a29a90ee96110017541cae349b605c4bea03719d693ebc5b43990465bcf8ab8da4" refkind="member"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"></highlight></codeline>
+<codeline lineno="113" refid="structle__audio__evt" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structle__audio__evt" kindref="compound">le_audio_evt</ref><sp/>{</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/><ref refid="le__audio_8h_a29a90ee96110017541cae349b605c4be_1a29a90ee96110017541cae349b605c4be" kindref="member">le_audio_evt_type</ref><sp/><ref refid="structle__audio__evt_aecde03909be79a1480a2bb045cf1b517_1aecde03909be79a1480a2bb045cf1b517" kindref="member">le_audio_evt_type</ref>;</highlight></codeline>
+<codeline lineno="115"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"></highlight></codeline>
+<codeline lineno="126" refid="le__audio_8h_a30299f43be420aacca8b67ebc8d682d9_1a30299f43be420aacca8b67ebc8d682d9" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/>void<sp/>(*<ref refid="le__audio_8h_a30299f43be420aacca8b67ebc8d682d9_1a30299f43be420aacca8b67ebc8d682d9" kindref="member">le_audio_receive_cb</ref>)(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint8_t<sp/>*</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>data,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>size,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>bad_frame,</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>sdu_ref,<sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/><ref refid="audio__defines_8h_a2b5a19d3dea9946ab7cbad0c770a9ad4_1a2b5a19d3dea9946ab7cbad0c770a9ad4" kindref="member">audio_channel</ref><sp/>channel_index);</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"></highlight></codeline>
+<codeline lineno="129" refid="le__audio_8h_a1a8a4e92008e6769dc505b8ba49f60f4_1a1a8a4e92008e6769dc505b8ba49f60f4" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/><ref refid="le__audio_8h_a1a8a4e92008e6769dc505b8ba49f60f4_1a1a8a4e92008e6769dc505b8ba49f60f4" kindref="member">le_audio_user_defined_action</ref><sp/>{</highlight></codeline>
+<codeline lineno="130" refid="le__audio_8h_a1a8a4e92008e6769dc505b8ba49f60f4_1a1a8a4e92008e6769dc505b8ba49f60f4a89232b47d64b0ed0c1206b41ca3c38cd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="le__audio_8h_a1a8a4e92008e6769dc505b8ba49f60f4_1a1a8a4e92008e6769dc505b8ba49f60f4a89232b47d64b0ed0c1206b41ca3c38cd" kindref="member">LE_AUDIO_USER_DEFINED_ACTION_1</ref>,</highlight></codeline>
+<codeline lineno="131" refid="le__audio_8h_a1a8a4e92008e6769dc505b8ba49f60f4_1a1a8a4e92008e6769dc505b8ba49f60f4a8cb67b81c25563c4ceca755a2e044f8c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="le__audio_8h_a1a8a4e92008e6769dc505b8ba49f60f4_1a1a8a4e92008e6769dc505b8ba49f60f4a8cb67b81c25563c4ceca755a2e044f8c" kindref="member">LE_AUDIO_USER_DEFINED_ACTION_2</ref>,</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="le__audio_8h_a1a8a4e92008e6769dc505b8ba49f60f4_1a1a8a4e92008e6769dc505b8ba49f60f4aad4c88b5c1c9d40c116847439e507442" kindref="member">LE_AUDIO_USER_DEFINED_ACTION_NUM</ref></highlight></codeline>
+<codeline lineno="133" refid="le__audio_8h_a1a8a4e92008e6769dc505b8ba49f60f4_1a1a8a4e92008e6769dc505b8ba49f60f4aad4c88b5c1c9d40c116847439e507442" refkind="member"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"></highlight></codeline>
+<codeline lineno="139" refid="structencoded__audio" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structencoded__audio" kindref="compound">encoded_audio</ref><sp/>{</highlight></codeline>
+<codeline lineno="140" refid="structencoded__audio_aaa02d088dc69d98ba37d5c8c1356055b_1aaa02d088dc69d98ba37d5c8c1356055b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint8_t<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structencoded__audio_aaa02d088dc69d98ba37d5c8c1356055b_1aaa02d088dc69d98ba37d5c8c1356055b" kindref="member">data</ref>;</highlight></codeline>
+<codeline lineno="141" refid="structencoded__audio_a4b1fdae1b8153803ba7b11e8493d3705_1a4b1fdae1b8153803ba7b11e8493d3705" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="structencoded__audio_a4b1fdae1b8153803ba7b11e8493d3705_1a4b1fdae1b8153803ba7b11e8493d3705" kindref="member">size</ref>;</highlight></codeline>
+<codeline lineno="142" refid="structencoded__audio_aadd545db3323761629db11f7db8827bb_1aadd545db3323761629db11f7db8827bb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint8_t<sp/><ref refid="structencoded__audio_aadd545db3323761629db11f7db8827bb_1aadd545db3323761629db11f7db8827bb" kindref="member">num_ch</ref>;</highlight></codeline>
+<codeline lineno="143"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"></highlight></codeline>
+<codeline lineno="153" refid="le__audio_8h_a9b1a6c8e6319090a911bcd089ce7b002_1a9b1a6c8e6319090a911bcd089ce7b002" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="le__audio_8h_a9b1a6c8e6319090a911bcd089ce7b002_1a9b1a6c8e6319090a911bcd089ce7b002" kindref="member">le_audio_user_defined_button_press</ref>(</highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/><ref refid="le__audio_8h_a1a8a4e92008e6769dc505b8ba49f60f4_1a1a8a4e92008e6769dc505b8ba49f60f4" kindref="member">le_audio_user_defined_action</ref><sp/>action);</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"></highlight></codeline>
+<codeline lineno="165" refid="le__audio_8h_accf721fc7cdcacb4b2efd77b1b07f3b9_1accf721fc7cdcacb4b2efd77b1b07f3b9" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="le__audio_8h_accf721fc7cdcacb4b2efd77b1b07f3b9_1accf721fc7cdcacb4b2efd77b1b07f3b9" kindref="member">le_audio_config_get</ref>(uint32_t<sp/>*bitrate,<sp/>uint32_t<sp/>*sampling_rate);</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"></highlight></codeline>
+<codeline lineno="174" refid="le__audio_8h_ae47f0bc2e0bbe34c54fcd07235e363fd_1ae47f0bc2e0bbe34c54fcd07235e363fd" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="le__audio_8h_ae47f0bc2e0bbe34c54fcd07235e363fd_1ae47f0bc2e0bbe34c54fcd07235e363fd" kindref="member">le_audio_volume_up</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"></highlight></codeline>
+<codeline lineno="183" refid="le__audio_8h_a6bec282a403dd62733a0c0cbc813e171_1a6bec282a403dd62733a0c0cbc813e171" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="le__audio_8h_a6bec282a403dd62733a0c0cbc813e171_1a6bec282a403dd62733a0c0cbc813e171" kindref="member">le_audio_volume_down</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="184"><highlight class="normal"></highlight></codeline>
+<codeline lineno="192" refid="le__audio_8h_aa176608776bb909a94007ecff73af991_1aa176608776bb909a94007ecff73af991" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="le__audio_8h_aa176608776bb909a94007ecff73af991_1aa176608776bb909a94007ecff73af991" kindref="member">le_audio_volume_mute</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"></highlight></codeline>
+<codeline lineno="200" refid="le__audio_8h_a526202e6e5eb0fc3325946bd60cba8d1_1a526202e6e5eb0fc3325946bd60cba8d1" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="le__audio_8h_a526202e6e5eb0fc3325946bd60cba8d1_1a526202e6e5eb0fc3325946bd60cba8d1" kindref="member">le_audio_play_pause</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="201"><highlight class="normal"></highlight></codeline>
+<codeline lineno="211" refid="le__audio_8h_a55e22f94893f4c4f597fb90296bc346b_1a55e22f94893f4c4f597fb90296bc346b" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="le__audio_8h_a55e22f94893f4c4f597fb90296bc346b_1a55e22f94893f4c4f597fb90296bc346b" kindref="member">le_audio_send</ref>(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structencoded__audio" kindref="compound">encoded_audio</ref><sp/>enc_audio);</highlight></codeline>
+<codeline lineno="212"><highlight class="normal"></highlight></codeline>
+<codeline lineno="220" refid="le__audio_8h_a7dbdfd58db1ed8ad79d51cd74a784610_1a7dbdfd58db1ed8ad79d51cd74a784610" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="le__audio_8h_a7dbdfd58db1ed8ad79d51cd74a784610_1a7dbdfd58db1ed8ad79d51cd74a784610" kindref="member">le_audio_enable</ref>(<ref refid="le__audio_8h_a30299f43be420aacca8b67ebc8d682d9_1a30299f43be420aacca8b67ebc8d682d9" kindref="member">le_audio_receive_cb</ref><sp/>recv_cb);</highlight></codeline>
+<codeline lineno="221"><highlight class="normal"></highlight></codeline>
+<codeline lineno="227" refid="structle__audio__evt_aecde03909be79a1480a2bb045cf1b517_1aecde03909be79a1480a2bb045cf1b517" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="le__audio_8h_addcfce02b8f36138a12dd23b7f8c9bba_1addcfce02b8f36138a12dd23b7f8c9bba" kindref="member">le_audio_disable</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="228"><highlight class="normal"></highlight></codeline>
+<codeline lineno="229"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>_LE_AUDIO_H_<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="applications/nrf5340_audio/src/bluetooth/le_audio.h"/>
+  </compounddef>
+</doxygen>

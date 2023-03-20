@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zigbee FOTA &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../_static/js/ncs.js"
+></script>
+<script src="../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Zigbee endpoint logger" href="zigbee_logger_eprxzcl.html" />
+    <link rel="prev" title="Zigbee error handler" href="zigbee_error_handler.html" />
+<link
+  href="../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drivers.html">Drivers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Libraries</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../bin/index.html">Binary libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bluetooth_services/index.html">Bluetooth libraries and services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bootloader/index.html">Bootloader libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../caf/index.html">Common Application Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../debug/index.html">Debug libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dfu/index.html">DFU libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gazell/index.html">Gazell libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modem/index.html">Modem libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mpsl/index.html">Multiprotocol Service Layer libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../networking/index.html">Libraries for networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nfc/index.html">Libraries for NFC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nrf_rpc/index.html">nRF RPC libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../others/index.html">Other libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../shell/index.html">Shell libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tfm/index.html">TF-M libraries</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Libraries for Zigbee</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="osif.html">Zigbee ZBOSS OSIF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="shell.html">Zigbee shell</a></li>
+<li class="toctree-l3"><a class="reference internal" href="zigbee_app_utils.html">Zigbee application utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="zigbee_error_handler.html">Zigbee error handler</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Zigbee FOTA</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ota-upgrade-entities">OTA upgrade entities</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ota-upgrade-process">OTA upgrade process</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuration">Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#limitations">Limitations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#api-documentation">API documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zigbee_logger_eprxzcl.html">Zigbee endpoint logger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="zigbee_zcl_scenes.html">Zigbee ZCL scene helper</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Libraries</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Libraries for Zigbee</a></li>
+      <li class="breadcrumb-item active">Zigbee FOTA</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/libraries/zigbee/zigbee_fota.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="zigbee-fota">
+<span id="lib-zigbee-fota"></span><h1>Zigbee FOTA<a class="headerlink" href="#zigbee-fota" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#ota-upgrade-entities" id="id7">OTA upgrade entities</a></p></li>
+<li><p><a class="reference internal" href="#ota-upgrade-process" id="id8">OTA upgrade process</a></p></li>
+<li><p><a class="reference internal" href="#configuration" id="id9">Configuration</a></p></li>
+<li><p><a class="reference internal" href="#limitations" id="id10">Limitations</a></p></li>
+<li><p><a class="reference internal" href="#api-documentation" id="id11">API documentation</a></p></li>
+</ul>
+</div>
+<p>The Zigbee firmware over-the-air (Zigbee FOTA) library provides Zigbee endpoint definition, which implements clusters responsible for transferring a firmware file through the Zigbee network.
+The received data is passed as an upgrade candidate through the <a class="reference internal" href="../dfu/dfu_multi_image.html#lib-dfu-multi-image"><span class="std std-ref">DFU multi-image</span></a> library API to the <a class="reference internal" href="../dfu/dfu_target.html#lib-dfu-target"><span class="std std-ref">DFU target</span></a>.</p>
+<p>The library uses the endpoint to:</p>
+<ul class="simple">
+<li><p>Discover Zigbee OTA server by sending Match Descriptor Request broadcast messages.</p></li>
+<li><p>Query the discovered server periodically to check if there is a suitable image for the update.</p></li>
+<li><p>Transfer the new firmware using the ZCL OTA cluster commands.</p></li>
+<li><p>Allow the OTA server to manage the upgrade process using the ZCL OTA control commands.</p></li>
+</ul>
+<p>When used, the Zigbee FOTA library replaces the <a class="reference internal" href="../networking/fota_download.html#lib-fota-download"><span class="std std-ref">FOTA download</span></a> library in nRF Connect SDK.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The Zigbee FOTA functionality is available for the <a class="reference internal" href="../../samples/zigbee/light_switch/README.html#zigbee-light-switch-sample"><span class="std std-ref">Zigbee: Light switch</span></a> sample.</p>
+</div>
+<section id="ota-upgrade-entities">
+<h2><a class="toc-backref" href="#id7">OTA upgrade entities</a><a class="headerlink" href="#ota-upgrade-entities" title="Permalink to this heading"></a></h2>
+<p>The following entities participate in the Zigbee OTA Upgrade process:</p>
+<ul class="simple">
+<li><p>OTA Upgrade Client – Runs on the target, that is the device that is being upgraded, and is responsible for downloading and installing the new firmware.</p></li>
+<li><p>OTA Upgrade Server – Provides the firmware image.
+The OTA Upgrade Server can be either a standalone third-party device or it can be instantiated on an nRF52840 DK using nRF Util’s <a class="reference external" href="https://infocenter.nordicsemi.com/topic/ug_nrfutil/UG/nrfutil/nrfutil_dfu_zigbee.html">DFU over Zigbee</a> procedure.</p></li>
+</ul>
+</section>
+<section id="ota-upgrade-process">
+<h2><a class="toc-backref" href="#id8">OTA upgrade process</a><a class="headerlink" href="#ota-upgrade-process" title="Permalink to this heading"></a></h2>
+<p>The OTA Upgrade Client queries for OTA Upgrade Servers with the intervals defined by the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZIGBEE_FOTA_SERVER_DISOVERY_INTERVAL_HRS</span></code> Kconfig option until at least one server is found.
+Once found, the client starts to query the server for images.
+The interval between queries for the available Zigbee FOTA images is defined by the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZIGBEE_FOTA_IMAGE_QUERY_INTERVAL_MIN</span></code> Kconfig option.
+After querying the OTA Upgrade Server for available images and receiving information about the image, the library begins the OTA upgrade process.
+The library uses <span class="xref std std-ref">nrfxlib:zboss</span>’s ZCL API to download the image.</p>
+<p>After the OTA Upgrade Client downloads the Zigbee OTA image header, the stack verifies the following mandatory fields:</p>
+<ul class="simple">
+<li><p>Manufacturer ID - Defined by the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZIGBEE_FOTA_MANUFACTURER_ID</span></code> Kconfig option.</p></li>
+<li><p>Image type - Defined by the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZIGBEE_FOTA_IMAGE_TYPE</span></code> Kconfig option; it may be different than the MCUboot image type value.</p></li>
+<li><p>Hardware version - Defined by the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZIGBEE_FOTA_HW_VERSION</span></code> Kconfig option.</p></li>
+<li><p>Firmware version - Defined by the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MCUBOOT_IMAGE_VERSION</span></code> Kconfig option; see <a class="reference internal" href="../../protocols/zigbee/configuring_libraries.html#ug-zigbee-configuring-components-ota"><span class="std std-ref">Configuring Zigbee FOTA</span></a> for details.</p></li>
+</ul>
+<p>If all values are accepted, the OTA Upgrade Client downloads the first fragment of the firmware image.</p>
+<p>Once the download is started, all received data fragments are passed to the <a class="reference internal" href="../dfu/dfu_multi_image.html#lib-dfu-multi-image"><span class="std std-ref">DFU multi-image</span></a> library.
+The library takes care of where the upgrade candidate is stored, depending on the image type that is being downloaded.</p>
+<p>When the download is completed, the download client sends an appropriate event.
+At this point, the received firmware is tagged as an upgrade candidate and the OTA server is queried for an update time.</p>
+<p>Once the OTA server triggers the update process, the library sends a <a class="reference internal" href="#c.zigbee_fota_evt_id.ZIGBEE_FOTA_EVT_FINISHED" title="ZIGBEE_FOTA_EVT_FINISHED"><code class="xref c c-enumerator docutils literal notranslate"><span class="pre">ZIGBEE_FOTA_EVT_FINISHED</span></code></a> callback event.
+When the consumer of the library receives this event, it should issue a reboot command to apply the upgrade.</p>
+</section>
+<section id="configuration">
+<span id="lib-zigbee-fota-options"></span><h2><a class="toc-backref" href="#id9">Configuration</a><a class="headerlink" href="#configuration" title="Permalink to this heading"></a></h2>
+<p>To enable the Zigbee FOTA library, set the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZIGBEE_FOTA</span></code> Kconfig option.</p>
+<p>To configure the Zigbee FOTA library, use the following options:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZIGBEE_FOTA_HW_VERSION</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZIGBEE_FOTA_DATA_BLOCK_SIZE</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZIGBEE_FOTA_ENDPOINT</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZIGBEE_FOTA_PROGRESS_EVT</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZIGBEE_FOTA_MANUFACTURER_ID</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZIGBEE_FOTA_IMAGE_TYPE</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZIGBEE_FOTA_COMMENT</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ENABLE_ZIGBEE_FOTA_MIN_HW_VERSION</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZIGBEE_FOTA_MIN_HW_VERSION</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ENABLE_ZIGBEE_FOTA_MAX_HW_VERSION</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZIGBEE_FOTA_MAX_HW_VERSION</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZIGBEE_FOTA_SERVER_DISOVERY_INTERVAL_HRS</span></code></p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZIGBEE_FOTA_IMAGE_QUERY_INTERVAL_MIN</span></code></p></li>
+</ul>
+<p>For detailed steps about configuring the library in a Zigbee sample or application, see <a class="reference internal" href="../../protocols/zigbee/configuring_libraries.html#ug-zigbee-configuring-components-ota"><span class="std std-ref">Configuring Zigbee FOTA</span></a>.</p>
+</section>
+<section id="limitations">
+<span id="lib-zigbee-fota-limitations"></span><h2><a class="toc-backref" href="#id10">Limitations</a><a class="headerlink" href="#limitations" title="Permalink to this heading"></a></h2>
+<p>The Zigbee FOTA library has the following limitations:</p>
+<ul class="simple">
+<li><p>The endpoint definition in the library includes the endpoint ID, defined with <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_ZIGBEE_FOTA_ENDPOINT</span></code>.
+When using the Zigbee FOTA library, this endpoint ID cannot be used for other endpoints.</p></li>
+<li><p>The Zigbee FOTA upgrades are currently only supported on the nRF52840 DK (PCA10056) and nRF5340 DK (PCA10095).</p></li>
+<li><p>The Zigbee FOTA library does not currently support bootloader upgrades.</p></li>
+</ul>
+<p>Additionally, the following limitations apply on the nRF5340 SoCs:</p>
+<ul class="simple">
+<li><p>It is required to use external flash to enable the Zigbee FOTA library.</p></li>
+<li><p>By default, only the full upgrades (to both application and network core) are allowed.
+Disable the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF53_ENFORCE_IMAGE_VERSION_EQUALITY</span></code> Kconfig option to build update images without inter-dependencies so that they can be applied independently.</p></li>
+<li><p>It is impossible to enable <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BOOT_SWAP_USING_MOVE</span></code> Kconfig option.
+As a result, the fallback recovery is not available and any valid upgrade will overwrite the previous image.
+The call to the <code class="xref c c-func docutils literal notranslate"><span class="pre">boot_write_img_confirmed()</span></code> will have no effect.</p></li>
+<li><p>The current DFU limitations and dependencies are enforced by the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_NRF53_MULTI_IMAGE_UPDATE</span></code> Kconfig option.</p></li>
+<li><p>The version of the network core image is always set to the same value as the application core image.
+Its value can be configured using the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MCUBOOT_IMAGE_VERSION</span></code> Kconfig option.</p></li>
+<li><p>The MCUboot header is not stored inside the network core flash memory.
+As a result, it is impossible to read the version of the currently running network core image.</p></li>
+</ul>
+</section>
+<section id="api-documentation">
+<h2><a class="toc-backref" href="#id11">API documentation</a><a class="headerlink" href="#api-documentation" title="Permalink to this heading"></a></h2>
+<div class="line-block">
+<div class="line">Header file: <code class="file docutils literal notranslate"><span class="pre">include/zigbee/zigbee_fota.h</span></code></div>
+<div class="line">Source files: <code class="file docutils literal notranslate"><span class="pre">subsys/zigbee/lib/zigbee_fota/src/</span></code></div>
+</div>
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="group__zigbee__fota"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">zigbee_fota</span></span></dt>
+<dd><p>Library for downloading a firmware update through Zigbee network. </p>
+<p>Discovers Zigbee OTA server, queries it for new images and downloads the matching file to the secondary partition of MCUboot. After the file has been downloaded, the secondary slot is tagged as having valid firmware inside it. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-defines">Defines</p>
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.ZIGBEE_FOTA_EVT_DL_COMPLETE_VAL">
+<span class="target" id="group__zigbee__fota_1ga175a4030fd25787ddbf5115a5ff87632"></span><span class="sig-name descname"><span class="n"><span class="pre">ZIGBEE_FOTA_EVT_DL_COMPLETE_VAL</span></span></span><a class="headerlink" href="#c.ZIGBEE_FOTA_EVT_DL_COMPLETE_VAL" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-typedefs">Typedefs</p>
+<dl class="c type">
+<dt class="sig sig-object c" id="c.zigbee_fota_callback_t">
+<span class="target" id="group__zigbee__fota_1ga0d48ab776d6ced05f1cb8046449968f2"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">zigbee_fota_callback_t</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.zigbee_fota_evt" title="zigbee_fota_evt"><span class="n"><span class="pre">zigbee_fota_evt</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">evt</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#c.zigbee_fota_callback_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Zigbee FOTA download asynchronous callback function. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Param evt</dt>
+<dd class="field-odd"><p>Event. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-enums">Enums</p>
+<dl class="c enum">
+<dt class="sig sig-object c" id="c.zigbee_fota_evt_id">
+<span class="target" id="group__zigbee__fota_1gafd8525bbd00bfa2c4822013981b5fee9"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">zigbee_fota_evt_id</span></span></span><a class="headerlink" href="#c.zigbee_fota_evt_id" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Zigbee FOTA download event IDs. </p>
+<p><em>Values:</em></p>
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.zigbee_fota_evt_id.ZIGBEE_FOTA_EVT_PROGRESS">
+<span class="target" id="group__zigbee__fota_1ggafd8525bbd00bfa2c4822013981b5fee9a0716cee7150151519ace7a48b26466ad"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ZIGBEE_FOTA_EVT_PROGRESS</span></span></span><a class="headerlink" href="#c.zigbee_fota_evt_id.ZIGBEE_FOTA_EVT_PROGRESS" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Zigbee FOTA download progress report. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.zigbee_fota_evt_id.ZIGBEE_FOTA_EVT_FINISHED">
+<span class="target" id="group__zigbee__fota_1ggafd8525bbd00bfa2c4822013981b5fee9a7b5f8e0a035506ef9111735ab4539dfb"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ZIGBEE_FOTA_EVT_FINISHED</span></span></span><a class="headerlink" href="#c.zigbee_fota_evt_id.ZIGBEE_FOTA_EVT_FINISHED" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Zigbee FOTA download finished. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.zigbee_fota_evt_id.ZIGBEE_FOTA_EVT_ERROR">
+<span class="target" id="group__zigbee__fota_1ggafd8525bbd00bfa2c4822013981b5fee9a034b60c65ad56b72c04cc0a45b9b9313"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ZIGBEE_FOTA_EVT_ERROR</span></span></span><a class="headerlink" href="#c.zigbee_fota_evt_id.ZIGBEE_FOTA_EVT_ERROR" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Zigbee FOTA download error. </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.zigbee_fota_init">
+<span class="target" id="group__zigbee__fota_1ga5d567b47db2bbf2f916768e6fbcf2178"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">zigbee_fota_init</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#c.zigbee_fota_callback_t" title="zigbee_fota_callback_t"><span class="n"><span class="pre">zigbee_fota_callback_t</span></span></a><span class="w"> </span><span class="n"><span class="pre">client_callback</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.zigbee_fota_init" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Initialize the Zigbee firmware over-the-air download library. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>client_callback</strong> – Callback for the generated events.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><p><strong>0</strong> – If successfully initialized. Otherwise, a negative value is returned. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.zigbee_fota_abort">
+<span class="target" id="group__zigbee__fota_1gacc5777c2513d7d252fdb0443458dec7b"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">zigbee_fota_abort</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.zigbee_fota_abort" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Abort all pending updates performed via Zigbee network. </p>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.zigbee_fota_signal_handler">
+<span class="target" id="group__zigbee__fota_1ga48706ce2edcc58b54631614c9ed8227f"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">zigbee_fota_signal_handler</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">zb_bufid_t</span></span><span class="w"> </span><span class="n"><span class="pre">bufid</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.zigbee_fota_signal_handler" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Function for passing Zigbee stack signals to the Zigbee FOTA logic. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bufid</strong> – <strong>[in]</strong> Reference to the Zigbee stack buffer used to pass signal. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.zigbee_fota_zcl_cb">
+<span class="target" id="group__zigbee__fota_1ga990eee6d329a3329c7b2a491589713d2"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">zigbee_fota_zcl_cb</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">zb_bufid_t</span></span><span class="w"> </span><span class="n"><span class="pre">bufid</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.zigbee_fota_zcl_cb" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Function for passing ZCL callback events to the Zigbee FOTA logic. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bufid</strong> – <strong>[in]</strong> Reference to the Zigbee stack buffer used to pass event. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.zigbee_fota_event_dl">
+<span class="target" id="structzigbee__fota__event__dl"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">zigbee_fota_event_dl</span></span></span><a class="headerlink" href="#c.zigbee_fota_event_dl" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;zigbee_fota.h&gt;</em></div>
+<p>Zigbee FOTA download progress event data. </p>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.zigbee_fota_evt">
+<span class="target" id="structzigbee__fota__evt"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">zigbee_fota_evt</span></span></span><a class="headerlink" href="#c.zigbee_fota_evt" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;zigbee_fota.h&gt;</em></div>
+<p>Zigbee FOTA download event data. </p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="zigbee_logger_eprxzcl.html" class="btn btn-neutral float-right" title="Zigbee endpoint logger" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="zigbee_error_handler.html" class="btn btn-neutral" title="Zigbee error handler" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

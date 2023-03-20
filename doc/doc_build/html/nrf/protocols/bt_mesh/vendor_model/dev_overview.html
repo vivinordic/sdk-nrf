@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vendor model development overview &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../../_static/js/ncs.js"
+></script>
+<script src="../../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Chat sample walk-through" href="chat_sample_walk_through.html" />
+    <link rel="prev" title="Creating a new model" href="index.html" />
+<link
+  href="../../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../protocols.html">Protocols</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../ble/index.html">Bluetooth LE Controller</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Bluetooth mesh</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../supported_features.html">Supported Bluetooth mesh features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../concepts.html">Bluetooth mesh concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../architecture.html">Bluetooth mesh stack architecture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../configuring.html">Configuring Bluetooth mesh in nRF Connect SDK</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../model_config_app.html">Configuring mesh models using the nRF Mesh mobile app</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fota.html">Performing FOTA updates in Bluetooth mesh</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../node_removal.html">Removing a node from a mesh network</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Creating a new model</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Vendor model development overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chat_sample_walk_through.html">Chat sample walk-through</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../reserved_ids.html">Reserved vendor model IDs and opcodes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../esb/index.html">Enhanced ShockBurst (ESB)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gazell/index.html">Gazell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../matter/index.html">Matter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../multiprotocol/index.html">Multiprotocol support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nfc/index.html">Near Field Communication (NFC)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../thread/index.html">Thread</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../wifi/index.html">Wi-Fi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../zigbee/index.html">Zigbee</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../drivers.html">Drivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../protocols.html">Protocols</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Bluetooth mesh</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Creating a new model</a></li>
+      <li class="breadcrumb-item active">Vendor model development overview</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/protocols/bt_mesh/vendor_model/dev_overview.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="vendor-model-development-overview">
+<span id="ug-bt-mesh-vendor-model-dev-overview"></span><h1>Vendor model development overview<a class="headerlink" href="#vendor-model-development-overview" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#defining-a-model-identifier" id="id7">Defining a model identifier</a></p></li>
+<li><p><a class="reference internal" href="#adding-the-model-to-the-node-composition-data" id="id8">Adding the model to the node composition data</a></p></li>
+<li><p><a class="reference internal" href="#defining-opcodes-for-the-messages" id="id9">Defining opcodes for the messages</a></p></li>
+<li><p><a class="reference internal" href="#receiving-messages" id="id10">Receiving messages</a></p></li>
+<li><p><a class="reference internal" href="#sending-messages" id="id11">Sending messages</a></p></li>
+<li><p><a class="reference internal" href="#associating-the-user-data" id="id12">Associating the user data</a></p></li>
+<li><p><a class="reference internal" href="#defining-model-callbacks" id="id13">Defining model callbacks</a></p></li>
+</ul>
+</div>
+<p>To implement a new Bluetooth® mesh model, apply the steps described in this step-by-step model development process overview.</p>
+<section id="defining-a-model-identifier">
+<h2><a class="toc-backref" href="#id7">Defining a model identifier</a><a class="headerlink" href="#defining-a-model-identifier" title="Permalink to this heading"></a></h2>
+<p>Models define basic functionality of a node in the Bluetooth mesh network.
+Once it is decided on what functionality the model will define, its identifier must be specified to be able to recognize it among the other models in the mesh network.</p>
+<p>As defined by the <a class="reference external" href="https://www.bluetooth.com/specifications/specs/">Bluetooth mesh profile specification</a>, the vendor model identifiers are composed of two unique 16-bit values specifying a company identifier (Company ID), and a vendor-assigned model identifier (Model ID) tied to this Company ID.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#define YOUR_COMPANY_ID 0x1234</span>
+<span class="cp">#define YOUR_MODEL_ID   0x5678</span>
+</pre></div>
+</div>
+<p>The Company ID must be registered with the Bluetooth® Special Interest Group (SIG), and the vendor owning the Company ID may freely allocate the model IDs for its Company ID.
+See <a class="reference external" href="https://www.bluetooth.com/specifications/assigned-numbers/company-identifiers/">Bluetooth SIG company identifiers</a> for a list of Company IDs.</p>
+</section>
+<section id="adding-the-model-to-the-node-composition-data">
+<h2><a class="toc-backref" href="#id8">Adding the model to the node composition data</a><a class="headerlink" href="#adding-the-model-to-the-node-composition-data" title="Permalink to this heading"></a></h2>
+<p>Once the model has its own Model ID, it can be added to the node composition data.
+This will register the model on the node, and enable the model configuration through the <span class="xref std std-ref">zephyr:bluetooth_mesh_models_cfg_cli</span> so that it can communicate with other models in the mesh network.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The node composition data is passed to <code class="xref c c-func docutils literal notranslate"><span class="pre">bt_mesh_init()</span></code> at the mesh stack initialization, and cannot be changed at run time.</p>
+</div>
+<p>To add the model to the node composition data, use the <code class="xref c c-macro docutils literal notranslate"><span class="pre">BT_MESH_MODEL_VND_CB</span></code> macro, that requires at least the Company ID and the Model ID to be provided.
+Below is an example of the simplest model initialization in the node composition data.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">BT_MESH_MODEL_VND_CB</span><span class="p">(</span><span class="n">YOUR_COMPANY_ID</span><span class="p">,</span>
+<span class="w">                     </span><span class="n">YOUR_MODEL_ID</span><span class="p">,</span>
+<span class="w">                     </span><span class="n">BT_MESH_MODEL_NO_OPS</span><span class="p">,</span>
+<span class="w">                     </span><span class="nb">NULL</span><span class="p">,</span>
+<span class="w">                     </span><span class="nb">NULL</span><span class="p">,</span>
+<span class="w">                     </span><span class="nb">NULL</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The third argument, the <code class="xref c c-macro docutils literal notranslate"><span class="pre">BT_MESH_MODEL_NO_OPS</span></code> macro, specifies an empty operation code (opcode) list, meaning that the model won’t receive any messages.
+The other arguments are optional and set to <code class="docutils literal notranslate"><span class="pre">NULL</span></code>.
+The following sections describe how and when to use these arguments.</p>
+<p>When defining the node composition data, pass the vendor models in the second parameter of the <code class="xref c c-macro docutils literal notranslate"><span class="pre">BT_MESH_ELEM</span></code> macro:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_elem</span><span class="w"> </span><span class="n">elements</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">BT_MESH_ELEM</span><span class="p">(</span>
+<span class="w">        </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">        </span><span class="n">BT_MESH_MODEL_LIST</span><span class="p">(</span><span class="n">BT_MESH_MODEL_CFG_SRV</span><span class="p">(</span><span class="o">&amp;</span><span class="n">cfg_srv</span><span class="p">),</span>
+<span class="w">                           </span><span class="n">BT_MESH_MODEL_HEALTH_SRV</span><span class="p">(</span><span class="o">&amp;</span><span class="n">health_srv</span><span class="p">,</span>
+<span class="w">                                                    </span><span class="o">&amp;</span><span class="n">health_pub</span><span class="p">)),</span>
+<span class="w">        </span><span class="n">BT_MESH_MODEL_LIST</span><span class="p">(</span><span class="n">BT_MESH_MODEL_VND_CB</span><span class="p">(</span><span class="n">YOUR_COMPANY_ID</span><span class="p">,</span>
+<span class="w">                                                </span><span class="n">YOUR_MODEL_ID</span><span class="p">,</span>
+<span class="w">                                                </span><span class="n">BT_MESH_MODEL_NO_OPS</span><span class="p">,</span>
+<span class="w">                                                </span><span class="nb">NULL</span><span class="p">,</span>
+<span class="w">                                                </span><span class="nb">NULL</span><span class="p">,</span>
+<span class="w">                                                </span><span class="nb">NULL</span><span class="p">))</span>
+<span class="w">    </span><span class="p">),</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</section>
+<section id="defining-opcodes-for-the-messages">
+<h2><a class="toc-backref" href="#id9">Defining opcodes for the messages</a><a class="headerlink" href="#defining-opcodes-for-the-messages" title="Permalink to this heading"></a></h2>
+<p>The communication between the nodes within a mesh network is done by means of message exchange.
+Therefore, if you want to implement your own node behavior, you need to define your own set of messages that will be associated with this behavior.
+To do that, you need to define vendor-specific opcodes for new messages, using the <code class="xref c c-macro docutils literal notranslate"><span class="pre">BT_MESH_MODEL_OP_3</span></code> macro.
+This macro encodes an opcode into the special format defined by the <a class="reference external" href="https://www.bluetooth.com/specifications/specs/">Bluetooth mesh profile specification</a>.
+Each vendor-specific message must be tied with a Company ID, passed as a second parameter to the macro:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">BT_MESH_MODEL_OP_3</span><span class="p">(</span><span class="mh">0x01</span><span class="p">,</span><span class="w"> </span><span class="n">YOUR_COMPANY_ID</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The two most significant bits of the first octet in a vendor-specific opcode are always set to <code class="docutils literal notranslate"><span class="pre">1</span></code>.
+Therefore, you can specify up to 64 different vendor-specific opcodes.</p>
+<p>You can wrap your opcode in a macro to make it convenient to use in the future:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#define MESSAGE_SET_OPCODE    BT_MESH_MODEL_OP_3(0x01, YOUR_COMPANY_ID)</span>
+<span class="cp">#define MESSAGE_ACK_OPCODE    BT_MESH_MODEL_OP_3(0x02, YOUR_COMPANY_ID)</span>
+<span class="cp">#define MESSAGE_STATUS_OPCODE BT_MESH_MODEL_OP_3(0x03, YOUR_COMPANY_ID)</span>
+</pre></div>
+</div>
+</section>
+<section id="receiving-messages">
+<h2><a class="toc-backref" href="#id10">Receiving messages</a><a class="headerlink" href="#receiving-messages" title="Permalink to this heading"></a></h2>
+<p>If the model is to receive messages, create an opcode list that will define a list of messages that your model will receive.
+To create the opcode list, initialize an array of <code class="xref c c-struct docutils literal notranslate"><span class="pre">bt_mesh_model_op</span></code> type with the following required parameters:</p>
+<ol class="arabic simple">
+<li><p>Message opcode, <code class="xref c c-member docutils literal notranslate"><span class="pre">bt_mesh_model_op.opcode</span></code>, to register a message to be received by the model.</p></li>
+<li><p>Minimal message length, <code class="xref c c-member docutils literal notranslate"><span class="pre">bt_mesh_model_op.len</span></code>, that prevents the model from receiving messages shorter than the specified value.</p></li>
+<li><p>Message handler, <code class="xref c c-member docutils literal notranslate"><span class="pre">bt_mesh_model_op.func</span></code>, which is used to process the received message.</p></li>
+</ol>
+<p>The last element in the opcode list is always the <code class="xref c c-macro docutils literal notranslate"><span class="pre">BT_MESH_MODEL_OP_END</span></code> macro:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">handle_message_set</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_model</span><span class="w"> </span><span class="o">*</span><span class="n">model</span><span class="p">,</span>
+<span class="w">                               </span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_msg_ctx</span><span class="w"> </span><span class="o">*</span><span class="n">ctx</span><span class="p">,</span>
+<span class="w">                               </span><span class="k">struct</span><span class="w"> </span><span class="nc">net_buf_simple</span><span class="w"> </span><span class="o">*</span><span class="n">buf</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// Message handler code</span>
+<span class="p">}</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">handle_message_ack</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_model</span><span class="w"> </span><span class="o">*</span><span class="n">model</span><span class="p">,</span>
+<span class="w">                               </span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_msg_ctx</span><span class="w"> </span><span class="o">*</span><span class="n">ctx</span><span class="p">,</span>
+<span class="w">                               </span><span class="k">struct</span><span class="w"> </span><span class="nc">net_buf_simple</span><span class="w"> </span><span class="o">*</span><span class="n">buf</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// Message handler code</span>
+<span class="p">}</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">handle_message_status</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_model</span><span class="w"> </span><span class="o">*</span><span class="n">model</span><span class="p">,</span>
+<span class="w">                                  </span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_msg_ctx</span><span class="w"> </span><span class="o">*</span><span class="n">ctx</span><span class="p">,</span>
+<span class="w">                                  </span><span class="k">struct</span><span class="w"> </span><span class="nc">net_buf_simple</span><span class="w"> </span><span class="o">*</span><span class="n">buf</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// Message handler code</span>
+<span class="p">}</span>
+
+<span class="k">const</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_model_op</span><span class="w"> </span><span class="n">_opcode_list</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="n">MESSAGE_SET_OPCODE</span><span class="p">,</span><span class="w">    </span><span class="n">MESSAGE_SET_LEN</span><span class="p">,</span><span class="w">    </span><span class="n">handle_message_set</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="n">MESSAGE_ACK_OPCODE</span><span class="p">,</span><span class="w">    </span><span class="n">MESSAGE_ACK_LEN</span><span class="p">,</span><span class="w">    </span><span class="n">handle_message_ack</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="n">MESSAGE_STATUS_OPCODE</span><span class="p">,</span><span class="w"> </span><span class="n">MESSAGE_STATUS_LEN</span><span class="p">,</span><span class="w"> </span><span class="n">handle_message_status</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="n">BT_MESH_MODEL_OP_END</span><span class="p">,</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>To associate the opcode list with your model, use the <code class="xref c c-macro docutils literal notranslate"><span class="pre">BT_MESH_MODEL_VND_CB</span></code> macro.
+It will initialize the <code class="xref c c-member docutils literal notranslate"><span class="pre">bt_mesh_model.op</span></code> field of the model context:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">BT_MESH_MODEL_VND_CB</span><span class="p">(</span><span class="n">YOUR_COMPANY_ID</span><span class="p">,</span>
+<span class="w">                     </span><span class="n">YOUR_MODEL_ID</span><span class="p">,</span>
+<span class="w">                     </span><span class="n">_opcode_list</span><span class="p">,</span>
+<span class="w">                     </span><span class="nb">NULL</span><span class="p">,</span>
+<span class="w">                     </span><span class="nb">NULL</span><span class="p">,</span>
+<span class="w">                     </span><span class="nb">NULL</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="sending-messages">
+<h2><a class="toc-backref" href="#id11">Sending messages</a><a class="headerlink" href="#sending-messages" title="Permalink to this heading"></a></h2>
+<p>Before sending a message, you need to prepare a buffer that will contain the message data together with the opcode.
+This can be done using the <code class="xref c c-macro docutils literal notranslate"><span class="pre">BT_MESH_MODEL_BUF_DEFINE</span></code> macro.
+It creates and initializes an instance of <code class="xref c c-struct docutils literal notranslate"><span class="pre">net_buf_simple</span></code>, therefore, use the <span class="xref std std-ref">net_buf_interface</span> API to fill up the buffer:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">BT_MESH_MODEL_BUF_DEFINE</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="n">MESSAGE_SET_OPCODE</span><span class="p">,</span><span class="w"> </span><span class="n">MESSAGE_SET_LEN</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>To set the opcode of the message, call <code class="xref c c-func docutils literal notranslate"><span class="pre">bt_mesh_model_msg_init()</span></code>:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">bt_mesh_model_msg_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="n">MESSAGE_SET_OPCODE</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>As described in <span class="xref std std-ref">Access API</span>, the model can send a message in two ways:</p>
+<ol class="arabic simple">
+<li><p>By using a custom <code class="xref c c-struct docutils literal notranslate"><span class="pre">bt_mesh_msg_ctx</span></code>.</p></li>
+<li><p>By using a model publication context.</p></li>
+</ol>
+<p>If you want your model to control a destination address or some other parameters of a message, you can initialize <code class="xref c c-struct docutils literal notranslate"><span class="pre">bt_mesh_msg_ctx</span></code> with custom parameters, and pass it together with a message buffer to <code class="xref c c-func docutils literal notranslate"><span class="pre">bt_mesh_model_send()</span></code>:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">send_message</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_model</span><span class="w"> </span><span class="o">*</span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">addr</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_msg_ctx</span><span class="w"> </span><span class="n">ctx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="p">.</span><span class="n">addr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">addr</span><span class="p">,</span>
+<span class="w">            </span><span class="p">.</span><span class="n">app_idx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">model</span><span class="o">-&gt;</span><span class="n">keys</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+<span class="w">            </span><span class="p">.</span><span class="n">send_ttl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BT_MESH_TTL_DEFAULT</span><span class="p">,</span>
+<span class="w">    </span><span class="p">};</span>
+
+<span class="w">    </span><span class="n">BT_MESH_MODEL_BUF_DEFINE</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="n">MESSAGE_SET_OPCODE</span><span class="p">,</span><span class="w"> </span><span class="n">MESSAGE_SET_LEN</span><span class="p">);</span>
+<span class="w">    </span><span class="n">bt_mesh_model_msg_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="n">MESSAGE_SET_OPCODE</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Fill the message buffer here</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">bt_mesh_model_send</span><span class="p">(</span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">ctx</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Before sending the messages, you still need to bind an application key to your model using the Configuration Client.</p>
+</div>
+<p>The <code class="xref c c-func docutils literal notranslate"><span class="pre">bt_mesh_model_send()</span></code> function is also used if you need to send a reply on a received message.
+To do that, use the message context passed to a handler of a message that needs to be replied to, when calling <code class="xref c c-func docutils literal notranslate"><span class="pre">bt_mesh_model_send()</span></code>:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">handle_message_set</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_model</span><span class="w"> </span><span class="o">*</span><span class="n">model</span><span class="p">,</span>
+<span class="w">                               </span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_msg_ctx</span><span class="w"> </span><span class="o">*</span><span class="n">ctx</span><span class="p">,</span>
+<span class="w">                               </span><span class="k">struct</span><span class="w"> </span><span class="nc">net_buf_simple</span><span class="w"> </span><span class="o">*</span><span class="n">buf</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">BT_MESH_MODEL_BUF_DEFINE</span><span class="p">(</span><span class="n">reply</span><span class="p">,</span><span class="w"> </span><span class="n">MESSAGE_ACK_OPCODE</span><span class="p">,</span><span class="w"> </span><span class="n">MESSAGE_ACK_LEN</span><span class="p">);</span>
+<span class="w">    </span><span class="n">bt_mesh_model_msg_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">reply</span><span class="p">,</span><span class="w"> </span><span class="n">MESSAGE_ACK_OPCODE</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Fill the reply buffer here</span>
+
+<span class="w">    </span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="n">bt_mesh_model_send</span><span class="p">(</span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="n">ctx</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">reply</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The model publication context defines the behavior of messages to be published by the model, and it is configured by the Configuration Client.
+If you want your model to send messages using the model publication context, create a <code class="xref c c-struct docutils literal notranslate"><span class="pre">bt_mesh_model_pub</span></code> instance and pass it to <code class="xref c c-macro docutils literal notranslate"><span class="pre">BT_MESH_MODEL_VND_CB</span></code> macro to initialize <code class="xref c c-member docutils literal notranslate"><span class="pre">bt_mesh_model.pub</span></code>:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_model_pub</span><span class="w"> </span><span class="n">pub_ctx</span><span class="p">;</span>
+
+<span class="n">BT_MESH_MODEL_VND_CB</span><span class="p">(</span><span class="n">YOUR_COMPANY_ID</span><span class="p">,</span>
+<span class="w">                     </span><span class="n">YOUR_MODEL_ID</span><span class="p">,</span>
+<span class="w">                     </span><span class="n">_opcode_list</span><span class="p">,</span>
+<span class="w">                     </span><span class="o">&amp;</span><span class="n">pub_ctx</span><span class="p">,</span>
+<span class="w">                     </span><span class="nb">NULL</span><span class="p">,</span>
+<span class="w">                     </span><span class="nb">NULL</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You must initialize the <code class="xref c c-member docutils literal notranslate"><span class="pre">bt_mesh_model_pub.msg</span></code> publication buffer when using the model publication context.
+This can be done in two ways.
+Either by using the <code class="xref c c-macro docutils literal notranslate"><span class="pre">NET_BUF_SIMPLE</span></code> macro:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_model_pub</span><span class="w"> </span><span class="n">pub_ctx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">.</span><span class="n">msg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NET_BUF_SIMPLE</span><span class="p">(</span><span class="n">BT_MESH_MODEL_BUF_LEN</span><span class="p">(</span><span class="n">MESSAGE_SET_OPCODE</span><span class="p">,</span>
+<span class="w">                                                </span><span class="n">MESSAGE_SET_MAXLEN</span><span class="p">)),</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Or, for example, in the <code class="xref c c-member docutils literal notranslate"><span class="pre">bt_mesh_model_cb.init</span></code> callback, using <code class="xref c c-func docutils literal notranslate"><span class="pre">net_buf_simple_init_with_data()</span></code>:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_model_pub</span><span class="w"> </span><span class="n">pub_ctx</span><span class="p">;</span>
+<span class="k">static</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">net_buf_simple</span><span class="w"> </span><span class="n">pub_msg</span><span class="p">;</span>
+<span class="k">static</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">buf</span><span class="p">[</span><span class="n">BT_MESH_MODEL_BUF_LEN</span><span class="p">(</span><span class="n">MESSAGE_SET_OPCODE</span><span class="p">,</span>
+<span class="w">                                         </span><span class="n">MESSAGE_SET_MAXLEN</span><span class="p">)];</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">model_init</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_model</span><span class="w"> </span><span class="o">*</span><span class="n">model</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">model</span><span class="o">-&gt;</span><span class="n">pub</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">pub_ctx</span><span class="p">;</span>
+<span class="w">    </span><span class="n">net_buf_simple_init_with_data</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pub_msg</span><span class="p">,</span><span class="w"> </span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">buf</span><span class="p">));</span>
+<span class="w">    </span><span class="n">pub_ctx</span><span class="p">.</span><span class="n">msg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">pub_msg</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The publication buffer size must be big enough to fit the longest message to be published.</p>
+</div>
+<p>How to initialize <code class="xref c c-member docutils literal notranslate"><span class="pre">bt_mesh_model_cb.init</span></code> is described later in this guide.</p>
+<p>When the model supports the model publication, configure the model to send messages at certain periods, regardless of the current model state, using the Configuration Client.
+This is useful for periodic data publication, for example, if it changes over time.
+To support the model publication, initialize the <code class="xref c c-member docutils literal notranslate"><span class="pre">bt_mesh_model_pub.update</span></code> callback.</p>
+<p>If the periodic publication is configured by the Configuration Client, the access layer calls the <code class="xref c c-member docutils literal notranslate"><span class="pre">bt_mesh_model_pub.update</span></code> callback in the beginning of each publication period.
+It resets the buffer provided in <code class="xref c c-member docutils literal notranslate"><span class="pre">bt_mesh_model_pub.msg</span></code>.
+Therefore, you only need to fill the data into the buffer:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">update_handler</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_model</span><span class="w"> </span><span class="o">*</span><span class="n">model</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">bt_mesh_model_msg_init</span><span class="p">(</span><span class="n">model</span><span class="o">-&gt;</span><span class="n">pub</span><span class="o">-&gt;</span><span class="n">msg</span><span class="p">,</span><span class="w"> </span><span class="n">MESSAGE_STATUS_OPCODE</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Fill the model publication buffer here</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="associating-the-user-data">
+<h2><a class="toc-backref" href="#id12">Associating the user data</a><a class="headerlink" href="#associating-the-user-data" title="Permalink to this heading"></a></h2>
+<p>You can associate your data with the <code class="xref c c-struct docutils literal notranslate"><span class="pre">bt_mesh_model</span></code> structure, through the <code class="xref c c-member docutils literal notranslate"><span class="pre">bt_mesh_model.user_data</span></code> field.
+This is useful for restoring your context associated with the model, whenever any of the callbacks defined by the Access API are called.
+To associate the data, pass the pointer to your data to the <code class="xref c c-macro docutils literal notranslate"><span class="pre">BT_MESH_MODEL_VND_CB</span></code> macro.</p>
+</section>
+<section id="defining-model-callbacks">
+<h2><a class="toc-backref" href="#id13">Defining model callbacks</a><a class="headerlink" href="#defining-model-callbacks" title="Permalink to this heading"></a></h2>
+<p>The Access API provides a set of callbacks that are called when certain events occur.
+These callbacks are defined in <code class="xref c c-struct docutils literal notranslate"><span class="pre">bt_mesh_model_cb</span></code>.</p>
+<figure class="align-default" id="id6">
+<img alt="A diagram representing the callbacks for Bluetooth mesh models." src="../../../_images/bt_mesh_model_callbacks.svg" /><figcaption>
+<p><span class="caption-text">Bluetooth mesh model callbacks</span><a class="headerlink" href="#id6" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<dl class="simple">
+<dt><code class="xref c c-member docutils literal notranslate"><span class="pre">bt_mesh_model_cb.settings_set</span></code></dt><dd><p>This handler is called when the model data is restored from the persistent storage.
+If you need to store data in the persistent storage, use the <code class="xref c c-func docutils literal notranslate"><span class="pre">bt_mesh_model_data_store()</span></code> function.
+To use the persistent storage, it needs to be enabled with <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_SETTINGS</span></code>.
+For more information on persistent storage, see <span class="xref std std-ref">zephyr:settings_api</span>.</p>
+</dd>
+<dt><code class="xref c c-member docutils literal notranslate"><span class="pre">bt_mesh_model_cb.start</span></code></dt><dd><p>This handler is called after the node has been provisioned, or after all mesh data is loaded from the persistent storage.
+When this callback fires, the mesh model may start its behavior, and all Access APIs are ready for use.</p>
+</dd>
+<dt><code class="xref c c-member docutils literal notranslate"><span class="pre">bt_mesh_model_cb.init</span></code></dt><dd><p>This handler is called on every model instance during the mesh initialization.
+Implement it if you need to do additional model initialization before the mesh stack starts, for example, to initialize the model publication context.
+If any of the model init callbacks return an error, the mesh subsystem initialization is aborted, and the error is returned to the caller of <code class="xref c c-func docutils literal notranslate"><span class="pre">bt_mesh_init()</span></code>.</p>
+</dd>
+<dt><code class="xref c c-member docutils literal notranslate"><span class="pre">bt_mesh_model_cb.reset</span></code></dt><dd><p>The model reset handler is called when the mesh node is reset.
+All of the model’s configuration is deleted on reset, and the model should clear its state.
+If the model stores any persistent data, this needs to be erased manually.</p>
+</dd>
+</dl>
+<p>If you want to use any of these callbacks, create an instance of <code class="xref c c-struct docutils literal notranslate"><span class="pre">bt_mesh_model_cb</span></code> and initialize any of the required callbacks.
+Use the <code class="xref c c-macro docutils literal notranslate"><span class="pre">BT_MESH_MODEL_VND_CB</span></code> macro to associate the callbacks with your model.
+It will initialize the <code class="xref c c-member docutils literal notranslate"><span class="pre">bt_mesh_model.cb</span></code> field of the model context:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_model_cb</span><span class="w"> </span><span class="n">model_cbs</span><span class="p">;</span>
+
+<span class="n">BT_MESH_MODEL_VND_CB</span><span class="p">(</span><span class="n">YOUR_COMPANY_ID</span><span class="p">,</span>
+<span class="w">                     </span><span class="n">YOUR_MODEL_ID</span><span class="p">,</span>
+<span class="w">                     </span><span class="n">_opcode_list</span><span class="p">,</span>
+<span class="w">                     </span><span class="o">&amp;</span><span class="n">pub_ctx</span><span class="p">,</span>
+<span class="w">                     </span><span class="nb">NULL</span><span class="p">,</span>
+<span class="w">                     </span><span class="o">&amp;</span><span class="n">model_cbs</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="chat_sample_walk_through.html" class="btn btn-neutral float-right" title="Chat sample walk-through" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Creating a new model" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structlocation__gnss__config" kind="struct" language="C++" prot="public">
+    <compoundname>location_gnss_config</compoundname>
+    <includes refid="location_8h" local="no">location.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structlocation__gnss__config_a2181db0bcb8ddf2edf8da650f475c146_1a2181db0bcb8ddf2edf8da650f475c146" prot="public" static="no" mutable="no">
+        <type>int32_t</type>
+        <definition>int32_t location_gnss_config::timeout</definition>
+        <argsstring></argsstring>
+        <name>timeout</name>
+        <briefdescription>
+<para>Timeout (in milliseconds), meaning how long GNSS is allowed to run when trying to acquire a fix. SYS_FOREVER_MS means that the timer is disabled, meaning that GNSS will continue to search until it gets a fix or the application calls cancel. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Note that this is not real time as experienced by the user. Since GNSS cannot run while LTE is operating, the running time is counted from the instant when GNSS is allowed to start. Library waits until RRC connection is inactive before starting GNSS. If LTE power saving mode (PSM) is enabled and A-GPS is disabled, library waits until modem enters PSM before starting GNSS, thus maximizing uninterrupted operating window and minimizing power consumption.</para>
+<para>Default value is 120000 (2 minutes). It is applied when <ref refid="group__location_gaa2acf9a8fab52e2ee4b60c3677a016f8_1gaa2acf9a8fab52e2ee4b60c3677a016f8" kindref="member">location_config_defaults_set</ref> function is called and can be changed at build time with CONFIG_LOCATION_REQUEST_DEFAULT_GNSS_TIMEOUT configuration. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/modem/location.h" line="264" column="9" bodyfile="include/modem/location.h" bodystart="264" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structlocation__gnss__config_a43c2987d4accda47ff0ad2ebf2488a63_1a43c2987d4accda47ff0ad2ebf2488a63" prot="public" static="no" mutable="no">
+        <type>enum <ref refid="group__location_gaedb56e1b41aaf462ff8f1382a82ee498_1gaedb56e1b41aaf462ff8f1382a82ee498" kindref="member">location_accuracy</ref></type>
+        <definition>enum location_accuracy location_gnss_config::accuracy</definition>
+        <argsstring></argsstring>
+        <name>accuracy</name>
+        <briefdescription>
+<para>Desired accuracy level. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If accuracy is set to LOCATION_ACCURACY_LOW, GNSS relaxes the criteria for a qualifying fix and may produce fixes using only three satellites.</para>
+<para>If accuracy is set to LOCATION_ACCURACY_HIGH, instead of using the first fix, GNSS is allowed to run for a longer time. This typically improves the location accuracy.</para>
+<para>Default value is LOCATION_ACCURACY_NORMAL. It is applied when <ref refid="group__location_gaa2acf9a8fab52e2ee4b60c3677a016f8_1gaa2acf9a8fab52e2ee4b60c3677a016f8" kindref="member">location_config_defaults_set</ref> function is called and can be changed at build time with CONFIG_LOCATION_REQUEST_DEFAULT_GNSS_ACCURACY choice configuration. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/modem/location.h" line="264" column="9" bodyfile="include/modem/location.h" bodystart="278" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structlocation__gnss__config_ad53cfc55465bc832b76f314e099bf4d6_1ad53cfc55465bc832b76f314e099bf4d6" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t location_gnss_config::num_consecutive_fixes</definition>
+        <argsstring></argsstring>
+        <name>num_consecutive_fixes</name>
+        <briefdescription>
+<para>The number of fixes GNSS is allowed to produce before the library outputs the current location when accuracy is set to LOCATION_ACCURACY_HIGH. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If accuracy is set to LOCATION_ACCURACY_NORMAL or LOCATION_ACCURACY_LOW this parameter has no effect.</para>
+<para>Default value is 3. It is applied when <ref refid="group__location_gaa2acf9a8fab52e2ee4b60c3677a016f8_1gaa2acf9a8fab52e2ee4b60c3677a016f8" kindref="member">location_config_defaults_set</ref> function is called and can be changed at build time with CONFIG_LOCATION_REQUEST_DEFAULT_GNSS_NUM_CONSECUTIVE_FIXES configuration. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/modem/location.h" line="291" column="9" bodyfile="include/modem/location.h" bodystart="291" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structlocation__gnss__config_ad4f2b874adda6d6e807b68ec3547dc68_1ad4f2b874adda6d6e807b68ec3547dc68" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool location_gnss_config::visibility_detection</definition>
+        <argsstring></argsstring>
+        <name>visibility_detection</name>
+        <briefdescription>
+<para>Obstructed visibility detection. If set to true, the library tries to detect situations where getting a GNSS fix is unlikely or would consume a lot of energy. When such a situation is detected, GNSS is stopped without waiting for a fix or a timeout. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>See Kconfig for related configuration options.</para>
+<para>Default value is false. It is applied when <ref refid="group__location_gaa2acf9a8fab52e2ee4b60c3677a016f8_1gaa2acf9a8fab52e2ee4b60c3677a016f8" kindref="member">location_config_defaults_set</ref> function is called and can be changed at build time with CONFIG_LOCATION_REQUEST_DEFAULT_GNSS_VISIBILITY_DETECTION configuration.</para>
+<para><simplesect kind="note"><para>Only supported with modem firmware v1.3.2 or later. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/modem/location.h" line="307" column="6" bodyfile="include/modem/location.h" bodystart="307" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structlocation__gnss__config_a87ef058dc2bb1f01f4a0f15cc2ec07ba_1a87ef058dc2bb1f01f4a0f15cc2ec07ba" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool location_gnss_config::priority_mode</definition>
+        <argsstring></argsstring>
+        <name>priority_mode</name>
+        <briefdescription>
+<para>Enable GNSS priority mode if GNSS does not get enough runtime due to LTE idle mode operations. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If set to true, the library triggers GNSS priority mode if five consecutive PVT messages indicate that GNSS is blocked by LTE idle mode operations. This is especially helpful if A-GPS or P-GPS is not enabled or downloading assistance data fails and GNSS module has to decode navigation data from the satellite broadcast. Priority mode is disabled automatically after the first fix or after 40 seconds.</para>
+<para>If the device attempts to send data during the priority mode, it will be buffered and sent after the priority time window ends. In case of mobile terminated data reception during the priority mode the network will typically buffer the data and sent them to the device once the priority time window ends. However, it is possible that the network drops the data, or some protocol timer expires causing data transfer to fail.</para>
+<para>Default value is false. It is applied when <ref refid="group__location_gaa2acf9a8fab52e2ee4b60c3677a016f8_1gaa2acf9a8fab52e2ee4b60c3677a016f8" kindref="member">location_config_defaults_set</ref> function is called and can be changed at build time with CONFIG_LOCATION_REQUEST_DEFAULT_GNSS_PRIORITY_MODE configuration. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/modem/location.h" line="329" column="6" bodyfile="include/modem/location.h" bodystart="329" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>GNSS configuration. </para>
+    </detaileddescription>
+    <location file="include/modem/location.h" line="247" column="1" bodyfile="include/modem/location.h" bodystart="247" bodyend="330"/>
+    <listofallmembers>
+      <member refid="structlocation__gnss__config_a43c2987d4accda47ff0ad2ebf2488a63_1a43c2987d4accda47ff0ad2ebf2488a63" prot="public" virt="non-virtual"><scope>location_gnss_config</scope><name>accuracy</name></member>
+      <member refid="structlocation__gnss__config_ad53cfc55465bc832b76f314e099bf4d6_1ad53cfc55465bc832b76f314e099bf4d6" prot="public" virt="non-virtual"><scope>location_gnss_config</scope><name>num_consecutive_fixes</name></member>
+      <member refid="structlocation__gnss__config_a87ef058dc2bb1f01f4a0f15cc2ec07ba_1a87ef058dc2bb1f01f4a0f15cc2ec07ba" prot="public" virt="non-virtual"><scope>location_gnss_config</scope><name>priority_mode</name></member>
+      <member refid="structlocation__gnss__config_a2181db0bcb8ddf2edf8da650f475c146_1a2181db0bcb8ddf2edf8da650f475c146" prot="public" virt="non-virtual"><scope>location_gnss_config</scope><name>timeout</name></member>
+      <member refid="structlocation__gnss__config_ad4f2b874adda6d6e807b68ec3547dc68_1ad4f2b874adda6d6e807b68ec3547dc68" prot="public" virt="non-virtual"><scope>location_gnss_config</scope><name>visibility_detection</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,1403 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scanning module &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../_static/js/ncs.js"
+></script>
+<script src="../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Apple Media Service (AMS) Client" href="services/ams_client.html" />
+    <link rel="prev" title="Bluetooth Low Energy Remote Procedure Call" href="rpc.html" />
+<link
+  href="../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drivers.html">Drivers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Libraries</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../bin/index.html">Binary libraries</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Bluetooth libraries and services</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="adv_prov.html">Bluetooth LE advertising providers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="conn_ctx.html">Bluetooth connection context</a></li>
+<li class="toctree-l3"><a class="reference internal" href="enocean.html">Bluetooth EnOcean</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gatt_dm.html">GATT Discovery Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gatt_pool.html">Bluetooth GATT attribute pools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mesh.html">Bluetooth mesh profile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rpc.html">Bluetooth Low Energy Remote Procedure Call</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Scanning module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuration">Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#usage">Usage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#samples-using-the-library">Samples using the library</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#api-documentation">API documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="services/ams_client.html">Apple Media Service (AMS) Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="services/ancs_client.html">Apple Notification Center Service (ANCS) Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="services/bas_client.html">GATT Battery Service (BAS) Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="services/bms.html">GATT Bond Management Service (BMS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="services/cgms.html">GATT Continuous Glucose Monitoring Service (CGMS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="services/cts_client.html">GATT Current Time Service (CTS) Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="services/ddfs.html">Direction and Distance Finding Service (DDFS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="services/dfu_smp.html">GATT DFU SMP Service Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="services/fast_pair.html">Google Fast Pair Service (GFPS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="services/gattp.html">Generic Attribute (GATT) Profile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="services/hids.html">GATT Human Interface Device (HID) Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="services/hogp.html">GATT Human Interface Device Service (HIDS) Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="services/hrs_client.html">GATT Heart Rate Service (HRS) Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="services/latency.html">GATT Latency Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="services/latency_client.html">GATT Latency Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="services/lbs.html">LED Button Service (LBS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="services/mds.html">Memfault Diagnostic Service (MDS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="services/nsms.html">Nordic Status Message Service (NSMS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="services/nus.html">Nordic UART Service (NUS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="services/nus_client.html">Nordic UART Service (NUS) Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="services/rscs.html">Running Speed and Cadence Service (RSCS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="services/throughput.html">GATT Throughput Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="services/wifi_prov.html">Wi-Fi Provisioning Service</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../bootloader/index.html">Bootloader libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../caf/index.html">Common Application Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../debug/index.html">Debug libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dfu/index.html">DFU libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gazell/index.html">Gazell libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modem/index.html">Modem libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mpsl/index.html">Multiprotocol Service Layer libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../networking/index.html">Libraries for networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nfc/index.html">Libraries for NFC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nrf_rpc/index.html">nRF RPC libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../others/index.html">Other libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../shell/index.html">Shell libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tfm/index.html">TF-M libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../zigbee/index.html">Libraries for Zigbee</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Libraries</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Bluetooth libraries and services</a></li>
+      <li class="breadcrumb-item active">Scanning module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/libraries/bluetooth_services/scan.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="scanning-module">
+<span id="nrf-bt-scan-readme"></span><span id="lib-nrf-bt-scan-readme"></span><h1>Scanning module<a class="headerlink" href="#scanning-module" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#overview" id="id7">Overview</a></p></li>
+<li><p><a class="reference internal" href="#configuration" id="id8">Configuration</a></p>
+<ul>
+<li><p><a class="reference internal" href="#blocklist" id="id9">Blocklist</a></p></li>
+<li><p><a class="reference internal" href="#directed-advertising" id="id10">Directed advertising</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#usage" id="id11">Usage</a></p>
+<ul>
+<li><p><a class="reference internal" href="#initializing" id="id12">Initializing</a></p></li>
+<li><p><a class="reference internal" href="#scanning" id="id13">Scanning</a></p></li>
+<li><p><a class="reference internal" href="#filtering" id="id14">Filtering</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#samples-using-the-library" id="id15">Samples using the library</a></p></li>
+<li><p><a class="reference internal" href="#dependencies" id="id16">Dependencies</a></p></li>
+<li><p><a class="reference internal" href="#api-documentation" id="id17">API documentation</a></p></li>
+</ul>
+</div>
+<p>The scanning module handles the Bluetooth® Low Energy scanning for your application.</p>
+<section id="overview">
+<h2><a class="toc-backref" href="#id7">Overview</a><a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+<p>Use the scanning module to find advertising devices and establish connections with them.
+The module can automatically establish connection after a filter match.
+It can also receive <a class="reference internal" href="#lib-nrf-bt-scan-readme-directedadvertising"><span class="std std-ref">directed advertising packets</span></a>.</p>
+<p>The scanning module can work in one of the following modes:</p>
+<ul class="simple">
+<li><p>Simple mode - Works without filters.</p></li>
+<li><p>Advanced mode - Allows using advanced filters.</p></li>
+</ul>
+</section>
+<section id="configuration">
+<h2><a class="toc-backref" href="#id8">Configuration</a><a class="headerlink" href="#configuration" title="Permalink to this heading"></a></h2>
+<p>Use the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_SCAN</span></code> Kconfig option to enable the library in the build system.</p>
+<section id="blocklist">
+<h3><a class="toc-backref" href="#id9">Blocklist</a><a class="headerlink" href="#blocklist" title="Permalink to this heading"></a></h3>
+<p>Devices can be added to the blocklist, which means that the scanning module ignores these devices and does not generate any events for them.
+Use the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_SCAN_BLOCKLIST</span></code> Kconfig option to enable the blocklist.</p>
+<p>In the default configuration, the scanning module allows to add up to two devices to the blocklist.
+To increase the blocklist size, set the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_SCAN_BLOCKLIST_LEN</span></code> Kconfig option.
+Use the <a class="reference internal" href="#c.bt_scan_blocklist_device_add" title="bt_scan_blocklist_device_add"><code class="xref c c-func docutils literal notranslate"><span class="pre">bt_scan_blocklist_device_add()</span></code></a> function to add a new device to the blocklist.
+To remove all devices from the blocklist, use the <a class="reference internal" href="#c.bt_scan_blocklist_clear" title="bt_scan_blocklist_clear"><code class="xref c c-func docutils literal notranslate"><span class="pre">bt_scan_blocklist_clear()</span></code></a> function.</p>
+</section>
+<section id="directed-advertising">
+<span id="lib-nrf-bt-scan-readme-directedadvertising"></span><h3><a class="toc-backref" href="#id10">Directed advertising</a><a class="headerlink" href="#directed-advertising" title="Permalink to this heading"></a></h3>
+<p>To receive directed advertising packets through the scanning module, enable one of the following Kconfig options in Zephyr:</p>
+<ul class="simple">
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_PRIVACY</span></code> - Scan with changing addresses.</p></li>
+<li><p><code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_SCAN_WITH_IDENTITY</span></code> - Scan with a local identity address.</p></li>
+</ul>
+<p>It is recommended to enable the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_PRIVACY</span></code> Kconfig option to support directed advertising only between bonded peers.
+Use the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_SCAN_WITH_IDENTITY</span></code> Kconfig option only when the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_PRIVACY</span></code> Kconfig option is not available.</p>
+<p>When the scanning module is set to the advanced mode and <a class="reference internal" href="#lib-nrf-bt-scan-readme-filters"><span class="std std-ref">filters</span></a> are set, you can use the <code class="docutils literal notranslate"><span class="pre">filter_no_match</span></code> event to check if directed advertising packets have been received.
+They will typically not match any filter as, by specification, they do not contain any advertising data.</p>
+<p>If there is no match, you can establish a connection without the need to disable or reconfigure the existing filters.</p>
+<p>The following code sample demonstrates the usage of the <code class="docutils literal notranslate"><span class="pre">filter_no_match</span></code> event:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">scan_filter_no_match</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_scan_device_info</span><span class="w"> </span><span class="o">*</span><span class="n">device_info</span><span class="p">,</span>
+<span class="w">				 </span><span class="kt">bool</span><span class="w"> </span><span class="n">connectable</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">	</span><span class="kt">int</span><span class="w"> </span><span class="n">err</span><span class="p">;</span>
+<span class="w">	</span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_conn</span><span class="w"> </span><span class="o">*</span><span class="n">conn</span><span class="p">;</span>
+<span class="w">	</span><span class="kt">char</span><span class="w"> </span><span class="n">addr</span><span class="p">[</span><span class="n">BT_ADDR_LE_STR_LEN</span><span class="p">];</span>
+
+<span class="w">	</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">device_info</span><span class="o">-&gt;</span><span class="n">recv_info</span><span class="o">-&gt;</span><span class="n">adv_type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">BT_GAP_ADV_TYPE_ADV_DIRECT_IND</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">		</span><span class="n">bt_addr_le_to_str</span><span class="p">(</span><span class="n">device_info</span><span class="o">-&gt;</span><span class="n">recv_info</span><span class="o">-&gt;</span><span class="n">addr</span><span class="p">,</span><span class="w"> </span><span class="n">addr</span><span class="p">,</span>
+<span class="w">				  </span><span class="k">sizeof</span><span class="p">(</span><span class="n">addr</span><span class="p">));</span>
+<span class="w">		</span><span class="n">printk</span><span class="p">(</span><span class="s">&quot;Direct advertising received from %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">addr</span><span class="p">);</span>
+<span class="w">		</span><span class="n">bt_scan_stop</span><span class="p">();</span>
+
+<span class="w">		</span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bt_conn_le_create</span><span class="p">(</span><span class="n">device_info</span><span class="o">-&gt;</span><span class="n">recv_info</span><span class="o">-&gt;</span><span class="n">addr</span><span class="p">,</span>
+<span class="w">					</span><span class="n">BT_CONN_LE_CREATE_CONN</span><span class="p">,</span>
+<span class="w">					</span><span class="n">device_info</span><span class="o">-&gt;</span><span class="n">conn_param</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">conn</span><span class="p">);</span>
+
+<span class="w">		</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">			</span><span class="n">default_conn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bt_conn_ref</span><span class="p">(</span><span class="n">conn</span><span class="p">);</span>
+<span class="w">			</span><span class="n">bt_conn_unref</span><span class="p">(</span><span class="n">conn</span><span class="p">);</span>
+<span class="w">		</span><span class="p">}</span>
+<span class="w">	</span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="usage">
+<h2><a class="toc-backref" href="#id11">Usage</a><a class="headerlink" href="#usage" title="Permalink to this heading"></a></h2>
+<p>You can use the scanning module to execute actions described in the sections below.</p>
+<section id="initializing">
+<h3><a class="toc-backref" href="#id12">Initializing</a><a class="headerlink" href="#initializing" title="Permalink to this heading"></a></h3>
+<p>To initialize the module, call the <a class="reference internal" href="#c.bt_scan_init" title="bt_scan_init"><code class="xref c c-func docutils literal notranslate"><span class="pre">bt_scan_init()</span></code></a> function.</p>
+<p>You can also call the function without an initialization structure.
+When you pass the initialization structure as <code class="docutils literal notranslate"><span class="pre">NULL</span></code>, the default static configuration is used.</p>
+<p>This configuration is also used when you initialize the module with a structure that has <code class="docutils literal notranslate"><span class="pre">NULL</span></code> pointers set for scan and connection parameters.</p>
+</section>
+<section id="scanning">
+<h3><a class="toc-backref" href="#id13">Scanning</a><a class="headerlink" href="#scanning" title="Permalink to this heading"></a></h3>
+<p>Call the following functions to perform basic scanning activities:</p>
+<ul>
+<li><p><a class="reference internal" href="#c.bt_scan_start" title="bt_scan_start"><code class="xref c c-func docutils literal notranslate"><span class="pre">bt_scan_start()</span></code></a> - Start scanning.</p>
+<p>In the simple mode, when you do not use the event handler, you can establish a connection when the scanner finds the device.</p>
+</li>
+<li><p><a class="reference internal" href="#c.bt_scan_params_set" title="bt_scan_params_set"><code class="xref c c-func docutils literal notranslate"><span class="pre">bt_scan_params_set()</span></code></a> - Change parameters.</p></li>
+<li><p><a class="reference internal" href="#c.bt_scan_stop" title="bt_scan_stop"><code class="xref c c-func docutils literal notranslate"><span class="pre">bt_scan_stop()</span></code></a> - Stop scanning manually.</p>
+<p>Scanning stops automatically if the module established the connection.</p>
+</li>
+<li><p><a class="reference internal" href="#c.bt_scan_start" title="bt_scan_start"><code class="xref c c-func docutils literal notranslate"><span class="pre">bt_scan_start()</span></code></a> - Resume scanning.</p></li>
+</ul>
+</section>
+<section id="filtering">
+<span id="lib-nrf-bt-scan-readme-filters"></span><h3><a class="toc-backref" href="#id14">Filtering</a><a class="headerlink" href="#filtering" title="Permalink to this heading"></a></h3>
+<p>Use filters in the advanced mode to narrow down the scan to devices of a specific type and mode.</p>
+<section id="filter-types">
+<h4>Filter types<a class="headerlink" href="#filter-types" title="Permalink to this heading"></a></h4>
+<p>See the following table for the details on the available filter types:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 22%" />
+<col style="width: 78%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Filter type</p></th>
+<th class="head"><p>Details</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Name</p></td>
+<td><p>The filter is set to the target name.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Short name</p></td>
+<td><p>The filter is set to the target short name.</p></td>
+</tr>
+<tr class="row-even"><td><p>Address</p></td>
+<td><p>The filter is set to the target address.</p></td>
+</tr>
+<tr class="row-odd"><td><p>UUID</p></td>
+<td><p>The filter is set to the target UUID.</p></td>
+</tr>
+<tr class="row-even"><td><p>Appearance</p></td>
+<td><p>The filter is set to the target appearance.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="filter-modes">
+<h4>Filter modes<a class="headerlink" href="#filter-modes" title="Permalink to this heading"></a></h4>
+<p>See the following table for the details on the behavior of the available filter modes:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 88%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Filter mode</p></th>
+<th class="head"><p>Behavior</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Normal</p></td>
+<td><p>It triggers a filter match callback when only one of the filters set matches, regardless of the type.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Multifilter</p></td>
+<td><p>It triggers a filter match callback only when both of the following conditions happen:</p>
+<ul class="simple">
+<li><p>All specified UUIDs match.</p></li>
+<li><p>At least one filter for each of the filter types set matches.</p></li>
+</ul>
+<p>For example, several filters can be set for name, address, UUID, and appearance.
+To trigger a filter match callback in this scenario, all of the following types must match:</p>
+<ul class="simple">
+<li><p>At least one of the address filters</p></li>
+<li><p>At least one of the name filters</p></li>
+<li><p>At least one of the appearance filters</p></li>
+<li><p>All of the UUID filters</p></li>
+</ul>
+<p>If not all of these types match, the <code class="docutils literal notranslate"><span class="pre">not</span> <span class="pre">found</span></code> callback is triggered.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="connection-attempts-filter">
+<h4>Connection attempts filter<a class="headerlink" href="#connection-attempts-filter" title="Permalink to this heading"></a></h4>
+<p>After a scanning session is started by the application, some peripheral devices can disconnect immediately.
+This might result in a loop of the connection and disconnection events.</p>
+<p>To avoid that, enable the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_SCAN_CONN_ATTEMPTS_FILTER</span></code> Kconfig option that limits the number of the connection attempts.</p>
+<p>This filter automatically tracks the connected devices and counts all disconnection events for them.
+If the number of disconnections is greater than or equal to the number of the allowed attempts, the scanning module ignores this device.</p>
+<p>Filtered devices must be removed manually from the filter array through the <a class="reference internal" href="#c.bt_scan_conn_attempts_filter_clear" title="bt_scan_conn_attempts_filter_clear"><code class="xref c c-func docutils literal notranslate"><span class="pre">bt_scan_conn_attempts_filter_clear()</span></code></a> function.
+Use this function before each scan starts, unless your application has different requirements.
+If the filter array is full, the scanning module overwrites the oldest device with the new one.</p>
+<p>In the default configuration, the filter allows to add two devices and limits the connection attempts to two.
+To increase the number of devices, set the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_SCAN_CONN_ATTEMPTS_FILTER_LEN</span></code> Kconfig option.
+The <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_SCAN_CONN_ATTEMPTS_COUNT</span></code> Kconfig option adjusts the number of connection attempts.</p>
+</section>
+</section>
+</section>
+<section id="samples-using-the-library">
+<h2><a class="toc-backref" href="#id15">Samples using the library</a><a class="headerlink" href="#samples-using-the-library" title="Permalink to this heading"></a></h2>
+<p>The following nRF Connect SDK application uses this library:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../applications/nrf_desktop/README.html#nrf-desktop"><span class="std std-ref">nRF Desktop</span></a></p></li>
+</ul>
+</section>
+<section id="dependencies">
+<h2><a class="toc-backref" href="#id16">Dependencies</a><a class="headerlink" href="#dependencies" title="Permalink to this heading"></a></h2>
+<p>There are no dependencies for using this library.</p>
+</section>
+<section id="api-documentation">
+<h2><a class="toc-backref" href="#id17">API documentation</a><a class="headerlink" href="#api-documentation" title="Permalink to this heading"></a></h2>
+<div class="line-block">
+<div class="line">Header file: <code class="file docutils literal notranslate"><span class="pre">include/bluetooth/scan.h</span></code></div>
+<div class="line">Source file: <code class="file docutils literal notranslate"><span class="pre">subsys/bluetooth/scan.c</span></code></div>
+</div>
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="group__nrf__bt__scan"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">nrf_bt_scan</span></span></dt>
+<dd><p>BT Scanning module. </p>
+<p>The Scanning Module handles the Bluetooth LE scanning for your application. The module offers several criteria for filtering the devices available for connection, and it can also work in the simple mode without using the filtering. If an event handler is provided, your main application can react to a filter match. The module can also be configured to automatically connect after it matches a filter.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The Scanning Module also supports applications with a multicentral link. </p>
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-defines">Defines</p>
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.BT_SCAN_CB_INIT">
+<span class="target" id="group__nrf__bt__scan_1gaaecbaf4fa4218aa999b42844a8045ce9"></span><span class="sig-name descname"><span class="n"><span class="pre">BT_SCAN_CB_INIT</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">_name</span></span>, <span class="n"><span class="pre">match_fun</span></span>, <span class="n"><span class="pre">no_match_fun</span></span>, <span class="n"><span class="pre">error_fun</span></span>, <span class="n"><span class="pre">connecting_fun</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.BT_SCAN_CB_INIT" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Initializing macro for scanning module. </p>
+<p>This is macro initializing necessary structures for <a class="reference internal" href="#structbt__scan__cb"><span class="std std-ref">bt_scan_cb</span></a> type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>_name</strong> – <strong>[in]</strong> Unique name for <a class="reference internal" href="#structbt__scan__cb"><span class="std std-ref">bt_scan_cb</span></a> structure. </p></li>
+<li><p><strong>match_fun</strong> – <strong>[in]</strong> Scan filter matched function pointer. </p></li>
+<li><p><strong>no_match_fun</strong> – <strong>[in]</strong> Scan filter unmatched (the device was not found) function pointer. </p></li>
+<li><p><strong>error_fun</strong> – <strong>[in]</strong> Error when connecting function pointer. </p></li>
+<li><p><strong>connecting_fun</strong> – <strong>[in]</strong> Connecting data function pointer. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-enums">Enums</p>
+<dl class="c enum">
+<dt class="sig sig-object c" id="c.bt_scan_type">
+<span class="target" id="group__nrf__bt__scan_1ga3e89c0eebbc80f1458a47e11de9f52f3"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_scan_type</span></span></span><a class="headerlink" href="#c.bt_scan_type" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Scan types. </p>
+<p><em>Values:</em></p>
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_scan_type.BT_SCAN_TYPE_SCAN_PASSIVE">
+<span class="target" id="group__nrf__bt__scan_1gga3e89c0eebbc80f1458a47e11de9f52f3aa8585a9c194323f999b43ceec23c7710"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_SCAN_TYPE_SCAN_PASSIVE</span></span></span><a class="headerlink" href="#c.bt_scan_type.BT_SCAN_TYPE_SCAN_PASSIVE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Passive scanning. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_scan_type.BT_SCAN_TYPE_SCAN_ACTIVE">
+<span class="target" id="group__nrf__bt__scan_1gga3e89c0eebbc80f1458a47e11de9f52f3a8f9bf315072d98eed2ce7f76c2eb326f"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_SCAN_TYPE_SCAN_ACTIVE</span></span></span><a class="headerlink" href="#c.bt_scan_type.BT_SCAN_TYPE_SCAN_ACTIVE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Active scanning. </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="c enum">
+<dt class="sig sig-object c" id="c.bt_scan_filter_type">
+<span class="target" id="group__nrf__bt__scan_1ga0dc9b7b2be9a0ce4d0ad93d88f399565"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_scan_filter_type</span></span></span><a class="headerlink" href="#c.bt_scan_filter_type" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Types of filters. </p>
+<p><em>Values:</em></p>
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_scan_filter_type.BT_SCAN_FILTER_TYPE_NAME">
+<span class="target" id="group__nrf__bt__scan_1gga0dc9b7b2be9a0ce4d0ad93d88f399565a8baf63b387ed679c608f73952296b443"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_SCAN_FILTER_TYPE_NAME</span></span></span><a class="headerlink" href="#c.bt_scan_filter_type.BT_SCAN_FILTER_TYPE_NAME" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Filter for names. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_scan_filter_type.BT_SCAN_FILTER_TYPE_SHORT_NAME">
+<span class="target" id="group__nrf__bt__scan_1gga0dc9b7b2be9a0ce4d0ad93d88f399565a5ef77da97ee7953416cbfccb7fc75bb1"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_SCAN_FILTER_TYPE_SHORT_NAME</span></span></span><a class="headerlink" href="#c.bt_scan_filter_type.BT_SCAN_FILTER_TYPE_SHORT_NAME" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Filter for short names. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_scan_filter_type.BT_SCAN_FILTER_TYPE_ADDR">
+<span class="target" id="group__nrf__bt__scan_1gga0dc9b7b2be9a0ce4d0ad93d88f399565ae789bbbc20951ed3c8415b011893aee1"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_SCAN_FILTER_TYPE_ADDR</span></span></span><a class="headerlink" href="#c.bt_scan_filter_type.BT_SCAN_FILTER_TYPE_ADDR" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Filter for addresses. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_scan_filter_type.BT_SCAN_FILTER_TYPE_UUID">
+<span class="target" id="group__nrf__bt__scan_1gga0dc9b7b2be9a0ce4d0ad93d88f399565ab059c2432821d465a5c3bd5b467ecddb"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_SCAN_FILTER_TYPE_UUID</span></span></span><a class="headerlink" href="#c.bt_scan_filter_type.BT_SCAN_FILTER_TYPE_UUID" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Filter for UUIDs. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_scan_filter_type.BT_SCAN_FILTER_TYPE_APPEARANCE">
+<span class="target" id="group__nrf__bt__scan_1gga0dc9b7b2be9a0ce4d0ad93d88f399565a14399ae2c466c4dd54e2f1060f80d60c"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_SCAN_FILTER_TYPE_APPEARANCE</span></span></span><a class="headerlink" href="#c.bt_scan_filter_type.BT_SCAN_FILTER_TYPE_APPEARANCE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Filter for appearances. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_scan_filter_type.BT_SCAN_FILTER_TYPE_MANUFACTURER_DATA">
+<span class="target" id="group__nrf__bt__scan_1gga0dc9b7b2be9a0ce4d0ad93d88f399565afd7430ed5fc246963c053114f34c26e9"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_SCAN_FILTER_TYPE_MANUFACTURER_DATA</span></span></span><a class="headerlink" href="#c.bt_scan_filter_type.BT_SCAN_FILTER_TYPE_MANUFACTURER_DATA" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Filter for manufacturer data. </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_scan_cb_register">
+<span class="target" id="group__nrf__bt__scan_1ga9d503c79f44b6df1f9f1048f64e6c0df"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_scan_cb_register</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_scan_cb" title="bt_scan_cb"><span class="n"><span class="pre">bt_scan_cb</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">cb</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_scan_cb_register" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Register scanning callbacks. </p>
+<p>Register callbacks to monitor the state of scanning.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cb</strong> – Callback struct. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_scan_init">
+<span class="target" id="group__nrf__bt__scan_1gad1960003a31eeac39f7405fc93a0e086"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_scan_init</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_scan_init_param" title="bt_scan_init_param"><span class="n"><span class="pre">bt_scan_init_param</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">init</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_scan_init" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Function for initializing the Scanning Module. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>init</strong> – <strong>[in]</strong> Pointer to scanning module initialization structure. Can be initialized as NULL. If NULL, the parameters required to initialize the module are loaded from static configuration. If module is to establish the connection automatically, this must be initialized with the relevant data. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_scan_start">
+<span class="target" id="group__nrf__bt__scan_1ga4d503246962d58d6aea9e815e0899e45"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_scan_start</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_scan_type" title="bt_scan_type"><span class="n"><span class="pre">bt_scan_type</span></span></a><span class="w"> </span><span class="n"><span class="pre">scan_type</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_scan_start" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Function for starting scanning. </p>
+<p>This function starts the scanning according to the configuration set during the initialization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>scan_type</strong> – <strong>[in]</strong> The choice between active and passive scanning.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>0 If the operation was successful. Otherwise, a (negative) error code is returned. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_scan_stop">
+<span class="target" id="group__nrf__bt__scan_1gaab3258c0ad99c5ffaf6231170cc3a493"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_scan_stop</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_scan_stop" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Function for stopping scanning. </p>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_scan_update_init_conn_params">
+<span class="target" id="group__nrf__bt__scan_1ga494590dc24ed9aa1c057aee285fcb715"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_scan_update_init_conn_params</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">bt_le_conn_param</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">new_conn_param</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_scan_update_init_conn_params" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Function to update initial connection parameters. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The function should not be used when scanning is active.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>new_conn_param</strong> – <strong>[in]</strong> New initial connection parameters. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_scan_filter_enable">
+<span class="target" id="group__nrf__bt__scan_1ga5a166ca0ea8a0223c56af9efb5f56f67"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_scan_filter_enable</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">mode</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n"><span class="pre">match_all</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_scan_filter_enable" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Function for enabling filtering. </p>
+<p>The filters can be combined with each other. For example, you can enable one filter or several filters. For example, (BT_SCAN_NAME_FILTER | BT_SCAN_UUID_FILTER) enables UUID and name filters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mode</strong> – <strong>[in]</strong> Filter mode: Filter modes. </p></li>
+<li><p><strong>match_all</strong> – <strong>[in]</strong> If this flag is set, all types of enabled filters must be matched before generating <em>BT_SCAN_EVT_FILTER_MATCH</em> to the main application. Otherwise, it is enough to match one filter to trigger the filter match event.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>0 If the operation was successful. Otherwise, a (negative) error code is returned. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_scan_filter_disable">
+<span class="target" id="group__nrf__bt__scan_1ga02c3257b0902ba840cf83872a098bdc8"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_scan_filter_disable</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_scan_filter_disable" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Function for disabling filtering. </p>
+<p>This function disables all filters. Even if the automatic connection establishing is enabled, the connection will not be established with the first device found after this function is called. </p>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_scan_filter_status_get">
+<span class="target" id="group__nrf__bt__scan_1ga752bad95f266654e4864a04fbbc79b6c"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_scan_filter_status_get</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_filter_status" title="bt_filter_status"><span class="n"><span class="pre">bt_filter_status</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">status</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_scan_filter_status_get" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Function for getting filter status. </p>
+<p>This function returns the filter setting and whether it is enabled or disabled.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>status</strong> – <strong>[out]</strong> Pointer to Filter Status structure.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>0 If the operation was successful. Otherwise, a (negative) error code is returned. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_scan_filter_add">
+<span class="target" id="group__nrf__bt__scan_1gac0768a9a67ddd298b108c32c48eb769c"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_scan_filter_add</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_scan_filter_type" title="bt_scan_filter_type"><span class="n"><span class="pre">bt_scan_filter_type</span></span></a><span class="w"> </span><span class="n"><span class="pre">type</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">data</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_scan_filter_add" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Function for adding any type of filter to the scanning. </p>
+<p>This function adds a new filter by type. The filter will be added if there is available space in this filter type array, and if the same filter has not already been set.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>type</strong> – <strong>[in]</strong> Filter type. </p></li>
+<li><p><strong>data</strong> – <strong>[in]</strong> Pointer to the filter data to add.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>0 If the operation was successful. Otherwise, a (negative) error code is returned. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_scan_filter_remove_all">
+<span class="target" id="group__nrf__bt__scan_1gafad82ea488fd69e8aa17033536319c30"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_scan_filter_remove_all</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_scan_filter_remove_all" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Function for removing all set filters. </p>
+<p>The function removes all previously set filters.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>After using this function the filters are still enabled. </p>
+</div>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_scan_params_set">
+<span class="target" id="group__nrf__bt__scan_1ga4d1d8b9ae85bb4f3fe567e4599c29b47"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_scan_params_set</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">bt_le_scan_param</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">scan_param</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_scan_params_set" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Function for changing the scanning parameters. </p>
+<p>Use this function to change scanning parameters. During the parameter change the scan is stopped. To resume scanning, use <a class="reference internal" href="#group__nrf__bt__scan_1ga4d503246962d58d6aea9e815e0899e45"><span class="std std-ref">bt_scan_start</span></a>. Scanning parameters can be set to NULL. If so, the default static configuration is used.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>scan_param</strong> – <strong>[in]</strong> Pointer to Scanning parameters. Can be initialized as NULL.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>0 If the operation was successful. Otherwise, a (negative) error code is returned. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_scan_conn_attempts_filter_clear">
+<span class="target" id="group__nrf__bt__scan_1gab844ca2c4d1010890cd8802df43796d5"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_scan_conn_attempts_filter_clear</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_scan_conn_attempts_filter_clear" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Clear connection attempts filter. </p>
+<p>Use this function to remove all entries from the connection attempts filter. </p>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_scan_blocklist_device_add">
+<span class="target" id="group__nrf__bt__scan_1ga8fa1fe8ec5635bdb6833125cf70bb8f5"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_scan_blocklist_device_add</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">bt_addr_le_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">addr</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_scan_blocklist_device_add" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Add a new device to the blocklist. </p>
+<p>Use this function to add a device to the blocklist. Scanning module does not generate any event for the blocklist device or does not try to connect such devices.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>addr</strong> – <strong>[in]</strong> Device address.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><p><strong>0</strong> – If the operation was successful. Otherwise, a (negative) error code is returned. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_scan_blocklist_clear">
+<span class="target" id="group__nrf__bt__scan_1ga9af099d21381896d402fffb958daf58f"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_scan_blocklist_clear</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_scan_blocklist_clear" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Clear the blocklist of the scanning module device. </p>
+<p>Use this function to remove all entries from the blocklist. </p>
+</dd></dl>
+
+</div>
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.bt_scan_filter_info">
+<span class="target" id="structbt__scan__filter__info"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_scan_filter_info</span></span></span><a class="headerlink" href="#c.bt_scan_filter_info" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;scan.h&gt;</em></div>
+<p>Filter information structure. </p>
+<p>It contains information about the number of filters of a given type and whether they are enabled </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_scan_filter_info.enabled">
+<span class="target" id="structbt__scan__filter__info_1a7b189f0cb8aa9c0e3aa27a7e7705fa85"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">enabled</span></span></span><a class="headerlink" href="#c.bt_scan_filter_info.enabled" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Filter enabled. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_scan_filter_info.cnt">
+<span class="target" id="structbt__scan__filter__info_1aad4b85487ff462c9d01964b546405c99"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cnt</span></span></span><a class="headerlink" href="#c.bt_scan_filter_info.cnt" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Filter count. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.bt_filter_status">
+<span class="target" id="structbt__filter__status"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_filter_status</span></span></span><a class="headerlink" href="#c.bt_filter_status" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;scan.h&gt;</em></div>
+<p>Filter status structure. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_filter_status.all_mode">
+<span class="target" id="structbt__filter__status_1a4df847962fec7f020e5631c707ff7605"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">all_mode</span></span></span><a class="headerlink" href="#c.bt_filter_status.all_mode" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Filter mode. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_filter_status.name">
+<span class="target" id="structbt__filter__status_1ae1b490d2654cc25b73f71baa225460a6"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_scan_filter_info" title="bt_scan_filter_info"><span class="n"><span class="pre">bt_scan_filter_info</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">name</span></span></span><a class="headerlink" href="#c.bt_filter_status.name" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Name filters info. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_filter_status.short_name">
+<span class="target" id="structbt__filter__status_1a7fde7cfb0dffc45de641a8404e6d0bd9"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_scan_filter_info" title="bt_scan_filter_info"><span class="n"><span class="pre">bt_scan_filter_info</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">short_name</span></span></span><a class="headerlink" href="#c.bt_filter_status.short_name" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Short name filters info. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_filter_status.addr">
+<span class="target" id="structbt__filter__status_1a39649325612c87a37e4c407e2223112f"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_scan_filter_info" title="bt_scan_filter_info"><span class="n"><span class="pre">bt_scan_filter_info</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">addr</span></span></span><a class="headerlink" href="#c.bt_filter_status.addr" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Address filters info. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_filter_status.uuid">
+<span class="target" id="structbt__filter__status_1a4947cdb9a16038cb5b073ac9b89e0cbf"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_scan_filter_info" title="bt_scan_filter_info"><span class="n"><span class="pre">bt_scan_filter_info</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">uuid</span></span></span><a class="headerlink" href="#c.bt_filter_status.uuid" title="Permalink to this definition"></a><br /></dt>
+<dd><p>UUID filters info. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_filter_status.appearance">
+<span class="target" id="structbt__filter__status_1a3c69dd4e91988ce7fc00cc80e25e6f3f"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_scan_filter_info" title="bt_scan_filter_info"><span class="n"><span class="pre">bt_scan_filter_info</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">appearance</span></span></span><a class="headerlink" href="#c.bt_filter_status.appearance" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Appearance filter info. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_filter_status.manufacturer_data">
+<span class="target" id="structbt__filter__status_1a0c37aa5839565723b28870528e0e36a0"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_scan_filter_info" title="bt_scan_filter_info"><span class="n"><span class="pre">bt_scan_filter_info</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">manufacturer_data</span></span></span><a class="headerlink" href="#c.bt_filter_status.manufacturer_data" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Appearance filter info. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.bt_scan_adv_info">
+<span class="target" id="structbt__scan__adv__info"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_scan_adv_info</span></span></span><a class="headerlink" href="#c.bt_scan_adv_info" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;scan.h&gt;</em></div>
+<p>Advertising info structure. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_scan_adv_info.adv_type">
+<span class="target" id="structbt__scan__adv__info_1ab548476cd34e85e4a3b5e829be008874"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">adv_type</span></span></span><a class="headerlink" href="#c.bt_scan_adv_info.adv_type" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Bluetooth LE advertising type. According to Bluetooth Specification 7.8.5 </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_scan_adv_info.rssi">
+<span class="target" id="structbt__scan__adv__info_1adc1abf4f254a3c7c4f83af3b55753089"></span><span class="n"><span class="pre">int8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">rssi</span></span></span><a class="headerlink" href="#c.bt_scan_adv_info.rssi" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Received Signal Strength Indication in dBm. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.bt_scan_short_name">
+<span class="target" id="structbt__scan__short__name"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_scan_short_name</span></span></span><a class="headerlink" href="#c.bt_scan_short_name" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;scan.h&gt;</em></div>
+<p>A helper structure to set filters for the name. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_scan_short_name.name">
+<span class="target" id="structbt__scan__short__name_1a4e9da7b5d70d80061842d53dc3d53fcd"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">name</span></span></span><a class="headerlink" href="#c.bt_scan_short_name.name" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Pointer to the short name. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_scan_short_name.min_len">
+<span class="target" id="structbt__scan__short__name_1a431c90f10fc9a84d72f4ac5c04f96856"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">min_len</span></span></span><a class="headerlink" href="#c.bt_scan_short_name.min_len" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Minimum length of the short name. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.bt_scan_manufacturer_data">
+<span class="target" id="structbt__scan__manufacturer__data"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_scan_manufacturer_data</span></span></span><a class="headerlink" href="#c.bt_scan_manufacturer_data" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;scan.h&gt;</em></div>
+<p>A helper structure to set filters for the manufacturer data. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_scan_manufacturer_data.data">
+<span class="target" id="structbt__scan__manufacturer__data_1a88d08782c038972a41713190838e0406"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">data</span></span></span><a class="headerlink" href="#c.bt_scan_manufacturer_data.data" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Pointer to the manufacturer data. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_scan_manufacturer_data.data_len">
+<span class="target" id="structbt__scan__manufacturer__data_1a448f8b548da256a8b248418fa0808446"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">data_len</span></span></span><a class="headerlink" href="#c.bt_scan_manufacturer_data.data_len" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Manufacturer data length. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.bt_scan_init_param">
+<span class="target" id="structbt__scan__init__param"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_scan_init_param</span></span></span><a class="headerlink" href="#c.bt_scan_init_param" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;scan.h&gt;</em></div>
+<p>Structure for Scanning Module initialization. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_scan_init_param.scan_param">
+<span class="target" id="structbt__scan__init__param_1aad34818a41033b73a6fbe4d02f007bcf"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">bt_le_scan_param</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">scan_param</span></span></span><a class="headerlink" href="#c.bt_scan_init_param.scan_param" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Scan parameters required to initialize the module. Can be initialized as NULL. If NULL, the parameters required to initialize the module are loaded from the static configuration. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_scan_init_param.connect_if_match">
+<span class="target" id="structbt__scan__init__param_1ab7d6888712c8c43227cf2f6b6a25499c"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">connect_if_match</span></span></span><a class="headerlink" href="#c.bt_scan_init_param.connect_if_match" title="Permalink to this definition"></a><br /></dt>
+<dd><p>If set to true, the module automatically connects after a filter match. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_scan_init_param.conn_param">
+<span class="target" id="structbt__scan__init__param_1a9f4515dc08a48e320c59b19615538acd"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">bt_le_conn_param</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">conn_param</span></span></span><a class="headerlink" href="#c.bt_scan_init_param.conn_param" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Connection parameters. Can be initialized as NULL. If NULL, the default static configuration is used. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.bt_scan_name_filter_status">
+<span class="target" id="structbt__scan__name__filter__status"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_scan_name_filter_status</span></span></span><a class="headerlink" href="#c.bt_scan_name_filter_status" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;scan.h&gt;</em></div>
+<p>Name filter status structure, used to inform the application which name filter is matched. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_scan_name_filter_status.match">
+<span class="target" id="structbt__scan__name__filter__status_1a775ce792e358c1186106a6c8b600ddc3"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">match</span></span></span><a class="headerlink" href="#c.bt_scan_name_filter_status.match" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Set to true if this type of filter is matched. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_scan_name_filter_status.name">
+<span class="target" id="structbt__scan__name__filter__status_1ab6ffc732c781e64154db285dbe56f7db"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">name</span></span></span><a class="headerlink" href="#c.bt_scan_name_filter_status.name" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Pointer to the matched filter name. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_scan_name_filter_status.len">
+<span class="target" id="structbt__scan__name__filter__status_1a55b1111033614f680af5ef92ac12416f"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">len</span></span></span><a class="headerlink" href="#c.bt_scan_name_filter_status.len" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Length of the matched name. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.bt_scan_addr_filter_status">
+<span class="target" id="structbt__scan__addr__filter__status"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_scan_addr_filter_status</span></span></span><a class="headerlink" href="#c.bt_scan_addr_filter_status" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;scan.h&gt;</em></div>
+<p>Address filter status structure, used to inform the application which address filter is matched. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_scan_addr_filter_status.match">
+<span class="target" id="structbt__scan__addr__filter__status_1a3b36d13e0f6e544e2e19887add3fc7dc"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">match</span></span></span><a class="headerlink" href="#c.bt_scan_addr_filter_status.match" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Set to true if this type of filter is matched. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_scan_addr_filter_status.addr">
+<span class="target" id="structbt__scan__addr__filter__status_1acb320acfafd89eb7e46e49d0e884af57"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">bt_addr_le_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">addr</span></span></span><a class="headerlink" href="#c.bt_scan_addr_filter_status.addr" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Pointer to the matched filter address. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.bt_scan_uuid_filter_status">
+<span class="target" id="structbt__scan__uuid__filter__status"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_scan_uuid_filter_status</span></span></span><a class="headerlink" href="#c.bt_scan_uuid_filter_status" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;scan.h&gt;</em></div>
+<p>UUID filter status structure, used to inform the application which UUID filters are matched. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_scan_uuid_filter_status.match">
+<span class="target" id="structbt__scan__uuid__filter__status_1a8ae7cd648b85de9f45ae5e1ea8703585"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">match</span></span></span><a class="headerlink" href="#c.bt_scan_uuid_filter_status.match" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Set to true if this type of filter is matched. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_scan_uuid_filter_status.uuid">
+<span class="target" id="structbt__scan__uuid__filter__status_1a433abd2a75f36d9f12385a5f72eab3b9"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">bt_uuid</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">uuid</span></span></span><span class="p"><span class="pre">[</span></span><span class="m"><span class="pre">1</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#c.bt_scan_uuid_filter_status.uuid" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Array of pointers to the matched UUID filters. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_scan_uuid_filter_status.count">
+<span class="target" id="structbt__scan__uuid__filter__status_1a042189ddf82870cde8eead9011c847e1"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">count</span></span></span><a class="headerlink" href="#c.bt_scan_uuid_filter_status.count" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Matched UUID count. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.bt_scan_appearance_filter_status">
+<span class="target" id="structbt__scan__appearance__filter__status"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_scan_appearance_filter_status</span></span></span><a class="headerlink" href="#c.bt_scan_appearance_filter_status" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;scan.h&gt;</em></div>
+<p>Appearance filter status structure, used to inform the application which appearance filter is matched. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_scan_appearance_filter_status.match">
+<span class="target" id="structbt__scan__appearance__filter__status_1ac42c2760e624774e19793b2d326cf605"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">match</span></span></span><a class="headerlink" href="#c.bt_scan_appearance_filter_status.match" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Set to true if this type of filter is matched. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_scan_appearance_filter_status.appearance">
+<span class="target" id="structbt__scan__appearance__filter__status_1a471bd38fb2c83f7dadf7ed7a4451fdd7"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">appearance</span></span></span><a class="headerlink" href="#c.bt_scan_appearance_filter_status.appearance" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Pointer to the matched filter appearance. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.bt_scan_manufacturer_data_filter_status">
+<span class="target" id="structbt__scan__manufacturer__data__filter__status"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_scan_manufacturer_data_filter_status</span></span></span><a class="headerlink" href="#c.bt_scan_manufacturer_data_filter_status" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;scan.h&gt;</em></div>
+<p>Manufacturer data filter status structure, used to inform the application which manufacturer data filter is matched. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_scan_manufacturer_data_filter_status.match">
+<span class="target" id="structbt__scan__manufacturer__data__filter__status_1afd0f95690fcc3df0e23b5708cc09d046"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">match</span></span></span><a class="headerlink" href="#c.bt_scan_manufacturer_data_filter_status.match" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Set to true if this type of filter is matched. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_scan_manufacturer_data_filter_status.data">
+<span class="target" id="structbt__scan__manufacturer__data__filter__status_1a5db1ede548ecf81c3a8b080bbd3d8e4c"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">data</span></span></span><a class="headerlink" href="#c.bt_scan_manufacturer_data_filter_status.data" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Pointer to the matched filter manufacturer data. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_scan_manufacturer_data_filter_status.len">
+<span class="target" id="structbt__scan__manufacturer__data__filter__status_1a27a03528285a36553e5f57a6f87b8568"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">len</span></span></span><a class="headerlink" href="#c.bt_scan_manufacturer_data_filter_status.len" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Length of the matched manufacturer data. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.bt_scan_filter_match">
+<span class="target" id="structbt__scan__filter__match"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_scan_filter_match</span></span></span><a class="headerlink" href="#c.bt_scan_filter_match" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;scan.h&gt;</em></div>
+<p>Structure for setting the filter status. </p>
+<p>This structure is used for sending filter status to the main application. Filter status contains information about which kind of filter is matched and also appropriate filter data. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_scan_filter_match.name">
+<span class="target" id="structbt__scan__filter__match_1aadff77edc9b2d1b75ab04d0dd9610be1"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_scan_name_filter_status" title="bt_scan_name_filter_status"><span class="n"><span class="pre">bt_scan_name_filter_status</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">name</span></span></span><a class="headerlink" href="#c.bt_scan_filter_match.name" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Name filter status data. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_scan_filter_match.short_name">
+<span class="target" id="structbt__scan__filter__match_1a0d1256914109bc71d4ce492388c8c3eb"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_scan_name_filter_status" title="bt_scan_name_filter_status"><span class="n"><span class="pre">bt_scan_name_filter_status</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">short_name</span></span></span><a class="headerlink" href="#c.bt_scan_filter_match.short_name" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Short name filter status data. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_scan_filter_match.addr">
+<span class="target" id="structbt__scan__filter__match_1afe25026f496f7a5bdcdde05257531841"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_scan_addr_filter_status" title="bt_scan_addr_filter_status"><span class="n"><span class="pre">bt_scan_addr_filter_status</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">addr</span></span></span><a class="headerlink" href="#c.bt_scan_filter_match.addr" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Address filter status data. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_scan_filter_match.uuid">
+<span class="target" id="structbt__scan__filter__match_1a4f0491513a25f6e40e86d4947faf1e64"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_scan_uuid_filter_status" title="bt_scan_uuid_filter_status"><span class="n"><span class="pre">bt_scan_uuid_filter_status</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">uuid</span></span></span><a class="headerlink" href="#c.bt_scan_filter_match.uuid" title="Permalink to this definition"></a><br /></dt>
+<dd><p>UUIDs filter status data. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_scan_filter_match.appearance">
+<span class="target" id="structbt__scan__filter__match_1a48bb6ac3c68f8798c6ac38e06e75fec1"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_scan_appearance_filter_status" title="bt_scan_appearance_filter_status"><span class="n"><span class="pre">bt_scan_appearance_filter_status</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">appearance</span></span></span><a class="headerlink" href="#c.bt_scan_filter_match.appearance" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Appearance filter status data. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_scan_filter_match.manufacturer_data">
+<span class="target" id="structbt__scan__filter__match_1a793ad10e696db571df24333020209612"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_scan_manufacturer_data_filter_status" title="bt_scan_manufacturer_data_filter_status"><span class="n"><span class="pre">bt_scan_manufacturer_data_filter_status</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">manufacturer_data</span></span></span><a class="headerlink" href="#c.bt_scan_filter_match.manufacturer_data" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Manufacturer data filter status data. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.bt_scan_device_info">
+<span class="target" id="structbt__scan__device__info"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_scan_device_info</span></span></span><a class="headerlink" href="#c.bt_scan_device_info" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;scan.h&gt;</em></div>
+<p>Structure containing device data needed to establish connection and advertising information. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_scan_device_info.recv_info">
+<span class="target" id="structbt__scan__device__info_1a61783c6607da7f33f1f91624efa4f140"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">bt_le_scan_recv_info</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">recv_info</span></span></span><a class="headerlink" href="#c.bt_scan_device_info.recv_info" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Received advertising packet information </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_scan_device_info.conn_param">
+<span class="target" id="structbt__scan__device__info_1aaadb32a7185c95a4256a3239712e7ce4"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">bt_le_conn_param</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">conn_param</span></span></span><a class="headerlink" href="#c.bt_scan_device_info.conn_param" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Connection parameters for LE connection. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_scan_device_info.adv_data">
+<span class="target" id="structbt__scan__device__info_1a33a3d469a9f7da41f7bad8770ad1b0a4"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">net_buf_simple</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">adv_data</span></span></span><a class="headerlink" href="#c.bt_scan_device_info.adv_data" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Received advertising data. If further data processing is needed, you should use <em>bt_data_parse()</em> to get specific advertising data type. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.cb_data">
+<span class="target" id="structcb__data"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cb_data</span></span></span><a class="headerlink" href="#c.cb_data" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;scan.h&gt;</em></div>
+<p>Data for scanning callback structure. </p>
+<p>This structure is used for storing callback functions pointers. It is used by <a class="reference internal" href="#structbt__scan__cb"><span class="std std-ref">bt_scan_cb</span></a> structure. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.cb_data.filter_match">
+<span class="target" id="structcb__data_1a905d248d7e797ba3aeff263af6237004"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">filter_match</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_scan_device_info" title="bt_scan_device_info"><span class="n"><span class="pre">bt_scan_device_info</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">device_info</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_scan_filter_match" title="bt_scan_filter_match"><span class="n"><span class="pre">bt_scan_filter_match</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">filter_match</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n"><span class="pre">connectable</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#c.cb_data.filter_match" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Scan filter matched. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Param device_info</dt>
+<dd class="field-odd"><p><strong>[in]</strong> Data needed to establish connection and advertising information. </p>
+</dd>
+<dt class="field-even">Param filter_match</dt>
+<dd class="field-even"><p><strong>[in]</strong> Filter match status. </p>
+</dd>
+<dt class="field-odd">Param connectable</dt>
+<dd class="field-odd"><p><strong>[in]</strong> Inform that device is connectable. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.cb_data.filter_no_match">
+<span class="target" id="structcb__data_1ae6cc16c436bd3771fe5dfa30193655fd"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">filter_no_match</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_scan_device_info" title="bt_scan_device_info"><span class="n"><span class="pre">bt_scan_device_info</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">device_info</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n"><span class="pre">connectable</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#c.cb_data.filter_no_match" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Scan filter unmatched. The device was not found. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Even if the filters are disable and not set, then all devices will be reported by this callback. It can be useful if the scan is used without filters. </p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Param device_info</dt>
+<dd class="field-odd"><p><strong>[in]</strong> Data needed to establish connection and advertising information. </p>
+</dd>
+<dt class="field-even">Param connectable</dt>
+<dd class="field-even"><p><strong>[in]</strong> Inform that device is connectable.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.cb_data.connecting_error">
+<span class="target" id="structcb__data_1af15465dbea8e95a02b14d454f1c9b685"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">connecting_error</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_scan_device_info" title="bt_scan_device_info"><span class="n"><span class="pre">bt_scan_device_info</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">device_info</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#c.cb_data.connecting_error" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Error when connecting. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Param device_info</dt>
+<dd class="field-odd"><p><strong>[in]</strong> Data needed to establish connection and advertising information. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.cb_data.connecting">
+<span class="target" id="structcb__data_1aad8d7c4957e8345a8c324cee46aadd32"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">connecting</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_scan_device_info" title="bt_scan_device_info"><span class="n"><span class="pre">bt_scan_device_info</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">device_info</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">bt_conn</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">conn</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#c.cb_data.connecting" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Connecting data. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Param device_info</dt>
+<dd class="field-odd"><p><strong>[in]</strong> Data needed to establish connection and advertising information. </p>
+</dd>
+<dt class="field-even">Param conn</dt>
+<dd class="field-even"><p><strong>[in]</strong> Connection object. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.bt_scan_cb">
+<span class="target" id="structbt__scan__cb"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_scan_cb</span></span></span><a class="headerlink" href="#c.bt_scan_cb" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;scan.h&gt;</em></div>
+<p>Scanning callback structure. </p>
+<p>This structure is used for tracking the state of a scanning. It is registered with the help of the <a class="reference internal" href="#group__nrf__bt__scan_1ga9d503c79f44b6df1f9f1048f64e6c0df"><span class="std std-ref">bt_scan_cb_register()</span></a> API. It’s permissible to register multiple instances of this <a class="reference internal" href="#structbt__scan__cb"><span class="std std-ref">bt_scan_cb</span></a> type, in case different modules of an application are interested in tracking the scanning state. If a callback is not of interest for an instance, it may be set to NULL and will as a consequence not be used for that instance. </p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="services/ams_client.html" class="btn btn-neutral float-right" title="Apple Media Service (AMS) Client" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="rpc.html" class="btn btn-neutral" title="Bluetooth Low Energy Remote Procedure Call" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

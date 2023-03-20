@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chat sample walk-through &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../../_static/js/ncs.js"
+></script>
+<script src="../../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Reserved vendor model IDs and opcodes" href="../reserved_ids.html" />
+    <link rel="prev" title="Vendor model development overview" href="dev_overview.html" />
+<link
+  href="../../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../protocols.html">Protocols</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../ble/index.html">Bluetooth LE Controller</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Bluetooth mesh</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../supported_features.html">Supported Bluetooth mesh features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../concepts.html">Bluetooth mesh concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../architecture.html">Bluetooth mesh stack architecture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../configuring.html">Configuring Bluetooth mesh in nRF Connect SDK</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../model_config_app.html">Configuring mesh models using the nRF Mesh mobile app</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fota.html">Performing FOTA updates in Bluetooth mesh</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../node_removal.html">Removing a node from a mesh network</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Creating a new model</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="dev_overview.html">Vendor model development overview</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Chat sample walk-through</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../reserved_ids.html">Reserved vendor model IDs and opcodes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../esb/index.html">Enhanced ShockBurst (ESB)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gazell/index.html">Gazell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../matter/index.html">Matter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../multiprotocol/index.html">Multiprotocol support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nfc/index.html">Near Field Communication (NFC)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../thread/index.html">Thread</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../wifi/index.html">Wi-Fi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../zigbee/index.html">Zigbee</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../drivers.html">Drivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../protocols.html">Protocols</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Bluetooth mesh</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Creating a new model</a></li>
+      <li class="breadcrumb-item active">Chat sample walk-through</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/protocols/bt_mesh/vendor_model/chat_sample_walk_through.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="chat-sample-walk-through">
+<span id="ug-bt-mesh-vendor-chat-sample-walk-through"></span><h1>Chat sample walk-through<a class="headerlink" href="#chat-sample-walk-through" title="Permalink to this heading"></a></h1>
+<p>After covering the <a class="reference internal" href="dev_overview.html#ug-bt-mesh-vendor-model-dev-overview"><span class="std std-ref">basics</span></a> of the model implementation, let’s take a look at how it works on the example of the <a class="reference internal" href="../../../samples/bluetooth/mesh/chat/README.html#bt-mesh-chat"><span class="std std-ref">Bluetooth: Mesh chat</span></a> sample.
+The sample implements a vendor model that is called the <a class="reference internal" href="../../../samples/bluetooth/mesh/chat/chat_cli.html#bt-mesh-chat-client-model"><span class="std std-ref">Chat Client model</span></a>.</p>
+<p>The code below shows how Company ID, Model ID and message opcodes for the <a class="reference internal" href="../../../samples/bluetooth/mesh/chat/chat_cli.html#bt-mesh-chat-client-model-messages"><span class="std std-ref">messages</span></a> are defined in the Chat Client model:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/** Company ID of the Bluetooth Mesh Chat Client model. */</span>
+<span class="cp">#define BT_MESH_CHAT_CLI_VENDOR_COMPANY_ID    0x0059</span>
+
+<span class="cm">/** Model ID of the Bluetooth Mesh Chat Client model. */</span>
+<span class="cp">#define BT_MESH_CHAT_CLI_VENDOR_MODEL_ID      0x000A</span>
+
+<span class="cm">/** Non-private message opcode. */</span>
+<span class="cp">#define BT_MESH_CHAT_CLI_OP_MESSAGE BT_MESH_MODEL_OP_3(0x0A, \</span>
+<span class="cp">				       BT_MESH_CHAT_CLI_VENDOR_COMPANY_ID)</span>
+
+<span class="cm">/** Private message opcode. */</span>
+<span class="cp">#define BT_MESH_CHAT_CLI_OP_PRIVATE_MESSAGE BT_MESH_MODEL_OP_3(0x0B, \</span>
+<span class="cp">				       BT_MESH_CHAT_CLI_VENDOR_COMPANY_ID)</span>
+
+<span class="cm">/** Message reply opcode. */</span>
+<span class="cp">#define BT_MESH_CHAT_CLI_OP_MESSAGE_REPLY BT_MESH_MODEL_OP_3(0x0C, \</span>
+<span class="cp">				       BT_MESH_CHAT_CLI_VENDOR_COMPANY_ID)</span>
+
+<span class="cm">/** Presence message opcode. */</span>
+<span class="cp">#define BT_MESH_CHAT_CLI_OP_PRESENCE BT_MESH_MODEL_OP_3(0x0D, \</span>
+<span class="cp">				       BT_MESH_CHAT_CLI_VENDOR_COMPANY_ID)</span>
+
+<span class="cm">/** Presence get message opcode. */</span>
+<span class="cp">#define BT_MESH_CHAT_CLI_OP_PRESENCE_GET BT_MESH_MODEL_OP_3(0x0E, \</span>
+<span class="cp">				       BT_MESH_CHAT_CLI_VENDOR_COMPANY_ID)</span>
+</pre></div>
+</div>
+<p>The next code snippet shows the declaration of the opcode list:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">const</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_model_op</span><span class="w"> </span><span class="n">_bt_mesh_chat_cli_op</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">	</span><span class="p">{</span>
+<span class="w">		</span><span class="n">BT_MESH_CHAT_CLI_OP_MESSAGE</span><span class="p">,</span>
+<span class="w">		</span><span class="n">BT_MESH_LEN_MIN</span><span class="p">(</span><span class="n">BT_MESH_CHAT_CLI_MSG_MINLEN_MESSAGE</span><span class="p">),</span>
+<span class="w">		</span><span class="n">handle_message</span>
+<span class="w">	</span><span class="p">},</span>
+<span class="w">	</span><span class="p">{</span>
+<span class="w">		</span><span class="n">BT_MESH_CHAT_CLI_OP_PRIVATE_MESSAGE</span><span class="p">,</span>
+<span class="w">		</span><span class="n">BT_MESH_LEN_MIN</span><span class="p">(</span><span class="n">BT_MESH_CHAT_CLI_MSG_MINLEN_MESSAGE</span><span class="p">),</span>
+<span class="w">		</span><span class="n">handle_private_message</span>
+<span class="w">	</span><span class="p">},</span>
+<span class="w">	</span><span class="p">{</span>
+<span class="w">		</span><span class="n">BT_MESH_CHAT_CLI_OP_MESSAGE_REPLY</span><span class="p">,</span>
+<span class="w">		</span><span class="n">BT_MESH_LEN_EXACT</span><span class="p">(</span><span class="n">BT_MESH_CHAT_CLI_MSG_LEN_MESSAGE_REPLY</span><span class="p">),</span>
+<span class="w">		</span><span class="n">handle_message_reply</span>
+<span class="w">	</span><span class="p">},</span>
+<span class="w">	</span><span class="p">{</span>
+<span class="w">		</span><span class="n">BT_MESH_CHAT_CLI_OP_PRESENCE</span><span class="p">,</span>
+<span class="w">		</span><span class="n">BT_MESH_LEN_EXACT</span><span class="p">(</span><span class="n">BT_MESH_CHAT_CLI_MSG_LEN_PRESENCE</span><span class="p">),</span>
+<span class="w">		</span><span class="n">handle_presence</span>
+<span class="w">	</span><span class="p">},</span>
+<span class="w">	</span><span class="p">{</span>
+<span class="w">		</span><span class="n">BT_MESH_CHAT_CLI_OP_PRESENCE_GET</span><span class="p">,</span>
+<span class="w">		</span><span class="n">BT_MESH_LEN_EXACT</span><span class="p">(</span><span class="n">BT_MESH_CHAT_CLI_MSG_LEN_PRESENCE_GET</span><span class="p">),</span>
+<span class="w">		</span><span class="n">handle_presence_get</span>
+<span class="w">	</span><span class="p">},</span>
+<span class="w">	</span><span class="n">BT_MESH_MODEL_OP_END</span><span class="p">,</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>To send <a class="reference internal" href="../../../samples/bluetooth/mesh/chat/chat_cli.html#bt-mesh-chat-client-model-states"><span class="std std-ref">presence</span></a> and non-private messages, the Chat Client model uses the model publication context.
+This will let the Configuration Client configure an address where the messages will be published to.
+Therefore, the model needs to declare <code class="xref c c-struct docutils literal notranslate"><span class="pre">bt_mesh_model_pub</span></code>, <code class="xref c c-struct docutils literal notranslate"><span class="pre">net_buf_simple</span></code> and a buffer for a message to be published.
+In addition to that, the model needs to store a pointer to <code class="xref c c-struct docutils literal notranslate"><span class="pre">bt_mesh_model</span></code>, to use the Access API.</p>
+<p>All these parameters are unique for each model instance.
+Therefore, together with other model specific parameters, they can be enclosed within a structure defining the model context:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * Bluetooth Mesh Chat Client model context.</span>
+<span class="cm"> */</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_chat_cli</span><span class="w"> </span><span class="p">{</span>
+<span class="w">	</span><span class="cm">/** Access model pointer. */</span>
+<span class="w">	</span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_model</span><span class="w"> </span><span class="o">*</span><span class="n">model</span><span class="p">;</span>
+<span class="w">	</span><span class="cm">/** Publish parameters. */</span>
+<span class="w">	</span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_model_pub</span><span class="w"> </span><span class="n">pub</span><span class="p">;</span>
+<span class="w">	</span><span class="cm">/** Publication message. */</span>
+<span class="w">	</span><span class="k">struct</span><span class="w"> </span><span class="nc">net_buf_simple</span><span class="w"> </span><span class="n">pub_msg</span><span class="p">;</span>
+<span class="w">	</span><span class="cm">/** Publication message buffer. */</span>
+<span class="w">	</span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">buf</span><span class="p">[</span><span class="n">BT_MESH_MODEL_BUF_LEN</span><span class="p">(</span><span class="n">BT_MESH_CHAT_CLI_OP_MESSAGE</span><span class="p">,</span>
+<span class="w">					  </span><span class="n">BT_MESH_CHAT_CLI_MSG_MAXLEN_MESSAGE</span><span class="p">)];</span>
+<span class="w">	</span><span class="cm">/** Handler function structure. */</span>
+<span class="w">	</span><span class="k">const</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_chat_cli_handlers</span><span class="w"> </span><span class="o">*</span><span class="n">handlers</span><span class="p">;</span>
+<span class="w">	</span><span class="cm">/** Current Presence value. */</span>
+<span class="w">	</span><span class="k">enum</span><span class="w"> </span><span class="n">bt_mesh_chat_cli_presence</span><span class="w"> </span><span class="n">presence</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>To initialize the model publication context and store <code class="xref c c-struct docutils literal notranslate"><span class="pre">bt_mesh_model</span></code>, the model uses the <code class="xref c c-member docutils literal notranslate"><span class="pre">bt_mesh_model_cb.init</span></code> handler:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">bt_mesh_chat_cli_init</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_model</span><span class="w"> </span><span class="o">*</span><span class="n">model</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">	</span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_chat_cli</span><span class="w"> </span><span class="o">*</span><span class="n">chat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">model</span><span class="o">-&gt;</span><span class="n">user_data</span><span class="p">;</span>
+
+<span class="w">	</span><span class="n">chat</span><span class="o">-&gt;</span><span class="n">model</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">model</span><span class="p">;</span>
+
+<span class="w">	</span><span class="n">net_buf_simple_init_with_data</span><span class="p">(</span><span class="o">&amp;</span><span class="n">chat</span><span class="o">-&gt;</span><span class="n">pub_msg</span><span class="p">,</span><span class="w"> </span><span class="n">chat</span><span class="o">-&gt;</span><span class="n">buf</span><span class="p">,</span>
+<span class="w">				      </span><span class="k">sizeof</span><span class="p">(</span><span class="n">chat</span><span class="o">-&gt;</span><span class="n">buf</span><span class="p">));</span>
+<span class="w">	</span><span class="n">chat</span><span class="o">-&gt;</span><span class="n">pub</span><span class="p">.</span><span class="n">msg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">chat</span><span class="o">-&gt;</span><span class="n">pub_msg</span><span class="p">;</span>
+<span class="w">	</span><span class="n">chat</span><span class="o">-&gt;</span><span class="n">pub</span><span class="p">.</span><span class="n">update</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bt_mesh_chat_cli_update_handler</span><span class="p">;</span>
+
+<span class="w">	</span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The model implements the <code class="xref c c-member docutils literal notranslate"><span class="pre">bt_mesh_model_cb.start</span></code> handler to notify a user that the mesh data has been loaded from persistent storage and when the node is provisioned:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">bt_mesh_chat_cli_start</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_model</span><span class="w"> </span><span class="o">*</span><span class="n">model</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">	</span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_chat_cli</span><span class="w"> </span><span class="o">*</span><span class="n">chat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">model</span><span class="o">-&gt;</span><span class="n">user_data</span><span class="p">;</span>
+
+<span class="w">	</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">chat</span><span class="o">-&gt;</span><span class="n">handlers</span><span class="o">-&gt;</span><span class="n">start</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">		</span><span class="n">chat</span><span class="o">-&gt;</span><span class="n">handlers</span><span class="o">-&gt;</span><span class="n">start</span><span class="p">(</span><span class="n">chat</span><span class="p">);</span>
+<span class="w">	</span><span class="p">}</span>
+
+<span class="w">	</span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The presence value of the model needs to be stored in the persistent storage, so it can be restored at the kit reboot.
+The <code class="xref c c-func docutils literal notranslate"><span class="pre">bt_mesh_model_data_store()</span></code> function is called to store the presence value:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">bt_mesh_chat_cli_presence_set</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_chat_cli</span><span class="w"> </span><span class="o">*</span><span class="n">chat</span><span class="p">,</span>
+<span class="w">			 </span><span class="k">enum</span><span class="w"> </span><span class="n">bt_mesh_chat_cli_presence</span><span class="w"> </span><span class="n">presence</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">	</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">presence</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">chat</span><span class="o">-&gt;</span><span class="n">presence</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">		</span><span class="n">chat</span><span class="o">-&gt;</span><span class="n">presence</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">presence</span><span class="p">;</span>
+
+<span class="w">		</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">IS_ENABLED</span><span class="p">(</span><span class="n">CONFIG_BT_SETTINGS</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">			</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="n">bt_mesh_model_data_store</span><span class="p">(</span><span class="n">chat</span><span class="o">-&gt;</span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">,</span>
+<span class="w">						</span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">presence</span><span class="p">,</span>
+<span class="w">						</span><span class="k">sizeof</span><span class="p">(</span><span class="n">chat</span><span class="o">-&gt;</span><span class="n">presence</span><span class="p">));</span>
+<span class="w">		</span><span class="p">}</span>
+<span class="w">	</span><span class="p">}</span>
+
+<span class="w">	</span><span class="n">encode_presence</span><span class="p">(</span><span class="n">chat</span><span class="o">-&gt;</span><span class="n">model</span><span class="o">-&gt;</span><span class="n">pub</span><span class="o">-&gt;</span><span class="n">msg</span><span class="p">,</span><span class="w"> </span><span class="n">chat</span><span class="o">-&gt;</span><span class="n">presence</span><span class="p">);</span>
+
+<span class="w">	</span><span class="k">return</span><span class="w"> </span><span class="n">bt_mesh_model_publish</span><span class="p">(</span><span class="n">chat</span><span class="o">-&gt;</span><span class="n">model</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>To restore the presence value, the model implements the <code class="xref c c-member docutils literal notranslate"><span class="pre">bt_mesh_model_cb.settings_set</span></code> handler:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#ifdef CONFIG_BT_SETTINGS</span>
+<span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">bt_mesh_chat_cli_settings_set</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_model</span><span class="w"> </span><span class="o">*</span><span class="n">model</span><span class="p">,</span>
+<span class="w">					 </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">name</span><span class="p">,</span>
+<span class="w">					 </span><span class="kt">size_t</span><span class="w"> </span><span class="n">len_rd</span><span class="p">,</span>
+<span class="w">					 </span><span class="n">settings_read_cb</span><span class="w"> </span><span class="n">read_cb</span><span class="p">,</span>
+<span class="w">					 </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">cb_arg</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">	</span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_chat_cli</span><span class="w"> </span><span class="o">*</span><span class="n">chat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">model</span><span class="o">-&gt;</span><span class="n">user_data</span><span class="p">;</span>
+
+<span class="w">	</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="o">-</span><span class="n">ENOENT</span><span class="p">;</span>
+<span class="w">	</span><span class="p">}</span>
+
+<span class="w">	</span><span class="kt">ssize_t</span><span class="w"> </span><span class="n">bytes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">read_cb</span><span class="p">(</span><span class="n">cb_arg</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">chat</span><span class="o">-&gt;</span><span class="n">presence</span><span class="p">,</span>
+<span class="w">				</span><span class="k">sizeof</span><span class="p">(</span><span class="n">chat</span><span class="o">-&gt;</span><span class="n">presence</span><span class="p">));</span>
+<span class="w">	</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">bytes</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="n">bytes</span><span class="p">;</span>
+<span class="w">	</span><span class="p">}</span>
+
+<span class="w">	</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">bytes</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">bytes</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">chat</span><span class="o">-&gt;</span><span class="n">presence</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="o">-</span><span class="n">EINVAL</span><span class="p">;</span>
+<span class="w">	</span><span class="p">}</span>
+
+<span class="w">	</span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="cp">#endif</span>
+</pre></div>
+</div>
+<p>The stored presence value needs to be reset if the node reset is applied.
+This will make the model start as it was just initialized.
+This is done through the <code class="xref c c-member docutils literal notranslate"><span class="pre">bt_mesh_model_cb.reset</span></code> handler:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">bt_mesh_chat_cli_reset</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_model</span><span class="w"> </span><span class="o">*</span><span class="n">model</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">	</span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_chat_cli</span><span class="w"> </span><span class="o">*</span><span class="n">chat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">model</span><span class="o">-&gt;</span><span class="n">user_data</span><span class="p">;</span>
+
+<span class="w">	</span><span class="n">chat</span><span class="o">-&gt;</span><span class="n">presence</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BT_MESH_CHAT_CLI_PRESENCE_AVAILABLE</span><span class="p">;</span>
+
+<span class="w">	</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">IS_ENABLED</span><span class="p">(</span><span class="n">CONFIG_BT_SETTINGS</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">		</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="n">bt_mesh_model_data_store</span><span class="p">(</span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">	</span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="xref c c-member docutils literal notranslate"><span class="pre">bt_mesh_model_cb.settings_set</span></code> handler, and both <code class="xref c c-func docutils literal notranslate"><span class="pre">bt_mesh_model_data_store()</span></code> calls, are only compiled if <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_SETTINGS</span></code> is enabled, making it possible to exclude this functionality if the persistent storage is not enabled.</p>
+</div>
+<p>The following code initializes the model callbacks structure:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">const</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_model_cb</span><span class="w"> </span><span class="n">_bt_mesh_chat_cli_cb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">	</span><span class="p">.</span><span class="n">init</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bt_mesh_chat_cli_init</span><span class="p">,</span>
+<span class="w">	</span><span class="p">.</span><span class="n">start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bt_mesh_chat_cli_start</span><span class="p">,</span>
+<span class="cp">#ifdef CONFIG_BT_SETTINGS</span>
+<span class="w">	</span><span class="p">.</span><span class="n">settings_set</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bt_mesh_chat_cli_settings_set</span><span class="p">,</span>
+<span class="cp">#endif</span>
+<span class="w">	</span><span class="p">.</span><span class="n">reset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bt_mesh_chat_cli_reset</span><span class="p">,</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>At this point, everything is ready for defining an entry for the node composition data.
+For the convenience, the initialization of the <code class="xref c c-macro docutils literal notranslate"><span class="pre">BT_MESH_MODEL_VND_CB</span></code> macro is wrapped into a <cite>BT_MESH_MODEL_CHAT_CLI</cite> macro, which only requires a pointer to the instance of the model context defined above:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/** @def BT_MESH_MODEL_CHAT_CLI</span>
+<span class="cm"> *</span>
+<span class="cm"> * @brief Bluetooth Mesh Chat Client model composition data entry.</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param[in] _chat Pointer to a @ref bt_mesh_chat_cli instance.</span>
+<span class="cm"> */</span>
+<span class="cp">#define BT_MESH_MODEL_CHAT_CLI(_chat)                                          \</span>
+<span class="cp">		BT_MESH_MODEL_VND_CB(BT_MESH_CHAT_CLI_VENDOR_COMPANY_ID,       \</span>
+<span class="cp">			BT_MESH_CHAT_CLI_VENDOR_MODEL_ID,                      \</span>
+<span class="cp">			_bt_mesh_chat_cli_op, &amp;(_chat)-&gt;pub,                   \</span>
+<span class="cp">			BT_MESH_MODEL_USER_DATA(struct bt_mesh_chat_cli,       \</span>
+<span class="cp">						_chat),                        \</span>
+<span class="cp">			&amp;_bt_mesh_chat_cli_cb)</span>
+</pre></div>
+</div>
+<p>The user data, which stores a pointer to the model context, is initialized through the <a class="reference internal" href="../../../libraries/bluetooth_services/mesh/model_types.html#c.BT_MESH_MODEL_USER_DATA" title="BT_MESH_MODEL_USER_DATA"><code class="xref c c-macro docutils literal notranslate"><span class="pre">BT_MESH_MODEL_USER_DATA</span></code></a> macro.
+This is done to ensure that the correct data type is passed to <cite>BT_MESH_MODEL_CHAT_CLI</cite>.
+The following code snippet shows how the defined macro is used when defining the node composition data:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_chat_cli</span><span class="w"> </span><span class="n">chat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">	</span><span class="p">.</span><span class="n">handlers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">chat_handlers</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="k">static</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_elem</span><span class="w"> </span><span class="n">elements</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">	</span><span class="n">BT_MESH_ELEM</span><span class="p">(</span>
+<span class="w">		</span><span class="mi">1</span><span class="p">,</span>
+<span class="w">		</span><span class="n">BT_MESH_MODEL_LIST</span><span class="p">(</span>
+<span class="w">			</span><span class="n">BT_MESH_MODEL_CFG_SRV</span><span class="p">,</span>
+<span class="w">			</span><span class="n">BT_MESH_MODEL_HEALTH_SRV</span><span class="p">(</span><span class="o">&amp;</span><span class="n">health_srv</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">health_pub</span><span class="p">)),</span>
+<span class="w">		</span><span class="n">BT_MESH_MODEL_LIST</span><span class="p">(</span><span class="n">BT_MESH_MODEL_CHAT_CLI</span><span class="p">(</span><span class="o">&amp;</span><span class="n">chat</span><span class="p">))),</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>The Chat Client model allows sending of private messages.
+This means that only the node with the specified address will receive the message.
+This is done by initializing <code class="xref c c-struct docutils literal notranslate"><span class="pre">bt_mesh_msg_ctx</span></code> with custom parameters:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">bt_mesh_chat_cli_private_message_send</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_chat_cli</span><span class="w"> </span><span class="o">*</span><span class="n">chat</span><span class="p">,</span>
+<span class="w">					  </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">addr</span><span class="p">,</span>
+<span class="w">					  </span><span class="k">const</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="o">*</span><span class="n">msg</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">	</span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_msg_ctx</span><span class="w"> </span><span class="n">ctx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">		</span><span class="p">.</span><span class="n">addr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">addr</span><span class="p">,</span>
+<span class="w">		</span><span class="p">.</span><span class="n">app_idx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">chat</span><span class="o">-&gt;</span><span class="n">model</span><span class="o">-&gt;</span><span class="n">keys</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+<span class="w">		</span><span class="p">.</span><span class="n">send_ttl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BT_MESH_TTL_DEFAULT</span><span class="p">,</span>
+<span class="w">		</span><span class="p">.</span><span class="n">send_rel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">,</span>
+<span class="w">	</span><span class="p">};</span>
+
+<span class="w">	</span><span class="n">BT_MESH_MODEL_BUF_DEFINE</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="n">BT_MESH_CHAT_CLI_OP_PRIVATE_MESSAGE</span><span class="p">,</span>
+<span class="w">				 </span><span class="n">BT_MESH_CHAT_CLI_MSG_MAXLEN_MESSAGE</span><span class="p">);</span>
+<span class="w">	</span><span class="n">bt_mesh_model_msg_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="n">BT_MESH_CHAT_CLI_OP_PRIVATE_MESSAGE</span><span class="p">);</span>
+
+<span class="w">	</span><span class="n">net_buf_simple_add_mem</span><span class="p">(</span><span class="o">&amp;</span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="n">msg</span><span class="p">,</span>
+<span class="w">			       </span><span class="n">strnlen</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span>
+<span class="w">				       </span><span class="n">CONFIG_BT_MESH_CHAT_CLI_MESSAGE_LENGTH</span><span class="p">));</span>
+<span class="w">	</span><span class="n">net_buf_simple_add_u8</span><span class="p">(</span><span class="o">&amp;</span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;\0&#39;</span><span class="p">);</span>
+
+<span class="w">	</span><span class="k">return</span><span class="w"> </span><span class="n">bt_mesh_model_send</span><span class="p">(</span><span class="n">chat</span><span class="o">-&gt;</span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">ctx</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Note that it also sets <code class="xref c c-member docutils literal notranslate"><span class="pre">bt_mesh_msg_ctx.send_rel</span></code> to ensure that the message is delivered to the destination.</p>
+<p>When the Chat Client model receives a private text message, or some of the nodes want to get the current presence of the model, it needs to send an acknowledgment back to the originator of the message.
+This is done by calling the <code class="xref c c-func docutils literal notranslate"><span class="pre">bt_mesh_model_send()</span></code> function, with <code class="xref c c-struct docutils literal notranslate"><span class="pre">bt_mesh_msg_ctx</span></code> passed to the message handler:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">send_message_reply</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_chat_cli</span><span class="w"> </span><span class="o">*</span><span class="n">chat</span><span class="p">,</span>
+<span class="w">			     </span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_msg_ctx</span><span class="w"> </span><span class="o">*</span><span class="n">ctx</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">	</span><span class="n">BT_MESH_MODEL_BUF_DEFINE</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span><span class="w"> </span><span class="n">BT_MESH_CHAT_CLI_OP_MESSAGE_REPLY</span><span class="p">,</span>
+<span class="w">				 </span><span class="n">BT_MESH_CHAT_CLI_MSG_LEN_MESSAGE_REPLY</span><span class="p">);</span>
+<span class="w">	</span><span class="n">bt_mesh_model_msg_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">msg</span><span class="p">,</span><span class="w"> </span><span class="n">BT_MESH_CHAT_CLI_OP_MESSAGE_REPLY</span><span class="p">);</span>
+
+<span class="w">	</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">bt_mesh_model_send</span><span class="p">(</span><span class="n">chat</span><span class="o">-&gt;</span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="n">ctx</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">msg</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">handle_private_message</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_model</span><span class="w"> </span><span class="o">*</span><span class="n">model</span><span class="p">,</span>
+<span class="w">				  </span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_msg_ctx</span><span class="w"> </span><span class="o">*</span><span class="n">ctx</span><span class="p">,</span>
+<span class="w">				  </span><span class="k">struct</span><span class="w"> </span><span class="nc">net_buf_simple</span><span class="w"> </span><span class="o">*</span><span class="n">buf</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">	</span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_chat_cli</span><span class="w"> </span><span class="o">*</span><span class="n">chat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">model</span><span class="o">-&gt;</span><span class="n">user_data</span><span class="p">;</span>
+<span class="w">	</span><span class="k">const</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="o">*</span><span class="n">msg</span><span class="p">;</span>
+
+<span class="w">	</span><span class="n">msg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">extract_msg</span><span class="p">(</span><span class="n">buf</span><span class="p">);</span>
+
+<span class="w">	</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">chat</span><span class="o">-&gt;</span><span class="n">handlers</span><span class="o">-&gt;</span><span class="n">private_message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">		</span><span class="n">chat</span><span class="o">-&gt;</span><span class="n">handlers</span><span class="o">-&gt;</span><span class="n">private_message</span><span class="p">(</span><span class="n">chat</span><span class="p">,</span><span class="w"> </span><span class="n">ctx</span><span class="p">,</span><span class="w"> </span><span class="n">msg</span><span class="p">);</span>
+<span class="w">	</span><span class="p">}</span>
+
+<span class="w">	</span><span class="n">send_message_reply</span><span class="p">(</span><span class="n">chat</span><span class="p">,</span><span class="w"> </span><span class="n">ctx</span><span class="p">);</span>
+<span class="w">	</span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../reserved_ids.html" class="btn btn-neutral float-right" title="Reserved vendor model IDs and opcodes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="dev_overview.html" class="btn btn-neutral" title="Vendor model development overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

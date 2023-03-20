@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Removing a node from a mesh network &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../_static/js/ncs.js"
+></script>
+<script src="../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Creating a new model" href="vendor_model/index.html" />
+    <link rel="prev" title="Performing FOTA updates in Bluetooth mesh" href="fota.html" />
+<link
+  href="../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../protocols.html">Protocols</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../ble/index.html">Bluetooth LE Controller</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Bluetooth mesh</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="supported_features.html">Supported Bluetooth mesh features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Bluetooth mesh concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture.html">Bluetooth mesh stack architecture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configuring.html">Configuring Bluetooth mesh in nRF Connect SDK</a></li>
+<li class="toctree-l3"><a class="reference internal" href="model_config_app.html">Configuring mesh models using the nRF Mesh mobile app</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fota.html">Performing FOTA updates in Bluetooth mesh</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Removing a node from a mesh network</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#removing-the-node">Removing the node</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#updating-the-network-key">Updating the network key</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="vendor_model/index.html">Creating a new model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reserved_ids.html">Reserved vendor model IDs and opcodes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../esb/index.html">Enhanced ShockBurst (ESB)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gazell/index.html">Gazell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../matter/index.html">Matter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multiprotocol/index.html">Multiprotocol support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nfc/index.html">Near Field Communication (NFC)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../thread/index.html">Thread</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../wifi/index.html">Wi-Fi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../zigbee/index.html">Zigbee</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drivers.html">Drivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../protocols.html">Protocols</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Bluetooth mesh</a></li>
+      <li class="breadcrumb-item active">Removing a node from a mesh network</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/protocols/bt_mesh/node_removal.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="removing-a-node-from-a-mesh-network">
+<span id="ug-bt-mesh-node-removal"></span><h1>Removing a node from a mesh network<a class="headerlink" href="#removing-a-node-from-a-mesh-network" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#removing-the-node" id="id6">Removing the node</a></p></li>
+<li><p><a class="reference internal" href="#updating-the-network-key" id="id7">Updating the network key</a></p>
+<ul>
+<li><p><a class="reference internal" href="#uploading-a-new-key" id="id8">Uploading a new key</a></p></li>
+<li><p><a class="reference internal" href="#switching-to-the-new-key" id="id9">Switching to the new key</a></p></li>
+<li><p><a class="reference internal" href="#revoking-the-old-key" id="id10">Revoking the old key</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>In certain circumstances, a need may arise to remove a node from a Bluetooth® mesh network.
+This can be done by unprovisioning the node using the Config Node Reset message.</p>
+<p>Though the unprovisioning of the node is a straightforward procedure, some additional steps need to be taken to maintain the security of the network.
+The procedure consists of two steps:</p>
+<ol class="arabic simple">
+<li><p>Removing the node.</p></li>
+<li><p>Replacing the network key(s), used by the removed node, in the rest of the nodes in the network.</p></li>
+</ol>
+<section id="removing-the-node">
+<h2><a class="toc-backref" href="#id6">Removing the node</a><a class="headerlink" href="#removing-the-node" title="Permalink to this heading"></a></h2>
+<p>To remove the node from the network and reset its configuration, send the Config Node Reset message from a node running the Configuration Client model.
+The node running the Configuration Client model is referred to as the Mesh Network Manager.</p>
+<p>To remove the node using the nRF Connect SDK API, complete the following steps:</p>
+<ol class="arabic simple">
+<li><p>Call the <code class="xref c c-func docutils literal notranslate"><span class="pre">bt_mesh_cfg_cli_node_reset()</span></code> function to send a Config Node Reset message to the node to be reset.</p></li>
+<li><p>Find the node in the Configuration Database (CDB) using the <code class="xref c c-func docutils literal notranslate"><span class="pre">bt_mesh_cdb_node_get()</span></code> function.</p></li>
+<li><p>Remove the node from the CDB using the <code class="xref c c-func docutils literal notranslate"><span class="pre">bt_mesh_cdb_node_del()</span></code> function.</p></li>
+</ol>
+<p>When using the nRF Mesh mobile app as a provisioner, do the following:</p>
+<ol class="arabic simple">
+<li><p>On the Network screen, tap the mesh device node to be reset.</p></li>
+<li><p>Scroll down and find the <span class="guilabel">Reset Node</span> section.</p></li>
+<li><p>Press the <span class="guilabel">RESET</span> button.</p></li>
+</ol>
+</section>
+<section id="updating-the-network-key">
+<h2><a class="toc-backref" href="#id7">Updating the network key</a><a class="headerlink" href="#updating-the-network-key" title="Permalink to this heading"></a></h2>
+<p>Even if the Config Node Reset message has been sent to the node, and the Config Node Reset Status message was received, this doesn’t guarantee that the node has removed all configuration data.
+To ensure that the removed node is not able to decrypt network messages after being reset, update the network key(s) that were known to the removed node.</p>
+<p>This procedure can be used in any other cases when a network key needs to be updated.
+For example, in cases where there is a suspicion of network credentials being compromised.</p>
+<p>The same procedure can be used to update an application key.
+To update an application key, the associated network key update must also be started before starting the updating for the application key.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Updating keys is currently not supported by the nRF Mesh mobile app.</p>
+</div>
+<p>The procedure of updating a network (or application) key is described below.</p>
+<section id="uploading-a-new-key">
+<h3><a class="toc-backref" href="#id8">Uploading a new key</a><a class="headerlink" href="#uploading-a-new-key" title="Permalink to this heading"></a></h3>
+<p>Upload a new network key to the nodes by sending the Config NetKey Update message to every node, including the node with the Configuration Client model.
+If an application key update is needed, upload a new application key by sending the Config AppKey Update message to every node after uploading the new network key.</p>
+<p>The snippet below demonstrates how to do this using the nRF Connect SDK API:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="nf">send_net_key_update</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_cdb_node</span><span class="w"> </span><span class="o">*</span><span class="n">node</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">user_data</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_cdb_subnet</span><span class="w"> </span><span class="o">*</span><span class="n">subnet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">user_data</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">err</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bt_mesh_cfg_cli_net_key_update</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">net_idx</span><span class="p">,</span><span class="w"> </span><span class="n">node</span><span class="o">-&gt;</span><span class="n">addr</span><span class="p">,</span><span class="w"> </span><span class="n">subnet</span><span class="o">-&gt;</span><span class="n">net_idx</span><span class="p">,</span>
+<span class="w">                                         </span><span class="n">subnet</span><span class="o">-&gt;</span><span class="n">keys</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">net_key</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">status</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">err</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">status</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">printk</span><span class="p">(</span><span class="s">&quot;Unable to update NetKey on %#x (err %d, status %u)</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">node</span><span class="o">-&gt;</span><span class="n">addr</span><span class="p">,</span><span class="w"> </span><span class="n">err</span><span class="p">,</span>
+<span class="w">               </span><span class="n">status</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">printk</span><span class="p">(</span><span class="s">&quot;Updated NetKey with index %u on %#x</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">subnet</span><span class="o">-&gt;</span><span class="n">net_idx</span><span class="p">,</span><span class="w"> </span><span class="n">node</span><span class="o">-&gt;</span><span class="n">addr</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">BT_MESH_CDB_ITER_CONTINUE</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">update_net_key</span><span class="p">(</span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">net_idx</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="o">*</span><span class="n">new_net_key</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_cdb_subnet</span><span class="w"> </span><span class="o">*</span><span class="n">subnet</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">subnet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bt_mesh_cdb_subnet_get</span><span class="p">(</span><span class="n">net_idx</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">subnet</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">printk</span><span class="p">(</span><span class="s">&quot;Unable to get subnet</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">-</span><span class="n">EINVAL</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/* Store the new network key in CDB. */</span>
+<span class="w">    </span><span class="n">memcpy</span><span class="p">(</span><span class="n">subnet</span><span class="o">-&gt;</span><span class="n">keys</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">net_key</span><span class="p">,</span><span class="w"> </span><span class="n">new_net_key</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p">);</span>
+<span class="w">    </span><span class="n">bt_mesh_cdb_subnet_store</span><span class="p">(</span><span class="n">subnet</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/* Send the new network key to each node. */</span>
+<span class="w">    </span><span class="n">bt_mesh_cdb_node_foreach</span><span class="p">(</span><span class="n">send_net_key_update</span><span class="p">,</span><span class="w"> </span><span class="n">subnet</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">...</span>
+
+<span class="kt">uint8_t</span><span class="w"> </span><span class="n">new_net_key</span><span class="p">[</span><span class="mi">16</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">};</span>
+<span class="n">update_net_key</span><span class="p">(</span><span class="n">BT_MESH_NET_PRIMARY</span><span class="p">,</span><span class="w"> </span><span class="n">new_net_key</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="switching-to-the-new-key">
+<h3><a class="toc-backref" href="#id9">Switching to the new key</a><a class="headerlink" href="#switching-to-the-new-key" title="Permalink to this heading"></a></h3>
+<p>After uploading the new key, configure the nodes to use it when sending messages.
+To do that, change the Key Refresh Phase to 2 by sending the Config Key Refresh Phase Set message with Transition field set to 0x2.
+Send this message to at least one node.</p>
+<p>The rest of the nodes will switch the Key Refresh Phase through Secure Network Beacon.
+But in this case, it may take a while for all nodes to eventually switch the phase due to the following:</p>
+<ul class="simple">
+<li><p>The time between two consecutive Secure Network Beacons is approximately 10 seconds.</p></li>
+<li><p>Some nodes can have a backoff interval of up to 600 seconds when sending Secure Network Beacons.</p></li>
+</ul>
+<p>You can speed up this process by sending the Config Key Refresh Phase Set message to all nodes that need to be updated.</p>
+<p>After switching the Key Refresh Phase to 2, a node will decrypt messages using both old and new keys, but encrypt only using the new key.</p>
+<p>The snippet below demonstrates how to set the Key Refresh Phase on all nodes using the nRF Connect SDK API:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="nf">send_key_refresh_phase_set</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_cdb_node</span><span class="w"> </span><span class="o">*</span><span class="n">node</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">user_data</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_cdb_subnet</span><span class="w"> </span><span class="o">*</span><span class="n">subnet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">user_data</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">phase</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">status</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">err</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bt_mesh_cfg_cli_krp_set</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">net_idx</span><span class="p">,</span><span class="w"> </span><span class="n">node</span><span class="o">-&gt;</span><span class="n">addr</span><span class="p">,</span><span class="w"> </span><span class="n">subnet</span><span class="o">-&gt;</span><span class="n">net_idx</span><span class="p">,</span><span class="w"> </span><span class="n">subnet</span><span class="o">-&gt;</span><span class="n">kr_phase</span><span class="p">,</span>
+<span class="w">                                  </span><span class="o">&amp;</span><span class="n">status</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">phase</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">err</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">status</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">printk</span><span class="p">(</span><span class="s">&quot;Unable to set Key Refresh Phase on %#x (err %d, status %u)</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
+<span class="w">               </span><span class="n">node</span><span class="o">-&gt;</span><span class="n">addr</span><span class="p">,</span><span class="w"> </span><span class="n">err</span><span class="p">,</span><span class="w"> </span><span class="n">status</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">printk</span><span class="p">(</span><span class="s">&quot;Set Key Refresh Phase to %u on %#x</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">phase</span><span class="p">,</span><span class="w"> </span><span class="n">node</span><span class="o">-&gt;</span><span class="n">addr</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">BT_MESH_CDB_ITER_CONTINUE</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">update_key_refresh_phase</span><span class="p">(</span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">net_idx</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">phase</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_cdb_subnet</span><span class="w"> </span><span class="o">*</span><span class="n">subnet</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">subnet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bt_mesh_cdb_subnet_get</span><span class="p">(</span><span class="n">net_idx</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">subnet</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">printk</span><span class="p">(</span><span class="s">&quot;Unable to get subnet</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">-</span><span class="n">EINVAL</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">subnet</span><span class="o">-&gt;</span><span class="n">kr_phase</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">phase</span><span class="p">;</span>
+<span class="w">    </span><span class="n">bt_mesh_cdb_subnet_store</span><span class="p">(</span><span class="n">subnet</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">bt_mesh_cdb_node_foreach</span><span class="p">(</span><span class="n">send_key_refresh_phase_set</span><span class="p">,</span><span class="w"> </span><span class="n">subnet</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">...</span>
+
+<span class="n">update_key_refresh_phase</span><span class="p">(</span><span class="n">BT_MESH_NET_PRIMARY</span><span class="p">,</span><span class="w"> </span><span class="n">BT_MESH_KR_PHASE_2</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>If the Key Refresh Phase is to be changed through Secure Network Beacons, wait until all nodes have changed the Key Refresh Phase to 2.
+This can be done by sending the Config Key Refresh Phase Get message to a specific node.
+To retrieve the Key Refresh Phase from a node using the nRF Connect SDK API, use the <code class="xref c c-func docutils literal notranslate"><span class="pre">bt_mesh_cfg_cli_krp_get()</span></code> function.</p>
+</section>
+<section id="revoking-the-old-key">
+<h3><a class="toc-backref" href="#id10">Revoking the old key</a><a class="headerlink" href="#revoking-the-old-key" title="Permalink to this heading"></a></h3>
+<p>When all nodes are in the Key Refresh Phase 2, the old key needs to be removed.
+To do that, switch the Key Refresh Phase to 3 by sending the Config Key Refresh Phase Set message with the Transition field set to 0x3.</p>
+<p>The same logic as for the phase 2 applies here.
+Either send this message to one of the nodes (not necessarily the node with the Configuration Client model) and wait while other nodes receive Secure Network Beacon, or send the message to each node.</p>
+<p>The snippet below demonstrates how to send the message to each node using the nRF Connect SDK API:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">swap_net_keys_in_cdb</span><span class="p">(</span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">net_idx</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">bt_mesh_cdb_subnet</span><span class="w"> </span><span class="o">*</span><span class="n">subnet</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">subnet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bt_mesh_cdb_subnet_get</span><span class="p">(</span><span class="n">net_idx</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">subnet</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">printk</span><span class="p">(</span><span class="s">&quot;Unable to get subnet</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">-</span><span class="n">EINVAL</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">memcpy</span><span class="p">(</span><span class="n">subnet</span><span class="o">-&gt;</span><span class="n">keys</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">net_key</span><span class="p">,</span><span class="w"> </span><span class="n">subnet</span><span class="o">-&gt;</span><span class="n">keys</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">net_key</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p">);</span>
+<span class="w">    </span><span class="n">memset</span><span class="p">(</span><span class="n">subnet</span><span class="o">-&gt;</span><span class="n">keys</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">net_key</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p">);</span>
+<span class="w">    </span><span class="n">bt_mesh_cdb_subnet_store</span><span class="p">(</span><span class="n">subnet</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="p">...</span>
+
+<span class="n">update_key_refresh_phase</span><span class="p">(</span><span class="n">BT_MESH_NET_PRIMARY</span><span class="p">,</span><span class="w"> </span><span class="n">BT_MESH_KR_PHASE_3</span><span class="p">);</span>
+
+<span class="cm">/* Replace the old key with the new one in CDB. */</span>
+<span class="n">swap_net_keys_in_cdb</span><span class="p">(</span><span class="n">BT_MESH_NET_PRIMARY</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Once all nodes have switched the Key Refresh Phase to 3, the procedure completes.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="vendor_model/index.html" class="btn btn-neutral float-right" title="Creating a new model" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="fota.html" class="btn btn-neutral" title="Performing FOTA updates in Bluetooth mesh" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

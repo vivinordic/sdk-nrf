@@ -1,0 +1,463 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="group__data__fifo" kind="group">
+    <compoundname>data_fifo</compoundname>
+    <title>Data first-in first-out library</title>
+    <innerclass refid="structdata__fifo__msgq" prot="public">data_fifo_msgq</innerclass>
+    <innerclass refid="structdata__fifo" prot="public">data_fifo</innerclass>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__data__fifo_1gadc71d6a0431fc29cad0011395e798fae" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int data_fifo_pointer_first_vacant_get</definition>
+        <argsstring>(struct data_fifo *data_fifo, void **data, k_timeout_t timeout)</argsstring>
+        <name>data_fifo_pointer_first_vacant_get</name>
+        <param>
+          <type>struct <ref refid="structdata__fifo" kindref="compound">data_fifo</ref> *</type>
+          <declname>data_fifo</declname>
+        </param>
+        <param>
+          <type>void **</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>k_timeout_t</type>
+          <declname>timeout</declname>
+        </param>
+        <briefdescription>
+<para>Get pointer to the first vacant block in slab. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Gives pointer to the first vacant memory block in the slab.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structdata__fifo" kindref="compound">data_fifo</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the <ref refid="structdata__fifo" kindref="compound">data_fifo</ref> structure. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Double pointer to the memory area. If this function returns with success, the caller is now able to write to this memory block. The write operation must not exceed the block size max given to DATA_FIFO_DEFINE. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>timeout</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Non-negative waiting period to wait for operation to complete (in milliseconds). Use K_NO_WAIT to return without waiting, or K_FOREVER to wait as long as necessary.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>0</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Memory allocated. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Return values from k_mem_slab_alloc. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/data_fifo.h" line="73" column="5" declfile="include/data_fifo.h" declline="73" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="group__data__fifo_1ga6fdfb21aeabe80b3cc4e0f90619ac7e5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int data_fifo_block_lock</definition>
+        <argsstring>(struct data_fifo *data_fifo, void **data, size_t size)</argsstring>
+        <name>data_fifo_block_lock</name>
+        <param>
+          <type>struct <ref refid="structdata__fifo" kindref="compound">data_fifo</ref> *</type>
+          <declname>data_fifo</declname>
+        </param>
+        <param>
+          <type>void **</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+<para>Confirm that the memory block use has finished and the block is put into the message queue. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>There is no mechanism blocking this region from being written to or read from. Hence, this block should not be used before it is later fetched by using data_fifo_pointer_last_filled_get.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structdata__fifo" kindref="compound">data_fifo</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the <ref refid="structdata__fifo" kindref="compound">data_fifo</ref> structure. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Double pointer to the memory block that has been written to. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of bytes written. Must be equal to or smaller than the block size max.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>0</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Block has been submitted to the message queue. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>-ENOMEM</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The size parameter is larger than the block size max. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>-EINVAL</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The supplied size is zero. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>-ESPIPE</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A generic return value if an error occurs in k_msg_put. Since data has already been added to the slab, there must be space in the message queue. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/data_fifo.h" line="96" column="5" declfile="include/data_fifo.h" declline="96" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="group__data__fifo_1gaa4de33e82bc72e6e34cf595b8ea00c0d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int data_fifo_pointer_last_filled_get</definition>
+        <argsstring>(struct data_fifo *data_fifo, void **data, size_t *size, k_timeout_t timeout)</argsstring>
+        <name>data_fifo_pointer_last_filled_get</name>
+        <param>
+          <type>struct <ref refid="structdata__fifo" kindref="compound">data_fifo</ref> *</type>
+          <declname>data_fifo</declname>
+        </param>
+        <param>
+          <type>void **</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>size_t *</type>
+          <declname>size</declname>
+        </param>
+        <param>
+          <type>k_timeout_t</type>
+          <declname>timeout</declname>
+        </param>
+        <briefdescription>
+<para>Get pointer to first (oldest) filled block in slab. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This returns a pointer to the first filled block in the slab (FIFO).</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structdata__fifo" kindref="compound">data_fifo</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the <ref refid="structdata__fifo" kindref="compound">data_fifo</ref> structure. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Double pointer to the block. If this functions returns with success, the caller is now able to read from this memory block. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Actual size in bytes of the stored data. This may be equal to or less than the block size. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>timeout</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Non-negative waiting period to wait for operation to complete (in milliseconds). Use K_NO_WAIT to return without waiting, or K_FOREVER to wait as long as necessary.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>0</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Memory pointer retrieved. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Return values from k_msgq_get. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/data_fifo.h" line="116" column="5" declfile="include/data_fifo.h" declline="116" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="group__data__fifo_1ga330ec09a2adba95ca02c052abd686798" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void data_fifo_block_free</definition>
+        <argsstring>(struct data_fifo *data_fifo, void **data)</argsstring>
+        <name>data_fifo_block_free</name>
+        <param>
+          <type>struct <ref refid="structdata__fifo" kindref="compound">data_fifo</ref> *</type>
+          <declname>data_fifo</declname>
+        </param>
+        <param>
+          <type>void **</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+<para>Free the data block after reading. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Read has finished in the given data block.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structdata__fifo" kindref="compound">data_fifo</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the <ref refid="structdata__fifo" kindref="compound">data_fifo</ref> structure. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Double pointer to the memory area which is to be freed. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/data_fifo.h" line="127" column="6" declfile="include/data_fifo.h" declline="127" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="group__data__fifo_1ga226c2f763b910d0fc1bedf1dd7c1e789" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int data_fifo_num_used_get</definition>
+        <argsstring>(struct data_fifo *data_fifo, uint32_t *alloced_num, uint32_t *locked_num)</argsstring>
+        <name>data_fifo_num_used_get</name>
+        <param>
+          <type>struct <ref refid="structdata__fifo" kindref="compound">data_fifo</ref> *</type>
+          <declname>data_fifo</declname>
+        </param>
+        <param>
+          <type>uint32_t *</type>
+          <declname>alloced_num</declname>
+        </param>
+        <param>
+          <type>uint32_t *</type>
+          <declname>locked_num</declname>
+        </param>
+        <briefdescription>
+<para>See how many alloced and locked blocks are in the system. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structdata__fifo" kindref="compound">data_fifo</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the <ref refid="structdata__fifo" kindref="compound">data_fifo</ref> structure. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>alloced_num</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of used blocks in the slab. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>locked_num</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of used items in the message queue.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>0</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Success. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>-EACCES</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Illegal combination of used message queue items and slabs. If an error occurs, parameters will be set to UINT32_MAX. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/data_fifo.h" line="141" column="5" declfile="include/data_fifo.h" declline="141" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="group__data__fifo_1ga073feb1be81eb863bfad529cb38e550b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int data_fifo_empty</definition>
+        <argsstring>(struct data_fifo *data_fifo)</argsstring>
+        <name>data_fifo_empty</name>
+        <param>
+          <type>struct <ref refid="structdata__fifo" kindref="compound">data_fifo</ref> *</type>
+          <declname>data_fifo</declname>
+        </param>
+        <briefdescription>
+<para>Empty all items from <ref refid="structdata__fifo" kindref="compound">data_fifo</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structdata__fifo" kindref="compound">data_fifo</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the data FIFO to be emptied.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>0 if success, error otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/data_fifo.h" line="151" column="5" declfile="include/data_fifo.h" declline="151" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="group__data__fifo_1gabb8c8c8d25898ff0aa0483b55c3429f5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int data_fifo_init</definition>
+        <argsstring>(struct data_fifo *data_fifo)</argsstring>
+        <name>data_fifo_init</name>
+        <param>
+          <type>struct <ref refid="structdata__fifo" kindref="compound">data_fifo</ref> *</type>
+          <declname>data_fifo</declname>
+        </param>
+        <briefdescription>
+<para>Initialise the <ref refid="structdata__fifo" kindref="compound">data_fifo</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structdata__fifo" kindref="compound">data_fifo</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the <ref refid="structdata__fifo" kindref="compound">data_fifo</ref> structure.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>0</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Success. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Return values from k_mem_slab_init. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/data_fifo.h" line="161" column="5" declfile="include/data_fifo.h" declline="161" declcolumn="5"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="group__data__fifo_1gabb35b00190d75f920e5475c8707194a0" prot="public" static="no">
+        <name>DATA_FIFO_DEFINE</name>
+        <param><defname>name</defname></param>
+        <param><defname>elements_max_in</defname></param>
+        <param><defname>block_size_max_in</defname></param>
+        <initializer>	char __aligned(WB_UP(1))                                                                   \
+		_msgq_buffer_##name[(elements_max_in) * sizeof(struct <ref refid="structdata__fifo__msgq" kindref="compound">data_fifo_msgq</ref>)] = { 0 };    \
+	char __aligned(WB_UP(1))                                                                   \
+		_slab_buffer_##name[(elements_max_in) * (block_size_max_in)] = { 0 };              \
+	struct <ref refid="structdata__fifo" kindref="compound">data_fifo</ref> name = { .msgq_buffer = _msgq_buffer_##name,                              \
+				  .slab_buffer = _slab_buffer_##name,                              \
+				  .block_size_max = block_size_max_in,                             \
+				  .elements_max = elements_max_in,                                 \
+				  .initialized = false }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/data_fifo.h" line="44" column="9" bodyfile="include/data_fifo.h" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Used to allocate a memory slab, use it, and signal to a receiver when the write operation has completed. The reader can then read and free the memory slab when done. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

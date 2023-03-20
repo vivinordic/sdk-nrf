@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Launch App message and records &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../../_static/js/ncs.js"
+></script>
+<script src="../../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Bluetooth LE OOB records" href="le_oob_rec.html" />
+    <link rel="prev" title="Parser for Connection Handover records" href="ch_rec_parser.html" />
+<link
+  href="../../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../drivers.html">Drivers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Libraries</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../bin/index.html">Binary libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../bluetooth_services/index.html">Bluetooth libraries and services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../bootloader/index.html">Bootloader libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../caf/index.html">Common Application Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../debug/index.html">Debug libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../dfu/index.html">DFU libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gazell/index.html">Gazell libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../modem/index.html">Modem libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mpsl/index.html">Multiprotocol Service Layer libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../networking/index.html">Libraries for networking</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Libraries for NFC</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">NFC Data Exchange Format (NDEF)</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="ch_msg.html">Connection Handover messages and records</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ch_rec_parser.html">Parser for Connection Handover records</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Launch App message and records</a></li>
+<li class="toctree-l4"><a class="reference internal" href="le_oob_rec.html">Bluetooth LE OOB records</a></li>
+<li class="toctree-l4"><a class="reference internal" href="le_oob_rec_parser.html">Parser for Bluetooth LE OOB records</a></li>
+<li class="toctree-l4"><a class="reference internal" href="msg.html">Messages and records</a></li>
+<li class="toctree-l4"><a class="reference internal" href="msg_parser.html">Parser for messages and records</a></li>
+<li class="toctree-l4"><a class="reference internal" href="text_rec.html">Text records</a></li>
+<li class="toctree-l4"><a class="reference internal" href="uri_msg.html">URI messages and records</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../t2t/index.html">Type 2 Tag</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../t4t/index.html">Type 4 Tag</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tnep/index.html">Tag NDEF Exchange Protocol (TNEP)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../nrf_rpc/index.html">nRF RPC libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../others/index.html">Other libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../shell/index.html">Shell libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tfm/index.html">TF-M libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../zigbee/index.html">Libraries for Zigbee</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Libraries</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Libraries for NFC</a></li>
+          <li class="breadcrumb-item"><a href="index.html">NFC Data Exchange Format (NDEF)</a></li>
+      <li class="breadcrumb-item active">Launch App message and records</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/libraries/nfc/ndef/launchapp.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="launch-app-message-and-records">
+<span id="nfc-launch-app"></span><h1>Launch App message and records<a class="headerlink" href="#launch-app-message-and-records" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#overview" id="id9">Overview</a></p></li>
+<li><p><a class="reference internal" href="#implementation" id="id10">Implementation</a></p></li>
+<li><p><a class="reference internal" href="#supported-features" id="id11">Supported features</a></p></li>
+<li><p><a class="reference internal" href="#library-files" id="id12">Library Files</a></p>
+<ul>
+<li><p><a class="reference internal" href="#launch-app-messages" id="id13">Launch App messages</a></p></li>
+<li><p><a class="reference internal" href="#launch-app-records" id="id14">Launch App records</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#samples-using-the-library" id="id15">Samples using the library</a></p></li>
+<li><p><a class="reference internal" href="#dependencies" id="id16">Dependencies</a></p></li>
+<li><p><a class="reference internal" href="#api-documentation" id="id17">API documentation</a></p>
+<ul>
+<li><p><a class="reference internal" href="#nfc-launchapp-msg" id="id18">Launch App messages</a></p></li>
+<li><p><a class="reference internal" href="#nfc-launchapp-rec" id="id19">Launch App records</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>Launch App library provides a way to create NFC messages capable of launching Android or iOS applications.</p>
+<section id="overview">
+<h2><a class="toc-backref" href="#id9">Overview</a><a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+<p>Launch App message contains two records: URI record and Android Launch App record.
+Typically, the URI record contains a Universal Link used by iOS and the Android record contains an Android package name.
+The Universal Link is a link associated to the application.</p>
+</section>
+<section id="implementation">
+<h2><a class="toc-backref" href="#id10">Implementation</a><a class="headerlink" href="#implementation" title="Permalink to this heading"></a></h2>
+<p>The <a class="reference internal" href="#nfc-launchapp-rec"><span class="std std-ref">Launch App records</span></a> module provides functions for creating the record, and the <a class="reference internal" href="#nfc-launchapp-msg"><span class="std std-ref">Launch App messages</span></a> module provides functions for creating and encoding the message.</p>
+<p>The following code snippets show how to generate a Launch App message.</p>
+<ol class="arabic">
+<li><p>Define the Universal Link string, Android package name string and create a buffer for the message:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/* Package: no.nordicsemi.android.nrftoolbox */</span>
+<span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">android_pkg_name</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">	</span><span class="sc">&#39;n&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;o&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;.&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;n&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;o&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;r&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;d&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;i&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;c&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;s&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;e&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;m&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;i&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;.&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;a&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;n&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;d&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;r&#39;</span><span class="p">,</span>
+<span class="w">	</span><span class="sc">&#39;o&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;i&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;d&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;.&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;n&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;r&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;f&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;t&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;o&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;o&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;l&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;b&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;o&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;x&#39;</span><span class="w"> </span><span class="p">};</span>
+
+<span class="cm">/* URI nrf-toolbox://main/ */</span>
+<span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">universal_link</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">	</span><span class="sc">&#39;n&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;r&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;f&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;-&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;t&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;o&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;o&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;l&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;b&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;o&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;x&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;:&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;/&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;/&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;m&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;a&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;i&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;n&#39;</span><span class="p">,</span>
+<span class="w">	</span><span class="sc">&#39;/&#39;</span><span class="p">};</span>
+</pre></div>
+</div>
+</li>
+<li><p>Create the Launch App message:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">err</span><span class="p">;</span>
+
+<span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nfc_launchapp_msg_encode</span><span class="p">(</span><span class="n">android_package_name</span><span class="p">,</span>
+<span class="w">                            </span><span class="k">sizeof</span><span class="p">(</span><span class="n">android_package_name</span><span class="p">),</span>
+<span class="w">                            </span><span class="n">universal_link</span><span class="p">,</span>
+<span class="w">                            </span><span class="k">sizeof</span><span class="p">(</span><span class="n">universal_link</span><span class="p">),</span>
+<span class="w">                            </span><span class="n">ndef_msg_buf</span><span class="p">,</span>
+<span class="w">                            </span><span class="o">&amp;</span><span class="n">len</span><span class="p">);</span>
+
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">err</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">     </span><span class="n">printk</span><span class="p">(</span><span class="s">&quot;Cannot encode message!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">     </span><span class="k">return</span><span class="w"> </span><span class="n">err</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Provide the following parameters:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Android package name string</p></li>
+<li><p>Length of Android package name string</p></li>
+<li><p>Universal Link string</p></li>
+<li><p>Length of the Universal Link string</p></li>
+<li><p>Message buffer</p></li>
+<li><p>Size of the available memory in the buffer</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ol>
+</section>
+<section id="supported-features">
+<h2><a class="toc-backref" href="#id11">Supported features</a><a class="headerlink" href="#supported-features" title="Permalink to this heading"></a></h2>
+<p>The library supports encoding AAR (Android Application Record) and Universal Links into NFC message.</p>
+</section>
+<section id="library-files">
+<h2><a class="toc-backref" href="#id12">Library Files</a><a class="headerlink" href="#library-files" title="Permalink to this heading"></a></h2>
+<p>Files used by the Launch App messages and records.</p>
+<section id="launch-app-messages">
+<h3><a class="toc-backref" href="#id13">Launch App messages</a><a class="headerlink" href="#launch-app-messages" title="Permalink to this heading"></a></h3>
+<div class="line-block">
+<div class="line">Header file: <code class="file docutils literal notranslate"><span class="pre">include/nfc/ndef/launchapp_msg.h</span></code></div>
+<div class="line">Source file: <code class="file docutils literal notranslate"><span class="pre">subsys/nfc/ndef/launchapp_msg.c</span></code></div>
+</div>
+</section>
+<section id="launch-app-records">
+<h3><a class="toc-backref" href="#id14">Launch App records</a><a class="headerlink" href="#launch-app-records" title="Permalink to this heading"></a></h3>
+<div class="line-block">
+<div class="line">Header file: <code class="file docutils literal notranslate"><span class="pre">include/nfc/ndef/launchapp_rec.h</span></code></div>
+<div class="line">Source file: <code class="file docutils literal notranslate"><span class="pre">subsys/nfc/ndef/launchapp_rec.c</span></code></div>
+</div>
+</section>
+</section>
+<section id="samples-using-the-library">
+<h2><a class="toc-backref" href="#id15">Samples using the library</a><a class="headerlink" href="#samples-using-the-library" title="Permalink to this heading"></a></h2>
+<p>The <a class="reference internal" href="../../../samples/nfc/record_launch_app/README.html#record-launch-app"><span class="std std-ref">NFC: Launch App</span></a> sample uses this library.</p>
+</section>
+<section id="dependencies">
+<h2><a class="toc-backref" href="#id16">Dependencies</a><a class="headerlink" href="#dependencies" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="uri_msg.html#nfc-uri-msg"><span class="std std-ref">URI messages</span></a></p></li>
+<li><p><a class="reference internal" href="msg.html#nfc-ndef-msg"><span class="std std-ref">NDEF messages</span></a></p></li>
+<li><p><a class="reference internal" href="msg.html#nfc-ndef-record"><span class="std std-ref">NDEF records</span></a></p></li>
+</ul>
+</section>
+<section id="api-documentation">
+<h2><a class="toc-backref" href="#id17">API documentation</a><a class="headerlink" href="#api-documentation" title="Permalink to this heading"></a></h2>
+<section id="nfc-launchapp-msg">
+<span id="id1"></span><h3><a class="toc-backref" href="#id18">Launch App messages</a><a class="headerlink" href="#nfc-launchapp-msg" title="Permalink to this heading"></a></h3>
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="group__nfc__launchapp__msg"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">nfc_launchapp_msg</span></span></dt>
+<dd><p>Generation of NFC NDEF messages that can be used to launch apps. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.nfc_launchapp_msg_encode">
+<span class="target" id="group__nfc__launchapp__msg_1ga72a2f1a1faca0c21ef11289af00b2c8d"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nfc_launchapp_msg_encode</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">android_package_name</span></span>, <span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n"><span class="pre">android_package_name_len</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">universal_link</span></span>, <span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n"><span class="pre">universal_link_len</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">buf</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">len</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.nfc_launchapp_msg_encode" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Function for encoding an NFC NDEF launch app message. </p>
+<p>This function encodes an NFC NDEF message into a buffer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>android_package_name</strong> – <strong>[in]</strong> Pointer to the Android package name string. If NULL, the Android Application Record will be skipped. </p></li>
+<li><p><strong>android_package_name_len</strong> – <strong>[in]</strong> Length of the Android package name. </p></li>
+<li><p><strong>universal_link</strong> – <strong>[in]</strong> Pointer to the Universal Link string. If NULL, the Universal Link Record will be skipped. </p></li>
+<li><p><strong>universal_link_len</strong> – <strong>[in]</strong> Length of the Universal Link. </p></li>
+<li><p><strong>buf</strong> – <strong>[out]</strong> Pointer to the buffer for the message. </p></li>
+<li><p><strong>len</strong> – <strong>[inout]</strong> Size of the available memory for the message as input. Size of the generated message as output.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>0</strong> – if the message was successfully created. </p></li>
+<li><p><strong>-EINVAL</strong> – if both android_package_name_len and universal_link were invalid (equal to NULL). </p></li>
+<li><p><strong>-ENOMEM</strong> – if the predicted message is larger than the provided buffer space. </p></li>
+<li><p><strong>Other</strong> – codes might be returned depending on the functions <a class="reference internal" href="msg.html#group__nfc__ndef__msg_1ga82467aede468e5467a8bff345ea05d2e"><span class="std std-ref">nfc_ndef_msg_encode</span></a> and <a class="reference internal" href="msg.html#group__nfc__ndef__msg_1gaa3eb7eacc6ffbeb2bf42d92c8c814554"><span class="std std-ref">nfc_ndef_msg_record_add</span></a> </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+<section id="nfc-launchapp-rec">
+<span id="id2"></span><h3><a class="toc-backref" href="#id19">Launch App records</a><a class="headerlink" href="#nfc-launchapp-rec" title="Permalink to this heading"></a></h3>
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="group__nfc__launchapp__rec"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">nfc_launchapp_rec</span></span></dt>
+<dd><p>Generation of NFC NDEF record descriptions that launch apps. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-defines">Defines</p>
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.NFC_ANDROID_REC_TYPE_LENGTH">
+<span class="target" id="group__nfc__launchapp__rec_1gad54f7048905f67c5c529dc8074cb381c"></span><span class="sig-name descname"><span class="n"><span class="pre">NFC_ANDROID_REC_TYPE_LENGTH</span></span></span><a class="headerlink" href="#c.NFC_ANDROID_REC_TYPE_LENGTH" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Size of the type field of the Android Application Record, defined in the file <code class="docutils literal notranslate"><span class="pre">launchapp_rec.c</span></code>. It is used in the <a class="reference internal" href="#group__nfc__launchapp__rec_1gab11bdadfdc3d6b6199842f80d6de52d6"><span class="std std-ref">NFC_NDEF_ANDROID_LAUNCHAPP_RECORD_DESC</span></a> macro. </p>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.NFC_NDEF_ANDROID_LAUNCHAPP_RECORD_DESC_DEF">
+<span class="target" id="group__nfc__launchapp__rec_1ga9ff2bf240d27b8b62a8bcf1ed785f4ac"></span><span class="sig-name descname"><span class="n"><span class="pre">NFC_NDEF_ANDROID_LAUNCHAPP_RECORD_DESC_DEF</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">name</span></span>, <span class="n"><span class="pre">package_name</span></span>, <span class="n"><span class="pre">package_name_length</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.NFC_NDEF_ANDROID_LAUNCHAPP_RECORD_DESC_DEF" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Macro for generating a description of an NFC NDEF Android Application Record (AAR). </p>
+<p>This macro declares and initializes an instance of an NFC NDEF record description of an Android Application Record (AAR).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The record descriptor is declared as an automatic variable, which implies that the NDEF message encoding (see <a class="reference internal" href="#group__nfc__launchapp__msg_1ga72a2f1a1faca0c21ef11289af00b2c8d"><span class="std std-ref">nfc_launchapp_msg_encode</span></a>) must be done in the same variable scope.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – <strong>[in]</strong> Name for accessing the record descriptor. </p></li>
+<li><p><strong>package_name</strong> – <strong>[in]</strong> Pointer to the Android package name string. </p></li>
+<li><p><strong>package_name_length</strong> – <strong>[in]</strong> Length of the Android package name. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.NFC_NDEF_ANDROID_LAUNCHAPP_RECORD_DESC">
+<span class="target" id="group__nfc__launchapp__rec_1gab11bdadfdc3d6b6199842f80d6de52d6"></span><span class="sig-name descname"><span class="n"><span class="pre">NFC_NDEF_ANDROID_LAUNCHAPP_RECORD_DESC</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">name</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.NFC_NDEF_ANDROID_LAUNCHAPP_RECORD_DESC" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Macro for accessing the NFC NDEF Android Application Record descriptor instance that was created with <a class="reference internal" href="#group__nfc__launchapp__rec_1ga9ff2bf240d27b8b62a8bcf1ed785f4ac"><span class="std std-ref">NFC_NDEF_ANDROID_LAUNCHAPP_RECORD_DESC_DEF</span></a>. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-variables">Variables</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.ndef_android_launchapp_rec_type">
+<span class="target" id="group__nfc__launchapp__rec_1gadc1507d1b8ecf4e6b5fd2387bcfaf3f1"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ndef_android_launchapp_rec_type</span></span></span><span class="p"><span class="pre">[</span></span><span class="m"><span class="pre">15</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#c.ndef_android_launchapp_rec_type" title="Permalink to this definition"></a><br /></dt>
+<dd><p>External reference to the type field of the NFC NDEF Android Application Record, defined in the file <code class="docutils literal notranslate"><span class="pre">launchapp_rec.c</span></code>. It is used in the <a class="reference internal" href="#group__nfc__launchapp__rec_1ga9ff2bf240d27b8b62a8bcf1ed785f4ac"><span class="std std-ref">NFC_NDEF_ANDROID_LAUNCHAPP_RECORD_DESC_DEF</span></a> macro. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="le_oob_rec.html" class="btn btn-neutral float-right" title="Bluetooth LE OOB records" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="ch_rec_parser.html" class="btn btn-neutral" title="Parser for Connection Handover records" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Direction and Distance Finding Service (DDFS) &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../../_static/js/ncs.js"
+></script>
+<script src="../../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="GATT DFU SMP Service Client" href="dfu_smp.html" />
+    <link rel="prev" title="GATT Current Time Service (CTS) Client" href="cts_client.html" />
+<link
+  href="../../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../drivers.html">Drivers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Libraries</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../bin/index.html">Binary libraries</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Bluetooth libraries and services</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../adv_prov.html">Bluetooth LE advertising providers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../conn_ctx.html">Bluetooth connection context</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../enocean.html">Bluetooth EnOcean</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gatt_dm.html">GATT Discovery Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gatt_pool.html">Bluetooth GATT attribute pools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mesh.html">Bluetooth mesh profile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../rpc.html">Bluetooth Low Energy Remote Procedure Call</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../scan.html">Scanning module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ams_client.html">Apple Media Service (AMS) Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ancs_client.html">Apple Notification Center Service (ANCS) Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bas_client.html">GATT Battery Service (BAS) Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bms.html">GATT Bond Management Service (BMS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cgms.html">GATT Continuous Glucose Monitoring Service (CGMS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cts_client.html">GATT Current Time Service (CTS) Client</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Direction and Distance Finding Service (DDFS)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#service-uuid">Service UUID</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#characteristics">Characteristics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#api-documentation">API documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="dfu_smp.html">GATT DFU SMP Service Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fast_pair.html">Google Fast Pair Service (GFPS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gattp.html">Generic Attribute (GATT) Profile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hids.html">GATT Human Interface Device (HID) Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hogp.html">GATT Human Interface Device Service (HIDS) Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hrs_client.html">GATT Heart Rate Service (HRS) Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="latency.html">GATT Latency Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="latency_client.html">GATT Latency Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lbs.html">LED Button Service (LBS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mds.html">Memfault Diagnostic Service (MDS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nsms.html">Nordic Status Message Service (NSMS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nus.html">Nordic UART Service (NUS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nus_client.html">Nordic UART Service (NUS) Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rscs.html">Running Speed and Cadence Service (RSCS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="throughput.html">GATT Throughput Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wifi_prov.html">Wi-Fi Provisioning Service</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../bootloader/index.html">Bootloader libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../caf/index.html">Common Application Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../debug/index.html">Debug libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../dfu/index.html">DFU libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gazell/index.html">Gazell libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../modem/index.html">Modem libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mpsl/index.html">Multiprotocol Service Layer libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../networking/index.html">Libraries for networking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nfc/index.html">Libraries for NFC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nrf_rpc/index.html">nRF RPC libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../others/index.html">Other libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../shell/index.html">Shell libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tfm/index.html">TF-M libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../zigbee/index.html">Libraries for Zigbee</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Libraries</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Bluetooth libraries and services</a></li>
+      <li class="breadcrumb-item active">Direction and Distance Finding Service (DDFS)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/libraries/bluetooth_services/services/ddfs.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="direction-and-distance-finding-service-ddfs">
+<span id="ddfs-readme"></span><h1>Direction and Distance Finding Service (DDFS)<a class="headerlink" href="#direction-and-distance-finding-service-ddfs" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#service-uuid" id="id8">Service UUID</a></p></li>
+<li><p><a class="reference internal" href="#characteristics" id="id9">Characteristics</a></p>
+<ul>
+<li><p><a class="reference internal" href="#distance-measurement-characteristic" id="id10">Distance Measurement Characteristic</a></p></li>
+<li><p><a class="reference internal" href="#azimuth-measurement-characteristic" id="id11">Azimuth Measurement Characteristic</a></p></li>
+<li><p><a class="reference internal" href="#elevation-measurement-characteristic" id="id12">Elevation Measurement Characteristic</a></p></li>
+<li><p><a class="reference internal" href="#ddf-feature-characteristic" id="id13">DDF Feature Characteristic</a></p></li>
+<li><p><a class="reference internal" href="#control-point-characteristic" id="id14">Control Point Characteristic</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#api-documentation" id="id15">API documentation</a></p></li>
+</ul>
+</div>
+<p>The Bluetooth® LE GATT Direction and Distance Finding Service is a custom service that allows publication of distance, azimuth and elevation measurement data.
+It also allows adjusting the measurement configuration parameters.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The current implementation is <a class="reference internal" href="../../../software_maturity.html#software-maturity"><span class="std std-ref">experimental</span></a>.</p>
+</div>
+<section id="service-uuid">
+<h2><a class="toc-backref" href="#id8">Service UUID</a><a class="headerlink" href="#service-uuid" title="Permalink to this heading"></a></h2>
+<p>The 128-bit vendor-specific service UUID is 21490000-494a-4573-98af-f126af76f490.</p>
+<table class="colwidths-auto docutils align-default" id="id7">
+<caption><span class="caption-text">Characteristic UUIDs</span><a class="headerlink" href="#id7" title="Permalink to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Characteristic</p></th>
+<th class="head"><p>UUID</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Distance Measurement</p></td>
+<td><p>21490001-494a-4573-98af-f126af76f490</p></td>
+</tr>
+<tr class="row-odd"><td><p>Azimuth Measurement</p></td>
+<td><p>21490002-494a-4573-98af-f126af76f490</p></td>
+</tr>
+<tr class="row-even"><td><p>Elevation Measurement</p></td>
+<td><p>21490003-494a-4573-98af-f126af76f490</p></td>
+</tr>
+<tr class="row-odd"><td><p>DDF Feature</p></td>
+<td><p>21490004-494a-4573-98af-f126af76f490</p></td>
+</tr>
+<tr class="row-even"><td><p>Control Point</p></td>
+<td><p>21490005-494a-4573-98af-f126af76f490</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="characteristics">
+<h2><a class="toc-backref" href="#id9">Characteristics</a><a class="headerlink" href="#characteristics" title="Permalink to this heading"></a></h2>
+<p>This service has the following characteristics.</p>
+<section id="distance-measurement-characteristic">
+<h3><a class="toc-backref" href="#id10">Distance Measurement Characteristic</a><a class="headerlink" href="#distance-measurement-characteristic" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>Notify:</dt><dd><p>Enable notifications for the Distance Measurement Characteristic to receive measurements.</p>
+</dd>
+</dl>
+</section>
+<section id="azimuth-measurement-characteristic">
+<h3><a class="toc-backref" href="#id11">Azimuth Measurement Characteristic</a><a class="headerlink" href="#azimuth-measurement-characteristic" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>Notify:</dt><dd><p>Enable notifications for the Azimuth Measurement Characteristic to receive measurements.</p>
+</dd>
+</dl>
+</section>
+<section id="elevation-measurement-characteristic">
+<h3><a class="toc-backref" href="#id12">Elevation Measurement Characteristic</a><a class="headerlink" href="#elevation-measurement-characteristic" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>Notify:</dt><dd><p>Enable notifications for the Elevation Measurement Characteristic to receive measurements.</p>
+</dd>
+</dl>
+</section>
+<section id="ddf-feature-characteristic">
+<h3><a class="toc-backref" href="#id13">DDF Feature Characteristic</a><a class="headerlink" href="#ddf-feature-characteristic" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>Read:</dt><dd><p>Read the supported features.</p>
+</dd>
+</dl>
+</section>
+<section id="control-point-characteristic">
+<h3><a class="toc-backref" href="#id14">Control Point Characteristic</a><a class="headerlink" href="#control-point-characteristic" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>Write:</dt><dd><p>Write data to the Control Point Characteristic to change the configuration.</p>
+</dd>
+</dl>
+</section>
+</section>
+<section id="api-documentation">
+<h2><a class="toc-backref" href="#id15">API documentation</a><a class="headerlink" href="#api-documentation" title="Permalink to this heading"></a></h2>
+<div class="line-block">
+<div class="line">Header file: <code class="file docutils literal notranslate"><span class="pre">include/bluetooth/services/ddfs.h</span></code></div>
+<div class="line">Source file: <code class="file docutils literal notranslate"><span class="pre">subsys/bluetooth/services/ddfs.c</span></code></div>
+</div>
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="group__bt__ddfs"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">bt_ddfs</span></span></dt>
+<dd><p>API for the Direction and Distance Finding Service (DDFS). </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-defines">Defines</p>
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.BT_UUID_DDFS_VAL">
+<span class="target" id="group__bt__ddfs_1ga51920d1d08b412211a335d672d289fbb"></span><span class="sig-name descname"><span class="n"><span class="pre">BT_UUID_DDFS_VAL</span></span></span><a class="headerlink" href="#c.BT_UUID_DDFS_VAL" title="Permalink to this definition"></a><br /></dt>
+<dd><p>UUID of the DDF Service. </p>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.BT_UUID_DDFS_DISTANCE_MEAS_VAL">
+<span class="target" id="group__bt__ddfs_1ga4c35da0e4f664cd62f8dc367a94ce7f0"></span><span class="sig-name descname"><span class="n"><span class="pre">BT_UUID_DDFS_DISTANCE_MEAS_VAL</span></span></span><a class="headerlink" href="#c.BT_UUID_DDFS_DISTANCE_MEAS_VAL" title="Permalink to this definition"></a><br /></dt>
+<dd><p>UUID of the Distance Measurement Characteristic. </p>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.BT_UUID_DDFS_AZIMUTH_MEAS_VAL">
+<span class="target" id="group__bt__ddfs_1ga60edcfe9cbae1b19713ed88580021d2d"></span><span class="sig-name descname"><span class="n"><span class="pre">BT_UUID_DDFS_AZIMUTH_MEAS_VAL</span></span></span><a class="headerlink" href="#c.BT_UUID_DDFS_AZIMUTH_MEAS_VAL" title="Permalink to this definition"></a><br /></dt>
+<dd><p>UUID of the Azimuth Measurement Characteristic. </p>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.BT_UUID_DDFS_ELEVATION_MEAS_VAL">
+<span class="target" id="group__bt__ddfs_1ga2e76510b9e6574bad033b18bd2b99dbd"></span><span class="sig-name descname"><span class="n"><span class="pre">BT_UUID_DDFS_ELEVATION_MEAS_VAL</span></span></span><a class="headerlink" href="#c.BT_UUID_DDFS_ELEVATION_MEAS_VAL" title="Permalink to this definition"></a><br /></dt>
+<dd><p>UUID of the Elevation Measurement Characteristic. </p>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.BT_UUID_DDFS_FEATURE_VAL">
+<span class="target" id="group__bt__ddfs_1ga192fc66b02b2713d6b84cebda3159316"></span><span class="sig-name descname"><span class="n"><span class="pre">BT_UUID_DDFS_FEATURE_VAL</span></span></span><a class="headerlink" href="#c.BT_UUID_DDFS_FEATURE_VAL" title="Permalink to this definition"></a><br /></dt>
+<dd><p>UUID of the Feature Characteristic. </p>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.BT_UUID_DDFS_CTRL_POINT_VAL">
+<span class="target" id="group__bt__ddfs_1gace3dbbf1de5ac66395a6cf7520217b43"></span><span class="sig-name descname"><span class="n"><span class="pre">BT_UUID_DDFS_CTRL_POINT_VAL</span></span></span><a class="headerlink" href="#c.BT_UUID_DDFS_CTRL_POINT_VAL" title="Permalink to this definition"></a><br /></dt>
+<dd><p>UUID of the Control Point Characteristic. </p>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.BT_UUID_DDFS">
+<span class="target" id="group__bt__ddfs_1ga7dc88c3b987aaee59b1af85447b388df"></span><span class="sig-name descname"><span class="n"><span class="pre">BT_UUID_DDFS</span></span></span><a class="headerlink" href="#c.BT_UUID_DDFS" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.BT_UUID_DDFS_DISTANCE_MEAS">
+<span class="target" id="group__bt__ddfs_1ga4a865617948dcb83268f40fc1d10d2a9"></span><span class="sig-name descname"><span class="n"><span class="pre">BT_UUID_DDFS_DISTANCE_MEAS</span></span></span><a class="headerlink" href="#c.BT_UUID_DDFS_DISTANCE_MEAS" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.BT_UUID_DFFS_AZIMUTH_MEAS">
+<span class="target" id="group__bt__ddfs_1ga1c7ba171d7a61bf01a0cfd79921705bb"></span><span class="sig-name descname"><span class="n"><span class="pre">BT_UUID_DFFS_AZIMUTH_MEAS</span></span></span><a class="headerlink" href="#c.BT_UUID_DFFS_AZIMUTH_MEAS" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.BT_UUID_DFFS_ELEVATION_MEAS">
+<span class="target" id="group__bt__ddfs_1gae8a1c23ecbd45c65315156756daed52d"></span><span class="sig-name descname"><span class="n"><span class="pre">BT_UUID_DFFS_ELEVATION_MEAS</span></span></span><a class="headerlink" href="#c.BT_UUID_DFFS_ELEVATION_MEAS" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.BT_UUID_DDFS_FEATURE">
+<span class="target" id="group__bt__ddfs_1gad7a0e65d6d24e0c4ad65976ec8030bdf"></span><span class="sig-name descname"><span class="n"><span class="pre">BT_UUID_DDFS_FEATURE</span></span></span><a class="headerlink" href="#c.BT_UUID_DDFS_FEATURE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.BT_UUID_DFFS_CTRL_POINT">
+<span class="target" id="group__bt__ddfs_1gaa268715bfce03ce7259c10a6bcd92991"></span><span class="sig-name descname"><span class="n"><span class="pre">BT_UUID_DFFS_CTRL_POINT</span></span></span><a class="headerlink" href="#c.BT_UUID_DFFS_CTRL_POINT" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-enums">Enums</p>
+<dl class="c enum">
+<dt class="sig sig-object c" id="c.bt_ddfs_dm_ranging_mode">
+<span class="target" id="group__bt__ddfs_1gab6b44c3a3ea60e22b0c6b7061d3db7b7"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_ddfs_dm_ranging_mode</span></span></span><a class="headerlink" href="#c.bt_ddfs_dm_ranging_mode" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Ranging mode </p>
+<p><em>Values:</em></p>
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_ddfs_dm_ranging_mode.BT_DDFS_DM_RANGING_MODE_RTT">
+<span class="target" id="group__bt__ddfs_1ggab6b44c3a3ea60e22b0c6b7061d3db7b7a48b5f62f11e68b5247309b61ec9aba5b"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_DDFS_DM_RANGING_MODE_RTT</span></span></span><a class="headerlink" href="#c.bt_ddfs_dm_ranging_mode.BT_DDFS_DM_RANGING_MODE_RTT" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Round trip timing </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_ddfs_dm_ranging_mode.BT_DDFS_DM_RANGING_MODE_MCPD">
+<span class="target" id="group__bt__ddfs_1ggab6b44c3a3ea60e22b0c6b7061d3db7b7abd13f0312bedf3be38d2c5a09ee8c63f"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_DDFS_DM_RANGING_MODE_MCPD</span></span></span><a class="headerlink" href="#c.bt_ddfs_dm_ranging_mode.BT_DDFS_DM_RANGING_MODE_MCPD" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Multi-carrier phase difference </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="c enum">
+<dt class="sig sig-object c" id="c.bt_ddfs_quality">
+<span class="target" id="group__bt__ddfs_1gad6c08804045f407f32d9e106012013f9"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_ddfs_quality</span></span></span><a class="headerlink" href="#c.bt_ddfs_quality" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Measurement quality definition. </p>
+<p><em>Values:</em></p>
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_ddfs_quality.BT_DDFS_QUALITY_OK">
+<span class="target" id="group__bt__ddfs_1ggad6c08804045f407f32d9e106012013f9a07768d461785c5e1f3ae21473e771fdc"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_DDFS_QUALITY_OK</span></span></span><a class="headerlink" href="#c.bt_ddfs_quality.BT_DDFS_QUALITY_OK" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Good measurement quality </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_ddfs_quality.BT_DDFS_QUALITY_POOR">
+<span class="target" id="group__bt__ddfs_1ggad6c08804045f407f32d9e106012013f9a111e35539eb23d426b721eaa7590c6f7"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_DDFS_QUALITY_POOR</span></span></span><a class="headerlink" href="#c.bt_ddfs_quality.BT_DDFS_QUALITY_POOR" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Poor measurement quality </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_ddfs_quality.BT_DDFS_QUALITY_DO_NOT_USE">
+<span class="target" id="group__bt__ddfs_1ggad6c08804045f407f32d9e106012013f9a921b2626f9e52db0a9374d6ae54644ee"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_DDFS_QUALITY_DO_NOT_USE</span></span></span><a class="headerlink" href="#c.bt_ddfs_quality.BT_DDFS_QUALITY_DO_NOT_USE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Measurement not for use </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.bt_ddfs_quality.BT_DDFS_QUALITY_NONE">
+<span class="target" id="group__bt__ddfs_1ggad6c08804045f407f32d9e106012013f9a329aff0af673151d25e4791e4777be51"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BT_DDFS_QUALITY_NONE</span></span></span><a class="headerlink" href="#c.bt_ddfs_quality.BT_DDFS_QUALITY_NONE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Measurement quality not specified </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_ddfs_distance_measurement_notify">
+<span class="target" id="group__bt__ddfs_1ga5835144c8873bdeba06ee460fff1f04c"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_ddfs_distance_measurement_notify</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">bt_conn</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">conn</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_ddfs_distance_measurement" title="bt_ddfs_distance_measurement"><span class="n"><span class="pre">bt_ddfs_distance_measurement</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">measurement</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_ddfs_distance_measurement_notify" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Function for sending Distance Measurement value. </p>
+<p>The application calls this function after having performed a Distance Measurement. If notification has been enabled, the measurement data is encoded and sent to the client.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>conn</strong> – <strong>[in]</strong> Pointer to connection object, or NULL if sent to all connected peers. </p></li>
+<li><p><strong>measurement</strong> – <strong>[in]</strong> Pointer to new distance measurement.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><p><strong>0</strong> – If the operation was successful. Otherwise, a negative error code is returned. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_ddfs_azimuth_measurement_notify">
+<span class="target" id="group__bt__ddfs_1ga6311a2601084c9474e8e4b6a0b18851c"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_ddfs_azimuth_measurement_notify</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">bt_conn</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">conn</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_ddfs_azimuth_measurement" title="bt_ddfs_azimuth_measurement"><span class="n"><span class="pre">bt_ddfs_azimuth_measurement</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">measurement</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_ddfs_azimuth_measurement_notify" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Function for sending Azimuth Measurement value. </p>
+<p>The application calls this function after having performed an Azimuth Measurement. If notification has been enabled, the measurement data is encoded and sent to the client.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>conn</strong> – <strong>[in]</strong> Pointer to connection object, or NULL if sent to all connected peers. </p></li>
+<li><p><strong>measurement</strong> – <strong>[in]</strong> Pointer to new azimuth measurement.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><p><strong>0</strong> – If the operation was successful. Otherwise, a negative error code is returned. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_ddfs_elevation_measurement_notify">
+<span class="target" id="group__bt__ddfs_1gae5e9b6b9de91740c899338f650417687"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_ddfs_elevation_measurement_notify</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">bt_conn</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">conn</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_ddfs_elevation_measurement" title="bt_ddfs_elevation_measurement"><span class="n"><span class="pre">bt_ddfs_elevation_measurement</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">measurement</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_ddfs_elevation_measurement_notify" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Function for sending Elevation Measurement value. </p>
+<p>The application calls this function after having performed an Elevation Measurement. If notification has been enabled, the measurement data is encoded and sent to the client.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>conn</strong> – <strong>[in]</strong> Pointer to connection object, or NULL if sent to all connected peers. </p></li>
+<li><p><strong>measurement</strong> – <strong>[in]</strong> Pointer to new elevation measurement.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><p><strong>0</strong> – If the operation was successful. Otherwise, a negative error code is returned. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.bt_ddfs_init">
+<span class="target" id="group__bt__ddfs_1ga9ff200bed13ffa3ce83a3c51fa56231a"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_ddfs_init</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_ddfs_init_params" title="bt_ddfs_init_params"><span class="n"><span class="pre">bt_ddfs_init_params</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">init</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.bt_ddfs_init" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Function for initializing the Direction and Distance Finding Service. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>init</strong> – <strong>[in]</strong> Initialization parameters.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><p><strong>0</strong> – If the operation was successful. Otherwise, a negative error code is returned. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.bt_ddfs_features">
+<span class="target" id="structbt__ddfs__features"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_ddfs_features</span></span></span><a class="headerlink" href="#c.bt_ddfs_features" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;ddfs.h&gt;</em></div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ddfs_features.ranging_mode_rtt">
+<span class="target" id="structbt__ddfs__features_1a53f61ff152df79a3333e740614ec0fdc"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ranging_mode_rtt</span></span></span><a class="headerlink" href="#c.bt_ddfs_features.ranging_mode_rtt" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Distance Measurement RTT ranging mode supported bit. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ddfs_features.ranging_mode_mcpd">
+<span class="target" id="structbt__ddfs__features_1a802f78f34f2c56871b7ef7efebe0214c"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ranging_mode_mcpd</span></span></span><a class="headerlink" href="#c.bt_ddfs_features.ranging_mode_mcpd" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Distance Measurement MCPD ranging mode supported bit. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.bt_ddfs_dm_config">
+<span class="target" id="structbt__ddfs__dm__config"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_ddfs_dm_config</span></span></span><a class="headerlink" href="#c.bt_ddfs_dm_config" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;ddfs.h&gt;</em></div>
+<p>Distance Measurement configuration parameters. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ddfs_dm_config.mode">
+<span class="target" id="structbt__ddfs__dm__config_1ad44ca88b2bd5818fc3f0755d02296963"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_ddfs_dm_ranging_mode" title="bt_ddfs_dm_ranging_mode"><span class="n"><span class="pre">bt_ddfs_dm_ranging_mode</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mode</span></span></span><a class="headerlink" href="#c.bt_ddfs_dm_config.mode" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Ranging mode </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ddfs_dm_config.high_precision">
+<span class="target" id="structbt__ddfs__dm__config_1af14848c796ce773adb449a35234b972f"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">high_precision</span></span></span><a class="headerlink" href="#c.bt_ddfs_dm_config.high_precision" title="Permalink to this definition"></a><br /></dt>
+<dd><p>High-precision calculations enabled </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.bt_ddfs_cb">
+<span class="target" id="structbt__ddfs__cb"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_ddfs_cb</span></span></span><a class="headerlink" href="#c.bt_ddfs_cb" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;ddfs.h&gt;</em></div>
+<p>Pointers to the callback functions for service events. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ddfs_cb.dm_ranging_mode_set">
+<span class="target" id="structbt__ddfs__cb_1aca70d9a6c3115c6397550bfce463f2d7"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">dm_ranging_mode_set</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#c.bt_ddfs_cb.dm_ranging_mode_set" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Indicates that the ranging mode for Distance Measurement is set. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Param mode</dt>
+<dd class="field-odd"><p>New ranging mode for distance measurement.</p>
+</dd>
+<dt class="field-even">Retval 0</dt>
+<dd class="field-even"><p>If the operation was successful. Otherwise, a negative error code is returned. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ddfs_cb.dm_config_read">
+<span class="target" id="structbt__ddfs__cb_1a02082d9a5aa7cc064d2b834026cd3873"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">dm_config_read</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_ddfs_dm_config" title="bt_ddfs_dm_config"><span class="n"><span class="pre">bt_ddfs_dm_config</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#c.bt_ddfs_cb.dm_config_read" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Indicates that the configuration for Distance Measurement is read. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Param config</dt>
+<dd class="field-odd"><p>Pointer to configuration object.</p>
+</dd>
+<dt class="field-even">Retval 0</dt>
+<dd class="field-even"><p>If the operation was successful. Otherwise, a negative error code is returned. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ddfs_cb.am_notification_config_changed">
+<span class="target" id="structbt__ddfs__cb_1a13faa4dc782b58e1e290b7bd17cebddd"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">am_notification_config_changed</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n"><span class="pre">enabled</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#c.bt_ddfs_cb.am_notification_config_changed" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Azimuth Measurement state callback. </p>
+<p>Indicate the CCCD descriptor status of the Azimuth Measurement characteristic.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Param enabled</dt>
+<dd class="field-odd"><p>Azimuth Measurement notification status. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ddfs_cb.dm_notification_config_changed">
+<span class="target" id="structbt__ddfs__cb_1a38ae9737f5f204faadc115ea5106e054"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">dm_notification_config_changed</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n"><span class="pre">enabled</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#c.bt_ddfs_cb.dm_notification_config_changed" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Distance Measurement state callback. </p>
+<p>Indicate the CCCD descriptor status of the Distance Measurement characteristic.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Param enabled</dt>
+<dd class="field-odd"><p>Distance Measurement notification status. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ddfs_cb.em_notification_config_changed">
+<span class="target" id="structbt__ddfs__cb_1acb7cc5e3985f379e1821eb2edd282315"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">em_notification_config_changed</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n"><span class="pre">enabled</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#c.bt_ddfs_cb.em_notification_config_changed" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Elevation Measurement state callback. </p>
+<p>Indicate the CCCD descriptor status of the Elevation Measurement characteristic.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Param enabled</dt>
+<dd class="field-odd"><p>Elevation Measurement notification status. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.bt_ddfs_distance_measurement">
+<span class="target" id="structbt__ddfs__distance__measurement"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_ddfs_distance_measurement</span></span></span><a class="headerlink" href="#c.bt_ddfs_distance_measurement" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;ddfs.h&gt;</em></div>
+<p>Structure of distance measurement results. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ddfs_distance_measurement.quality">
+<span class="target" id="structbt__ddfs__distance__measurement_1ace5a4ac1e07df656e5d03a0cfd5bbf3e"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_ddfs_quality" title="bt_ddfs_quality"><span class="n"><span class="pre">bt_ddfs_quality</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">quality</span></span></span><a class="headerlink" href="#c.bt_ddfs_distance_measurement.quality" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Quality indicator </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ddfs_distance_measurement.bt_addr">
+<span class="target" id="structbt__ddfs__distance__measurement_1a54fe4c4f2f58b7729e4ef15384a4123b"></span><span class="n"><span class="pre">bt_addr_le_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_addr</span></span></span><a class="headerlink" href="#c.bt_ddfs_distance_measurement.bt_addr" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Bluetooth LE Device Address </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ddfs_distance_measurement.ranging_mode">
+<span class="target" id="structbt__ddfs__distance__measurement_1ad480f7f0fe9f9c05c9f6d22baa04543a"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_ddfs_dm_ranging_mode" title="bt_ddfs_dm_ranging_mode"><span class="n"><span class="pre">bt_ddfs_dm_ranging_mode</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ranging_mode</span></span></span><a class="headerlink" href="#c.bt_ddfs_distance_measurement.ranging_mode" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Mode used for ranging </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ddfs_distance_measurement.ifft">
+<span class="target" id="structbt__ddfs__distance__measurement_1a514ead4ba53b4e6f1c6edf51159a6829"></span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ifft</span></span></span><a class="headerlink" href="#c.bt_ddfs_distance_measurement.ifft" title="Permalink to this definition"></a><br /></dt>
+<dd><p>MCPD: Distance estimate based on IFFT of spectrum </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ddfs_distance_measurement.phase_slope">
+<span class="target" id="structbt__ddfs__distance__measurement_1a05400643540babaf0a20fd0711d293ed"></span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">phase_slope</span></span></span><a class="headerlink" href="#c.bt_ddfs_distance_measurement.phase_slope" title="Permalink to this definition"></a><br /></dt>
+<dd><p>MCPD: Distance estimate based on average phase slope estimation </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ddfs_distance_measurement.rssi_openspace">
+<span class="target" id="structbt__ddfs__distance__measurement_1ab09b817fe8b721e8dea843ee66eaa0ee"></span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">rssi_openspace</span></span></span><a class="headerlink" href="#c.bt_ddfs_distance_measurement.rssi_openspace" title="Permalink to this definition"></a><br /></dt>
+<dd><p>RSSI: Distance estimate based on Friis path loss formula </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ddfs_distance_measurement.best">
+<span class="target" id="structbt__ddfs__distance__measurement_1aeb68affa2cfe3d267920669e4f98f2fa"></span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">best</span></span></span><a class="headerlink" href="#c.bt_ddfs_distance_measurement.best" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Best effort distance estimate </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ddfs_distance_measurement.rtt">
+<span class="target" id="structbt__ddfs__distance__measurement_1a08d4f767ee85c93263b5efbec393ac79"></span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">rtt</span></span></span><a class="headerlink" href="#c.bt_ddfs_distance_measurement.rtt" title="Permalink to this definition"></a><br /></dt>
+<dd><p>RTT: Distance estimate based on RTT measurement </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.bt_ddfs_azimuth_measurement">
+<span class="target" id="structbt__ddfs__azimuth__measurement"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_ddfs_azimuth_measurement</span></span></span><a class="headerlink" href="#c.bt_ddfs_azimuth_measurement" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;ddfs.h&gt;</em></div>
+<p>Structure of azimuth measurement results. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ddfs_azimuth_measurement.quality">
+<span class="target" id="structbt__ddfs__azimuth__measurement_1acd231dce69f8f0f045acd7aba68287ed"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_ddfs_quality" title="bt_ddfs_quality"><span class="n"><span class="pre">bt_ddfs_quality</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">quality</span></span></span><a class="headerlink" href="#c.bt_ddfs_azimuth_measurement.quality" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Quality indicator </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ddfs_azimuth_measurement.bt_addr">
+<span class="target" id="structbt__ddfs__azimuth__measurement_1a50062322ac1cf6b8c4b481b13d08b86b"></span><span class="n"><span class="pre">bt_addr_le_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_addr</span></span></span><a class="headerlink" href="#c.bt_ddfs_azimuth_measurement.bt_addr" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Bluetooth LE Device Address </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ddfs_azimuth_measurement.value">
+<span class="target" id="structbt__ddfs__azimuth__measurement_1ad6154311d11aed91165de1e7a69449f3"></span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">value</span></span></span><a class="headerlink" href="#c.bt_ddfs_azimuth_measurement.value" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Azimuth estimate </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.bt_ddfs_elevation_measurement">
+<span class="target" id="structbt__ddfs__elevation__measurement"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_ddfs_elevation_measurement</span></span></span><a class="headerlink" href="#c.bt_ddfs_elevation_measurement" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;ddfs.h&gt;</em></div>
+<p>Structure of elevation measurement results. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ddfs_elevation_measurement.quality">
+<span class="target" id="structbt__ddfs__elevation__measurement_1a28e5e15f9c80247c44ac54efc83f3f8c"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_ddfs_quality" title="bt_ddfs_quality"><span class="n"><span class="pre">bt_ddfs_quality</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">quality</span></span></span><a class="headerlink" href="#c.bt_ddfs_elevation_measurement.quality" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Quality indicator </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ddfs_elevation_measurement.bt_addr">
+<span class="target" id="structbt__ddfs__elevation__measurement_1a86af9080b8293ade5a268bdc0fc0809c"></span><span class="n"><span class="pre">bt_addr_le_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_addr</span></span></span><a class="headerlink" href="#c.bt_ddfs_elevation_measurement.bt_addr" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Bluetooth LE Device Address </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ddfs_elevation_measurement.value">
+<span class="target" id="structbt__ddfs__elevation__measurement_1a5c78c797f41340f3d0164102fee1e6e0"></span><span class="n"><span class="pre">int8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">value</span></span></span><a class="headerlink" href="#c.bt_ddfs_elevation_measurement.value" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Elevation estimate </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.bt_ddfs_init_params">
+<span class="target" id="structbt__ddfs__init__params"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bt_ddfs_init_params</span></span></span><a class="headerlink" href="#c.bt_ddfs_init_params" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;ddfs.h&gt;</em></div>
+<p>Direction and Distance Finding Service initialization parameters. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ddfs_init_params.dm_features">
+<span class="target" id="structbt__ddfs__init__params_1a1fd8e1a9e6f303baf66a5f40a85d9d41"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_ddfs_features" title="bt_ddfs_features"><span class="n"><span class="pre">bt_ddfs_features</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dm_features</span></span></span><a class="headerlink" href="#c.bt_ddfs_init_params.dm_features" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Initial value for features. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.bt_ddfs_init_params.cb">
+<span class="target" id="structbt__ddfs__init__params_1a85e76e6d42a74474c5f2db8122c49619"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.bt_ddfs_cb" title="bt_ddfs_cb"><span class="n"><span class="pre">bt_ddfs_cb</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">cb</span></span></span><a class="headerlink" href="#c.bt_ddfs_init_params.cb" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Callback functions structure. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="dfu_smp.html" class="btn btn-neutral float-right" title="GATT DFU SMP Service Client" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="cts_client.html" class="btn btn-neutral" title="GATT Current Time Service (CTS) Client" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

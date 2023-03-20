@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Adding Wi-Fi Coexistence support to short-range radio applications &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../_static/js/ncs.js"
+></script>
+<script src="../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Security" href="../../security.html" />
+    <link rel="prev" title="Working with RF front-end modules" href="../working_with_fem/index.html" />
+<link
+  href="../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev_model.html">Development model</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../app_dev.html">Application development</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../board_support/index.html">Board support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pin_control/index.html">Pin control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../build_and_config_system/index.html">Build and configuration system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../optimizing/index.html">Optimizing application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ap_protect/index.html">Enabling access port protection mechanism</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bootloaders_and_dfu/index.html">Bootloaders and Device Firmware Updates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../logging/index.html">Logging in nRF Connect SDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multi_image/index.html">Multi-image builds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../testing_unity_cmock/index.html">Testing with Unity and CMock</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tfm/index.html">Running applications with Trusted Firmware-M</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_fem/index.html">Working with RF front-end modules</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Adding Wi-Fi Coexistence support to short-range radio applications</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#requirements">Requirements</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#wi-fi-coexistence-and-mpsl">Wi-Fi Coexistence and MPSL</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#hardware-description">Hardware description</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#nrf700x-coexistence-hardware-interface">nRF700x Coexistence hardware interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#generic-three-wire-coexistence-hardware-interface">Generic three wire Coexistence hardware interface</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#wi-fi-coexistence-implementations">Wi-Fi Coexistence implementations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#nrf700x-interface-implementation">nRF700x interface implementation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#thread-implementation"><em>Thread</em> implementation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#custom-user-implementations">Custom user implementations</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drivers.html">Drivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../app_dev.html">Application development</a></li>
+      <li class="breadcrumb-item active">Adding Wi-Fi Coexistence support to short-range radio applications</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/app_dev/wifi_coex/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="adding-wi-fi-coexistence-support-to-short-range-radio-applications">
+<span id="ug-radio-coex"></span><h1>Adding Wi-Fi Coexistence support to short-range radio applications<a class="headerlink" href="#adding-wi-fi-coexistence-support-to-short-range-radio-applications" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#requirements" id="id6">Requirements</a></p>
+<ul>
+<li><p><a class="reference internal" href="#wi-fi-coexistence-and-mpsl" id="id7">Wi-Fi Coexistence and MPSL</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#hardware-description" id="id8">Hardware description</a></p>
+<ul>
+<li><p><a class="reference internal" href="#nrf700x-coexistence-hardware-interface" id="id9">nRF700x Coexistence hardware interface</a></p></li>
+<li><p><a class="reference internal" href="#generic-three-wire-coexistence-hardware-interface" id="id10">Generic three wire Coexistence hardware interface</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#wi-fi-coexistence-implementations" id="id11">Wi-Fi Coexistence implementations</a></p>
+<ul>
+<li><p><a class="reference internal" href="#nrf700x-interface-implementation" id="id12">nRF700x interface implementation</a></p></li>
+<li><p><a class="reference internal" href="#thread-implementation" id="id13"><em>Thread</em> implementation</a></p></li>
+<li><p><a class="reference internal" href="#custom-user-implementations" id="id14">Custom user implementations</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>This guide describes how to add Wi-Fi Coexistence (CX) support to your short-range radio application in nRF Connect SDK.</p>
+<p>Short-range RF technologies (here referred to as SR), such as Bluetooth LE or 802.15.4, use different radios than Wi-Fi.
+However, if both SR and Wi-Fi attempt to transmit simultaneously, the radio frequency (RF) waves interfere with each other, causing decreased performance and unneeded higher power consumption.
+Also, in cases like receiving an acknowledgment (ACK), radios should not transmit to ensure correct reception.</p>
+<p>These issues are defined as coexistence issues.
+To mitigate these issues and to improve performance, a Packet Traffic Arbiter (PTA) is used.
+When both SR and Wi-Fi request access to RF, the Packet Traffic Arbiter grants or denies that access.</p>
+<section id="requirements">
+<span id="ug-radio-cx-software-support"></span><h2><a class="toc-backref" href="#id6">Requirements</a><a class="headerlink" href="#requirements" title="Permalink to this heading"></a></h2>
+<p>If your application uses SR protocols and requires coexistence with Wi-Fi, you must enable <span class="xref std std-ref">nrfxlib:mpsl_cx</span> in the <span class="xref std std-ref">nrfxlib:mpsl</span> (MPSL) library.</p>
+<section id="wi-fi-coexistence-and-mpsl">
+<h3><a class="toc-backref" href="#id7">Wi-Fi Coexistence and MPSL</a><a class="headerlink" href="#wi-fi-coexistence-and-mpsl" title="Permalink to this heading"></a></h3>
+<p>The MPSL library provides an implementation of the Wi-Fi Coexistence for SR applications.
+To use this implementation, your application must use a protocol driver that enables the Wi-Fi Coexistence (CX) feature.
+The library provides multiprotocol support, but you can also use it in applications that require only one protocol.</p>
+<p>Currently, the following protocols use the Wi-Fi Coexistence support provided by MPSL:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference internal" href="../../protocols/thread/index.html#ug-thread"><span class="std std-ref">Thread</span></a></p></li>
+<li><p><a class="reference internal" href="../../protocols/zigbee/index.html#ug-zigbee"><span class="std std-ref">Zigbee</span></a></p></li>
+</ul>
+</div></blockquote>
+<section id="enabling-mpsl">
+<span id="ug-radio-cx-requirements"></span><h4>Enabling MPSL<a class="headerlink" href="#enabling-mpsl" title="Permalink to this heading"></a></h4>
+<p>The MPSL library provides an API to handle signals coming from the PTA and to control requests sent to PTA.
+See the <span class="xref std std-ref">nrfxlib:mpsl_lib</span> in the nrfxlib documentation for details.</p>
+<p>Enable support for the MPSL implementation in nRF Connect SDK by setting the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MPSL</span></code> Kconfig option to <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When using the nRF5340, add the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MPSL</span></code> option only for the NET core.</p>
+</div>
+</section>
+<section id="enabling-wi-fi-coexistence">
+<h4>Enabling Wi-Fi Coexistence<a class="headerlink" href="#enabling-wi-fi-coexistence" title="Permalink to this heading"></a></h4>
+<p>To enable Wi-Fi Coexistence, do as follows:</p>
+<ol class="arabic simple">
+<li><p>Set the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MPSL_CX</span></code> Kconfig option to <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p></li>
+<li><p>Select the specific Coexistence implementation.
+See <a class="reference internal" href="#ug-radio-cx-wifi-coex-impls"><span class="std std-ref">Wi-Fi Coexistence implementations</span></a> for details about the implementations currently supported.</p></li>
+<li><p>On the nRF5340, you must apply the settings to the Kconfig options mentioned in steps 1 and 2 also to the network core.
+See <a class="reference internal" href="../multi_image/index.html#ug-multi-image"><span class="std std-ref">Multi-image builds</span></a>.</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When using the <a class="reference internal" href="#ug-radio-cx-nrf700x-impl"><span class="std std-ref">nRF700x interface implementation</span></a>, you do not need to select the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MPSL_CX_NRF700X</span></code> Kconfig option manually.
+If a <code class="docutils literal notranslate"><span class="pre">nordic,nrf700x-coex</span></code> compatible node is present in the device tree and <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MPSL_CX</span></code> is set to <code class="docutils literal notranslate"><span class="pre">y</span></code>, <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">MPSL_CX_NRF700X</span></code> will be selected by default.</p>
+</div>
+</section>
+</section>
+</section>
+<section id="hardware-description">
+<span id="ug-radio-cx-hardware-description"></span><h2><a class="toc-backref" href="#id8">Hardware description</a><a class="headerlink" href="#hardware-description" title="Permalink to this heading"></a></h2>
+<p>The nRF Connect SDK provides a wrapper that configures Wi-Fi Coexistence based on devicetree (DTS) and Kconfig information.</p>
+<p>To enable CX support for the currently supported CX implementation, you must add an <code class="docutils literal notranslate"><span class="pre">nrf_radio_coex</span></code> node in the devicetree source file.
+You can also provide the node using the devicetree source file of the target board or an overlay file.
+See <span class="xref std std-ref">zephyr:dt-guide</span> for more information about the DTS data structure, and <span class="xref std std-ref">zephyr:dt_vs_kconfig</span> for information about differences between DTS and Kconfig.</p>
+<p>The following CX hardware interfaces are currently supported:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#ug-radio-cx-nrf700x-hw-if"><span class="std std-ref">nRF700x Coexistence hardware interface</span></a></p></li>
+<li><p><a class="reference internal" href="#ug-radio-cx-generic-3-wire-hw-if"><span class="std std-ref">Generic three wire Coexistence hardware interface</span></a></p></li>
+</ul>
+<p>Both supported hardware interfaces can be used when a three-wire interface to the PTA is provided (like the one shown in the following image).
+However, the role of each of the pins is dependent on the Wi-Fi Coexistence implementation used.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>When using one of the supported implementations, you must use the <code class="docutils literal notranslate"><span class="pre">nrf_radio_coex</span></code> name for the node.
+However, if you add a custom user implementation, you can also use a different name.</p></li>
+<li><p>You can add a new device binding and use it as the <code class="docutils literal notranslate"><span class="pre">compatible</span></code> property for the node, if the provided hardware interfaces are unsuitable.</p></li>
+</ul>
+</div>
+<figure class="align-default">
+<img alt="PTA interface supported by the ``nrf_radio_coex`` node with an nRF52 Series SoC" src="../../_images/coex_generic_3pin_pta.svg" /></figure>
+<section id="nrf700x-coexistence-hardware-interface">
+<span id="ug-radio-cx-nrf700x-hw-if"></span><h3><a class="toc-backref" href="#id9">nRF700x Coexistence hardware interface</a><a class="headerlink" href="#nrf700x-coexistence-hardware-interface" title="Permalink to this heading"></a></h3>
+<p>To configure the hardware for a PTA inside the nRF700x series chips:</p>
+<ol class="arabic">
+<li><p>Add the following node in the devicetree source file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span> <span class="p">{</span>
+      <span class="n">nrf_radio_coex</span><span class="p">:</span> <span class="n">nrf7002</span><span class="o">-</span><span class="n">coex</span> <span class="p">{</span>
+         <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;okay&quot;</span><span class="p">;</span>
+         <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;nordic,nrf700x-coex&quot;</span><span class="p">;</span>
+         <span class="n">req</span><span class="o">-</span><span class="n">gpios</span> <span class="o">=</span>     <span class="o">&lt;&amp;</span><span class="n">gpio0</span> <span class="mi">24</span> <span class="p">(</span><span class="n">GPIO_ACTIVE_HIGH</span><span class="p">)</span><span class="o">&gt;</span><span class="p">;</span>
+         <span class="n">status0</span><span class="o">-</span><span class="n">gpios</span> <span class="o">=</span> <span class="o">&lt;&amp;</span><span class="n">gpio0</span> <span class="mi">14</span> <span class="p">(</span><span class="n">GPIO_ACTIVE_HIGH</span><span class="p">)</span><span class="o">&gt;</span><span class="p">;</span>
+         <span class="n">grant</span><span class="o">-</span><span class="n">gpios</span> <span class="o">=</span>   <span class="o">&lt;&amp;</span><span class="n">gpio0</span> <span class="mi">25</span> <span class="p">(</span><span class="n">GPIO_ACTIVE_HIGH</span> <span class="o">|</span> <span class="n">GPIO_PULL_UP</span><span class="p">)</span><span class="o">&gt;</span><span class="p">;</span>
+   <span class="p">};</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</li>
+<li><p>Optionally replace the node name <code class="docutils literal notranslate"><span class="pre">nrf7002-coex</span></code> with a custom one.</p></li>
+<li><p>Replace the pin numbers provided for each of the required properties:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">req-gpios</span></code> - GPIO characteristic of the device that controls the <code class="docutils literal notranslate"><span class="pre">REQUEST</span></code> signal of the PTA.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">status0-gpios</span></code> - GPIO characteristic of the device that controls the <code class="docutils literal notranslate"><span class="pre">PRIORITY</span></code> signal of the PTA.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">grant-gpios</span></code> - GPIO characteristic of the device that controls the <code class="docutils literal notranslate"><span class="pre">GRANT</span></code> signal of the PTA (RF medium access granted).
+Note that <code class="docutils literal notranslate"><span class="pre">GPIO_PULL_UP</span></code> is added to avoid a floating input pin and is required on some boards only.
+If the target board is designed to avoid this signal being left floating, you can remove <code class="docutils literal notranslate"><span class="pre">GPIO_PULL_UP</span></code> to save power.</p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">phandle-array</span></code> type is used, as it is commonly used in Zephyr’s devicetree to describe GPIO signals.
+The first element <code class="docutils literal notranslate"><span class="pre">&amp;gpio0</span></code> indicates the GPIO port (<code class="docutils literal notranslate"><span class="pre">port</span> <span class="pre">0</span></code> has been selected in the example shown).
+The second element is the pin number on that port.</p>
+</li>
+<li><p>On the nRF5340, you must also apply the same devicetree node mentioned in step 1 to the network core.
+To do so, apply the overlay to the correct network-core child image by creating an overlay file named <code class="file docutils literal notranslate"><span class="pre">child_image/*childImageName*.overlay</span></code> in your application directory, for example <code class="file docutils literal notranslate"><span class="pre">child_image/multiprotocol_rpmsg.overlay</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">*childImageName*</span></code> string must assume one of the following values:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">multiprotocol_rpmsg</span></code> for multiprotocol applications having support for both 802.15.4 and Bluetooth.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">802154_rpmsg</span></code> for applications having support for 802.15.4, but not for Bluetooth.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hci_rpmsg</span></code> for application having support for Bluetooth, but not for 802.15.4.</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="generic-three-wire-coexistence-hardware-interface">
+<span id="ug-radio-cx-generic-3-wire-hw-if"></span><h3><a class="toc-backref" href="#id10">Generic three wire Coexistence hardware interface</a><a class="headerlink" href="#generic-three-wire-coexistence-hardware-interface" title="Permalink to this heading"></a></h3>
+<p>To configure the hardware for a PTA using a 3-wire interface:</p>
+<ol class="arabic">
+<li><p>Add the following node in the devicetree source file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span> <span class="p">{</span>
+      <span class="n">nrf_radio_coex</span><span class="p">:</span> <span class="n">radio_coex_three_wire</span> <span class="p">{</span>
+         <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;okay&quot;</span><span class="p">;</span>
+         <span class="n">compatible</span> <span class="o">=</span> <span class="s2">&quot;generic-radio-coex-three-wire&quot;</span><span class="p">;</span>
+         <span class="n">req</span><span class="o">-</span><span class="n">gpios</span> <span class="o">=</span>     <span class="o">&lt;&amp;</span><span class="n">gpio0</span> <span class="mi">24</span> <span class="p">(</span><span class="n">GPIO_ACTIVE_HIGH</span><span class="p">)</span><span class="o">&gt;</span><span class="p">;</span>
+         <span class="n">pri</span><span class="o">-</span><span class="nb">dir</span><span class="o">-</span><span class="n">gpios</span> <span class="o">=</span> <span class="o">&lt;&amp;</span><span class="n">gpio0</span> <span class="mi">14</span> <span class="p">(</span><span class="n">GPIO_ACTIVE_HIGH</span><span class="p">)</span><span class="o">&gt;</span><span class="p">;</span>
+         <span class="n">grant</span><span class="o">-</span><span class="n">gpios</span> <span class="o">=</span>   <span class="o">&lt;&amp;</span><span class="n">gpio0</span> <span class="mi">25</span> <span class="p">(</span><span class="n">GPIO_ACTIVE_HIGH</span> <span class="o">|</span> <span class="n">GPIO_PULL_UP</span><span class="p">)</span><span class="o">&gt;</span><span class="p">;</span>
+   <span class="p">};</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</li>
+<li><p>Optionally replace the node name <code class="docutils literal notranslate"><span class="pre">radio_coex_three_wire</span></code> with a custom one.</p></li>
+<li><p>Replace the pin numbers provided for each of the required properties:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">req-gpios</span></code> - GPIO characteristic of the device that controls the <code class="docutils literal notranslate"><span class="pre">REQUEST</span></code> signal of the PTA.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pri-dir-gpios</span></code> - GPIO characteristic of the device that controls the <code class="docutils literal notranslate"><span class="pre">PRIORITY</span></code> signal of the PTA.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">grant-gpios</span></code> - GPIO characteristic of the device that controls the <code class="docutils literal notranslate"><span class="pre">GRANT</span></code> signal of the PTA (RF medium access granted).
+Note that <code class="docutils literal notranslate"><span class="pre">GPIO_PULL_UP</span></code> is added to avoid a floating input pin and is required on some boards only.
+If the target board is designed to avoid this signal being left floating, you can remove <code class="docutils literal notranslate"><span class="pre">GPIO_PULL_UP</span></code> to save power.</p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">phandle-array</span></code> type is used, as it is commonly used in Zephyr’s devicetree to describe GPIO signals.
+The first element <code class="docutils literal notranslate"><span class="pre">&amp;gpio0</span></code> indicates the GPIO port (<code class="docutils literal notranslate"><span class="pre">port</span> <span class="pre">0</span></code> has been selected in the example shown).
+The second element is the pin number on that port.</p>
+</li>
+<li><p>On the nRF5340, you must also apply the same devicetree node mentioned in step 1 to the network core.
+To do so, apply the overlay to the correct network-core child image by creating an overlay file named <code class="file docutils literal notranslate"><span class="pre">child_image/*childImageName*.overlay</span></code> in your application directory, for example <code class="file docutils literal notranslate"><span class="pre">child_image/multiprotocol_rpmsg.overlay</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">*childImageName*</span></code> string must assume one of the following values:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">multiprotocol_rpmsg</span></code> for multiprotocol applications having support for both 802.15.4 and Bluetooth.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">802154_rpmsg</span></code> for applications having support for 802.15.4, but not for Bluetooth.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hci_rpmsg</span></code> for application having support for Bluetooth, but not for 802.15.4.</p></li>
+</ul>
+</li>
+</ol>
+</section>
+</section>
+<section id="wi-fi-coexistence-implementations">
+<span id="ug-radio-cx-wifi-coex-impls"></span><h2><a class="toc-backref" href="#id11">Wi-Fi Coexistence implementations</a><a class="headerlink" href="#wi-fi-coexistence-implementations" title="Permalink to this heading"></a></h2>
+<p>The following CX implementations are available:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#ug-radio-cx-nrf700x-impl"><span class="std std-ref">nRF700x interface implementation</span></a></p></li>
+<li><p><a class="reference internal" href="#ug-radio-cx-thread-impl"><span class="std std-ref">Thread implementation</span></a></p></li>
+</ul>
+<p>Each implementation is a plugin composed of one or more C source files interfacing with the MPSL API, which, in turn, communicates with the SR protocol drivers.</p>
+<p>When one of the CX variants is enabled, the driver requests access to the RF medium from the PTA and informs it about the operation it is about to perform.
+It also reacts properly to the information from the PTA that access to the RF medium was either granted or denied.</p>
+<section id="nrf700x-interface-implementation">
+<span id="ug-radio-cx-nrf700x-impl"></span><h3><a class="toc-backref" href="#id12">nRF700x interface implementation</a><a class="headerlink" href="#nrf700x-interface-implementation" title="Permalink to this heading"></a></h3>
+<p>This implementation uses the following pins to communicate with the PTA:</p>
+<ul class="simple">
+<li><p>REQUEST pin - It is the output controlled by the protocol driver.
+It is asserted to request RF access from the PTA.
+It can be configured by setting the <code class="docutils literal notranslate"><span class="pre">req-gpios</span></code> property of the <code class="docutils literal notranslate"><span class="pre">nrf_radio_coex</span></code> devicetree node.</p></li>
+<li><p>PRIORITY pin - It is the output controlled by the protocol driver.
+It contains information about the type of operation (either RX or TX) to perform.
+It can be configured by setting the <code class="docutils literal notranslate"><span class="pre">status0-gpios</span></code> property of the <code class="docutils literal notranslate"><span class="pre">nrf_radio_coex</span></code> devicetree node.</p></li>
+<li><p>GRANT pin - It is the input of the SoC controlled by the PTA.
+It asserts when PTA grants access to the RF to the 802.15.4 and deasserts when it denies the access.
+It can be configured by setting the <code class="docutils literal notranslate"><span class="pre">grant-gpios</span></code> property of the <code class="docutils literal notranslate"><span class="pre">nrf_radio_coex</span></code> devicetree node.</p></li>
+</ul>
+<p>The support for this interface is provided in a single-file plugin located in the sdk-nrf repo, in the <code class="file docutils literal notranslate"><span class="pre">subsys/mpsl/cx</span></code> directory.</p>
+<section id="adding-support-for-the-cx-nrf700x-interface">
+<h4>Adding support for the CX nRF700x interface<a class="headerlink" href="#adding-support-for-the-cx-nrf700x-interface" title="Permalink to this heading"></a></h4>
+<p>The nRF700x interface is supported out of the box.
+To use it, complete the following steps:</p>
+<ol class="arabic simple">
+<li><p>Add the devicetree <cite>nrf_radio_coex</cite> node as described in <a class="reference internal" href="#ug-radio-cx-nrf700x-hw-if"><span class="std std-ref">nRF700x Coexistence hardware interface</span></a>.</p></li>
+<li><p>Set the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MPSL_CX</span></code> Kconfig option to <code class="docutils literal notranslate"><span class="pre">y</span></code>.
+On the nRF5340, you must apply the Kconfig option also to the network core.</p></li>
+</ol>
+</section>
+</section>
+<section id="thread-implementation">
+<span id="ug-radio-cx-thread-impl"></span><h3><a class="toc-backref" href="#id13"><em>Thread</em> implementation</a><a class="headerlink" href="#thread-implementation" title="Permalink to this heading"></a></h3>
+<p>This implementation uses the following pins to communicate with the PTA:</p>
+<ul class="simple">
+<li><p>REQUEST pin - it is the output controlled by the protocol driver.
+It is asserted to request RF access from the PTA.
+It can be configured by setting the <code class="docutils literal notranslate"><span class="pre">req-gpios</span></code> property of the <code class="docutils literal notranslate"><span class="pre">nrf_radio_coex</span></code> devicetree node.</p></li>
+<li><p>PRIORITY pin - it is the output controlled by the protocol driver.
+It is asserted if the operation priority is high and deasserted if it is low.
+It can be configured by setting the <code class="docutils literal notranslate"><span class="pre">pri-dir-gpios</span></code> property of the <code class="docutils literal notranslate"><span class="pre">nrf_radio_coex</span></code> devicetree node.</p></li>
+<li><p>GRANT pin - it is the input of the SoC controlled by the PTA.
+It asserts when PTA grants access to the RF to the 802.15.4 and deasserts when it denies the access.
+It can be configured by setting the <code class="docutils literal notranslate"><span class="pre">grant-gpios</span></code> property of the <code class="docutils literal notranslate"><span class="pre">nrf_radio_coex</span></code> devicetree node.</p></li>
+</ul>
+<p>The support for this interface is provided in a single-file plugin located in the sdk-nrf repo, in the <code class="file docutils literal notranslate"><span class="pre">subsys/mpsl/cx</span></code> directory.</p>
+<section id="adding-support-for-the-cx-thread-interface">
+<h4>Adding support for the CX <em>Thread</em> interface<a class="headerlink" href="#adding-support-for-the-cx-thread-interface" title="Permalink to this heading"></a></h4>
+<p>To use the <em>Thread</em> interface PTA, complete the following steps:</p>
+<ol class="arabic simple">
+<li><p>Set the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_MPSL_CX_THREAD</span></code> Kconfig option to <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p></li>
+<li><p>Add the devicetree <cite>nrf_radio_coex</cite> node as described in <a class="reference internal" href="#ug-radio-cx-hardware-description"><span class="std std-ref">Hardware description</span></a>.</p></li>
+</ol>
+</section>
+</section>
+<section id="custom-user-implementations">
+<h3><a class="toc-backref" href="#id14">Custom user implementations</a><a class="headerlink" href="#custom-user-implementations" title="Permalink to this heading"></a></h3>
+<p>Implementing a custom user CX implementation is described in <span class="xref std std-ref">nrfxlib:mpsl_cx</span>.
+If the <code class="docutils literal notranslate"><span class="pre">nrf_radio_coex</span></code> devicetree node is not sufficient for the implementation, you must add a custom devicetree node.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../security.html" class="btn btn-neutral float-right" title="Security" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../working_with_fem/index.html" class="btn btn-neutral" title="Working with RF front-end modules" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

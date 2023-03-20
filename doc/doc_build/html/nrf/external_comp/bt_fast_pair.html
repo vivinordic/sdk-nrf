@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Using Google Fast Pair with the nRF Connect SDK &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../_static/js/ncs.js"
+></script>
+<script src="../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Edge Impulse integration" href="edge_impulse.html" />
+    <link rel="prev" title="Bluetooth external radio coexistence integration" href="bt_coex.html" />
+<link
+  href="../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../ecosystem_integration.html">Ecosystems integration</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="bt_coex.html">Bluetooth external radio coexistence integration</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Using Google Fast Pair with the nRF Connect SDK</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#integrating-fast-pair">Integrating Fast Pair</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#provisioning-the-device">Provisioning the device</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#registering-fast-pair-provider">Registering Fast Pair Provider</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#provisioning-registration-data-onto-device">Provisioning registration data onto device</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#setting-up-bluetooth-le-advertising">Setting up Bluetooth LE advertising</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#advertising-data-and-parameters">Advertising data and parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fast-pair-advertising-data-provider">Fast Pair advertising data provider</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#advertising-tx-power">Advertising TX power</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#setting-up-gatt-service">Setting up GATT service</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="edge_impulse.html">Edge Impulse integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="memfault.html">Memfault integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="avsystem.html">AVSystem integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nrf_cloud.html">Using nRF Cloud with the nRF Connect SDK</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../protocols.html">Protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../drivers.html">Drivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../ecosystem_integration.html">Ecosystems integration</a></li>
+      <li class="breadcrumb-item active">Using Google Fast Pair with the nRF Connect SDK</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/external_comp/bt_fast_pair.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="using-google-fast-pair-with-the-ncs">
+<span id="ug-bt-fast-pair"></span><h1>Using Google Fast Pair with the nRF Connect SDK<a class="headerlink" href="#using-google-fast-pair-with-the-ncs" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#integrating-fast-pair" id="id6">Integrating Fast Pair</a></p></li>
+<li><p><a class="reference internal" href="#provisioning-the-device" id="id7">Provisioning the device</a></p>
+<ul>
+<li><p><a class="reference internal" href="#registering-fast-pair-provider" id="id8">Registering Fast Pair Provider</a></p></li>
+<li><p><a class="reference internal" href="#provisioning-registration-data-onto-device" id="id9">Provisioning registration data onto device</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#setting-up-bluetooth-le-advertising" id="id10">Setting up Bluetooth LE advertising</a></p>
+<ul>
+<li><p><a class="reference internal" href="#advertising-data-and-parameters" id="id11">Advertising data and parameters</a></p></li>
+<li><p><a class="reference internal" href="#fast-pair-advertising-data-provider" id="id12">Fast Pair advertising data provider</a></p></li>
+<li><p><a class="reference internal" href="#advertising-tx-power" id="id13">Advertising TX power</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#setting-up-gatt-service" id="id14">Setting up GATT service</a></p></li>
+</ul>
+</div>
+<p>Google Fast Pair is a standard for pairing Bluetooth® and Bluetooth Low Energy (LE) devices with as little user interaction required as possible.
+Google also provides additional features built upon the Fast Pair standard.
+For detailed information about supported functionalities, see the official <a class="reference external" href="https://developers.google.com/nearby/fast-pair/specifications/introduction">Fast Pair</a> documentation.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The Fast Pair support in the nRF Connect SDK is <a class="reference internal" href="../software_maturity.html#software-maturity"><span class="std std-ref">experimental</span></a>.
+The implementation is not yet ready for production and extensions are not fully supported.</p>
+<p>The implementation passes Fast Pair Validator (beta version) tests.
+The procedure triggered in Android settings is successful (tested with Android 11).</p>
+</div>
+<section id="integrating-fast-pair">
+<span id="ug-integrating-fast-pair"></span><h2><a class="toc-backref" href="#id6">Integrating Fast Pair</a><a class="headerlink" href="#integrating-fast-pair" title="Permalink to this heading"></a></h2>
+<p>The Fast Pair standard integration in the nRF Connect SDK consists of the following steps:</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#ug-bt-fast-pair-provisioning"><span class="std std-ref">Provisioning the device</span></a></p></li>
+<li><p><a class="reference internal" href="#ug-bt-fast-pair-advertising"><span class="std std-ref">Setting up Bluetooth LE advertising</span></a></p></li>
+<li><p><a class="reference internal" href="#ug-bt-fast-pair-gatt-service"><span class="std std-ref">Setting up GATT service</span></a></p></li>
+</ol>
+<p>These steps are described in the following sections.</p>
+<p>The Fast Pair standard implementation in the nRF Connect SDK integrates Fast Pair Provider, one of the available <a class="reference external" href="https://developers.google.com/nearby/fast-pair/specifications/configuration#roles">Fast Pair roles</a>.
+For an integration example, see the <a class="reference internal" href="../samples/bluetooth/peripheral_fast_pair/README.html#peripheral-fast-pair"><span class="std std-ref">Bluetooth: Fast Pair</span></a> sample.</p>
+</section>
+<section class="numbered-step" id="provisioning-the-device">
+<span id="ug-bt-fast-pair-provisioning"></span><h2><a class="toc-backref" href="#id7">Provisioning the device</a><a class="headerlink" href="#provisioning-the-device" title="Permalink to this heading"></a></h2>
+<p>A device model must be registered with Google to work as a Fast Pair Provider.
+The data is used for procedures defined by the Fast Pair standard.</p>
+<section id="registering-fast-pair-provider">
+<h3><a class="toc-backref" href="#id8">Registering Fast Pair Provider</a><a class="headerlink" href="#registering-fast-pair-provider" title="Permalink to this heading"></a></h3>
+<p>See the official <a class="reference external" href="https://developers.google.com/nearby/fast-pair/specifications/service/modelregistration">Fast Pair Model Registration</a> documentation for information how to register the device and obtain the Model ID and Anti-Spoofing Public/Private Key pair.</p>
+</section>
+<section id="provisioning-registration-data-onto-device">
+<h3><a class="toc-backref" href="#id9">Provisioning registration data onto device</a><a class="headerlink" href="#provisioning-registration-data-onto-device" title="Permalink to this heading"></a></h3>
+<p>The Fast Pair standard requires provisioning the device with Model ID and Anti-Spoofing Private Key obtained during device model registration.
+In the nRF Connect SDK, the provisioning data is generated as a hexadecimal file using the <a class="reference internal" href="../scripts/nrf_provision/fast_pair/README.html#bt-fast-pair-provision-script"><span class="std std-ref">Fast Pair provision script</span></a>.</p>
+<p>If Fast Pair is enabled with the <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_FAST_PAIR</span></code> Kconfig option, the Fast Pair provision script is called automatically by the build system and the resulting hexadecimal file is automatically added to the firmware (that is, to the <code class="file docutils literal notranslate"><span class="pre">merged.hex</span></code> file).
+You must provide the following CMake options:</p>
+<ul class="simple">
+<li><p><code class="xref c c-macro docutils literal notranslate"><span class="pre">FP_MODEL_ID</span></code> - Fast Pair Model ID in format <code class="docutils literal notranslate"><span class="pre">0xXXXXXX</span></code>,</p></li>
+<li><p><code class="xref c c-macro docutils literal notranslate"><span class="pre">FP_ANTI_SPOOFING_KEY</span></code> - base64-encoded Fast Pair Anti-Spoofing Private Key.</p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">bt_fast_pair</span></code> partition address is provided automatically by the build system.</p>
+<p>For example, when building an application with the nRF Connect for VS Code extension, you need to add the following parameters in the <strong>Extra CMake arguments</strong> field on the <strong>Add Build Configuration view</strong>: <code class="docutils literal notranslate"><span class="pre">-DFP_MODEL_ID=0xFFFFFF</span> <span class="pre">-DFP_ANTI_SPOOFING_KEY=AbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbA=</span></code>.
+Make sure to replace <code class="docutils literal notranslate"><span class="pre">0xFFFFFF</span></code> and <code class="docutils literal notranslate"><span class="pre">AbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbA=</span></code> with values obtained for your device.
+See <a class="reference internal" href="../getting_started/modifying.html#cmake-options"><span class="std std-ref">Providing CMake options</span></a> for more information about defining CMake options.</p>
+</section>
+</section>
+<section class="numbered-step" id="setting-up-bluetooth-le-advertising">
+<span id="ug-bt-fast-pair-advertising"></span><h2><a class="toc-backref" href="#id10">Setting up Bluetooth LE advertising</a><a class="headerlink" href="#setting-up-bluetooth-le-advertising" title="Permalink to this heading"></a></h2>
+<p>The Fast Pair Provider must include Fast Pair service advertising data in the advertising payload.
+The Fast Pair Seeker must also know the Provider’s transmit power to determine proximity.</p>
+<section id="advertising-data-and-parameters">
+<h3><a class="toc-backref" href="#id11">Advertising data and parameters</a><a class="headerlink" href="#advertising-data-and-parameters" title="Permalink to this heading"></a></h3>
+<p>The Fast Pair service implementation provides API to generate the advertising data for both discoverable and not discoverable advertising:</p>
+<dl>
+<dt><a class="reference internal" href="../libraries/bluetooth_services/services/fast_pair.html#c.bt_fast_pair_adv_data_size" title="bt_fast_pair_adv_data_size"><code class="xref c c-func docutils literal notranslate"><span class="pre">bt_fast_pair_adv_data_size()</span></code></a>, <a class="reference internal" href="../libraries/bluetooth_services/services/fast_pair.html#c.bt_fast_pair_adv_data_fill" title="bt_fast_pair_adv_data_fill"><code class="xref c c-func docutils literal notranslate"><span class="pre">bt_fast_pair_adv_data_fill()</span></code></a></dt><dd><p>These functions are used to check the buffer size required for the advertising data and fill the buffer with data.
+Managing memory used for the advertising packets is a responsibility of the application.
+Make sure that these functions are called by the application from the cooperative context to ensure that not discoverable advertising data generation is not preempted by an Account Key write operation from a connected Fast Pair Seeker.
+Account Keys are used to generate not discoverable advertising data.
+Special battery data can be included in not discoverable advertising packet using the Fast Pair Battery Notification extension.
+To use this extension, ensure the following:</p>
+<ol class="arabic simple">
+<li><p>Call <a class="reference internal" href="../libraries/bluetooth_services/services/fast_pair.html#c.bt_fast_pair_battery_set" title="bt_fast_pair_battery_set"><code class="xref c c-func docutils literal notranslate"><span class="pre">bt_fast_pair_battery_set()</span></code></a> to provide battery information.</p></li>
+<li><p>Set <a class="reference internal" href="../libraries/bluetooth_services/services/fast_pair.html#c.bt_fast_pair_adv_config.adv_battery_mode" title="bt_fast_pair_adv_config.adv_battery_mode"><code class="xref c c-member docutils literal notranslate"><span class="pre">bt_fast_pair_adv_config.adv_battery_mode</span></code></a> to either <a class="reference internal" href="../libraries/bluetooth_services/services/fast_pair.html#c.bt_fast_pair_adv_battery_mode.BT_FAST_PAIR_ADV_BATTERY_MODE_SHOW_UI_IND" title="BT_FAST_PAIR_ADV_BATTERY_MODE_SHOW_UI_IND"><code class="xref c c-enum docutils literal notranslate"><span class="pre">BT_FAST_PAIR_ADV_BATTERY_MODE_SHOW_UI_IND</span></code></a> or <a class="reference internal" href="../libraries/bluetooth_services/services/fast_pair.html#c.bt_fast_pair_adv_battery_mode.BT_FAST_PAIR_ADV_BATTERY_MODE_HIDE_UI_IND" title="BT_FAST_PAIR_ADV_BATTERY_MODE_HIDE_UI_IND"><code class="xref c c-enum docutils literal notranslate"><span class="pre">BT_FAST_PAIR_ADV_BATTERY_MODE_HIDE_UI_IND</span></code></a> to include the battery notification in the generated advertising payload.</p></li>
+</ol>
+<p>See the <a class="reference external" href="https://developers.google.com/nearby/fast-pair/specifications/extensions/batterynotification">Fast Pair Battery Notification extension</a> documentation for more details about this extension.</p>
+</dd>
+<dt><a class="reference internal" href="../libraries/bluetooth_services/services/fast_pair.html#c.bt_fast_pair_set_pairing_mode" title="bt_fast_pair_set_pairing_mode"><code class="xref c c-func docutils literal notranslate"><span class="pre">bt_fast_pair_set_pairing_mode()</span></code></a></dt><dd><p>This function is to be used to set pairing mode before the advertising is started.</p>
+</dd>
+</dl>
+<p>Since you control the advertising, make sure to use advertising parameters consistent with the specification.
+The Bluetooth privacy is selected by the Fast Pair service, but you must make sure that the following requirements are met:</p>
+<ul class="simple">
+<li><p>The Resolvable Private Address (RPA) rotation is synchronized with the advertising payload update during the not discoverable advertising.</p></li>
+<li><p>The Resolvable Private Address (RPA) address is not rotated during discoverable advertising session.</p></li>
+</ul>
+<p>See the official <a class="reference external" href="https://developers.google.com/nearby/fast-pair/specifications/service/provider">Fast Pair Advertising</a> documentation for detailed information about the requirements related to discoverable and not discoverable advertising.</p>
+</section>
+<section id="fast-pair-advertising-data-provider">
+<h3><a class="toc-backref" href="#id12">Fast Pair advertising data provider</a><a class="headerlink" href="#fast-pair-advertising-data-provider" title="Permalink to this heading"></a></h3>
+<p>The Fast Pair <a class="reference internal" href="../libraries/bluetooth_services/adv_prov.html#bt-le-adv-prov-readme"><span class="std std-ref">advertising data provider</span></a> (<code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_ADV_PROV_FAST_PAIR</span></code>) can be used to manage the Fast Pair advertising data.
+See <a class="reference internal" href="../samples/bluetooth/peripheral_fast_pair/README.html#peripheral-fast-pair"><span class="std std-ref">Bluetooth: Fast Pair</span></a> for an example of using the provider in a sample.
+See <code class="file docutils literal notranslate"><span class="pre">subsys/bluetooth/adv_prov/providers/fast_pair.c</span></code> for provider implementation.</p>
+</section>
+<section id="advertising-tx-power">
+<h3><a class="toc-backref" href="#id13">Advertising TX power</a><a class="headerlink" href="#advertising-tx-power" title="Permalink to this heading"></a></h3>
+<p>The Fast Pair Seeker must know the TX power of the Provider to determine proximity.
+The TX power can be provided in one of the following ways:</p>
+<ul class="simple">
+<li><p>Defined during model registration</p></li>
+<li><p>Included in the advertising payload</p></li>
+</ul>
+<p>See the <a class="reference external" href="https://developers.google.com/nearby/fast-pair/specifications/configuration#transmit_power">Fast Pair TX power</a> documentation for more information.</p>
+<section id="advertising-data-provider">
+<h4>Advertising data provider<a class="headerlink" href="#advertising-data-provider" title="Permalink to this heading"></a></h4>
+<p>If your application uses <a class="reference internal" href="../libraries/bluetooth_services/adv_prov.html#bt-le-adv-prov-readme"><span class="std std-ref">Bluetooth LE advertising providers</span></a>, you can use the TX power advertising data provider (<code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_ADV_PROV_TX_POWER</span></code>) to read the advertising TX power from Bluetooth controller and add it to the generated advertising data.
+The <code class="xref kconfig kconfig-option docutils literal notranslate"><span class="pre">CONFIG_BT_ADV_PROV_TX_POWER_CORRECTION_VAL</span></code> option can be used to define a TX power correction value that is added to the TX power readout included in the advertising data.
+The option can be used to take into account hardware configuration, for example, used antenna and device casing.
+See <a class="reference internal" href="../samples/bluetooth/peripheral_fast_pair/README.html#peripheral-fast-pair"><span class="std std-ref">Bluetooth: Fast Pair</span></a> sample for an example of how to use the TX power advertising provider.</p>
+</section>
+<section id="multiprotocol-service-layer-front-end-module-mpsl-fem">
+<h4>Multiprotocol Service Layer front-end module (MPSL FEM)<a class="headerlink" href="#multiprotocol-service-layer-front-end-module-mpsl-fem" title="Permalink to this heading"></a></h4>
+<p>If your application uses MPSL <span class="xref std std-ref">nrfxlib:mpsl_fem</span>, you can use a front-end module power model.
+The power model allows you to control the TX power more accurately and compensate, for example, for external conditions.
+See the TX power split using models section of the <span class="xref std std-ref">nrfxlib:mpsl_fem</span> documentation for more details.
+See the MPSL FEM power model section in <span class="xref std std-ref">nrfxlib:mpsl_api</span> for API documentation.</p>
+</section>
+</section>
+</section>
+<section class="numbered-step" id="setting-up-gatt-service">
+<span id="ug-bt-fast-pair-gatt-service"></span><h2><a class="toc-backref" href="#id14">Setting up GATT service</a><a class="headerlink" href="#setting-up-gatt-service" title="Permalink to this heading"></a></h2>
+<p>The Fast Pair GATT service is implemented by the <a class="reference internal" href="../libraries/bluetooth_services/services/fast_pair.html#bt-fast-pair-readme"><span class="std std-ref">Google Fast Pair Service (GFPS)</span></a>.
+The service implements functionalities required by the <a class="reference external" href="https://developers.google.com/nearby/fast-pair/specifications/service/gatt">Fast Pair Procedure</a>.
+The procedure is initiated by the Fast Pair Seeker after Bluetooth LE connection is established.
+No application interaction is required.</p>
+<p>The Fast Pair GATT service modifies default values of related Kconfig options to follow Fast Pair requirements.
+The service also enables the needed functionalities using Kconfig select statement.
+For details, see the <a class="reference internal" href="../libraries/bluetooth_services/services/fast_pair.html#bt-fast-pair-readme"><span class="std std-ref">Google Fast Pair Service (GFPS)</span></a> Bluetooth service documentation in the nRF Connect SDK.</p>
+<p>The Fast Pair GATT service uses a non-volatile memory to store the Fast Pair user data such as Account Keys and the Personalized Name.
+This data can be cleared by calling the <a class="reference internal" href="../libraries/bluetooth_services/services/fast_pair.html#c.bt_fast_pair_factory_reset" title="bt_fast_pair_factory_reset"><code class="xref c c-func docutils literal notranslate"><span class="pre">bt_fast_pair_factory_reset()</span></code></a> function.
+For details, see the <a class="reference internal" href="../libraries/bluetooth_services/services/fast_pair.html#c.bt_fast_pair_factory_reset" title="bt_fast_pair_factory_reset"><code class="xref c c-func docutils literal notranslate"><span class="pre">bt_fast_pair_factory_reset()</span></code></a> function documentation.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="edge_impulse.html" class="btn btn-neutral float-right" title="Edge Impulse integration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="bt_coex.html" class="btn btn-neutral" title="Bluetooth external radio coexistence integration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thread tools &mdash; nRF Connect SDK 2.3.99 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nordic.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/nrf.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" /> 
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-ZPVZRKFQJR"></script>
+        <script src="../../_static/js/ga-tracker.js"></script>
+        <script data-culture="EN" id="CookieConsent" type="text/javascript" src="https://policy.app.cookieinformation.com/uc.js"></script>
+        <script src="../../_static/tabs.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/js/theme.js"></script>
+<script
+  type="text/javascript"
+  src="../../_static/js/ncs.js"
+></script>
+<script src="../../_static/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Thread certification" href="certification.html" />
+    <link rel="prev" title="Pre-built libraries" href="prebuilt_libs.html" />
+<link
+  href="../../_static/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="shortcut icon"
+  href="../../_static/images/favicon.ico"
+/>
+
+</head>
+
+<body class="wy-body-for-nav">
+<div class="announcement"></div>
+<div class="d-print-none ncs-header">
+  <div class="container-xl ncs-header-top">
+    <div class="row h-100">
+      <div class="d-none d-md-block col-2">
+        <div class="bg-white py-4 px-3 ml-2 ncs-header-logo">
+          <img
+            class="ncs-header-logo"
+            src="../../_static/images/nordic-logo.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        class="col-8 col-md-7 pl-md-4 d-flex align-self-center justify-content-center"
+      >
+        <form class="w-75" action="../../search.html" method="get">
+          <div class="form-group">
+            <input
+              type="text"
+              name="q"
+              class="ncs-search-input form-control"
+              placeholder="Search all docs..."
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-4 col-md-3 d-md-block p-3 text-end">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle ncs-btn-versions"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="d-none d-md-inline">nRF Connect SDK</span>
+            <span id="ncsversion" class="d-inline"></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ncs-header-nav">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col col-12 d-flex justify-content-center">
+          <nav class="navbar navbar-dark navbar-expand-lg p-0">
+            <span class="navbar-brand d-block d-lg-none py-2 pl-1"
+              >Documentation sets</span
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav">
+                <li class="nav-item active py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrf/index.html"
+                    >nRF Connect SDK</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfx/index.html"
+                    >nrfx</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../nrfxlib/README.html"
+                    >nrfxlib</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../zephyr/index.html"
+                    >Zephyr Project</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../mcuboot/wrapper.html"
+                    >MCUboot</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../tfm/index.html"
+                    >Trusted Firmware-M</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../matter/index.html"
+                    >Matter</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item  py-1 px-3">
+                  <a
+                    class="nav-link"
+                    href="../../../kconfig/index.html"
+                    >Kconfig Reference</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> nRF Connect SDK
+          </a>
+              <div class="version">
+                2.3.99
+              </div>
+<div id="searchbox" role="search">
+  <div class="searchformwrapper">
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+  </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev_model.html">Development model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../app_dev.html">Application development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ecosystem_integration.html">Ecosystems integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf91.html">Working with nRF91 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf70.html">Working with nRF70 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf53.html">Working with nRF53 Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nrf52.html">Working with nRF52 Series</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../protocols.html">Protocols</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../ble/index.html">Bluetooth LE Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bt_mesh/index.html">Bluetooth mesh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../esb/index.html">Enhanced ShockBurst (ESB)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gazell/index.html">Gazell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../matter/index.html">Matter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multiprotocol/index.html">Multiprotocol support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nfc/index.html">Near Field Communication (NFC)</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Thread</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="overview/index.html">OpenThread overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configuring.html">Configuring Thread in the nRF Connect SDK</a></li>
+<li class="toctree-l3"><a class="reference internal" href="prebuilt_libs.html">Pre-built libraries</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Thread tools</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#nrf-sniffer-for-802-15-4">nRF Sniffer for 802.15.4</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nrf-thread-topology-monitor">nRF Thread Topology Monitor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#thread-border-router">Thread Border Router</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#openthread-posix-applications">OpenThread POSIX applications</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="certification.html">Thread certification</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../wifi/index.html">Wi-Fi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../zigbee/index.html">Zigbee</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../samples.html">Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drivers.html">Drivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../known_issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../software_maturity.html">Software maturity levels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation.html">About this documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">nRF Connect SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../protocols.html">Protocols</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Thread</a></li>
+      <li class="breadcrumb-item active">Thread tools</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/protocols/thread/tools.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="thread-tools">
+<span id="ug-thread-tools"></span><h1>Thread tools<a class="headerlink" href="#thread-tools" title="Permalink to this heading"></a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#nrf-sniffer-for-802-15-4" id="id8">nRF Sniffer for 802.15.4</a></p></li>
+<li><p><a class="reference internal" href="#nrf-thread-topology-monitor" id="id9">nRF Thread Topology Monitor</a></p></li>
+<li><p><a class="reference internal" href="#thread-border-router" id="id10">Thread Border Router</a></p>
+<ul>
+<li><p><a class="reference internal" href="#configuring-a-radio-co-processor" id="id11">Configuring a radio co-processor</a></p></li>
+<li><p><a class="reference internal" href="#installing-otbr-manually-raspberry-pi" id="id12">Installing OTBR manually (Raspberry Pi)</a></p></li>
+<li><p><a class="reference internal" href="#running-otbr-using-docker" id="id13">Running OTBR using Docker</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#openthread-posix-applications" id="id14">OpenThread POSIX applications</a></p>
+<ul>
+<li><p><a class="reference internal" href="#building-the-openthread-posix-applications" id="id15">Building the OpenThread POSIX applications</a></p></li>
+<li><p><a class="reference internal" href="#running-the-openthread-posix-applications" id="id16">Running the OpenThread POSIX applications</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>The tools listed on this page can be helpful when developing your Thread application with the nRF Connect SDK.</p>
+<section id="nrf-sniffer-for-802-15-4">
+<span id="ug-thread-tools-sniffer"></span><h2><a class="toc-backref" href="#id8">nRF Sniffer for 802.15.4</a><a class="headerlink" href="#nrf-sniffer-for-802-15-4" title="Permalink to this heading"></a></h2>
+<p>The nRF Sniffer for 802.15.4 is a tool for learning about and debugging applications that are using protocols based on IEEE 802.15.4, like Thread or Zigbee.
+It provides a near real-time display of 802.15.4 packets that are sent back and forth between devices, even when the link is encrypted.</p>
+<p>See <a class="reference external" href="https://infocenter.nordicsemi.com/topic/ug_sniffer_802154/UG/sniffer_802154/intro_802154.html">nRF Sniffer for 802.15.4</a> for documentation.</p>
+</section>
+<section id="nrf-thread-topology-monitor">
+<span id="ug-thread-tools-ttm"></span><h2><a class="toc-backref" href="#id9">nRF Thread Topology Monitor</a><a class="headerlink" href="#nrf-thread-topology-monitor" title="Permalink to this heading"></a></h2>
+<p>nRF Thread Topology Monitor is a desktop application that connects to a Thread network through a serial connection to visualize the topology of Thread devices.
+It allows you to scan for new devices in real time, check their parameters, and inspect network processes through the log.</p>
+<p>See <a class="reference external" href="https://infocenter.nordicsemi.com/topic/ug_nrf_ttm/UG/nrf_ttm/ttm_introduction.html">nRF Thread Topology Monitor</a> for documentation.</p>
+</section>
+<section id="thread-border-router">
+<span id="ug-thread-tools-tbr"></span><h2><a class="toc-backref" href="#id10">Thread Border Router</a><a class="headerlink" href="#thread-border-router" title="Permalink to this heading"></a></h2>
+<p>The Thread Border Router is a specific type of Border Router device that provides connectivity from the IEEE 802.15.4 network to adjacent networks on other physical layers (such as Wi-Fi or Ethernet).
+Border Routers provide services for devices within the IEEE 802.15.4 network, including routing services for off-network operations.</p>
+<p>Typically, a Border Router solution consists of the following parts:</p>
+<ul class="simple">
+<li><p>An application based on the <a class="reference internal" href="overview/architectures.html#thread-architectures-designs-cp-ncp"><span class="std std-ref">Network co-processor (NCP)</span></a> design or its <a class="reference internal" href="overview/architectures.html#thread-architectures-designs-cp-rcp"><span class="std std-ref">Radio co-processor (RCP)</span></a> variant compatible with the IEEE 802.15.4 standard.
+This application can be implemented, for example, on an nRF52 device.</p></li>
+<li><p>A host-side application, usually implemented on a more powerful device with an incorporated Linux-based operating system.</p></li>
+</ul>
+<p>The nRF Connect SDK does not provide a complete Thread Border Router solution.
+For development purposes, you can use the <a class="reference external" href="https://openthread.io/guides/border-router">OpenThread Border Router</a> (OTBR) released by Google, an open-source Border Router implementation that you can set up either on your PC using Docker or on a Raspberry Pi.</p>
+<p>The OpenThread Border Router is compatible with Nordic Semiconductor devices.
+It implements a number of features, including:</p>
+<ul class="simple">
+<li><p>Bidirectional IP connectivity between Thread and Wi-Fi or Ethernet networks (or both)</p></li>
+<li><p>Network components that allow Thread nodes to connect to IPv4 networks (NAT64, DNS64)</p></li>
+<li><p>Bidirectional DNS-based service discovery using mDNS (on Wi-Fi or Ethernet link, or both) and SRP (on Thread network)</p></li>
+<li><p>External Thread commissioning (for example, using a mobile phone) to authenticate and join a Thread device to a Thread network</p></li>
+</ul>
+<p>You can either install the OpenThread Border Router on a Raspberry Pi or run it using a Docker container, as described in the following sections.
+In both cases, you must first configure a radio co-processor (RCP), which provides the required radio capability to your Linux device.</p>
+<section id="configuring-a-radio-co-processor">
+<span id="ug-thread-tools-tbr-rcp"></span><h3><a class="toc-backref" href="#id11">Configuring a radio co-processor</a><a class="headerlink" href="#configuring-a-radio-co-processor" title="Permalink to this heading"></a></h3>
+<p>The OpenThread Border Router must have physical access to the IEEE 802.15.4 network that is used by the Thread protocol.
+As neither the Linux-based PC nor the Raspberry Pi have such radio capability, you must connect an external nRF device that serves as radio co-processor.</p>
+<p>To program the nRF device with the RCP application, complete the following steps:</p>
+<ol class="arabic">
+<li><p>Build the <a class="reference internal" href="../../samples/openthread/coprocessor/README.html#ot-coprocessor-sample"><span class="std std-ref">Thread: Co-processor</span></a> sample for the hardware platform and the transport of your choice:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">nRF52840 Dongle (USB transport)</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">nRF52840 Development Kit (UART transport)</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">west build -p always -b nrf52840dongle_nrf52840 nrf/samples/openthread/coprocessor/ -- -DOVERLAY_CONFIG=&quot;overlay-usb.conf&quot; -DDTC_OVERLAY_FILE=&quot;usb.overlay&quot;</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">west build -p always -b nrf52840dk_nrf52840 nrf/samples/openthread/coprocessor/</span>
+</pre></div>
+</div>
+</div></div>
+</li>
+<li><p>Depending on the hardware platform, complete the following steps:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-1-1-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-1-1-0" name="1-0" role="tab" tabindex="0">nRF52840 Dongle (USB transport)</button><button aria-controls="panel-1-1-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-1-1-1" name="1-1" role="tab" tabindex="-1">nRF52840 Development Kit (UART transport)</button></div><div aria-labelledby="tab-1-1-0" class="sphinx-tabs-panel" id="panel-1-1-0" name="1-0" role="tabpanel" tabindex="0"><ol class="loweralpha">
+<li><p>Install nRF Util as described in <a class="reference external" href="https://infocenter.nordicsemi.com/topic/ug_nrfutil/UG/nrfutil/nrfutil_installing.html">Installing nRF Util for nRF5 SDK</a>.</p></li>
+<li><p>Generate the RCP firmware package:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">nrfutil pkg generate --hw-version 52 --sd-req=0x00 \</span>
+<span class="go"> --application build/zephyr/zephyr.hex --application-version 1 build/zephyr/zephyr.zip</span>
+</pre></div>
+</div>
+</li>
+<li><p>Connect the nRF52840 Dongle to the USB port.</p></li>
+<li><p>Press the <strong>RESET</strong> button on the dongle to put it into the DFU mode.
+The LED on the dongle starts blinking red.</p></li>
+<li><p>Install the RCP firmware package onto the dongle by running the following command, with <code class="docutils literal notranslate"><span class="pre">/dev/ttyACM0</span></code> replaced with the device node name of your nRF52840 Dongle:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">nrfutil dfu usb-serial -pkg build/zephyr/zephyr.zip -p /dev/ttyACM0</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div><div aria-labelledby="tab-1-1-1" class="sphinx-tabs-panel" hidden="true" id="panel-1-1-1" name="1-1" role="tabpanel" tabindex="0"><ol class="loweralpha">
+<li><p>Program the image using <span class="xref std std-ref">west</span>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">west flash --erase</span>
+</pre></div>
+</div>
+</li>
+<li><p>Disable the Mass Storage feature on the device, so that it does not interfere with the core RCP functionalities.
+Also, force Hardware Flow Control to avoid potential race conditions related to the auto-detection:</p>
+<pre class="highlight literal-block">JLinkExe -device NRF52840_XXAA -if SWD -speed 4000 -autoconnect 1 -SelectEmuBySN <em>SEGGER_ID</em>
+J-Link&gt;MSDDisable
+Probe configured successfully.
+J-Link&gt;SetHWFC Force
+New configuration applies immediately.
+J-Link&gt;exit</pre>
+<p>Replace <em>SEGGER_ID</em> with the SEGGER ID of your nRF52840 Development Kit.
+This setting remains valid even if you program another firmware onto the device.</p>
+</li>
+<li><p>Power-cycle the device to apply the changes.</p></li>
+</ol>
+</div></div>
+</li>
+</ol>
+</section>
+<section id="installing-otbr-manually-raspberry-pi">
+<h3><a class="toc-backref" href="#id12">Installing OTBR manually (Raspberry Pi)</a><a class="headerlink" href="#installing-otbr-manually-raspberry-pi" title="Permalink to this heading"></a></h3>
+<p>The recommended option is to build and configure the OpenThread Border Router on a Raspberry Pi 3 Model B or newer.
+This option provides most of the functionalities available in the OpenThread Border Router, such as border routing capabilities needed for establishing Thread communication with a mobile phone on a Wi-Fi network.
+However, this approach requires you to download the OpenThread Border Router repository and install the Border Router manually on the Raspberry Pi.</p>
+<p>To set up and configure the OpenThread Border Router, follow the official <a class="reference external" href="https://openthread.io/codelabs/openthread-border-router">OpenThread Border Router Codelab tutorial</a> on the OpenThread documentation portal with the below modifications:</p>
+<ul>
+<li><p>After cloning the repository in the <em>Get OTBR code</em> section, make sure to check out the compatible commit id:</p>
+<blockquote>
+<div><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">cd ot-br-posix</span>
+<span class="go">git pull --unshallow</span>
+<span class="go">git checkout a892bf7</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>After the <em>Build and install OTBR</em> section, configure RCP device’s UART baud rate in <em>otbr-agent</em>.
+Modify the <code class="file docutils literal notranslate"><span class="pre">/etc/default/otbr-agent</span></code> configuration file with default RCP baud rate:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">spinel+hdlc+uart:///dev/ttyACM0?uart-baudrate=1000000</span>
+</pre></div>
+</div>
+</li>
+<li><p>Omit the <em>Build and flash RCP firmware</em> section, because that section duplicates the steps already performed in the <a class="reference internal" href="#configuring-a-radio-co-processor">Configuring a radio co-processor</a> section of this guide.</p></li>
+</ul>
+</section>
+<section id="running-otbr-using-docker">
+<h3><a class="toc-backref" href="#id13">Running OTBR using Docker</a><a class="headerlink" href="#running-otbr-using-docker" title="Permalink to this heading"></a></h3>
+<p>For development purposes, you can run the OpenThread Border Router on any Linux-based system using a Docker container that already has the Border Router installed.
+This solution can be used when you are only interested in direct communication between your Border Router and the Thread network.
+For example, you can use the Docker container when you want to establish IP communication between an application running on Linux (such as the <a class="reference internal" href="../matter/getting_started/testing/index.html#ug-matter-configuring"><span class="std std-ref">CHIP Tool Matter controller</span></a>) and an application running on a Thread node.</p>
+<p>To install and configure the OpenThread Border Router using the Docker container on an Ubuntu operating system, complete the following steps:</p>
+<ol class="arabic">
+<li><p>Install the Docker daemon:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sudo apt update &amp;&amp; sudo apt install docker.io</span>
+</pre></div>
+</div>
+</li>
+<li><p>Start the Docker daemon:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sudo systemctl start docker</span>
+</pre></div>
+</div>
+</li>
+<li><p>Create an IPv6 network for the OpenThread Border Router container in Docker:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sudo docker network create --ipv6 --subnet fd11:db8:1::/64 -o com.docker.network.bridge.name=otbr0 otbr</span>
+</pre></div>
+</div>
+</li>
+<li><p>Download the compatible version of the OpenThread Border Router docker image by running the following command:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">docker pull nrfconnect/otbr:a892bf7</span>
+</pre></div>
+</div>
+</li>
+<li><p>Connect the radio co-processor that you configured in <a class="reference internal" href="#ug-thread-tools-tbr-rcp"><span class="std std-ref">Configuring a radio co-processor</span></a> to the Border Router device.</p></li>
+<li><p>Start the OpenThread Border Router container using the following commands:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sudo modprobe ip6table_filter</span>
+<span class="go">sudo docker run -it --rm --privileged --name otbr --network otbr -p 8080:80 \</span>
+<span class="go">--sysctl &quot;net.ipv6.conf.all.disable_ipv6=0 net.ipv4.conf.all.forwarding=1 net.ipv6.conf.all.forwarding=1&quot; \</span>
+<span class="go">--volume /dev/ttyACM0:/dev/radio nrfconnect/otbr:a892bf7 --radio-url spinel+hdlc+uart:///dev/radio?uart-baudrate=1000000</span>
+</pre></div>
+</div>
+<p>Replace <code class="docutils literal notranslate"><span class="pre">/dev/ttyACM0</span></code> with the device node name of the OpenThread radio co-processor.</p>
+</li>
+<li><p>Form the Thread network using one of the following options:</p>
+<ul>
+<li><p>Follow the instruction in the <a class="reference external" href="https://openthread.io/codelabs/openthread-border-router#2">OpenThread Border Router Codelab tutorial step 3</a>.</p></li>
+<li><p>Open the <code class="docutils literal notranslate"><span class="pre">http://localhost:8080/</span></code> address in a web browser and choose <span class="guilabel">Form</span> from the menu.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you are using a Raspberry Pi without a screen, but you have a different device in the same network, you can start a web browser on that device and use the address of the Raspberry Pi instead of <code class="docutils literal notranslate"><span class="pre">localhost</span></code>.</p>
+</div>
+</li>
+</ul>
+</li>
+<li><p>Note down the selected On-Mesh Prefix value.
+For example, <code class="docutils literal notranslate"><span class="pre">fd11:22::/64</span></code>.</p></li>
+<li><p>Make sure that packets addressed to devices in the Thread network are routed through the OpenThread Border Router container in Docker.
+To do this, run the following command that uses the On-Mesh Prefix that you configured in the previous step (in this case, <code class="docutils literal notranslate"><span class="pre">fd11:22::/64</span></code>):</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sudo ip -6 route add fd11:22::/64 dev otbr0 via fd11:db8:1::2</span>
+</pre></div>
+</div>
+</li>
+<li><p>Check the status of the OpenThread Border Router by executing the following command:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sudo docker exec -it otbr sh -c &quot;sudo service otbr-agent status&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Check the status of the Thread node running inside the Docker:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sudo docker exec -it otbr sh -c &quot;sudo ot-ctl state&quot;</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>OTBR on the Docker has got disabled DNS64 service by default.</p>
+</div>
+</section>
+</section>
+<section id="openthread-posix-applications">
+<span id="ug-thread-tools-ot-apps"></span><h2><a class="toc-backref" href="#id14">OpenThread POSIX applications</a><a class="headerlink" href="#openthread-posix-applications" title="Permalink to this heading"></a></h2>
+<p>OpenThread POSIX applications allow to communicate with a radio co-processor (RCP) in a comfortable way.</p>
+<p>OpenThread provides the following applications:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ot-cli</span></code> - Works like the <a class="reference internal" href="../../samples/openthread/cli/README.html#ot-cli-sample"><span class="std std-ref">Thread: CLI</span></a> sample for the RCP architecture.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ot-daemon</span></code> and <code class="docutils literal notranslate"><span class="pre">ot-ctl</span></code> - Provides the same functionality as <code class="docutils literal notranslate"><span class="pre">ot-cli</span></code>, but keeps the daemon running in the background all the time.
+See <a class="reference external" href="https://openthread.io/platforms/co-processor/ot-daemon">OpenThread Daemon</a> for more information.</p></li>
+</ul>
+<p>When working with Thread, you can use these tools to interact with the following sample:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../samples/openthread/coprocessor/README.html#ot-coprocessor-sample"><span class="std std-ref">Thread: Co-processor</span></a></p></li>
+</ul>
+<p>See <a class="reference external" href="https://github.com/zephyrproject-rtos/openthread/tree/zephyr/src/posix">OpenThread POSIX app</a> for more information.</p>
+<section id="building-the-openthread-posix-applications">
+<span id="ug-thread-tools-building-ot-apps"></span><h3><a class="toc-backref" href="#id15">Building the OpenThread POSIX applications</a><a class="headerlink" href="#building-the-openthread-posix-applications" title="Permalink to this heading"></a></h3>
+<p>Build the OpenThread POSIX applications by performing the following steps:</p>
+<ol class="arabic">
+<li><p>Enter the <code class="file docutils literal notranslate"><span class="pre">openthread</span></code> directory:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">cd modules/lib/openthread</span>
+</pre></div>
+</div>
+</li>
+<li><p>Install the OpenThread dependencies:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">./script/bootstrap</span>
+</pre></div>
+</div>
+</li>
+<li><p>Build the applications with the required options.
+For example, to build the <code class="docutils literal notranslate"><span class="pre">ot-cli</span></code> application with support for Thread v1.1, run the following command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">script</span><span class="o">/</span><span class="n">cmake</span><span class="o">-</span><span class="n">build</span> <span class="n">posix</span> <span class="o">-</span><span class="n">DOT_THREAD_VERSION</span><span class="o">=</span><span class="mf">1.1</span>
+</pre></div>
+</div>
+<p>Alternatively, to build the <code class="docutils literal notranslate"><span class="pre">ot-daemon</span></code> and <code class="docutils literal notranslate"><span class="pre">ot-ctl</span></code> applications with support for Thread v1.2, run the following command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">script</span><span class="o">/</span><span class="n">cmake</span><span class="o">-</span><span class="n">build</span> <span class="n">posix</span> <span class="o">-</span><span class="n">DOT_THREAD_VERSION</span><span class="o">=</span><span class="mf">1.2</span> <span class="o">-</span><span class="n">DOT_DAEMON</span><span class="o">=</span><span class="n">ON</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<p>You can find the generated applications in <code class="file docutils literal notranslate"><span class="pre">./build/posix/src/posix/</span></code>.</p>
+</section>
+<section id="running-the-openthread-posix-applications">
+<h3><a class="toc-backref" href="#id16">Running the OpenThread POSIX applications</a><a class="headerlink" href="#running-the-openthread-posix-applications" title="Permalink to this heading"></a></h3>
+<p>Use the following radio URL parameter to connect to an RCP node.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&#39;spinel+hdlc+uart://\ *ncp_uart_device*\ ?uart-baudrate=\ *baud_rate*&#39;</span>
+</pre></div>
+</div>
+<p>Replace the following parameters:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><em>ncp_uart_device</em> - Specifies the location of the device, for example: <code class="file docutils literal notranslate"><span class="pre">/dev/ttyACM0</span></code>.</p></li>
+<li><p><em>baud_rate</em> - Specifies the baud rate to use.
+The Thread Co-Processor sample supports baud rate <code class="docutils literal notranslate"><span class="pre">1000000</span></code>.</p></li>
+</ul>
+</div></blockquote>
+<p>For example, to use <code class="docutils literal notranslate"><span class="pre">ot-daemon</span></code>, enter the following command:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sudo ./build/posix/src/posix/ot-daemon &#39;spinel+hdlc+uart:///dev/ttyACM0?uart-baudrate=1000000&#39; --verbose</span>
+</pre></div>
+</div>
+<p>And on a separate terminal window:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sudo ./build/posix/src/posix/ot-ctl</span>
+</pre></div>
+</div>
+<p>To use <code class="docutils literal notranslate"><span class="pre">ot-cli</span></code>, enter the following command instead:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sudo ./build/posix/src/posix/ot-cli &#39;spinel+hdlc+uart:///dev/ttyACM0?uart-baudrate=1000000&#39; --verbose</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="certification.html" class="btn btn-neutral float-right" title="Thread certification" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="prebuilt_libs.html" class="btn btn-neutral" title="Pre-built libraries" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+
+<table>
+<tr>
+<td>
+    <p>
+        &copy; Copyright 2019-2023, Nordic Semiconductor.
+      Last updated on Mar 20, 2023.
+
+    </p>
+</td>
+<td id="nordiclogo">
+  <a href="https://www.nordicsemi.com/"><img src="../../_static/images/nordic-logo.png" border="0"/></a>
+</td>
+</tr>
+</table>
+  </div> 
+
+
+</footer>
+
+<div id="scroll-container">
+  <button type="button" id="scroll-btn" class="btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="#fff"/></svg>
+  </button>
+</div>
+
+<script>
+  const scrollBtn = document.querySelector("#scroll-btn");
+
+  document.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+          scrollBtn.style.visibility = "visible";
+      } else {
+          scrollBtn.style.visibility = "hidden";
+      }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> nRF Connect SDK</span>
+       <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <div class="rst-other-version ncs">
+        <a href="../../../nrf/index.html">nRF Connect SDK</a>
+      </div>
+      
+      <div class="rst-other-version nrfx">
+        <a href="../../../nrfx/index.html">nrfx</a>
+      </div>
+      
+      <div class="rst-other-version nrfxlib">
+        <a href="../../../nrfxlib/README.html">nrfxlib</a>
+      </div>
+      
+      <div class="rst-other-version zephyr">
+        <a href="../../../zephyr/index.html">Zephyr Project</a>
+      </div>
+      
+      <div class="rst-other-version mcuboot">
+        <a href="../../../mcuboot/wrapper.html">MCUboot</a>
+      </div>
+      
+      <div class="rst-other-version tfm">
+        <a href="../../../tfm/index.html">Trusted Firmware-M</a>
+      </div>
+      
+      <div class="rst-other-version matter">
+        <a href="../../../matter/index.html">Matter</a>
+      </div>
+      
+      <div class="rst-other-version kconfig">
+        <a href="../../../kconfig/index.html">Kconfig Reference</a>
+      </div>
+    </div>
+  </div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
