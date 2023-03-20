@@ -46,8 +46,8 @@ Setup and Connections
 RF test setup:
    The following connection is used for performing Wi-Fi and Short Range (SR) RF based tests.
 
-   .. figure:: /images/wifi_coex_ble.png
-        :width: 780px
+   .. figure:: /images/RF_test_setup.png
+        :width: 580px
         :align: center
         :alt: RF test setup
 
@@ -56,8 +56,8 @@ RF test setup:
 PER test setup:
    The following connection is used for performing Wi-Fi and Short Range (SR) PER based tests.
 
-   .. figure:: /images/wifi_coex_ble.png
-        :width: 780px
+   .. figure:: /images/PER_test_setup.png
+        :width: 699px
         :align: center
         :alt: PER test setup
 
@@ -70,8 +70,8 @@ PER test setup:
 Wi-Fi System level test setup:
    The following connection is used for performing Wi-Fi association and ping tests with Wi-Fi capable access point.
 
-   .. figure:: /images/wifi_coex_ble.png
-        :width: 780px
+   .. figure:: /images/wifi_shell_test_setup.png
+        :width: 546px
         :align: center
         :alt: Wi-Fi System level test setup
 
@@ -595,7 +595,7 @@ How to use Wi-Fi Radio Test for PER measurements:
         uart:~$ wifi_radio_test rx 0
    - Calculate the PER as 1 – (RX success count / TX transmit count).
 
-#. 802.11a PER measurements
+#. 802.11a PER measurements:
 
    - Configure the first DK to receive packets on the required channel number:
 
@@ -630,7 +630,8 @@ How to use Wi-Fi Radio Test for PER measurements:
          uart:~$ wifi_radio_test rx 0
       - Calculate the PER as 1 – (RX success count / TX transmit count).
 
-#. 802.11n PER measurements
+#. 802.11n PER measurements:
+
    - Configure the first DK to receive packets on the required channel number:
 
       .. code-block:: console
@@ -655,7 +656,7 @@ How to use Wi-Fi Radio Test for PER measurements:
          uart:~$ wifi_radio_test tx 1
 
    - Record number of successfully received packets on the first DK (repeat as necessary until count stops incrementing).
-      RX success count is displayed as ofdm_crc32_pass_cnt:
+     RX success count is displayed as ofdm_crc32_pass_cnt:
 
       .. code-block:: console
 
@@ -667,7 +668,7 @@ How to use Wi-Fi Radio Test for PER measurements:
          uart:~$ wifi_radio_test rx 0
    - Calculate the PER as 1 – (RX success count / TX transmit count).
 
-#. 802. 11ac PER measurements
+#. 802. 11ac PER measurements:
    - Configure the first DK to receive packets on the required channel number:
 
       .. code-block:: console
@@ -703,7 +704,7 @@ How to use Wi-Fi Radio Test for PER measurements:
          uart:~$ wifi_radio_test rx 0
    - Calculate the PER as 1 – (RX success count / TX transmit count).
 
-#. 802.11ax PER measurements
+#. 802.11ax PER measurements:
    - Configure the first DK to receive packets on the required channel number:
 
       .. code-block:: console
